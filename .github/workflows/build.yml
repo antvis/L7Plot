@@ -16,9 +16,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: npx lerna bootstrap
+    - run: npm run bootstrap
     - run: npm run lint
-  
+
   test:
     runs-on: ubuntu-latest
     strategy:
@@ -31,13 +31,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: npx lerna bootstrap
+    - run: npm run bootstrap
     - run: npm run test
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.ACCESS_TOKEN }}
-    
+
   build:
     runs-on: ubuntu-latest
     strategy:
@@ -50,5 +50,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: npx lerna bootstrap
+    - run: npm run bootstrap
     - run: npm run build
