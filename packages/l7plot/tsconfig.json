@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist/lib",
+    "rootDir": "src",
+    "types": ["amap-js-api"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/__tests__/**/*"],
+  "typedocOptions": {
+    "entryPoints": ["src/index.ts"],
+    "out": "type-docs"
+  }
+}

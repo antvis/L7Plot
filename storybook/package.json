@@ -1,0 +1,28 @@
+{
+  "name": "l7plot-storybook",
+  "private": true,
+  "version": "0.0.1-alpha.1",
+  "license": "MIT",
+  "author": "yunji",
+  "scripts": {
+    "dev": "npm run storybook",
+    "storybook": "start-storybook -p 6066",
+    "build-storybook": "build-storybook",
+    "lint": "eslint stories --ext .js,.ts,.tsx",
+    "lint-fix": "eslint stories --ext .js,.ts,.tsx --fix",
+    "prettier": "prettier stories -c -w"
+  },
+  "dependencies": {
+    "@antv/l7plot": "^0.0.1-alpha.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@storybook/addon-actions": "^6.2.9",
+    "@storybook/addon-essentials": "^6.2.9",
+    "@storybook/addon-links": "^6.2.9",
+    "@storybook/react": "^6.2.9",
+    "babel-loader": "^8.2.2"
+  }
+}
