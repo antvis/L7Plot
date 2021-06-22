@@ -14,7 +14,9 @@
     "prettier": "lerna run prettier",
     "test": "jest",
     "test-cover": "jest --coverage",
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "build-l7lot": "lerna run build --stream --scope=@antv/l7plot",
+    "build-website": "lerna run build --stream --scope=l7plot-website"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
