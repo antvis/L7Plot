@@ -1,19 +1,15 @@
 module.exports = {
   preset: 'ts-jest',
-  testEnvironment: 'node',
+  runner: 'jest-electron/runner',
+  testEnvironment: 'jest-electron/environment',
   clearMocks: true,
   collectCoverage: false,
   collectCoverageFrom: ['packages/**/src/**/*.ts'],
-  coveragePathIgnorePatterns: ['**/node_modules/**', '**/__tests__/**', '**/*.d.ts', '**/*.spec.ts'],
+  coveragePathIgnorePatterns: ['/node_modules/', '/__tests__/'],
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov', 'clover'],
   moduleFileExtensions: ['js', 'ts'],
-  testMatch: [
-    '**/__tests__/*.spec.+(ts|js)',
-    '**/*.test.+(ts|js)',
-    '**/*.spec.+(ts|js)',
-    '**/__tests__/*/*.spec.+(ts|js)',
-  ],
+  testMatch: ['**/__tests__/**/*.+(spec|test).[jt]s'],
   coverageThreshold: {
     // global: {
     //   branches: 80,
