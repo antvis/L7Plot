@@ -39,7 +39,7 @@
   "devDependencies": {
     "rimraf": "^3.0.2",
     "rollup": "^2.52.2",
-    "typedoc": "^0.20.37"
+    "typedoc": "^0.21.0"
   },
   "dependencies": {
     "@antv/event-emitter": "^0.1.2",
