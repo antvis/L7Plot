@@ -8,7 +8,7 @@ import { LabelLayerWrapper } from '../../layers/label-layer';
 import { Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
 
-export class PointMap extends MapWrapper<PointMapOptions> {
+export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWrapper<O> {
   /**
    * 默认配置项
    */
@@ -46,7 +46,7 @@ export class PointMap extends MapWrapper<PointMapOptions> {
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<PointMapOptions> {
+  protected getDefaultOptions(): Partial<O> {
     return PointMap.DefaultOptions;
   }
 
@@ -68,7 +68,7 @@ export class PointMap extends MapWrapper<PointMapOptions> {
   /**
    * 更新内置图层
    */
-  protected updateInternalLayers(options: PointMapOptions) {
+  protected updateInternalLayers(options: O) {
     const pointLayerConfig = pick<any>(options, POINT_LAYER_OPTIONS_KEYS);
     const labelLayerConfig = { ...options.label };
 
