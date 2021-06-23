@@ -9,12 +9,7 @@ module.exports = {
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov', 'clover'],
   moduleFileExtensions: ['js', 'ts'],
-  testMatch: [
-    '**/__tests__/*.spec.+(ts|js)',
-    '**/*.test.+(ts|js)',
-    '**/*.spec.+(ts|js)',
-    '**/__tests__/*/*.spec.+(ts|js)',
-  ],
+  testMatch: ['**/__tests__/**/*.+(spec|test).[jt]s'],
   coverageThreshold: {
     // global: {
     //   branches: 80,
