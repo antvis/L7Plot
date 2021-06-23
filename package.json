@@ -5,8 +5,9 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky install",
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap --hoist",
     "dev": "lerna run dev --stream --parallel --ignore=l7plot-website",
+    "dev-l7lot": "lerna run dev --stream --scope=@antv/l7plot",
     "dev-storybook": "lerna run dev --stream --scope=l7plot-storybook",
     "dev-website": "lerna run dev --stream --scope=l7plot-website",
     "lint": "lerna run lint",
@@ -14,7 +15,9 @@
     "prettier": "lerna run prettier",
     "test": "jest",
     "test-cover": "jest --coverage",
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "build-l7lot": "lerna run build --stream --scope=@antv/l7plot",
+    "build-website": "lerna run build --stream --scope=l7plot-website"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
