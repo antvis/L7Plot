@@ -6,12 +6,10 @@ import { ColorsAttr, IStateAttribute } from './attr';
 import { ILabelConfig } from './label';
 import { IPopup } from './popup';
 import { ITooltip } from './tooltip';
-import { IZoomControlOption } from './zoom';
-import { IScaleControlOption } from './scale';
 import { ILegendControlOption } from './legend';
-import { ILayerMenuControlOption } from './layer-menu';
+import { ILayerMenuControlOption, IScaleControlOption, IZoomControlOption } from './control';
 
-export { MapboxglMap, Source };
+export { MapboxglMap, Source, IStatusOptions };
 
 export type AMapInstance = AMap.Map & IAMapInstance;
 
@@ -91,11 +89,6 @@ export interface IMapOptions {
    * logo 配置
    */
   readonly logo?: boolean | ILogo;
-
-  /**
-   * 地图可操作状态
-   */
-  readonly controller?: IStatusOptions;
 
   /**
    * 具体的数据

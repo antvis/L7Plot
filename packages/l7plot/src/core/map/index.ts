@@ -1,9 +1,21 @@
 import { Scene } from '@antv/l7-scene';
 import { Mapbox, GaodeMap } from '@antv/l7-maps';
+import { Scale, Layers, Zoom } from '@antv/l7-component';
 import EventEmitter from '@antv/event-emitter';
 import { isBoolean } from '@antv/util';
 import { deepAssign } from '../../utils';
-import { MapType, BaseMapType, IMapOptions, MapboxglMap, AMapInstance, MapboxInstance, Source } from '../../types';
+import {
+  MapType,
+  BaseMapType,
+  IMapOptions,
+  MapboxglMap,
+  AMapInstance,
+  MapboxInstance,
+  Source,
+  IZoomControlOption,
+  ILayerMenuControlOption,
+  IScaleControlOption,
+} from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { ISourceCFG } from '@antv/l7-core';
 
@@ -37,7 +49,6 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
    * scene 实例
    */
   public scene: Scene;
-
   /**
    * 数据
    */
@@ -46,6 +57,18 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
    * 图层组
    */
   public layerGroups: LayerGroup[] = [];
+  /**
+   * zoom 放大缩小 Control
+   */
+  public zoomControl: Zoom | undefined;
+  /**
+   * scale 比例尺 Control
+   */
+  public scaleControl: Scale | undefined;
+  /**
+   * layerMenu 图层列表 Control
+   */
+  public layerMenuControl: Layers | undefined;
 
   constructor(container: string | HTMLDivElement, options: O) {
     super();
@@ -144,6 +167,7 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
       layerGroup.addTo(this.scene);
       this.layerGroups.push(layerGroup);
     }
+    this.initControls();
   }
 
   /**
@@ -205,6 +229,75 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
    */
   public getLayerGroups(): LayerGroup[] {
     return this.layerGroups;
+  }
+
+  /**
+   * 初始化控件
+   */
+  private initControls() {
+    const { zoom, scale, layerMenu } = this.options;
+    scale ? this.addScaleControl(scale) : this.removeScaleControl();
+    zoom ? this.addZoomControl(zoom) : this.removeZoomControl();
+    layerMenu ? this.addLayerMenuControl(layerMenu) : this.removeLayerMenuControl();
+  }
+
+  /**
+   * 添加 zoom 控件
+   */
+  public addZoomControl(options: IZoomControlOption) {
+    this.removeZoomControl();
+    this.zoomControl = new Zoom(options);
+    this.scene.addControl(this.zoomControl);
+  }
+
+  /**
+   * 移除 zoom 控件
+   */
+  public removeZoomControl() {
+    if (this.zoomControl) {
+      this.zoomControl.remove();
+    }
+  }
+
+  /**
+   * 添加 scale 控件
+   */
+  public addScaleControl(options: IScaleControlOption) {
+    this.removeScaleControl();
+    this.scaleControl = new Scale(options);
+    this.scene.addControl(this.scaleControl);
+  }
+
+  /**
+   * 移除 scale 控件
+   */
+  public removeScaleControl() {
+    if (this.scaleControl) {
+      this.scaleControl.remove();
+    }
+  }
+
+  /**
+   * 添加 layerMenu 控件
+   */
+  public addLayerMenuControl(options: ILayerMenuControlOption) {
+    this.removeLayerMenuControl();
+    const baseLayers = {};
+    const overlayers = {};
+    this.layerGroups.forEach((layerGroup) => {
+      layerGroup.getLayers().forEach((layer) => (overlayers[layer.name] = layer));
+    });
+    this.layerMenuControl = new Layers(Object.assign({}, options, { baseLayers, overlayers }));
+    this.scene.addControl(this.layerMenuControl);
+  }
+
+  /**
+   * 移除 layerMenu 控件
+   */
+  public removeLayerMenuControl() {
+    if (this.layerMenuControl) {
+      this.layerMenuControl.remove();
+    }
   }
 
   /**

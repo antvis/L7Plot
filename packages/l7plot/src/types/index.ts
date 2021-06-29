@@ -4,7 +4,4 @@ export * from './map';
 export * from './label';
 export * from './tooltip';
 export * from './popup';
-export * from './zoom';
-export * from './scale';
-export * from './legend';
-export * from './layer-menu';
+export * from './control';
