@@ -1,5 +1,5 @@
 import { isFunction, isObject, isString, isNumber, isBoolean, isArray } from '@antv/util';
-import { ILayer } from '@antv/l7-core';
+import { ILayer, IScale, IScaleOptions } from '@antv/l7-core';
 import { ColorAttr, SizeAttr, ShapeAttr, RotateAttr, animateAttr, IStateAttribute } from '../../types/';
 
 /**
@@ -44,6 +44,10 @@ export class MappingLayer {
       } else {
         layer.shape(field, shape.value);
       }
+      // scale
+      if (isString(field) && shape.type) {
+        MappingLayer.scale(layer, field, { type: shape.type });
+      }
     }
   }
 
@@ -69,6 +73,10 @@ export class MappingLayer {
       } else {
         layer.size(field, size.value);
       }
+      // scale
+      if (isString(field) && size.type) {
+        MappingLayer.scale(layer, field, { type: size.type });
+      }
     }
   }
 
@@ -93,6 +101,10 @@ export class MappingLayer {
         layer.color(field, getMappingFunction(mappingFields, color.value));
       } else {
         layer.color(field, color.value);
+      }
+      // scale
+      if (isString(field) && color.type) {
+        MappingLayer.scale(layer, field, { type: color.type });
       }
     }
   }
@@ -120,11 +132,8 @@ export class MappingLayer {
       // layer.rotate(rotate);
     } else if (isFunction(rotate)) {
       // TODO: rotate isFunction
-      // const mappingFields = getMappingField(options, 'rotate');
-      // layer.rotate(mappingFields.join('*'), getMappingFunction(mappingFields, rotate));
     } else if (isObject(rotate)) {
       // TODO: L7 rotate
-      // rotate.field && layer.rotate(rotate.field, rotate.value);
     }
   }
 
@@ -137,5 +146,14 @@ export class MappingLayer {
     if (isBoolean(animate) || isObject(animate)) {
       layer.animate(animate);
     }
+  }
+
+  static scale(layer: ILayer, field: string | IScaleOptions, cfg: IScale) {
+    /**
+     * scale 的几种情况
+     * layer.scale('name', {type: 'cat'});
+     * layer.scale({name: {type: 'cat'}, value: {type: 'linear'}});
+     */
+    layer.scale(field, cfg);
   }
 }

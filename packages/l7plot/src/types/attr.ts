@@ -1,4 +1,4 @@
-import { IAnimateOption, IActiveOption } from '@antv/l7-core';
+import { ScaleTypeName, IAnimateOption, IActiveOption } from '@antv/l7-core';
 
 export type CallBack<T> = (data: Record<string, any>) => T;
 
@@ -13,21 +13,25 @@ export interface IStyleAttribute<T> {
 export interface IColorStyleAttribute {
   field?: string | string[];
   value?: string | string[] | CallBack<string>;
+  type?: ScaleTypeName;
 }
 
 export interface ISizeStyleAttribute {
   field?: string;
   value?: number | number[] | CallBack<number>;
+  type?: ScaleTypeName;
 }
 
 export interface IRotateStyleAttribute {
   field?: string;
   value?: number | number[] | CallBack<number>;
+  type?: ScaleTypeName;
 }
 
 export interface IShapeStyleAttribute<T> {
   field?: string | string[];
   value?: T | T[] | CallBack<T>;
+  type?: ScaleTypeName;
 }
 
 /** 图形交互反馈 */
