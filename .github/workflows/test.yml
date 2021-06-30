@@ -1,4 +1,4 @@
-name: Test
+name: test
 
 on: [push, pull_request]
 
@@ -12,14 +12,13 @@ jobs:
         with:
           node-version: 12
       - name: yarn install
-        run: |
-          yarn --ignore-engines
+        run: yarn --ignore-engines
       - name: bootstrap
-        run: |
-          yarn run bootstrap
-     - name: test
-        run: |
-          yarn run test
+        run: yarn run bootstrap
+      - name: test
+        run: yarn run test
+      - name: cover
+        run: yarn run test-cover
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
