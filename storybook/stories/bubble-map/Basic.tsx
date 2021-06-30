@@ -64,6 +64,15 @@ class Basic extends Component {
           select: { color: '#1AA4D6' },
         },
       },
+      zoom: {
+        position: 'bottomright',
+      },
+      scale: {
+        position: 'bottomright',
+      },
+      layerMenu: {
+        position: 'topright',
+      },
       // popup: {
       //   field: ['name', 'value'],
       //   content: ({ name, value }) => `<span>${name}:</span><span>${value}</span>`,
@@ -71,13 +80,6 @@ class Basic extends Component {
       // },
       // legend: {
       //   position: 'bottomleft',
-      // },
-      // scale: {
-      //   position: 'bottomright',
-      //   maxWidth: 200,
-      // },
-      // layerMenu: {
-      //   position: 'topright',
       // },
     });
 

@@ -64,6 +64,15 @@ class Basic extends Component {
           textOffset: [0, 20], // 文本相对锚点的偏移量 [水平, 垂直]
         },
       },
+      zoom: {
+        position: 'bottomright',
+      },
+      scale: {
+        position: 'bottomright',
+      },
+      layerMenu: {
+        position: 'topright',
+      },
       // popup: {
       //   field: ['name', 'value'],
       //   content: ({ name, value }) => `<span>${name}:</span><span>${value}</span>`,
@@ -71,13 +80,6 @@ class Basic extends Component {
       // },
       // legend: {
       //   position: 'bottomleft',
-      // },
-      // scale: {
-      //   position: 'bottomright',
-      //   maxWidth: 200,
-      // },
-      // layerMenu: {
-      //   position: 'topright',
       // },
     });
 

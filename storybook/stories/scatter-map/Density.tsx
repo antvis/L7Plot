@@ -35,6 +35,15 @@ class Density extends Component {
       style: {
         opacity: 1,
       },
+      zoom: {
+        position: 'bottomright',
+      },
+      scale: {
+        position: 'bottomright',
+      },
+      layerMenu: {
+        position: 'topright',
+      },
       // popup: {
       //   field: ['name', 'value'],
       //   content: ({ name, value }) => `<span>${name}:</span><span>${value}</span>`,
@@ -42,13 +51,6 @@ class Density extends Component {
       // },
       // legend: {
       //   position: 'bottomleft',
-      // },
-      // scale: {
-      //   position: 'bottomright',
-      //   maxWidth: 200,
-      // },
-      // layerMenu: {
-      //   position: 'topright',
       // },
     });
 

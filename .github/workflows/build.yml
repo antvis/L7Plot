@@ -32,11 +32,11 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: npm run bootstrap
-    - run: npm run test
+    - run: npm run test-cover
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
-        github-token: ${{ secrets.ACCESS_TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     runs-on: ubuntu-latest
