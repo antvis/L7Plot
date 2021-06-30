@@ -29,13 +29,19 @@ class Basic extends Component {
           type: 'geojson',
         },
         cluster: true,
+        clusterOption: {
+          radius: 40,
+          minZoom: 0,
+          maxZoom: 20,
+        },
       },
 
       shape: 'circle',
       color: 'yellow',
       size: {
         field: 'point_count',
-        value: [5, 10, 15, 20, 25],
+        value: [10, 20, 30, 40, 50, 60, 70, 80],
+        type: 'quantile',
       },
 
       style: {
@@ -50,8 +56,6 @@ class Basic extends Component {
         style: {
           fill: '#fff',
           fontSize: 12,
-          textAnchor: 'top', // 文本相对锚点的位置 center|left|right|top|bottom|top-left
-          textOffset: [0, 20], // 文本相对锚点的偏移量 [水平, 垂直]
         },
       },
       // popup: {
