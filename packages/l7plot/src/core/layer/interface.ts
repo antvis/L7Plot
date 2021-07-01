@@ -12,6 +12,39 @@ export interface IPointLayerStyleOptions {
 }
 
 /**
+ * 热力普通图层 色带
+ */
+export type ColorRamp = { color: string; position: number }[];
+
+/**
+ * 热力普通图层 图层样式
+ */
+export interface IHeatMapLayerStyleOptions {
+  // 透明度
+  opacity?: number;
+  // 旋转角度
+  angle?: number;
+  // 全局热力权重，推荐权重范围 1-5
+  intensity: number;
+  // 热力半径，单位像素
+  radius: number;
+  // 色带
+  rampColors: ColorRamp;
+}
+
+/**
+ * 热力网格图/蜂窝图层 图层样式
+ */
+export interface IGridHeatMapLayerStyleOptions {
+  // 透明度
+  opacity?: number;
+  // 旋转角度
+  angle?: number;
+  // 覆盖度
+  coverage?: string;
+}
+
+/**
  * 线图层 线类型
  */
 export enum lineStyleType {
@@ -73,6 +106,18 @@ export interface ILabelLayerConfig extends Partial<IBaseLayerConfig & ILabelConf
 }
 
 /**
+ * 热力图层基础配置
+ */
+export interface IHeatMapLayerConfig extends Partial<IBaseLayerConfig> {
+  shape?: ShapeAttr<string>;
+  color?: ColorAttr;
+  size?: SizeAttr;
+  state?: IStateAttribute;
+
+  style?: IHeatMapLayerStyleOptions | IGridHeatMapLayerStyleOptions;
+}
+
+/**
  * 线图层基础配置
  */
 export interface ILIneLayerConfig extends Partial<IBaseLayerConfig & ILineLayerStyleOptions> {
@@ -88,18 +133,6 @@ export interface ILIneLayerConfig extends Partial<IBaseLayerConfig & ILineLayerS
  * 面图层基础配置
  */
 export interface IPolygonLayerConfig extends Partial<IBaseLayerConfig & IPolygonLayerStyleOptions> {
-  shape?: ShapeAttr<string>;
-  color?: ColorAttr;
-  size?: SizeAttr;
-  state?: IStateAttribute;
-
-  style?: IPolygonLayerStyleOptions;
-}
-
-/**
- * 热力图层基础配置
- */
-export interface IHeatMapLayerConfig extends IBaseLayerConfig {
   shape?: ShapeAttr<string>;
   color?: ColorAttr;
   size?: SizeAttr;
