@@ -19,7 +19,7 @@ export type ColorRamp = { color: string; position: number }[];
 /**
  * 热力普通图层 图层样式
  */
-export interface IHeatMapLayerStyleOptions {
+export interface IHeatmapLayerStyleOptions {
   // 透明度
   opacity?: number;
   // 旋转角度
@@ -29,20 +29,29 @@ export interface IHeatMapLayerStyleOptions {
   // 热力半径，单位像素
   radius: number;
   // 色带
-  rampColors: ColorRamp;
+  colorsRamp: ColorRamp;
 }
 
 /**
  * 热力网格图/蜂窝图层 图层样式
  */
-export interface IGridHeatMapLayerStyleOptions {
+export interface IGridHeatmapLayerStyleOptions {
   // 透明度
   opacity?: number;
   // 旋转角度
   angle?: number;
   // 覆盖度
-  coverage?: string;
+  coverage?: number;
 }
+
+/**
+ * 热力图层 图斑形状
+ */
+export type heatmapShape2d = 'circle' | 'square' | 'hexagon' | 'triangle';
+
+export type heatmapShape3d = 'cylinder' | 'triangleColumn' | 'hexagonColumn' | 'squareColumn';
+
+export type heatmapShape = heatmapShape2d | heatmapShape3d | 'heatmap' | 'heatmap3D';
 
 /**
  * 线图层 线类型
@@ -108,13 +117,13 @@ export interface ILabelLayerConfig extends Partial<IBaseLayerConfig & ILabelConf
 /**
  * 热力图层基础配置
  */
-export interface IHeatMapLayerConfig extends Partial<IBaseLayerConfig> {
-  shape?: ShapeAttr<string>;
+export interface IHeatmapLayerConfig extends Partial<IBaseLayerConfig> {
+  shape?: ShapeAttr<heatmapShape>;
   color?: ColorAttr;
   size?: SizeAttr;
   state?: IStateAttribute;
 
-  style?: IHeatMapLayerStyleOptions | IGridHeatMapLayerStyleOptions;
+  style?: IHeatmapLayerStyleOptions | IGridHeatmapLayerStyleOptions;
 }
 
 /**

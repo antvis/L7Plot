@@ -1,28 +1,28 @@
 import { uniqueId } from '@antv/util';
 import { ILayer } from '@antv/l7-core';
-import { PointLayer as PLayer } from '@antv/l7-layers';
+import { HeatmapLayer } from '@antv/l7-layers';
 import { BaseLayerWrapper } from '../../core/layer/base-layer';
 import { IPointLayerConfig } from '../../core/layer/interface';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
-import { IHeatMapLayerOptions } from './interface';
+import { IHeatmapLayerOptions } from './interface';
 
 const Point_DEFAULT_OPTIONS = {
-  name: 'heatMapLayer',
+  name: 'heatmapLayer',
 };
 
-export class HeatMapLayerWrapper extends BaseLayerWrapper<IHeatMapLayerOptions> {
+export class HeatmapLayerWrapper extends BaseLayerWrapper<IHeatmapLayerOptions> {
   public layer: ILayer;
-  public options: IHeatMapLayerOptions;
+  public options: IHeatmapLayerOptions;
 
-  constructor(options: IHeatMapLayerOptions) {
+  constructor(options: IHeatmapLayerOptions) {
     super();
     const { name, source } = options;
     const layerName = name ? name : uniqueId(Point_DEFAULT_OPTIONS.name);
     this.options = deepAssign({}, Point_DEFAULT_OPTIONS, options);
 
     const config = this.pickLayerConfig(this.options);
-    this.layer = new PLayer({ ...config, name: layerName });
+    this.layer = new HeatmapLayer({ ...config, name: layerName });
 
     mappingLayer(this.layer, this.options);
 
