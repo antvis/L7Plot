@@ -18,9 +18,9 @@ class Grid extends Component {
       map: {
         type: 'mapbox',
         style: 'dark',
-        pitch: 0,
-        center: [107.054293, 35.246265],
-        zoom: 5,
+        pitch: 48,
+        center: [109.054293, 29.246265],
+        zoom: 6,
       },
       source: {
         data: data,
@@ -37,31 +37,35 @@ class Grid extends Component {
             method: 'sum',
           },
         ],
+      },
 
-        shape: 'square',
-        color: {
-          field: 'count',
-          value: [
-            '#0B0030',
-            '#100243',
-            '#100243',
-            '#1B048B',
-            '#051FB7',
-            '#0350C1',
-            '#0350C1',
-            '#0072C4',
-            '#0796D3',
-            '#2BA9DF',
-            '#30C7C4',
-            '#6BD5A0',
-            '#A7ECB2',
-            '#D0F4CA',
-          ],
+      shape: 'squareColumn',
+      size: {
+        field: 'count',
+        value: ({ count }) => {
+          return count * 200;
         },
-        style: {
-          coverage: 1,
-          angle: 0,
-        },
+      },
+      color: {
+        field: 'count',
+        value: [
+          '#8C1EB2',
+          '#8C1EB2',
+          '#DA05AA',
+          '#F0051A',
+          '#FF2A3C',
+          '#FF4818',
+          '#FF4818',
+          '#FF8B18',
+          '#F77B00',
+          '#ED9909',
+          '#ECC357',
+          '#EDE59C',
+        ].reverse(),
+      },
+      style: {
+        coverage: 0.9,
+        angle: 0,
       },
     });
 

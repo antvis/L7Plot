@@ -19,8 +19,8 @@ class Hexagon extends Component {
         type: 'mapbox',
         style: 'dark',
         pitch: 43,
-        center: [120.13383079335335, 29.651873105004427],
-        zoom: 7.068989519212174,
+        center: [120.13383079335335, 29.9],
+        zoom: 8.2,
       },
       source: {
         data: data,

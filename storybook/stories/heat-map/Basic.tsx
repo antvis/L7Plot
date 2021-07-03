@@ -32,6 +32,16 @@ class Basic extends Component {
       size: {
         field: 'mag',
       },
+
+      zoom: {
+        position: 'bottomright',
+      },
+      scale: {
+        position: 'bottomright',
+      },
+      layerMenu: {
+        position: 'topright',
+      },
     });
 
     this.map = heatMap;
