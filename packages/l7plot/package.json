@@ -37,13 +37,11 @@
   },
   "homepage": "https://github.com/liuvigongzuoshi/L7Plot#readme",
   "devDependencies": {
-    "rimraf": "^3.0.2",
-    "rollup": "^2.52.2",
-    "typedoc": "^0.21.0"
+    "typedoc": "^0.21.2"
   },
   "dependencies": {
     "@antv/event-emitter": "^0.1.2",
-    "@antv/l7": "^2.4.3",
+    "@antv/l7": "^2.4.4",
     "@antv/util": "^2.0.13"
   }
 }
