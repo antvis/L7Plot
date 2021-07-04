@@ -28,7 +28,7 @@ export function mappingLayer(layer: ILayer, options: IHeatmapLayerOptions) {
   // mapping style
   if (style) {
     if ('colorsRamp' in style) {
-      style['rampColors'] = getRampColors(style);
+      style.rampColors = getRampColors(style);
     }
     MappingLayer.style(layer, style);
   }

@@ -1,4 +1,5 @@
 import { ILayer, ILayerConfig, BlendType } from '@antv/l7-core';
+import { IColorRamp } from '@antv/l7-utils';
 import { ILabelConfig, Source } from '../../types';
 import { animateAttr, ColorAttr, IStateAttribute, ShapeAttr, SizeAttr } from '../../types/attr';
 
@@ -30,6 +31,8 @@ export interface IHeatmapLayerStyleOptions {
   radius: number;
   // 色带
   colorsRamp: ColorRamp;
+  // L7 原色带
+  rampColors?: IColorRamp;
 }
 
 /**
@@ -158,6 +161,6 @@ export interface IBaseLayerWrapper {
   options: IBaseLayerConfig;
 
   pickLayerConfig<T extends IBaseLayerConfig>(params: T): Partial<ILayerConfig>;
-  updateOption<T>(options: T);
+  updateOptions<T>(options: T);
   changeData(source: Source);
 }

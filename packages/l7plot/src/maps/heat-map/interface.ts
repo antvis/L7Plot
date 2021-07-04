@@ -19,5 +19,5 @@ export interface HeatMapOptions extends IMapOptions {
   /**
    * 图层样式
    */
-  style?: IHeatmapLayerStyleOptions | IGridHeatmapLayerStyleOptions;
+  style?: Omit<IHeatmapLayerStyleOptions, 'rampColors'> | IGridHeatmapLayerStyleOptions;
 }
