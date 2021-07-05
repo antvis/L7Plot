@@ -36,7 +36,11 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
   /**
    * map 类型名称
    */
-  public abstract readonly type: MapType;
+  public abstract readonly type: MapType | string;
+  /**
+   * 初始化状态
+   */
+  public inited = false;
   /**
    * map 的 schema 配置
    */
@@ -52,7 +56,7 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
   /**
    * 数据
    */
-  protected source: Source | undefined;
+  public source: Source;
   /**
    * 图层组
    */
@@ -77,9 +81,11 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
     this.options = deepAssign({}, this.getDefaultOptions(), options);
 
     this.scene = this.createScene();
+    this.source = this.createSource();
 
     // this.bindEvents();
     this.render();
+    this.inited = true;
   }
 
   /**
@@ -158,11 +164,10 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
    * 渲染
    */
   public render() {
-    if (this.source) {
+    if (this.inited) {
       this.updateInternalLayers(this.options);
       this.scene.render();
     } else {
-      this.source = this.createSource();
       const layerGroup = this.createInternalLayers(this.source);
       layerGroup.addTo(this.scene);
       this.layerGroups.push(layerGroup);
@@ -181,7 +186,7 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
   /**
    * 更新: 更新配置
    */
-  protected updateOption(options: Partial<O>) {
+  public updateOption(options: Partial<O>) {
     this.options = deepAssign({}, this.options, options);
   }
 
@@ -190,7 +195,7 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
    */
   public changeData(data: any, cfg?: ISourceCFG) {
     // TODO: deepAssign old cfg
-    this.source?.setData(data, cfg);
+    this.source.setData(data, cfg);
   }
 
   /**

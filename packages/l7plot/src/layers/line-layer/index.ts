@@ -1,3 +1,1 @@
-class LineLayer {}
-
-export default LineLayer;
+export class LineLayerWrapper {}

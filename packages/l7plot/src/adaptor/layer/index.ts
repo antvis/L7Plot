@@ -5,9 +5,9 @@ import { ColorAttr, SizeAttr, ShapeAttr, RotateAttr, animateAttr, IStateAttribut
 /**
  * 获得映射函数
  * @param mappingFields
- * @param callBack
+ * @param callback
  */
-export function getMappingFunction(mappingFields: string[], callBack: (data: Record<string, any>) => any) {
+export function getMappingFunction(mappingFields: string[], callback: (data: Record<string, any>) => any) {
   return (...args: any[]) => {
     const params: Record<string, any> = {};
 
@@ -17,7 +17,7 @@ export function getMappingFunction(mappingFields: string[], callBack: (data: Rec
 
     delete params['undefined'];
 
-    return callBack(params);
+    return callback(params);
   };
 }
 
@@ -122,10 +122,10 @@ export class MappingLayer {
   static rotate(layer: ILayer, rotate: RotateAttr) {
     /**
      * rotate 的几种情况
-     * layer.rotate('cicle');
-     * layer.rotate('rotate', ['cicle', 'square']);
-     * layer.rotate('x', (x) => 'cicle');
-     * layer.rotate('x*y', (x, y) => 'cicle');
+     * layer.rotate(45);
+     * layer.rotate('rotate', [45, 90]);
+     * layer.rotate('x', (x) => 45);
+     * layer.rotate('x*y', (x, y) => 45);
      */
     if (isString(rotate)) {
       // TODO: L7 rotate
