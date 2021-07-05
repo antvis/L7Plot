@@ -32,7 +32,7 @@ export class LabelLayerWrapper extends BaseLayerWrapper<ILabelLayerOptions> {
     this.layer.setSource(source);
   }
 
-  public updateOption(options: ILabelLayerConfig) {
+  public updateOptions(options: ILabelLayerConfig) {
     this.options = deepAssign({}, this.options, options);
     mappingLayer(this.layer, this.options);
   }
