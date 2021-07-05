@@ -25,3 +25,7 @@ export type { ScatterMapOptions } from './maps/scatter-map/interface';
 // 符号地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { SymbolMap } from './maps/symbol-map';
 export type { SymbolMapOptions } from './maps/symbol-map/interface';
+
+// 热力地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { HeatMap } from './maps/heat-map';
+export type { HeatMapOptions } from './maps/heat-map/interface';
