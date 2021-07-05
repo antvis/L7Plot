@@ -1,36 +1,36 @@
 import { ScaleTypeName, IAnimateOption, IActiveOption } from '@antv/l7-core';
 
-export type CallBack<T> = (data: Record<string, any>) => T;
+export type Callback<T> = (data: Record<string, any>) => T;
 
 /** 颜色色板 */
 export type ColorsAttr = string | string[];
 
 export interface IStyleAttribute<T> {
   field?: string | string[];
-  value?: T | T[] | CallBack<T>;
+  value?: T | T[] | Callback<T>;
 }
 
 export interface IColorStyleAttribute {
   field?: string | string[];
-  value?: string | string[] | CallBack<string>;
+  value?: string | string[] | Callback<string>;
   type?: ScaleTypeName;
 }
 
 export interface ISizeStyleAttribute {
   field?: string;
-  value?: number | number[] | CallBack<number>;
+  value?: number | number[] | Callback<number>;
   type?: ScaleTypeName;
 }
 
 export interface IRotateStyleAttribute {
   field?: string;
-  value?: number | number[] | CallBack<number>;
+  value?: number | number[] | Callback<number>;
   type?: ScaleTypeName;
 }
 
 export interface IShapeStyleAttribute<T> {
   field?: string | string[];
-  value?: T | T[] | CallBack<T>;
+  value?: T | T[] | Callback<T>;
   type?: ScaleTypeName;
 }
 
@@ -41,16 +41,16 @@ export interface IStateAttribute {
 }
 
 /** 颜色 */
-export type ColorAttr = string | CallBack<string> | IColorStyleAttribute;
+export type ColorAttr = string | Callback<string> | IColorStyleAttribute;
 
 /** 大小 */
-export type SizeAttr = number | CallBack<number> | ISizeStyleAttribute;
+export type SizeAttr = number | Callback<number> | ISizeStyleAttribute;
 
 /** 旋转 */
-export type RotateAttr = number | CallBack<number> | IRotateStyleAttribute;
+export type RotateAttr = number | Callback<number> | IRotateStyleAttribute;
 
 /** 图形形状 */
-export type ShapeAttr<T> = T | CallBack<T> | IShapeStyleAttribute<T>;
+export type ShapeAttr<T> = T | Callback<T> | IShapeStyleAttribute<T>;
 
 /** 图形动画 */
 export type animateAttr = boolean | Partial<IAnimateOption>;
