@@ -72,7 +72,7 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
     const pointLayerConfig = pick<any>(options, POINT_LAYER_OPTIONS_KEYS);
     const labelLayerConfig = { ...options.label };
 
-    this.pointLayerWrapper?.updateOption(pointLayerConfig);
-    this.labelLayerWrapper?.updateOption(labelLayerConfig);
+    this.pointLayerWrapper?.updateOptions(pointLayerConfig);
+    this.labelLayerWrapper?.updateOptions(labelLayerConfig);
   }
 }

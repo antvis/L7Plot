@@ -75,7 +75,7 @@ export class HeatMap<O extends HeatMapOptions = HeatMapOptions> extends MapWrapp
     const heatMapLayerConfig = pick<any>(options, POINT_LAYER_OPTIONS_KEYS);
     const labelLayerConfig = { ...options.label };
 
-    this.heatmapLayerWrapper?.updateOption(heatMapLayerConfig);
-    this.labelLayerWrapper?.updateOption(labelLayerConfig);
+    this.heatmapLayerWrapper?.updateOptions(heatMapLayerConfig);
+    this.labelLayerWrapper?.updateOptions(labelLayerConfig);
   }
 }
