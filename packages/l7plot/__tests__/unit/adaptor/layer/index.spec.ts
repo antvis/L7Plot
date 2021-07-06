@@ -3,7 +3,7 @@ import { PointLayerWrapper } from '../../../../src/layers/point-layer';
 import { Source } from '../../../../src/types';
 
 describe('mapping layer', () => {
-  it('shape', () => {
+  it('mapping shape', () => {
     const layerWrapper = new PointLayerWrapper({
       source: new Source([]),
       shape: 'circle',
@@ -46,7 +46,7 @@ describe('mapping layer', () => {
     ).toBeDefined();
   });
 
-  it('size', () => {
+  it('mapping size', () => {
     const layerWrapper = new PointLayerWrapper({
       source: new Source([]),
       size: 12,
@@ -85,7 +85,7 @@ describe('mapping layer', () => {
     expect(getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'size')?.attributeValues).toBeDefined();
   });
 
-  it('color', () => {
+  it('mapping color', () => {
     const layerWrapper = new PointLayerWrapper({
       source: new Source([]),
       color: 'red',
@@ -128,7 +128,7 @@ describe('mapping layer', () => {
     ).toBeDefined();
   });
 
-  it('style', () => {
+  it('mapping style', () => {
     const layerWrapper = new PointLayerWrapper({
       source: new Source([]),
       style: { opacity: 1, strokeWidth: 1, stroke: 'red' },
@@ -139,7 +139,7 @@ describe('mapping layer', () => {
     expect(layerWrapper.layer['rawConfig']).toMatchObject({ opacity: 1, strokeWidth: 1, stroke: 'red' });
   });
 
-  it('state', () => {
+  it('mapping state', () => {
     const layerWrapper = new PointLayerWrapper({
       source: new Source([]),
       state: { active: true, select: true },
@@ -151,7 +151,7 @@ describe('mapping layer', () => {
     expect(layerWrapper.layer['needUpdateConfig'].enableSelect).toBeTruthy();
   });
 
-  it('rotate', () => {
+  it('mapping rotate', () => {
     const layerWrapper = new PointLayerWrapper({
       source: new Source([]),
       // rotate: 45,
@@ -165,7 +165,7 @@ describe('mapping layer', () => {
     // });
   });
 
-  it('animate', () => {
+  it('mapping animate', () => {
     const layerWrapper = new PointLayerWrapper({
       source: new Source([]),
       animate: true,
@@ -176,7 +176,7 @@ describe('mapping layer', () => {
     expect(layerWrapper.layer['needUpdateConfig'].animateOption.enable).toBeTruthy();
   });
 
-  it('scale', () => {
+  it('mapping scale', () => {
     const layerWrapper = new PointLayerWrapper({
       source: new Source([]),
       size: {
