@@ -26,7 +26,7 @@ export enum MapType {
   Scatter = 'scatter',
   Symbol = 'symbol',
   Clustere = 'clustere',
-  Heat = 'heat',
+  Heat = 'heatmap',
 }
 
 /**
@@ -73,11 +73,6 @@ export interface IMapOptions {
    * 画布高度
    */
   readonly height?: number;
-  /**
-   * 画布是否自动适配容器大小，默认为 true
-   */
-
-  readonly autoFit?: boolean;
 
   // 通用数据配置
   /**
@@ -89,6 +84,12 @@ export interface IMapOptions {
    * logo 配置
    */
   readonly logo?: boolean | ILogo;
+
+  /**
+   * 是否自动缩放到图层范围，默认为 false
+   */
+
+  readonly autoFit?: boolean;
 
   /**
    * 具体的数据

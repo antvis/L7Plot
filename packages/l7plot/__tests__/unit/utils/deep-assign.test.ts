@@ -1,4 +1,4 @@
-import { deepAssign } from '../../src/utils/deep-assign';
+import { deepAssign } from '../../../src/utils/deep-assign';
 
 describe('deepAssign', () => {
   it('deepAssign', () => {

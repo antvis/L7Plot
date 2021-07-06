@@ -84,7 +84,7 @@ export class LayerGroup {
    * 根据图层 name 获取图层对象
    */
   public getLayerByName(name: string): ILayer | undefined {
-    return this.layers.find((itemLayer) => itemLayer.id === name);
+    return this.layers.find((itemLayer) => itemLayer.name === name);
   }
 
   /**
