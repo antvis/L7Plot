@@ -7,7 +7,7 @@ describe('layer group', () => {
 
   it('layer', () => {
     const { layer } = new PointLayerWrapper({
-      source: new Source([]),
+      source: new Source([], { parser: { type: 'json', x: 'x', y: 'y' } }),
       size: 12,
       color: '#fff',
       shape: 'circle',

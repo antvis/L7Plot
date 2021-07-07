@@ -1,74 +1,117 @@
-import { LayerGroup } from '../../../../src/core/layer/layer-group';
-import { IMapOptions, MapWrapper, PointMap, Source } from '../../../../src';
+import { PointMap } from '../../../../src';
 import { createDiv } from '../../../helper/dom';
 
 describe('core map', () => {
-  const pointMap = new PointMap(createDiv(), {
-    autoFit: true,
-    source: { data: [] },
-    shape: 'circle',
-    zoom: { position: 'bottomright' },
-    scale: { position: 'bottomright' },
-    layerMenu: { position: 'topright' },
-  });
-
   it('update', () => {
-    pointMap.update({ shape: 'square' });
-
-    expect(pointMap.options.shape).toEqual('square');
+    const pointMap = new PointMap(createDiv(), {
+      source: {
+        data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
+        parser: { type: 'json' },
+      },
+      shape: 'circle',
+    });
+    return new Promise<void>((resolve, reject) => {
+      pointMap.on('loaded', () => {
+        try {
+          pointMap.update({ shape: 'square' });
+          expect(pointMap.options.shape).toEqual('square');
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
+        setTimeout(() => pointMap.destroy(), 0);
+      });
+    });
   });
 
   it('render', () => {
-    pointMap.updateOption({ shape: 'circle' });
-    pointMap.render();
-
-    expect(pointMap.options.shape).toEqual('circle');
+    const pointMap = new PointMap(createDiv(), {
+      source: {
+        data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
+        parser: { type: 'json' },
+      },
+      shape: 'square',
+    });
+    return new Promise<void>((resolve, reject) => {
+      pointMap.on('loaded', () => {
+        try {
+          pointMap.updateOption({ shape: 'circle' });
+          pointMap.render();
+          expect(pointMap.options.shape).toEqual('circle');
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
+        // setTimeout(() => pointMap.destroy(), 0);
+      });
+    });
   });
 
   it('change data', () => {
-    pointMap.pointLayer?.once('inited', () => {
-      const data = [{ x: 129, y: 29 }];
-      pointMap.changeData(data);
-      expect(pointMap.source['originData']).toEqual(data);
+    const pointMap = new PointMap(createDiv(), {
+      source: {
+        data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
+        parser: { type: 'json' },
+      },
+    });
+    const data = [{ x: 109, y: 29 }];
+    return new Promise<void>((resolve, reject) => {
+      pointMap.on('loaded', () => {
+        try {
+          pointMap.changeData(data);
+          expect(pointMap.source['originData']).toEqual(data);
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
+        setTimeout(() => pointMap.destroy(), 0);
+      });
     });
   });
 
   it('controls', () => {
-    pointMap.pointLayer?.once('inited', () => {
-      expect(pointMap.zoomControl).toBeDefined();
-      expect(pointMap.scaleControl).toBeDefined();
-      expect(pointMap.layerMenuControl).toBeDefined();
-
-      pointMap.removeZoomControl();
-      pointMap.removeScaleControl();
-      pointMap.removeLayerMenuControl();
-
-      expect(pointMap.zoomControl).toBeUndefined();
-      expect(pointMap.scaleControl).toBeUndefined();
-      expect(pointMap.layerMenuControl).toBeUndefined();
-
-      pointMap.destroy();
+    const pointMap = new PointMap(createDiv(), {
+      source: {
+        data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
+        parser: { type: 'json' },
+      },
+      zoom: { position: 'bottomright' },
+      scale: { position: 'bottomright' },
+      layerMenu: { position: 'topright' },
     });
+
+    expect(pointMap.zoomControl).toBeDefined();
+    expect(pointMap.scaleControl).toBeDefined();
+    expect(pointMap.layerMenuControl).toBeDefined();
+
+    pointMap.removeZoomControl();
+    pointMap.removeScaleControl();
+    pointMap.removeLayerMenuControl();
+
+    expect(pointMap.zoomControl).toBeUndefined();
+    expect(pointMap.scaleControl).toBeUndefined();
+    expect(pointMap.layerMenuControl).toBeUndefined();
+
+    pointMap.on('loaded', () => setTimeout(() => pointMap.destroy(), 0));
   });
-});
 
-describe('custom map', () => {
-  it('default-options', () => {
-    type CustomMapOptions = IMapOptions;
-    class CustomMap extends MapWrapper<CustomMapOptions> {
-      type = 'custom';
-      protected createInternalLayers(source: Source): LayerGroup {
-        source;
-        const layerGroup = new LayerGroup([]);
-        return layerGroup;
-      }
-      protected updateInternalLayers(options: CustomMapOptions) {
-        options;
-      }
-    }
-    const customMap = new CustomMap(createDiv(), { source: { data: [] } });
-    expect(MapWrapper.DefaultOptions).toEqual(CustomMap.DefaultOptions);
-
-    customMap.destroy();
+  it('loaded event', () => {
+    const pointMap = new PointMap(createDiv(), {
+      source: {
+        data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
+        parser: { type: 'json' },
+      },
+    });
+    return new Promise<void>((resolve, reject) => {
+      pointMap.on('loaded', () => {
+        try {
+          expect(pointMap.scene['sceneService'].loaded).toBeTruthy();
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
+        setTimeout(() => pointMap.destroy(), 0);
+      });
+    });
   });
 });

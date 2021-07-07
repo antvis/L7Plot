@@ -4,7 +4,7 @@ import { Source } from '../../../../src/types';
 
 describe('label layer', () => {
   const layerWrapper = new LabelLayerWrapper({
-    source: new Source([]),
+    source: new Source([], { parser: { type: 'json', x: 'x', y: 'y' } }),
     content: 'label',
     style: {
       fill: '#fff',

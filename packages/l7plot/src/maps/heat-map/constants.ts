@@ -9,6 +9,8 @@ export const DEFAULT_OPTIONS = deepAssign({}, MapWrapper.DefaultOptions, {
     data: [],
     parser: {
       type: 'json',
+      x: 'x',
+      y: 'y',
     },
   },
   shape: 'heatmap',

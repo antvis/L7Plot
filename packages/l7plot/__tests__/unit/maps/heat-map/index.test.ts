@@ -22,6 +22,6 @@ describe('heat map', () => {
     expect(heatMap.type).toEqual('heatmap');
     expect(heatMap.heatMapLayer).toBeDefined();
 
-    heatMap.destroy();
+    heatMap.on('loaded', () => setTimeout(() => heatMap.destroy(), 0));
   });
 });

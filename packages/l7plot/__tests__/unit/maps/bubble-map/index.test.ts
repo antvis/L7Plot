@@ -30,6 +30,6 @@ describe('point map', () => {
     expect(bubbleMap.type).toEqual('bubble');
     expect(bubbleMap.pointLayer).toBeDefined();
 
-    bubbleMap.destroy();
+    bubbleMap.on('loaded', () => setTimeout(() => bubbleMap.destroy(), 0));
   });
 });

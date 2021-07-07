@@ -4,7 +4,7 @@ import { Source } from '../../../../src/types';
 
 describe('heatmap layer', () => {
   const layerWrapper = new HeatmapLayerWrapper({
-    source: new Source([]),
+    source: new Source([], { parser: { type: 'json', x: 'x', y: 'y' } }),
     shape: 'heatmap',
     size: {
       field: 'mag',
