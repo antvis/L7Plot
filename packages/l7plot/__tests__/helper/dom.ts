@@ -1,10 +1,10 @@
-type createDivOptions = { title: string; container: HTMLElement; id?: string; style?: string };
+type DivOptions = { title: string; container: HTMLElement; id?: string; style?: string };
 
 /**
  * 创建一个 div 节点，并放到 container，默认放到 body 上
  */
 export function createDiv(
-  { title, container, id, style }: createDivOptions = {
+  { title, container, id, style }: DivOptions = {
     title: '',
     container: document.body,
     style: 'position: relative; height: 400px;',
