@@ -4,7 +4,7 @@ import { Source } from '../../../../src/types';
 
 describe('point layer', () => {
   const layerWrapper = new PointLayerWrapper({
-    source: new Source([]),
+    source: new Source([], { parser: { type: 'json', x: 'x', y: 'y' } }),
     size: 12,
     color: '#fff',
     shape: 'circle',

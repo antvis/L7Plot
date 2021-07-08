@@ -10,6 +10,7 @@ module.exports = {
   coverageReporters: ['text', 'lcov', 'clover'],
   moduleFileExtensions: ['js', 'ts'],
   testMatch: ['**/__tests__/**/*.+(spec|test).[jt]s'],
+  testTimeout: 5000 * 4,
   coverageThreshold: {
     // global: {
     //   branches: 80,

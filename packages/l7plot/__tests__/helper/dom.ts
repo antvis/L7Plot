@@ -1,13 +1,21 @@
+type DivOptions = { title: string; container: HTMLElement; id?: string; style?: string };
+
 /**
  * 创建一个 div 节点，并放到 container，默认放到 body 上
- * @param title
- * @param container
- * @param id  容器 id
  */
-export function createDiv(title = '', container: HTMLElement = document.body, id?: string): HTMLDivElement {
+export function createDiv(
+  { title, container, id, style }: DivOptions = {
+    title: '',
+    container: document.body,
+    style: 'position: relative; height: 400px;',
+  }
+): HTMLDivElement {
   const div = document.createElement('div');
   if (id) {
     div.id = id;
+  }
+  if (style) {
+    div.setAttribute('style', style);
   }
   if (title) {
     const titleDiv = document.createElement('div').appendChild(document.createTextNode(title));

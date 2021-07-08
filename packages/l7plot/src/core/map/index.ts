@@ -1,4 +1,4 @@
-import { Scene } from '@antv/l7-scene';
+import { Scene } from '@antv/l7';
 import { Mapbox, GaodeMap } from '@antv/l7-maps';
 import { Scale, Layers, Zoom } from '@antv/l7-component';
 import EventEmitter from '@antv/event-emitter';
@@ -18,6 +18,7 @@ import {
 } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { ISourceCFG } from '@antv/l7-core';
+import { MapEventList, SceneEventList } from './constants';
 
 const DEFAULT_OPTIONS = {
   map: { type: BaseMapType.Amap },
@@ -38,9 +39,13 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
    */
   public abstract readonly type: MapType | string;
   /**
-   * 初始化状态
+   * 是否首次渲染
    */
   public inited = false;
+  /**
+   * 是否场景加载成功
+   */
+  public sceneLoaded = false;
   /**
    * map 的 schema 配置
    */
@@ -83,7 +88,7 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
     this.scene = this.createScene();
     this.source = this.createSource();
 
-    // this.bindEvents();
+    this.bindSceneEvents();
     this.render();
     this.inited = true;
   }
@@ -166,10 +171,29 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
   public render() {
     if (this.inited) {
       this.updateInternalLayers(this.options);
-      this.scene.render();
+      // this.scene.render();
     } else {
       const layerGroup = this.createInternalLayers(this.source);
-      layerGroup.addTo(this.scene);
+      if (this.scene['sceneService'].loaded) {
+        if (layerGroup.isEmpty()) {
+          this.emit('loaded');
+        } else {
+          layerGroup.once('inited-all', () => this.emit('loaded'));
+        }
+        layerGroup.addTo(this.scene);
+      } else {
+        // TODO: once
+        this.scene.on('loaded', () => {
+          this.bindMapEvents();
+          this.sceneLoaded = true;
+          if (layerGroup.isEmpty()) {
+            this.emit('loaded');
+          } else {
+            layerGroup.once('inited-all', () => this.emit('loaded'));
+          }
+          layerGroup.addTo(this.scene);
+        });
+      }
       this.layerGroups.push(layerGroup);
     }
     this.initControls();
@@ -199,14 +223,25 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
   }
 
   /**
-   * 绑定代理所有 L7 的事件
+   * 绑定代理所有 scene 的事件
    */
-  private bindEvents() {
-    // this.scene.on('*', (e: Event) => {
-    //   if (e?.type) {
-    //     this.emit(e.type, e);
-    //   }
-    // });
+  private bindSceneEvents() {
+    SceneEventList.forEach(({ original, adaptation }) => {
+      this.scene.on(original, (e: Event) => {
+        this.emit(adaptation, e);
+      });
+    });
+  }
+
+  /**
+   * 绑定代理所有 map 的事件
+   */
+  private bindMapEvents() {
+    MapEventList.forEach((eventName) => {
+      this.scene.on(eventName, (e: Event) => {
+        this.emit(eventName, e);
+      });
+    });
   }
 
   /**
@@ -261,6 +296,7 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
   public removeZoomControl() {
     if (this.zoomControl) {
       this.zoomControl.remove();
+      this.zoomControl = undefined;
     }
   }
 
@@ -279,6 +315,7 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
   public removeScaleControl() {
     if (this.scaleControl) {
       this.scaleControl.remove();
+      this.scaleControl = undefined;
     }
   }
 
@@ -302,6 +339,7 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
   public removeLayerMenuControl() {
     if (this.layerMenuControl) {
       this.layerMenuControl.remove();
+      this.layerMenuControl = undefined;
     }
   }
 
@@ -317,7 +355,7 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
    */
   public destroy() {
     // 清空已经绑定的事件
-    // this.off();
+    this.off();
     this.scene.destroy();
   }
 }

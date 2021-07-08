@@ -39,6 +39,6 @@ describe('point map', () => {
     expect(pointMap.type).toEqual('point');
     expect(pointMap.pointLayer).toBeDefined();
 
-    pointMap.destroy();
+    pointMap.on('loaded', () => setTimeout(() => pointMap.destroy(), 0));
   });
 });

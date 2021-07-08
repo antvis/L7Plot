@@ -3,9 +3,11 @@ import { PointLayerWrapper } from '../../../../src/layers/point-layer';
 import { Source } from '../../../../src/types';
 
 describe('mapping layer', () => {
+  const source = new Source([], { parser: { type: 'json', x: 'x', y: 'y' } });
+
   it('mapping shape', () => {
     const layerWrapper = new PointLayerWrapper({
-      source: new Source([]),
+      source: source,
       shape: 'circle',
     });
 
@@ -48,7 +50,7 @@ describe('mapping layer', () => {
 
   it('mapping size', () => {
     const layerWrapper = new PointLayerWrapper({
-      source: new Source([]),
+      source: source,
       size: 12,
     });
 
@@ -87,7 +89,7 @@ describe('mapping layer', () => {
 
   it('mapping color', () => {
     const layerWrapper = new PointLayerWrapper({
-      source: new Source([]),
+      source: source,
       color: 'red',
     });
 
@@ -130,7 +132,7 @@ describe('mapping layer', () => {
 
   it('mapping style', () => {
     const layerWrapper = new PointLayerWrapper({
-      source: new Source([]),
+      source: source,
       style: { opacity: 1, strokeWidth: 1, stroke: 'red' },
     });
 
@@ -141,7 +143,7 @@ describe('mapping layer', () => {
 
   it('mapping state', () => {
     const layerWrapper = new PointLayerWrapper({
-      source: new Source([]),
+      source: source,
       state: { active: true, select: true },
     });
 
@@ -153,7 +155,7 @@ describe('mapping layer', () => {
 
   it('mapping rotate', () => {
     const layerWrapper = new PointLayerWrapper({
-      source: new Source([]),
+      source: source,
       // rotate: 45,
     });
 
@@ -167,7 +169,7 @@ describe('mapping layer', () => {
 
   it('mapping animate', () => {
     const layerWrapper = new PointLayerWrapper({
-      source: new Source([]),
+      source: source,
       animate: true,
     });
 
@@ -178,7 +180,7 @@ describe('mapping layer', () => {
 
   it('mapping scale', () => {
     const layerWrapper = new PointLayerWrapper({
-      source: new Source([]),
+      source: source,
       size: {
         field: 'x',
         value: [12, 14],
