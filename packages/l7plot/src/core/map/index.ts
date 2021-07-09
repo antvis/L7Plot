@@ -19,6 +19,7 @@ import {
 import { LayerGroup } from '../layer/layer-group';
 import { ISourceCFG } from '@antv/l7-core';
 import { LayerEventList, MapEventList, SceneEventList } from './constants';
+import { FONT_FACE_CACHE, ICON_FONT_CACHE, IMAGES_CACHE } from './register';
 
 const DEFAULT_OPTIONS = {
   map: { type: BaseMapType.Amap },
@@ -92,6 +93,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
     this.scene = this.createScene();
     this.source = this.createSource();
 
+    this.registerResources();
     this.render();
     this.inited = true;
   }
@@ -199,6 +201,27 @@ export abstract class MapWrapper<O extends IMapOptions> {
       this.layerGroups.push(layerGroup);
     }
     this.initControls();
+  }
+
+  /**
+   * 注册静态资源
+   */
+  private registerResources() {
+    if (IMAGES_CACHE.size) {
+      IMAGES_CACHE.forEach((img, id) => {
+        this.scene.addImage(id, img);
+      });
+    }
+    if (FONT_FACE_CACHE.size) {
+      FONT_FACE_CACHE.forEach((fontPath, fontFamily) => {
+        this.scene.addFontFace(fontFamily, fontPath);
+      });
+    }
+    if (ICON_FONT_CACHE.size) {
+      ICON_FONT_CACHE.forEach((name, fontUnicode) => {
+        this.scene.addIconFont(fontUnicode, name);
+      });
+    }
   }
 
   /**

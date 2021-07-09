@@ -1,5 +1,17 @@
 export const version = '0.0.1-alpha.1';
 
+// 资源静态注册
+export {
+  registerImage,
+  registerImages,
+  unregisterImage,
+  registerFontFace,
+  unregisterFontFace,
+  registerIconFont,
+  registerIconFonts,
+  unregisterIconFont,
+} from './core/map/register';
+
 /** G7Plot 的 MapWrapper 基类 */
 export { MapWrapper } from './core/map';
 
