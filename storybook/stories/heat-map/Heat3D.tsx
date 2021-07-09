@@ -20,7 +20,7 @@ class Basic extends Component {
         style: 'dark',
         center: [127.5671666579043, 7.445038892195569],
         zoom: 2.632456779444394,
-        pitch: 0,
+        pitch: 45,
       },
       source: {
         data: data,
@@ -28,18 +28,9 @@ class Basic extends Component {
           type: 'geojson',
         },
       },
+      shape: 'heatmap3D',
       size: {
         field: 'mag',
-      },
-
-      zoom: {
-        position: 'bottomright',
-      },
-      scale: {
-        position: 'bottomright',
-      },
-      layerMenu: {
-        position: 'topright',
       },
     });
 
