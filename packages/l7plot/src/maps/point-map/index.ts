@@ -51,14 +51,27 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
   }
 
   /**
+   * 获取内置图层名
+   */
+  protected getInternalLayerName() {
+    const pointLayerName = 'pointLayer';
+    return { pointLayerName };
+  }
+
+  /**
    * 创建内置图层
    */
   protected createInternalLayers(source: Source): LayerGroup {
-    this.pointLayerWrapper = new PointLayerWrapper({ source, ...pick<any>(this.options, POINT_LAYER_OPTIONS_KEYS) });
+    const { pointLayerName } = this.getInternalLayerName();
+    this.pointLayerWrapper = new PointLayerWrapper({
+      source,
+      ...pick<any>(this.options, POINT_LAYER_OPTIONS_KEYS),
+      name: pointLayerName,
+    });
     const layerGroup = new LayerGroup([this.pointLayerWrapper.layer]);
 
     if (this.options.label) {
-      this.labelLayerWrapper = new LabelLayerWrapper({ source, ...this.options.label });
+      this.labelLayerWrapper = new LabelLayerWrapper({ source, ...this.options.label, name: 'labelLayer' });
       layerGroup.addlayer(this.labelLayerWrapper.layer);
     }
 

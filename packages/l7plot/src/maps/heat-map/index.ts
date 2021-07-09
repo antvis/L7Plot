@@ -57,11 +57,12 @@ export class HeatMap<O extends HeatMapOptions = HeatMapOptions> extends MapWrapp
     this.heatmapLayerWrapper = new HeatmapLayerWrapper({
       source,
       ...pick<any>(this.options, POINT_LAYER_OPTIONS_KEYS),
+      name: 'heatmapLayer',
     });
     const layerGroup = new LayerGroup([this.heatmapLayerWrapper.layer]);
 
     if (this.options.label) {
-      this.labelLayerWrapper = new LabelLayerWrapper({ source, ...this.options.label });
+      this.labelLayerWrapper = new LabelLayerWrapper({ source, ...this.options.label, name: 'labelLayer' });
       layerGroup.addlayer(this.labelLayerWrapper.layer);
     }
 
