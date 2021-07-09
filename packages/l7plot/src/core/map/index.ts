@@ -1,4 +1,4 @@
-import { Scene } from '@antv/l7';
+import { Scene } from '@antv/l7-scene';
 import { Mapbox, GaodeMap } from '@antv/l7-maps';
 import { Scale, Layers, Zoom } from '@antv/l7-component';
 import EventEmitter from '@antv/event-emitter';
@@ -18,14 +18,14 @@ import {
 } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { ISourceCFG } from '@antv/l7-core';
-import { MapEventList, SceneEventList } from './constants';
+import { LayerEventList, MapEventList, SceneEventList } from './constants';
 
 const DEFAULT_OPTIONS = {
   map: { type: BaseMapType.Amap },
   logo: true,
 };
 
-export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
+export abstract class MapWrapper<O extends IMapOptions> {
   /**
    * 默认的 options 配置项
    */
@@ -34,6 +34,11 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
    * 地图类型
    */
   static MapType = MapType;
+
+  /**
+   * 自定义事件中心
+   */
+  private readonly eventEmitter = new EventEmitter();
   /**
    * map 类型名称
    */
@@ -80,7 +85,6 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
   public layerMenuControl: Layers | undefined;
 
   constructor(container: string | HTMLDivElement, options: O) {
-    super();
     this.container = container;
 
     this.options = deepAssign({}, this.getDefaultOptions(), options);
@@ -88,7 +92,6 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
     this.scene = this.createScene();
     this.source = this.createSource();
 
-    this.bindSceneEvents();
     this.render();
     this.inited = true;
   }
@@ -184,7 +187,6 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
       } else {
         // TODO: once
         this.scene.on('loaded', () => {
-          this.bindMapEvents();
           this.sceneLoaded = true;
           if (layerGroup.isEmpty()) {
             this.emit('loaded');
@@ -223,25 +225,53 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
   }
 
   /**
-   * 绑定代理所有 scene 的事件
+   * 自定义事件: 事件触发
    */
-  private bindSceneEvents() {
-    SceneEventList.forEach(({ original, adaptation }) => {
-      this.scene.on(original, (e: Event) => {
-        this.emit(adaptation, e);
-      });
-    });
+  protected emit(name: string, ...args: any[]) {
+    this.eventEmitter.emit(name, ...args);
   }
 
   /**
-   * 绑定代理所有 map 的事件
+   * 事件代理: 绑定事件
    */
-  private bindMapEvents() {
-    MapEventList.forEach((eventName) => {
-      this.scene.on(eventName, (e: Event) => {
-        this.emit(eventName, e);
-      });
-    });
+  public on(name: string, callback: (...args: any[]) => void) {
+    this.eventHander('on', name, callback);
+  }
+
+  /**
+   * 事件代理: 绑定一次事件
+   */
+  public once(name: string, callback: (...args: any[]) => void) {
+    this.eventHander('once', name, callback);
+  }
+
+  /**
+   * 事件代理: 解绑事件
+   */
+  public off(name: string, callback: (...args: any[]) => void) {
+    this.eventHander('off', name, callback);
+  }
+
+  /**
+   * 事件代理: 事件处理
+   */
+  private eventHander(type: 'on' | 'off' | 'once', name: string, callback: (...args: any[]) => void) {
+    const sceneEvent = SceneEventList.find((event) => event.adaptation === name);
+    if (sceneEvent) {
+      this.scene[type](sceneEvent.original, callback);
+    } else if (MapEventList.indexOf(name) !== -1) {
+      this.scene[type](name, callback);
+    } else if (name.includes(':')) {
+      const [module, eventName] = name.split(':');
+      const hasEventEmitter = this[module] && this[module][type];
+      if (hasEventEmitter && LayerEventList.indexOf(eventName) !== -1) {
+        this[module][type](eventName, callback);
+      } else {
+        throw new Error(`No event name "${name}"`);
+      }
+    } else {
+      this.eventEmitter[type](name, callback);
+    }
   }
 
   /**
@@ -355,7 +385,6 @@ export abstract class MapWrapper<O extends IMapOptions> extends EventEmitter {
    */
   public destroy() {
     // 清空已经绑定的事件
-    this.off();
     this.scene.destroy();
   }
 }

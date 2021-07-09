@@ -84,8 +84,8 @@ class Basic extends Component {
     });
 
     console.log('bubbleMap: ', bubbleMap);
-    const { labelLayer, bobbleLayer } = bubbleMap;
-    console.log('bobbleLayer: ', bobbleLayer);
+    const { labelLayer, bubbleLayer } = bubbleMap;
+    console.log('bubbleLayer: ', bubbleLayer);
     console.log('labelLayer: ', labelLayer);
     // console.log('scene: ', bubbleMap.scene);
 
