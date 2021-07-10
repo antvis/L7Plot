@@ -13,6 +13,25 @@ export interface IPointLayerStyleOptions {
 }
 
 /**
+ * 点图层 图斑形状
+ */
+export type pointShape2d =
+  | 'circle'
+  | 'square'
+  | 'hexagon'
+  | 'triangle'
+  | 'pentagon'
+  | 'octogon'
+  | 'hexagram'
+  | 'rhombus'
+  | 'vesica'
+  | 'dot';
+
+export type pointShape3d = 'cylinder' | 'triangleColumn' | 'hexagonColumn' | 'squareColumn';
+
+export type pointShape = pointShape2d | pointShape3d;
+
+/**
  * 热力普通图层 色带
  */
 export type ColorRamp = { color: string; position: number }[];

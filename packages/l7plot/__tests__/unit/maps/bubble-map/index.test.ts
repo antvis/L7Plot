@@ -1,8 +1,13 @@
 import { BubbleMap } from '../../../../src';
+import { DEFAULT_OPTIONS } from '../../../../src/maps/bubble-map/constants';
 import { createDiv } from '../../../helper/dom';
 import data from '../../../data-set/point-temperature.json';
 
-describe('point map', () => {
+describe('bubble map', () => {
+  it('defaultOptions', () => {
+    expect(BubbleMap.DefaultOptions).toEqual(DEFAULT_OPTIONS);
+  });
+
   it('source', () => {
     const bubbleMap = new BubbleMap(createDiv(), {
       source: {
@@ -28,8 +33,31 @@ describe('point map', () => {
     });
 
     expect(bubbleMap.type).toEqual('bubble');
-    expect(bubbleMap.pointLayer).toBeDefined();
+    expect(bubbleMap.bubbleLayer).toBeDefined();
+    expect(bubbleMap.labelLayer).toBeDefined();
 
     bubbleMap.on('loaded', () => setTimeout(() => bubbleMap.destroy(), 0));
+  });
+
+  it('event', () => {
+    const bubbleMap = new BubbleMap(createDiv(), {
+      source: {
+        data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
+        parser: { type: 'json' },
+      },
+    });
+
+    return new Promise<void>((resolve, reject) => {
+      bubbleMap.on('bubbleLayer:add', () => {
+        try {
+          expect(bubbleMap.bubbleLayer?.inited).toBeTruthy();
+          expect(bubbleMap.getLayerByName('bubbleLayer')).toBeDefined();
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
+        setTimeout(() => bubbleMap.destroy(), 0);
+      });
+    });
   });
 });

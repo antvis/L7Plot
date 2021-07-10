@@ -1,5 +1,6 @@
 import { Scene } from '@antv/l7-scene';
 import { Mapbox, GaodeMap } from '@antv/l7-maps';
+import { ILayer, ISourceCFG } from '@antv/l7-core';
 import { Scale, Layers, Zoom } from '@antv/l7-component';
 import EventEmitter from '@antv/event-emitter';
 import { isBoolean } from '@antv/util';
@@ -17,8 +18,8 @@ import {
   IScaleControlOption,
 } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
-import { ISourceCFG } from '@antv/l7-core';
 import { LayerEventList, MapEventList, SceneEventList } from './constants';
+import { FONT_FACE_CACHE, ICON_FONT_CACHE, IMAGES_CACHE } from './register';
 
 const DEFAULT_OPTIONS = {
   map: { type: BaseMapType.Amap },
@@ -48,9 +49,13 @@ export abstract class MapWrapper<O extends IMapOptions> {
    */
   public inited = false;
   /**
-   * 是否场景加载成功
+   * 是否场景加载完成
    */
   public sceneLoaded = false;
+  /**
+   * 是否所有内置图层加载完成
+   */
+  public layersLoaded = false;
   /**
    * map 的 schema 配置
    */
@@ -92,6 +97,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
     this.scene = this.createScene();
     this.source = this.createSource();
 
+    this.registerResources();
     this.render();
     this.inited = true;
   }
@@ -178,27 +184,48 @@ export abstract class MapWrapper<O extends IMapOptions> {
     } else {
       const layerGroup = this.createInternalLayers(this.source);
       if (this.scene['sceneService'].loaded) {
-        if (layerGroup.isEmpty()) {
-          this.emit('loaded');
-        } else {
-          layerGroup.once('inited-all', () => this.emit('loaded'));
-        }
-        layerGroup.addTo(this.scene);
+        this.sceneLoaded = true;
+        this.layersLoaded && this.emit('loaded');
       } else {
         // TODO: once
         this.scene.on('loaded', () => {
           this.sceneLoaded = true;
-          if (layerGroup.isEmpty()) {
-            this.emit('loaded');
-          } else {
-            layerGroup.once('inited-all', () => this.emit('loaded'));
-          }
-          layerGroup.addTo(this.scene);
+          this.layersLoaded && this.emit('loaded');
         });
       }
+      if (layerGroup.isEmpty()) {
+        this.layersLoaded = true;
+      } else {
+        layerGroup.once('inited-all', () => {
+          this.layersLoaded = true;
+          this.sceneLoaded && this.emit('loaded');
+        });
+      }
+      layerGroup.addTo(this.scene);
       this.layerGroups.push(layerGroup);
     }
     this.initControls();
+  }
+
+  /**
+   * 注册静态资源
+   */
+  private registerResources() {
+    if (IMAGES_CACHE.size) {
+      IMAGES_CACHE.forEach((img, id) => {
+        this.scene.addImage(id, img);
+      });
+    }
+    if (FONT_FACE_CACHE.size) {
+      FONT_FACE_CACHE.forEach((fontPath, fontFamily) => {
+        this.scene.addFontFace(fontFamily, fontPath);
+      });
+    }
+    if (ICON_FONT_CACHE.size) {
+      ICON_FONT_CACHE.forEach((name, fontUnicode) => {
+        this.scene.addIconFont(fontUnicode, name);
+      });
+    }
   }
 
   /**
@@ -295,10 +322,38 @@ export abstract class MapWrapper<O extends IMapOptions> {
   }
 
   /**
-   * 获取图层组
+   * 添加图层
    */
-  public getLayerGroups(): LayerGroup[] {
-    return this.layerGroups;
+  public addLayer(layer: ILayer) {
+    this.scene.addLayer(layer);
+  }
+
+  /**
+   * 获取所有图层
+   */
+  public getLayes(): ILayer[] {
+    return this.scene.getLayers();
+  }
+
+  /**
+   * 根据图层名称获取图层
+   */
+  public getLayerByName(name: string): ILayer | undefined {
+    return this.scene.getLayerByName(name);
+  }
+
+  /**
+   * 移除图层
+   */
+  public removeLayer(layer: ILayer) {
+    this.scene.removeLayer(layer);
+  }
+
+  /**
+   * 移除容器内所有的图层
+   */
+  public removeAllLayer() {
+    return this.scene.removeAllLayer();
   }
 
   /**

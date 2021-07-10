@@ -31,7 +31,6 @@ class Basic extends Component {
         },
       },
 
-      shape: 'circle',
       color: {
         field: 'Magnitude',
         value: [

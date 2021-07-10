@@ -28,15 +28,8 @@ class Basic extends Component {
         parser: {
           type: 'geojson',
         },
-        cluster: true,
-        clusterOption: {
-          radius: 40,
-          minZoom: 0,
-          maxZoom: 20,
-        },
       },
 
-      shape: 'circle',
       color: 'yellow',
       size: {
         field: 'point_count',

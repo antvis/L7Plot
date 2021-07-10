@@ -38,7 +38,30 @@ describe('point map', () => {
 
     expect(pointMap.type).toEqual('point');
     expect(pointMap.pointLayer).toBeDefined();
+    expect(pointMap.labelLayer).toBeDefined();
 
     pointMap.on('loaded', () => setTimeout(() => pointMap.destroy(), 0));
+  });
+
+  it('event', () => {
+    const pointMap = new PointMap(createDiv(), {
+      source: {
+        data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
+        parser: { type: 'json' },
+      },
+    });
+
+    return new Promise<void>((resolve, reject) => {
+      pointMap.on('pointLayer:add', () => {
+        try {
+          expect(pointMap.pointLayer?.inited).toBeTruthy();
+          expect(pointMap.getLayerByName('pointLayer')).toBeDefined();
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
+        setTimeout(() => pointMap.destroy(), 0);
+      });
+    });
   });
 });
