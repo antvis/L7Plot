@@ -20,10 +20,6 @@
     "build:umd": "tsc -p tsconfig.json --target ES5 --module UMD --outDir dist/umd",
     "rollup": "rollup -c rollup.config.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/liuvigongzuoshi/L7Plot.git"
-  },
   "keywords": [
     "antv",
     "chart",
@@ -32,10 +28,14 @@
   ],
   "author": "yunji",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/liuvigongzuoshi/L7Plot/issues"
+  "homepage": "https://github.com/antvis/L7Plot#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antvis/L7Plot.git"
   },
-  "homepage": "https://github.com/liuvigongzuoshi/L7Plot#readme",
+  "bugs": {
+    "url": "https://github.com/antvis/L7Plot/issues"
+  },
   "devDependencies": {
     "typedoc": "^0.21.2"
   },
