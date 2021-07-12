@@ -1,7 +1,7 @@
 {
-  "name": "@antv/l7plot",
+  "name": "@antv/l7plot-component",
   "version": "0.0.1-alpha.1",
-  "description": "A map charting library",
+  "description": "Components for L7Plot",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
   "module": "dist/esm/index.js",
@@ -12,7 +12,6 @@
     "lint": "eslint src __tests__ --ext .js,.ts",
     "lint-fix": "eslint src __tests__ --ext .js,.ts --fix",
     "prettier": "prettier src __tests__ -c -w",
-    "typedoc": "typedoc",
     "clean": "rimraf dist",
     "build": "npm run clean && npm run build:cjs && npm run build:esm",
     "build:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib",
@@ -22,9 +21,9 @@
   },
   "keywords": [
     "antv",
-    "chart",
     "l7",
-    "plot"
+    "l7plot",
+    "component"
   ],
   "author": "yunji",
   "license": "MIT",
@@ -36,12 +35,8 @@
   "bugs": {
     "url": "https://github.com/antvis/L7Plot/issues"
   },
-  "devDependencies": {
-    "typedoc": "^0.21.2"
-  },
   "dependencies": {
-    "@antv/event-emitter": "^0.1.2",
-    "@antv/l7": "^2.4.4",
-    "@antv/util": "^2.0.13"
+    "@antv/dom-util": "^2.0.3",
+    "@antv/util": "^2.0.14"
   }
 }
