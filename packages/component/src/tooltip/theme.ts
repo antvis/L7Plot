@@ -3,7 +3,7 @@ import { CONTAINER_CLASS, LIST_CLASS, LIST_ITEM_CLASS, MARKER_CLASS, TITLE_CLASS
 
 export default {
   // css style for tooltip
-  [`${CONTAINER_CLASS}`]: {
+  [CONTAINER_CLASS]: {
     visibility: 'visible',
     zIndex: 1,
     transition:
@@ -19,26 +19,26 @@ export default {
     lineHeight: '20px',
     padding: '10px 10px 6px 10px',
   },
-  [`${TITLE_CLASS}`]: {
+  [TITLE_CLASS]: {
     marginBottom: '4px',
   },
-  [`${LIST_CLASS}`]: {
+  [LIST_CLASS]: {
     margin: '0px',
     listStyleType: 'none',
     padding: '0px',
   },
-  [`${LIST_ITEM_CLASS}`]: {
+  [LIST_ITEM_CLASS]: {
     listStyleType: 'none',
     marginBottom: '4px',
   },
-  [`${MARKER_CLASS}`]: {
+  [MARKER_CLASS]: {
     width: '8px',
     height: '8px',
     borderRadius: '50%',
     display: 'inline-block',
     marginRight: '8px',
   },
-  [`${VALUE_CLASS}`]: {
+  [VALUE_CLASS]: {
     display: 'inline-block',
     float: 'right',
     marginLeft: '30px',
