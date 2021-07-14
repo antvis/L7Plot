@@ -30,7 +30,6 @@ describe('tooltip', () => {
   });
 
   it('render', () => {
-    tooltip.render();
     const container = tooltip.getContainer();
 
     expect(Array.from(container.classList).includes('l7plot-tooltip')).toBe(true);

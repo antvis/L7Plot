@@ -17,8 +17,8 @@ export class SymbolMap extends PointMap<SymbolMapOptions> {
   /**
    * 符号图层
    */
-  get symbolLayer(): ILayer | undefined {
-    return this.pointLayerWrapper?.layer;
+  get symbolLayer(): ILayer {
+    return this.pointLayerWrapper.layer;
   }
 
   /**
@@ -39,7 +39,6 @@ export class SymbolMap extends PointMap<SymbolMapOptions> {
    * 获取内置图层名
    */
   protected getInternalLayerName() {
-    const pointLayerName = 'symbolLayer';
-    return { pointLayerName };
+    return { pointLayerName: 'symbolLayer', labeLayerName: 'labelLayer' };
   }
 }

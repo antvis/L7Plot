@@ -1,5 +1,5 @@
 import Theme from '../configs/theme';
-import { CONTAINER_CLASS, LIST_CLASS, LIST_ITEM_CLASS, MARKER_CLASS, TITLE_CLASS, VALUE_CLASS } from './constants';
+import { CONTAINER_CLASS, LIST_CLASS, LIST_ITEM_CLASS, TITLE_CLASS, VALUE_CLASS } from './constants';
 
 export default {
   // css style for tooltip
@@ -11,8 +11,8 @@ export default {
       'left 0.4s cubic-bezier(0.23, 1, 0.32, 1), ' +
       'top 0.4s cubic-bezier(0.23, 1, 0.32, 1)',
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    boxShadow: '0px 0px 10px #aeaeae',
-    borderRadius: '3px',
+    boxShadow: 'rgb(0 0 0 / 16%) 0px 6px 12px 0px',
+    borderRadius: '2px',
     color: 'rgb(87, 87, 87)',
     fontSize: '12px',
     fontFamily: Theme.fontFamily,
@@ -30,13 +30,6 @@ export default {
   [LIST_ITEM_CLASS]: {
     listStyleType: 'none',
     marginBottom: '4px',
-  },
-  [MARKER_CLASS]: {
-    width: '8px',
-    height: '8px',
-    borderRadius: '50%',
-    display: 'inline-block',
-    marginRight: '8px',
   },
   [VALUE_CLASS]: {
     display: 'inline-block',

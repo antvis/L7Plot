@@ -34,26 +34,26 @@ describe('scatter map', () => {
     expect(scatterMap.labelLayer).toBeDefined();
 
     scatterMap.on('loaded', () => setTimeout(() => scatterMap.destroy(), 0));
+  });
 
-    it('event', () => {
-      const scatterMap = new ScatterMap(createDiv(), {
-        source: {
-          data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
-          parser: { type: 'json' },
-        },
-      });
+  it('event', () => {
+    const scatterMap = new ScatterMap(createDiv(), {
+      source: {
+        data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
+        parser: { type: 'json' },
+      },
+    });
 
-      return new Promise<void>((resolve, reject) => {
-        scatterMap.on('scatterLayer:add', () => {
-          try {
-            expect(scatterMap.scatterLayer?.inited).toBeTruthy();
-            expect(scatterMap.getLayerByName('scatterLayer')).toBeDefined();
-            resolve();
-          } catch (err) {
-            reject(err);
-          }
-          setTimeout(() => scatterMap.destroy(), 0);
-        });
+    return new Promise<void>((resolve, reject) => {
+      scatterMap.on('scatterLayer:add', () => {
+        try {
+          expect(scatterMap.scatterLayer?.inited).toBeTruthy();
+          expect(scatterMap.getLayerByName('scatterLayer')).toBeDefined();
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
+        setTimeout(() => scatterMap.destroy(), 0);
       });
     });
   });

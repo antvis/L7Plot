@@ -1,6 +1,6 @@
 import { ILayer, ILayerConfig, BlendType } from '@antv/l7-core';
 import { IColorRamp } from '@antv/l7-utils';
-import { ILabelConfig, Source } from '../../types';
+import { ILabelOptions, Source } from '../../types';
 import { animateAttr, ColorAttr, IStateAttribute, ShapeAttr, SizeAttr } from '../../types/attr';
 
 /**
@@ -130,7 +130,7 @@ export interface IPointLayerConfig extends Partial<IBaseLayerConfig & IPointLaye
 /**
  * 文字图层基础配置
  */
-export interface ILabelLayerConfig extends Partial<IBaseLayerConfig & ILabelConfig> {
+export interface ILabelLayerConfig extends Partial<IBaseLayerConfig & ILabelOptions> {
   color?: ColorAttr;
   size?: SizeAttr;
   state?: IStateAttribute;

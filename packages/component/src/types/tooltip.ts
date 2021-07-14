@@ -3,7 +3,7 @@ import { IComponentOptions } from './component';
 /**
  * 列表选项接口
  */
-export interface IListItem {
+export interface ITooltipListItem {
   /**
    * 唯一值，用于查找
    */
@@ -16,15 +16,11 @@ export interface IListItem {
    * 值
    */
   value: any;
-  /**
-   * 颜色
-   */
-  color?: string;
 
   [key: string]: any;
 }
 
-export type CustomContent = (title: string, items: IListItem[]) => string | HTMLElement;
+export type TooltipCustomContent = (title: string, items: ITooltipListItem[]) => string | HTMLElement;
 
 /**
  * Tooltip 配置接口
@@ -33,7 +29,7 @@ export interface ITooltipOptions extends IComponentOptions {
   /**
    * 标题
    */
-  title: string;
+  title?: string;
   /**
    * 是否显示标题
    */
@@ -41,7 +37,7 @@ export interface ITooltipOptions extends IComponentOptions {
   /**
    * 列表项集合
    */
-  items: IListItem[];
+  items: ITooltipListItem[];
   /**
    * 列表项的模板
    */
@@ -49,13 +45,9 @@ export interface ITooltipOptions extends IComponentOptions {
   /**
    * 自定义模板
    */
-  customContent?: CustomContent;
+  customContent?: TooltipCustomContent;
   /**
    * 传入各个 dom 的样式
    */
   domStyles?: Record<string, any>;
-  /**
-   * 默认的各个 dom 的样式
-   */
-  defaultStyles?: Record<string, any>;
 }

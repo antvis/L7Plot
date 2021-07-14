@@ -53,7 +53,7 @@ export interface IPointTextLayerStyleOptions {
 /**
  * Label
  */
-export interface ILabelConfig extends IBaseLayerConfig {
+export interface ILabelOptions extends IBaseLayerConfig {
   /** 映射的字段 */
   field?: string;
   // TODO: 多字段支持

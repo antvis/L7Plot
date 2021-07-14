@@ -10,6 +10,9 @@ module.exports = {
   coverageReporters: ['text', 'lcov', 'clover'],
   moduleFileExtensions: ['js', 'ts'],
   testMatch: ['**/__tests__/**/*.+(spec|test).[jt]s'],
+  moduleNameMapper: {
+    '^lodash-es$': 'lodash',
+  },
   testTimeout: 5000 * 4,
   coverageThreshold: {
     // global: {

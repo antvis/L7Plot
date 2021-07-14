@@ -59,10 +59,6 @@ class Basic extends Component {
           strokeWidth: 0.3, // 描边宽度
           strokeOpacity: 1.0,
         },
-        state: {
-          active: { color: 'red' },
-          select: { color: '#1AA4D6' },
-        },
       },
       zoom: {
         position: 'bottomright',
@@ -73,11 +69,9 @@ class Basic extends Component {
       layerMenu: {
         position: 'topright',
       },
-      // popup: {
-      //   field: ['name', 'value'],
-      //   content: ({ name, value }) => `<span>${name}:</span><span>${value}</span>`,
-      //   trigger: 'mousemove',
-      // },
+      tooltip: {
+        items: ['s', 't'],
+      },
       // legend: {
       //   position: 'bottomleft',
       // },

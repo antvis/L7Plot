@@ -84,17 +84,27 @@ describe('core map', () => {
       layerMenu: { position: 'topright' },
     });
 
-    expect(pointMap.zoomControl).toBeDefined();
-    expect(pointMap.scaleControl).toBeDefined();
-    expect(pointMap.layerMenuControl).toBeDefined();
+    return new Promise<void>((resolve, reject) => {
+      pointMap.on('loaded', () => {
+        try {
+          expect(pointMap.zoomControl).toBeDefined();
+          expect(pointMap.scaleControl).toBeDefined();
+          expect(pointMap.layerMenuControl).toBeDefined();
 
-    pointMap.removeZoomControl();
-    pointMap.removeScaleControl();
-    pointMap.removeLayerMenuControl();
+          pointMap.removeZoomControl();
+          pointMap.removeScaleControl();
+          pointMap.removeLayerMenuControl();
 
-    expect(pointMap.zoomControl).toBeUndefined();
-    expect(pointMap.scaleControl).toBeUndefined();
-    expect(pointMap.layerMenuControl).toBeUndefined();
+          expect(pointMap.zoomControl).toBeUndefined();
+          expect(pointMap.scaleControl).toBeUndefined();
+          expect(pointMap.layerMenuControl).toBeUndefined();
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
+        setTimeout(() => pointMap.destroy(), 0);
+      });
+    });
 
     pointMap.on('loaded', () => setTimeout(() => pointMap.destroy(), 0));
   });

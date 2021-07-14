@@ -21,6 +21,7 @@ export abstract class Component<O extends IComponentOptions = IComponentOptions>
     this.initEvent();
     this.initCapture();
     this.initVisible();
+    this.render();
   }
 
   /**
@@ -172,9 +173,9 @@ export abstract class Component<O extends IComponentOptions = IComponentOptions>
     }
     const container = this.container;
     this.applyChildrenStyles(container, domStyles);
-    const containerClassName = this.options.containerClassName;
-    if (containerClassName && hasClass(container, containerClassName)) {
-      const containerCss = domStyles[containerClassName];
+    const className = this.options.className;
+    if (className && hasClass(container, className)) {
+      const containerCss = domStyles[className];
       modifyCSS(container, containerCss);
     }
   }

@@ -3,9 +3,9 @@ import { IAMapInstance, IMapboxInstance } from '@antv/l7-maps/typings';
 import { IMapConfig as MapConfig, IStatusOptions, PositionName, ISourceCFG } from '@antv/l7-core';
 import Source from '@antv/l7-source';
 import { ColorsAttr, IStateAttribute } from './attr';
-import { ILabelConfig } from './label';
-import { IPopup } from './popup';
-import { ITooltip } from './tooltip';
+import { ILabelOptions } from './label';
+import { IPopupOptions } from './popup';
+import { ITooltipOptions } from './tooltip';
 import { ILegendControlOption } from './legend';
 import { ILayerMenuControlOption, IScaleControlOption, IZoomControlOption } from './control';
 
@@ -114,18 +114,18 @@ export interface IMapOptions {
   /**
    * 数据标签配置
    */
-  readonly label?: false | ILabelConfig;
+  readonly label?: false | ILabelOptions;
 
   // 组件相关
   /**
    * tooltip 配置项
    */
-  readonly tooltip?: false | ITooltip;
+  readonly tooltip?: false | ITooltipOptions;
 
   /**
    * popup 配置项
    */
-  readonly popup?: false | IPopup;
+  readonly popup?: false | IPopupOptions;
 
   /**
    * 图例 legend 配置项

@@ -3,7 +3,7 @@ import { modifyCSS } from '@antv/dom-util';
 import DomStyles from './theme';
 import { CONTAINER_CLASS, CONTAINER_TPL, ITEM_TPL, LIST_CLASS, TITLE_CLASS } from './constants';
 import { Component } from '../core/component';
-import { CustomContent, ITooltipOptions } from '../types';
+import { TooltipCustomContent, ITooltipOptions } from '../types';
 import { clearDom } from '../utils/dom';
 
 export class Tooltip<O extends ITooltipOptions = ITooltipOptions> extends Component<O> {
@@ -29,7 +29,7 @@ export class Tooltip<O extends ITooltipOptions = ITooltipOptions> extends Compon
       containerTpl: CONTAINER_TPL,
       itemTpl: ITEM_TPL,
       domStyles: DomStyles,
-      containerClassName: CONTAINER_CLASS,
+      className: CONTAINER_CLASS,
     });
   }
 
@@ -121,12 +121,14 @@ export class Tooltip<O extends ITooltipOptions = ITooltipOptions> extends Compon
     });
   }
 
-  // 更新属性的同时，可能会引起 DOM 的变化，这里对可能引起 DOM 变化的场景做了处理
+  /**
+   * 更新
+   */
   protected updateInner(options: Partial<O>) {
     if (this.options.customContent) {
       this.renderCustomContent(this.options.customContent);
     } else {
-      if (options.title && options.showTitle !== undefined) {
+      if (options.title) {
         this.resetTitle();
       }
       if (options.items) {
@@ -139,7 +141,7 @@ export class Tooltip<O extends ITooltipOptions = ITooltipOptions> extends Compon
   /**
    * 根据 customContent 渲染 DOM
    */
-  private renderCustomContent(customContent: CustomContent) {
+  private renderCustomContent(customContent: TooltipCustomContent) {
     const parentContainer = this.container.parentNode;
     const node = this.getHtmlContentNode(customContent);
     const curContainer = this.container;
@@ -155,9 +157,9 @@ export class Tooltip<O extends ITooltipOptions = ITooltipOptions> extends Compon
   /**
    * 生成自定义内容 DOM
    */
-  private getHtmlContentNode(customContent: CustomContent) {
+  private getHtmlContentNode(customContent: TooltipCustomContent) {
     let node: HTMLElement;
-    const element = customContent(this.options.title, this.options.items);
+    const element = customContent(this.options.title || '', this.options.items);
     if (isString(element)) {
       node = this.createDom(element);
     } else {
@@ -174,19 +176,44 @@ export class Tooltip<O extends ITooltipOptions = ITooltipOptions> extends Compon
     const title = this.options.title;
     const showTitle = this.options.showTitle;
     if (showTitle && title) {
+      this.showTitle();
       this.setTitle(title);
     } else {
-      this.setTitle('');
+      this.hideTitle();
     }
   }
 
   /**
-   * 设置 title 文本
+   * 显示 title
    */
-  private setTitle(text) {
+  public showTitle() {
     const titleDom = this.titleDom;
     if (titleDom) {
-      titleDom.innerText = text;
+      modifyCSS(titleDom, {
+        display: 'block',
+      });
+    }
+  }
+
+  /**
+   * 隐藏 title
+   */
+  public hideTitle() {
+    const titleDom = this.titleDom;
+    if (titleDom) {
+      modifyCSS(titleDom, {
+        display: 'none',
+      });
+    }
+  }
+
+  /**
+   * 设置 title 内容
+   */
+  private setTitle(text: string) {
+    const titleDom = this.titleDom;
+    if (titleDom) {
+      titleDom.innerHTML = text;
     }
   }
 
@@ -200,11 +227,7 @@ export class Tooltip<O extends ITooltipOptions = ITooltipOptions> extends Compon
     const listDom = this.listDom;
     if (listDom) {
       each(items, (item) => {
-        const color = item.color;
-        const substituteObj = {
-          ...item,
-          color,
-        };
+        const substituteObj = { ...item };
 
         const domStr = substitute(itemTpl, substituteObj);
         const itemDom = this.createDom(domStr);

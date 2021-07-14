@@ -55,11 +55,9 @@ class Basic extends Component {
       layerMenu: {
         position: 'topright',
       },
-      // popup: {
-      //   field: ['name', 'value'],
-      //   content: ({ name, value }) => `<span>${name}:</span><span>${value}</span>`,
-      //   trigger: 'mousemove',
-      // },
+      tooltip: {
+        items: ['FullName', 'SATCAT Designation'],
+      },
       // legend: {
       //   position: 'bottomleft',
       // },

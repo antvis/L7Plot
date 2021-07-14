@@ -63,11 +63,9 @@ class Distribution extends Component {
       layerMenu: {
         position: 'topright',
       },
-      // popup: {
-      //   field: ['name', 'value'],
-      //   content: ({ name, value }) => `<span>${name}:</span><span>${value}</span>`,
-      //   trigger: 'mousemove',
-      // },
+      tooltip: {
+        items: [{ field: 'properties.mag', alias: 'mag' }],
+      },
       // legend: {
       //   position: 'bottomleft',
       // },

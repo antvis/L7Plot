@@ -18,8 +18,8 @@ export class BubbleMap extends PointMap<BubbleMapOptions> {
   /**
    * 气泡图层
    */
-  get bubbleLayer(): ILayer | undefined {
-    return this.pointLayerWrapper?.layer;
+  get bubbleLayer(): ILayer {
+    return this.pointLayerWrapper.layer;
   }
 
   /**
@@ -40,7 +40,6 @@ export class BubbleMap extends PointMap<BubbleMapOptions> {
    * 获取内置图层名
    */
   protected getInternalLayerName() {
-    const pointLayerName = 'bubbleLayer';
-    return { pointLayerName };
+    return { pointLayerName: 'bubbleLayer', labeLayerName: 'labelLayer' };
   }
 }
