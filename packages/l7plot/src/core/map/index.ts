@@ -4,6 +4,7 @@ import { ILayer, ISourceCFG } from '@antv/l7-core';
 import { Scale, Layers, Zoom } from '@antv/l7-component';
 import EventEmitter from '@antv/event-emitter';
 import { isBoolean } from '@antv/util';
+import { Tooltip } from '../component/tooltip';
 import { deepAssign } from '../../utils';
 import {
   MapType,
@@ -16,6 +17,7 @@ import {
   IZoomControlOption,
   ILayerMenuControlOption,
   IScaleControlOption,
+  IEvent,
 } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { LayerEventList, MapEventList, SceneEventList } from './constants';
@@ -75,7 +77,11 @@ export abstract class MapWrapper<O extends IMapOptions> {
   /**
    * 图层组
    */
-  public layerGroups: LayerGroup[] = [];
+  public layerGroup = new LayerGroup();
+  /**
+   * 带交互的内置图层
+   */
+  protected abstract interactionInternalLayers: ILayer[];
   /**
    * zoom 放大缩小 Control
    */
@@ -88,6 +94,10 @@ export abstract class MapWrapper<O extends IMapOptions> {
    * layerMenu 图层列表 Control
    */
   public layerMenuControl: Layers | undefined;
+  /**
+   * tooltip 悬浮提示
+   */
+  public tooltip: Tooltip | undefined;
 
   constructor(container: string | HTMLDivElement, options: O) {
     this.container = container;
@@ -168,11 +178,10 @@ export abstract class MapWrapper<O extends IMapOptions> {
    * 创建内置图层
    */
   protected abstract createInternalLayers(source: Source): LayerGroup;
-
   /**
    * 更新内置图层
    */
-  protected abstract updateInternalLayers(options: Partial<O>);
+  protected abstract updateInternalLayers(options: Partial<O>): void;
 
   /**
    * 渲染
@@ -181,6 +190,8 @@ export abstract class MapWrapper<O extends IMapOptions> {
     if (this.inited) {
       this.updateInternalLayers(this.options);
       // this.scene.render();
+      this.initControls();
+      this.initTooltip();
     } else {
       const layerGroup = this.createInternalLayers(this.source);
       if (this.scene['sceneService'].loaded) {
@@ -202,9 +213,12 @@ export abstract class MapWrapper<O extends IMapOptions> {
         });
       }
       layerGroup.addTo(this.scene);
-      this.layerGroups.push(layerGroup);
+      this.layerGroup = layerGroup;
     }
-    this.initControls();
+    this.once('loaded', () => {
+      this.initControls();
+      this.initTooltip();
+    });
   }
 
   /**
@@ -262,33 +276,33 @@ export abstract class MapWrapper<O extends IMapOptions> {
    * 事件代理: 绑定事件
    */
   public on(name: string, callback: (...args: any[]) => void) {
-    this.eventHander('on', name, callback);
+    this.proxyEventHander('on', name, callback);
   }
 
   /**
    * 事件代理: 绑定一次事件
    */
   public once(name: string, callback: (...args: any[]) => void) {
-    this.eventHander('once', name, callback);
+    this.proxyEventHander('once', name, callback);
   }
 
   /**
    * 事件代理: 解绑事件
    */
   public off(name: string, callback: (...args: any[]) => void) {
-    this.eventHander('off', name, callback);
+    this.proxyEventHander('off', name, callback);
   }
 
   /**
    * 事件代理: 事件处理
    */
-  private eventHander(type: 'on' | 'off' | 'once', name: string, callback: (...args: any[]) => void) {
+  private proxyEventHander(type: 'on' | 'off' | 'once', name: string, callback: (...args: any[]) => void) {
     const sceneEvent = SceneEventList.find((event) => event.adaptation === name);
     if (sceneEvent) {
       this.scene[type](sceneEvent.original, callback);
     } else if (MapEventList.indexOf(name) !== -1) {
       this.scene[type](name, callback);
-    } else if (name.includes(':')) {
+    } else if (name.includes('Layer:')) {
       const [module, eventName] = name.split(':');
       const hasEventEmitter = this[module] && this[module][type];
       if (hasEventEmitter && LayerEventList.indexOf(eventName) !== -1) {
@@ -411,8 +425,8 @@ export abstract class MapWrapper<O extends IMapOptions> {
     this.removeLayerMenuControl();
     const baseLayers = {};
     const overlayers = {};
-    this.layerGroups.forEach((layerGroup) => {
-      layerGroup.getLayers().forEach((layer) => (overlayers[layer.name] = layer));
+    this.layerGroup.getLayers().forEach((layer) => {
+      overlayers[layer.name] = layer;
     });
     this.layerMenuControl = new Layers(Object.assign({}, options, { baseLayers, overlayers }));
     this.scene.addControl(this.layerMenuControl);
@@ -429,6 +443,20 @@ export abstract class MapWrapper<O extends IMapOptions> {
   }
 
   /**
+   * 初始化 Tooltip
+   */
+  private initTooltip() {
+    if (this.tooltip) {
+      this.tooltip.destroy();
+    }
+    const { tooltip } = this.options;
+    if (tooltip) {
+      this.tooltip = new Tooltip(this.scene, this.interactionInternalLayers, tooltip);
+      this.tooltip.on('*', (event: IEvent) => this.emit(event.type, event));
+    }
+  }
+
+  /**
    * 导出地图图片
    */
   public exportPng(type?: 'png' | 'jpg'): string {
@@ -439,7 +467,8 @@ export abstract class MapWrapper<O extends IMapOptions> {
    * 销毁
    */
   public destroy() {
-    // 清空已经绑定的事件
+    // TODO: 清空已经绑定的事件
     this.scene.destroy();
+    this.tooltip?.destroy();
   }
 }

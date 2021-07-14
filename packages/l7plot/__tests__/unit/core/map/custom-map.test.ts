@@ -7,6 +7,7 @@ describe('custom map', () => {
     type CustomMapOptions = IMapOptions;
     class CustomMap extends MapWrapper<CustomMapOptions> {
       type = 'custom';
+      protected interactionInternalLayers = [];
       protected createInternalLayers(source: Source): LayerGroup {
         source;
         const layerGroup = new LayerGroup([]);

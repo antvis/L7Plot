@@ -1,4 +1,4 @@
-export function hasClass(elements, cName): boolean {
+export function hasClass(elements: HTMLElement, cName: string) {
   return !!elements.className.match(new RegExp(`(\\s|^)${cName}(\\s|$)`));
 }
 

@@ -18,7 +18,7 @@ export interface IComponentOptions {
   /**
    * 组件的容器样式名称
    */
-  containerClassName?: string;
+  className?: string;
   /**
    * 是否显示
    */

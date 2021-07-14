@@ -40,7 +40,6 @@ export class ClustereMap extends PointMap<ClustereMapOptions> {
    * 获取内置图层名
    */
   protected getInternalLayerName() {
-    const pointLayerName = 'clusterLayer';
-    return { pointLayerName };
+    return { pointLayerName: 'clusterLayer', labeLayerName: 'labelLayer' };
   }
 }

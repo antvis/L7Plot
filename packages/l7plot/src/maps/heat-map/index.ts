@@ -22,13 +22,13 @@ export class HeatMap<O extends HeatMapOptions = HeatMapOptions> extends MapWrapp
   /**
    * heatmapLayerWrapper
    */
-  protected heatmapLayerWrapper: HeatmapLayerWrapper | undefined;
+  protected heatmapLayerWrapper!: HeatmapLayerWrapper;
 
   /**
    * 热力图层
    */
-  get heatMapLayer(): ILayer | undefined {
-    return this.heatmapLayerWrapper?.layer;
+  get heatMapLayer(): ILayer {
+    return this.heatmapLayerWrapper.layer;
   }
 
   /**
@@ -44,6 +44,11 @@ export class HeatMap<O extends HeatMapOptions = HeatMapOptions> extends MapWrapp
   }
 
   /**
+   * 带交互的内置图层
+   */
+  protected interactionInternalLayers = [this.heatMapLayer];
+
+  /**
    * 获取默认配置
    */
   protected getDefaultOptions(): Partial<O> {
@@ -51,18 +56,26 @@ export class HeatMap<O extends HeatMapOptions = HeatMapOptions> extends MapWrapp
   }
 
   /**
+   * 获取内置图层名
+   */
+  protected getInternalLayerName() {
+    return { heatmapLayerName: 'pointLayer', labeLayerName: 'labelLayer' };
+  }
+
+  /**
    * 创建内置图层
    */
   protected createInternalLayers(source: Source): LayerGroup {
+    const { heatmapLayerName, labeLayerName } = this.getInternalLayerName();
     this.heatmapLayerWrapper = new HeatmapLayerWrapper({
       source,
       ...pick<any>(this.options, POINT_LAYER_OPTIONS_KEYS),
-      name: 'heatmapLayer',
+      name: heatmapLayerName,
     });
     const layerGroup = new LayerGroup([this.heatmapLayerWrapper.layer]);
 
     if (this.options.label) {
-      this.labelLayerWrapper = new LabelLayerWrapper({ source, ...this.options.label, name: 'labelLayer' });
+      this.labelLayerWrapper = new LabelLayerWrapper({ source, ...this.options.label, name: labeLayerName });
       layerGroup.addlayer(this.labelLayerWrapper.layer);
     }
 
@@ -74,9 +87,24 @@ export class HeatMap<O extends HeatMapOptions = HeatMapOptions> extends MapWrapp
    */
   protected updateInternalLayers(options: O) {
     const heatMapLayerConfig = pick<any>(options, POINT_LAYER_OPTIONS_KEYS);
-    const labelLayerConfig = { ...options.label };
+    this.heatmapLayerWrapper.updateOptions(heatMapLayerConfig);
 
-    this.heatmapLayerWrapper?.updateOptions(heatMapLayerConfig);
-    this.labelLayerWrapper?.updateOptions(labelLayerConfig);
+    if (options.label) {
+      if (this.labelLayerWrapper) {
+        this.labelLayerWrapper.updateOptions({ ...options.label });
+      } else {
+        const { labeLayerName } = this.getInternalLayerName();
+        this.labelLayerWrapper = new LabelLayerWrapper({
+          source: this.source,
+          ...options.label,
+          name: labeLayerName,
+        });
+        this.layerGroup.addlayer(this.labelLayerWrapper.layer);
+      }
+    } else {
+      if (this.labelLayerWrapper) {
+        this.layerGroup.removelayer(this.labelLayerWrapper.layer);
+      }
+    }
   }
 }

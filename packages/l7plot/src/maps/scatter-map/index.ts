@@ -18,8 +18,8 @@ export class ScatterMap extends PointMap<ScatterMapOptions> {
   /**
    * 散点图层
    */
-  get scatterLayer(): ILayer | undefined {
-    return this.pointLayerWrapper?.layer;
+  get scatterLayer(): ILayer {
+    return this.pointLayerWrapper.layer;
   }
 
   /**
@@ -40,7 +40,6 @@ export class ScatterMap extends PointMap<ScatterMapOptions> {
    * 获取内置图层名
    */
   protected getInternalLayerName() {
-    const pointLayerName = 'scatterLayer';
-    return { pointLayerName };
+    return { pointLayerName: 'scatterLayer', labeLayerName: 'labelLayer' };
   }
 }
