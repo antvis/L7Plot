@@ -38,7 +38,7 @@ export class Tooltip extends EventEmitter {
   /**
    * tooltip 是否可见
    */
-  public isVisible = false;
+  public visible = false;
 
   constructor(scene: Scene, interactionLayers: ILayer[], options: ITooltipOptions) {
     super();
@@ -183,18 +183,18 @@ export class Tooltip extends EventEmitter {
    * tooltip 添加到地图上
    */
   public addTo() {
-    if (this.isVisible) return;
+    if (this.visible) return;
     this.scene.addMarker(this.marker);
-    this.isVisible = true;
+    this.visible = true;
   }
 
   /**
    * tooltip 从地图上移除
    */
   public remove() {
-    if (!this.isVisible) return;
+    if (!this.visible) return;
     this.marker.remove();
-    this.isVisible = false;
+    this.visible = false;
   }
 
   /**
