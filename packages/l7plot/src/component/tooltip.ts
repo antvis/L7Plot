@@ -9,8 +9,8 @@ import {
   ITooltipListItem,
 } from '@antv/l7plot-component';
 import { get as getValueByPath } from 'lodash-es';
-import { TooltipAnchorType, IEvent, ITooltipOptions } from '../../types';
-import { deepAssign } from '../../utils';
+import { TooltipAnchorType, IEvent, ITooltipOptions } from '../types';
+import { deepAssign } from '../utils';
 
 const TRIGGER_LIST = ['mousemove', 'click'];
 

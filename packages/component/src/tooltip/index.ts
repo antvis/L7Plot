@@ -99,10 +99,7 @@ export class Tooltip<O extends ITooltipOptions = ITooltipOptions> extends Compon
    */
   public show() {
     const container = this.container;
-    if (!container || this.destroyed) {
-      // 防止容器不存在或者被销毁时报错
-      return;
-    }
+    if (!container || this.destroyed) return;
     modifyCSS(container, {
       visibility: 'visible',
     });
@@ -113,9 +110,7 @@ export class Tooltip<O extends ITooltipOptions = ITooltipOptions> extends Compon
    */
   public hide() {
     const container = this.container;
-    if (!container || this.destroyed) {
-      return;
-    }
+    if (!container || this.destroyed) return;
     modifyCSS(container, {
       visibility: 'hidden',
     });
@@ -210,10 +205,10 @@ export class Tooltip<O extends ITooltipOptions = ITooltipOptions> extends Compon
   /**
    * 设置 title 内容
    */
-  private setTitle(text: string) {
+  private setTitle(content: string) {
     const titleDom = this.titleDom;
     if (titleDom) {
-      titleDom.innerHTML = text;
+      titleDom.innerHTML = content;
     }
   }
 

@@ -4,7 +4,8 @@ import { ILayer, ISourceCFG } from '@antv/l7-core';
 import { Scale, Layers, Zoom } from '@antv/l7-component';
 import EventEmitter from '@antv/event-emitter';
 import { isBoolean } from '@antv/util';
-import { Tooltip } from '../component/tooltip';
+import { Tooltip } from '../../component/tooltip';
+import { LegendControl } from '../../component/legend';
 import { deepAssign } from '../../utils';
 import {
   MapType,
@@ -14,9 +15,10 @@ import {
   AMapInstance,
   MapboxInstance,
   Source,
-  IZoomControlOption,
-  ILayerMenuControlOption,
-  IScaleControlOption,
+  IZoomControlOptions,
+  ILayerMenuControlOptions,
+  IScaleControlOptions,
+  ILegendOptions,
   IEvent,
 } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
@@ -94,6 +96,10 @@ export abstract class MapWrapper<O extends IMapOptions> {
    * layerMenu 图层列表 Control
    */
   public layerMenuControl: Layers | undefined;
+  /**
+   * legend 图例 Control
+   */
+  public legendControl: LegendControl | undefined;
   /**
    * tooltip 悬浮提示
    */
@@ -374,16 +380,17 @@ export abstract class MapWrapper<O extends IMapOptions> {
    * 初始化控件
    */
   private initControls() {
-    const { zoom, scale, layerMenu } = this.options;
+    const { zoom, scale, layerMenu, legend } = this.options;
     scale ? this.addScaleControl(scale) : this.removeScaleControl();
     zoom ? this.addZoomControl(zoom) : this.removeZoomControl();
     layerMenu ? this.addLayerMenuControl(layerMenu) : this.removeLayerMenuControl();
+    legend ? this.addLegendControl(legend) : this.removeLegendControl();
   }
 
   /**
    * 添加 zoom 控件
    */
-  public addZoomControl(options: IZoomControlOption) {
+  public addZoomControl(options: IZoomControlOptions) {
     this.removeZoomControl();
     this.zoomControl = new Zoom(options);
     this.scene.addControl(this.zoomControl);
@@ -402,7 +409,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
   /**
    * 添加 scale 控件
    */
-  public addScaleControl(options: IScaleControlOption) {
+  public addScaleControl(options: IScaleControlOptions) {
     this.removeScaleControl();
     this.scaleControl = new Scale(options);
     this.scene.addControl(this.scaleControl);
@@ -421,7 +428,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
   /**
    * 添加 layerMenu 控件
    */
-  public addLayerMenuControl(options: ILayerMenuControlOption) {
+  public addLayerMenuControl(options: ILayerMenuControlOptions) {
     this.removeLayerMenuControl();
     const baseLayers = {};
     const overlayers = {};
@@ -443,7 +450,27 @@ export abstract class MapWrapper<O extends IMapOptions> {
   }
 
   /**
-   * 初始化 Tooltip
+   * 添加 legend 控件
+   */
+  public addLegendControl(options: ILegendOptions) {
+    this.removeLegendControl();
+    const legendControlOptions = Object.assign({}, { title: '', items: [] }, options);
+    this.legendControl = new LegendControl(legendControlOptions);
+    this.scene.addControl(this.legendControl);
+  }
+
+  /**
+   * 移除 legend 控件
+   */
+  public removeLegendControl() {
+    if (this.legendControl) {
+      this.legendControl.remove();
+      this.legendControl = undefined;
+    }
+  }
+
+  /**
+   * 初始化 tooltip
    */
   private initTooltip() {
     if (this.tooltip) {
