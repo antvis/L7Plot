@@ -4,3 +4,4 @@ export const version = '0.0.1-alpha.1';
 export * from './types';
 
 export { Tooltip } from './tooltip';
+export { Legend } from './legend';

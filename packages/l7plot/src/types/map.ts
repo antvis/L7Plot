@@ -6,8 +6,8 @@ import { ColorsAttr, IStateAttribute } from './attr';
 import { ILabelOptions } from './label';
 import { IPopupOptions } from './popup';
 import { ITooltipOptions } from './tooltip';
-import { ILegendControlOption } from './legend';
-import { ILayerMenuControlOption, IScaleControlOption, IZoomControlOption } from './control';
+import { ILegendOptions } from './legend';
+import { ILayerMenuControlOptions, IScaleControlOptions, IZoomControlOptions } from './control';
 
 export { MapboxglMap, Source, IStatusOptions };
 
@@ -130,17 +130,17 @@ export interface IMapOptions {
   /**
    * 图例 legend 配置项
    */
-  readonly legend?: false | ILegendControlOption;
+  readonly legend?: false | ILegendOptions;
   /**
    * zoom 配置
    */
-  readonly zoom?: false | IZoomControlOption;
+  readonly zoom?: false | IZoomControlOptions;
   /**
    * scale 配置
    */
-  readonly scale?: false | IScaleControlOption;
+  readonly scale?: false | IScaleControlOptions;
   /**
    * layerMenu 配置
    */
-  readonly layerMenu?: false | ILayerMenuControlOption;
+  readonly layerMenu?: false | ILayerMenuControlOptions;
 }

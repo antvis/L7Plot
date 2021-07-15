@@ -5,3 +5,4 @@ export * from './label';
 export * from './tooltip';
 export * from './popup';
 export * from './control';
+export * from './legend';

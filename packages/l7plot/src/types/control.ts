@@ -5,7 +5,7 @@ export { PositionType };
 /**
  * ZoomControl
  */
-export interface IZoomControlOption {
+export interface IZoomControlOptions {
   position?: PositionName;
   zoomInText?: string;
   zoomInTitle?: string;
@@ -16,7 +16,7 @@ export interface IZoomControlOption {
 /**
  * ScaleControl
  */
-export interface IScaleControlOption {
+export interface IScaleControlOptions {
   position?: PositionName;
   maxWidth?: number;
   metric?: boolean;
@@ -27,7 +27,7 @@ export interface IScaleControlOption {
 /**
  * LayerMenuControl
  */
-export interface ILayerMenuControlOption {
+export interface ILayerMenuControlOptions {
   position?: PositionName;
   collapsed?: boolean;
   autoZIndex?: boolean;
