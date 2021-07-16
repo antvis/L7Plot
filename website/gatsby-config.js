@@ -51,24 +51,24 @@ module.exports = {
       {
         slug: 'api/source',
         title: {
-          zh: '数据 Source',
+          zh: '数据源',
           en: 'Data Source',
         },
         order: 1,
       },
       {
-        slug: 'api/point-map',
+        slug: 'api/point-maps',
         title: {
           zh: '点地图',
-          en: 'Point map',
+          en: 'Point Map',
         },
         order: 2,
       },
       {
-        slug: 'api/options',
+        slug: 'api/heat-map',
         title: {
-          zh: '通用配置',
-          en: 'Common Configuration',
+          zh: '热力地图',
+          en: 'Heat Map',
         },
         order: 3,
       },
@@ -81,12 +81,20 @@ module.exports = {
         order: 4,
       },
       {
+        slug: 'api/theme',
+        title: {
+          zh: '地图主题',
+          en: 'Theme',
+        },
+        order: 5,
+      },
+      {
         slug: 'api/advanced-plot',
         title: {
           zh: '组合地图',
           en: 'Advanced plot',
         },
-        order: 5,
+        order: 6,
       },
     ],
     examples: [
@@ -99,11 +107,19 @@ module.exports = {
         },
       },
       {
-        slug: 'bubble-map',
-        icon: 'bubble',
+        slug: 'point-map',
+        icon: 'point',
         title: {
-          zh: '气泡地图',
-          en: 'Bubble Map',
+          zh: '点地图',
+          en: 'Point Map',
+        },
+      },
+      {
+        slug: 'heat-map',
+        icon: 'heatmap',
+        title: {
+          zh: '热力地图',
+          en: 'Heat Map',
         },
       },
     ],

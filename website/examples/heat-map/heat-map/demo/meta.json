@@ -1,0 +1,16 @@
+{
+  "title": {
+    "zh": "分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "basic.ts",
+      "title": {
+        "zh": "基础热力地图",
+        "en": "Basic Heat Map"
+      },
+      "screenshot": "https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*GD2bR7pb-yIAAAAAAAAAAABkARQnAQ"
+    }
+  ]
+}

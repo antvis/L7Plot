@@ -15,6 +15,7 @@
     "lint-fix": "lerna run lint-fix",
     "prettier": "lerna run prettier",
     "test": "jest",
+    "test-live": "DEBUG_MODE=1 jest --watch __tests__/unit",
     "test-cover": "jest --coverage",
     "build": "lerna run build",
     "build-l7lot": "lerna run build --stream --scope=@antv/l7plot",
