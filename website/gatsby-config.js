@@ -43,23 +43,23 @@ module.exports = {
       {
         slug: 'api/map-api',
         title: {
-          zh: '地图 API',
-          en: 'Map API',
+          zh: '地图 - Map',
+          en: 'Map',
         },
         order: 0,
       },
       {
         slug: 'api/source',
         title: {
-          zh: '数据源',
-          en: 'Data Source',
+          zh: '数据 - Source',
+          en: 'Source',
         },
         order: 1,
       },
       {
         slug: 'api/point-maps',
         title: {
-          zh: '点地图',
+          zh: '点地图 - Point Map',
           en: 'Point Map',
         },
         order: 2,
@@ -67,7 +67,7 @@ module.exports = {
       {
         slug: 'api/heat-map',
         title: {
-          zh: '热力地图',
+          zh: '热力地图 - Heat Map',
           en: 'Heat Map',
         },
         order: 3,
@@ -75,7 +75,7 @@ module.exports = {
       {
         slug: 'api/components',
         title: {
-          zh: '图表组件',
+          zh: '地图组件',
           en: 'Components',
         },
         order: 4,
@@ -83,8 +83,8 @@ module.exports = {
       {
         slug: 'api/theme',
         title: {
-          zh: '地图主题',
-          en: 'Theme',
+          zh: '主题',
+          en: '主题 - Theme',
         },
         order: 5,
       },
@@ -92,7 +92,7 @@ module.exports = {
         slug: 'api/advanced-plot',
         title: {
           zh: '组合地图',
-          en: 'Advanced plot',
+          en: '组合地图 - Advanced Plot',
         },
         order: 6,
       },

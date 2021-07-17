@@ -3,11 +3,20 @@ title: 数据 - Source
 order: 1
 ---
 
-```json
+```js
 {
-  "source": {}
+  source: {
+    data: [{  lng: 104.101, lat: 30.649, t: 24.6, n: '成都', }],
+    parser: {
+      type: 'json',
+      x: 'x',
+      y: 'y',
+    }
+  }
 }
 ```
+
+## `source.`data
 
 ## `source.`parser
 
