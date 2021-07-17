@@ -21,7 +21,7 @@ export interface ILegendItems {
   name?: string;
 }
 
-export interface ILegendControlOptions extends Partial<IControlOption> {
+export interface ILegendOptions extends Partial<IControlOption> {
   title: string;
   items: ILegendItems[];
   className?: string;
@@ -29,17 +29,17 @@ export interface ILegendControlOptions extends Partial<IControlOption> {
   domStyles?: Record<string, any>;
 }
 
-export class LegendControl extends Control {
+export class Legend extends Control {
   /**
-   * tooltip 的 schema 配置
+   * legend 的 schema 配置
    */
-  protected options: ILegendControlOptions;
+  protected options: ILegendOptions;
   /**
    * legendComponent 实例
    */
   private legendComponent: LegendComponent;
 
-  constructor(options: ILegendControlOptions) {
+  constructor(options: ILegendOptions) {
     super(options);
     this.options = options;
     this.legendComponent = new LegendComponent({
@@ -54,7 +54,7 @@ export class LegendControl extends Control {
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<ILegendControlOptions> {
+  protected getDefaultOptions(): Partial<ILegendOptions> {
     return {
       items: [],
       position: 'bottomleft',

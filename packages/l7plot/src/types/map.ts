@@ -86,15 +86,15 @@ export interface IMapOptions {
   readonly logo?: boolean | ILogo;
 
   /**
+   * 具体的数据
+   */
+  readonly source: ISource;
+
+  /**
    * 是否自动缩放到图层范围，默认为 false
    */
 
   readonly autoFit?: boolean;
-
-  /**
-   * 具体的数据
-   */
-  readonly source: ISource;
 
   /**
    * 交互反馈
