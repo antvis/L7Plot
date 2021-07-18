@@ -126,13 +126,13 @@ constructor(container: string | HTMLDivElement, options: MapOptions)
 
 `IStateAttribute` optional
 
-图层交互。
+元素交互反馈效果。
 
 #### `options.`active
 
-`boolean ｜ IActiveOption` optional default: `false`
+`boolean｜IActiveOption` optional default: `false`
 
-图层 mousehover 元素高亮效果，开启 mousehover 元素高亮效果：
+标签 mousehover 高亮效果，开启 mousehover 元素高亮效果：
 
 ```js
 {
@@ -156,9 +156,9 @@ constructor(container: string | HTMLDivElement, options: MapOptions)
 
 #### `options.`select
 
-`boolean ｜ IActiveOption` optional default: `false`
+`boolean｜IActiveOption` optional default: `false`
 
-图层 mouseclick 选中高亮效果，开启 mouseclick 元素高亮效果：
+元素 mouseclick 选中高亮效果，开启 mouseclick 元素高亮效果：
 
 ```js
 {
@@ -182,37 +182,37 @@ constructor(container: string | HTMLDivElement, options: MapOptions)
 
 ### `options.`label
 
-`false ｜ ILabelOptions` optional default: `false`
+`false｜ILabelOptions` optional default: `false`
 
 地图数据标签配置，详见 [Label](/zh/docs/api/components/label)。
 
 ### `options.`tooltip
 
-`false ｜ ITooltipOptions` optional default: `false`
+`false｜ITooltipOptions` optional default: `false`
 
 数据悬浮提示组件配置，详见 [Tooltip](/zh/docs/api/components/tooltip)。
 
 ### `options.`legend
 
-`false ｜ ILegendOptions` optional default: `false`
+`false｜ILegendOptions` optional default: `false`
 
 地图图例组件配置，详见 [Legend](/zh/docs/api/components/legend)。
 
 ### `options.`zoom
 
-`false ｜ IZoomControlOptions` optional default: `false`
+`false｜IZoomControlOptions` optional default: `false`
 
 地图放大缩小控件，详见 [Zoom](/zh/docs/api/components/zoom)。
 
 ### `options.`scale
 
-`false ｜ IScaleControlOptions` optional default: `false`
+`false｜IScaleControlOptions` optional default: `false`
 
 地图比例尺控件，详见 [Scale](/zh/docs/api/components/scale)。
 
 ### `options.`layerMenu
 
-`false ｜ ILayerMenuControlOptions` optional default: `false`
+`false｜ILayerMenuControlOptions` optional default: `false`
 
 地图图层列表控件，详见 [LayerMenu](/zh/docs/api/components/layerMenu)。
 
@@ -266,31 +266,31 @@ constructor(container: string | HTMLDivElement, options: MapOptions)
 
 ### zoomControl
 
-`undefined ｜ Zoom`
+`undefined｜Zoom`
 
 放缩器控件实例。
 
 ### scaleControl
 
-`undefined ｜ Scale`
+`undefined｜Scale`
 
 比例尺控件实例。
 
 ### layerMenuControl
 
-`undefined ｜ Layers`
+`undefined｜Layers`
 
 图层列表控件实例。
 
 ### legendControl
 
-`undefined ｜ Legend`
+`undefined｜Legend`
 
 图例控件实例。
 
 ### tooltip
 
-`undefined ｜ Tooltip`
+`undefined｜Tooltip`
 
 悬浮提示组件实例。
 
