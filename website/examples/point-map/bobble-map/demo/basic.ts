@@ -3,11 +3,10 @@ import { BubbleMap } from '@antv/l7plot';
 async function initMap() {
   const response = await fetch('https://gw.alipayobjects.com/os/rmsportal/oVTMqfzuuRFKiDwhPSFL.json');
   const data = await response.json();
-  console.log('data: ', data);
 
   const bubbleMap = new BubbleMap('container', {
     map: {
-      type: 'amap',
+      type: 'mapbox',
       style: 'dark',
       center: [102.447303, 37.753574],
       zoom: 5,
@@ -38,6 +37,7 @@ async function initMap() {
     state: { active: { color: 'red' } },
 
     label: {
+      visible: true,
       field: 't',
       style: {
         fill: '#fff',
@@ -51,30 +51,23 @@ async function initMap() {
         strokeWidth: 0.3, // 描边宽度
         strokeOpacity: 1.0,
       },
-      state: {
-        active: { color: 'red' },
-        select: { color: '#1AA4D6' },
-      },
     },
-    // popup: {
-    //   field: ['name', 'value'],
-    //   content: ({ name, value }) => `<span>${name}:</span><span>${value}</span>`,
-    //   trigger: 'mousemove',
-    // },
+    zoom: {
+      position: 'bottomright',
+    },
+    scale: {
+      position: 'bottomright',
+    },
+    layerMenu: {
+      position: 'topright',
+    },
+    tooltip: {
+      items: ['s', 't'],
+    },
     // legend: {
     //   position: 'bottomleft',
     // },
-    // scale: {
-    //   position: 'bottomright',
-    //   maxWidth: 200,
-    // },
-    // layerMenu: {
-    //   position: 'topright',
-    // },
   });
-
-  console.log('bubbleMap: ', bubbleMap);
-  // const map = bubbleMap.getMap();
 }
 
 initMap();

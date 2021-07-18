@@ -1,0 +1,16 @@
+{
+  "title": {
+    "zh": "分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "basic.ts",
+      "title": {
+        "zh": "气泡地图",
+        "en": "Bubble Map"
+      },
+      "screenshot": "https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*v5j_QZEL-1YAAAAAAAAAAABkARQnAQ"
+    }
+  ]
+}

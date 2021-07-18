@@ -1,6 +1,6 @@
 {
   "title": {
-    "zh": "中文分类",
+    "zh": "分类",
     "en": "Category"
   },
   "demos": [
@@ -10,7 +10,7 @@
         "zh": "基础气泡地图",
         "en": "Basic Bubble Map"
       },
-      "screenshot": "https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*fNGiS7YI1tIAAAAAAAAAAABkARQnAQ"
+      "screenshot": "https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*v5j_QZEL-1YAAAAAAAAAAABkARQnAQ"
     }
   ]
 }

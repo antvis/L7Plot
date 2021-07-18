@@ -1,0 +1,16 @@
+{
+  "title": {
+    "zh": "分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "basic.ts",
+      "title": {
+        "zh": "基础符号地图",
+        "en": "Basic Symbol Map"
+      },
+      "screenshot": "https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*oVyHT5S3sv0AAAAAAAAAAABkARQnAQ"
+    }
+  ]
+}

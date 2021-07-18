@@ -1,0 +1,16 @@
+{
+  "title": {
+    "zh": "分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "basic.ts",
+      "title": {
+        "zh": "基础散点地图",
+        "en": "Basic Scatter Map"
+      },
+      "screenshot": "https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*LnlmQ7sFWigAAAAAAAAAAABkARQnAQ"
+    }
+  ]
+}
