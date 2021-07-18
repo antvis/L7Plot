@@ -1,5 +1,5 @@
 ---
-title: 气泡地图
+title: 气泡地图 - Bubble Map
 order: 1
 ---
 

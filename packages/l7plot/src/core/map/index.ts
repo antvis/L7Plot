@@ -5,7 +5,7 @@ import { Scale, Layers, Zoom } from '@antv/l7-component';
 import EventEmitter from '@antv/event-emitter';
 import { isBoolean } from '@antv/util';
 import { Tooltip } from '../../component/tooltip';
-import { LegendControl } from '../../component/legend';
+import { Legend } from '../../component/legend';
 import { deepAssign } from '../../utils';
 import {
   MapType,
@@ -85,7 +85,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
    */
   protected abstract interactionInternalLayers: ILayer[];
   /**
-   * zoom 放大缩小 Control
+   * zoom 放缩器 Control
    */
   public zoomControl: Zoom | undefined;
   /**
@@ -99,7 +99,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
   /**
    * legend 图例 Control
    */
-  public legendControl: LegendControl | undefined;
+  public legendControl: Legend | undefined;
   /**
    * tooltip 悬浮提示
    */
@@ -373,7 +373,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
    * 移除容器内所有的图层
    */
   public removeAllLayer() {
-    return this.scene.removeAllLayer();
+    this.scene.removeAllLayer();
   }
 
   /**
@@ -455,7 +455,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
   public addLegendControl(options: ILegendOptions) {
     this.removeLegendControl();
     const legendControlOptions = Object.assign({}, { title: '', items: [] }, options);
-    this.legendControl = new LegendControl(legendControlOptions);
+    this.legendControl = new Legend(legendControlOptions);
     this.scene.addControl(this.legendControl);
   }
 
@@ -495,7 +495,11 @@ export abstract class MapWrapper<O extends IMapOptions> {
    */
   public destroy() {
     // TODO: 清空已经绑定的事件
-    this.scene.destroy();
+    this.removeScaleControl();
+    this.removeZoomControl();
+    this.removeLayerMenuControl();
+    this.removeLegendControl();
     this.tooltip?.destroy();
+    this.scene.destroy();
   }
 }
