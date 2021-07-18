@@ -23,7 +23,19 @@ async function initMap() {
     size: {
       field: 'mag',
     },
-
+    style: {
+      intensity: 3,
+      radius: 20,
+      opacity: 1,
+      colorsRamp: [
+        { color: '#206C7C', position: 0 },
+        { color: '#2EA9A1 ', position: 0.2 },
+        { color: '#91EABC', position: 0.4 },
+        { color: '#FFF598', position: 0.6 },
+        { color: '#F7B74A', position: 0.8 },
+        { color: '#FF4818', position: 1 },
+      ],
+    },
     zoom: {
       position: 'bottomright',
     },

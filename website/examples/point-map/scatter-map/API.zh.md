@@ -1,1 +1,1 @@
-`markdown:docs/api/point-maps/scatter-map/index.zh.md`
+`markdown:docs/api/point-maps/scatter-map.zh.md`

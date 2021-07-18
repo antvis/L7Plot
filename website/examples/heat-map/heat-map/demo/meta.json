@@ -5,12 +5,36 @@
   },
   "demos": [
     {
-      "filename": "basic.ts",
+      "filename": "global.ts",
       "title": {
-        "zh": "基础热力地图",
-        "en": "Basic Heat Map"
+        "zh": "全球热力地图",
+        "en": "Global heat map"
       },
-      "screenshot": "https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*GD2bR7pb-yIAAAAAAAAAAABkARQnAQ"
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/svqQmzIKVw/2977de7d-6362-42f1-b731-05e734b6bfe0.png"
+    },
+    {
+      "filename": "global-3d.ts",
+      "title": {
+        "zh": "全球热力 3D 地图",
+        "en": "Global 3D heat map"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/5osUdJv%24Nq/51c6693d-e00a-4c32-adb2-90b95359d4f2.png"
+    },
+    {
+      "filename": "grid.ts",
+      "title": {
+        "zh": "网格热力 3D 地图",
+        "en": "Grid thermal 3D map"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/XPitK0Ftor/9dcf6d62-ffc1-4207-9bb6-1f52fbc93002.png"
+    },
+    {
+      "filename": "hexagon.ts",
+      "title": {
+        "zh": "蜂窝热力 3D 地图",
+        "en": "Hexagon thermal 3D map"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/fA50QqeP%24T/a5031ad0-7786-4183-bf23-e66dbdf52fe5.png"
     }
   ]
 }

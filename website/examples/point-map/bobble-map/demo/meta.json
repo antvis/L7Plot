@@ -5,12 +5,20 @@
   },
   "demos": [
     {
-      "filename": "basic.ts",
+      "filename": "air.ts",
       "title": {
-        "zh": "基础气泡地图",
-        "en": "Basic Bubble Map"
+        "zh": "国内气温气泡地图",
+        "en": "Air bubble map of China"
       },
-      "screenshot": "https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*v5j_QZEL-1YAAAAAAAAAAABkARQnAQ"
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/h4XdQzs%24Oq/3c9372cf-6d45-4068-93ef-e7badfa943c4.png"
+    },
+    {
+      "filename": "animate.ts",
+      "title": {
+        "zh": "气泡动画地图",
+        "en": "Bubble animation map"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/2BF%24N%24V07L/72d65dcd-b1c1-4be8-b5ca-b0819a3d7c09.png"
     }
   ]
 }
