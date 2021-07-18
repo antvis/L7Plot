@@ -25,9 +25,9 @@ export interface IPointTextLayerStyleOptions {
   /* 透明度 */
   opacity?: number;
   /* 文本相对锚点的位置 */
-  textOffset?: [number, number];
-  /* 文本相对锚点的偏移量 */
   textAnchor?: AnchorType;
+  /* 文本相对锚点的偏移量 */
+  textOffset?: [number, number];
   /* 字符间距 */
   spacing?: number;
   /* 文本包围盒 padding [水平，垂直]，影响碰撞检测结果，避免相邻文本靠的太近 */
