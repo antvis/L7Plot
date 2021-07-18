@@ -5,18 +5,17 @@ redirect_from:
   - /zh/docs/api
 ---
 
+`Map` 是所有地图的基类，定义了地图的通用属性和方法。
+
 ## 一、配置
 
-创建地图实例：
-
 ```ts
-import { BubbleMap } from '@antv/l7plot';
-const bubbleMap = new BubbleMap(container, options);
+constructor(container: string | HTMLDivElement, options: MapOptions)
 ```
 
 ### container
 
-`string | HTMLDivElement` required
+`string|HTMLDivElement` required
 
 地图渲染的 DOM 容器。
 
@@ -27,6 +26,10 @@ const bubbleMap = new BubbleMap(container, options);
 地图的所有配置项。
 
 ### `options.`map
+
+`MapConfig` required
+
+地图容器配置项。
 
 #### `map.`type
 
@@ -111,7 +114,7 @@ const bubbleMap = new BubbleMap(container, options);
 
 `ISource` required
 
-数据配置，详见 [Source]()。
+数据配置，详见 [Source](/zh/docs/api/source)。
 
 ### `options.`autoFit
 
@@ -181,37 +184,37 @@ const bubbleMap = new BubbleMap(container, options);
 
 `false ｜ ILabelOptions` optional default: `false`
 
-地图数据标签配置，详见 [Label]()。
+地图数据标签配置，详见 [Label](/zh/docs/api/components/label)。
 
 ### `options.`tooltip
 
 `false ｜ ITooltipOptions` optional default: `false`
 
-数据悬浮提示组件配置，详见 [Tooltip]()。
+数据悬浮提示组件配置，详见 [Tooltip](/zh/docs/api/components/tooltip)。
 
 ### `options.`legend
 
 `false ｜ ILegendOptions` optional default: `false`
 
-地图图例组件配置，详见 [Legend]()。
+地图图例组件配置，详见 [Legend](/zh/docs/api/components/legend)。
 
 ### `options.`zoom
 
 `false ｜ IZoomControlOptions` optional default: `false`
 
-地图放大缩小控件，详见 [Zoom]()。
+地图放大缩小控件，详见 [Zoom](/zh/docs/api/components/zoom)。
 
 ### `options.`scale
 
 `false ｜ IScaleControlOptions` optional default: `false`
 
-地图比例尺控件，详见 [Scale]()。
+地图比例尺控件，详见 [Scale](/zh/docs/api/components/scale)。
 
 ### `options.`layerMenu
 
 `false ｜ ILayerMenuControlOptions` optional default: `false`
 
-地图图层列表控件，详见 [LayerMenu]()。
+地图图层列表控件，详见 [LayerMenu](/zh/docs/api/components/layerMenu)。
 
 ## 二、属性
 
@@ -297,7 +300,7 @@ const bubbleMap = new BubbleMap(container, options);
 
 更新配置且重新渲染。
 
-```sign
+```ts
 map.update(options: Partial<MapOptions>);
 ```
 
@@ -305,7 +308,7 @@ map.update(options: Partial<MapOptions>);
 
 更新数据源。
 
-```sign
+```ts
 map.changeData(data: any, cfg?: ISourceCFG);
 ```
 
@@ -313,7 +316,7 @@ map.changeData(data: any, cfg?: ISourceCFG);
 
 获取 scene 实例。
 
-```sign
+```ts
 map.getScene() : Scene;
 ```
 
@@ -321,7 +324,7 @@ map.getScene() : Scene;
 
 获取 map 实例。
 
-```sign
+```ts
 map.getMap() : MapboxInstance | AMapInstance;
 ```
 
@@ -329,7 +332,7 @@ map.getMap() : MapboxInstance | AMapInstance;
 
 添加图层。
 
-```sign
+```ts
 map.addLayer(layer: ILayer);
 ```
 
@@ -337,7 +340,7 @@ map.addLayer(layer: ILayer);
 
 获取所有图层。
 
-```sign
+```ts
 map.getLayes(): ILayer[];
 ```
 
@@ -345,7 +348,7 @@ map.getLayes(): ILayer[];
 
 根据图层名称获取图层。
 
-```sign
+```ts
 map.getLayes(name: string): ILayer | undefined;
 ```
 
@@ -353,7 +356,7 @@ map.getLayes(name: string): ILayer | undefined;
 
 移除图层。
 
-```sign
+```ts
 map.removeLayer(layer: ILayer);
 ```
 
@@ -361,7 +364,7 @@ map.removeLayer(layer: ILayer);
 
 移除容器内所有的图层。
 
-```sign
+```ts
 map.removeAllLayer();
 ```
 
@@ -369,7 +372,7 @@ map.removeAllLayer();
 
 添加地图缩放器控件。
 
-```sign
+```ts
 map.addZoomControl(options: IZoomControlOptions);
 ```
 
@@ -377,7 +380,7 @@ map.addZoomControl(options: IZoomControlOptions);
 
 移除地图缩放器控件。
 
-```sign
+```ts
 map.removeZoomControl();
 ```
 
@@ -385,7 +388,7 @@ map.removeZoomControl();
 
 添加地图比例尺控件。
 
-```sign
+```ts
 map.addScaleControl(options: IScaleControlOptions);
 ```
 
@@ -393,7 +396,7 @@ map.addScaleControl(options: IScaleControlOptions);
 
 移除地图比例尺控件。
 
-```sign
+```ts
 map.removeScaleControl();
 ```
 
@@ -401,7 +404,7 @@ map.removeScaleControl();
 
 添加地图图层列表控件。
 
-```sign
+```ts
 map.addLayerMenuControl(options: ILayerMenuControlOptions);
 ```
 
@@ -409,7 +412,7 @@ map.addLayerMenuControl(options: ILayerMenuControlOptions);
 
 移除地图图层列表控件。
 
-```sign
+```ts
 map.removeLayerMenuControl();
 ```
 
@@ -417,7 +420,7 @@ map.removeLayerMenuControl();
 
 添加图例控件。
 
-```sign
+```ts
 map.addLegendControl(options: ILegendOptions);
 ```
 
@@ -425,13 +428,13 @@ map.addLegendControl(options: ILegendOptions);
 
 移除图例控件。
 
-```sign
+```ts
 map.removeLegendControl();
 ```
 
 ### exportPng
 
-```sign
+```ts
 map.exportPng(type?: 'png' | 'jpg');
 ```
 
@@ -439,7 +442,7 @@ map.exportPng(type?: 'png' | 'jpg');
 
 绑定事件。
 
-```sign
+```ts
 map.on(event: string, callback: Function);
 ```
 
@@ -447,7 +450,7 @@ map.on(event: string, callback: Function);
 
 绑定一次事件。
 
-```sign
+```ts
 map.once(event: string, callback: Function);
 ```
 
@@ -455,13 +458,13 @@ map.once(event: string, callback: Function);
 
 解绑事件。
 
-```sign
+```ts
 map.off(event?: string, callback?: Function);
 ```
 
 ### destroy
 
-```sign
+```ts
 map.destroy();
 ```
 
@@ -471,19 +474,19 @@ map.destroy();
 
 #### 绑定事件
 
-```sign
+```ts
 map.on(event: string, callback: Function);
 ```
 
 #### 绑定一次事件
 
-```sign
+```ts
 map.once(event: string, callback: Function);
 ```
 
 #### 解绑事件
 
-```sign
+```ts
 map.off(event?: string, callback?: Function);
 ```
 
@@ -521,26 +524,26 @@ map.off(event?: string, callback?: Function);
 #### 图层事件
 
 - 生命周期事件
-  - inited：图层初始化完成事件。
-  - add：图层添加到场景 scene 事件。
-  - remove：图层移除时事件。
-  - dataUpdate：图层数据源更新事件。
+  - layerName:inited：图层初始化完成事件。
+  - layerName:add：图层添加到场景 scene 事件。
+  - layerName:remove：图层移除时事件。
+  - layerName:dataUpdate：图层数据源更新事件。
 - 单击事件
-  - click：左键点击图层事件。
-  - unclick：图层外左键点击事件。
+  - layerName:click：左键点击图层事件。
+  - layerName:unclick：图层外左键点击事件。
 - 右键事件
-  - contextmenu：图层要素点击右键菜单事件。
-  - uncontextmenu：图层外点击右键事件。
+  - layerName:contextmenu：图层要素点击右键菜单事件。
+  - layerName:uncontextmenu：图层外点击右键事件。
 - 滑动事件
-  - mouseenter：鼠标进入图层要素事件。
-  - mousemove：鼠标在图层上移动时触发事件。
-  - unmousemove：图层外鼠标移动事件。
-  - mouseout：鼠标移出图层要素事件。
-  - mouseup：鼠标在图层上单击抬起事件。
-  - unmouseup：图层外鼠标抬起。
-  - mousedown：鼠标在图层上单击按下事件。
-  - unmousedown：图层外单击按下事件。
-- unpick： 图层外的操作的所有事件。
+  - layerName:mouseenter：鼠标进入图层要素事件。
+  - layerName:mousemove：鼠标在图层上移动时触发事件。
+  - layerName:unmousemove：图层外鼠标移动事件。
+  - layerName:mouseout：鼠标移出图层要素事件。
+  - layerName:mouseup：鼠标在图层上单击抬起事件。
+  - layerName:unmouseup：图层外鼠标抬起。
+  - layerName:mousedown：鼠标在图层上单击按下事件。
+  - layerName:unmousedown：图层外单击按下事件。
+- layerName:unpick： 图层外的操作的所有事件。
 
 #### 组件事件
 
@@ -560,7 +563,7 @@ map.off(event?: string, callback?: Function);
 params:
 
 - id: `string`
-- image: `HTMLImageElement | File | string`
+- image: `HTMLImageElement|File|string`
 
 ```js
 registerImage('01', 'https://l7plot.antv.vision/xxx.svg');
@@ -574,7 +577,7 @@ params:
 
 - images: `Array`
   - id: `string`
-  - image: `HTMLImageElement | File | string`
+  - image: `HTMLImageElement|File|string`
 
 ```js
 const images = [{ id: '01', image: 'https://l7plot.antv.vision/xxx.svg' }];
