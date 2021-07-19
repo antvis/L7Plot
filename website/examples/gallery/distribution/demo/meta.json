@@ -5,12 +5,12 @@
   },
   "demos": [
     {
-      "filename": "basic.ts",
+      "filename": "global-distribution.ts",
       "title": {
-        "zh": "气泡地图",
-        "en": "Bubble Map"
+        "zh": "全球分布",
+        "en": "Global Distribution"
       },
-      "screenshot": "https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*v5j_QZEL-1YAAAAAAAAAAABkARQnAQ"
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/%24PbbsgFfcG/f82a51e1-9b7b-4b8a-9734-c426aac1055f.png"
     }
   ]
 }

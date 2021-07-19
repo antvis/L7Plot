@@ -64,9 +64,6 @@ async function initMap() {
     tooltip: {
       items: ['s', 't'],
     },
-    // legend: {
-    //   position: 'bottomleft',
-    // },
   });
 }
 

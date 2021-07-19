@@ -1,1 +1,1 @@
-`markdown:docs/api/point-maps/bubble-map/index.en.md`
+`markdown:docs/api/point-maps/bubble-map.en.md`
