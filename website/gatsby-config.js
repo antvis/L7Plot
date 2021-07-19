@@ -43,50 +43,58 @@ module.exports = {
       {
         slug: 'api/map-api',
         title: {
-          zh: '地图 API',
-          en: 'Map API',
+          zh: '地图 - Map',
+          en: 'Map',
         },
         order: 0,
       },
       {
         slug: 'api/source',
         title: {
-          zh: '数据 Source',
-          en: 'Data Source',
+          zh: '数据 - Source',
+          en: 'Source',
         },
         order: 1,
       },
       {
-        slug: 'api/point-map',
+        slug: 'api/point-maps',
         title: {
-          zh: '点地图',
-          en: 'Point map',
+          zh: '点地图 - Point Map',
+          en: 'Point Map',
         },
         order: 2,
       },
       {
-        slug: 'api/options',
+        slug: 'api/heat-map',
         title: {
-          zh: '通用配置',
-          en: 'Common Configuration',
+          zh: '热力地图 - Heat Map',
+          en: 'Heat Map',
         },
         order: 3,
       },
       {
         slug: 'api/components',
         title: {
-          zh: '图表组件',
+          zh: '地图组件',
           en: 'Components',
         },
         order: 4,
       },
       {
+        slug: 'api/theme',
+        title: {
+          zh: '主题',
+          en: '主题 - Theme',
+        },
+        order: 5,
+      },
+      {
         slug: 'api/advanced-plot',
         title: {
           zh: '组合地图',
-          en: 'Advanced plot',
+          en: '组合地图 - Advanced Plot',
         },
-        order: 5,
+        order: 6,
       },
     ],
     examples: [
@@ -99,11 +107,19 @@ module.exports = {
         },
       },
       {
-        slug: 'bubble-map',
-        icon: 'bubble',
+        slug: 'point-map',
+        icon: 'point',
         title: {
-          zh: '气泡地图',
-          en: 'Bubble Map',
+          zh: '点地图',
+          en: 'Point Map',
+        },
+      },
+      {
+        slug: 'heat-map',
+        icon: 'heatmap',
+        title: {
+          zh: '热力地图',
+          en: 'Heat Map',
         },
       },
     ],

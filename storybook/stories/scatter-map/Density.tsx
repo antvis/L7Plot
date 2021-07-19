@@ -35,21 +35,15 @@ class Density extends Component {
       style: {
         opacity: 1,
       },
-      // popup: {
-      //   field: ['name', 'value'],
-      //   content: ({ name, value }) => `<span>${name}:</span><span>${value}</span>`,
-      //   trigger: 'mousemove',
-      // },
-      // legend: {
-      //   position: 'bottomleft',
-      // },
-      // scale: {
-      //   position: 'bottomright',
-      //   maxWidth: 200,
-      // },
-      // layerMenu: {
-      //   position: 'topright',
-      // },
+      zoom: {
+        position: 'bottomright',
+      },
+      scale: {
+        position: 'bottomright',
+      },
+      layerMenu: {
+        position: 'topright',
+      },
     });
 
     this.map = scatterMap;

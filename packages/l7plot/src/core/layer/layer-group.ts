@@ -1,12 +1,13 @@
 import { uniqueId } from '@antv/util';
 import { Scene } from '@antv/l7-scene';
 import { ILayer } from '@antv/l7-core';
+import EventEmitter from '@antv/event-emitter';
 
 export interface ILayerGroupOption {
   name?: string;
 }
 
-export class LayerGroup {
+export class LayerGroup extends EventEmitter {
   /**
    * 图层组名称
    */
@@ -21,6 +22,7 @@ export class LayerGroup {
   public scene: Scene | undefined;
 
   constructor(layers: ILayer[] = [], option: ILayerGroupOption = {}) {
+    super();
     this.name = option.name ? option.name : uniqueId('layerGroup');
     this.layers = layers;
   }
@@ -30,7 +32,16 @@ export class LayerGroup {
    */
   addTo(scene: Scene) {
     this.scene = scene;
+    let layerIndex = 0;
+    const layerLength = this.layers.length;
     this.layers.forEach((layer) => {
+      layer.once('inited', (e) => {
+        layerIndex++;
+        this.emit('inited', e);
+        if (layerIndex === layerLength) {
+          this.emit('inited-all');
+        }
+      });
       scene.addLayer(layer);
     });
   }
@@ -49,6 +60,7 @@ export class LayerGroup {
     // TODO: duplicate layer
     this.layers.push(layer);
     if (this.scene) {
+      layer.once('inited', (e) => this.emit('inited', e));
       this.scene.addLayer(layer);
     }
   }
@@ -84,7 +96,7 @@ export class LayerGroup {
    * 根据图层 name 获取图层对象
    */
   public getLayerByName(name: string): ILayer | undefined {
-    return this.layers.find((itemLayer) => itemLayer.id === name);
+    return this.layers.find((itemLayer) => itemLayer.name === name);
   }
 
   /**
@@ -97,5 +109,12 @@ export class LayerGroup {
       }
     });
     this.layers = [];
+  }
+
+  /**
+   * 是否图层组为空
+   */
+  public isEmpty() {
+    return this.layers.length === 0;
   }
 }

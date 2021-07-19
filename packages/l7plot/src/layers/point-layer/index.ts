@@ -29,7 +29,7 @@ export class PointLayerWrapper extends BaseLayerWrapper<IPointLayerOptions> {
     this.layer.setSource(source);
   }
 
-  public updateOption(options: IPointLayerConfig) {
+  public updateOptions(options: IPointLayerConfig) {
     this.options = deepAssign({}, this.options, options);
     mappingLayer(this.layer, this.options);
   }

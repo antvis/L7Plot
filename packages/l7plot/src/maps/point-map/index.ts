@@ -22,13 +22,13 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
   /**
    * pointLayerWrapper
    */
-  protected pointLayerWrapper: PointLayerWrapper | undefined;
+  protected pointLayerWrapper!: PointLayerWrapper;
 
   /**
    * 点图层
    */
-  get pointLayer(): ILayer | undefined {
-    return this.pointLayerWrapper?.layer;
+  get pointLayer(): ILayer {
+    return this.pointLayerWrapper.layer;
   }
 
   /**
@@ -44,6 +44,11 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
   }
 
   /**
+   * 带交互的内置图层
+   */
+  protected interactionInternalLayers = [this.pointLayer];
+
+  /**
    * 获取默认配置
    */
   protected getDefaultOptions(): Partial<O> {
@@ -51,14 +56,26 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
   }
 
   /**
+   * 获取内置图层名
+   */
+  protected getInternalLayerName() {
+    return { pointLayerName: 'pointLayer', labeLayerName: 'labelLayer' };
+  }
+
+  /**
    * 创建内置图层
    */
   protected createInternalLayers(source: Source): LayerGroup {
-    this.pointLayerWrapper = new PointLayerWrapper({ source, ...pick<any>(this.options, POINT_LAYER_OPTIONS_KEYS) });
+    const { pointLayerName, labeLayerName } = this.getInternalLayerName();
+    this.pointLayerWrapper = new PointLayerWrapper({
+      source,
+      ...pick<any>(this.options, POINT_LAYER_OPTIONS_KEYS),
+      name: pointLayerName,
+    });
     const layerGroup = new LayerGroup([this.pointLayerWrapper.layer]);
 
     if (this.options.label) {
-      this.labelLayerWrapper = new LabelLayerWrapper({ source, ...this.options.label });
+      this.labelLayerWrapper = new LabelLayerWrapper({ source, ...this.options.label, name: labeLayerName });
       layerGroup.addlayer(this.labelLayerWrapper.layer);
     }
 
@@ -70,9 +87,24 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
    */
   protected updateInternalLayers(options: O) {
     const pointLayerConfig = pick<any>(options, POINT_LAYER_OPTIONS_KEYS);
-    const labelLayerConfig = { ...options.label };
+    this.pointLayerWrapper.updateOptions(pointLayerConfig);
 
-    this.pointLayerWrapper?.updateOption(pointLayerConfig);
-    this.labelLayerWrapper?.updateOption(labelLayerConfig);
+    if (options.label) {
+      if (this.labelLayerWrapper) {
+        this.labelLayerWrapper.updateOptions({ ...options.label });
+      } else {
+        const { labeLayerName } = this.getInternalLayerName();
+        this.labelLayerWrapper = new LabelLayerWrapper({
+          source: this.source,
+          ...options.label,
+          name: labeLayerName,
+        });
+        this.layerGroup.addlayer(this.labelLayerWrapper.layer);
+      }
+    } else {
+      if (this.labelLayerWrapper) {
+        this.layerGroup.removelayer(this.labelLayerWrapper.layer);
+      }
+    }
   }
 }

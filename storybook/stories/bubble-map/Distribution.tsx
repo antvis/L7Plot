@@ -54,20 +54,20 @@ class Distribution extends Component {
           textOffset: [0, 20], // 文本相对锚点的偏移量 [水平, 垂直]
         },
       },
-      // popup: {
-      //   field: ['name', 'value'],
-      //   content: ({ name, value }) => `<span>${name}:</span><span>${value}</span>`,
-      //   trigger: 'mousemove',
-      // },
+      zoom: {
+        position: 'bottomright',
+      },
+      scale: {
+        position: 'bottomright',
+      },
+      layerMenu: {
+        position: 'topright',
+      },
+      tooltip: {
+        items: [{ field: 'properties.mag', alias: 'mag' }],
+      },
       // legend: {
       //   position: 'bottomleft',
-      // },
-      // scale: {
-      //   position: 'bottomright',
-      //   maxWidth: 200,
-      // },
-      // layerMenu: {
-      //   position: 'topright',
       // },
     });
 

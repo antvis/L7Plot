@@ -5,11 +5,15 @@ module.exports = {
   clearMocks: true,
   collectCoverage: false,
   collectCoverageFrom: ['packages/**/src/**/*.ts'],
-  coveragePathIgnorePatterns: ['/node_modules/', '/__tests__/'],
+  coveragePathIgnorePatterns: ['/node_modules/', '/__tests__/', 'interface.ts'],
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov', 'clover'],
   moduleFileExtensions: ['js', 'ts'],
   testMatch: ['**/__tests__/**/*.+(spec|test).[jt]s'],
+  moduleNameMapper: {
+    '^lodash-es$': 'lodash',
+  },
+  testTimeout: 5000 * 4,
   coverageThreshold: {
     // global: {
     //   branches: 80,

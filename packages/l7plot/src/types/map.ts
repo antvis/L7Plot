@@ -3,15 +3,13 @@ import { IAMapInstance, IMapboxInstance } from '@antv/l7-maps/typings';
 import { IMapConfig as MapConfig, IStatusOptions, PositionName, ISourceCFG } from '@antv/l7-core';
 import Source from '@antv/l7-source';
 import { ColorsAttr, IStateAttribute } from './attr';
-import { ILabelConfig } from './label';
-import { IPopup } from './popup';
-import { ITooltip } from './tooltip';
-import { IZoomControlOption } from './zoom';
-import { IScaleControlOption } from './scale';
-import { ILegendControlOption } from './legend';
-import { ILayerMenuControlOption } from './layer-menu';
+import { ILabelOptions } from './label';
+import { IPopupOptions } from './popup';
+import { ITooltipOptions } from './tooltip';
+import { ILegendOptions } from './legend';
+import { ILayerMenuControlOptions, IScaleControlOptions, IZoomControlOptions } from './control';
 
-export { MapboxglMap, Source };
+export { MapboxglMap, Source, IStatusOptions };
 
 export type AMapInstance = AMap.Map & IAMapInstance;
 
@@ -28,7 +26,7 @@ export enum MapType {
   Scatter = 'scatter',
   Symbol = 'symbol',
   Clustere = 'clustere',
-  Heat = 'heat',
+  Heat = 'heatmap',
 }
 
 /**
@@ -75,11 +73,6 @@ export interface IMapOptions {
    * 画布高度
    */
   readonly height?: number;
-  /**
-   * 画布是否自动适配容器大小，默认为 true
-   */
-
-  readonly autoFit?: boolean;
 
   // 通用数据配置
   /**
@@ -93,14 +86,15 @@ export interface IMapOptions {
   readonly logo?: boolean | ILogo;
 
   /**
-   * 地图可操作状态
-   */
-  readonly controller?: IStatusOptions;
-
-  /**
    * 具体的数据
    */
   readonly source: ISource;
+
+  /**
+   * 是否自动缩放到图层范围，默认为 false
+   */
+
+  readonly autoFit?: boolean;
 
   /**
    * 交互反馈
@@ -120,33 +114,33 @@ export interface IMapOptions {
   /**
    * 数据标签配置
    */
-  readonly label?: false | ILabelConfig;
+  readonly label?: false | ILabelOptions;
 
   // 组件相关
   /**
    * tooltip 配置项
    */
-  readonly tooltip?: false | ITooltip;
+  readonly tooltip?: false | ITooltipOptions;
 
   /**
    * popup 配置项
    */
-  readonly popup?: false | IPopup;
+  readonly popup?: false | IPopupOptions;
 
   /**
    * 图例 legend 配置项
    */
-  readonly legend?: false | ILegendControlOption;
+  readonly legend?: false | ILegendOptions;
   /**
    * zoom 配置
    */
-  readonly zoom?: false | IZoomControlOption;
+  readonly zoom?: false | IZoomControlOptions;
   /**
    * scale 配置
    */
-  readonly scale?: false | IScaleControlOption;
+  readonly scale?: false | IScaleControlOptions;
   /**
    * layerMenu 配置
    */
-  readonly layerMenu?: false | ILayerMenuControlOption;
+  readonly layerMenu?: false | ILayerMenuControlOptions;
 }

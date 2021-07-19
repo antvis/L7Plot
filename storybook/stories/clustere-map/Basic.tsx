@@ -28,14 +28,13 @@ class Basic extends Component {
         parser: {
           type: 'geojson',
         },
-        cluster: true,
       },
 
-      shape: 'circle',
       color: 'yellow',
       size: {
         field: 'point_count',
-        value: [5, 10, 15, 20, 25],
+        value: [10, 20, 30, 40, 50, 60, 70, 80],
+        type: 'quantile',
       },
 
       style: {
@@ -50,24 +49,19 @@ class Basic extends Component {
         style: {
           fill: '#fff',
           fontSize: 12,
-          textAnchor: 'top', // 文本相对锚点的位置 center|left|right|top|bottom|top-left
-          textOffset: [0, 20], // 文本相对锚点的偏移量 [水平, 垂直]
         },
       },
-      // popup: {
-      //   field: ['name', 'value'],
-      //   content: ({ name, value }) => `<span>${name}:</span><span>${value}</span>`,
-      //   trigger: 'mousemove',
-      // },
+      zoom: {
+        position: 'bottomright',
+      },
+      scale: {
+        position: 'bottomright',
+      },
+      layerMenu: {
+        position: 'topright',
+      },
       // legend: {
       //   position: 'bottomleft',
-      // },
-      // scale: {
-      //   position: 'bottomright',
-      //   maxWidth: 200,
-      // },
-      // layerMenu: {
-      //   position: 'topright',
       // },
     });
 

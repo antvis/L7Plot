@@ -1,0 +1,16 @@
+{
+  "title": {
+    "zh": "分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "global-distribution.ts",
+      "title": {
+        "zh": "全球分布",
+        "en": "Global Distribution"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/%24PbbsgFfcG/f82a51e1-9b7b-4b8a-9734-c426aac1055f.png"
+    }
+  ]
+}

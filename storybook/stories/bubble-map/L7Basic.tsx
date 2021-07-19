@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Scene, PointLayer, GaodeMap } from '@antv/l7plot/node_modules/@antv/l7';
+import { Scene, PointLayer, GaodeMap } from '@antv/l7';
 
 class Basic extends Component {
   public scene: Scene | undefined;

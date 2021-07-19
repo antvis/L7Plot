@@ -1,13 +1,13 @@
 import { isFunction, isObject, isString, isNumber, isBoolean, isArray } from '@antv/util';
-import { ILayer } from '@antv/l7-core';
+import { ILayer, IScale, IScaleOptions } from '@antv/l7-core';
 import { ColorAttr, SizeAttr, ShapeAttr, RotateAttr, animateAttr, IStateAttribute } from '../../types/';
 
 /**
  * 获得映射函数
  * @param mappingFields
- * @param callBack
+ * @param callback
  */
-export function getMappingFunction(mappingFields: string[], callBack: (data: Record<string, any>) => any) {
+export function getMappingFunction(mappingFields: string[], callback: (data: Record<string, any>) => any) {
   return (...args: any[]) => {
     const params: Record<string, any> = {};
 
@@ -17,7 +17,7 @@ export function getMappingFunction(mappingFields: string[], callBack: (data: Rec
 
     delete params['undefined'];
 
-    return callBack(params);
+    return callback(params);
   };
 }
 
@@ -44,6 +44,10 @@ export class MappingLayer {
       } else {
         layer.shape(field, shape.value);
       }
+      // scale
+      if (isString(field) && shape.type) {
+        MappingLayer.scale(layer, field, { type: shape.type });
+      }
     }
   }
 
@@ -68,6 +72,10 @@ export class MappingLayer {
         layer.size(field, getMappingFunction(mappingFields, size.value));
       } else {
         layer.size(field, size.value);
+      }
+      // scale
+      if (isString(field) && size.type) {
+        MappingLayer.scale(layer, field, { type: size.type });
       }
     }
   }
@@ -94,6 +102,10 @@ export class MappingLayer {
       } else {
         layer.color(field, color.value);
       }
+      // scale
+      if (isString(field) && color.type) {
+        MappingLayer.scale(layer, field, { type: color.type });
+      }
     }
   }
 
@@ -110,21 +122,18 @@ export class MappingLayer {
   static rotate(layer: ILayer, rotate: RotateAttr) {
     /**
      * rotate 的几种情况
-     * layer.rotate('cicle');
-     * layer.rotate('rotate', ['cicle', 'square']);
-     * layer.rotate('x', (x) => 'cicle');
-     * layer.rotate('x*y', (x, y) => 'cicle');
+     * layer.rotate(45);
+     * layer.rotate('rotate', [45, 90]);
+     * layer.rotate('x', (x) => 45);
+     * layer.rotate('x*y', (x, y) => 45);
      */
     if (isString(rotate)) {
       // TODO: L7 rotate
       // layer.rotate(rotate);
     } else if (isFunction(rotate)) {
       // TODO: rotate isFunction
-      // const mappingFields = getMappingField(options, 'rotate');
-      // layer.rotate(mappingFields.join('*'), getMappingFunction(mappingFields, rotate));
     } else if (isObject(rotate)) {
       // TODO: L7 rotate
-      // rotate.field && layer.rotate(rotate.field, rotate.value);
     }
   }
 
@@ -137,5 +146,14 @@ export class MappingLayer {
     if (isBoolean(animate) || isObject(animate)) {
       layer.animate(animate);
     }
+  }
+
+  static scale(layer: ILayer, field: string | IScaleOptions, cfg: IScale) {
+    /**
+     * scale 的几种情况
+     * layer.scale('name', {type: 'cat'});
+     * layer.scale({name: {type: 'cat'}, value: {type: 'linear'}});
+     */
+    layer.scale(field, cfg);
   }
 }

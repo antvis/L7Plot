@@ -59,31 +59,27 @@ class Basic extends Component {
           strokeWidth: 0.3, // 描边宽度
           strokeOpacity: 1.0,
         },
-        state: {
-          active: { color: 'red' },
-          select: { color: '#1AA4D6' },
-        },
       },
-      // popup: {
-      //   field: ['name', 'value'],
-      //   content: ({ name, value }) => `<span>${name}:</span><span>${value}</span>`,
-      //   trigger: 'mousemove',
-      // },
+      zoom: {
+        position: 'bottomright',
+      },
+      scale: {
+        position: 'bottomright',
+      },
+      layerMenu: {
+        position: 'topright',
+      },
+      tooltip: {
+        items: ['s', 't'],
+      },
       // legend: {
       //   position: 'bottomleft',
-      // },
-      // scale: {
-      //   position: 'bottomright',
-      //   maxWidth: 200,
-      // },
-      // layerMenu: {
-      //   position: 'topright',
       // },
     });
 
     console.log('bubbleMap: ', bubbleMap);
-    const { labelLayer, bobbleLayer } = bubbleMap;
-    console.log('bobbleLayer: ', bobbleLayer);
+    const { labelLayer, bubbleLayer } = bubbleMap;
+    console.log('bubbleLayer: ', bubbleLayer);
     console.log('labelLayer: ', labelLayer);
     // console.log('scene: ', bubbleMap.scene);
 

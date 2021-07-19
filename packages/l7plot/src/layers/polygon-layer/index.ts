@@ -1,3 +1,1 @@
-class PolygonLayer {}
-
-export default PolygonLayer;
+export class PolygonLayerWrapper {}
