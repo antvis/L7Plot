@@ -324,6 +324,14 @@ map.update(options: Partial<MapOptions>);
 map.changeData(data: any, cfg?: ISourceCFG);
 ```
 
+### changeSize
+
+修改容器大小。
+
+```ts
+map.changeSize(width: number, height: number);
+```
+
 ### getScene
 
 获取 scene 实例。
