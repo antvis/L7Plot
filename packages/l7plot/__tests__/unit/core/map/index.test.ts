@@ -2,6 +2,29 @@ import { PointMap } from '../../../../src';
 import { createDiv } from '../../../helper/dom';
 
 describe('core map', () => {
+  it('render', () => {
+    const pointMap = new PointMap(createDiv(), {
+      source: {
+        data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
+        parser: { type: 'json' },
+      },
+      shape: 'square',
+    });
+    return new Promise<void>((resolve, reject) => {
+      pointMap.on('loaded', () => {
+        try {
+          pointMap.updateOption({ shape: 'circle' });
+          pointMap.render();
+          expect(pointMap.options.shape).toEqual('circle');
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
+        setTimeout(() => pointMap.destroy(), 0);
+      });
+    });
+  });
+
   it(
     'update',
     () => {
@@ -28,29 +51,6 @@ describe('core map', () => {
     1000 * 10
   );
 
-  it('render', () => {
-    const pointMap = new PointMap(createDiv(), {
-      source: {
-        data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
-        parser: { type: 'json' },
-      },
-      shape: 'square',
-    });
-    return new Promise<void>((resolve, reject) => {
-      pointMap.on('loaded', () => {
-        try {
-          pointMap.updateOption({ shape: 'circle' });
-          pointMap.render();
-          expect(pointMap.options.shape).toEqual('circle');
-          resolve();
-        } catch (err) {
-          reject(err);
-        }
-        setTimeout(() => pointMap.destroy(), 0);
-      });
-    });
-  });
-
   it('change data', () => {
     const pointMap = new PointMap(createDiv(), {
       source: {
@@ -64,6 +64,30 @@ describe('core map', () => {
         try {
           pointMap.changeData(data);
           expect(pointMap.source['originData']).toEqual(data);
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
+        setTimeout(() => pointMap.destroy(), 0);
+      });
+    });
+  });
+
+  it('change size', () => {
+    const pointMap = new PointMap(createDiv(), {
+      width: 700,
+      height: 300,
+      source: {
+        data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
+        parser: { type: 'json' },
+      },
+    });
+    return new Promise<void>((resolve, reject) => {
+      pointMap.on('loaded', () => {
+        try {
+          pointMap.changeSize(1000, 500);
+          expect(pointMap.container.style.width).toEqual('1000px');
+          expect(pointMap.container.style.height).toEqual('500px');
           resolve();
         } catch (err) {
           reject(err);

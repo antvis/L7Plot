@@ -67,7 +67,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
   /**
    * map 绘制的 dom
    */
-  public readonly container: string | HTMLDivElement;
+  public readonly container: HTMLDivElement;
   /**
    * scene 实例
    */
@@ -106,9 +106,8 @@ export abstract class MapWrapper<O extends IMapOptions> {
   public tooltip: Tooltip | undefined;
 
   constructor(container: string | HTMLDivElement, options: O) {
-    this.container = container;
-
     this.options = deepAssign({}, this.getDefaultOptions(), options);
+    this.container = this.createContainer(container);
 
     this.scene = this.createScene();
     this.source = this.createSource();
@@ -123,6 +122,23 @@ export abstract class MapWrapper<O extends IMapOptions> {
    */
   protected getDefaultOptions(): Partial<IMapOptions> {
     return MapWrapper.DefaultOptions;
+  }
+
+  /**
+   * 创建 DOM 容器
+   */
+  private createContainer(container: string | HTMLDivElement) {
+    const { width, height } = this.options;
+    const dom = typeof container === 'string' ? (document.getElementById(container) as HTMLDivElement) : container;
+    dom.style.position || (dom.style.position = 'relative');
+    if (width) {
+      dom.style.width || (dom.style.width = `${width}px`);
+    }
+    if (height) {
+      dom.style.height || (dom.style.height = `${height}px`);
+    }
+
+    return dom;
   }
 
   /**
@@ -269,6 +285,16 @@ export abstract class MapWrapper<O extends IMapOptions> {
   public changeData(data: any, cfg?: ISourceCFG) {
     // TODO: deepAssign old cfg
     this.source.setData(data, cfg);
+  }
+
+  /**
+   * 修改容器大小
+   */
+  public changeSize(width: number, height: number) {
+    if (this.options.width === width && this.options.height === height) return;
+    this.container.style.width = `${width}px`;
+    this.container.style.height = `${height}px`;
+    this.options = Object.assign(this.options, { width, height });
   }
 
   /**

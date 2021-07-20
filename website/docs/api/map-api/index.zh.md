@@ -25,6 +25,18 @@ constructor(container: string | HTMLDivElement, options: MapOptions)
 
 地图的所有配置项。
 
+### `options.`width
+
+`number` optional default: `null`
+
+设置地图容器宽度。
+
+### `options.`height
+
+`number` optional default: `null`
+
+设置地图容器高度。
+
 ### `options.`map
 
 `MapConfig` required
