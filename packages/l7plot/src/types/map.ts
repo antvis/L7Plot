@@ -65,12 +65,12 @@ export interface ISource extends ISourceCFG {
 export interface IMapOptions {
   // 地图容器基本配置
   /**
-   * 画布宽度
+   * 容器宽度
    */
   readonly width?: number;
 
   /**
-   * 画布高度
+   * 容器高度
    */
   readonly height?: number;
 
