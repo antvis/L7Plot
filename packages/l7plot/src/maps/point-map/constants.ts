@@ -18,5 +18,5 @@ export const DEFAULT_OPTIONS = deepAssign({}, MapWrapper.DefaultOptions, {
   color: '#5FD3A6',
 });
 
-export const POINT_LAYER_OPTIONS_KEYS = ['shape', 'color', 'size', 'style', 'state', 'animate'];
+export const POINT_LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state', 'animate'];
 export const LABEL_LAYER_OPTIONS_KEYS = ['label'];

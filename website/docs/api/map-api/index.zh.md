@@ -99,13 +99,13 @@ constructor(container: string | HTMLDivElement, options: MapOptions)
 
 #### `map.`style
 
-`string` optional default: `light`
+`string` optional default: `dark`
 
 内置样式:
 
-- dark
-- light
-- normal
+- dark: 黑暗
+- light: 明亮
+- normal: 普通
 - blank: 无底图
 
 自定义样式:
@@ -130,7 +130,7 @@ constructor(container: string | HTMLDivElement, options: MapOptions)
 
 ### `options.`autoFit
 
-`bool` optional default: `false`
+`bool` optional default: `true`
 
 图层完成初始化之后，地图是否自动缩放到图层的数据边界范围。
 
