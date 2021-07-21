@@ -26,8 +26,9 @@ import { LayerEventList, MapEventList, SceneEventList } from './constants';
 import { FONT_FACE_CACHE, ICON_FONT_CACHE, IMAGES_CACHE } from './register';
 
 const DEFAULT_OPTIONS = {
-  map: { type: BaseMapType.Amap },
+  map: { type: BaseMapType.Amap, style: 'dark' },
   logo: true,
+  autoFit: true,
 };
 
 export abstract class MapWrapper<O extends IMapOptions> {
