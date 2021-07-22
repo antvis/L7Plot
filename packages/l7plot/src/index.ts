@@ -41,3 +41,11 @@ export type { ClustereMapOptions } from './maps/clustere-map/interface';
 // 热力地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { HeatMap } from './maps/heat-map';
 export type { HeatMapOptions } from './maps/heat-map/interface';
+
+// 网格地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { GridMap } from './maps/grid-map';
+export type { GridMapOptions } from './maps/grid-map/interface';
+
+// 蜂窝地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { HexagonMap } from './maps/hexagon-map';
+export type { HexagonMapOptions } from './maps/hexagon-map/interface';

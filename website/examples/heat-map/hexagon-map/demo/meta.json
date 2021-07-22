@@ -1,0 +1,16 @@
+{
+  "title": {
+    "zh": "分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "hexagon.ts",
+      "title": {
+        "zh": "蜂窝热力 3D 地图",
+        "en": "Hexagon thermal 3D map"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/fA50QqeP%24T/a5031ad0-7786-4183-bf23-e66dbdf52fe5.png"
+    }
+  ]
+}

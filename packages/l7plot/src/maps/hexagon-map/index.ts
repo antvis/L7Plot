@@ -1,9 +1,10 @@
 import { ILayer } from '@antv/l7-core';
-import { HeatMapOptions } from './interface';
+import { HexagonMapOptions } from './interface';
 import { MapWrapper } from '../../core/map';
 import { DEFAULT_OPTIONS } from './constants';
 import { Heatmap } from '../heatmap';
-export class HeatMap extends Heatmap<HeatMapOptions> {
+
+export class HexagonMap extends Heatmap<HexagonMapOptions> {
   /**
    * 默认配置项
    */
@@ -12,12 +13,12 @@ export class HeatMap extends Heatmap<HeatMapOptions> {
   /**
    * 地图类型
    */
-  public type = MapWrapper.MapType.HeatMap;
+  public type = MapWrapper.MapType.Hexagon;
 
   /**
-   * 热力图层
+   * 蜂窝图层
    */
-  get heatMapLayer(): ILayer {
+  get hexagonLayer(): ILayer {
     return this.heatmapLayerWrapper.layer;
   }
 
@@ -31,14 +32,14 @@ export class HeatMap extends Heatmap<HeatMapOptions> {
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<HeatMapOptions> {
-    return HeatMap.DefaultOptions;
+  protected getDefaultOptions(): Partial<HexagonMapOptions> {
+    return HexagonMap.DefaultOptions;
   }
 
   /**
    * 获取内置图层名
    */
   protected getInternalLayerName() {
-    return { heatmapLayerName: 'heatMapLayer', labeLayerName: 'labelLayer' };
+    return { heatmapLayerName: 'hexagonLayer', labeLayerName: 'labelLayer' };
   }
 }

@@ -1,17 +1,13 @@
-import { IHeatmapLayerStyleOptions, IGridHeatmapLayerStyleOptions, heatmapShape } from '../../core/layer/interface';
-import { ColorAttr, IMapOptions, SizeAttr } from '../../types';
-import { ShapeAttr } from '../../types';
+import { IHeatmapLayerStyleOptions, IGridHeatmapLayerStyleOptions } from '../../core/layer/interface';
+import { SizeAttr } from '../../types';
+import { HeatmapOptions } from '../heatmap/interface';
 
-/** 点地图的配置类型定义 */
-export interface HeatMapOptions extends IMapOptions {
+/** 热力地图的配置类型定义 */
+export interface HeatMapOptions extends Omit<HeatmapOptions, 'color'> {
   /**
    * 图斑形状
    */
-  shape?: ShapeAttr<heatmapShape>;
-  /**
-   * 图斑颜色
-   */
-  color?: ColorAttr;
+  shape?: 'heatmap' | 'heatmap3D';
   /**
    * 图斑大小
    */

@@ -1,0 +1,16 @@
+{
+  "title": {
+    "zh": "分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "grid.ts",
+      "title": {
+        "zh": "网格热力 3D 地图",
+        "en": "Grid thermal 3D map"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/XPitK0Ftor/9dcf6d62-ffc1-4207-9bb6-1f52fbc93002.png"
+    }
+  ]
+}

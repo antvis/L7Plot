@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { HeatMap } from '@antv/l7plot';
+import { GridMap } from '@antv/l7plot';
 
 class Grid extends Component {
-  public map: HeatMap | undefined;
+  public map: GridMap | undefined;
 
   constructor(props) {
     super(props);
@@ -14,7 +14,7 @@ class Grid extends Component {
     );
     const data = await response.text();
 
-    const heatMap = new HeatMap('container', {
+    const gridMap = new GridMap('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
@@ -69,7 +69,7 @@ class Grid extends Component {
       },
     });
 
-    this.map = heatMap;
+    this.map = gridMap;
   }
 
   componentDidMount() {

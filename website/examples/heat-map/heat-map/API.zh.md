@@ -1,1 +1,1 @@
-`markdown:docs/api/heat-map/index.zh.md`
+`markdown:docs/api/heat-map/heat-map.zh.md`

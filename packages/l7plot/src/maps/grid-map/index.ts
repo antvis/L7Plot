@@ -1,9 +1,10 @@
 import { ILayer } from '@antv/l7-core';
-import { HeatMapOptions } from './interface';
+import { GridMapOptions } from './interface';
 import { MapWrapper } from '../../core/map';
 import { DEFAULT_OPTIONS } from './constants';
 import { Heatmap } from '../heatmap';
-export class HeatMap extends Heatmap<HeatMapOptions> {
+
+export class GridMap extends Heatmap<GridMapOptions> {
   /**
    * 默认配置项
    */
@@ -12,12 +13,12 @@ export class HeatMap extends Heatmap<HeatMapOptions> {
   /**
    * 地图类型
    */
-  public type = MapWrapper.MapType.HeatMap;
+  public type = MapWrapper.MapType.Grid;
 
   /**
-   * 热力图层
+   * 网格图层
    */
-  get heatMapLayer(): ILayer {
+  get gridLayer(): ILayer {
     return this.heatmapLayerWrapper.layer;
   }
 
@@ -31,14 +32,14 @@ export class HeatMap extends Heatmap<HeatMapOptions> {
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<HeatMapOptions> {
-    return HeatMap.DefaultOptions;
+  protected getDefaultOptions(): Partial<GridMapOptions> {
+    return GridMap.DefaultOptions;
   }
 
   /**
    * 获取内置图层名
    */
   protected getInternalLayerName() {
-    return { heatmapLayerName: 'heatMapLayer', labeLayerName: 'labelLayer' };
+    return { heatmapLayerName: 'gridLayer', labeLayerName: 'labelLayer' };
   }
 }

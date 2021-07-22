@@ -1,6 +1,6 @@
 ---
-title: 热力地图 - Heat Map
-order: 3
+title: 蜂窝地图 - Hexagon Map
+order: 2
 ---
 
 `HeatMap` 继承基类 [Map](/zh/docs/api/map-api)。
@@ -36,13 +36,13 @@ const heatMap = new HeatMap(container, options);
 - heatmap3D
 - 2D
   - circle: 圆形
-  - square: 正方形
-  - hexagon: 六边形
   - triangle: 三角形
+  - square: 正方形
+  - hexagon: 蜂窝
 - 3D
   - cylinder: 圆柱
-  - triangleColumn: 三角形柱
-  - hexagonColumn: 六角形柱
+  - triangleColumn: 三角柱
+  - hexagonColumn: 蜂窝柱
   - squareColumn: 方柱
 
 ```js

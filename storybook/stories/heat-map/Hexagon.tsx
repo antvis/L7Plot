@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { HeatMap } from '@antv/l7plot';
+import { HexagonMap } from '@antv/l7plot';
 
 class Hexagon extends Component {
-  public map: HeatMap | undefined;
+  public map: HexagonMap | undefined;
 
   constructor(props) {
     super(props);
@@ -14,7 +14,7 @@ class Hexagon extends Component {
     );
     const data = await response.text();
 
-    const heatMap = new HeatMap('container', {
+    const hexagonMap = new HexagonMap('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
@@ -70,7 +70,7 @@ class Hexagon extends Component {
       },
     });
 
-    this.map = heatMap;
+    this.map = hexagonMap;
   }
 
   componentDidMount() {
