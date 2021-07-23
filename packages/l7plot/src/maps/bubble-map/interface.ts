@@ -8,7 +8,7 @@ export interface ISource extends Pick<ISourceCFG, 'parser' | 'transforms'> {
   data: any;
 }
 
-/** 气泡图的配置类型定义 */
+/** 气泡地图的配置类型定义 */
 export interface BubbleMapOptions extends PointMapOptions {
   /**
    * 图斑形状

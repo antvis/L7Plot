@@ -96,7 +96,7 @@ const pointMap = new PointMap(container, options);
 
 #### `shape.`type
 
-`string` optional default: `''`
+`string` optional default: `'linear'`
 
 关联字段的映射 scale 类型，有以下 scale 类型：
 
@@ -174,7 +174,7 @@ const pointMap = new PointMap(container, options);
 
 #### `color.`type
 
-`string` optional default: `''`
+`string` optional default: `'linear'`
 
 关联字段的映射 scale 类型，有以下 scale 类型：
 
@@ -252,7 +252,7 @@ const pointMap = new PointMap(container, options);
 
 #### `size.`type
 
-`string` optional default: `''`
+`string` optional default: `'linear'`
 
 关联字段的映射 scale 类型，有以下 scale 类型：
 

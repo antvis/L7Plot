@@ -65,7 +65,7 @@ module.exports = {
         order: 2,
       },
       {
-        slug: 'api/heat-map',
+        slug: 'api/heat-maps',
         title: {
           zh: '热力地图 - Heat Map',
           en: 'Heat Map',

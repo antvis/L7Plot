@@ -1,4 +1,4 @@
-import { HeatMap } from '@antv/l7plot';
+import { HexagonMap } from '@antv/l7plot';
 
 async function initMap() {
   const response = await fetch(
@@ -6,7 +6,7 @@ async function initMap() {
   );
   const data = await response.text();
 
-  const heatMap = new HeatMap('container', {
+  const hexagonMap = new HexagonMap('container', {
     map: {
       type: 'mapbox',
       style: 'dark',
@@ -21,14 +21,11 @@ async function initMap() {
         x: 'lng',
         y: 'lat',
       },
-      transforms: [
-        {
-          type: 'hexagon',
-          size: 2500,
-          field: 'v',
-          method: 'sum',
-        },
-      ],
+      aggregation: {
+        field: 'v',
+        radius: 2500,
+        type: 'sum',
+      },
     },
 
     shape: 'hexagonColumn',

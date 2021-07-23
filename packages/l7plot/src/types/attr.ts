@@ -54,3 +54,22 @@ export type ShapeAttr<T> = T | Callback<T> | IShapeStyleAttribute<T>;
 
 /** 图形动画 */
 export type animateAttr = boolean | Partial<IAnimateOption>;
+
+/** 聚合方法 */
+export type AggregationMethod = 'count' | 'max' | 'min' | 'sum' | 'mean';
+
+/** 网格聚合 */
+export interface IGridAggregation {
+  /**
+   * 聚合字段
+   */
+  field: string;
+  /**
+   * 网格半径
+   */
+  radius?: number;
+  /**
+   * 聚合方法
+   */
+  type?: AggregationMethod;
+}

@@ -19,8 +19,8 @@ describe('heat map', () => {
       },
     });
 
-    expect(heatMap.type).toEqual('heatmap');
-    expect(heatMap.heatMapLayer).toBeDefined();
+    expect(heatMap.type).toEqual('heatMap');
+    expect(heatMap.heatmapLayer).toBeDefined();
     expect(heatMap.labelLayer).toBeFalsy();
 
     heatMap.on('loaded', () => setTimeout(() => heatMap.destroy(), 0));
@@ -35,10 +35,10 @@ describe('heat map', () => {
     });
 
     return new Promise<void>((resolve, reject) => {
-      heatMap.on('heatMapLayer:add', () => {
+      heatMap.on('heatmapLayer:add', () => {
         try {
-          expect(heatMap.heatMapLayer?.inited).toBeTruthy();
-          expect(heatMap.getLayerByName('heatMapLayer')).toBeDefined();
+          expect(heatMap.heatmapLayer?.inited).toBeTruthy();
+          expect(heatMap.getLayerByName('heatmapLayer')).toBeDefined();
           resolve();
         } catch (err) {
           reject(err);

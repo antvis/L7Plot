@@ -73,7 +73,7 @@ export type heatmapShape2d = 'circle' | 'square' | 'hexagon' | 'triangle';
 
 export type heatmapShape3d = 'cylinder' | 'triangleColumn' | 'hexagonColumn' | 'squareColumn';
 
-export type heatmapShape = heatmapShape2d | heatmapShape3d | 'heatmap' | 'heatmap3D';
+export type heatmapShape = 'heatmap' | 'heatmap3D' | heatmapShape2d | heatmapShape3d;
 
 /**
  * 线图层 线类型

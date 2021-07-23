@@ -1,4 +1,4 @@
-import { HeatMap } from '@antv/l7plot';
+import { GridMap } from '@antv/l7plot';
 
 async function initMap() {
   const response = await fetch(
@@ -6,7 +6,7 @@ async function initMap() {
   );
   const data = await response.text();
 
-  const heatMap = new HeatMap('container', {
+  const gridMap = new GridMap('container', {
     map: {
       type: 'mapbox',
       style: 'dark',
@@ -21,14 +21,11 @@ async function initMap() {
         x: 'lng',
         y: 'lat',
       },
-      transforms: [
-        {
-          type: 'grid',
-          size: 20000,
-          field: 'v',
-          method: 'sum',
-        },
-      ],
+      aggregation: {
+        radius: 20000,
+        field: 'v',
+        type: 'sum',
+      },
     },
 
     shape: 'squareColumn',
