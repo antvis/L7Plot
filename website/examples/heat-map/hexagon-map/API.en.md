@@ -1,1 +1,1 @@
-`markdown:docs/api/heat-map/hexagon-map.en.md`
+`markdown:docs/api/heat-maps/hexagon-map.en.md`

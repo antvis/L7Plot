@@ -17,7 +17,7 @@ export class HeatMap extends Heatmap<HeatMapOptions> {
   /**
    * 热力图层
    */
-  get heatMapLayer(): ILayer {
+  get heatmapLayer(): ILayer {
     return this.heatmapLayerWrapper.layer;
   }
 
@@ -39,6 +39,6 @@ export class HeatMap extends Heatmap<HeatMapOptions> {
    * 获取内置图层名
    */
   protected getInternalLayerName() {
-    return { heatmapLayerName: 'heatMapLayer', labeLayerName: 'labelLayer' };
+    return { heatmapLayerName: 'heatmapLayer', labeLayerName: 'labelLayer' };
   }
 }

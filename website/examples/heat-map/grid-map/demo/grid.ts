@@ -21,14 +21,11 @@ async function initMap() {
         x: 'lng',
         y: 'lat',
       },
-      transforms: [
-        {
-          type: 'grid',
-          size: 20000,
-          field: 'v',
-          method: 'sum',
-        },
-      ],
+      aggregation: {
+        radius: 20000,
+        field: 'v',
+        type: 'sum',
+      },
     },
 
     shape: 'squareColumn',

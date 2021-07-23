@@ -1,4 +1,4 @@
 ---
 title: Hexagon Map
-order: 0
+order: 2
 ---

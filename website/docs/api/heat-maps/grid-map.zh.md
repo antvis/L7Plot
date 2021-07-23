@@ -1,17 +1,17 @@
 ---
-title: 蜂窝地图 - Hexagon Map
-order: 2
+title: 网格地图 - Grid Map
+order: 1
 ---
 
-`HeatMap` 继承基类 [Map](/zh/docs/api/map-api)。
+`GridMap` 继承基类 [Map](/zh/docs/api/map-api)。
 
 ## 一、配置
 
 创建地图实例：
 
 ```ts
-import { HeatMap } from '@antv/l7plot';
-const heatMap = new HeatMap(container, options);
+import { GridMap } from '@antv/l7plot';
+const gridMap = new GridMap(container, options);
 ```
 
 ### container
@@ -22,32 +22,52 @@ const heatMap = new HeatMap(container, options);
 
 ### options
 
-`HeatMapOptions` required
+`GridMapOptions` required
 
 热力地图的所有配置项，继承自 [Map options](/zh/docs/api/map-api#options)。
 
+### `options.source.`aggregation
+
+`IGridAggregation` required
+
+生成方格网格布局。
+
+#### `aggregation.`field
+
+`string` required
+
+聚合字段。
+
+#### `aggregation.`radius
+
+`number` optional default: `15000`
+
+网格半径。
+
+#### `aggregation.`type
+
+`'count'|'max'|'min'|'sum'|'mean'` optional default: `'sum'`
+
+聚合类型。
+
 ### `options.`shape
 
-`string` optional default: `'heatmap'`
+`string` optional default: `'square'`
 
 元素形状，内置以下形状：
 
-- heatmap
-- heatmap3D
 - 2D
   - circle: 圆形
   - triangle: 三角形
   - square: 正方形
-  - hexagon: 蜂窝
 - 3D
   - cylinder: 圆柱
   - triangleColumn: 三角柱
-  - hexagonColumn: 蜂窝柱
   - squareColumn: 方柱
 
 ```js
 {
-  shape: 'heatmap';
+  shape: 'square';
 }
 ```
 
@@ -77,7 +97,7 @@ const heatMap = new HeatMap(container, options);
 
 #### `color.`type
 
-`string` optional default: `''`
+`string` optional default: `'linear'`
 
 关联字段的映射 scale 类型，有以下 scale 类型：
 
@@ -94,15 +114,19 @@ const heatMap = new HeatMap(container, options);
 
 元素大小。
 
+**shape 为 2D 时，size 无需设置；shape 为 3D 时，size 表示高度；**
+
 ```js
 {
-  size: 12;
+  size: {
+    field: 'value', ({ value }) => value * 2;
+  }
 }
 ```
 
 #### `size.`field
 
-`string` optional default: `''`
+`string` required
 
 热力图权重字段。
 
@@ -114,7 +138,7 @@ const heatMap = new HeatMap(container, options);
 
 #### `size.`type
 
-`string` optional default: `''`
+`string` optional default: `'linear'`
 
 关联字段的映射 scale 类型，有以下 scale 类型：
 
@@ -134,32 +158,12 @@ const heatMap = new HeatMap(container, options);
 ```js
 {
   style: {
-    intensity: 3,
-    radius: 20,
-    opacity: 1,
-    colorsRamp: [
-      { color: 'rgba(33,102,172,0.0)', position: 0 },
-      { color: 'rgb(103,169,207)', position: 0.2 },
-      { color: 'rgb(209,229,240)', position: 0.4 },
-      { color: 'rgb(253,219,199)', position: 0.6 },
-      { color: 'rgb(239,138,98)', position: 0.8 },
-      { color: 'rgb(178,24,43,1.0)', position: 1 },
-    ],
+    coverage: 0.9,
+    angle: 0,
+    opacity: 1.0,
   }
 }
 ```
-
-#### `style.`intensity
-
-`number` optional default: `3`
-
-全局热力权重。
-
-#### `style.`radius
-
-`number` optional default: `20`
-
-热力半径，单位像素。
 
 #### `style.`opacity
 
@@ -169,7 +173,7 @@ const heatMap = new HeatMap(container, options);
 
 #### `style.`coverage
 
-`number` optional default: `1`
+`number` optional default: `0.9`
 
 热力网格覆盖度，范围 0 到 1。
 
@@ -179,22 +183,11 @@ const heatMap = new HeatMap(container, options);
 
 热力网格旋转角度，范围 0 到 360。
 
-#### `style.`colorsRamp
-
-`array` optional
-
-热力色带。
-
-params:
-
-- color: `string` 颜色
-- position: `number` 数据
-
 ## 二、属性
 
 继承 [Map 属性](/zh/docs/api/map-api#二、属性)。
 
-### heatMapLayer
+### gridLayer
 
 `ILayer`
 
@@ -216,11 +209,11 @@ params:
 
 内置图层名称分别为：
 
-- 'heatMapLayer'
+- 'gridLayer'
 - 'labelLayer'
 
 ```js
-heatMap.on('heatMapLayer:click', (e) => {});
+gridMap.on('gridLayer:click', (e) => {});
 // Or
-heatMap.heatMapLayer.on('click', (e) => {});
+gridMap.gridLayer.on('click', (e) => {});
 ```

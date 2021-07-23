@@ -186,7 +186,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
   /**
    * 创建 source 实例
    */
-  private createSource() {
+  protected createSource() {
     const { data, ...sourceCFG } = this.options.source;
     const source = new Source(data, sourceCFG);
     return source;

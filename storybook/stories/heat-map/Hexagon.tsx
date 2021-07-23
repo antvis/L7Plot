@@ -29,14 +29,11 @@ class Hexagon extends Component {
           x: 'lng',
           y: 'lat',
         },
-        transforms: [
-          {
-            type: 'hexagon',
-            size: 2500,
-            field: 'v',
-            method: 'sum',
-          },
-        ],
+        aggregation: {
+          radius: 2500,
+          field: 'v',
+          type: 'sum',
+        },
       },
 
       shape: 'hexagonColumn',

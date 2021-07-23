@@ -1,6 +1,6 @@
 ---
-title: 网格地图 - Grid Map
-order: 1
+title: 热力地图 - Heat Map
+order: 0
 ---
 
 `HeatMap` 继承基类 [Map](/zh/docs/api/map-api)。
@@ -30,20 +30,10 @@ const heatMap = new HeatMap(container, options);
 
 `string` optional default: `'heatmap'`
 
-元素形状，内置以下形状：
+元素形状，分别支持 2D 与 3D 热力：
 
 - heatmap
 - heatmap3D
-- 2D
-  - circle: 圆形
-  - triangle: 三角形
-  - square: 正方形
-  - hexagon: 蜂窝
-- 3D
-  - cylinder: 圆柱
-  - triangleColumn: 三角柱
-  - hexagonColumn: 蜂窝柱
-  - squareColumn: 方柱
 
 ```js
 {
@@ -51,48 +41,11 @@ const heatMap = new HeatMap(container, options);
 }
 ```
 
-### `options.`color
-
-`string|Function|object` optional default: `'#5FD3A6'`
-
-元素颜色。
-
-```js
-{
-  color: 'red';
-}
-```
-
-#### `color.`field
-
-`string` optional default: `''`
-
-元素颜色值映射关联字段。
-
-#### `color.`value
-
-`string|string[]|Function` optional default: `'#5FD3A6'`
-
-元素颜色值映射值。
-
-#### `color.`type
-
-`string` optional default: `''`
-
-关联字段的映射 scale 类型，有以下 scale 类型：
-
-- linear：线性
-- power：指数
-- log：对数
-- quantile：等分位
-- quantize：等间距
-- cat：枚举
-
 ### `options.`size
 
 `number|Function|object` optional default: `12`
 
-元素大小。
+热力大小。
 
 ```js
 {
@@ -114,7 +67,7 @@ const heatMap = new HeatMap(container, options);
 
 #### `size.`type
 
-`string` optional default: `''`
+`string` optional default: `'linear'`
 
 关联字段的映射 scale 类型，有以下 scale 类型：
 
@@ -167,18 +120,6 @@ const heatMap = new HeatMap(container, options);
 
 透明度。
 
-#### `style.`coverage
-
-`number` optional default: `1`
-
-热力网格覆盖度，范围 0 到 1。
-
-#### `style.`angle
-
-`number` optional default: `0`
-
-热力网格旋转角度，范围 0 到 360。
-
 #### `style.`colorsRamp
 
 `array` optional
@@ -194,7 +135,7 @@ params:
 
 继承 [Map 属性](/zh/docs/api/map-api#二、属性)。
 
-### heatMapLayer
+### heatmapLayer
 
 `ILayer`
 
@@ -216,11 +157,11 @@ params:
 
 内置图层名称分别为：
 
-- 'heatMapLayer'
+- 'heatmapLayer'
 - 'labelLayer'
 
 ```js
-heatMap.on('heatMapLayer:click', (e) => {});
+heatMap.on('heatmapLayer:click', (e) => {});
 // Or
 heatMap.heatMapLayer.on('click', (e) => {});
 ```

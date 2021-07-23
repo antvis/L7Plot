@@ -1,1 +1,1 @@
-`markdown:docs/api/heat-map/grid-map.en.md`
+`markdown:docs/api/heat-maps/grid-map.en.md`

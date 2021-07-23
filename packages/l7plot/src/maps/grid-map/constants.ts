@@ -12,13 +12,10 @@ export const DEFAULT_OPTIONS = deepAssign({}, MapWrapper.DefaultOptions, {
       x: 'x',
       y: 'y',
     },
-    transforms: [
-      {
-        type: 'square',
-        size: 15000,
-        method: 'sum',
-      },
-    ],
+    aggregation: {
+      radius: 15000,
+      type: 'sum',
+    },
   },
   shape: 'grid',
   style: {
