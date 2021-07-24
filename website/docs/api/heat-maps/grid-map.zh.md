@@ -95,7 +95,7 @@ const gridMap = new GridMap(container, options);
 
 #### `color.`field
 
-`string` optional default: `''`
+`string` optional
 
 元素颜色值映射关联字段。
 
@@ -202,7 +202,7 @@ const gridMap = new GridMap(container, options);
 
 `ILayer`
 
-热力图层实例。
+网格图层实例。
 
 ### labelLayer
 

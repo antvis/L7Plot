@@ -90,7 +90,7 @@ const hexagonMap = new HexagonMap(container, options);
 
 #### `color.`field
 
-`string` optional default: `''`
+`string` optional
 
 元素颜色值映射关联字段。
 
@@ -197,7 +197,7 @@ const hexagonMap = new HexagonMap(container, options);
 
 `ILayer`
 
-热力图层实例。
+蜂窝图层实例。
 
 ### labelLayer
 

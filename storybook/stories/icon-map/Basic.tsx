@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { registerImages, SymbolMap } from '@antv/l7plot';
+import { registerImages, IconMap } from '@antv/l7plot';
 
 class Basic extends Component {
-  public map: SymbolMap | undefined;
+  public map: IconMap | undefined;
 
   constructor(props) {
     super(props);
@@ -20,7 +20,7 @@ class Basic extends Component {
     );
     const data = await response.json();
 
-    const symbolMap = new SymbolMap('container', {
+    const iconMap = new IconMap('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
@@ -44,7 +44,7 @@ class Basic extends Component {
       size: 20,
     });
 
-    this.map = symbolMap;
+    this.map = iconMap;
   }
 
   componentDidMount() {

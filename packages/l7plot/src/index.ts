@@ -30,9 +30,9 @@ export type { BubbleMapOptions } from './maps/bubble-map/interface';
 export { ScatterMap } from './maps/scatter-map';
 export type { ScatterMapOptions } from './maps/scatter-map/interface';
 
-// 符号地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { SymbolMap } from './maps/symbol-map';
-export type { SymbolMapOptions } from './maps/symbol-map/interface';
+// 图标地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { IconMap } from './maps/icon-map';
+export type { IconMapOptions } from './maps/icon-map/interface';
 
 // 聚合地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { ClustereMap } from './maps/clustere-map';

@@ -6,7 +6,7 @@ async function initMap() {
   );
   const data = await response.json();
 
-  const heatMap = new HeatMap('container', {
+  new HeatMap('container', {
     map: {
       type: 'mapbox',
       style: 'dark',

@@ -17,7 +17,7 @@ export class Heatmap<O extends HeatmapOptions = HeatmapOptions> extends MapWrapp
   /**
    * 地图类型
    */
-  public type = MapWrapper.MapType.Heatmap;
+  public type = MapWrapper.MapType.Heat;
 
   /**
    * heatmapLayerWrapper

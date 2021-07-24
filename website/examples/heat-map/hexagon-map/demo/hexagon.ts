@@ -6,7 +6,7 @@ async function initMap() {
   );
   const data = await response.text();
 
-  const hexagonMap = new HexagonMap('container', {
+  new HexagonMap('container', {
     map: {
       type: 'mapbox',
       style: 'dark',

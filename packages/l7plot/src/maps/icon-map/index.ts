@@ -2,8 +2,8 @@ import { ILayer } from '@antv/l7-core';
 import { MapWrapper } from '../../core/map';
 import { PointMap } from '../point-map';
 import { DEFAULT_OPTIONS } from './constants';
-import { SymbolMapOptions } from './interface';
-export class SymbolMap extends PointMap<SymbolMapOptions> {
+import { IconMapOptions } from './interface';
+export class IconMap extends PointMap<IconMapOptions> {
   /**
    * 默认配置项
    */
@@ -12,12 +12,12 @@ export class SymbolMap extends PointMap<SymbolMapOptions> {
   /**
    * 地图类型
    */
-  public type = MapWrapper.MapType.Symbol;
+  public type = MapWrapper.MapType.Icon;
 
   /**
-   * 符号图层
+   * 图标图层
    */
-  get symbolLayer(): ILayer {
+  get iconLayer(): ILayer {
     return this.pointLayerWrapper.layer;
   }
 
@@ -31,14 +31,14 @@ export class SymbolMap extends PointMap<SymbolMapOptions> {
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<SymbolMapOptions> {
-    return SymbolMap.DefaultOptions;
+  protected getDefaultOptions(): Partial<IconMapOptions> {
+    return IconMap.DefaultOptions;
   }
 
   /**
    * 获取内置图层名
    */
   protected getInternalLayerName() {
-    return { pointLayerName: 'symbolLayer', labeLayerName: 'labelLayer' };
+    return { pointLayerName: 'iconLayer', labeLayerName: 'labelLayer' };
   }
 }
