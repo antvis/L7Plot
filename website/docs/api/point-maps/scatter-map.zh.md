@@ -64,6 +64,8 @@ const scatterMap = new ScatterMap(container, options);
 
 `markdown:docs/common/attribute/style.zh.md`
 
+`markdown:docs/common/attribute/components.zh.md`
+
 ## 二、属性
 
 继承 [Map 属性](/zh/docs/api/map-api#二、属性)。
