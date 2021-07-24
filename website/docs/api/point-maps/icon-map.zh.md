@@ -3,7 +3,7 @@ title: 图标地图 - Icon Map
 order: 3
 ---
 
-`BubbleMap` 继承自 [PointMap](/zh/docs/api/point-maps/point-map)。
+`IconMap` 继承自 [PointMap](/zh/docs/api/point-maps/point-map)。
 
 ## 一、配置
 
@@ -11,7 +11,7 @@ order: 3
 
 ```ts
 import { IconMap } from '@antv/l7plot';
-const iconMapMap = new IconMap(container, options);
+const iconMap = new IconMap(container, options);
 ```
 
 ### container
@@ -22,7 +22,7 @@ const iconMapMap = new IconMap(container, options);
 
 ### options
 
-`PointMapOptions` required
+`IconMapOptions` required
 
 图标地图的所有配置项，继承自 [PointMap options](/zh/docs/api/point-maps/point-map#options)。
 
@@ -136,7 +136,7 @@ registerImages(images);
 - 'labelLayer'
 
 ```js
-bubbleMap.on('iconLayer:click', (e) => {});
+iconMap.on('iconLayer:click', (e) => {});
 // Or
-bubbleMap.iconLayer.on('click', (e) => {});
+iconMap.iconLayer.on('click', (e) => {});
 ```

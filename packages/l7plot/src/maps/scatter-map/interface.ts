@@ -1,4 +1,3 @@
-import { ShapeAttr } from '../..';
 import { pointShape2d } from '../../core/layer/interface';
 import { PointMapOptions } from '../point-map/interface';
 
@@ -7,7 +6,7 @@ export interface ScatterMapOptions extends PointMapOptions {
   /**
    * 图斑形状
    */
-  shape?: ShapeAttr<pointShape2d>;
+  shape?: pointShape2d;
   /**
    * 图斑大小
    */
