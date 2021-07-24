@@ -24,7 +24,11 @@ const bubbleMap = new BubbleMap(container, options);
 
 `BubbleMapOptions` required
 
-气泡地图的所有配置项，继承自 [PointMap options](/zh/docs/api/point-maps/point-map#options)。
+气泡地图的所有配置项，继承自 [Map options](/zh/docs/api/map-api#options)。
+
+`markdown:docs/common/attribute/color.zh.md`
+
+`markdown:docs/common/attribute/size.zh.md`
 
 ### `options.`animate
 
@@ -38,17 +42,19 @@ const bubbleMap = new BubbleMap(container, options);
 }
 ```
 
-### `animate.`speed
+#### `animate.`speed
 
 `number` optional default: `1`
 
 水波速度。
 
-### `animate.`rings
+#### `animate.`rings
 
 `number` optional default: `3`
 
 水波环数。
+
+`markdown:docs/common/attribute/style.zh.md`
 
 ## 二、属性
 

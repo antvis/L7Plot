@@ -24,7 +24,7 @@ const pointCloudMap = new PointCloudMap(container, options);
 
 `PointCloudMapOptions` required
 
-点云地图的所有配置项，继承自 [PointMap options](/zh/docs/api/point-maps/point-map#options)。
+点云地图的所有配置项，继承自 [Map options](/zh/docs/api/map-api#options)。
 
 ### `options.`size
 
@@ -37,6 +37,10 @@ const pointCloudMap = new PointCloudMap(container, options);
   size: 0.5;
 }
 ```
+
+`markdown:docs/common/attribute/color.zh.md`
+
+`markdown:docs/common/attribute/style.zh.md`
 
 ## 二、属性
 
