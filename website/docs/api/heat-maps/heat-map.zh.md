@@ -43,13 +43,20 @@ const heatMap = new HeatMap(container, options);
 
 ### `options.`size
 
-`number|Function|object` optional default: `12`
+`object|Function` optional default: `{ value: [0, 1] }`
 
 热力大小。
 
 ```js
 {
-  size: 12;
+  source: {
+    data: [{ lng: 104.101, lat: 30.649, t: 24.6, n: 'chengdu' }],
+    parser: { type: 'json', x: 'lng', y: 'lat' }
+  },
+  size: {
+    field: 't',
+    value: [0, 1]
+  };
 }
 ```
 
@@ -61,7 +68,7 @@ const heatMap = new HeatMap(container, options);
 
 #### `size.`value
 
-`number|number[]|Function` optional default: `[0, 1]`
+`number[]|Function` optional default: `[0, 1]`
 
 热力数据映射区间。
 
