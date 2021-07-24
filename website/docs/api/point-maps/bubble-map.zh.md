@@ -26,12 +26,6 @@ const bubbleMap = new BubbleMap(container, options);
 
 气泡地图的所有配置项，继承自 [PointMap options](/zh/docs/api/point-maps/point-map#options)。
 
-### `options.`shape
-
-`'circle'` optional
-
-元素形状固定为 circle。
-
 ### `options.`animate
 
 `boolean｜object` optional default: `false`
@@ -46,13 +40,13 @@ const bubbleMap = new BubbleMap(container, options);
 
 ### `animate.`speed
 
-`number` optional
+`number` optional default: `1`
 
 水波速度。
 
 ### `animate.`rings
 
-`number` optional
+`number` optional default: `3`
 
 水波环数。
 

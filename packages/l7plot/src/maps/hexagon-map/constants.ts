@@ -18,6 +18,7 @@ export const DEFAULT_OPTIONS = deepAssign({}, MapWrapper.DefaultOptions, {
     },
   },
   shape: 'hexagon',
+  color: '#5FD3A6',
   style: {
     coverage: 0.9,
     angle: 0,

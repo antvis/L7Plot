@@ -32,6 +32,16 @@ const gridMap = new GridMap(container, options);
 
 生成方格网格布局。
 
+```js
+{
+  source: {
+    data: [{ lng: 104.101, lat: 30.649, t: 24.6, n: 'chengdu' }],
+    parser: { type: 'json', x: 'lng', y: 'lat' },
+    aggregation: { field: 't', radius: 15000, type: 'sum' }
+  }
+}
+```
+
 #### `aggregation.`field
 
 `string` required
@@ -91,7 +101,7 @@ const gridMap = new GridMap(container, options);
 
 #### `color.`value
 
-`string|string[]|Function` optional default: `'#5FD3A6'`
+`string|string[]|Function` optional
 
 元素颜色值映射值。
 
@@ -110,16 +120,17 @@ const gridMap = new GridMap(container, options);
 
 ### `options.`size
 
-`number|Function|object` optional default: `12`
+`number|Function|object` optional
 
 元素大小。
 
-**shape 为 2D 时，size 无需设置；shape 为 3D 时，size 表示高度；**
+**shape 为 2D 时，size 无需设置；shape 为 3D 时，size 表示高度。**
 
 ```js
 {
   size: {
-    field: 'value', ({ value }) => value * 2;
+    field: 'value',
+    value: ({ value }) => value * 2
   }
 }
 ```
@@ -128,13 +139,13 @@ const gridMap = new GridMap(container, options);
 
 `string` required
 
-热力图权重字段。
+网格大小映射字段。
 
 #### `size.`value
 
-`number|number[]|Function` optional default: `[0, 1]`
+`number|number[]|Function` optional
 
-热力数据映射区间。
+网格大小值映射值。
 
 #### `size.`type
 
