@@ -4,7 +4,7 @@ async function initMap() {
   const response = await fetch('https://gw.alipayobjects.com/os/rmsportal/oVTMqfzuuRFKiDwhPSFL.json');
   const data = await response.json();
 
-  const bubbleMap = new BubbleMap('container', {
+  new BubbleMap('container', {
     map: {
       type: 'mapbox',
       style: 'dark',

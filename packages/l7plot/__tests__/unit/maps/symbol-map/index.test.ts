@@ -1,10 +1,10 @@
-import { registerImages, SymbolMap } from '../../../../src';
-import { DEFAULT_OPTIONS } from '../../../../src/maps/symbol-map/constants';
+import { registerImages, IconMap } from '../../../../src';
+import { DEFAULT_OPTIONS } from '../../../../src/maps/icon-map/constants';
 import { createDiv } from '../../../helper/dom';
 
-describe('symbol map', () => {
+describe('icon map', () => {
   it('defaultOptions', () => {
-    expect(SymbolMap.DefaultOptions).toEqual(DEFAULT_OPTIONS);
+    expect(IconMap.DefaultOptions).toEqual(DEFAULT_OPTIONS);
   });
 
   it('source', () => {
@@ -12,7 +12,7 @@ describe('symbol map', () => {
       { id: '01', image: 'https://gw.alipayobjects.com/zos/basement_prod/604b5e7f-309e-40db-b95b-4fac746c5153.svg' },
     ];
     registerImages(images);
-    const symbolMap = new SymbolMap(createDiv(), {
+    const iconMap = new IconMap(createDiv(), {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -29,15 +29,15 @@ describe('symbol map', () => {
       },
     });
 
-    expect(symbolMap.type).toEqual('symbol');
-    expect(symbolMap.symbolLayer).toBeDefined();
-    expect(symbolMap.labelLayer).toBeDefined();
+    expect(iconMap.type).toEqual('icon');
+    expect(iconMap.iconLayer).toBeDefined();
+    expect(iconMap.labelLayer).toBeDefined();
 
-    symbolMap.on('loaded', () => setTimeout(() => symbolMap.destroy(), 0));
+    iconMap.on('loaded', () => setTimeout(() => iconMap.destroy(), 0));
   });
 
   it('event', () => {
-    const symbolMap = new SymbolMap(createDiv(), {
+    const iconMap = new IconMap(createDiv(), {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -45,15 +45,15 @@ describe('symbol map', () => {
     });
 
     return new Promise<void>((resolve, reject) => {
-      symbolMap.on('symbolLayer:add', () => {
+      iconMap.on('iconLayer:add', () => {
         try {
-          expect(symbolMap.symbolLayer?.inited).toBeTruthy();
-          expect(symbolMap.getLayerByName('symbolLayer')).toBeDefined();
+          expect(iconMap.iconLayer?.inited).toBeTruthy();
+          expect(iconMap.getLayerByName('iconLayer')).toBeDefined();
           resolve();
         } catch (err) {
           reject(err);
         }
-        setTimeout(() => symbolMap.destroy(), 0);
+        setTimeout(() => iconMap.destroy(), 0);
       });
     });
   });

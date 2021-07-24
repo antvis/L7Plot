@@ -4,7 +4,7 @@ async function initMap() {
   const response = await fetch('https://gw.alipayobjects.com/os/rmsportal/BElVQFEFvpAKzddxFZxJ.txt');
   const data = await response.text();
 
-  const scatterMap = new ScatterMap('container', {
+  new ScatterMap('container', {
     map: {
       type: 'mapbox',
       style: 'dark',

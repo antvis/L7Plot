@@ -62,7 +62,7 @@ const heatMap = new HeatMap(container, options);
 
 #### `size.`field
 
-`string` optional default: `''`
+`string` required
 
 热力图权重字段。
 

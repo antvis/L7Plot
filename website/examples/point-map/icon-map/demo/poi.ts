@@ -1,4 +1,4 @@
-import { SymbolMap, registerImages } from '@antv/l7plot';
+import { IconMap, registerImages } from '@antv/l7plot';
 
 const images = [
   { id: '01', image: 'https://gw.alipayobjects.com/zos/basement_prod/604b5e7f-309e-40db-b95b-4fac746c5153.svg' },
@@ -13,7 +13,7 @@ async function initMap() {
   );
   const data = await response.json();
 
-  const symbolMap = new SymbolMap('container', {
+  new IconMap('container', {
     map: {
       type: 'mapbox',
       style: 'dark',

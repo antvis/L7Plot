@@ -6,7 +6,7 @@ async function initMap() {
   );
   const data = await response.text();
 
-  const scatterMap = new ScatterMap('container', {
+  new ScatterMap('container', {
     map: {
       type: 'mapbox',
       style: 'dark',

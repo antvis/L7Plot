@@ -6,7 +6,7 @@ async function initMap() {
   );
   const data = await response.json();
 
-  const bubbleMap = new BubbleMap('container', {
+  new BubbleMap('container', {
     map: {
       type: 'mapbox',
       style: 'dark',

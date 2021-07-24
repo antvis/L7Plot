@@ -57,7 +57,7 @@ const pointMap = new PointMap(container, options);
 
 #### `shape.`field
 
-`string` optional default: `''`
+`string` optional
 
 元素形状值映射关联字段。
 
@@ -75,7 +75,7 @@ const pointMap = new PointMap(container, options);
 
 #### `shape.`value
 
-`string|string[]|Function` optional default: `'circle'`
+`string|string[]|Function` optional
 
 元素形状值映射值。
 
@@ -135,7 +135,7 @@ const pointMap = new PointMap(container, options);
 
 #### `color.`field
 
-`string` optional default: `''`
+`string` optional
 
 元素颜色值映射关联字段。
 
@@ -153,7 +153,7 @@ const pointMap = new PointMap(container, options);
 
 #### `color.`value
 
-`string|string[]|Function` optional default: `'#5FD3A6'`
+`string|string[]|Function` optional
 
 元素颜色值映射值。
 
@@ -213,7 +213,7 @@ const pointMap = new PointMap(container, options);
 
 #### `size.`field
 
-`string` optional default: `''`
+`string` optional
 
 元素大小值映射关联字段。
 
@@ -231,7 +231,7 @@ const pointMap = new PointMap(container, options);
 
 #### `size.`value
 
-`number|number[]|Function` optional default: `12`
+`number|number[]|Function` optional
 
 元素大小值映射值。
 
