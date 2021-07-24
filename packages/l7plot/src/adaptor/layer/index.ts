@@ -1,6 +1,15 @@
 import { isFunction, isObject, isString, isNumber, isBoolean, isArray } from '@antv/util';
-import { ILayer, IScale, IScaleOptions } from '@antv/l7-core';
-import { ColorAttr, SizeAttr, ShapeAttr, RotateAttr, animateAttr, IStateAttribute } from '../../types/';
+import {
+  ILayer,
+  IScale,
+  IScaleOptions,
+  ColorAttr,
+  SizeAttr,
+  ShapeAttr,
+  RotateAttr,
+  animateAttr,
+  IStateAttribute,
+} from '../../types/';
 
 /**
  * 获得映射函数

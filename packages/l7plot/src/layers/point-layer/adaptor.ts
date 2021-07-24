@@ -1,5 +1,5 @@
-import { ILayer } from '@antv/l7-core';
 import { MappingLayer } from '../../adaptor/layer';
+import { ILayer } from '../../types';
 import { IPointLayerOptions } from './interface';
 
 export function mappingLayer(layer: ILayer, options: IPointLayerOptions): void {

@@ -1,11 +1,10 @@
 import { pick } from '@antv/util';
-import { ILayer } from '@antv/l7-core';
 import { PointMapOptions } from './interface';
 import { MapWrapper } from '../../core/map';
 import { DEFAULT_OPTIONS, POINT_LAYER_OPTIONS_KEYS } from './constants';
 import { PointLayerWrapper } from '../../layers/point-layer';
 import { LabelLayerWrapper } from '../../layers/label-layer';
-import { Source } from '../../types';
+import { ILayer, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
 
 export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWrapper<O> {
@@ -44,9 +43,9 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
   }
 
   /**
-   * 带交互的内置图层
+   * 带交互的图层
    */
-  protected interactionInternalLayers = [this.pointLayer];
+  protected interactionLayers = [this.pointLayer];
 
   /**
    * 获取默认配置
@@ -56,26 +55,29 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
   }
 
   /**
-   * 获取内置图层名
+   * 创建图层之前 hook
    */
-  protected getInternalLayerName() {
-    return { pointLayerName: 'pointLayer', labeLayerName: 'labelLayer' };
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected beforeCreateLayers(options: O) {
+    const pointLayerConfig = { name: 'pointLayer' };
+
+    return { pointLayerConfig };
   }
 
   /**
-   * 创建内置图层
+   * 创建图层
    */
-  protected createInternalLayers(source: Source): LayerGroup {
-    const { pointLayerName, labeLayerName } = this.getInternalLayerName();
+  protected createLayers(source: Source): LayerGroup {
+    const { pointLayerConfig } = this.beforeCreateLayers(this.options);
     this.pointLayerWrapper = new PointLayerWrapper({
       source,
       ...pick<any>(this.options, POINT_LAYER_OPTIONS_KEYS),
-      name: pointLayerName,
+      ...pointLayerConfig,
     });
     const layerGroup = new LayerGroup([this.pointLayerWrapper.layer]);
 
     if (this.options.label) {
-      this.labelLayerWrapper = new LabelLayerWrapper({ source, ...this.options.label, name: labeLayerName });
+      this.labelLayerWrapper = this.createLabelLayer(source, this.options.label);
       layerGroup.addlayer(this.labelLayerWrapper.layer);
     }
 
@@ -83,9 +85,9 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
   }
 
   /**
-   * 更新内置图层
+   * 更新图层
    */
-  protected updateInternalLayers(options: O) {
+  protected updateLayers(options: O) {
     const pointLayerConfig = pick<any>(options, POINT_LAYER_OPTIONS_KEYS);
     this.pointLayerWrapper.updateOptions(pointLayerConfig);
 
@@ -93,12 +95,7 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
       if (this.labelLayerWrapper) {
         this.labelLayerWrapper.updateOptions({ ...options.label });
       } else {
-        const { labeLayerName } = this.getInternalLayerName();
-        this.labelLayerWrapper = new LabelLayerWrapper({
-          source: this.source,
-          ...options.label,
-          name: labeLayerName,
-        });
+        this.labelLayerWrapper = this.createLabelLayer(this.source, options.label);
         this.layerGroup.addlayer(this.labelLayerWrapper.layer);
       }
     } else {
