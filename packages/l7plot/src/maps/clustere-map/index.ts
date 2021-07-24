@@ -23,13 +23,6 @@ export class ClustereMap extends PointMap<ClustereMapOptions> {
   }
 
   /**
-   * 标注图层
-   */
-  get labelLayer(): ILayer | undefined {
-    return this.labelLayerWrapper?.layer;
-  }
-
-  /**
    * 获取默认配置
    */
   protected getDefaultOptions(): Partial<ClustereMapOptions> {
