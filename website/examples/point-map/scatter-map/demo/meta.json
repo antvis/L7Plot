@@ -11,14 +11,6 @@
         "en": "Scatter map of distribution"
       },
       "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/4WtBpqWfnv/afb123fe-62d8-4990-9b45-e088941b3efa.png"
-    },
-    {
-      "filename": "density.ts",
-      "title": {
-        "zh": "点密度地图",
-        "en": "Dot density map"
-      },
-      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/t5BQDH5Jp8/dbcddc7e-5ff9-4d3b-af9b-2d86f40b626a.png"
     }
   ]
 }

@@ -30,6 +30,10 @@ export type { BubbleMapOptions } from './maps/bubble-map/interface';
 export { ScatterMap } from './maps/scatter-map';
 export type { ScatterMapOptions } from './maps/scatter-map/interface';
 
+// 点云地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { PointCloudMap } from './maps/point-cloud-map';
+export type { PointCloudMapOptions } from './maps/point-cloud-map/interface';
+
 // 图标地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { IconMap } from './maps/icon-map';
 export type { IconMapOptions } from './maps/icon-map/interface';

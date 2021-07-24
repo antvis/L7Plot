@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { ScatterMap } from '@antv/l7plot';
+import { PointCloudMap } from '@antv/l7plot';
 
 class Density extends Component {
-  public map: ScatterMap | undefined;
+  public map: PointCloudMap | undefined;
 
   constructor(props) {
     super(props);
@@ -12,7 +12,7 @@ class Density extends Component {
     const response = await fetch('https://gw.alipayobjects.com/os/rmsportal/BElVQFEFvpAKzddxFZxJ.txt');
     const data = await response.text();
 
-    const scatterMap = new ScatterMap('container', {
+    const pointCloud = new PointCloudMap('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
@@ -29,7 +29,6 @@ class Density extends Component {
         },
       },
 
-      shape: 'dot',
       color: '#080298',
       size: 0.5,
       style: {
@@ -46,7 +45,7 @@ class Density extends Component {
       },
     });
 
-    this.map = scatterMap;
+    this.map = pointCloud;
   }
 
   componentDidMount() {

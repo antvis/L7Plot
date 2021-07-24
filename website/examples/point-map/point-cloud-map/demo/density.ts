@@ -1,10 +1,10 @@
-import { ScatterMap } from '@antv/l7plot';
+import { PointCloudMapOptions } from '@antv/l7plot';
 
 async function initMap() {
   const response = await fetch('https://gw.alipayobjects.com/os/rmsportal/BElVQFEFvpAKzddxFZxJ.txt');
   const data = await response.text();
 
-  new ScatterMap('container', {
+  new PointCloudMapOptions('container', {
     map: {
       type: 'mapbox',
       style: 'dark',
@@ -21,7 +21,6 @@ async function initMap() {
       },
     },
 
-    shape: 'dot',
     color: '#080298',
     size: 0.5,
     style: {

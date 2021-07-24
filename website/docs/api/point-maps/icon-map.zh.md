@@ -1,6 +1,6 @@
 ---
 title: 图标地图 - Icon Map
-order: 3
+order: 4
 ---
 
 `IconMap` 继承自 [PointMap](/zh/docs/api/point-maps/point-map)。

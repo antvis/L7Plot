@@ -24,7 +24,7 @@ const hexagonMap = new HexagonMap(container, options);
 
 `HexagonMapOptions` required
 
-热力地图的所有配置项，继承自 [Map options](/zh/docs/api/map-api#options)。
+蜂窝地图的所有配置项，继承自 [Map options](/zh/docs/api/map-api#options)。
 
 ### `options.source.`aggregation
 
