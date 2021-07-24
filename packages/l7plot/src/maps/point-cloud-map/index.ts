@@ -13,7 +13,7 @@ export class PointCloudMap extends PointMap<PointCloudMapOptions> {
   /**
    * 地图类型
    */
-  public type = MapWrapper.MapType.Dot;
+  public type = MapWrapper.MapType.PointCloud;
 
   /**
    * 点云图层

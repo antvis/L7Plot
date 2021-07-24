@@ -42,7 +42,7 @@ const pointCloudMap = new PointCloudMap(container, options);
 
 继承 [Map 属性](/zh/docs/api/map-api#二、属性)。
 
-### scatterLayer
+### pointCloudLayer
 
 `ILayer`
 
@@ -64,11 +64,11 @@ const pointCloudMap = new PointCloudMap(container, options);
 
 内置图层名称分别为：
 
-- 'scatterLayer'
+- 'pointCloudLayer'
 - 'labelLayer'
 
 ```js
-pointCloudMap.on('scatterLayer:click', (e) => {});
+pointCloudMap.on('pointCloudLayer:click', (e) => {});
 // Or
-pointCloudMap.scatterLayer.on('click', (e) => {});
+pointCloudMap.pointCloudLayer.on('click', (e) => {});
 ```
