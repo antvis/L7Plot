@@ -24,7 +24,7 @@ const scatterMap = new ScatterMap(container, options);
 
 `ScatterMapOptions` required
 
-散点地图的所有配置项，继承自 [PointMap options](/zh/docs/api/point-maps/point-map#options)。
+散点地图的所有配置项，继承自 [Map options](/zh/docs/api/map-api#options)。
 
 ### `options.`shape
 
@@ -59,6 +59,12 @@ const scatterMap = new ScatterMap(container, options);
   size: 5;
 }
 ```
+
+`markdown:docs/common/attribute/color.zh.md`
+
+`markdown:docs/common/attribute/style.zh.md`
+
+`markdown:docs/common/attribute/components.zh.md`
 
 ## 二、属性
 

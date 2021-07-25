@@ -96,16 +96,7 @@ const pointMap = new PointMap(container, options);
 
 #### `shape.`type
 
-`string` optional default: `'linear'`
-
-关联字段的映射 scale 类型，有以下 scale 类型：
-
-- linear：线性
-- power：指数
-- log：对数
-- quantile：等分位
-- quantize：等间距
-- cat：枚举
+`markdown:docs/common/attribute/scale.zh.md`
 
 ```js
 {
@@ -121,195 +112,13 @@ const pointMap = new PointMap(container, options);
 }
 ```
 
-### `options.`color
+`markdown:docs/common/attribute/color.zh.md`
 
-`string|Function|object` optional default: `'#5FD3A6'`
+`markdown:docs/common/attribute/size.zh.md`
 
-元素颜色。
+`markdown:docs/common/attribute/style.zh.md`
 
-```js
-{
-  color: 'red';
-}
-```
-
-#### `color.`field
-
-`string` optional
-
-元素颜色值映射关联字段。
-
-```js
-{
-  source: {
-    data: [{ lng: 104.101, lat: 30.649, c: 'red', n: 'chengdu' }],
-    parser: { type: 'json', x: 'lng', y: 'lat' }
-  },
-  color: {
-    fied: 'c'
-  }
-}
-```
-
-#### `color.`value
-
-`string|string[]|Function` optional
-
-元素颜色值映射值。
-
-```js
-{
-  source: {
-    data: [{ lng: 104.101, lat: 30.649, t: 24.6, n: 'chengdu' }],
-    parser: { type: 'json', x: 'lng', y: 'lat' }
-  },
-  color: {
-    fied: 't',
-    value: ({ t }) => {
-      return t > 20 ? 'red': 'blue'
-    }
-  }
-}
-```
-
-#### `color.`type
-
-`string` optional default: `'linear'`
-
-关联字段的映射 scale 类型，有以下 scale 类型：
-
-- linear：线性
-- power：指数
-- log：对数
-- quantile：等分位
-- quantize：等间距
-- cat：枚举
-
-```js
-{
-  source: {
-    data: [{ lng: 104.101, lat: 30.649, t: 24.6, n: 'chengdu' }],
-    parser: { type: 'json', x: 'lng', y: 'lat' }
-  },
-  color: {
-    fied: 't',
-    value: ['blue', 'red'],
-    type: 'quantile'
-  }
-}
-```
-
-### `options.`size
-
-`number|Function|object` optional default: `12`
-
-元素大小。
-
-```js
-{
-  size: 12;
-}
-```
-
-#### `size.`field
-
-`string` optional
-
-元素大小值映射关联字段。
-
-```js
-{
-  source: {
-    data: [{ lng: 104.101, lat: 30.649, s: 12, n: 'chengdu' }],
-    parser: { type: 'json', x: 'lng', y: 'lat' }
-  },
-  size: {
-    fied: 's'
-  }
-}
-```
-
-#### `size.`value
-
-`number|number[]|Function` optional
-
-元素大小值映射值。
-
-```js
-{
-  source: {
-    data: [{ lng: 104.101, lat: 30.649, t: 24.6, n: 'chengdu' }],
-    parser: { type: 'json', x: 'lng', y: 'lat' }
-  },
-  size: {
-    fied: 't',
-    value: ({ t }) => {
-      return t > 20 ? 15 : 12
-    }
-  }
-}
-```
-
-#### `size.`type
-
-`string` optional default: `'linear'`
-
-关联字段的映射 scale 类型，有以下 scale 类型：
-
-- linear：线性
-- power：指数
-- log：对数
-- quantile：等分位
-- quantize：等间距
-- cat：枚举
-
-```js
-{
-  source: {
-    data: [{ lng: 104.101, lat: 30.649, t: 24.6, n: 'chengdu' }],
-    parser: { type: 'json', x: 'lng', y: 'lat' }
-  },
-  size: {
-    fied: 't',
-    value: [12, 15],
-    type: 'quantile'
-  }
-}
-```
-
-### `options.`style
-
-`object` optional
-
-点图形全局样式。
-
-```js
-{
-  style: {
-    opacity: 0.8,
-    stroke: 'white',
-    strokeWidth: 2
-  }
-}
-```
-
-#### `style.`opacity
-
-`number` optional
-
-图形透明度。
-
-#### `style.`stroke
-
-`string` optional
-
-图形边线填充颜色。
-
-#### `style.`strokeWidth
-
-`number` optional
-
-图形线的宽度。
+`markdown:docs/common/attribute/components.zh.md`
 
 ## 二、属性
 

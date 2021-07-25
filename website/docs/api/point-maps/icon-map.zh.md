@@ -24,7 +24,7 @@ const iconMap = new IconMap(container, options);
 
 `IconMapOptions` required
 
-图标地图的所有配置项，继承自 [PointMap options](/zh/docs/api/point-maps/point-map#options)。
+图标地图的所有配置项，继承自 [Map options](/zh/docs/api/map-api#options)。
 
 ### `options.`shape
 
@@ -105,6 +105,32 @@ registerImages(images);
   }
 }
 ```
+
+#### `shape.`type
+
+`markdown:docs/common/attribute/scale.zh.md`
+
+```js
+{
+  source: {
+    data: [{ lng: 104.101, lat: 30.649, t: 24.6, n: 'chengdu' }],
+    parser: { type: 'json', x: 'lng', y: 'lat' }
+  },
+  shape: {
+    fied: 't',
+    value: ['01', '02'],
+    type: 'quantile'
+  }
+}
+```
+
+`markdown:docs/common/attribute/color.zh.md`
+
+`markdown:docs/common/attribute/size.zh.md`
+
+`markdown:docs/common/attribute/style.zh.md`
+
+`markdown:docs/common/attribute/components.zh.md`
 
 ## 二、属性
 

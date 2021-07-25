@@ -81,46 +81,11 @@ const gridMap = new GridMap(container, options);
 }
 ```
 
-### `options.`color
-
-`string|Function|object` optional default: `'#5FD3A6'`
-
-元素颜色。
-
-```js
-{
-  color: 'red';
-}
-```
-
-#### `color.`field
-
-`string` optional
-
-元素颜色值映射关联字段。
-
-#### `color.`value
-
-`string|string[]|Function` optional
-
-元素颜色值映射值。
-
-#### `color.`type
-
-`string` optional default: `'linear'`
-
-关联字段的映射 scale 类型，有以下 scale 类型：
-
-- linear：线性
-- power：指数
-- log：对数
-- quantile：等分位
-- quantize：等间距
-- cat：枚举
+`markdown:docs/common/attribute/color.zh.md`
 
 ### `options.`size
 
-`number|Function|object` optional
+`number|object|Function` optional
 
 元素大小。
 
@@ -149,50 +114,11 @@ const gridMap = new GridMap(container, options);
 
 #### `size.`type
 
-`string` optional default: `'linear'`
+`markdown:docs/common/attribute/scale.zh.md`
 
-关联字段的映射 scale 类型，有以下 scale 类型：
+`markdown:docs/common/attribute/grid-style.zh.md`
 
-- linear：线性
-- power：指数
-- log：对数
-- quantile：等分位
-- quantize：等间距
-- cat：枚举
-
-### `options.`style
-
-`object` optional
-
-热力全局样式。
-
-```js
-{
-  style: {
-    coverage: 0.9,
-    angle: 0,
-    opacity: 1.0,
-  }
-}
-```
-
-#### `style.`opacity
-
-`number` optional default: `1`
-
-透明度。
-
-#### `style.`coverage
-
-`number` optional default: `0.9`
-
-热力网格覆盖度，范围 0 到 1。
-
-#### `style.`angle
-
-`number` optional default: `0`
-
-热力网格旋转角度，范围 0 到 360。
+`markdown:docs/common/attribute/components.zh.md`
 
 ## 二、属性
 
