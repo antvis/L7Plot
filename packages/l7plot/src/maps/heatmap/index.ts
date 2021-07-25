@@ -1,10 +1,9 @@
 import { pick } from '@antv/util';
-import { ILayer } from '@antv/l7-core';
 import { HeatmapOptions } from './interface';
 import { MapWrapper } from '../../core/map';
 import { DEFAULT_OPTIONS, POINT_LAYER_OPTIONS_KEYS } from './constants';
 import { LabelLayerWrapper } from '../../layers/label-layer';
-import { Source } from '../../types';
+import { ILayer, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
 import { HeatmapLayerWrapper } from '../../layers/heatmap-layer';
 
@@ -44,9 +43,9 @@ export class Heatmap<O extends HeatmapOptions = HeatmapOptions> extends MapWrapp
   }
 
   /**
-   * 带交互的内置图层
+   * 带交互的图层
    */
-  protected interactionInternalLayers = [this.heatmapLayer];
+  protected interactionLayers = [this.heatmapLayer];
 
   /**
    * 获取默认配置
@@ -56,26 +55,29 @@ export class Heatmap<O extends HeatmapOptions = HeatmapOptions> extends MapWrapp
   }
 
   /**
-   * 获取内置图层名
+   * 创建图层之前 hook
    */
-  protected getInternalLayerName() {
-    return { heatmapLayerName: 'heatmapLayer', labeLayerName: 'labelLayer' };
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected beforeCreateLayers(options: O) {
+    const heatmapLayerConfig = { name: 'heatmapLayer' };
+
+    return { heatmapLayerConfig };
   }
 
   /**
-   * 创建内置图层
+   * 创建图层
    */
-  protected createInternalLayers(source: Source): LayerGroup {
-    const { heatmapLayerName, labeLayerName } = this.getInternalLayerName();
+  protected createLayers(source: Source): LayerGroup {
+    const { heatmapLayerConfig } = this.beforeCreateLayers(this.options);
     this.heatmapLayerWrapper = new HeatmapLayerWrapper({
       source,
       ...pick<any>(this.options, POINT_LAYER_OPTIONS_KEYS),
-      name: heatmapLayerName,
+      ...heatmapLayerConfig,
     });
     const layerGroup = new LayerGroup([this.heatmapLayerWrapper.layer]);
 
     if (this.options.label) {
-      this.labelLayerWrapper = new LabelLayerWrapper({ source, ...this.options.label, name: labeLayerName });
+      this.labelLayerWrapper = this.createLabelLayer(this.source, this.options.label);
       layerGroup.addlayer(this.labelLayerWrapper.layer);
     }
 
@@ -83,9 +85,9 @@ export class Heatmap<O extends HeatmapOptions = HeatmapOptions> extends MapWrapp
   }
 
   /**
-   * 更新内置图层
+   * 更新图层
    */
-  protected updateInternalLayers(options: O) {
+  protected updateLayers(options: O) {
     const heatMapLayerConfig = pick<any>(options, POINT_LAYER_OPTIONS_KEYS);
     this.heatmapLayerWrapper.updateOptions(heatMapLayerConfig);
 
@@ -93,12 +95,7 @@ export class Heatmap<O extends HeatmapOptions = HeatmapOptions> extends MapWrapp
       if (this.labelLayerWrapper) {
         this.labelLayerWrapper.updateOptions({ ...options.label });
       } else {
-        const { labeLayerName } = this.getInternalLayerName();
-        this.labelLayerWrapper = new LabelLayerWrapper({
-          source: this.source,
-          ...options.label,
-          name: labeLayerName,
-        });
+        this.labelLayerWrapper = this.createLabelLayer(this.source, options.label);
         this.layerGroup.addlayer(this.labelLayerWrapper.layer);
       }
     } else {

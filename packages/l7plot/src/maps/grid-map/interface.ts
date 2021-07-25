@@ -1,6 +1,5 @@
-import { ISourceCFG } from '@antv/l7-core';
 import { IGridHeatmapLayerStyleOptions, heatmapShape2d, heatmapShape3d } from '../../core/layer/interface';
-import { ColorAttr, IGridAggregation, SizeAttr } from '../../types';
+import { ColorAttr, IGridAggregation, ISourceCFG, SizeAttr } from '../../types';
 import { HeatmapOptions } from '../heatmap/interface';
 
 /**

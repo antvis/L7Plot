@@ -1,7 +1,7 @@
 import { uniqueId } from '@antv/util';
 import { Scene } from '@antv/l7-scene';
-import { ILayer } from '@antv/l7-core';
 import EventEmitter from '@antv/event-emitter';
+import { ILayer } from '../../types';
 
 export interface ILayerGroupOption {
   name?: string;

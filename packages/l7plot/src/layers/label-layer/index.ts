@@ -1,11 +1,11 @@
 import { uniqueId } from '@antv/util';
-import { ILayer } from '@antv/l7-core';
 import { PointLayer } from '@antv/l7-layers';
 import { BaseLayerWrapper } from '../../core/layer/base-layer';
 import { ILabelLayerConfig } from '../../core/layer/interface';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
 import { ILabelLayerOptions } from './interface';
+import { ILayer } from '../../types';
 
 const LABEL_DEFAULT_OPTIONS = {
   name: 'labelLayer',
@@ -27,13 +27,16 @@ export class LabelLayerWrapper extends BaseLayerWrapper<ILabelLayerOptions> {
     const config = this.pickLayerConfig(this.options);
     this.layer = new PointLayer({ ...config, name: layerName });
 
-    mappingLayer(this.layer, this.options);
-
+    this.mappingLayer(this.layer, this.options);
     this.layer.setSource(source);
+  }
+
+  mappingLayer(layer: ILayer, options: ILabelLayerOptions) {
+    mappingLayer(layer, options);
   }
 
   public updateOptions(options: ILabelLayerConfig) {
     this.options = deepAssign({}, this.options, options);
-    mappingLayer(this.layer, this.options);
+    this.mappingLayer(this.layer, this.options);
   }
 }

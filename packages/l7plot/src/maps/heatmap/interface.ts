@@ -1,6 +1,5 @@
-import { ISourceCFG } from '@antv/l7-core';
 import { IHeatmapLayerStyleOptions, IGridHeatmapLayerStyleOptions, heatmapShape } from '../../core/layer/interface';
-import { ColorAttr, IMapOptions, SizeAttr } from '../../types';
+import { ColorAttr, IMapOptions, SizeAttr, ISourceCFG } from '../../types';
 
 /**
  * 数据配置

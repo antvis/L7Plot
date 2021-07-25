@@ -7,13 +7,13 @@ describe('custom map', () => {
     type CustomMapOptions = IMapOptions;
     class CustomMap extends MapWrapper<CustomMapOptions> {
       type = 'custom';
-      protected interactionInternalLayers = [];
-      protected createInternalLayers(source: Source): LayerGroup {
+      protected interactionLayers = [];
+      protected createLayers(source: Source): LayerGroup {
         source;
         const layerGroup = new LayerGroup([]);
         return layerGroup;
       }
-      protected updateInternalLayers(options: CustomMapOptions) {
+      protected updateLayers(options: CustomMapOptions) {
         options;
       }
     }

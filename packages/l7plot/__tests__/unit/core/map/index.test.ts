@@ -129,8 +129,6 @@ describe('core map', () => {
         setTimeout(() => pointMap.destroy(), 0);
       });
     });
-
-    pointMap.on('loaded', () => setTimeout(() => pointMap.destroy(), 0));
   });
 
   it('loaded event', () => {

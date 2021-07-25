@@ -1,7 +1,7 @@
-import { ILayer } from '@antv/l7-core';
 import { IColorRamp } from '@antv/l7-utils';
 import { MappingLayer } from '../../adaptor/layer';
 import { IHeatmapLayerStyleOptions } from '../../core/layer/interface';
+import { ILayer } from '../../types';
 import { IHeatmapLayerOptions } from './interface';
 
 function getRampColors(style: IHeatmapLayerStyleOptions): IColorRamp {

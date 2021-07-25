@@ -1,6 +1,5 @@
-import { ILayer, ISourceCFG, ITransform } from '@antv/l7-core';
 import { GridMapOptions, ISource } from './interface';
-import { Source } from '../../types';
+import { Source, ILayer, ISourceCFG, ITransform } from '../../types';
 import { MapWrapper } from '../../core/map';
 import { DEFAULT_OPTIONS } from './constants';
 import { Heatmap } from '../heatmap';
@@ -84,9 +83,11 @@ export class GridMap extends Heatmap<GridMapOptions> {
   }
 
   /**
-   * 获取内置图层名
+   * 创建图层之前 hook
    */
-  protected getInternalLayerName() {
-    return { heatmapLayerName: 'gridLayer', labeLayerName: 'labelLayer' };
+  protected beforeCreateLayers() {
+    const heatmapLayerConfig = { name: 'gridLayer' };
+
+    return { heatmapLayerConfig };
   }
 }

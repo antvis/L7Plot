@@ -1,6 +1,5 @@
 import { Scene } from '@antv/l7-scene';
 import { Mapbox, GaodeMap } from '@antv/l7-maps';
-import { ILayer, ISourceCFG } from '@antv/l7-core';
 import { Scale, Layers, Zoom } from '@antv/l7-component';
 import EventEmitter from '@antv/event-emitter';
 import { isBoolean } from '@antv/util';
@@ -11,7 +10,6 @@ import {
   MapType,
   BaseMapType,
   IMapOptions,
-  MapboxglMap,
   AMapInstance,
   MapboxInstance,
   Source,
@@ -20,10 +18,14 @@ import {
   IScaleControlOptions,
   ILegendOptions,
   IEvent,
+  ILabelOptions,
+  ILayer,
+  ISourceCFG,
 } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { LayerEventList, MapEventList, SceneEventList } from './constants';
 import { FONT_FACE_CACHE, ICON_FONT_CACHE, IMAGES_CACHE } from './register';
+import { LabelLayerWrapper } from '../../layers/label-layer';
 
 const DEFAULT_OPTIONS = {
   map: { type: BaseMapType.Amap, style: 'dark' },
@@ -58,7 +60,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
    */
   public sceneLoaded = false;
   /**
-   * 是否所有内置图层加载完成
+   * 是否所有图层加载完成
    */
   public layersLoaded = false;
   /**
@@ -82,9 +84,9 @@ export abstract class MapWrapper<O extends IMapOptions> {
    */
   public layerGroup = new LayerGroup();
   /**
-   * 带交互的内置图层
+   * 带交互的图层
    */
-  protected abstract interactionInternalLayers: ILayer[];
+  protected abstract interactionLayers: ILayer[];
   /**
    * zoom 放缩器 Control
    */
@@ -195,28 +197,32 @@ export abstract class MapWrapper<O extends IMapOptions> {
   /**
    * 创建图层
    */
-  // protected abstract createLayers(source: Source): LayerGroup;
+  protected abstract createLayers(source: Source): LayerGroup;
 
   /**
-   * 创建内置图层
+   * 更新图层
    */
-  protected abstract createInternalLayers(source: Source): LayerGroup;
+  protected abstract updateLayers(options: Partial<O>): void;
+
   /**
-   * 更新内置图层
+   * 创建数据标签图层
    */
-  protected abstract updateInternalLayers(options: Partial<O>): void;
+  protected createLabelLayer(source: Source, label: ILabelOptions): LabelLayerWrapper {
+    const labelLayerWrapper = new LabelLayerWrapper({ name: 'labelLayer', source, ...label });
+    return labelLayerWrapper;
+  }
 
   /**
    * 渲染
    */
   public render() {
     if (this.inited) {
-      this.updateInternalLayers(this.options);
+      this.updateLayers(this.options);
       // this.scene.render();
       this.initControls();
       this.initTooltip();
     } else {
-      const layerGroup = this.createInternalLayers(this.source);
+      const layerGroup = this.createLayers(this.source);
       if (this.scene['sceneService'].loaded) {
         this.sceneLoaded = true;
         this.layersLoaded && this.emit('loaded');
@@ -359,10 +365,10 @@ export abstract class MapWrapper<O extends IMapOptions> {
    * 获取 map 实例
    */
   public getMap(): MapboxInstance | AMapInstance | unknown {
-    if (this.scene.map instanceof AMap.Map) {
-      return this.scene.map;
-    } else if (this.scene.map instanceof MapboxglMap) {
-      return this.scene.map;
+    if (this.options.map?.type === BaseMapType.Amap) {
+      return this.scene.map as AMapInstance;
+    } else if (this.options.map?.type === BaseMapType.Mapbox) {
+      return this.scene.map as MapboxInstance;
     } else {
       return this.scene.map;
     }
@@ -505,7 +511,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
     }
     const { tooltip } = this.options;
     if (tooltip) {
-      this.tooltip = new Tooltip(this.scene, this.interactionInternalLayers, tooltip);
+      this.tooltip = new Tooltip(this.scene, this.interactionLayers, tooltip);
       this.tooltip.on('*', (event: IEvent) => this.emit(event.type, event));
     }
   }

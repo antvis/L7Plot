@@ -1,8 +1,8 @@
-import { ILayer } from '@antv/l7-core';
 import { HeatMapOptions } from './interface';
 import { MapWrapper } from '../../core/map';
 import { DEFAULT_OPTIONS } from './constants';
 import { Heatmap } from '../heatmap';
+import { ILayer } from '../../types';
 export class HeatMap extends Heatmap<HeatMapOptions> {
   /**
    * 默认配置项
@@ -36,9 +36,11 @@ export class HeatMap extends Heatmap<HeatMapOptions> {
   }
 
   /**
-   * 获取内置图层名
+   * 创建图层之前 hook
    */
-  protected getInternalLayerName() {
-    return { heatmapLayerName: 'heatmapLayer', labeLayerName: 'labelLayer' };
+  protected beforeCreateLayers() {
+    const heatmapLayerConfig = { name: 'heatmapLayer' };
+
+    return { heatmapLayerConfig };
   }
 }

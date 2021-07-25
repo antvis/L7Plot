@@ -1,6 +1,5 @@
-import { ILayer, ILayerConfig, BlendType } from '@antv/l7-core';
 import { IColorRamp } from '@antv/l7-utils';
-import { ILabelOptions, Source } from '../../types';
+import { ILayer, ILayerConfig, BlendType, ILabelOptions, Source } from '../../types';
 import { animateAttr, ColorAttr, IStateAttribute, ShapeAttr, SizeAttr } from '../../types/attr';
 
 /**

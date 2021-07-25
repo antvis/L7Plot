@@ -1,5 +1,5 @@
-import { ILayer } from '@antv/l7-core';
 import { MapWrapper } from '../../core/map';
+import { ILayer } from '../../types';
 import { PointMap } from '../point-map';
 import { DEFAULT_OPTIONS } from './constants';
 import { IconMapOptions } from './interface';
@@ -36,9 +36,11 @@ export class IconMap extends PointMap<IconMapOptions> {
   }
 
   /**
-   * 获取内置图层名
+   * 创建图层之前 hook
    */
-  protected getInternalLayerName() {
-    return { pointLayerName: 'iconLayer', labeLayerName: 'labelLayer' };
+  protected beforeCreateLayers() {
+    const pointLayerConfig = { name: 'iconLayer' };
+
+    return { pointLayerConfig };
   }
 }

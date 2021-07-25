@@ -2,8 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist/lib",
-    "rootDir": "src",
-    "types": ["amap-js-api"]
+    "rootDir": "src"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/__tests__/**/*"],

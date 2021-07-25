@@ -1,4 +1,4 @@
-import { ISourceCFG } from '@antv/l7-core';
+import { ISourceCFG } from '../../types';
 import { PointMapOptions } from '../point-map/interface';
 
 /**

@@ -1,8 +1,8 @@
-import { ILayer } from '@antv/l7-core';
 import { MapWrapper } from '../../core/map';
 import { BubbleMapOptions } from './interface';
 import { DEFAULT_OPTIONS } from './constants';
 import { PointMap } from '../point-map';
+import { ILayer } from '../../types';
 
 export class BubbleMap extends PointMap<BubbleMapOptions> {
   /**
@@ -37,9 +37,11 @@ export class BubbleMap extends PointMap<BubbleMapOptions> {
   }
 
   /**
-   * 获取内置图层名
+   * 创建图层之前 hook
    */
-  protected getInternalLayerName() {
-    return { pointLayerName: 'bubbleLayer', labeLayerName: 'labelLayer' };
+  protected beforeCreateLayers() {
+    const pointLayerConfig = { name: 'bubbleLayer' };
+
+    return { pointLayerConfig };
   }
 }

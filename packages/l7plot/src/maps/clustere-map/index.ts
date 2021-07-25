@@ -1,5 +1,5 @@
-import { ILayer } from '@antv/l7-core';
 import { MapWrapper } from '../../core/map';
+import { ILayer } from '../../types';
 import { PointMap } from '../point-map';
 import { DEFAULT_OPTIONS } from './constants';
 import { ClustereMapOptions } from './interface';
@@ -37,9 +37,11 @@ export class ClustereMap extends PointMap<ClustereMapOptions> {
   }
 
   /**
-   * 获取内置图层名
+   * 创建图层之前 hook
    */
-  protected getInternalLayerName() {
-    return { pointLayerName: 'clusterLayer', labeLayerName: 'labelLayer' };
+  protected beforeCreateLayers() {
+    const pointLayerConfig = { name: 'clusterLayer' };
+
+    return { pointLayerConfig };
   }
 }

@@ -325,7 +325,7 @@ const pointMap = new PointMap(container, options);
 
 `undefined|ILayer`
 
-标注图层实例。
+数据标签图层实例。
 
 ## 三、方法
 

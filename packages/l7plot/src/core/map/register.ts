@@ -1,4 +1,4 @@
-import { IImage } from '@antv/l7-core';
+import { IImage } from '../../types';
 
 /**
  * 自定义添加图片资源
