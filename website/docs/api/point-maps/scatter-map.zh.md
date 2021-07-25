@@ -24,7 +24,7 @@ const scatterMap = new ScatterMap(container, options);
 
 `ScatterMapOptions` required
 
-气泡地图的所有配置项，继承自 [PointMap options](/zh/docs/api/point-maps/point-map#options)。
+散点地图的所有配置项，继承自 [PointMap options](/zh/docs/api/point-maps/point-map#options)。
 
 ### `options.`shape
 

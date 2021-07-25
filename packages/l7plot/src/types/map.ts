@@ -24,6 +24,7 @@ export enum MapType {
   Point = 'point',
   Bubble = 'bubble',
   Scatter = 'scatter',
+  PointCloud = 'pointCloud',
   Icon = 'icon',
   Clustere = 'clustere',
   Heat = 'heat',

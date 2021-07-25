@@ -2,8 +2,9 @@ import { MapWrapper } from '../../core/map';
 import { ILayer } from '../../types';
 import { PointMap } from '../point-map';
 import { DEFAULT_OPTIONS } from './constants';
-import { IconMapOptions } from './interface';
-export class IconMap extends PointMap<IconMapOptions> {
+import { PointCloudMapOptions } from './interface';
+
+export class PointCloudMap extends PointMap<PointCloudMapOptions> {
   /**
    * 默认配置项
    */
@@ -12,27 +13,27 @@ export class IconMap extends PointMap<IconMapOptions> {
   /**
    * 地图类型
    */
-  public type = MapWrapper.MapType.Icon;
+  public type = MapWrapper.MapType.PointCloud;
 
   /**
-   * 图标图层
+   * 点云图层
    */
-  get iconLayer(): ILayer {
+  get pointCloudLayer(): ILayer {
     return this.pointLayerWrapper.layer;
   }
 
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<IconMapOptions> {
-    return IconMap.DefaultOptions;
+  protected getDefaultOptions(): Partial<PointCloudMapOptions> {
+    return PointCloudMap.DefaultOptions;
   }
 
   /**
    * 创建图层之前 hook
    */
   protected beforeCreateLayers() {
-    const pointLayerConfig = { name: 'iconLayer' };
+    const pointLayerConfig = { name: 'pointCloudLayer' };
 
     return { pointLayerConfig };
   }

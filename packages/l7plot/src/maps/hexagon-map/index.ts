@@ -69,13 +69,6 @@ export class HexagonMap extends Heatmap<HexagonMapOptions> {
   }
 
   /**
-   * 标注图层
-   */
-  get labelLayer(): ILayer | undefined {
-    return this.labelLayerWrapper?.layer;
-  }
-
-  /**
    * 获取默认配置
    */
   protected getDefaultOptions(): Partial<HexagonMapOptions> {
