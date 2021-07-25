@@ -1,10 +1,10 @@
-import { PointCloudMapOptions } from '@antv/l7plot';
+import { PointCloudMap } from '@antv/l7plot';
 
 async function initMap() {
   const response = await fetch('https://gw.alipayobjects.com/os/rmsportal/BElVQFEFvpAKzddxFZxJ.txt');
   const data = await response.text();
 
-  new PointCloudMapOptions('container', {
+  new PointCloudMap('container', {
     map: {
       type: 'mapbox',
       style: 'dark',

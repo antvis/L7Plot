@@ -2,9 +2,9 @@ import { BubbleMap } from '@antv/l7plot';
 
 async function initMap() {
   const response = await fetch(
-    'https://gw.alipayobjects.com/os/basement_prod/9078fd36-ce8d-4ee2-91bc-605db8315fdf.csv'
+    'https://gw.alipayobjects.com/os/antfincdn/xZqmXatMnc/quanguojiaotongshijianxiangyingzhishu.json'
   );
-  const data = await response.text();
+  const data = await response.json();
 
   new BubbleMap('container', {
     map: {
@@ -17,38 +17,33 @@ async function initMap() {
     source: {
       data: data,
       parser: {
-        type: 'csv',
-        x: 'Longitude',
-        y: 'Latitude',
+        type: 'geojson',
       },
     },
 
     color: '#4cfd47',
-    size: 56,
+    size: 20,
 
     animate: true,
     state: { active: true },
 
     label: {
-      field: 'SATCAT Designation',
+      field: 'cityName',
       style: {
         fill: '#fff',
         fontSize: 12,
-        textAnchor: 'top', // 文本相对锚点的位置 center|left|right|top|bottom|top-left
-        textOffset: [0, 20], // 文本相对锚点的偏移量 [水平, 垂直]
+        textAnchor: 'top',
+        textOffset: [0, 20],
       },
     },
     zoom: {
-      position: 'bottomright',
-    },
-    scale: {
       position: 'bottomright',
     },
     layerMenu: {
       position: 'topright',
     },
     tooltip: {
-      items: ['FullName', 'SATCAT Designation'],
+      items: [{ field: 'properties.cityName', alias: '名称' }],
     },
   });
 }

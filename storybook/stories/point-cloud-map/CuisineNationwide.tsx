@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PointCloudMap } from '@antv/l7plot';
 
-class Density extends Component {
+class CuisineNationwide extends Component {
   public map: PointCloudMap | undefined;
 
   constructor(props) {
@@ -9,39 +9,33 @@ class Density extends Component {
   }
 
   async initMap() {
-    const response = await fetch('https://gw.alipayobjects.com/os/rmsportal/BElVQFEFvpAKzddxFZxJ.txt');
-    const data = await response.text();
+    const response = await fetch(
+      'https://gw.alipayobjects.com/os/antfincdn/fZreT5RyVT/6wanquanguoyuecaidefenbu.geojson'
+    );
+    const data = await response.json();
 
     const pointCloud = new PointCloudMap('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
-        center: [121.417463, 31.215175],
+        center: [105.425968, 35.882505],
         pitch: 0,
         zoom: 11,
       },
       source: {
         data: data,
         parser: {
-          type: 'csv',
-          y: 'lat',
-          x: 'lng',
+          type: 'geojson',
         },
       },
 
-      color: '#080298',
+      color: '#3C1FA8',
       size: 0.5,
       style: {
         opacity: 1,
       },
       zoom: {
         position: 'bottomright',
-      },
-      scale: {
-        position: 'bottomright',
-      },
-      layerMenu: {
-        position: 'topright',
       },
     });
 
@@ -72,4 +66,4 @@ class Density extends Component {
   }
 }
 
-export default Density;
+export default CuisineNationwide;

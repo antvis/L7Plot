@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ClustereMap } from '@antv/l7plot';
 
-class Basic extends Component {
+class EarthquakeMagnitude extends Component {
   public map: ClustereMap | undefined;
 
   constructor(props) {
@@ -13,7 +13,6 @@ class Basic extends Component {
       'https://gw.alipayobjects.com/os/basement_prod/d3564b06-670f-46ea-8edb-842f7010a7c6.json'
     );
     const data = await response.json();
-    console.log('data: ', data);
 
     const clustereMap = new ClustereMap('container', {
       map: {
@@ -30,7 +29,7 @@ class Basic extends Component {
         },
       },
 
-      color: 'yellow',
+      color: '#5FD3A6',
       size: {
         field: 'point_count',
         value: [10, 20, 30, 40, 50, 60, 70, 80],
@@ -60,9 +59,6 @@ class Basic extends Component {
       layerMenu: {
         position: 'topright',
       },
-      // legend: {
-      //   position: 'bottomleft',
-      // },
     });
 
     this.map = clustereMap;
@@ -92,4 +88,4 @@ class Basic extends Component {
   }
 }
 
-export default Basic;
+export default EarthquakeMagnitude;

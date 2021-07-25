@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BubbleMap } from '@antv/l7plot';
 
-class Distribution extends Component {
+class Earthquake extends Component {
   public map: BubbleMap | undefined;
 
   constructor(props) {
@@ -9,66 +9,57 @@ class Distribution extends Component {
   }
 
   async initMap() {
-    const response = await fetch(
-      'https://gw.alipayobjects.com/os/basement_prod/d3564b06-670f-46ea-8edb-842f7010a7c6.json'
-    );
-    const data = await response.json();
+    const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/m5r7MFHt8U/wenchuandizhenshuju.json');
+    const { data } = await response.json();
 
     const bubbleMap = new BubbleMap('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
         center: [102.447303, 37.753574],
-        zoom: 1,
+        zoom: 5,
         pitch: 0,
       },
       source: {
         data: data,
-        parser: { type: 'geojson' },
+        parser: {
+          type: 'json',
+          x: 'lng',
+          y: 'lat',
+        },
       },
 
       color: {
         field: 'mag',
         value: ({ mag }) => {
-          return mag > 4.5 ? '#5B8FF9' : '#5CCEA1';
+          if (mag > 7) {
+            return '#82cf9c';
+          } else if (mag <= 7 && mag >= 5.5) {
+            return '#10b3b0';
+          } else {
+            return '#2033ab';
+          }
         },
       },
       size: {
         field: 'mag',
-        value: [1, 25],
+        value: ({ mag }) => (mag - 4.3) * 10,
       },
 
       style: {
-        opacity: 0.3,
-        strokeWidth: 1,
+        opacity: 0.8,
+        strokeWidth: 0,
       },
-      state: { active: true },
-
-      label: {
-        visible: true,
-        field: 'mag',
-        style: {
-          fill: '#fff',
-          fontSize: 12,
-          textAnchor: 'top', // 文本相对锚点的位置 center|left|right|top|bottom|top-left
-          textOffset: [0, 20], // 文本相对锚点的偏移量 [水平, 垂直]
-        },
-      },
+      state: { active: { color: '#FFF684' } },
       zoom: {
         position: 'bottomright',
       },
       scale: {
         position: 'bottomright',
       },
-      layerMenu: {
-        position: 'topright',
-      },
       tooltip: {
-        items: [{ field: 'properties.mag', alias: 'mag' }],
+        items: ['title', 'mag', 'depth'],
       },
-      // legend: {
-      //   position: 'bottomleft',
-      // },
     });
 
     this.map = bubbleMap;
@@ -98,4 +89,4 @@ class Distribution extends Component {
   }
 }
 
-export default Distribution;
+export default Earthquake;

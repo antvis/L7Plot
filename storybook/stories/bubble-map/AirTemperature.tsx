@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BubbleMap } from '@antv/l7plot';
 
-class Basic extends Component {
+class AirTemperature extends Component {
   public map: BubbleMap | undefined;
 
   constructor(props) {
@@ -31,21 +31,32 @@ class Basic extends Component {
 
       color: {
         field: 't',
-        value: ['#34B6B7', '#4AC5AF', '#5FD3A6', '#7BE39E', '#A1EDB8', '#CEF8D6'],
+        value: [
+          '#03071e',
+          '#370617',
+          '#6a040f',
+          '#9d0208',
+          '#d00000',
+          '#dc2f02',
+          '#e85d04',
+          '#f48c06',
+          '#faa307',
+          '#ffba08',
+        ].reverse(),
       },
       size: {
         field: 't',
-        value: [0, 20],
+        value: [2, 18],
       },
 
       style: {
         opacity: 0.5,
         strokeWidth: 0,
       },
-      state: { active: { color: 'red' } },
+      state: { active: { color: '#FFF684' } },
 
       label: {
-        visible: true,
+        visible: false, // 是否显示标签图层
         field: 't',
         style: {
           fill: '#fff',
@@ -72,9 +83,6 @@ class Basic extends Component {
       tooltip: {
         items: ['s', 't'],
       },
-      // legend: {
-      //   position: 'bottomleft',
-      // },
     });
 
     console.log('bubbleMap: ', bubbleMap);
@@ -110,4 +118,4 @@ class Basic extends Component {
   }
 }
 
-export default Basic;
+export default AirTemperature;

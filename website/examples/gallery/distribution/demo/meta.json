@@ -5,12 +5,20 @@
   },
   "demos": [
     {
-      "filename": "global-distribution.ts",
+      "filename": "population-gdp.ts",
       "title": {
-        "zh": "全球分布",
-        "en": "Global Distribution"
+        "zh": "中国城市人口数量及GDP排行",
+        "en": "China's urban population and GDP ranking"
       },
-      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/%24PbbsgFfcG/f82a51e1-9b7b-4b8a-9734-c426aac1055f.png"
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/VbC9OPwdNg/8bf7bd3f-2479-4228-b04b-4cb38af1d7af.png"
+    },
+    {
+      "filename": "global-earthquake.ts",
+      "title": {
+        "zh": "全球地震数据等级与深度",
+        "en": "Global earthquake data level and depth"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/kDRYz0hAqk/88b8ee59-de23-4c49-becb-a80354adaaee.png"
     }
   ]
 }

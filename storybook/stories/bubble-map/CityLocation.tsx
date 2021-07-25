@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BubbleMap } from '@antv/l7plot';
 
-class Basic extends Component {
+class CityLocation extends Component {
   public map: BubbleMap | undefined;
 
   constructor(props) {
@@ -9,49 +9,48 @@ class Basic extends Component {
   }
 
   async initMap() {
-    const response = await fetch(
-      'https://gw.alipayobjects.com/os/antfincdn/xZqmXatMnc/quanguojiaotongshijianxiangyingzhishu.json'
-    );
-    const data = await response.json();
+    const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/g5hIthhKlr/quanguoshixianweizhi.json');
+    const { list } = await response.json();
 
     const bubbleMap = new BubbleMap('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
-        center: [102.447303, 37.753574],
-        zoom: 2,
-        pitch: 0,
+        zoom: 5,
+        center: [107.4976, 32.1697],
+        pitch: 45,
       },
       source: {
-        data: data,
+        data: list,
         parser: {
-          type: 'geojson',
+          type: 'json',
+          coordinates: 'lnglat',
         },
       },
-
-      color: '#4cfd47',
-      size: 20,
-
-      animate: true,
-      state: { active: true },
-
-      label: {
-        field: 'cityName',
-        style: {
-          fill: '#fff',
-          fontSize: 12,
-          textAnchor: 'top',
-          textOffset: [0, 20],
+      color: '#47aff7',
+      size: {
+        field: 'style',
+        value: ({ style }) => {
+          if (style == 0) {
+            return 8;
+          } else if (style == 1) {
+            return 4;
+          } else {
+            return 2;
+          }
         },
       },
+      style: {
+        opacity: 0.8,
+        stroke: '#c3faff',
+        strokeWidth: 1,
+      },
+      state: { active: { color: '#FFF684' } },
       zoom: {
         position: 'bottomright',
       },
-      layerMenu: {
-        position: 'topright',
-      },
       tooltip: {
-        items: [{ field: 'properties.cityName', alias: '名称' }],
+        items: ['name'],
       },
     });
 
@@ -82,4 +81,4 @@ class Basic extends Component {
   }
 }
 
-export default Basic;
+export default CityLocation;

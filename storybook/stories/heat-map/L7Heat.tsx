@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Scene, PointLayer, GaodeMap } from '@antv/l7';
+import { Scene, HeatmapLayer, GaodeMap } from '@antv/l7';
 
-class Basic extends Component {
+class L7Heat extends Component {
   public scene: Scene | undefined;
 
   constructor(props) {
@@ -9,7 +9,7 @@ class Basic extends Component {
   }
 
   async initMap() {
-    const response = await fetch('https://gw.alipayobjects.com/os/rmsportal/oVTMqfzuuRFKiDwhPSFL.json');
+    const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/S2Pb%26549sG/20210723023614.json');
     const data = await response.json();
 
     const scene = new Scene({
@@ -17,31 +17,27 @@ class Basic extends Component {
       map: new GaodeMap({
         pitch: 0,
         style: 'dark',
-        center: [102.447303, 37.753574],
-        zoom: 5.32,
-        maxZoom: 10,
+        zoom: 11.7,
+        center: [120.19660949707033, 30.234747338474293],
       }),
     });
 
-    const pointLayer = new PointLayer({})
-      .source(data.list, {
-        parser: {
-          type: 'json',
-          x: 'j',
-          y: 'w',
-        },
-      })
-      .shape('circle')
-      .size('t', [0, 16])
-      .color('t', ['#34B6B7', '#4AC5AF', '#5FD3A6', '#7BE39E', '#A1EDB8', '#CEF8D6'])
-      .active(true)
+    const heatmapLayer = new HeatmapLayer({})
+      .source(data)
+      .shape('heatmap')
+      .size('count', [0, 1.0])
       .style({
-        opacity: 0.5,
-        strokeWidth: 0,
+        intensity: 2,
+        radius: 20,
+        opacity: 1.0,
+        rampColors: {
+          colors: ['#FF4818', '#F7B74A', '#FFF598', '#91EABC', '#2EA9A1', '#206C7C'].reverse(),
+          positions: [0, 0.2, 0.4, 0.6, 0.8, 1.0],
+        },
       });
 
     scene.on('loaded', () => {
-      scene.addLayer(pointLayer);
+      scene.addLayer(heatmapLayer);
     });
 
     this.scene = scene;
@@ -71,4 +67,4 @@ class Basic extends Component {
   }
 }
 
-export default Basic;
+export default L7Heat;

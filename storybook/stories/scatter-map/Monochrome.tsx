@@ -1,47 +1,49 @@
 import React, { Component } from 'react';
-import { BubbleMap } from '@antv/l7plot';
+import { ScatterMap } from '@antv/l7plot';
 
-class Basic extends Component {
-  public map: BubbleMap | undefined;
+class Monochrome extends Component {
+  public map: ScatterMap | undefined;
 
   constructor(props) {
     super(props);
   }
 
   async initMap() {
-    const response = await fetch(
-      'https://gw.alipayobjects.com/os/antfincdn/xZqmXatMnc/quanguojiaotongshijianxiangyingzhishu.json'
-    );
-    const data = await response.json();
+    const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/g5hIthhKlr/quanguoshixianweizhi.json');
+    const { list } = await response.json();
 
-    const bubbleMap = new BubbleMap('container', {
+    const scatterMap = new ScatterMap('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
-        center: [102.447303, 37.753574],
-        zoom: 2,
+        zoom: 5,
+        center: [107.4976, 32.1697],
         pitch: 0,
       },
       source: {
-        data: data,
+        data: list,
         parser: {
-          type: 'geojson',
+          type: 'json',
+          coordinates: 'lnglat',
         },
       },
+      color: '#14B4C9',
+      size: 2,
 
-      color: '#4cfd47',
-      size: 20,
-
-      animate: true,
-      state: { active: true },
+      style: {
+        opacity: 0.8,
+        strokeWidth: 0,
+      },
 
       label: {
-        field: 'cityName',
+        visible: false,
+        field: 'name',
         style: {
           fill: '#fff',
           fontSize: 12,
           textAnchor: 'top',
           textOffset: [0, 20],
+          padding: [10, 10],
         },
       },
       zoom: {
@@ -50,12 +52,9 @@ class Basic extends Component {
       layerMenu: {
         position: 'topright',
       },
-      tooltip: {
-        items: [{ field: 'properties.cityName', alias: '名称' }],
-      },
     });
 
-    this.map = bubbleMap;
+    this.map = scatterMap;
   }
 
   componentDidMount() {
@@ -82,4 +81,4 @@ class Basic extends Component {
   }
 }
 
-export default Basic;
+export default Monochrome;
