@@ -110,167 +110,44 @@ export const createLightStyleSheet = (cfg: StyleSheetCfg = {}) => {
     fontFamily,
 
     // -------------------- 图例 --------------------
-    /** 图例标题颜色 */
-    legendTitleTextFillColor: BLACK_COLORS[45],
-    /** 图例标题文本字体大小 */
-    legendTitleTextFontSize: 12,
-    /** 图例标题文本行高 */
-    legendTitleTextLineHeight: 21,
-    /** 图例标题文本字体粗细 */
-    legendTitleTextFontWeight: 'normal',
+    /** 图例内容框背景色 */
+    legendContainerFillColor: 'rgba(255, 255, 255, 0.9)',
+    /** 图例内容框阴影 */
+    legendContainerShadow: 'rgb(0 0 0 / 16%) 0px 6px 12px 0px',
+    /** 图例内容框圆角 */
+    legendContainerBorderRadius: 2,
 
-    /** 图例 marker 颜色 */
-    legendMarkerColor: brandColor,
-    /** 图例 marker 距离图例文本的间距 */
-    legendMarkerSpacing: 8,
-    /** 图例 marker 默认半径大小 */
-    legendMarkerSize: 4,
-    /** 图例 'circle' marker 半径 */
-    legendCircleMarkerSize: 4,
-    /** 图例 'square' marker 半径 */
-    legendSquareMarkerSize: 4,
-    /** 图例 'line' marker 半径 */
-    legendLineMarkerSize: 5,
-
-    /** 图例项文本颜色 */
-    legendItemNameFillColor: BLACK_COLORS[65],
-    /** 图例项文本字体大小 */
-    legendItemNameFontSize: 12,
-    /** 图例项文本行高 */
-    legendItemNameLineHeight: 12,
-    /** 图例项粗细 */
-    legendItemNameFontWeight: 'normal',
-    /** 图例项之间的水平间距 */
-    legendItemSpacing: 24,
-    /** 图例项垂直方向的间隔 */
-    legendItemMarginBottom: 12,
-    /** 图例与图表绘图区域的偏移距离  */
-    legendPadding: [8, 8, 8, 8],
-    /** 水平布局的图例与绘图区域偏移距离 */
-    legendHorizontalPadding: [8, 0, 8, 0],
-    /** 垂直布局的图例与绘图区域偏移距离 */
-    legendVerticalPadding: [0, 8, 0, 8],
-
-    // 图例分页器
-    /** 图例分页器 marker 大小 */
-    legendPageNavigatorMarkerSize: 12,
-    /** 图例分页器 marker 非激活状态填充色 */
-    legendPageNavigatorMarkerInactiveFillColor: BLACK_COLORS[100],
-    /** 图例分页器 marker 非激活状态填充色透明度 */
-    legendPageNavigatorMarkerInactiveFillOpacity: 0.45,
-    /** 图例分页器 marker 填充色 */
-    legendPageNavigatorMarkerFillColor: BLACK_COLORS[100],
-    /** 图例分页器 marker 填充色透明度 */
-    legendPageNavigatorMarkerFillOpacity: 1,
-    /** 图例分页器文本颜色 */
-    legendPageNavigatorTextFillColor: BLACK_COLORS[45],
-    /** 图例分页器文本字体大小 */
-    legendPageNavigatorTextFontSize: 12,
-
-    /** 连续图例滑块填充色 */
-    sliderRailFillColor: BLACK_COLORS[15],
-    /** 连续图例滑块边框粗细 */
-    sliderRailBorder: 0,
-    /** 连续图例滑块边框颜色 */
-    sliderRailBorderColor: null,
-    /** 连续图例滑块宽度 */
-    sliderRailWidth: 100,
-    /** 连续图例滑块高度 */
-    sliderRailHeight: 12,
-
-    /** 连续图例文本颜色 */
-    sliderLabelTextFillColor: BLACK_COLORS[45],
-    /** 连续图例文本字体大小 */
-    sliderLabelTextFontSize: 12,
-    /** 连续图例文本行高 */
-    sliderLabelTextLineHeight: 12,
-    /** 连续图例文本字体粗细 */
-    sliderLabelTextFontWeight: 'normal',
-
-    /** 连续图例滑块颜色 */
-    sliderHandlerFillColor: BLACK_COLORS[6],
-    /** 连续图例滑块宽度 */
-    sliderHandlerWidth: 10,
-    /** 连续图例滑块高度 */
-    sliderHandlerHeight: 14,
-    /** 连续图例滑块边框粗细 */
-    sliderHandlerBorder: 1,
-    /** 连续图例滑块边框颜色 */
-    sliderHandlerBorderColor: BLACK_COLORS[25],
+    /** 图例文本颜色 */
+    legendTextFillColor: BLACK_COLORS[65],
+    /** 图例文本字体大小 */
+    legendTextFontSize: 12,
+    /** 图例文本行高 */
+    legendTextLineHeight: '1',
 
     // -------------------- Tooltip --------------------
-    /** tooltip crosshairs 辅助线颜色 */
-    tooltipCrosshairsBorderColor: BLACK_COLORS[25],
-    /** tooltip crosshairs 辅助线粗细 */
-    tooltipCrosshairsBorder: 1,
-    /** tooltip crosshairs 辅助线虚线间隔 */
-    // tooltipCrosshairsLineDash: null,
-
     /** tooltip 内容框背景色 */
-    tooltipContainerFillColor: 'rgb(255, 255, 255)',
-    tooltipContainerFillOpacity: 0.95,
+    tooltipContainerFillColor: 'rgba(255, 255, 255, 0.9)',
     /** tooltip 内容框阴影 */
-    tooltipContainerShadow: '0px 0px 10px #aeaeae',
+    tooltipContainerShadow: 'rgb(0 0 0 / 16%) 0px 6px 12px 0px',
     /** tooltip 内容框圆角 */
-    tooltipContainerBorderRadius: 3,
+    tooltipContainerBorderRadius: 2,
 
     /** tooltip 文本颜色 */
     tooltipTextFillColor: BLACK_COLORS[65],
     /** tooltip 文本字体大小 */
     tooltipTextFontSize: 12,
     /** tooltip 文本行高 */
-    tooltipTextLineHeight: 12,
-    /** tooltip 文本字体粗细 */
-    tooltipTextFontWeight: 'bold',
+    tooltipTextLineHeight: '20px',
 
-    // -------------------- Geometry labels --------------------
-    /** Geometry label 文本颜色 */
+    // -------------------- label --------------------
+    /** label 文本颜色 */
     labelFillColor: BLACK_COLORS[65],
     labelFillColorDark: '#2c3542',
     labelFillColorLight: '#ffffff',
-    /** Geometry label 文本字体大小 */
+    /** label 文本字体大小 */
     labelFontSize: 12,
-    /** Geometry label 文本行高 */
-    labelLineHeight: 12,
-    /** Geometry label 文本字体粗细 */
-    labelFontWeight: 'normal',
-    /** Geometry label 文本描边颜色 */
-    labelBorderColor: null,
-    /** Geometry label 文本描边粗细 */
-    labelBorder: 0,
 
-    /** Geometry innerLabel 文本颜色 */
-    innerLabelFillColor: WHITE_COLORS[100],
-    /** Geometry innerLabel 文本字体大小 */
-    innerLabelFontSize: 12,
-    /** Geometry innerLabel 文本行高 */
-    innerLabelLineHeight: 12,
-    /** Geometry innerLabel 文本字体粗细 */
-    innerLabelFontWeight: 'normal',
-    /** Geometry innerLabel 文本描边颜色 */
-    innerLabelBorderColor: null,
-    /** Geometry innerLabel 文本描边粗细 */
-    innerLabelBorder: 0,
-
-    /** Geometry overflowLabel 文本颜色 */
-    overflowLabelFillColor: BLACK_COLORS[65],
-    /** Geometry overflowLabel 文本字体大小 */
-    overflowLabelFontSize: 12,
-    /** Geometry overflowLabel 文本行高 */
-    overflowLabelLineHeight: 12,
-    /** Geometry overflowLabel 文本字体粗细 */
-    overflowLabelFontWeight: 'normal',
-    /** Geometry overflowLabel 文本描边颜色 */
-    overflowLabelBorderColor: WHITE_COLORS[100],
-    /** Geometry overflowLabel 文本描边粗细 */
-    overflowLabelBorder: 1,
-
-    /** Geometry label 文本连接线粗细 */
-    labelLineBorder: 1,
-    /** Geometry label 文本连接线颜色 */
-    labelLineBorderColor: BLACK_COLORS[25],
-
-    // -------------------- Geometry 图形样式--------------------
+    // -------------------- 图形样式 --------------------
     /** 点图填充颜色 */
     pointFillColor: brandColor,
     /** 点图填充颜色透明度 */
@@ -281,145 +158,13 @@ export const createLightStyleSheet = (cfg: StyleSheetCfg = {}) => {
     pointBorder: 1,
     /** 点图描边颜色 */
     pointBorderColor: WHITE_COLORS[100],
-    /** 点图描边透明度 */
-    pointBorderOpacity: 1,
 
     /** 点图 active 状态下描边颜色 */
     pointActiveBorderColor: BLACK_COLORS[100],
 
-    /** 点图 selected 状态下描边粗细 */
-    pointSelectedBorder: 2,
     /** 点图 selected 状态下描边颜色 */
     pointSelectedBorderColor: BLACK_COLORS[100],
-
-    /** 点图 inactive 状态下填充颜色透明度 */
-    pointInactiveFillOpacity: 0.3,
-    /** 点图 inactive 状态下描边透明度 */
-    pointInactiveBorderOpacity: 0.3,
-
-    /** 空心点图大小 */
-    hollowPointSize: 4,
-    /** 空心点图描边粗细 */
-    hollowPointBorder: 1,
-    /** 空心点图描边颜色 */
-    hollowPointBorderColor: brandColor,
-    /** 空心点图描边透明度 */
-    hollowPointBorderOpacity: 0.95,
-    hollowPointFillColor: WHITE_COLORS[100],
-
-    /** 空心点图 active 状态下描边粗细 */
-    hollowPointActiveBorder: 1,
-    /** 空心点图 active 状态下描边颜色 */
-    hollowPointActiveBorderColor: BLACK_COLORS[100],
-    /** 空心点图 active 状态下描边透明度 */
-    hollowPointActiveBorderOpacity: 1,
-
-    /** 空心点图 selected 状态下描边粗细 */
-    hollowPointSelectedBorder: 2,
-    /** 空心点图 selected 状态下描边颜色 */
-    hollowPointSelectedBorderColor: BLACK_COLORS[100],
-    /** 空心点图 selected 状态下描边透明度 */
-    hollowPointSelectedBorderOpacity: 1,
-
-    /** 空心点图 inactive 状态下描边透明度 */
-    hollowPointInactiveBorderOpacity: 0.3,
-
-    /** 线图粗细 */
-    lineBorder: 2,
-    /** 线图颜色 */
-    lineBorderColor: brandColor,
-    /** 线图透明度 */
-    lineBorderOpacity: 1,
-
-    /** 线图 Active 状态下粗细 */
-    lineActiveBorder: 3,
-
-    /** 线图 selected 状态下粗细 */
-    lineSelectedBorder: 3,
-
-    /** 线图 inactive 状态下透明度 */
-    lineInactiveBorderOpacity: 0.3,
-
-    /** area 填充颜色 */
-    areaFillColor: brandColor,
-    /** area 填充透明度 */
-    areaFillOpacity: 0.25,
-
-    /** area 在 active 状态下的填充透明度 */
-    areaActiveFillColor: brandColor,
-    areaActiveFillOpacity: 0.5,
-
-    /** area 在 selected 状态下的填充透明度 */
-    areaSelectedFillColor: brandColor,
-    areaSelectedFillOpacity: 0.5,
-
-    /** area inactive 状态下填充透明度 */
-    areaInactiveFillOpacity: 0.3,
-
-    /** hollowArea 颜色 */
-    hollowAreaBorderColor: brandColor,
-    /** hollowArea 边框粗细 */
-    hollowAreaBorder: 2,
-    /** hollowArea 边框透明度 */
-    hollowAreaBorderOpacity: 1,
-
-    /** hollowArea active 状态下的边框粗细 */
-    hollowAreaActiveBorder: 3,
-    hollowAreaActiveBorderColor: BLACK_COLORS[100],
-
-    /** hollowArea selected 状态下的边框粗细 */
-    hollowAreaSelectedBorder: 3,
-    hollowAreaSelectedBorderColor: BLACK_COLORS[100],
-
-    /** hollowArea inactive 状态下的边框透明度 */
-    hollowAreaInactiveBorderOpacity: 0.3,
-
-    /** interval 填充颜色 */
-    intervalFillColor: brandColor,
-    /** interval 填充透明度 */
-    intervalFillOpacity: 0.95,
-
-    /** interval active 状态下边框粗细 */
-    intervalActiveBorder: 1,
-    /** interval active 状态下边框颜色 */
-    intervalActiveBorderColor: BLACK_COLORS[100],
-    intervalActiveBorderOpacity: 1,
-
-    /** interval selected 状态下边框粗细 */
-    intervalSelectedBorder: 2,
-    /** interval selected 状态下边框颜色 */
-    intervalSelectedBorderColor: BLACK_COLORS[100],
-    /** interval selected 状态下边框透明度 */
-    intervalSelectedBorderOpacity: 1,
-
-    /** interval inactive 状态下边框透明度 */
-    intervalInactiveBorderOpacity: 0.3,
-    /** interval inactive 状态下填充透明度 */
-    intervalInactiveFillOpacity: 0.3,
-
-    /** interval 边框粗细 */
-    hollowIntervalBorder: 2,
-    /** hollowInterval 边框颜色 */
-    hollowIntervalBorderColor: brandColor,
-    /** hollowInterval 边框透明度 */
-    hollowIntervalBorderOpacity: 1,
-    hollowIntervalFillColor: WHITE_COLORS[100],
-
-    /** hollowInterval active 状态下边框粗细 */
-    hollowIntervalActiveBorder: 2,
-    /** hollowInterval active 状态下边框颜色 */
-    hollowIntervalActiveBorderColor: BLACK_COLORS[100],
-
-    /** hollowInterval selected 状态下边框粗细 */
-    hollowIntervalSelectedBorder: 3,
-    /** hollowInterval selected 状态下边框颜色 */
-    hollowIntervalSelectedBorderColor: BLACK_COLORS[100],
-    /** hollowInterval selected 状态下边框透明度 */
-    hollowIntervalSelectedBorderOpacity: 1,
-
-    /** hollowInterval inactive 状态下边框透明度 */
-    hollowIntervalInactiveBorderOpacity: 0.3,
   };
 };
 
-export const antvLight = createLightStyleSheet();
+export const light = createLightStyleSheet();
