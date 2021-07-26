@@ -5,12 +5,20 @@
   },
   "demos": [
     {
-      "filename": "distribution.ts",
+      "filename": "distribution-cities.ts",
       "title": {
-        "zh": "分布散点地图",
-        "en": "Scatter map of distribution"
+        "zh": "全国城市与区县分布",
+        "en": "Distribution of cities, districts and counties in China"
       },
-      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/4WtBpqWfnv/afb123fe-62d8-4990-9b45-e088941b3efa.png"
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/gC%24wt99VC6/d5f3e768-6a62-409e-8343-ee0e95675be4.png"
+    },
+    {
+      "filename": "classified-scatter.ts",
+      "title": {
+        "zh": "分类散点",
+        "en": "Classified Scatter Map"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/u31zxgii2R/d3fe9e5f-feb6-4b32-8237-4d79ae99a906.png"
     }
   ]
 }

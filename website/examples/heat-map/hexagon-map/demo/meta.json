@@ -5,10 +5,18 @@
   },
   "demos": [
     {
-      "filename": "hexagon.ts",
+      "filename": "traffic-delay.ts",
       "title": {
-        "zh": "蜂窝热力 3D 地图",
-        "en": "Hexagon thermal 3D map"
+        "zh": "杭州交通高峰期路口延误指数",
+        "en": "Intersection delay index in traffic peak in Hangzhou"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/7W1VDrMpy%24/63f536b0-244a-41e9-9698-c3249a2108a7.png"
+    },
+    {
+      "filename": "hexagon3d.ts",
+      "title": {
+        "zh": "蜂窝热力 3D",
+        "en": "Hexagon thermal 3D"
       },
       "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/fA50QqeP%24T/a5031ad0-7786-4183-bf23-e66dbdf52fe5.png"
     }

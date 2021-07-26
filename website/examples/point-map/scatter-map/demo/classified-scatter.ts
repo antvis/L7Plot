@@ -38,28 +38,29 @@ async function initMap() {
         '#D7F9F0',
       ],
     },
-    size: 4,
+    size: 3,
 
     style: {
-      opacity: 0.5,
+      opacity: 0.8,
       strokeWidth: 0,
     },
 
     label: {
-      visible: true,
+      visible: false,
       field: 'Magnitude',
       style: {
         fill: '#fff',
         fontSize: 12,
-        textAnchor: 'top', // 文本相对锚点的位置 center|left|right|top|bottom|top-left
-        textOffset: [0, 20], // 文本相对锚点的偏移量 [水平, 垂直]
+        textAnchor: 'top',
+        textOffset: [0, 20],
+        padding: [10, 10],
       },
     },
     zoom: {
       position: 'bottomright',
     },
-    scale: {
-      position: 'bottomright',
+    layerMenu: {
+      position: 'topright',
     },
   });
 }

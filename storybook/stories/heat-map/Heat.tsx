@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { HeatMap } from '@antv/l7plot';
 
-class Heat3D extends Component {
+class Heat extends Component {
   public map: HeatMap | undefined;
 
   constructor(props) {
@@ -9,16 +9,16 @@ class Heat3D extends Component {
   }
 
   async initMap() {
-    const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/OOSGL1vhp3/20200726024229.json');
+    const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/S2Pb%26549sG/20210723023614.json');
     const data = await response.json();
 
     const heatMap = new HeatMap('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
-        center: [127.5671666579043, 7.445038892195569],
-        zoom: 2.632456779444394,
-        pitch: 45,
+        zoom: 11.7,
+        center: [120.19660949707033, 30.234747338474293],
+        pitch: 0,
       },
       source: {
         data: data,
@@ -26,10 +26,26 @@ class Heat3D extends Component {
           type: 'geojson',
         },
       },
-      shape: 'heatmap3D',
       size: {
-        field: 'avg',
-        value: ({ avg }) => avg / 100,
+        field: 'count',
+        value: [0, 1],
+      },
+      style: {
+        intensity: 2,
+        radius: 15,
+        opacity: 1,
+        colorsRamp: [
+          { color: 'rgba(33,102,172,0.0)', position: 0 },
+          { color: 'rgb(103,169,207)', position: 0.2 },
+          { color: 'rgb(209,229,240)', position: 0.4 },
+          { color: 'rgb(253,219,199)', position: 0.6 },
+          { color: 'rgb(239,138,98)', position: 0.8 },
+          { color: 'rgb(178,24,43,1.0)', position: 1 },
+        ],
+      },
+
+      zoom: {
+        position: 'bottomright',
       },
     });
 
@@ -60,4 +76,4 @@ class Heat3D extends Component {
   }
 }
 
-export default Heat3D;
+export default Heat;

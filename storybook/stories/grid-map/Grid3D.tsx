@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { HexagonMap } from '@antv/l7plot';
+import { GridMap } from '@antv/l7plot';
 
-class Hexagon extends Component {
-  public map: HexagonMap | undefined;
+class Grid3D extends Component {
+  public map: GridMap | undefined;
 
   constructor(props) {
     super(props);
@@ -10,17 +10,17 @@ class Hexagon extends Component {
 
   async initMap() {
     const response = await fetch(
-      'https://gw.alipayobjects.com/os/basement_prod/a1a8158d-6fe3-424b-8e50-694ccf61c4d7.csv'
+      'https://gw.alipayobjects.com/os/basement_prod/7359a5e9-3c5e-453f-b207-bc892fb23b84.csv'
     );
     const data = await response.text();
 
-    const hexagonMap = new HexagonMap('container', {
+    const gridMap = new GridMap('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
-        pitch: 43,
-        center: [120.13383079335335, 29.9],
-        zoom: 8.2,
+        pitch: 45,
+        center: [109.054293, 29.246265],
+        zoom: 5,
       },
       source: {
         data: data,
@@ -30,44 +30,43 @@ class Hexagon extends Component {
           y: 'lat',
         },
         aggregation: {
-          radius: 2500,
+          radius: 20000,
           field: 'v',
           type: 'sum',
         },
       },
 
-      shape: 'hexagonColumn',
+      shape: 'squareColumn',
       size: {
-        field: 'sum',
-        value: ({ sum }) => {
-          return sum * 200;
+        field: 'count',
+        value: ({ count }) => {
+          return count * 200;
         },
       },
       color: {
-        field: 'sum',
+        field: 'count',
         value: [
-          '#094D4A',
-          '#146968',
-          '#1D7F7E',
-          '#289899',
-          '#34B6B7',
-          '#4AC5AF',
-          '#5FD3A6',
-          '#7BE39E',
-          '#A1EDB8',
-          '#C3F9CC',
-          '#DEFAC0',
-          '#ECFFB1',
-        ],
+          '#8C1EB2',
+          '#8C1EB2',
+          '#DA05AA',
+          '#F0051A',
+          '#FF2A3C',
+          '#FF4818',
+          '#FF4818',
+          '#FF8B18',
+          '#F77B00',
+          '#ED9909',
+          '#ECC357',
+          '#EDE59C',
+        ].reverse(),
       },
       style: {
-        coverage: 0.8,
+        coverage: 0.9,
         angle: 0,
-        opacity: 1.0,
       },
     });
 
-    this.map = hexagonMap;
+    this.map = gridMap;
   }
 
   componentDidMount() {
@@ -94,4 +93,4 @@ class Hexagon extends Component {
   }
 }
 
-export default Hexagon;
+export default Grid3D;

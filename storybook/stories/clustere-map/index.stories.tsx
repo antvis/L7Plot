@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/react';
 
-import BasicDemo from './Basic';
+import EarthquakeMagnitude from './EarthquakeMagnitude';
 
-storiesOf('聚合地图', module).add('分布', () => <BasicDemo />);
+storiesOf('聚合地图', module).add('地震震级聚合', () => <EarthquakeMagnitude />);

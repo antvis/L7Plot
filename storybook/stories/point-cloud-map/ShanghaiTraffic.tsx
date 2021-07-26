@@ -1,49 +1,45 @@
 import React, { Component } from 'react';
-import { HeatMap } from '@antv/l7plot';
+import { PointCloudMap } from '@antv/l7plot';
 
-class Basic extends Component {
-  public map: HeatMap | undefined;
+class ShanghaiTraffic extends Component {
+  public map: PointCloudMap | undefined;
 
   constructor(props) {
     super(props);
   }
 
   async initMap() {
-    const response = await fetch(
-      'https://gw.alipayobjects.com/os/basement_prod/d3564b06-670f-46ea-8edb-842f7010a7c6.json'
-    );
-    const data = await response.json();
+    const response = await fetch('https://gw.alipayobjects.com/os/rmsportal/BElVQFEFvpAKzddxFZxJ.txt');
+    const data = await response.text();
 
-    const heatMap = new HeatMap('container', {
+    const pointCloud = new PointCloudMap('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
-        center: [127.5671666579043, 7.445038892195569],
-        zoom: 2.632456779444394,
+        center: [121.417463, 31.215175],
         pitch: 0,
+        zoom: 11,
       },
       source: {
         data: data,
         parser: {
-          type: 'geojson',
+          type: 'csv',
+          y: 'lat',
+          x: 'lng',
         },
       },
-      size: {
-        field: 'mag',
-      },
 
+      color: '#080298',
+      size: 0.5,
+      style: {
+        opacity: 1,
+      },
       zoom: {
         position: 'bottomright',
       },
-      scale: {
-        position: 'bottomright',
-      },
-      layerMenu: {
-        position: 'topright',
-      },
     });
 
-    this.map = heatMap;
+    this.map = pointCloud;
   }
 
   componentDidMount() {
@@ -70,4 +66,4 @@ class Basic extends Component {
   }
 }
 
-export default Basic;
+export default ShanghaiTraffic;

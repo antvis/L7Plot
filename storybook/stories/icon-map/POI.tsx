@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { registerImages, IconMap } from '@antv/l7plot';
 
-class Basic extends Component {
+class POI extends Component {
   public map: IconMap | undefined;
 
   constructor(props) {
@@ -71,4 +71,4 @@ class Basic extends Component {
   }
 }
 
-export default Basic;
+export default POI;
