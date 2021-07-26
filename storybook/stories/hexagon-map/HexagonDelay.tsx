@@ -31,6 +31,7 @@ class HexagonDelay extends Component {
           type: 'sum',
         },
       },
+      autoFit: true,
 
       shape: 'hexagonColumn',
       size: {

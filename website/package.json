@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "npm run clean && npm run develop",
     "develop": "gatsby develop -H 0.0.0.0 -p 8900 --open",
-    "build": "gatsby build --prefix-paths",
+    "build": "npm run clean && gatsby build --prefix-paths",
     "deploy": "npm run build && gh-pages -d public",
     "serve": "gatsby serve",
     "clean": "gatsby clean",

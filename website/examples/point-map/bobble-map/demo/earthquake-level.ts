@@ -8,8 +8,8 @@ async function initMap() {
     map: {
       type: 'mapbox',
       style: 'dark',
-      center: [102.447303, 37.753574],
-      zoom: 5,
+      center: [103.447303, 31.753574],
+      zoom: 7,
       pitch: 0,
     },
     source: {
@@ -43,6 +43,7 @@ async function initMap() {
       strokeWidth: 0,
     },
     state: { active: { color: '#FFF684' } },
+    autoFit: true,
     zoom: {
       position: 'bottomright',
     },
