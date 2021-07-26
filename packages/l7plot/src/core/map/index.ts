@@ -30,7 +30,7 @@ import { LabelLayerWrapper } from '../../layers/label-layer';
 const DEFAULT_OPTIONS = {
   map: { type: BaseMapType.Amap, style: 'dark' },
   logo: true,
-  autoFit: true,
+  autoFit: false,
 };
 
 export abstract class MapWrapper<O extends IMapOptions> {
