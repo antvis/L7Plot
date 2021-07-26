@@ -16,8 +16,8 @@ class Earthquake extends Component {
       map: {
         type: 'mapbox',
         style: 'dark',
-        center: [102.447303, 37.753574],
-        zoom: 5,
+        center: [103.447303, 31.753574],
+        zoom: 7,
         pitch: 0,
       },
       source: {
@@ -28,6 +28,7 @@ class Earthquake extends Component {
           y: 'lat',
         },
       },
+      autoFit: true,
 
       color: {
         field: 'mag',

@@ -28,6 +28,7 @@ class CuisineNationwide extends Component {
           type: 'geojson',
         },
       },
+      autoFit: true,
 
       color: '#3C1FA8',
       size: 0.5,

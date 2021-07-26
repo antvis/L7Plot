@@ -130,7 +130,7 @@ constructor(container: string | HTMLDivElement, options: MapOptions)
 
 ### `options.`autoFit
 
-`bool` optional default: `true`
+`bool` optional default: `false`
 
 图层完成初始化之后，地图是否自动缩放到图层的数据边界范围。
 

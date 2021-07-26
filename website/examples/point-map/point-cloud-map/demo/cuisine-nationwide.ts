@@ -10,7 +10,7 @@ async function initMap() {
       style: 'dark',
       center: [105.425968, 35.882505],
       pitch: 0,
-      zoom: 11,
+      zoom: 4,
     },
     source: {
       data: data,
@@ -24,6 +24,7 @@ async function initMap() {
     style: {
       opacity: 1,
     },
+    autoFit: true,
     zoom: {
       position: 'bottomright',
     },

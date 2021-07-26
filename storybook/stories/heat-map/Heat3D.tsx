@@ -17,7 +17,7 @@ class Heat3D extends Component {
         type: 'mapbox',
         style: 'dark',
         center: [127.5671666579043, 7.445038892195569],
-        zoom: 2.632456779444394,
+        zoom: 3,
         pitch: 45,
       },
       source: {
@@ -26,6 +26,7 @@ class Heat3D extends Component {
           type: 'geojson',
         },
       },
+      autoFit: true,
       shape: 'heatmap3D',
       size: {
         field: 'avg',

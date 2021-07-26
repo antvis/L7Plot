@@ -21,7 +21,7 @@ async function initMap() {
       type: 'mapbox',
       style: 'dark',
       center: [102.601, 37.32],
-      zoom: 5,
+      zoom: 3,
       pitch: 0,
     },
     source: {
