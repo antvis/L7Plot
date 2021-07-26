@@ -1,5 +1,5 @@
-import TOOLTIP_CSS_CONST from '@antv/l7plot-component/dist/lib/tooltip/constants';
-import LEGEND_CSS_CONST from '@antv/l7plot-component/dist/lib/legend/constants';
+import * as TOOLTIP_CSS_CONST from '@antv/l7plot-component/dist/lib/tooltip/constants';
+import * as LEGEND_CSS_CONST from '@antv/l7plot-component/dist/lib/legend/constants';
 import { IStyleSheet } from '../../types';
 
 /**
@@ -134,13 +134,15 @@ export function createThemeByStyleSheet(styleSheet: IStyleSheet): Record<string,
         },
       },
       label: {
-        textAnchor: 'bottom-left',
-        textOffset: [0, 20],
-        fill: styleSheet.labelFillColor,
-        fontSize: styleSheet.labelFontSize,
-        fontFamily: styleSheet.fontFamily,
-        fillColorDark: styleSheet.labelFillColorDark,
-        fillColorLight: styleSheet.labelFillColorLight,
+        style: {
+          textAnchor: 'center',
+          textOffset: [0, 0],
+          fill: styleSheet.labelFillColor,
+          fontSize: styleSheet.labelFontSize,
+          fontFamily: styleSheet.fontFamily,
+          fillColorDark: styleSheet.labelFillColorDark,
+          fillColorLight: styleSheet.labelFillColorLight,
+        },
       },
     },
   };

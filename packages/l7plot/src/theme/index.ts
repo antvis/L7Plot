@@ -1,18 +1,21 @@
 import { get, lowerCase } from '@antv/util';
 
-import { createTheme } from './util';
+import { createDarkTheme, createTheme } from './util';
 
 const defaultTheme = createTheme({});
+const darkTheme = createDarkTheme({});
 
 // 所有已经存在的主题
 const Themes: Record<string, Record<string, any>> = {
   default: defaultTheme,
+  light: defaultTheme,
+  dark: darkTheme,
 };
 
 /**
  * 获取主题配置信息。
  */
-export function getTheme(theme: string): Record<string, any> {
+export function getTheme(theme = 'default'): Record<string, any> {
   return get(Themes, lowerCase(theme), Themes['default']);
 }
 

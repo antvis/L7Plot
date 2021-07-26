@@ -1,4 +1,4 @@
-import { StyleSheetCfg } from '../../types';
+import { IStyleSheet, StyleSheetCfg } from '../../types';
 
 const WHITE_COLORS = {
   100: '#000',
@@ -71,7 +71,7 @@ const SINGLE_SEQUENCE = [
   '#001D70',
 ];
 
-export const createDarkStyleSheet = (cfg: StyleSheetCfg = {}) => {
+export const createDarkStyleSheet: (cfg?: StyleSheetCfg) => IStyleSheet = (cfg: StyleSheetCfg = {}) => {
   const {
     mapStyle = 'dark',
     subColor = 'rgba(255,255,255,0.05)',
