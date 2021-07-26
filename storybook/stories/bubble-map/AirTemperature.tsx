@@ -50,7 +50,7 @@ class AirTemperature extends Component {
       },
 
       style: {
-        opacity: 0.5,
+        opacity: 0.8,
         strokeWidth: 0,
       },
       state: { active: { color: '#FFF684' } },

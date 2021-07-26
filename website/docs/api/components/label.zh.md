@@ -23,7 +23,7 @@ order: 3
 
 ### `style.`fill
 
-`string` optional default: `'black'`
+`string` optional default: `'#fff'`
 
 字体颜色。
 
