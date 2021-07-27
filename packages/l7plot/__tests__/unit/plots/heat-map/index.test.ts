@@ -1,5 +1,5 @@
 import { HeatMap } from '../../../../src';
-import { DEFAULT_OPTIONS } from '../../../../src/maps/heat-map/constants';
+import { DEFAULT_OPTIONS } from '../../../../src/plots/heat-map/constants';
 import { createDiv } from '../../../helper/dom';
 import data from '../../../data-set/heat-map.json';
 

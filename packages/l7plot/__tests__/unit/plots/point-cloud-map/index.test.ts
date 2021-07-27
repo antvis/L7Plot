@@ -1,5 +1,5 @@
 import { PointCloudMap } from '../../../../src';
-import { DEFAULT_OPTIONS } from '../../../../src/maps/point-cloud-map/constants';
+import { DEFAULT_OPTIONS } from '../../../../src/plots/point-cloud-map/constants';
 import { createDiv } from '../../../helper/dom';
 import data from '../../../data-set/point-temperature.json';
 
