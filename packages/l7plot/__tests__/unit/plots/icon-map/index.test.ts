@@ -1,5 +1,5 @@
 import { registerImages, IconMap } from '../../../../src';
-import { DEFAULT_OPTIONS } from '../../../../src/maps/icon-map/constants';
+import { DEFAULT_OPTIONS } from '../../../../src/plots/icon-map/constants';
 import { createDiv } from '../../../helper/dom';
 
 describe('icon map', () => {

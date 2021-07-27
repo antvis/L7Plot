@@ -1,5 +1,5 @@
 import { GridMap } from '../../../../src';
-import { DEFAULT_OPTIONS } from '../../../../src/maps/grid-map/constants';
+import { DEFAULT_OPTIONS } from '../../../../src/plots/grid-map/constants';
 import { createDiv } from '../../../helper/dom';
 import data from '../../../data-set/heat-map.json';
 

@@ -1,15 +1,15 @@
-import { BubbleMap } from '../../../../src';
-import { DEFAULT_OPTIONS } from '../../../../src/maps/bubble-map/constants';
+import { PointMap } from '../../../../src';
+import { DEFAULT_OPTIONS } from '../../../../src/plots/point-map/constants';
 import { createDiv } from '../../../helper/dom';
 import data from '../../../data-set/point-temperature.json';
 
-describe('bubble map', () => {
+describe('point map', () => {
   it('defaultOptions', () => {
-    expect(BubbleMap.DefaultOptions).toEqual(DEFAULT_OPTIONS);
+    expect(PointMap.DefaultOptions).toEqual(DEFAULT_OPTIONS);
   });
 
   it('source', () => {
-    const bubbleMap = new BubbleMap(createDiv(), {
+    const pointMap = new PointMap(createDiv(), {
       source: {
         data: data.list,
         parser: { type: 'json', x: 'j', y: 'w' },
@@ -22,6 +22,10 @@ describe('bubble map', () => {
         field: 't',
         value: [0, 20],
       },
+      style: {
+        opacity: 0.5,
+        strokeWidth: 0,
+      },
       label: {
         field: 't',
         style: {
@@ -32,15 +36,15 @@ describe('bubble map', () => {
       },
     });
 
-    expect(bubbleMap.type).toEqual('bubble');
-    expect(bubbleMap.bubbleLayer).toBeDefined();
-    expect(bubbleMap.labelLayer).toBeDefined();
+    expect(pointMap.type).toEqual('point');
+    expect(pointMap.pointLayer).toBeDefined();
+    expect(pointMap.labelLayer).toBeDefined();
 
-    bubbleMap.on('loaded', () => setTimeout(() => bubbleMap.destroy(), 0));
+    pointMap.on('loaded', () => setTimeout(() => pointMap.destroy(), 0));
   });
 
   it('event', () => {
-    const bubbleMap = new BubbleMap(createDiv(), {
+    const pointMap = new PointMap(createDiv(), {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -48,15 +52,15 @@ describe('bubble map', () => {
     });
 
     return new Promise<void>((resolve, reject) => {
-      bubbleMap.on('bubbleLayer:add', () => {
+      pointMap.on('pointLayer:add', () => {
         try {
-          expect(bubbleMap.bubbleLayer?.inited).toBeTruthy();
-          expect(bubbleMap.getLayerByName('bubbleLayer')).toBeDefined();
+          expect(pointMap.pointLayer?.inited).toBeTruthy();
+          expect(pointMap.getLayerByName('pointLayer')).toBeDefined();
           resolve();
         } catch (err) {
           reject(err);
         }
-        setTimeout(() => bubbleMap.destroy(), 0);
+        setTimeout(() => pointMap.destroy(), 0);
       });
     });
   });
