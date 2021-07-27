@@ -158,7 +158,6 @@ export abstract class MapWrapper<O extends IMapOptions> {
     const theme = isObject(this.options.theme)
       ? deepAssign({}, getTheme('default'), createTheme(this.options.theme))
       : getTheme(this.options.theme);
-    console.log('theme: ', theme);
     return theme;
   }
 
@@ -506,7 +505,8 @@ export abstract class MapWrapper<O extends IMapOptions> {
    */
   public addLegendControl(options: ILegendOptions) {
     this.removeLegendControl();
-    const legendControlOptions = Object.assign(
+    const legendControlOptions = deepAssign(
+      {},
       { title: '', items: [], domStyles: this.theme['components'].legend.domStyles },
       options
     );
@@ -533,7 +533,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
     }
     const { tooltip } = this.options;
     if (tooltip) {
-      const options = Object.assign({ domStyles: this.theme['components'].tooltip.domStyles }, tooltip);
+      const options = deepAssign({}, { domStyles: this.theme['components'].tooltip.domStyles }, tooltip);
       this.tooltip = new Tooltip(this.scene, this.interactionLayers, options);
       this.tooltip.on('*', (event: IEvent) => this.emit(event.type, event));
     }

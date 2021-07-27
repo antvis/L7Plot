@@ -37,7 +37,7 @@ export function createThemeByStyleSheet(styleSheet: IStyleSheet): Record<string,
     sequenceColors: styleSheet.paletteSequence,
     shapes: {
       point: ['circle', 'square'],
-      line: ['line', 'dot'],
+      line: ['line'],
     },
     sizes: [1, 10],
     geometries: {
