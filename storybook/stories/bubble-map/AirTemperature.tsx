@@ -13,9 +13,9 @@ class AirTemperature extends Component {
     const data = await response.json();
 
     const bubbleMap = new BubbleMap('container', {
+      theme: 'dark',
       map: {
         type: 'mapbox',
-        style: 'dark',
         center: [102.447303, 37.753574],
         zoom: 5,
         pitch: 0,
@@ -50,7 +50,7 @@ class AirTemperature extends Component {
       },
 
       style: {
-        opacity: 0.5,
+        opacity: 0.8,
         strokeWidth: 0,
       },
       state: { active: { color: '#FFF684' } },

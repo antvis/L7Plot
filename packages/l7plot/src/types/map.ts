@@ -106,14 +106,9 @@ export interface IMapOptions {
   readonly state?: IStateAttribute;
 
   /**
-   * 颜色色板
-   */
-  readonly colors?: ColorsAttr;
-
-  /**
    * 主题，字符串或 object
    */
-  readonly theme?: string | Record<string, unknown>;
+  readonly theme?: string | Record<string, any>;
 
   /**
    * 数据标签配置

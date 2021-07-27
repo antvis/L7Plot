@@ -12,6 +12,9 @@ export {
   unregisterIconFont,
 } from './core/map/register';
 
+/** 主题注册 */
+export { getTheme, registerTheme } from './theme';
+
 /** G7Plot 的 MapWrapper 基类 */
 export { MapWrapper } from './core/map';
 
