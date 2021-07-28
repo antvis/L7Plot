@@ -58,6 +58,10 @@ export abstract class MapWrapper<O extends IMapOptions> {
    */
   public inited = false;
   /**
+   * 是否场景与所有图层加载完成
+   */
+  public loaded = false;
+  /**
    * 是否场景加载完成
    */
   public sceneLoaded = false;
@@ -241,14 +245,20 @@ export abstract class MapWrapper<O extends IMapOptions> {
       this.initTooltip();
     } else {
       const layerGroup = this.createLayers(this.source);
+      const onLoaded = () => {
+        this.loaded = true;
+        this.emit('loaded');
+        this.initControls();
+        this.initTooltip();
+      };
       if (this.scene['sceneService'].loaded) {
         this.sceneLoaded = true;
-        this.layersLoaded && this.emit('loaded');
+        this.layersLoaded && onLoaded();
       } else {
         // TODO: once
         this.scene.on('loaded', () => {
           this.sceneLoaded = true;
-          this.layersLoaded && this.emit('loaded');
+          this.layersLoaded && onLoaded();
         });
       }
       if (layerGroup.isEmpty()) {
@@ -256,16 +266,12 @@ export abstract class MapWrapper<O extends IMapOptions> {
       } else {
         layerGroup.once('inited-all', () => {
           this.layersLoaded = true;
-          this.sceneLoaded && this.emit('loaded');
+          this.sceneLoaded && onLoaded();
         });
       }
       layerGroup.addTo(this.scene);
       this.layerGroup = layerGroup;
     }
-    this.once('loaded', () => {
-      this.initControls();
-      this.initTooltip();
-    });
   }
 
   /**
