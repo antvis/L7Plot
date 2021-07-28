@@ -150,11 +150,12 @@ export interface IHeatmapLayerConfig extends Partial<IBaseLayerConfig> {
 /**
  * 线图层基础配置
  */
-export interface ILIneLayerConfig extends Partial<IBaseLayerConfig & ILineLayerStyleOptions> {
+export interface ILineLayerConfig extends Partial<IBaseLayerConfig & ILineLayerStyleOptions> {
   shape?: ShapeAttr<string>;
-  color?: ColorAttr;
   size?: SizeAttr;
-  state?: IStateAttribute;
+  color?: ColorAttr;
+  scale?: 'linear' | 'log' | 'pow' | 'quantile' | 'quantize' | 'cat';
+  animate?: boolean;
 
   style?: ILineLayerStyleOptions;
 }

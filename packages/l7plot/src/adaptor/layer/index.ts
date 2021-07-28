@@ -157,7 +157,7 @@ export class MappingLayer {
     }
   }
 
-  static scale(layer: ILayer, field: string | IScaleOptions, cfg: IScale) {
+  static scale(layer: ILayer, field: string | IScaleOptions, cfg?: IScale) {
     /**
      * scale 的几种情况
      * layer.scale('name', {type: 'cat'});

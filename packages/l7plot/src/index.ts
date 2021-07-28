@@ -56,3 +56,7 @@ export type { GridMapOptions } from './plots/grid-map/interface';
 // 蜂窝地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { HexagonMap } from './plots/hexagon-map';
 export type { HexagonMapOptions } from './plots/hexagon-map/interface';
+
+// 线地图及类型定义
+export { LineMap } from './plots/line-map';
+export type { LineMapOptions } from './plots/line-map/interface';

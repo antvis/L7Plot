@@ -31,6 +31,7 @@ export enum MapType {
   HeatMap = 'heatMap',
   Grid = 'grid',
   Hexagon = 'hexagon',
+  Line = 'line',
 }
 
 /**
