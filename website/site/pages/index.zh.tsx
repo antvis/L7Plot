@@ -5,6 +5,7 @@ import Banner from '@antv/gatsby-theme-antv/site/components/Banner';
 // import Features from '@antv/gatsby-theme-antv/site/components/Features';
 // import Cases from '@antv/gatsby-theme-antv/site/components/Cases';
 import BannerSVG from '@antv/gatsby-theme-antv/site/components/BannerSVG';
+import './index.less';
 
 const IndexPage = () => {
   const { t, i18n } = useTranslation();

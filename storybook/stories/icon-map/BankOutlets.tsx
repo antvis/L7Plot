@@ -9,11 +9,11 @@ class POI extends Component {
     const images = [
       {
         id: '160104',
-        image: '',
+        image: 'https://gw.alipayobjects.com/zos/antfincdn/tWx6gaMr9P/zhongguoyinhang.png',
       },
       {
         id: '160139',
-        image: 'https://gw.alipayobjects.com/zos/antfincdn/tWx6gaMr9P/zhongguoyinhang.png',
+        image: 'https://gw.alipayobjects.com/zos/antfincdn/KDjael3M3h/youzhengyinhang.png',
       },
       {
         id: '160105',

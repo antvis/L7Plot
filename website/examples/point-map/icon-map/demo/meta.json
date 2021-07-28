@@ -5,12 +5,20 @@
   },
   "demos": [
     {
+      "filename": "bank.ts",
+      "title": {
+        "zh": "银行网点",
+        "en": "Bank outlets"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/zWvhGhbuTY/08a0857b-814b-4165-b787-b375d73a5b6c.png"
+    },
+    {
       "filename": "poi.ts",
       "title": {
         "zh": "POI 图标",
         "en": "POI Icon"
       },
-      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/tnfI9FspYv/47f73054-b188-4c9a-8391-fef18b00c1d4.png"
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/cfT2Jb1Fi2/83261ea9-3ccc-4684-a47a-721343c0279b.png"
     }
   ]
 }
