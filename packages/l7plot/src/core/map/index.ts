@@ -246,10 +246,10 @@ export abstract class MapWrapper<O extends IMapOptions> {
     } else {
       const layerGroup = this.createLayers(this.source);
       const onLoaded = () => {
-        this.loaded = true;
-        this.emit('loaded');
         this.initControls();
         this.initTooltip();
+        this.loaded = true;
+        this.emit('loaded');
       };
       if (this.scene['sceneService'].loaded) {
         this.sceneLoaded = true;
