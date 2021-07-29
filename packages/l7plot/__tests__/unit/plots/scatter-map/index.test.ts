@@ -1,5 +1,5 @@
 import { ScatterMap } from '../../../../src';
-import { DEFAULT_OPTIONS } from '../../../../src/maps/scatter-map/constants';
+import { DEFAULT_OPTIONS } from '../../../../src/plots/scatter-map/constants';
 import { createDiv } from '../../../helper/dom';
 import data from '../../../data-set/point-temperature.json';
 

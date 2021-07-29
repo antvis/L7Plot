@@ -9,9 +9,9 @@ async function initMap() {
     map: {
       type: 'mapbox',
       style: 'dark',
-      center: [121.417463, 31.215175],
+      center: [116.417463, 40.015175],
       pitch: 0,
-      zoom: 11,
+      zoom: 9,
     },
     source: {
       data: data,
@@ -43,6 +43,7 @@ async function initMap() {
     style: {
       opacity: 1,
     },
+    autoFit: true,
     zoom: {
       position: 'bottomright',
     },

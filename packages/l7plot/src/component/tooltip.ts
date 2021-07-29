@@ -7,7 +7,7 @@ import {
   ITooltipOptions as ITooltipComponentOptions,
   ITooltipListItem,
 } from '@antv/l7plot-component';
-import { get as getValueByPath } from 'lodash-es';
+import { isEqual, get as getValueByPath } from 'lodash-es';
 import { ILayer, ILngLat, TooltipAnchorType, IEvent, ITooltipOptions } from '../types';
 import { deepAssign } from '../utils';
 
@@ -38,6 +38,10 @@ export class Tooltip extends EventEmitter {
    * tooltip 是否可见
    */
   public visible = false;
+  /**
+   * TooltipComponent 更新项
+   */
+  private lastComponentOptions: any;
 
   constructor(scene: Scene, interactionLayers: ILayer[], options: ITooltipOptions) {
     super();
@@ -142,21 +146,20 @@ export class Tooltip extends EventEmitter {
   public showTooltip(position: ILngLat, componentOptions: Partial<ITooltipComponentOptions>) {
     this.update(position, componentOptions);
     this.addTo();
-    const event: IEvent = { type: 'tooltip:show' };
-    this.emit('tooltip:show', event);
   }
 
   public hideTooltip() {
     this.remove();
-    const event: IEvent = { type: 'tooltip:hide' };
-    this.emit('tooltip:hide', event);
   }
 
   /**
    * 更新 tooltip
    */
   public update(position: ILngLat, componentOptions: Partial<ITooltipComponentOptions>) {
-    this.tooltipComponent.update(componentOptions);
+    if (!isEqual(this.lastComponentOptions, componentOptions)) {
+      this.tooltipComponent.update(componentOptions);
+      this.lastComponentOptions = componentOptions;
+    }
     this.setPostion(position);
   }
 
@@ -185,6 +188,8 @@ export class Tooltip extends EventEmitter {
     if (this.visible) return;
     this.scene.addMarker(this.marker);
     this.visible = true;
+    const event: IEvent = { type: 'tooltip:show' };
+    this.emit('tooltip:show', event);
   }
 
   /**
@@ -194,6 +199,8 @@ export class Tooltip extends EventEmitter {
     if (!this.visible) return;
     this.marker.remove();
     this.visible = false;
+    const event: IEvent = { type: 'tooltip:hide' };
+    this.emit('tooltip:hide', event);
   }
 
   /**

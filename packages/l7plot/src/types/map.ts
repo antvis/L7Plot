@@ -2,7 +2,7 @@ import { Map as MapboxglMap } from 'mapbox-gl';
 import { IAMapInstance, IMapboxInstance } from '@antv/l7-maps/typings';
 import { IMapConfig as MapConfig, IStatusOptions, PositionName, ISourceCFG } from '@antv/l7-core';
 import Source from '@antv/l7-source';
-import { ColorsAttr, IStateAttribute } from './attr';
+import { IStateAttribute } from './attr';
 import { ILabelOptions } from './label';
 import { IPopupOptions } from './popup';
 import { ITooltipOptions } from './tooltip';
@@ -106,14 +106,9 @@ export interface IMapOptions {
   readonly state?: IStateAttribute;
 
   /**
-   * 颜色色板
-   */
-  readonly colors?: ColorsAttr;
-
-  /**
    * 主题，字符串或 object
    */
-  readonly theme?: string | Record<string, unknown>;
+  readonly theme?: string | Record<string, any>;
 
   /**
    * 数据标签配置

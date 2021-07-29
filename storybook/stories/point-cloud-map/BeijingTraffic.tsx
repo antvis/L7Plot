@@ -29,6 +29,7 @@ class BeijingTraffic extends Component {
           x: 'lng',
         },
       },
+      autoFit: true,
 
       color: {
         field: 'type',

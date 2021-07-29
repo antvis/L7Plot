@@ -37,6 +37,7 @@
     "url": "https://github.com/antvis/L7Plot/issues"
   },
   "devDependencies": {
+    "@types/lodash-es": "^4.17.4",
     "typedoc": "^0.21.2"
   },
   "dependencies": {

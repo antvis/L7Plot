@@ -1,12 +1,13 @@
 import { getLayerStyleAttribute } from '../../../helper/layer';
 import { PointLayerWrapper } from '../../../../src/layers/point-layer';
 import { Source } from '../../../../src/types';
+import { IPointLayerOptions } from '../../../../src/layers/point-layer/interface';
 
 describe('mapping layer', () => {
   const source = new Source([], { parser: { type: 'json', x: 'x', y: 'y' } });
 
   it('mapping shape', () => {
-    const layerWrapper = new PointLayerWrapper({
+    const layerWrapper = new PointLayerWrapper<IPointLayerOptions>({
       source: source,
       shape: 'circle',
     });
@@ -49,7 +50,7 @@ describe('mapping layer', () => {
   });
 
   it('mapping size', () => {
-    const layerWrapper = new PointLayerWrapper({
+    const layerWrapper = new PointLayerWrapper<IPointLayerOptions>({
       source: source,
       size: 12,
     });
@@ -88,7 +89,7 @@ describe('mapping layer', () => {
   });
 
   it('mapping color', () => {
-    const layerWrapper = new PointLayerWrapper({
+    const layerWrapper = new PointLayerWrapper<IPointLayerOptions>({
       source: source,
       color: 'red',
     });

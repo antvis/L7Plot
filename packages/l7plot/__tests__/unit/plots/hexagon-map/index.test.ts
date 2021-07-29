@@ -1,5 +1,5 @@
 import { HexagonMap } from '../../../../src';
-import { DEFAULT_OPTIONS } from '../../../../src/maps/hexagon-map/constants';
+import { DEFAULT_OPTIONS } from '../../../../src/plots/hexagon-map/constants';
 import { createDiv } from '../../../helper/dom';
 import data from '../../../data-set/heat-map.json';
 

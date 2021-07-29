@@ -6,3 +6,4 @@ export * from './tooltip';
 export * from './popup';
 export * from './control';
 export * from './legend';
+export * from './theme';

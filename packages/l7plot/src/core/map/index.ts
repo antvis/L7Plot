@@ -2,7 +2,7 @@ import { Scene } from '@antv/l7-scene';
 import { Mapbox, GaodeMap } from '@antv/l7-maps';
 import { Scale, Layers, Zoom } from '@antv/l7-component';
 import EventEmitter from '@antv/event-emitter';
-import { isBoolean } from '@antv/util';
+import { isObject, isBoolean } from '@antv/util';
 import { Tooltip } from '../../component/tooltip';
 import { Legend } from '../../component/legend';
 import { deepAssign } from '../../utils';
@@ -26,11 +26,13 @@ import { LayerGroup } from '../layer/layer-group';
 import { LayerEventList, MapEventList, SceneEventList } from './constants';
 import { FONT_FACE_CACHE, ICON_FONT_CACHE, IMAGES_CACHE } from './register';
 import { LabelLayerWrapper } from '../../layers/label-layer';
+import { getTheme } from '../../theme';
+import { createTheme } from '../../theme/util';
 
 const DEFAULT_OPTIONS = {
-  map: { type: BaseMapType.Amap, style: 'dark' },
+  map: { type: BaseMapType.Amap },
   logo: true,
-  autoFit: true,
+  autoFit: false,
 };
 
 export abstract class MapWrapper<O extends IMapOptions> {
@@ -55,6 +57,10 @@ export abstract class MapWrapper<O extends IMapOptions> {
    * 是否首次渲染
    */
   public inited = false;
+  /**
+   * 是否场景与所有图层加载完成
+   */
+  public loaded = false;
   /**
    * 是否场景加载完成
    */
@@ -88,6 +94,10 @@ export abstract class MapWrapper<O extends IMapOptions> {
    */
   protected abstract interactionLayers: ILayer[];
   /**
+   * 主题配置
+   */
+  protected theme: Record<string, any>;
+  /**
    * zoom 放缩器 Control
    */
   public zoomControl: Zoom | undefined;
@@ -112,6 +122,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
     this.options = deepAssign({}, this.getDefaultOptions(), options);
     this.container = this.createContainer(container);
 
+    this.theme = this.createTheme();
     this.scene = this.createScene();
     this.source = this.createSource();
 
@@ -145,13 +156,24 @@ export abstract class MapWrapper<O extends IMapOptions> {
   }
 
   /**
+   * 注册主题
+   */
+  private createTheme() {
+    const theme = isObject(this.options.theme)
+      ? deepAssign({}, getTheme('default'), createTheme(this.options.theme))
+      : getTheme(this.options.theme);
+    return theme;
+  }
+
+  /**
    * 创建 map 容器
    */
   private createMap() {
     const mapConfig = this.options.map ? this.options.map : DEFAULT_OPTIONS.map;
     const { type, ...config } = mapConfig;
+    const options = Object.assign({ style: this.theme['mapStyle'] }, config);
 
-    return type === BaseMapType.Amap ? new GaodeMap(config) : new Mapbox(config);
+    return type === BaseMapType.Amap ? new GaodeMap(options) : new Mapbox(options);
   }
 
   /**
@@ -223,14 +245,20 @@ export abstract class MapWrapper<O extends IMapOptions> {
       this.initTooltip();
     } else {
       const layerGroup = this.createLayers(this.source);
+      const onLoaded = () => {
+        this.initControls();
+        this.initTooltip();
+        this.loaded = true;
+        this.emit('loaded');
+      };
       if (this.scene['sceneService'].loaded) {
         this.sceneLoaded = true;
-        this.layersLoaded && this.emit('loaded');
+        this.layersLoaded && onLoaded();
       } else {
         // TODO: once
         this.scene.on('loaded', () => {
           this.sceneLoaded = true;
-          this.layersLoaded && this.emit('loaded');
+          this.layersLoaded && onLoaded();
         });
       }
       if (layerGroup.isEmpty()) {
@@ -238,16 +266,12 @@ export abstract class MapWrapper<O extends IMapOptions> {
       } else {
         layerGroup.once('inited-all', () => {
           this.layersLoaded = true;
-          this.sceneLoaded && this.emit('loaded');
+          this.sceneLoaded && onLoaded();
         });
       }
       layerGroup.addTo(this.scene);
       this.layerGroup = layerGroup;
     }
-    this.once('loaded', () => {
-      this.initControls();
-      this.initTooltip();
-    });
   }
 
   /**
@@ -487,7 +511,11 @@ export abstract class MapWrapper<O extends IMapOptions> {
    */
   public addLegendControl(options: ILegendOptions) {
     this.removeLegendControl();
-    const legendControlOptions = Object.assign({}, { title: '', items: [] }, options);
+    const legendControlOptions = deepAssign(
+      {},
+      { title: '', items: [], domStyles: this.theme['components'].legend.domStyles },
+      options
+    );
     this.legendControl = new Legend(legendControlOptions);
     this.scene.addControl(this.legendControl);
   }
@@ -511,7 +539,8 @@ export abstract class MapWrapper<O extends IMapOptions> {
     }
     const { tooltip } = this.options;
     if (tooltip) {
-      this.tooltip = new Tooltip(this.scene, this.interactionLayers, tooltip);
+      const options = deepAssign({}, { domStyles: this.theme['components'].tooltip.domStyles }, tooltip);
+      this.tooltip = new Tooltip(this.scene, this.interactionLayers, options);
       this.tooltip.on('*', (event: IEvent) => this.emit(event.type, event));
     }
   }
