@@ -43,11 +43,6 @@ export class Heatmap<O extends HeatmapOptions = HeatmapOptions> extends MapWrapp
   }
 
   /**
-   * 带交互的图层
-   */
-  protected interactionLayers = [this.heatmapLayer];
-
-  /**
    * 获取默认配置
    */
   protected getDefaultOptions(): Partial<O> {
@@ -80,6 +75,8 @@ export class Heatmap<O extends HeatmapOptions = HeatmapOptions> extends MapWrapp
       this.labelLayerWrapper = this.createLabelLayer(this.source, this.options.label);
       layerGroup.addlayer(this.labelLayerWrapper.layer);
     }
+
+    this.interactionLayers = [this.heatmapLayerWrapper.layer];
 
     return layerGroup;
   }
