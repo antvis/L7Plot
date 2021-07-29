@@ -21,7 +21,7 @@ export function Basic() {
         source: {
           data: source,
         },
-        size: 1.5,
+        size: () => 1.5,
         color: {
           field: '标准名称',
           value: ['#5B8FF9', '#5CCEA1', '#5D7092'],
