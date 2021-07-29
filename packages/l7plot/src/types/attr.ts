@@ -1,6 +1,6 @@
 import { ScaleTypeName, IAnimateOption, IActiveOption } from '@antv/l7-core';
 
-export type Callback<T> = (data: Record<string, any>) => T;
+export type Callback<T> = (data: Record<string, any>) => T | T[];
 
 /** 颜色色板 */
 export type ColorsAttr = string | string[];
