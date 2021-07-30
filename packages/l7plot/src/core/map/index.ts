@@ -326,7 +326,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
 
     this.scene.setRotation(rotation);
 
-    if (style) {
+    if (style && style !== this.options.map?.style) {
       this.scene.setMapStyle(style);
     }
 
@@ -532,15 +532,19 @@ export abstract class MapWrapper<O extends IMapOptions> {
   }
 
   /**
+   * 获取 legend 配置项
+   * 由各图各自实现，不同的图 legend 可能不同
+   */
+  protected getLegendOptions(): ILegendOptions {
+    return { domStyles: this.theme['components'].legend.domStyles };
+  }
+
+  /**
    * 添加 legend 控件
    */
   public addLegendControl(options: ILegendOptions) {
     this.removeLegendControl();
-    const legendControlOptions = deepAssign(
-      {},
-      { title: '', items: [], domStyles: this.theme['components'].legend.domStyles },
-      options
-    );
+    const legendControlOptions = deepAssign({}, this.getLegendOptions(), options);
     this.legendControl = new Legend(legendControlOptions);
     this.scene.addControl(this.legendControl);
   }

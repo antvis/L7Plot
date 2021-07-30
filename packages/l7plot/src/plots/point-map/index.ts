@@ -4,8 +4,9 @@ import { MapWrapper } from '../../core/map';
 import { DEFAULT_OPTIONS, POINT_LAYER_OPTIONS_KEYS } from './constants';
 import { PointLayerWrapper } from '../../layers/point-layer';
 import { LabelLayerWrapper } from '../../layers/label-layer';
-import { ILayer, Source } from '../../types';
+import { ILayer, ILegendOptions, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
+import { getColorLegendItems } from './helper';
 
 export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWrapper<O> {
   /**
@@ -100,5 +101,17 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
         this.layerGroup.removelayer(this.labelLayerWrapper.layer);
       }
     }
+  }
+
+  /**
+   * 实现 legend 配置项
+   */
+  protected getLegendOptions(): ILegendOptions {
+    const colorLegendItems = this.pointLayer.getLegendItems('color');
+    if (colorLegendItems.length === 0) return {};
+
+    const items = getColorLegendItems(colorLegendItems);
+
+    return { items };
   }
 }
