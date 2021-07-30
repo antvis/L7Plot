@@ -2,7 +2,7 @@ import { Map as MapboxglMap } from 'mapbox-gl';
 import { IAMapInstance, IMapboxInstance } from '@antv/l7-maps/typings';
 import { IStatusOptions, PositionName, ISourceCFG, MapStyle } from '@antv/l7-core';
 import Source from '@antv/l7-source';
-import { AnimateAttr, ColorAttr, IStateAttribute } from './attr';
+import { IStateAttribute } from './attr';
 import { ILabelOptions } from './label';
 import { IPopupOptions } from './popup';
 import { ITooltipOptions } from './tooltip';
@@ -183,12 +183,4 @@ export interface IMapOptions {
    * layerMenu 配置
    */
   readonly layerMenu?: false | ILayerMenuControlOptions;
-  /**
-   * 是否开启动画
-   */
-  readonly animate?: AnimateAttr;
-  /**
-   * 颜色
-   */
-  readonly color?: ColorAttr;
 }
