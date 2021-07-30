@@ -21,6 +21,7 @@ import {
   ILabelOptions,
   ILayer,
   ISourceCFG,
+  UpdateMapConfig,
 } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { LayerEventList, MapEventList, SceneEventList } from './constants';
@@ -92,7 +93,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
   /**
    * 带交互的图层
    */
-  protected abstract interactionLayers: ILayer[];
+  protected interactionLayers: ILayer[] = [];
   /**
    * 主题配置
    */
@@ -238,13 +239,14 @@ export abstract class MapWrapper<O extends IMapOptions> {
    * 渲染
    */
   public render() {
+    const layerGroup = this.createLayers(this.source);
     if (this.inited) {
-      this.updateLayers(this.options);
-      // this.scene.render();
+      this.layerGroup.removeAllLayer();
+      layerGroup.addTo(this.scene);
+      this.layerGroup = layerGroup;
       this.initControls();
       this.initTooltip();
     } else {
-      const layerGroup = this.createLayers(this.source);
       const onLoaded = () => {
         this.initControls();
         this.initTooltip();
@@ -299,6 +301,9 @@ export abstract class MapWrapper<O extends IMapOptions> {
    * 更新: 更新配置且重新渲染
    */
   public update(options: Partial<O>) {
+    if (options.map) {
+      this.updateMap(options.map);
+    }
     this.updateOption(options);
     this.render();
   }
@@ -308,6 +313,26 @@ export abstract class MapWrapper<O extends IMapOptions> {
    */
   public updateOption(options: Partial<O>) {
     this.options = deepAssign({}, this.options, options);
+  }
+
+  /**
+   * 更新: 地图底图配置
+   */
+  public updateMap(updateMapConfig: UpdateMapConfig) {
+    if (!this.scene) return;
+    const { style, center, zoom, rotation = 0, pitch = 0 } = updateMapConfig;
+
+    this.scene.setPitch(pitch);
+
+    this.scene.setRotation(rotation);
+
+    if (style) {
+      this.scene.setMapStyle(style);
+    }
+
+    if (zoom && center) {
+      this.scene.setZoomAndCenter(zoom, center);
+    }
   }
 
   /**

@@ -1,6 +1,6 @@
 import { Map as MapboxglMap } from 'mapbox-gl';
 import { IAMapInstance, IMapboxInstance } from '@antv/l7-maps/typings';
-import { IMapConfig as MapConfig, IStatusOptions, PositionName, ISourceCFG } from '@antv/l7-core';
+import { IStatusOptions, PositionName, ISourceCFG, MapStyle } from '@antv/l7-core';
 import Source from '@antv/l7-source';
 import { IStateAttribute } from './attr';
 import { ILabelOptions } from './label';
@@ -45,9 +45,49 @@ export enum BaseMapType {
 /**
  * 地图配置
  */
-export interface IMapConfig extends Omit<MapConfig, 'id'> {
+export interface IMapConfig {
+  /**
+   * 底图类型
+   */
   type?: 'amap' | 'mapbox';
+  /**
+   * 地图
+   */
+  token?: string;
+  /**
+   * 中心点
+   */
+  center?: [number, number];
+  /**
+   * 地图倾角
+   */
+  pitch?: number;
+  /**
+   * 地图旋转角度
+   */
+  rotation?: number;
+  /**
+   * 缩放等级
+   */
+  zoom?: number;
+  /**
+   * 底图样式
+   */
+  style?: MapStyle;
+  /**
+   * 最小缩放等级
+   */
+  minZoom?: number;
+  /**
+   * 最大缩放等级
+   */
+  maxZoom?: number;
 }
+
+/**
+ * 地图更新配置
+ */
+export type UpdateMapConfig = Pick<IMapConfig, 'center' | 'pitch' | 'rotation' | 'zoom' | 'style'>;
 
 /**
  * logo 配置

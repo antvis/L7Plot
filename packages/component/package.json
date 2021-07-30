@@ -16,7 +16,6 @@
     "build": "npm run clean && npm run build:cjs && npm run build:esm",
     "build:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib",
     "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm",
-    "build:umd": "tsc -p tsconfig.json --target ES5 --module UMD --outDir dist/umd",
     "rollup": "rollup -c rollup.config.js"
   },
   "keywords": [
