@@ -43,11 +43,6 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
   }
 
   /**
-   * 带交互的图层
-   */
-  protected interactionLayers = [this.pointLayer];
-
-  /**
    * 获取默认配置
    */
   protected getDefaultOptions(): Partial<O> {
@@ -80,6 +75,8 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
       this.labelLayerWrapper = this.createLabelLayer(source, this.options.label);
       layerGroup.addlayer(this.labelLayerWrapper.layer);
     }
+
+    this.interactionLayers = [this.pointLayerWrapper.layer];
 
     return layerGroup;
   }
