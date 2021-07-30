@@ -36,15 +36,28 @@ export function Basic() {
   }, []);
 
   return (
-    <div
-      id="container"
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-      }}
-    />
+    <>
+      <div
+        onClick={() => {
+          map.current?.update({
+            color: 'red',
+            animate: false,
+          });
+        }}
+        style={{ color: 'red', fontSize: 40, zIndex: 1000 }}
+      >
+        update
+      </div>
+      <div
+        id="container"
+        style={{
+          position: 'absolute',
+          top: 80,
+          left: 0,
+          right: 0,
+          bottom: 0,
+        }}
+      />
+    </>
   );
 }

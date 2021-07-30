@@ -33,6 +33,7 @@ export class LineMap<O extends LineMapOptions = LineMapOptions> extends MapWrapp
   }
 
   protected updateLayers(options: Partial<O>): void {
-    throw new Error('Method not implemented.');
+    const pointLayerConfig = pick<any>(options, LINE_LAYER_OPTIONS_KEYS);
+    this.lineLayerWrapper.updateOptions(pointLayerConfig);
   }
 }

@@ -53,7 +53,7 @@ export type RotateAttr = number | Callback<number> | IRotateStyleAttribute;
 export type ShapeAttr<T> = T | Callback<T> | IShapeStyleAttribute<T>;
 
 /** 图形动画 */
-export type animateAttr = boolean | Partial<IAnimateOption>;
+export type AnimateAttr = boolean | Partial<IAnimateOption>;
 
 /** 聚合方法 */
 export type AggregationMethod = 'count' | 'max' | 'min' | 'sum' | 'mean';

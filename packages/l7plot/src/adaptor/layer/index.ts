@@ -7,7 +7,7 @@ import {
   SizeAttr,
   ShapeAttr,
   RotateAttr,
-  animateAttr,
+  AnimateAttr,
   IStateAttribute,
 } from '../../types/';
 
@@ -146,7 +146,7 @@ export class MappingLayer {
     }
   }
 
-  static animate(layer: ILayer, animate: animateAttr) {
+  static animate(layer: ILayer, animate: AnimateAttr) {
     /**
      * animate 的几种情况
      * layer.animate(true);

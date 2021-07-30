@@ -1,5 +1,5 @@
 import { IPointLayerStyleOptions, pointShape } from '../../core/layer/interface';
-import { animateAttr, ColorAttr, IMapOptions, SizeAttr } from '../../types';
+import { AnimateAttr, ColorAttr, IMapOptions, SizeAttr } from '../../types';
 import { ShapeAttr } from '../../types';
 
 /** 点地图的配置类型定义 */
@@ -23,5 +23,5 @@ export interface PointMapOptions extends IMapOptions {
   /**
    * animation 配置
    */
-  animate?: animateAttr;
+  animate?: AnimateAttr;
 }

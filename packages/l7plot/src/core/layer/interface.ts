@@ -1,6 +1,6 @@
 import { IColorRamp } from '@antv/l7-utils';
 import { ILayer, ILayerConfig, BlendType, ILabelOptions, Source } from '../../types';
-import { animateAttr, ColorAttr, IStateAttribute, ShapeAttr, SizeAttr } from '../../types/attr';
+import { AnimateAttr, ColorAttr, IStateAttribute, ShapeAttr, SizeAttr } from '../../types/attr';
 
 /**
  * 点图层 图层样式
@@ -123,7 +123,7 @@ export interface IPointLayerConfig extends Partial<IBaseLayerConfig & IPointLaye
   state?: IStateAttribute;
 
   style?: IPointLayerStyleOptions;
-  animate?: animateAttr;
+  animate?: AnimateAttr;
 }
 
 /**
