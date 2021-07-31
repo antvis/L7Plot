@@ -2,7 +2,7 @@ import { HeatMapOptions } from './interface';
 import { MapWrapper } from '../../core/map';
 import { DEFAULT_OPTIONS } from './constants';
 import { Heatmap } from '../heatmap';
-import { ILayer } from '../../types';
+import { ILayer, ILegendOptions } from '../../types';
 export class HeatMap extends Heatmap<HeatMapOptions> {
   /**
    * 默认配置项
@@ -35,5 +35,24 @@ export class HeatMap extends Heatmap<HeatMapOptions> {
     const heatmapLayerConfig = { name: 'heatmapLayer' };
 
     return { heatmapLayerConfig };
+  }
+
+  /**
+   * 实现 legend 配置项
+   */
+  protected getLegendOptions(): ILegendOptions {
+    const sizeLegendItems = this.heatmapLayer.getLegendItems('size');
+    console.log('this.heatmapLayer: ', this.heatmapLayer);
+    if (sizeLegendItems.length === 0) return {};
+    console.log('sizeLegendItems: ', sizeLegendItems);
+
+    const tick = [sizeLegendItems[0].value, sizeLegendItems[sizeLegendItems.length - 1].value];
+    console.log('tick: ', tick);
+    const colors = this.options.style?.colorsRamp.map(({ color }) => color);
+    console.log('colors: ', colors);
+
+    // const items = getColorLegendItems(sizeLegendItems);
+
+    return { items: [] };
   }
 }

@@ -31,8 +31,8 @@ export const getColorLegendItems = (legendItems: LegendItemI[] | LegendItemT[]):
   } else {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    items = legendItems.slice();
+    items = legendItems.map((item) => ({ ...item, value: item.value.map((value) => Math.ceil(value)) }));
   }
 
-  return items.map((item) => ({ ...item, value: item.value[1] }));
+  return items.map((item) => ({ ...item, value: item.value.join('-') }));
 };
