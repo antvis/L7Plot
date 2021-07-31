@@ -21,12 +21,13 @@ export function Basic() {
         source: {
           data: source,
         },
+        // shape: 'line',
         size: () => 1.5,
         color: {
           field: '标准名称',
           value: ['#5B8FF9', '#5CCEA1', '#5D7092'],
         },
-        animate: true,
+        // animate: true,
       });
     }
 
@@ -40,13 +41,44 @@ export function Basic() {
       <div
         onClick={() => {
           map.current?.update({
+            size: 2,
             color: 'red',
             animate: false,
           });
         }}
-        style={{ color: 'red', fontSize: 40, zIndex: 1000 }}
+        style={{ color: 'red', fontSize: 40, display: 'inline-block' }}
       >
         update
+      </div>
+      <div
+        onClick={() => {
+          map.current?.update({
+            source: {
+              data: {
+                type: 'FeatureCollection',
+                features: [
+                  {
+                    type: 'Feature',
+                    properties: {},
+                    geometry: {
+                      type: 'LineString',
+                      coordinates: [
+                        [116.38050072430798, 39.94888011518406],
+                        [136.40625, 61.77312286453146],
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+            color: 'red',
+            shape: 'arc',
+            animate: false,
+          });
+        }}
+        style={{ color: 'red', fontSize: 40, display: 'inline-block' }}
+      >
+        arc
       </div>
       <div
         id="container"

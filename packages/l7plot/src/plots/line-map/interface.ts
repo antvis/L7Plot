@@ -1,4 +1,4 @@
-import { AnimateAttr, ColorAttr, IMapOptions } from '../../types';
+import { AnimateAttr, ColorAttr, IMapOptions, SizeAttr } from '../../types';
 
 export interface LineMapOptions extends IMapOptions {
   /**
@@ -15,4 +15,9 @@ export interface LineMapOptions extends IMapOptions {
    * 颜色
    */
   color?: ColorAttr;
+
+  /**
+   * 线的宽度和高度
+   */
+  size?: SizeAttr;
 }
