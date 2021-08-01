@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { LineMap, Source } from '@antv/l7plot';
+import { LineMap, LineMapOptions } from '@antv/l7plot';
 
 export function Basic() {
   const map = useRef<LineMap>();
@@ -10,12 +10,23 @@ export function Basic() {
         'https://gw.alipayobjects.com/os/basement_prod/0d2f0113-f48b-4db9-8adc-a3937243d5a3.json'
       );
       const source = await response.json();
-      map.current = new LineMap('container', {
+      map.current = new LineMap<LineMapOptions>('container', {
+        name: 'LineMap',
+        visible: true,
+        zoom: {
+          position: 'bottomright',
+        },
         map: {
           center: [116.3956, 39.9392],
           pitch: 0,
           zoom: 10,
           rotation: 0,
+        },
+        scale: {
+          // position: 'bottomright',
+        },
+        layerMenu: {
+          position: 'topright',
         },
         theme: 'dark',
         source: {
@@ -26,6 +37,9 @@ export function Basic() {
         color: {
           field: '标准名称',
           value: ['#5B8FF9', '#5CCEA1', '#5D7092'],
+        },
+        style: {
+          lineType: 'dash',
         },
         // animate: true,
       });
@@ -44,6 +58,9 @@ export function Basic() {
             size: 2,
             color: 'red',
             animate: false,
+            style: {
+              lineType: 'solid',
+            },
           });
         }}
         style={{ color: 'red', fontSize: 40, display: 'inline-block' }}
