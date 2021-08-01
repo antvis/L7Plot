@@ -1,9 +1,9 @@
 import { IComponentOptions } from './component';
 
 /**
- * 列表选项接口
+ * 分类列表项接口
  */
-export interface ILegendListItem {
+export interface ICategoryLegendListItem {
   /**
    * 唯一值，用于查找
    */
@@ -20,12 +20,12 @@ export interface ILegendListItem {
   [key: string]: any;
 }
 
-export type LegendCustomContent = (title: string, items: ILegendListItem[]) => string | HTMLElement;
+export type CategoryLegendCustomContent = (title: string, items: ICategoryLegendListItem[]) => string | HTMLElement;
 
 /**
- * Legend 配置接口
+ * 分类 Legend 配置接口
  */
-export interface ILegendOptions extends IComponentOptions {
+export interface ICategoryLegendOptions extends IComponentOptions {
   /**
    * 标题
    */
@@ -33,7 +33,7 @@ export interface ILegendOptions extends IComponentOptions {
   /**
    * 列表项集合
    */
-  items: ILegendListItem[];
+  items: ICategoryLegendListItem[];
   /**
    * 列表项的模板
    */
@@ -41,7 +41,44 @@ export interface ILegendOptions extends IComponentOptions {
   /**
    * 自定义模板
    */
-  customContent?: LegendCustomContent;
+  customContent?: CategoryLegendCustomContent;
+  /**
+   * 传入各个 dom 的样式
+   */
+  domStyles?: Record<string, any>;
+}
+
+export type ContinueLegendCustomContent = (
+  title: string,
+  min: number,
+  max: number,
+  colors: string[]
+) => string | HTMLElement;
+
+/**
+ * 连续 Legend 配置接口
+ */
+export interface IContinueLegendOptions extends IComponentOptions {
+  /**
+   * 标题
+   */
+  title?: string;
+  /**
+   * 范围的最小值
+   */
+  min: number;
+  /**
+   * 范围的最大值
+   */
+  max: number;
+  /**
+   * 图例的颜色
+   */
+  colors: string[];
+  /**
+   * 自定义模板
+   */
+  customContent?: ContinueLegendCustomContent;
   /**
    * 传入各个 dom 的样式
    */

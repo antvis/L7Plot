@@ -1,4 +1,4 @@
-import Theme from '../configs/theme';
+import Theme from '../../configs/theme';
 import { CONTAINER_CLASS, LIST_CLASS, LIST_ITEM_CLASS, MARKER_CLASS, TITLE_CLASS, VALUE_CLASS } from './constants';
 
 export default {

@@ -1,6 +1,6 @@
 import { IControlOption } from '@antv/l7-core';
 import { Control } from '@antv/l7-component';
-import { Legend as LegendComponent, LegendCustomContent } from '@antv/l7plot-component';
+import { CategoryLegend as LegendComponent, LegendCustomContent } from '@antv/l7plot-component';
 
 export interface ILegendItems {
   /**
