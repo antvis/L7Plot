@@ -1,14 +1,17 @@
-import { ILegendItems } from '../../component/legend';
+import { ICategoryLegendListItem } from '@antv/l7plot-component';
 
 type LegendItemT = { value: [number, number]; color: string };
 type LegendItemI = { value: number; color: string };
 
-export const getColorLegendItems = (legendItems: LegendItemI[] | LegendItemT[]): ILegendItems[] => {
+export const getColorLegendItems = (legendItems: LegendItemI[] | LegendItemT[]): ICategoryLegendListItem[] => {
   // TODO: type
   let items: LegendItemT[] = [];
   items = [];
 
   if (typeof legendItems[0].value === 'number') {
+    if (legendItems.length === 1) {
+      return [{ color: legendItems[0].color, value: legendItems[0].value }];
+    }
     items = legendItems
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore

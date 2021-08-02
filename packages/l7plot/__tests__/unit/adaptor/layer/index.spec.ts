@@ -185,7 +185,7 @@ describe('mapping layer', () => {
       size: {
         field: 'x',
         value: [12, 14],
-        type: 'quantize',
+        scale: { type: 'quantize' },
       },
     });
 

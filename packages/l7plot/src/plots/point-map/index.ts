@@ -108,10 +108,11 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
    */
   protected getLegendOptions(): ILegendOptions {
     const colorLegendItems = this.pointLayer.getLegendItems('color');
-    if (colorLegendItems.length === 0) return {};
+    if (Array.isArray(colorLegendItems) && colorLegendItems.length !== 0) {
+      const items = getColorLegendItems(colorLegendItems);
+      return { category: { items } };
+    }
 
-    const items = getColorLegendItems(colorLegendItems);
-
-    return { items };
+    return {};
   }
 }

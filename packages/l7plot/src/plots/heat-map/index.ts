@@ -42,17 +42,14 @@ export class HeatMap extends Heatmap<HeatMapOptions> {
    */
   protected getLegendOptions(): ILegendOptions {
     const sizeLegendItems = this.heatmapLayer.getLegendItems('size');
-    console.log('this.heatmapLayer: ', this.heatmapLayer);
-    if (sizeLegendItems.length === 0) return {};
-    console.log('sizeLegendItems: ', sizeLegendItems);
+    if (Array.isArray(sizeLegendItems) && sizeLegendItems.length !== 0) {
+      const min = sizeLegendItems[0].value;
+      const max = sizeLegendItems[sizeLegendItems.length - 1].value;
+      const colors = this.options.style?.colorsRamp.map(({ color }) => color);
 
-    const tick = [sizeLegendItems[0].value, sizeLegendItems[sizeLegendItems.length - 1].value];
-    console.log('tick: ', tick);
-    const colors = this.options.style?.colorsRamp.map(({ color }) => color);
-    console.log('colors: ', colors);
+      return { continue: { min, max, colors } };
+    }
 
-    // const items = getColorLegendItems(sizeLegendItems);
-
-    return { items: [] };
+    return {};
   }
 }
