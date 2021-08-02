@@ -76,6 +76,10 @@ export interface IContinueLegendOptions extends IComponentOptions {
    */
   colors: string[];
   /**
+   * 色带的模板
+   */
+  ribbonTpl?: string;
+  /**
    * 自定义模板
    */
   customContent?: ContinueLegendCustomContent;

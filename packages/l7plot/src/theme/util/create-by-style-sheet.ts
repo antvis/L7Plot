@@ -86,7 +86,6 @@ export function createThemeByStyleSheet(styleSheet: IStyleSheet): Record<string,
             listStyleType: 'none',
             display: 'flex',
             alignItems: 'center',
-            marginBottom: '2px',
           },
           [LEGEND_CSS_CONST.MARKER_CLASS]: {
             width: '24px',

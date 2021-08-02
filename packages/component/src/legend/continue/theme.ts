@@ -1,5 +1,5 @@
 import Theme from '../../configs/theme';
-import { CONTAINER_CLASS, LIST_CLASS, LIST_ITEM_CLASS, MARKER_CLASS, TITLE_CLASS, VALUE_CLASS } from './constants';
+import { CONTAINER_CLASS, TITLE_CLASS, RIBBON_CLASS, GRADIENT_BAR_CLASS, VALUE_RANGE_CLASS } from './constants';
 
 export default {
   // css style for legend
@@ -19,20 +19,15 @@ export default {
     lineHeight: '18px',
     marginBottom: '5px',
   },
-  [LIST_CLASS]: {
-    margin: '0px',
-    listStyleType: 'none',
-    padding: '0px',
-  },
-  [LIST_ITEM_CLASS]: {
-    listStyleType: 'none',
+  [RIBBON_CLASS]: {
     display: 'flex',
     alignItems: 'center',
   },
-  [MARKER_CLASS]: {
-    width: '24px',
-    height: '12px',
-    marginRight: '8px',
+  [GRADIENT_BAR_CLASS]: {
+    width: '130px',
+    height: '20px',
   },
-  [VALUE_CLASS]: {},
+  [VALUE_RANGE_CLASS]: {
+    padding: '0px 5px',
+  },
 };

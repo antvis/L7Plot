@@ -1,19 +1,18 @@
 import { each } from '@antv/util';
 import { createDiv, removeDom } from '../../../helper/dom';
-import { CategoryLegend } from '../../../../src';
-import Theme from '../../../../src/legend/category/theme';
+import { ContinueLegend } from '../../../../src';
+import Theme from '../../../../src/legend/continue/theme';
 
-describe('category-legend', () => {
+describe('continue-legend', () => {
   const div = createDiv('container');
-  const items = [
-    { value: '100-200', color: 'yellow' },
-    { value: '200-300', color: 'blue' },
-    { value: '300-500', color: 'red' },
-  ];
-  const legend = new CategoryLegend({
+  const min = 5;
+  const max = 45;
+  const legend = new ContinueLegend({
     parent: div,
     title: 'my title',
-    items,
+    min,
+    max,
+    colors: ['#35E0CC', '#31C4DC', '#44A2E4', '#3976E2', '#204CCF'],
   });
 
   it('init', () => {
@@ -25,13 +24,14 @@ describe('category-legend', () => {
   it('render', () => {
     const container = legend.getContainer();
 
+    expect(Array.from(container.classList).includes('l7plot-legend')).toBe(true);
     const title = container.getElementsByClassName('l7plot-legend__title')[0] as HTMLElement;
     expect(title.innerText).toBe('my title');
 
-    const listItems = Array.from(container.getElementsByClassName('l7plot-legend__list-item')) as HTMLElement[];
-    each(listItems, (listItem, index) => {
-      expect(listItem.getElementsByClassName('l7plot-legend__category-value')[0].innerText).toBe(items[index].value);
-    });
+    const ranges = Array.from(container.getElementsByClassName('l7plot-legend__value-range')) as HTMLElement[];
+
+    expect(ranges[0].innerText).toBe(min + '');
+    expect(ranges[1].innerText).toBe(max + '');
 
     each(Theme, (val, key) => {
       const elements = container.getElementsByClassName(key);

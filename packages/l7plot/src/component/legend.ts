@@ -1,6 +1,6 @@
 import { IControlOption } from '@antv/l7-core';
 import { Control } from '@antv/l7-component';
-import { CategoryLegend as LegendComponent, LegendCustomContent } from '@antv/l7plot-component';
+import { CategoryLegend as CategoryLegendComponent, CategoryLegendCustomContent } from '@antv/l7plot-component';
 
 export interface ILegendItems {
   /**
@@ -25,7 +25,7 @@ export interface ILegendOptions extends Partial<IControlOption> {
   title: string;
   items: ILegendItems[];
   className?: string;
-  customContent?: LegendCustomContent;
+  customContent?: CategoryLegendCustomContent;
   domStyles?: Record<string, any>;
 }
 
@@ -37,12 +37,12 @@ export class Legend extends Control {
   /**
    * legendComponent 实例
    */
-  private legendComponent: LegendComponent;
+  private legendComponent: CategoryLegendComponent;
 
   constructor(options: ILegendOptions) {
     super(options);
     this.options = options;
-    this.legendComponent = new LegendComponent({
+    this.legendComponent = new CategoryLegendComponent({
       title: options.title,
       items: options.items,
       className: options.className,
