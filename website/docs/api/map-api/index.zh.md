@@ -354,6 +354,38 @@ map.removeLayer(layer: ILayer);
 map.removeAllLayer();
 ```
 
+### zoomIn
+
+地图放大一级。
+
+```ts
+map.zoomIn();
+```
+
+### zoomOut
+
+地图缩小一级。
+
+```ts
+map.zoomOut();
+```
+
+### setPitch
+
+设置地图倾角。
+
+```ts
+map.setPitch(pitch: number);
+```
+
+### fitBounds
+
+设置地图缩放范围。
+
+```ts
+map.fitBounds(bound: Bounds);
+```
+
 ### addZoomControl
 
 添加地图缩放器控件。

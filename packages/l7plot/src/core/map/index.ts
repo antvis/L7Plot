@@ -4,7 +4,7 @@ import { Scale, Layers, Zoom } from '@antv/l7-component';
 import EventEmitter from '@antv/event-emitter';
 import { isObject, isBoolean } from '@antv/util';
 import { Tooltip } from '../../component/tooltip';
-import { Legend } from '../../component/legend';
+import { Legend, LegendItem } from '../../component/legend';
 import { deepAssign } from '../../utils';
 import {
   MapType,
@@ -22,6 +22,7 @@ import {
   ILayer,
   ISourceCFG,
   UpdateMapConfig,
+  Bounds,
 } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { LayerEventList, MapEventList, SceneEventList } from './constants';
@@ -459,6 +460,34 @@ export abstract class MapWrapper<O extends IMapOptions> {
   }
 
   /**
+   * 地图放大一级
+   */
+  public zoomIn() {
+    this.scene.zoomIn();
+  }
+
+  /**
+   * 地图缩小一级
+   */
+  public zoomOut() {
+    this.scene.zoomOut();
+  }
+
+  /**
+   * 设置地图倾角
+   */
+  public setPitch(pitch: number) {
+    this.scene.setPitch(pitch);
+  }
+
+  /**
+   * 设置地图缩放范围
+   */
+  public fitBounds(bound: Bounds) {
+    this.scene.fitBounds(bound);
+  }
+
+  /**
    * 初始化控件
    */
   private initControls() {
@@ -536,12 +565,19 @@ export abstract class MapWrapper<O extends IMapOptions> {
    */
   public addLegendControl(options: ILegendOptions) {
     this.removeLegendControl();
-    const legendControlOptions = deepAssign(
-      {},
-      { title: '', items: [], domStyles: this.theme['components'].legend.domStyles },
-      options
-    );
-    this.legendControl = new Legend(legendControlOptions);
+    const legendTheme = this.theme['components'].legend;
+    const { position, category: categoryLegend, continue: continueLegend } = options;
+    const items: LegendItem[] = [];
+    if (categoryLegend) {
+      const options = deepAssign({}, { domStyles: legendTheme.category.domStyles }, categoryLegend);
+      items.push({ type: 'category', options });
+    }
+    if (continueLegend) {
+      const options = deepAssign({}, { domStyles: legendTheme.continue.domStyles }, continueLegend);
+      items.push({ type: 'continue', options });
+    }
+
+    this.legendControl = new Legend({ position, items });
     this.scene.addControl(this.legendControl);
   }
 
