@@ -22,6 +22,7 @@ import {
   ILayer,
   ISourceCFG,
   UpdateMapConfig,
+  Bounds,
 } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { LayerEventList, MapEventList, SceneEventList } from './constants';
@@ -456,6 +457,34 @@ export abstract class MapWrapper<O extends IMapOptions> {
    */
   public removeAllLayer() {
     this.scene.removeAllLayer();
+  }
+
+  /**
+   * 地图放大一级
+   */
+  public zoomIn() {
+    this.scene.zoomIn();
+  }
+
+  /**
+   * 地图缩小一级
+   */
+  public zoomOut() {
+    this.scene.zoomOut();
+  }
+
+  /**
+   * 设置地图倾角
+   */
+  public setPitch(pitch: number) {
+    this.scene.setPitch(pitch);
+  }
+
+  /**
+   * 设置地图缩放范围
+   */
+  public fitBounds(bound: Bounds) {
+    this.scene.fitBounds(bound);
   }
 
   /**
