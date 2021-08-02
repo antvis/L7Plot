@@ -1,15 +1,15 @@
 import { each } from '@antv/util';
-import { createDiv, removeDom } from '../../helper/dom';
-import { Legend } from '../../../src';
+import { createDiv, removeDom } from '../../../helper/dom';
+import { CategoryLegend } from '../../../../src';
 
-describe('legend customContent', () => {
+describe('category legend customContent', () => {
   const div = createDiv('container');
   const items = [
     { value: '100', color: 'yellow' },
     { value: '200', color: 'blue' },
     { value: '300', color: 'red' },
   ];
-  const legend = new Legend({
+  const legend = new CategoryLegend({
     parent: div,
     title: 'xx',
     items,

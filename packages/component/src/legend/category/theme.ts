@@ -1,4 +1,4 @@
-import Theme from '../configs/theme';
+import Theme from '../../configs/theme';
 import { CONTAINER_CLASS, LIST_CLASS, LIST_ITEM_CLASS, MARKER_CLASS, TITLE_CLASS, VALUE_CLASS } from './constants';
 
 export default {
@@ -20,15 +20,12 @@ export default {
     marginBottom: '5px',
   },
   [LIST_CLASS]: {
-    margin: '0px',
     listStyleType: 'none',
-    padding: '0px',
   },
   [LIST_ITEM_CLASS]: {
     listStyleType: 'none',
     display: 'flex',
     alignItems: 'center',
-    marginBottom: '2px',
   },
   [MARKER_CLASS]: {
     width: '24px',
