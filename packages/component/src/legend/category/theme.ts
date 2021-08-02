@@ -20,9 +20,7 @@ export default {
     marginBottom: '5px',
   },
   [LIST_CLASS]: {
-    margin: '0px',
     listStyleType: 'none',
-    padding: '0px',
   },
   [LIST_ITEM_CLASS]: {
     listStyleType: 'none',

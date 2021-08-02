@@ -1,5 +1,6 @@
 import * as TOOLTIP_CSS_CONST from '@antv/l7plot-component/dist/lib/tooltip/constants';
-import * as LEGEND_CSS_CONST from '@antv/l7plot-component/dist/lib/legend/constants';
+import * as CATEGORY_LEGEND_CSS_CONST from '@antv/l7plot-component/dist/lib/legend/category/constants';
+import * as CONTINUE_LEGEND_CSS_CONST from '@antv/l7plot-component/dist/lib/legend/continue/constants';
 import { IStyleSheet } from '../../types';
 
 /**
@@ -59,40 +60,70 @@ export function createThemeByStyleSheet(styleSheet: IStyleSheet): Record<string,
     },
     components: {
       legend: {
-        // legend dom 样式
-        domStyles: {
-          [LEGEND_CSS_CONST.CONTAINER_CLASS]: {
-            visibility: 'visible',
-            zIndex: 1,
-            backgroundColor: styleSheet.legendContainerFillColor,
-            boxShadow: styleSheet.legendContainerShadow,
-            borderRadius: `${styleSheet.legendContainerBorderRadius}px`,
-            color: styleSheet.legendTextFillColor,
-            fontFamily: styleSheet.fontFamily,
-            padding: '10px 10px 6px 10px',
-            lineHeight: styleSheet.legendTextLineHeight,
-            fontSize: `${styleSheet.legendTextFontSize}px`,
+        category: {
+          domStyles: {
+            [CATEGORY_LEGEND_CSS_CONST.CONTAINER_CLASS]: {
+              visibility: 'visible',
+              zIndex: 1,
+              backgroundColor: styleSheet.legendContainerFillColor,
+              boxShadow: styleSheet.legendContainerShadow,
+              borderRadius: `${styleSheet.legendContainerBorderRadius}px`,
+              color: styleSheet.legendTextFillColor,
+              fontFamily: styleSheet.fontFamily,
+              padding: '10px 10px 6px 10px',
+              lineHeight: styleSheet.legendTextLineHeight,
+              fontSize: `${styleSheet.legendTextFontSize}px`,
+            },
+            [CATEGORY_LEGEND_CSS_CONST.TITLE_CLASS]: {
+              lineHeight: '18px',
+              marginBottom: '5px',
+            },
+            [CATEGORY_LEGEND_CSS_CONST.LIST_CLASS]: {
+              listStyleType: 'none',
+            },
+            [CATEGORY_LEGEND_CSS_CONST.LIST_ITEM_CLASS]: {
+              listStyleType: 'none',
+              display: 'flex',
+              alignItems: 'center',
+            },
+            [CATEGORY_LEGEND_CSS_CONST.MARKER_CLASS]: {
+              width: '24px',
+              height: '12px',
+              marginRight: '8px',
+            },
+            [CATEGORY_LEGEND_CSS_CONST.VALUE_CLASS]: {},
           },
-          [LEGEND_CSS_CONST.TITLE_CLASS]: {
-            lineHeight: '18px',
-            marginBottom: '5px',
+        },
+        continue: {
+          domStyles: {
+            [CONTINUE_LEGEND_CSS_CONST.CONTAINER_CLASS]: {
+              visibility: 'visible',
+              zIndex: 1,
+              backgroundColor: styleSheet.legendContainerFillColor,
+              boxShadow: styleSheet.legendContainerShadow,
+              borderRadius: `${styleSheet.legendContainerBorderRadius}px`,
+              color: styleSheet.legendTextFillColor,
+              fontFamily: styleSheet.fontFamily,
+              padding: '10px 10px 6px 10px',
+              lineHeight: styleSheet.legendTextLineHeight,
+              fontSize: `${styleSheet.legendTextFontSize}px`,
+            },
+            [CONTINUE_LEGEND_CSS_CONST.TITLE_CLASS]: {
+              lineHeight: '18px',
+              marginBottom: '5px',
+            },
+            [CONTINUE_LEGEND_CSS_CONST.RIBBON_CLASS]: {
+              display: 'flex',
+              alignItems: 'center',
+            },
+            [CONTINUE_LEGEND_CSS_CONST.GRADIENT_BAR_CLASS]: {
+              width: '130px',
+              height: '20px',
+            },
+            [CONTINUE_LEGEND_CSS_CONST.VALUE_RANGE_CLASS]: {
+              padding: '0px 5px',
+            },
           },
-          [LEGEND_CSS_CONST.LIST_CLASS]: {
-            margin: '0px',
-            listStyleType: 'none',
-            padding: '0px',
-          },
-          [LEGEND_CSS_CONST.LIST_ITEM_CLASS]: {
-            listStyleType: 'none',
-            display: 'flex',
-            alignItems: 'center',
-          },
-          [LEGEND_CSS_CONST.MARKER_CLASS]: {
-            width: '24px',
-            height: '12px',
-            marginRight: '8px',
-          },
-          [LEGEND_CSS_CONST.VALUE_CLASS]: {},
         },
       },
       tooltip: {

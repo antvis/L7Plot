@@ -1,32 +1,16 @@
 import { IControlOption } from '@antv/l7-core';
 import { Control } from '@antv/l7-component';
-import { CategoryLegend as CategoryLegendComponent, CategoryLegendCustomContent } from '@antv/l7plot-component';
+import { ICategoryLegendOptions, IContinueLegendOptions, CategoryLegend, ContinueLegend } from '@antv/l7plot-component';
 
-export interface ILegendItems {
-  /**
-   * 唯一值，用于查找
-   */
-  id?: string;
-  /**
-   * 值
-   */
-  value: any;
-  /**
-   * 颜色
-   */
-  color: string;
-  /**
-   * 名称
-   */
-  name?: string;
-}
+export type LegendType = 'category' | 'continue';
+
+export type LegendItem = {
+  type: LegendType;
+  options: ICategoryLegendOptions & IContinueLegendOptions;
+};
 
 export interface ILegendOptions extends Partial<IControlOption> {
-  title: string;
-  items: ILegendItems[];
-  className?: string;
-  customContent?: CategoryLegendCustomContent;
-  domStyles?: Record<string, any>;
+  items: LegendItem[];
 }
 
 export class Legend extends Control {
@@ -35,19 +19,36 @@ export class Legend extends Control {
    */
   protected options: ILegendOptions;
   /**
-   * legendComponent 实例
+   * legendComponents 实例
    */
-  private legendComponent: CategoryLegendComponent;
+  private legendComponents: (CategoryLegend | ContinueLegend)[] = [];
 
   constructor(options: ILegendOptions) {
     super(options);
     this.options = options;
-    this.legendComponent = new CategoryLegendComponent({
-      title: options.title,
-      items: options.items,
-      className: options.className,
-      customContent: options.customContent,
-      domStyles: options.domStyles,
+    this.options.items.forEach((item) => {
+      const { type, options } = item;
+      if (type === 'category') {
+        const legend = new CategoryLegend({
+          title: options.title,
+          items: options.items,
+          className: options.className,
+          customContent: options.customContent,
+          domStyles: options.domStyles,
+        });
+        this.legendComponents.push(legend);
+      } else if (type === 'continue') {
+        const legend = new ContinueLegend({
+          title: options.title,
+          min: options.min,
+          max: options.max,
+          colors: options.colors,
+          className: options.className,
+          customContent: options.customContent,
+          domStyles: options.domStyles,
+        });
+        this.legendComponents.push(legend);
+      }
     });
   }
 
@@ -56,20 +57,24 @@ export class Legend extends Control {
    */
   protected getDefaultOptions(): Partial<ILegendOptions> {
     return {
-      items: [],
       position: 'bottomleft',
     };
   }
 
   public onAdd(): HTMLElement {
-    const legend = this.legendComponent.getContainer();
     const container = window.document.createElement('div');
     container.className = 'l7plot-legend-container';
-    container.appendChild(legend);
+    this.legendComponents.forEach((legendComponent) => {
+      const legend = legendComponent.getContainer();
+      container.appendChild(legend);
+    });
+
     return container;
   }
 
-  public onRemove(): void {
-    //
+  public onRemove() {
+    this.legendComponents.forEach((legendComponent) => {
+      legendComponent.destroy();
+    });
   }
 }
