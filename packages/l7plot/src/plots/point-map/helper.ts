@@ -6,31 +6,37 @@ type LegendItemI = { value: number; color: string };
 export const getColorLegendItems = (legendItems: LegendItemI[] | LegendItemT[]): ICategoryLegendListItem[] => {
   // TODO: type
   let items: LegendItemT[] = [];
-  items = [];
 
   if (typeof legendItems[0].value === 'number') {
     if (legendItems.length === 1) {
       return [{ color: legendItems[0].color, value: legendItems[0].value }];
     }
-    items = legendItems
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      .filter((item, index) => {
-        return legendItems.findIndex(({ color }) => color === item.color) === index;
-      })
-      .map((item, index) => {
-        let value: [number, number];
-        if (index === legendItems.length - 1) {
+    const cache = new Map<string, number[]>();
+    for (let index = 0; index < legendItems.length; index++) {
+      const { color, value } = legendItems[index];
+      if (cache.has(color)) {
+        const data = cache.get(color);
+        if (Array.isArray(data)) {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          value = [legendItems[index - 1].value, item.value];
-        } else {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          value = [item.value, legendItems[index + 1].value];
+          data.push(value);
         }
-        return { value: value, color: item.color };
-      });
+      } else {
+        // const data = preValue ? [preValue] : [value];
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        cache.set(color, [value]);
+      }
+    }
+
+    let preValue: number;
+    cache.forEach((value, color) => {
+      const min = value[0];
+      const max = value[value.length - 1];
+      const range: [number, number] = [preValue ? preValue : min, max];
+      preValue = max;
+      items.push({ color, value: range });
+    });
   } else {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
