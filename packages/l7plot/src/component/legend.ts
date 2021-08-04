@@ -26,8 +26,14 @@ export class Legend extends Control {
   constructor(options: ILegendOptions) {
     super(options);
     this.options = options;
-    this.options.items.forEach((item) => {
-      const { type, options } = item;
+    this.legendComponents = this.initLegendComponents(options.items);
+  }
+
+  private initLegendComponents(legendItem: LegendItem[]) {
+    const legendComponents: (CategoryLegend | ContinueLegend)[] = [];
+
+    for (let index = 0; index < legendItem.length; index++) {
+      const { type, options } = legendItem[index];
       if (type === 'category') {
         const legend = new CategoryLegend({
           title: options.title,
@@ -36,7 +42,7 @@ export class Legend extends Control {
           customContent: options.customContent,
           domStyles: options.domStyles,
         });
-        this.legendComponents.push(legend);
+        legendComponents.push(legend);
       } else if (type === 'continue') {
         const legend = new ContinueLegend({
           title: options.title,
@@ -47,9 +53,11 @@ export class Legend extends Control {
           customContent: options.customContent,
           domStyles: options.domStyles,
         });
-        this.legendComponents.push(legend);
+        legendComponents.push(legend);
       }
-    });
+    }
+
+    return legendComponents;
   }
 
   /**

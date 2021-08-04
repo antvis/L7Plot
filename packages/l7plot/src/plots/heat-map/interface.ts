@@ -1,4 +1,4 @@
-import { IHeatmapLayerStyleOptions, IGridHeatmapLayerStyleOptions } from '../../core/layer/interface';
+import { IHeatmapLayerStyleOptions } from '../../core/layer/interface';
 import { SizeAttr } from '../../types';
 import { HeatmapOptions } from '../heatmap/interface';
 
@@ -15,5 +15,5 @@ export interface HeatMapOptions extends Omit<HeatmapOptions, 'color'> {
   /**
    * 图层样式
    */
-  style?: Omit<IHeatmapLayerStyleOptions, 'rampColors'> | IGridHeatmapLayerStyleOptions;
+  style?: Omit<IHeatmapLayerStyleOptions, 'rampColors'>;
 }
