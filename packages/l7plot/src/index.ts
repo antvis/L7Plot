@@ -16,7 +16,7 @@ export {
 export { getTheme, registerTheme } from './theme';
 
 /** G7Plot 的 MapWrapper 基类 */
-export { MapWrapper } from './core/map';
+export { Plot as MapWrapper } from './core/plot';
 
 // 类型定义导出
 export * from './types';

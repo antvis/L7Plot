@@ -1,5 +1,5 @@
 import { IHeatmapLayerStyleOptions, IGridHeatmapLayerStyleOptions, heatmapShape } from '../../core/layer/interface';
-import { ColorAttr, IMapOptions, SizeAttr, ISourceCFG } from '../../types';
+import { ColorAttr, IPlotOptions, SizeAttr, ISourceCFG } from '../../types';
 
 /**
  * 数据配置
@@ -9,7 +9,7 @@ export interface ISource extends Pick<ISourceCFG, 'parser' | 'transforms'> {
 }
 
 /** 热地图的配置类型定义 */
-export interface HeatmapOptions extends IMapOptions {
+export interface HeatmapOptions extends IPlotOptions {
   /**
    * 具体的数据
    */

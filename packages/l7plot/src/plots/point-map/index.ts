@@ -1,6 +1,6 @@
 import { pick } from '@antv/util';
 import { PointMapOptions } from './interface';
-import { MapWrapper } from '../../core/map';
+import { Plot } from '../../core/plot';
 import { DEFAULT_OPTIONS, POINT_LAYER_OPTIONS_KEYS } from './constants';
 import { PointLayerWrapper } from '../../layers/point-layer';
 import { LabelLayerWrapper } from '../../layers/label-layer';
@@ -8,7 +8,7 @@ import { ILayer, ILegendOptions, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
 import { getColorLegendItems } from './helper';
 
-export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWrapper<O> {
+export class PointMap<O extends PointMapOptions = PointMapOptions> extends Plot<O> {
   /**
    * 默认配置项
    */
@@ -17,7 +17,7 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
   /**
    * 地图类型
    */
-  public type = MapWrapper.MapType.Point;
+  public type = Plot.MapType.Point;
 
   /**
    * pointLayerWrapper

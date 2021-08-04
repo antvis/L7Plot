@@ -2,7 +2,6 @@ import { Map as MapboxglMap } from 'mapbox-gl';
 import { IAMapInstance, IMapboxInstance } from '@antv/l7-maps/typings';
 import { IStatusOptions, PositionName, ISourceCFG, MapStyle } from '@antv/l7-core';
 import Source from '@antv/l7-source';
-import { IStateAttribute } from './attr';
 import { ILabelOptions } from './label';
 import { IPopupOptions } from './popup';
 import { ITooltipOptions } from './tooltip';
@@ -104,7 +103,7 @@ export interface ISource extends ISourceCFG {
 }
 
 /**
- * 基础 options 配置
+ * 基础 map options 配置
  */
 export interface IMapOptions {
   // 地图容器基本配置
@@ -141,17 +140,6 @@ export interface IMapOptions {
    * 具体的数据
    */
   readonly source: ISource;
-
-  /**
-   * 是否自动缩放到图层范围，默认为 false
-   */
-
-  readonly autoFit?: boolean;
-
-  /**
-   * 交互反馈
-   */
-  readonly state?: IStateAttribute;
 
   /**
    * 主题，string 或 object

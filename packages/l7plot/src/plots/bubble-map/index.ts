@@ -1,4 +1,4 @@
-import { MapWrapper } from '../../core/map';
+import { Plot } from '../../core/plot';
 import { BubbleMapOptions } from './interface';
 import { DEFAULT_OPTIONS } from './constants';
 import { PointMap } from '../point-map';
@@ -13,7 +13,7 @@ export class BubbleMap extends PointMap<BubbleMapOptions> {
   /**
    * 地图类型
    */
-  public type = MapWrapper.MapType.Bubble;
+  public type = Plot.MapType.Bubble;
 
   /**
    * 气泡图层

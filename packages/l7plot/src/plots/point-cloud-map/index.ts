@@ -1,4 +1,4 @@
-import { MapWrapper } from '../../core/map';
+import { Plot } from '../../core/plot';
 import { ILayer } from '../../types';
 import { PointMap } from '../point-map';
 import { DEFAULT_OPTIONS } from './constants';
@@ -13,7 +13,7 @@ export class PointCloudMap extends PointMap<PointCloudMapOptions> {
   /**
    * 地图类型
    */
-  public type = MapWrapper.MapType.PointCloud;
+  public type = Plot.MapType.PointCloud;
 
   /**
    * 点云图层

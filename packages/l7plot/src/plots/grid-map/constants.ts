@@ -1,10 +1,10 @@
-import { MapWrapper } from '../../core/map';
+import { Plot } from '../../core/plot';
 import { deepAssign } from '../../utils';
 
 /**
  * 默认配置项
  */
-export const DEFAULT_OPTIONS = deepAssign({}, MapWrapper.DefaultOptions, {
+export const DEFAULT_OPTIONS = deepAssign({}, Plot.DefaultOptions, {
   source: {
     data: [],
     parser: {
