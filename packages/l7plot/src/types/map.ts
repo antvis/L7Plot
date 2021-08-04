@@ -125,6 +125,14 @@ export interface IMapOptions {
   readonly map?: IMapConfig;
 
   /**
+   * 是否开启抗锯齿
+   */
+  readonly antialias?: boolean;
+  /**
+   * 是否保留缓冲区数据
+   */
+  readonly preserveDrawingBuffer?: boolean;
+  /**
    * logo 配置
    */
   readonly logo?: boolean | ILogo;
@@ -146,7 +154,7 @@ export interface IMapOptions {
   readonly state?: IStateAttribute;
 
   /**
-   * 主题，字符串或 object
+   * 主题，string 或 object
    */
   readonly theme?: string | Record<string, any>;
 

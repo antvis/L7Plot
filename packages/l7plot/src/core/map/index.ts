@@ -182,7 +182,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
    * 创建 scene 实例
    */
   private createScene() {
-    const { logo } = this.options;
+    const { logo, antialias, preserveDrawingBuffer } = this.options;
     const logoConfig = isBoolean(logo)
       ? { logoVisible: logo }
       : { logoVisible: logo?.visible, logoPosition: logo?.position };
@@ -193,8 +193,8 @@ export abstract class MapWrapper<O extends IMapOptions> {
         // pickBufferScale,
         // enableMultiPassRenderer,
         // passes,
-        // antialias,
-        // preserveDrawingBuffer,
+        antialias,
+        preserveDrawingBuffer,
       },
       logoConfig
     );
