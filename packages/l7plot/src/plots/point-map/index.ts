@@ -46,7 +46,7 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends Plot<
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<O> {
+  protected getDefaultOptions(): Partial<PointMapOptions> {
     return PointMap.DefaultOptions;
   }
 

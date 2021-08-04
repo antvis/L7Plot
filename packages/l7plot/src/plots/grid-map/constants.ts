@@ -1,10 +1,11 @@
 import { Plot } from '../../core/plot';
 import { deepAssign } from '../../utils';
+import { GridMapOptions } from './interface';
 
 /**
  * 默认配置项
  */
-export const DEFAULT_OPTIONS = deepAssign({}, Plot.DefaultOptions, {
+export const DEFAULT_OPTIONS: Partial<GridMapOptions> = deepAssign({}, Plot.DefaultOptions, {
   source: {
     data: [],
     parser: {

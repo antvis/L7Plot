@@ -1,10 +1,11 @@
 import { deepAssign } from '../../utils';
 import { DEFAULT_OPTIONS as POINT_DEFAULT_OPTIONS } from '../point-map/constants';
+import { ClustereMapOptions } from './interface';
 
 /**
  * 默认配置项
  */
-export const DEFAULT_OPTIONS = deepAssign({}, POINT_DEFAULT_OPTIONS, {
+export const DEFAULT_OPTIONS: Partial<ClustereMapOptions> = deepAssign({}, POINT_DEFAULT_OPTIONS, {
   source: {
     data: [],
     parser: {

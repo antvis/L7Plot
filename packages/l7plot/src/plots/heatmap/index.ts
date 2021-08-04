@@ -45,7 +45,7 @@ export class Heatmap<O extends HeatmapOptions = HeatmapOptions> extends Plot<O> 
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<O> {
+  protected getDefaultOptions(): Partial<HeatmapOptions> {
     return Heatmap.DefaultOptions;
   }
 
