@@ -627,6 +627,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
    */
   public destroy() {
     // TODO: 清空已经绑定的事件
+    this.eventEmitter.off('*');
     this.removeScaleControl();
     this.removeZoomControl();
     this.removeLayerMenuControl();
