@@ -1,30 +1,29 @@
 import { ICategoryLegendListItem } from '@antv/l7plot-component';
 
-type LegendItemT = { value: [number, number]; color: string };
-type LegendItemI = { value: number; color: string };
+type LegendItemTick = { value: number; color: string };
+type LegendItemExtent = { value: [number, number]; color: string };
 
-export const getColorLegendItems = (legendItems: LegendItemI[] | LegendItemT[]): ICategoryLegendListItem[] => {
-  // TODO: type
-  let items: LegendItemT[] = [];
+const isLegendItemI = (legendItems: LegendItemTick[] | LegendItemExtent[]): legendItems is LegendItemTick[] => {
+  return typeof legendItems[0].value === 'number';
+};
 
-  if (typeof legendItems[0].value === 'number') {
+export const getColorLegendItems = (legendItems: LegendItemTick[] | LegendItemExtent[]): ICategoryLegendListItem[] => {
+  let items: LegendItemExtent[] = [];
+
+  if (isLegendItemI(legendItems)) {
     if (legendItems.length === 1) {
       return [{ color: legendItems[0].color, value: legendItems[0].value }];
     }
     const cache = new Map<string, number[]>();
+
     for (let index = 0; index < legendItems.length; index++) {
       const { color, value } = legendItems[index];
       if (cache.has(color)) {
         const data = cache.get(color);
         if (Array.isArray(data)) {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           data.push(value);
         }
       } else {
-        // const data = preValue ? [preValue] : [value];
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         cache.set(color, [value]);
       }
     }
@@ -38,9 +37,10 @@ export const getColorLegendItems = (legendItems: LegendItemI[] | LegendItemT[]):
       items.push({ color, value: range });
     });
   } else {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    items = legendItems.map((item) => ({ ...item, value: item.value.map((value) => Math.ceil(value)) }));
+    items = legendItems.map((item) => ({
+      ...item,
+      value: [Math.ceil(item.value[0]), Math.ceil(item.value[1])],
+    }));
   }
 
   return items.map((item) => ({ ...item, value: item.value.join('-') }));
