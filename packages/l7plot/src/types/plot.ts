@@ -2,6 +2,22 @@ import { IMapOptions } from './map';
 import { IStateAttribute } from './attr';
 
 /**
+ * 地图图表类型
+ */
+export enum MapType {
+  Point = 'point',
+  Bubble = 'bubble',
+  Scatter = 'scatter',
+  PointCloud = 'pointCloud',
+  Icon = 'icon',
+  Clustere = 'clustere',
+  Heat = 'heat',
+  HeatMap = 'heatMap',
+  Grid = 'grid',
+  Hexagon = 'hexagon',
+}
+
+/**
  * 基础 plot options 配置
  */
 export interface IPlotOptions extends IMapOptions {

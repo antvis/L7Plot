@@ -17,22 +17,6 @@ export type MapboxInstance = MapboxglMap & IMapboxInstance;
 export type MapInstance = AMapInstance | MapboxInstance;
 
 /**
- * 地图图表类型
- */
-export enum MapType {
-  Point = 'point',
-  Bubble = 'bubble',
-  Scatter = 'scatter',
-  PointCloud = 'pointCloud',
-  Icon = 'icon',
-  Clustere = 'clustere',
-  Heat = 'heat',
-  HeatMap = 'heatMap',
-  Grid = 'grid',
-  Hexagon = 'hexagon',
-}
-
-/**
  * 底图类型
  */
 export enum BaseMapType {
