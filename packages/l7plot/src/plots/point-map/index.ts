@@ -1,13 +1,14 @@
 import { pick } from '@antv/util';
 import { PointMapOptions } from './interface';
-import { MapWrapper } from '../../core/map';
+import { Plot } from '../../core/plot';
 import { DEFAULT_OPTIONS, POINT_LAYER_OPTIONS_KEYS } from './constants';
 import { PointLayerWrapper } from '../../layers/point-layer';
 import { LabelLayerWrapper } from '../../layers/label-layer';
-import { ILayer, Source } from '../../types';
+import { ILayer, ILegendOptions, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
+import { getColorLegendItems } from './helper';
 
-export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWrapper<O> {
+export class PointMap<O extends PointMapOptions = PointMapOptions> extends Plot<O> {
   /**
    * 默认配置项
    */
@@ -16,7 +17,7 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
   /**
    * 地图类型
    */
-  public type = MapWrapper.MapType.Point;
+  public type = Plot.MapType.Point;
 
   /**
    * pointLayerWrapper
@@ -45,7 +46,7 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<O> {
+  protected getDefaultOptions(): Partial<PointMapOptions> {
     return PointMap.DefaultOptions;
   }
 
@@ -100,5 +101,18 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends MapWr
         this.layerGroup.removelayer(this.labelLayerWrapper.layer);
       }
     }
+  }
+
+  /**
+   * 实现 legend 配置项
+   */
+  protected getLegendOptions(): ILegendOptions {
+    const colorLegendItems = this.pointLayer.getLegendItems('color');
+    if (Array.isArray(colorLegendItems) && colorLegendItems.length !== 0) {
+      const items = getColorLegendItems(colorLegendItems);
+      return { category: { items } };
+    }
+
+    return {};
   }
 }

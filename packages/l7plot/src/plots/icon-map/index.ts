@@ -1,4 +1,4 @@
-import { MapWrapper } from '../../core/map';
+import { Plot } from '../../core/plot';
 import { ILayer } from '../../types';
 import { PointMap } from '../point-map';
 import { DEFAULT_OPTIONS } from './constants';
@@ -12,7 +12,7 @@ export class IconMap extends PointMap<IconMapOptions> {
   /**
    * 地图类型
    */
-  public type = MapWrapper.MapType.Icon;
+  public type = Plot.MapType.Icon;
 
   /**
    * 图标图层

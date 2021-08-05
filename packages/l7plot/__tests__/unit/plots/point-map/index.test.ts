@@ -64,4 +64,30 @@ describe('point map', () => {
       });
     });
   });
+
+  it('legend', () => {
+    const pointMap = new PointMap(createDiv(), {
+      source: {
+        data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
+        parser: { type: 'json' },
+      },
+      color: {
+        field: 't',
+        value: ['#34B6B7', '#4AC5AF', '#5FD3A6', '#7BE39E', '#A1EDB8', '#CEF8D6'],
+      },
+      legend: { position: 'bottomleft' },
+    });
+
+    return new Promise<void>((resolve, reject) => {
+      pointMap.on('loaded', () => {
+        try {
+          expect(pointMap.legendControl).toBeDefined();
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
+        setTimeout(() => pointMap.destroy(), 0);
+      });
+    });
+  });
 });

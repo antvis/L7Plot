@@ -54,8 +54,8 @@ export class MappingLayer {
         layer.shape(field, shape.value);
       }
       // scale
-      if (isString(field) && shape.type) {
-        MappingLayer.scale(layer, field, { type: shape.type });
+      if (isString(field) && shape.scale) {
+        MappingLayer.scale(layer, field, shape.scale);
       }
     }
   }
@@ -83,8 +83,8 @@ export class MappingLayer {
         layer.size(field, size.value);
       }
       // scale
-      if (isString(field) && size.type) {
-        MappingLayer.scale(layer, field, { type: size.type });
+      if (isString(field) && size.scale) {
+        MappingLayer.scale(layer, field, size.scale);
       }
     }
   }
@@ -112,8 +112,8 @@ export class MappingLayer {
         layer.color(field, color.value);
       }
       // scale
-      if (isString(field) && color.type) {
-        MappingLayer.scale(layer, field, { type: color.type });
+      if (isString(field) && color.scale) {
+        MappingLayer.scale(layer, field, color.scale);
       }
     }
   }

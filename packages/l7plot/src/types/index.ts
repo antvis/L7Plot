@@ -1,6 +1,7 @@
 export * from './common';
 export * from './attr';
 export * from './map';
+export * from './plot';
 export * from './label';
 export * from './tooltip';
 export * from './popup';

@@ -56,7 +56,7 @@ constructor(container: string | HTMLDivElement, options: MapOptions)
 
 `string` required
 
-地图服务 token。
+地图服务 token，需服务平台申请。
 
 #### `map.`center
 
@@ -93,9 +93,9 @@ constructor(container: string | HTMLDivElement, options: MapOptions)
 
 #### `map.`maxZoom
 
-`number` optional default: `22`
+`number` optional default: `20`
 
-地图最大缩放等级
+地图最大缩放等级，AMap 最大缩放等级 18，Mapbox 最大缩放等级 20。
 
 #### `map.`style
 
@@ -115,6 +115,18 @@ constructor(container: string | HTMLDivElement, options: MapOptions)
   style: 'amap://styles/2a09079c3daac9420ee53b67307a8006?isPublic=true';
 }
 ```
+
+### `options.`antialias
+
+`boolean` optional default: `true`
+
+是否开启抗锯齿。
+
+### `options.`preserveDrawingBuffer
+
+`boolean` optional default: `false`
+
+是否保留缓冲区数据。
 
 ### `options.`logo
 
@@ -140,7 +152,7 @@ constructor(container: string | HTMLDivElement, options: MapOptions)
 
 元素交互反馈效果。
 
-#### `options.`active
+#### `state.`active
 
 `boolean｜IActiveOption` optional default: `false`
 
@@ -166,7 +178,7 @@ constructor(container: string | HTMLDivElement, options: MapOptions)
 }
 ```
 
-#### `options.`select
+#### `state.`select
 
 `boolean｜IActiveOption` optional default: `false`
 
@@ -192,13 +204,19 @@ constructor(container: string | HTMLDivElement, options: MapOptions)
 }
 ```
 
+### `options.`theme
+
+`string|object` optional default: `'light'`
+
+图表主题，详见 [Theme](/zh/docs/api/theme)。
+
 `markdown:docs/common/attribute/components.zh.md`
 
 ## 二、属性
 
 ### DefaultOptions
 
-`Object` **static**
+`object` **static**
 
 ### container
 

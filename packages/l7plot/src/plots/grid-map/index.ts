@@ -1,6 +1,6 @@
 import { GridMapOptions, ISource } from './interface';
-import { Source, ILayer, ISourceCFG, ITransform } from '../../types';
-import { MapWrapper } from '../../core/map';
+import { Source, ILayer, ISourceCFG, ITransform, IGridAggregation } from '../../types';
+import { Plot } from '../../core/plot';
 import { DEFAULT_OPTIONS } from './constants';
 import { Heatmap } from '../heatmap';
 
@@ -13,12 +13,12 @@ export class GridMap extends Heatmap<GridMapOptions> {
   /**
    * 地图类型
    */
-  public type = MapWrapper.MapType.Grid;
+  public type = Plot.MapType.Grid;
 
   /**
    * 获取网格聚合配置
    */
-  protected getAggregationConfig(aggregation) {
+  protected getAggregationConfig(aggregation: IGridAggregation) {
     const { radius, type: method, field } = aggregation;
     const aggregationType = 'grid';
     const config = { type: aggregationType, size: radius, method, field };

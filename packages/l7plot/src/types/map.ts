@@ -2,7 +2,6 @@ import { Map as MapboxglMap } from 'mapbox-gl';
 import { IAMapInstance, IMapboxInstance } from '@antv/l7-maps/typings';
 import { IStatusOptions, PositionName, ISourceCFG, MapStyle } from '@antv/l7-core';
 import Source from '@antv/l7-source';
-import { IStateAttribute } from './attr';
 import { ILabelOptions } from './label';
 import { IPopupOptions } from './popup';
 import { ITooltipOptions } from './tooltip';
@@ -16,23 +15,6 @@ export type AMapInstance = AMap.Map & IAMapInstance;
 export type MapboxInstance = MapboxglMap & IMapboxInstance;
 
 export type MapInstance = AMapInstance | MapboxInstance;
-
-/**
- * 地图图表类型
- */
-export enum MapType {
-  Point = 'point',
-  Bubble = 'bubble',
-  Scatter = 'scatter',
-  PointCloud = 'pointCloud',
-  Icon = 'icon',
-  Clustere = 'clustere',
-  Heat = 'heat',
-  HeatMap = 'heatMap',
-  Grid = 'grid',
-  Hexagon = 'hexagon',
-  Line = 'line',
-}
 
 /**
  * 底图类型
@@ -105,7 +87,7 @@ export interface ISource extends ISourceCFG {
 }
 
 /**
- * 基础 options 配置
+ * 基础 map options 配置
  */
 export interface IMapOptions {
   // 地图容器基本配置
@@ -126,6 +108,14 @@ export interface IMapOptions {
   readonly map?: IMapConfig;
 
   /**
+   * 是否开启抗锯齿
+   */
+  readonly antialias?: boolean;
+  /**
+   * 是否保留缓冲区数据
+   */
+  readonly preserveDrawingBuffer?: boolean;
+  /**
    * logo 配置
    */
   readonly logo?: boolean | ILogo;
@@ -136,18 +126,7 @@ export interface IMapOptions {
   readonly source: ISource;
 
   /**
-   * 是否自动缩放到图层范围，默认为 false
-   */
-
-  readonly autoFit?: boolean;
-
-  /**
-   * 交互反馈
-   */
-  readonly state?: IStateAttribute;
-
-  /**
-   * 主题，字符串或 object
+   * 主题，string 或 object
    */
   readonly theme?: string | Record<string, any>;
 

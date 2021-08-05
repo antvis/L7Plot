@@ -16,10 +16,11 @@ export {
 export { getTheme, registerTheme } from './theme';
 
 /** G7Plot 的 MapWrapper 基类 */
-export { MapWrapper } from './core/map';
+export { Plot as MapWrapper } from './core/plot';
 
 // 类型定义导出
 export * from './types';
+export * from './core/layer/interface';
 
 // 点地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { PointMap } from './plots/point-map';
