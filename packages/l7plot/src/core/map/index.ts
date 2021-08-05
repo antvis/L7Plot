@@ -7,7 +7,6 @@ import { Tooltip } from '../../component/tooltip';
 import { Legend, LegendItem } from '../../component/legend';
 import { deepAssign } from '../../utils';
 import {
-  MapType,
   BaseMapType,
   IMapOptions,
   AMapInstance,
@@ -31,32 +30,22 @@ import { LabelLayerWrapper } from '../../layers/label-layer';
 import { getTheme } from '../../theme';
 import { createTheme } from '../../theme/util';
 
-const DEFAULT_OPTIONS = {
+const DEFAULT_OPTIONS: Partial<IMapOptions> = {
   map: { type: BaseMapType.Amap },
   logo: true,
-  autoFit: false,
 };
 
-export abstract class MapWrapper<O extends IMapOptions> {
+export abstract class Map<O extends IMapOptions> {
   /**
    * 默认的 options 配置项
    */
   static DefaultOptions = DEFAULT_OPTIONS;
   /**
-   * 地图类型
-   */
-  static MapType = MapType;
-
-  /**
    * 自定义事件中心
    */
   private readonly eventEmitter = new EventEmitter();
   /**
-   * map 类型名称
-   */
-  public abstract readonly type: MapType | string;
-  /**
-   * 是否首次渲染
+   * 是否初始化成功
    */
   public inited = false;
   /**
@@ -137,7 +126,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
    * 获取默认配置
    */
   protected getDefaultOptions(): Partial<IMapOptions> {
-    return MapWrapper.DefaultOptions;
+    return Map.DefaultOptions;
   }
 
   /**
@@ -171,7 +160,8 @@ export abstract class MapWrapper<O extends IMapOptions> {
    * 创建 map 容器
    */
   private createMap() {
-    const mapConfig = this.options.map ? this.options.map : DEFAULT_OPTIONS.map;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const mapConfig = this.options.map ? this.options.map : DEFAULT_OPTIONS.map!;
     const { type, ...config } = mapConfig;
     const options = Object.assign({ style: this.theme['mapStyle'] }, config);
 
@@ -258,8 +248,7 @@ export abstract class MapWrapper<O extends IMapOptions> {
         this.sceneLoaded = true;
         this.layersLoaded && onLoaded();
       } else {
-        // TODO: once
-        this.scene.on('loaded', () => {
+        this.scene.once('loaded', () => {
           this.sceneLoaded = true;
           this.layersLoaded && onLoaded();
         });

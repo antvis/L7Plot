@@ -1,6 +1,6 @@
 import { HexagonMapOptions, ISource } from './interface';
-import { Source, ILayer, ISourceCFG, ITransform } from '../../types';
-import { MapWrapper } from '../../core/map';
+import { Source, ILayer, ISourceCFG, ITransform, IGridAggregation } from '../../types';
+import { Plot } from '../../core/plot';
 import { DEFAULT_OPTIONS } from './constants';
 import { Heatmap } from '../heatmap';
 
@@ -13,12 +13,12 @@ export class HexagonMap extends Heatmap<HexagonMapOptions> {
   /**
    * 地图类型
    */
-  public type = MapWrapper.MapType.Hexagon;
+  public type = Plot.MapType.Hexagon;
 
   /**
    * 获取网格聚合配置
    */
-  protected getAggregationConfig(aggregation) {
+  protected getAggregationConfig(aggregation: IGridAggregation) {
     const { radius, type: method, field } = aggregation;
     const aggregationType = 'hexagon';
     const config = { type: aggregationType, size: radius, method, field };

@@ -1,5 +1,5 @@
 import { HeatMapOptions } from './interface';
-import { MapWrapper } from '../../core/map';
+import { Plot } from '../../core/plot';
 import { DEFAULT_OPTIONS } from './constants';
 import { Heatmap } from '../heatmap';
 import { ILayer, ILegendOptions } from '../../types';
@@ -12,7 +12,7 @@ export class HeatMap extends Heatmap<HeatMapOptions> {
   /**
    * 地图类型
    */
-  public type = MapWrapper.MapType.HeatMap;
+  public type = Plot.MapType.HeatMap;
 
   /**
    * 热力图层

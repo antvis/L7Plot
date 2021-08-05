@@ -1,13 +1,13 @@
 import { pick } from '@antv/util';
 import { HeatmapOptions } from './interface';
-import { MapWrapper } from '../../core/map';
+import { Plot } from '../../core/plot';
 import { DEFAULT_OPTIONS, POINT_LAYER_OPTIONS_KEYS } from './constants';
 import { LabelLayerWrapper } from '../../layers/label-layer';
 import { ILayer, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
 import { HeatmapLayerWrapper } from '../../layers/heatmap-layer';
 
-export class Heatmap<O extends HeatmapOptions = HeatmapOptions> extends MapWrapper<O> {
+export class Heatmap<O extends HeatmapOptions = HeatmapOptions> extends Plot<O> {
   /**
    * 默认配置项
    */
@@ -16,7 +16,7 @@ export class Heatmap<O extends HeatmapOptions = HeatmapOptions> extends MapWrapp
   /**
    * 地图类型
    */
-  public type = MapWrapper.MapType.Heat;
+  public type = Plot.MapType.Heat;
 
   /**
    * heatmapLayerWrapper
@@ -45,7 +45,7 @@ export class Heatmap<O extends HeatmapOptions = HeatmapOptions> extends MapWrapp
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<O> {
+  protected getDefaultOptions(): Partial<HeatmapOptions> {
     return Heatmap.DefaultOptions;
   }
 
