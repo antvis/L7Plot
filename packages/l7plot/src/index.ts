@@ -20,6 +20,7 @@ export { MapWrapper } from './core/map';
 
 // 类型定义导出
 export * from './types';
+export * from './core/layer/interface';
 
 // 点地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { PointMap } from './plots/point-map';
