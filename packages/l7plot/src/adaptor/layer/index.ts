@@ -9,7 +9,7 @@ import {
   RotateAttr,
   animateAttr,
   IStateAttribute,
-} from '../../types/';
+} from '../../types';
 
 /**
  * 获得映射函数
