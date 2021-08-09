@@ -1,5 +1,5 @@
 import Theme from '../configs/theme';
-import { CONTAINER_CLASS, LIST_CLASS, LIST_ITEM_CLASS, TITLE_CLASS, VALUE_CLASS } from './constants';
+import { CONTAINER_CLASS, LIST_CLASS, LIST_ITEM_CLASS, TITLE_CLASS, NAME_CLASS, VALUE_CLASS } from './constants';
 
 export default {
   // css style for tooltip
@@ -31,6 +31,7 @@ export default {
     listStyleType: 'none',
     marginBottom: '4px',
   },
+  [NAME_CLASS]: {},
   [VALUE_CLASS]: {
     display: 'inline-block',
     float: 'right',

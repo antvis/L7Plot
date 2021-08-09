@@ -46,6 +46,10 @@ export interface IStyleSheet {
 
   /** tooltip 文本颜色 */
   tooltipTextFillColor?: string;
+  /** tooltip 数据项名称颜色 */
+  tooltipItemNameFillColor?: string;
+  /** tooltip 数据项数据颜色 */
+  tooltipItemValueFillColor?: string;
   /** tooltip 文本字体大小 */
   tooltipTextFontSize?: number;
   /** tooltip 文本行高 */
