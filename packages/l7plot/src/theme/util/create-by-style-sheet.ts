@@ -156,7 +156,11 @@ export function createThemeByStyleSheet(styleSheet: IStyleSheet): Record<string,
             listStyleType: 'none',
             marginBottom: '4px',
           },
+          [TOOLTIP_CSS_CONST.NAME_CLASS]: {
+            color: styleSheet.tooltipItemNameFillColor,
+          },
           [TOOLTIP_CSS_CONST.VALUE_CLASS]: {
+            color: styleSheet.tooltipItemValueFillColor,
             display: 'inline-block',
             float: 'right',
             marginLeft: '30px',

@@ -22,6 +22,6 @@ export function getTheme(theme = 'default'): Record<string, any> {
 /**
  * 注册新的主题配置信息。
  */
-export function registerTheme(theme: string, value: Record<string, any>) {
-  Themes[lowerCase(theme)] = createTheme(value);
+export function registerTheme(theme: string, value: Record<string, any>, type: 'light' | 'dark' = 'light') {
+  Themes[lowerCase(theme)] = type === 'light' ? createTheme(value) : createDarkTheme(value);
 }

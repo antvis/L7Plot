@@ -134,6 +134,10 @@ export const createLightStyleSheet: (cfg?: StyleSheetCfg) => IStyleSheet = (cfg:
 
     /** tooltip 文本颜色 */
     tooltipTextFillColor: BLACK_COLORS[65],
+    /** tooltip 数据项名称颜色 */
+    tooltipItemNameFillColor: BLACK_COLORS[65],
+    /** tooltip 数据项数据颜色 */
+    tooltipItemValueFillColor: BLACK_COLORS[65],
     /** tooltip 文本字体大小 */
     tooltipTextFontSize: 12,
     /** tooltip 文本行高 */
