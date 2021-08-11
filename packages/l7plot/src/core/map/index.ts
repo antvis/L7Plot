@@ -553,7 +553,7 @@ export abstract class Map<O extends IMapOptions> {
    * 获取 legend 配置项
    * 由各图各自实现，不同的图 legend 可能不同
    */
-  protected getLegendOptions(): ILegendOptions {
+  public getLegendOptions(): ILegendOptions {
     return {};
   }
 
@@ -564,15 +564,14 @@ export abstract class Map<O extends IMapOptions> {
     this.removeLegendControl();
     const legendTheme = this.theme['components'].legend;
     const legendOptions: ILegendOptions = deepAssign({}, this.getLegendOptions(), options);
-    const { position, category: categoryLegend, continue: continueLegend } = legendOptions;
+    const { type, position, ...rest } = legendOptions;
     const items: LegendItem[] = [];
-    if (categoryLegend) {
-      const options = deepAssign({}, { domStyles: legendTheme.category.domStyles }, categoryLegend);
-      items.push({ type: 'category', options });
-    }
-    if (continueLegend) {
-      const options = deepAssign({}, { domStyles: legendTheme.continue.domStyles }, continueLegend);
-      items.push({ type: 'continue', options });
+    if (type === 'category') {
+      const options = deepAssign({}, { domStyles: legendTheme.category.domStyles }, rest);
+      items.push({ type, options });
+    } else if (type === 'continue') {
+      const options = deepAssign({}, { domStyles: legendTheme.continue.domStyles }, rest);
+      items.push({ type, options });
     }
 
     this.legendControl = new Legend({ position, items });

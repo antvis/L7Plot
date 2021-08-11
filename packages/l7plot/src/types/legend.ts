@@ -4,14 +4,17 @@ import {
   ICategoryLegendListItem,
   ContinueLegendCustomContent,
 } from '@antv/l7plot-component';
+import { LegendType } from '../component/legend';
 
 /**
  * LegendControl
  */
-export interface ILegendOptions {
+export interface ILegendOptions
+  extends Omit<ICategoryLegendOptions, 'customContent'>,
+    Omit<IContinueLegendOptions, 'customContent'> {
+  type?: LegendType;
   position?: PositionName;
-  category?: ICategoryLegendOptions;
-  continue?: IContinueLegendOptions;
+  customContent?: CategoryLegendCustomContent | ContinueLegendCustomContent;
 }
 
 /**

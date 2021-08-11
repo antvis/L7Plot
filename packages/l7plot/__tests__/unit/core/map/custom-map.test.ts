@@ -1,11 +1,11 @@
 import { LayerGroup } from '../../../../src/core/layer/layer-group';
-import { IMapOptions, MapWrapper, Source } from '../../../../src';
+import { IMapOptions, Map, Source } from '../../../../src';
 import { createDiv } from '../../../helper/dom';
 
 describe('custom map', () => {
   it('default-options', () => {
     type CustomMapOptions = IMapOptions;
-    class CustomMap extends MapWrapper<CustomMapOptions> {
+    class CustomMap extends Map<CustomMapOptions> {
       type = 'custom';
       protected interactionLayers = [];
       protected createLayers(source: Source): LayerGroup {
@@ -18,7 +18,7 @@ describe('custom map', () => {
       }
     }
     const customMap = new CustomMap(createDiv(), { source: { data: [], parser: { type: 'json', x: 'x', y: 'y' } } });
-    expect(MapWrapper.DefaultOptions).toEqual(CustomMap.DefaultOptions);
+    expect(Map.DefaultOptions).toEqual(CustomMap.DefaultOptions);
 
     customMap.on('loaded', () => setTimeout(() => customMap.destroy(), 0));
   });

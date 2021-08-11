@@ -106,11 +106,11 @@ export class PointMap<O extends PointMapOptions = PointMapOptions> extends Plot<
   /**
    * 实现 legend 配置项
    */
-  protected getLegendOptions(): ILegendOptions {
+  public getLegendOptions(): ILegendOptions {
     const colorLegendItems = this.pointLayer.getLegendItems('color');
     if (Array.isArray(colorLegendItems) && colorLegendItems.length !== 0) {
       const items = getColorLegendItems(colorLegendItems);
-      return { category: { items } };
+      return { type: 'category', items };
     }
 
     return {};
