@@ -15,8 +15,11 @@ export {
 /** 主题注册 */
 export { getTheme, registerTheme } from './theme';
 
-/** G7Plot 的 MapWrapper 基类 */
-export { Plot as MapWrapper } from './core/plot';
+/** L7Plot 的基类 */
+export { Map } from './core/map';
+
+/** 各图表的基类 Plot */
+export { Plot } from './core/plot';
 
 // 类型定义导出
 export * from './types';
