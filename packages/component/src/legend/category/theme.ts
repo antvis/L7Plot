@@ -16,8 +16,9 @@ export default {
     fontSize: '12px',
   },
   [TITLE_CLASS]: {
-    lineHeight: '18px',
-    marginBottom: '5px',
+    fontSize: '13px',
+    lineHeight: '19px',
+    marginBottom: '8px',
   },
   [LIST_CLASS]: {
     listStyleType: 'none',
