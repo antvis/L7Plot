@@ -15,7 +15,7 @@ export interface ICategoryLegendListItem {
   /**
    * 值
    */
-  value: any;
+  value: [number, number] | [string, string] | string;
 
   [key: string]: any;
 }
