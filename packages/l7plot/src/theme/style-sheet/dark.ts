@@ -111,9 +111,9 @@ export const createDarkStyleSheet: (cfg?: StyleSheetCfg) => IStyleSheet = (cfg: 
 
     // -------------------- 图例 --------------------
     /** 图例内容框背景色 */
-    legendContainerFillColor: 'rgba(31, 31, 31, 0.9)',
+    legendContainerFillColor: 'rgba(31, 31, 31, 0.85)',
     /** 图例内容框阴影 */
-    legendContainerShadow: '0px 2px 4px rgba(0,0,0,.5)',
+    legendContainerShadow: '0 2px 8px 0 rgba(166, 166, 166, 0.20)',
     /** 图例内容框圆角 */
     legendContainerBorderRadius: 2,
 
@@ -121,14 +121,12 @@ export const createDarkStyleSheet: (cfg?: StyleSheetCfg) => IStyleSheet = (cfg: 
     legendTextFillColor: BLACK_COLORS[65],
     /** 图例文本字体大小 */
     legendTextFontSize: 12,
-    /** 图例文本行高 */
-    legendTextLineHeight: '1',
 
     // -------------------- Tooltip --------------------
     /** tooltip 内容框背景色 */
     tooltipContainerFillColor: 'rgba(31, 31, 31, 0.9)',
     /** tooltip 内容框阴影 */
-    tooltipContainerShadow: '0px 2px 4px rgba(0,0,0,.5)',
+    tooltipContainerShadow: '0px 2px 4px rgba(0, 0, 0, 0.5)',
     /** tooltip 内容框圆角 */
     tooltipContainerBorderRadius: 2,
 

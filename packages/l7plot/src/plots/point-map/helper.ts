@@ -1,5 +1,3 @@
-import { ICategoryLegendListItem } from '@antv/l7plot-component';
-
 type LegendItemTick = { value: number; color: string };
 type LegendItemExtent = { value: [number, number]; color: string };
 
@@ -7,13 +5,11 @@ const isLegendItemI = (legendItems: LegendItemTick[] | LegendItemExtent[]): lege
   return typeof legendItems[0].value === 'number';
 };
 
-export const getColorLegendItems = (legendItems: LegendItemTick[] | LegendItemExtent[]): ICategoryLegendListItem[] => {
+export const getColorLegendItems = (legendItems: LegendItemTick[] | LegendItemExtent[]) => {
   let items: LegendItemExtent[] = [];
 
   if (isLegendItemI(legendItems)) {
-    if (legendItems.length === 1) {
-      return [{ color: legendItems[0].color, value: legendItems[0].value }];
-    }
+    if (legendItems.length === 1) return [];
     const cache = new Map<string, number[]>();
 
     for (let index = 0; index < legendItems.length; index++) {
@@ -43,5 +39,5 @@ export const getColorLegendItems = (legendItems: LegendItemTick[] | LegendItemEx
     }));
   }
 
-  return items.map((item) => ({ ...item, value: item.value.join('-') }));
+  return items;
 };

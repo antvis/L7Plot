@@ -40,14 +40,14 @@ export class HeatMap extends Heatmap<HeatMapOptions> {
   /**
    * 实现 legend 配置项
    */
-  protected getLegendOptions(): ILegendOptions {
+  public getLegendOptions(): ILegendOptions {
     const sizeLegendItems = this.heatmapLayer.getLegendItems('size');
     if (Array.isArray(sizeLegendItems) && sizeLegendItems.length !== 0) {
       const min = sizeLegendItems[0].value;
       const max = sizeLegendItems[sizeLegendItems.length - 1].value;
       const colors = this.options.style?.colorsRamp.map(({ color }) => color);
 
-      return { continue: { min, max, colors } };
+      return { type: 'continue', min, max, colors };
     }
 
     return {};

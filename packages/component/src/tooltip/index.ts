@@ -1,4 +1,4 @@
-import { deepMix, each, isString, substitute } from '@antv/util';
+import { deepMix, isString, substitute } from '@antv/util';
 import { modifyCSS } from '@antv/dom-util';
 import DomStyles from './theme';
 import { CONTAINER_CLASS, CONTAINER_TPL, ITEM_TPL, LIST_CLASS, TITLE_CLASS } from './constants';
@@ -221,7 +221,7 @@ export class Tooltip<O extends ITooltipOptions = ITooltipOptions> extends Compon
     const itemTpl = this.options.itemTpl || ITEM_TPL;
     const listDom = this.listDom;
     if (listDom) {
-      each(items, (item) => {
+      items.forEach((item) => {
         const substituteObj = { ...item };
 
         const domStr = substitute(itemTpl, substituteObj);

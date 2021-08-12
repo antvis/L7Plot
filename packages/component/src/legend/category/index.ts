@@ -1,4 +1,4 @@
-import { deepMix, each, isString, substitute } from '@antv/util';
+import { deepMix, isString, substitute } from '@antv/util';
 import { modifyCSS } from '@antv/dom-util';
 import DomStyles from './theme';
 import { CONTAINER_CLASS, CONTAINER_TPL, ITEM_TPL, LIST_CLASS, TITLE_CLASS } from './constants';
@@ -219,8 +219,9 @@ export class CategoryLegend<O extends ICategoryLegendOptions = ICategoryLegendOp
     const itemTpl = this.options.itemTpl || ITEM_TPL;
     const listDom = this.listDom;
     if (listDom) {
-      each(items, (item) => {
-        const substituteObj = { ...item };
+      items.forEach((item) => {
+        const value = Array.isArray(item.value) ? item.value.join('-') : item.value;
+        const substituteObj = { ...item, value };
 
         const domStr = substitute(itemTpl, substituteObj);
         const itemDom = this.createDom(domStr);
