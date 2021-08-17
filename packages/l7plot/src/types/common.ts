@@ -19,7 +19,18 @@ export type { Scene };
 export type ValueOf<T> = T[keyof T];
 
 export interface IEvent {
+  // 事件类型
   type: string;
+  // 事件源
   target?: any;
   [key: string]: any;
+}
+
+export interface IMouseEvent extends IEvent {
+  x: number;
+  y: number;
+  type: string;
+  lngLat: ILngLat;
+  feature: unknown;
+  featureId: number;
 }

@@ -8,7 +8,7 @@ import {
   ITooltipListItem,
 } from '@antv/l7plot-component';
 import { isEqual, get as getValueByPath } from 'lodash-es';
-import { ILayer, ILngLat, TooltipAnchorType, IEvent, ITooltipOptions } from '../types';
+import { ILayer, ILngLat, TooltipAnchorType, IEvent, ITooltipOptions, IMouseEvent, ITooltipItem } from '../types';
 import { deepAssign } from '../utils';
 
 const TRIGGER_LIST = ['mousemove', 'click'];
@@ -85,7 +85,6 @@ export class Tooltip extends EventEmitter {
     const trigger = this.options.trigger || 'mousemove';
     if (!TRIGGER_LIST.includes(trigger)) {
       throw new Error('trigger is mousemove or click');
-      return;
     }
 
     this.interactionLayers.forEach((layer) => {
@@ -94,8 +93,8 @@ export class Tooltip extends EventEmitter {
     });
   }
 
-  private interactionTriggerHander = (event: any) => {
-    const { lngLat, feature } = event;
+  private interactionTriggerHander = (event: IMouseEvent) => {
+    const { lngLat, feature, featureId } = event;
     const { title, customTitle, items, customItems } = this.options;
     let tooltipItems: ITooltipListItem[] = [];
 
@@ -107,7 +106,7 @@ export class Tooltip extends EventEmitter {
         throw new Error('customItems return array');
       }
     } else if (items) {
-      items.forEach((item) => {
+      items.forEach((item: string | ITooltipItem) => {
         if (isString(item)) {
           const value = getValueByPath(feature, item);
           if (value !== undefined) {
@@ -119,7 +118,7 @@ export class Tooltip extends EventEmitter {
           if (value !== undefined) {
             tooltipItems.push({
               name: alias || field,
-              value: customValue ? customValue(value, feature) : value,
+              value: customValue ? customValue(value, feature, featureId) : value,
             });
           }
         }
