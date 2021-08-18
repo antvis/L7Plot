@@ -12,7 +12,7 @@ export enum MapType {
   Icon = 'icon',
   Clustere = 'clustere',
   Heat = 'heat',
-  HeatMap = 'heatMap',
+  Heatmap = 'heatmap',
   Grid = 'grid',
   Hexagon = 'hexagon',
 }

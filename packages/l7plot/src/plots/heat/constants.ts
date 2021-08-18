@@ -1,11 +1,11 @@
 import { Plot } from '../../core/plot';
 import { deepAssign } from '../../utils';
-import { HeatMapOptions } from './interface';
+import { HeatOptions } from './interface';
 
 /**
  * 默认配置项
  */
-export const DEFAULT_OPTIONS: Partial<HeatMapOptions> = deepAssign({}, Plot.DefaultOptions, {
+export const DEFAULT_OPTIONS: Partial<HeatOptions> = deepAssign({}, Plot.DefaultOptions, {
   source: {
     data: [],
     parser: {
@@ -32,3 +32,6 @@ export const DEFAULT_OPTIONS: Partial<HeatMapOptions> = deepAssign({}, Plot.Defa
     ],
   },
 });
+
+export const POINT_LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state'];
+export const LABEL_LAYER_OPTIONS_KEYS = ['label'];

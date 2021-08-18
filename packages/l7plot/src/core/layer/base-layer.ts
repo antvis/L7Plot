@@ -14,7 +14,7 @@ export abstract class BaseLayerWrapper<O extends IBaseLayerConfig> implements IB
     return config;
   }
 
-  public abstract updateOptions(options: Partial<O>);
+  public abstract updateOptions(options: Partial<O>): void;
 
   public changeData(source: Source) {
     this.layer.setSource(source);

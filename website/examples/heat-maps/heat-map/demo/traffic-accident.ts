@@ -1,12 +1,10 @@
-import { HeatMap } from '@antv/l7plot';
+import { Heatmap } from '@antv/l7plot';
 
 async function initMap() {
-  const response = await fetch(
-    'https://gw.alipayobjects.com/os/basement_prod/d3564b06-670f-46ea-8edb-842f7010a7c6.json'
-  );
+  const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/OOSGL1vhp3/20200726024229.json');
   const data = await response.json();
 
-  new HeatMap('container', {
+  new Heatmap('container', {
     map: {
       type: 'mapbox',
       style: 'dark',
@@ -22,7 +20,8 @@ async function initMap() {
     },
     shape: 'heatmap3D',
     size: {
-      field: 'mag',
+      field: 'avg',
+      value: ({ avg }) => avg / 100,
     },
   });
 }

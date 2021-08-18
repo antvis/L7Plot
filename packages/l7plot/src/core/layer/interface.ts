@@ -12,7 +12,7 @@ export interface IPointLayerStyleOptions {
 }
 
 /**
- * 点图层 图斑形状
+ * 点图层 图形形状
  */
 export type pointShape2d =
   | 'circle'
@@ -66,11 +66,11 @@ export interface IGridHeatmapLayerStyleOptions {
 }
 
 /**
- * 热力图层 图斑形状
+ * 热力图层 图形形状
  */
 export type heatmapShape2d = 'circle' | 'square' | 'hexagon' | 'triangle';
 
-export type heatmapShape3d = 'cylinder' | 'triangleColumn' | 'hexagonColumn' | 'squareColumn';
+export type heatmapShape3d = 'cylinder' | 'squareColumn' | 'hexagonColumn' | 'triangleColumn';
 
 export type heatmapShape = 'heatmap' | 'heatmap3D' | heatmapShape2d | heatmapShape3d;
 
@@ -179,6 +179,6 @@ export interface IBaseLayerWrapper {
   options: IBaseLayerConfig;
 
   pickLayerConfig<T extends IBaseLayerConfig>(params: T): Partial<ILayerConfig>;
-  updateOptions<T>(options: T);
-  changeData(source: Source);
+  updateOptions<T>(options: T): void;
+  changeData(source: Source): void;
 }

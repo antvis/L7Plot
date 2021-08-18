@@ -2,9 +2,9 @@ import { GridMapOptions, ISource } from './interface';
 import { Source, ILayer, ISourceCFG, ITransform, IGridAggregation } from '../../types';
 import { Plot } from '../../core/plot';
 import { DEFAULT_OPTIONS } from './constants';
-import { Heatmap } from '../heatmap';
+import { Heat } from '../heat';
 
-export class GridMap extends Heatmap<GridMapOptions> {
+export class GridMap extends Heat<GridMapOptions> {
   /**
    * 默认配置项
    */

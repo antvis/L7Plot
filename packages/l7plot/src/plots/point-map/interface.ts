@@ -5,15 +5,15 @@ import { ShapeAttr } from '../../types';
 /** 点地图的配置类型定义 */
 export interface PointMapOptions extends IPlotOptions {
   /**
-   * 图斑形状
+   * 图形形状
    */
   shape?: ShapeAttr<pointShape | string>;
   /**
-   * 图斑颜色
+   * 图形颜色
    */
   color?: ColorAttr;
   /**
-   * 图斑大小
+   * 图形大小
    */
   size?: SizeAttr;
   /**

@@ -1,17 +1,17 @@
 ---
-title: 热力地图 - Heat Map
+title: 热力图 - Heatmap
 order: 0
 ---
 
-`HeatMap` 继承基类 [Map](/zh/docs/api/map-api)。
+`Heatmap` 继承基类 [Map](/zh/docs/api/map-api)。
 
 ## 一、配置
 
 创建地图实例：
 
 ```ts
-import { HeatMap } from '@antv/l7plot';
-const heatMap = new HeatMap(container, options);
+import { Heatmap } from '@antv/l7plot';
+const heatmap = new Heatmap(container, options);
 ```
 
 ### container
@@ -22,7 +22,7 @@ const heatMap = new HeatMap(container, options);
 
 ### options
 
-`HeatMapOptions` required
+`HeatmapOptions` required
 
 热力地图的所有配置项，继承自 [Map options](/zh/docs/api/map-api#options)。
 
@@ -161,7 +161,5 @@ params:
 - 'labelLayer'
 
 ```js
-heatMap.on('heatmapLayer:click', (e) => {});
-// Or
-heatMap.heatMapLayer.on('click', (e) => {});
+heatmap.on('heatmapLayer:click', (e) => {});
 ```

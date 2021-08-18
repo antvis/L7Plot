@@ -1,5 +1,5 @@
 ---
-title: 散点地图 - Scatter Map
+title: 散点图 - Scatter Map
 order: 2
 ---
 
@@ -97,6 +97,4 @@ const scatterMap = new ScatterMap(container, options);
 
 ```js
 scatterMap.on('scatterLayer:click', (e) => {});
-// Or
-scatterMap.scatterLayer.on('click', (e) => {});
 ```

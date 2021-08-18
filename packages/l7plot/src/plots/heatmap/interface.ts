@@ -1,33 +1,19 @@
-import { IHeatmapLayerStyleOptions, IGridHeatmapLayerStyleOptions, heatmapShape } from '../../core/layer/interface';
-import { ColorAttr, IPlotOptions, SizeAttr, ISourceCFG } from '../../types';
+import { IHeatmapLayerStyleOptions } from '../../core/layer/interface';
+import { SizeAttr } from '../../types';
+import { HeatOptions } from '../heat/interface';
 
-/**
- * 数据配置
- */
-export interface ISource extends Pick<ISourceCFG, 'parser' | 'transforms'> {
-  data: any;
-}
-
-/** 热地图的配置类型定义 */
-export interface HeatmapOptions extends IPlotOptions {
+/** 热力图的配置类型定义 */
+export interface HeatmapOptions extends Omit<HeatOptions, 'color'> {
   /**
-   * 具体的数据
+   * 图形形状
    */
-  source: ISource;
+  shape?: 'heatmap' | 'heatmap3D';
   /**
-   * 图斑形状
-   */
-  shape?: heatmapShape;
-  /**
-   * 图斑颜色
-   */
-  color?: ColorAttr;
-  /**
-   * 图斑大小
+   * 图形大小
    */
   size?: SizeAttr;
   /**
    * 图层样式
    */
-  style?: Omit<IHeatmapLayerStyleOptions, 'rampColors'> | IGridHeatmapLayerStyleOptions;
+  style?: Omit<IHeatmapLayerStyleOptions, 'rampColors'>;
 }

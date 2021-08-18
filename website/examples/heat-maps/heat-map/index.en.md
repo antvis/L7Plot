@@ -1,4 +1,4 @@
 ---
-title: Heat Map
+title: Heatmap
 order: 0
 ---

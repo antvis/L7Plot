@@ -1,5 +1,5 @@
 ---
-title: 气泡地图 - Bubble Map
+title: 气泡图 - Bubble Map
 order: 1
 ---
 
@@ -89,6 +89,4 @@ const bubbleMap = new BubbleMap(container, options);
 
 ```js
 bubbleMap.on('bubbleLayer:click', (e) => {});
-// Or
-bubbleMap.bubbleLayer.on('click', (e) => {});
 ```

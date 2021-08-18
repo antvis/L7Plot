@@ -59,23 +59,23 @@ module.exports = {
       {
         slug: 'api/point-maps',
         title: {
-          zh: '点地图 - Point Map',
-          en: 'Point Map',
+          zh: '点地图 - Point Maps',
+          en: 'Point Maps',
         },
         order: 2,
       },
       {
         slug: 'api/heat-maps',
         title: {
-          zh: '热力图 - Heatmap',
-          en: 'Heatmap',
+          zh: '热力图 - Heat Maps',
+          en: 'Heat Maps',
         },
         order: 3,
       },
       {
         slug: 'api/components',
         title: {
-          zh: '地图组件 - Components',
+          zh: '组件 - Components',
           en: 'Components',
         },
         order: 4,
@@ -107,7 +107,7 @@ module.exports = {
         },
       },
       {
-        slug: 'point-map',
+        slug: 'point-maps',
         icon: 'point',
         title: {
           zh: '点地图',
@@ -115,7 +115,7 @@ module.exports = {
         },
       },
       {
-        slug: 'heat-map',
+        slug: 'heat-maps',
         icon: 'heatmap',
         title: {
           zh: '热力地图',

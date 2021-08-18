@@ -1,15 +1,15 @@
-import { HeatMap } from '../../../../src';
-import { DEFAULT_OPTIONS } from '../../../../src/plots/heat-map/constants';
+import { Heatmap } from '../../../../src';
+import { DEFAULT_OPTIONS } from '../../../../src/plots/heatmap/constants';
 import { createDiv } from '../../../helper/dom';
 import data from '../../../data-set/heat-map.json';
 
-describe('heat map', () => {
+describe('heatmap', () => {
   it('defaultOptions', () => {
-    expect(HeatMap.DefaultOptions).toEqual(DEFAULT_OPTIONS);
+    expect(Heatmap.DefaultOptions).toEqual(DEFAULT_OPTIONS);
   });
 
   it('source', () => {
-    const heatMap = new HeatMap(createDiv(), {
+    const heatmap = new Heatmap(createDiv(), {
       source: {
         data: data,
         parser: { type: 'geojson' },
@@ -19,15 +19,15 @@ describe('heat map', () => {
       },
     });
 
-    expect(heatMap.type).toEqual('heatMap');
-    expect(heatMap.heatmapLayer).toBeDefined();
-    expect(heatMap.labelLayer).toBeFalsy();
+    expect(heatmap.type).toEqual('heatmap');
+    expect(heatmap.heatmapLayer).toBeDefined();
+    expect(heatmap.labelLayer).toBeFalsy();
 
-    heatMap.on('loaded', () => setTimeout(() => heatMap.destroy(), 0));
+    heatmap.on('loaded', () => setTimeout(() => heatmap.destroy(), 0));
   });
 
   it('event', () => {
-    const heatMap = new HeatMap(createDiv(), {
+    const heatmap = new Heatmap(createDiv(), {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -35,21 +35,21 @@ describe('heat map', () => {
     });
 
     return new Promise<void>((resolve, reject) => {
-      heatMap.on('heatmapLayer:add', () => {
+      heatmap.on('heatmapLayer:add', () => {
         try {
-          expect(heatMap.heatmapLayer?.inited).toBeTruthy();
-          expect(heatMap.getLayerByName('heatmapLayer')).toBeDefined();
+          expect(heatmap.heatmapLayer?.inited).toBeTruthy();
+          expect(heatmap.getLayerByName('heatmapLayer')).toBeDefined();
           resolve();
         } catch (err) {
           reject(err);
         }
-        setTimeout(() => heatMap.destroy(), 0);
+        setTimeout(() => heatmap.destroy(), 0);
       });
     });
   });
 
   it('legend', () => {
-    const heatMap = new HeatMap(createDiv(), {
+    const heatmap = new Heatmap(createDiv(), {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -75,14 +75,14 @@ describe('heat map', () => {
     });
 
     return new Promise<void>((resolve, reject) => {
-      heatMap.on('loaded', () => {
+      heatmap.on('loaded', () => {
         try {
-          expect(heatMap.legendControl).toBeDefined();
+          expect(heatmap.legendControl).toBeDefined();
           resolve();
         } catch (err) {
           reject(err);
         }
-        setTimeout(() => heatMap.destroy(), 0);
+        setTimeout(() => heatmap.destroy(), 0);
       });
     });
   });

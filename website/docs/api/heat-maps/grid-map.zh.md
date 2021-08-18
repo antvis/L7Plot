@@ -1,5 +1,5 @@
 ---
-title: 网格地图 - Grid Map
+title: 网格图 - Grid Map
 order: 1
 ---
 
@@ -151,6 +151,4 @@ const gridMap = new GridMap(container, options);
 
 ```js
 gridMap.on('gridLayer:click', (e) => {});
-// Or
-gridMap.gridLayer.on('click', (e) => {});
 ```
