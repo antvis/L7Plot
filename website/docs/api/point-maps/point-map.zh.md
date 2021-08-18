@@ -151,6 +151,4 @@ const pointMap = new PointMap(container, options);
 
 ```js
 pointMap.on('pointLayer:click', (e) => {});
-// Or
-pointMap.pointLayer.on('click', (e) => {});
 ```

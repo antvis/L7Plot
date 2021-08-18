@@ -1,5 +1,5 @@
 ---
-title: 图标地图 - Icon Map
+title: 图标图 - Icon Map
 order: 4
 ---
 
@@ -163,6 +163,4 @@ registerImages(images);
 
 ```js
 iconMap.on('iconLayer:click', (e) => {});
-// Or
-iconMap.iconLayer.on('click', (e) => {});
 ```

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { HeatMap } from '@antv/l7plot';
+import { Heatmap } from '@antv/l7plot';
 
 class Heat extends Component {
-  public map: HeatMap | undefined;
+  public map: Heatmap | undefined;
 
   constructor(props) {
     super(props);
@@ -12,7 +12,7 @@ class Heat extends Component {
     const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/S2Pb%26549sG/20210723023614.json');
     const data = await response.json();
 
-    const heatMap = new HeatMap('container', {
+    const heatmap = new Heatmap('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
@@ -49,7 +49,7 @@ class Heat extends Component {
       },
     });
 
-    this.map = heatMap;
+    this.map = heatmap;
   }
 
   componentDidMount() {

@@ -1,6 +1,6 @@
 import { IGridHeatmapLayerStyleOptions } from '../../core/layer/interface';
 import { ISourceCFG, ColorAttr, IGridAggregation, SizeAttr } from '../../types';
-import { HeatmapOptions } from '../heatmap/interface';
+import { HeatOptions } from '../heat/interface';
 
 /**
  * 数据配置
@@ -13,22 +13,22 @@ export interface ISource extends Pick<ISourceCFG, 'parser' | 'transforms'> {
   aggregation: IGridAggregation;
 }
 
-/** 蜂窝地图的配置类型定义 */
-export interface HexagonMapOptions extends HeatmapOptions {
+/** 蜂窝图的配置类型定义 */
+export interface HexagonMapOptions extends HeatOptions {
   /**
    * 具体的数据
    */
   source: ISource;
   /**
-   * 图斑形状
+   * 图形形状
    */
   shape?: 'hexagon' | 'hexagonColumn';
   /**
-   * 图斑颜色
+   * 图形颜色
    */
   color?: ColorAttr;
   /**
-   * 图斑大小
+   * 图形大小
    */
   size?: SizeAttr;
   /**

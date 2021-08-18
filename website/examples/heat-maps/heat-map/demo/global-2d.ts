@@ -1,4 +1,4 @@
-import { HeatMap } from '@antv/l7plot';
+import { Heatmap } from '@antv/l7plot';
 
 async function initMap() {
   const response = await fetch(
@@ -6,7 +6,7 @@ async function initMap() {
   );
   const data = await response.json();
 
-  new HeatMap('container', {
+  new Heatmap('container', {
     map: {
       type: 'mapbox',
       style: 'dark',

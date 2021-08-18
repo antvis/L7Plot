@@ -32,6 +32,3 @@ export const DEFAULT_OPTIONS: Partial<HeatmapOptions> = deepAssign({}, Plot.Defa
     ],
   },
 });
-
-export const POINT_LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state'];
-export const LABEL_LAYER_OPTIONS_KEYS = ['label'];

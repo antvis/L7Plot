@@ -1,5 +1,5 @@
 ---
-title: 蜂窝地图 - Hexagon Map
+title: 蜂窝图 - Hexagon Map
 order: 2
 ---
 
@@ -146,6 +146,4 @@ const hexagonMap = new HexagonMap(container, options);
 
 ```js
 hexagonMap.on('hexagonLayer:click', (e) => {});
-// Or
-hexagonMap.hexagonLayer.on('click', (e) => {});
 ```

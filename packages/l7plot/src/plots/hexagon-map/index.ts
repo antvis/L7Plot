@@ -2,9 +2,9 @@ import { HexagonMapOptions, ISource } from './interface';
 import { Source, ILayer, ISourceCFG, ITransform, IGridAggregation } from '../../types';
 import { Plot } from '../../core/plot';
 import { DEFAULT_OPTIONS } from './constants';
-import { Heatmap } from '../heatmap';
+import { Heat } from '../heat';
 
-export class HexagonMap extends Heatmap<HexagonMapOptions> {
+export class HexagonMap extends Heat<HexagonMapOptions> {
   /**
    * 默认配置项
    */

@@ -1,5 +1,5 @@
 ---
-title: 点云地图 - Point Cloud Map
+title: 点云图 - Point Cloud Map
 order: 3
 ---
 
@@ -75,6 +75,4 @@ const pointCloudMap = new PointCloudMap(container, options);
 
 ```js
 pointCloudMap.on('pointCloudLayer:click', (e) => {});
-// Or
-pointCloudMap.pointCloudLayer.on('click', (e) => {});
 ```

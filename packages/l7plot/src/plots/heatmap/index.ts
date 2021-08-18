@@ -1,13 +1,9 @@
-import { pick } from '@antv/util';
 import { HeatmapOptions } from './interface';
 import { Plot } from '../../core/plot';
-import { DEFAULT_OPTIONS, POINT_LAYER_OPTIONS_KEYS } from './constants';
-import { LabelLayerWrapper } from '../../layers/label-layer';
-import { ILayer, Source } from '../../types';
-import { LayerGroup } from '../../core/layer/layer-group';
-import { HeatmapLayerWrapper } from '../../layers/heatmap-layer';
-
-export class Heatmap<O extends HeatmapOptions = HeatmapOptions> extends Plot<O> {
+import { DEFAULT_OPTIONS } from './constants';
+import { Heat } from '../heat';
+import { ILayer, ILegendOptions } from '../../types';
+export class Heatmap extends Heat<HeatmapOptions> {
   /**
    * 默认配置项
    */
@@ -16,30 +12,13 @@ export class Heatmap<O extends HeatmapOptions = HeatmapOptions> extends Plot<O> 
   /**
    * 地图类型
    */
-  public type = Plot.MapType.Heat;
-
-  /**
-   * heatmapLayerWrapper
-   */
-  protected heatmapLayerWrapper!: HeatmapLayerWrapper;
+  public type = Plot.MapType.Heatmap;
 
   /**
    * 热力图层
    */
   get heatmapLayer(): ILayer {
     return this.heatmapLayerWrapper.layer;
-  }
-
-  /**
-   * labelLayerWrapper
-   */
-  protected labelLayerWrapper: LabelLayerWrapper | undefined;
-
-  /**
-   * 标注图层
-   */
-  get labelLayer(): ILayer | undefined {
-    return this.labelLayerWrapper?.layer;
   }
 
   /**
@@ -52,53 +31,25 @@ export class Heatmap<O extends HeatmapOptions = HeatmapOptions> extends Plot<O> 
   /**
    * 创建图层之前 hook
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  protected beforeCreateLayers(options: O) {
+  protected beforeCreateLayers() {
     const heatmapLayerConfig = { name: 'heatmapLayer' };
 
     return { heatmapLayerConfig };
   }
 
   /**
-   * 创建图层
+   * 实现 legend 配置项
    */
-  protected createLayers(source: Source): LayerGroup {
-    const { heatmapLayerConfig } = this.beforeCreateLayers(this.options);
-    this.heatmapLayerWrapper = new HeatmapLayerWrapper({
-      source,
-      ...pick<any>(this.options, POINT_LAYER_OPTIONS_KEYS),
-      ...heatmapLayerConfig,
-    });
-    const layerGroup = new LayerGroup([this.heatmapLayerWrapper.layer]);
+  public getLegendOptions(): ILegendOptions {
+    const sizeLegendItems = this.heatmapLayer.getLegendItems('size');
+    if (Array.isArray(sizeLegendItems) && sizeLegendItems.length !== 0) {
+      const min = sizeLegendItems[0].value;
+      const max = sizeLegendItems[sizeLegendItems.length - 1].value;
+      const colors = this.options.style?.colorsRamp.map(({ color }) => color);
 
-    if (this.options.label) {
-      this.labelLayerWrapper = this.createLabelLayer(this.source, this.options.label);
-      layerGroup.addlayer(this.labelLayerWrapper.layer);
+      return { type: 'continue', min, max, colors };
     }
 
-    this.interactionLayers = [this.heatmapLayerWrapper.layer];
-
-    return layerGroup;
-  }
-
-  /**
-   * 更新图层
-   */
-  protected updateLayers(options: O) {
-    const heatMapLayerConfig = pick<any>(options, POINT_LAYER_OPTIONS_KEYS);
-    this.heatmapLayerWrapper.updateOptions(heatMapLayerConfig);
-
-    if (options.label) {
-      if (this.labelLayerWrapper) {
-        this.labelLayerWrapper.updateOptions({ ...options.label });
-      } else {
-        this.labelLayerWrapper = this.createLabelLayer(this.source, options.label);
-        this.layerGroup.addlayer(this.labelLayerWrapper.layer);
-      }
-    } else {
-      if (this.labelLayerWrapper) {
-        this.layerGroup.removelayer(this.labelLayerWrapper.layer);
-      }
-    }
+    return {};
   }
 }

@@ -1,10 +1,10 @@
-import { HeatMap } from '@antv/l7plot';
+import { Heatmap } from '@antv/l7plot';
 
 async function initMap() {
   const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/S2Pb%26549sG/20210723023614.json');
   const data = await response.json();
 
-  new HeatMap('container', {
+  new Heatmap('container', {
     map: {
       type: 'mapbox',
       style: 'dark',

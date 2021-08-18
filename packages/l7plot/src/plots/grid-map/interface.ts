@@ -1,6 +1,6 @@
 import { IGridHeatmapLayerStyleOptions, heatmapShape2d, heatmapShape3d } from '../../core/layer/interface';
 import { ColorAttr, IGridAggregation, ISourceCFG, SizeAttr } from '../../types';
-import { HeatmapOptions } from '../heatmap/interface';
+import { HeatOptions } from '../heat/interface';
 
 /**
  * 数据配置
@@ -13,22 +13,22 @@ export interface ISource extends Pick<ISourceCFG, 'parser' | 'transforms'> {
   aggregation: IGridAggregation;
 }
 
-/** 网格地图的配置类型定义 */
-export interface GridMapOptions extends HeatmapOptions {
+/** 网格图的配置类型定义 */
+export interface GridMapOptions extends HeatOptions {
   /**
    * 具体的数据
    */
   source: ISource;
   /**
-   * 图斑形状
+   * 图形形状
    */
   shape?: heatmapShape2d | heatmapShape3d;
   /**
-   * 图斑颜色
+   * 图形颜色
    */
   color?: ColorAttr;
   /**
-   * 图斑大小
+   * 图形大小
    */
   size?: SizeAttr;
   /**

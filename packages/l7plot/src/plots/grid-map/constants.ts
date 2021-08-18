@@ -18,7 +18,7 @@ export const DEFAULT_OPTIONS: Partial<GridMapOptions> = deepAssign({}, Plot.Defa
       type: 'sum',
     },
   },
-  shape: 'grid',
+  shape: 'square',
   color: '#5FD3A6',
   style: {
     coverage: 0.9,

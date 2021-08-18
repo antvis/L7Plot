@@ -50,8 +50,8 @@ export { ClustereMap } from './plots/clustere-map';
 export type { ClustereMapOptions } from './plots/clustere-map/interface';
 
 // 热力地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { HeatMap } from './plots/heat-map';
-export type { HeatMapOptions } from './plots/heat-map/interface';
+export { Heatmap } from './plots/heatmap';
+export type { HeatmapOptions } from './plots/heatmap/interface';
 
 // 网格地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { GridMap } from './plots/grid-map';
