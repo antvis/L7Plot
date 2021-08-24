@@ -1,6 +1,6 @@
 {
   "name": "@antv/l7plot",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.3",
   "description": "A map charting library",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
@@ -43,8 +43,9 @@
   "dependencies": {
     "@antv/event-emitter": "^0.1.2",
     "@antv/l7": "^2.5.5",
-    "@antv/l7plot-component": "^0.0.1-alpha.1",
+    "@antv/l7plot-component": "^0.0.1-alpha.3",
     "@antv/util": "^2.0.13",
     "lodash-es": "^4.17.21"
-  }
+  },
+  "gitHead": "2f9a1c17e388833b92ba5355842e0f2b6ddeb12f"
 }

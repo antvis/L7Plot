@@ -1,4 +1,14 @@
 {
   "packages": ["packages/*", "website", "storybook"],
-  "version": "0.0.1-alpha.1"
+  "version": "independent",
+  "command": {
+    "publish": {
+      "ignoreChanges": ["__tests__", "*.md"],
+      "registry": "https://registry.npmjs.com",
+      "message": "chore: publish"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
