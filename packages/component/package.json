@@ -6,6 +6,7 @@
   "types": "dist/lib/index.d.ts",
   "module": "dist/esm/index.js",
   "unpkg": "dist/umd/index.js",
+  "files": ["dist"],
   "scripts": {
     "dev": "npm run clean && npm run dev:cjs",
     "dev:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib --watch",
@@ -38,5 +39,7 @@
     "@antv/dom-util": "^2.0.3",
     "@antv/util": "^2.0.14"
   },
-  "gitHead": "2f9a1c17e388833b92ba5355842e0f2b6ddeb12f"
+  "publishConfig": {
+    "access": "public"
+  }
 }

@@ -7,8 +7,5 @@
       "registry": "https://registry.npmjs.com",
       "message": "chore: publish"
     }
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
