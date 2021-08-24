@@ -39,5 +39,7 @@
     "@antv/dom-util": "^2.0.3",
     "@antv/util": "^2.0.14"
   },
-  "gitHead": "2f9a1c17e388833b92ba5355842e0f2b6ddeb12f"
+  "publishConfig": {
+    "access": "public"
+  }
 }
