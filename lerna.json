@@ -4,6 +4,7 @@
   "command": {
     "publish": {
       "ignoreChanges": ["__tests__", "*.md"],
+      "registry": "https://registry.npmjs.com",
       "message": "chore: publish"
     }
   }
