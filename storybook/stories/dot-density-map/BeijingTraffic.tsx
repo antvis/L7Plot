@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { PointCloudMap } from '@antv/l7plot';
+import { DotDensityMap } from '@antv/l7plot';
 
 class BeijingTraffic extends Component {
-  public map: PointCloudMap | undefined;
+  public map: DotDensityMap | undefined;
 
   constructor(props) {
     super(props);
@@ -13,7 +13,7 @@ class BeijingTraffic extends Component {
     const data = await response.text();
     const colors = ['#c57f34', '#cbfddf', '#edea70', '#8cc9f1', '#2c7bb6'];
 
-    const pointCloud = new PointCloudMap('container', {
+    const dotDensity = new DotDensityMap('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
@@ -57,7 +57,7 @@ class BeijingTraffic extends Component {
       },
     });
 
-    this.map = pointCloud;
+    this.map = dotDensity;
   }
 
   componentDidMount() {

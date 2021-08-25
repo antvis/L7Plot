@@ -1,10 +1,10 @@
-import { PointCloudMap } from '@antv/l7plot';
+import { DotDensityMap } from '@antv/l7plot';
 
 async function initMap() {
   const response = await fetch('https://gw.alipayobjects.com/os/rmsportal/BElVQFEFvpAKzddxFZxJ.txt');
   const data = await response.text();
 
-  new PointCloudMap('container', {
+  new DotDensityMap('container', {
     map: {
       type: 'mapbox',
       style: 'dark',

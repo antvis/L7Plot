@@ -26,6 +26,7 @@ async function initMap() {
 
     animate: true,
     state: { active: true },
+    autoFit: true,
 
     label: {
       field: 'cityName',

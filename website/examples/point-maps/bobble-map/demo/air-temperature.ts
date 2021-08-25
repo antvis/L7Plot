@@ -46,6 +46,7 @@ async function initMap() {
       strokeWidth: 0,
     },
     state: { active: { color: '#FFF684' } },
+    autoFit: true,
 
     label: {
       visible: false, // 是否显示标签图层
