@@ -34,6 +34,7 @@ class Basic extends Component {
 
       animate: true,
       state: { active: true },
+      autoFit: true,
 
       label: {
         field: 'cityName',

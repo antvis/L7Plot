@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { PointCloudMap } from '@antv/l7plot';
+import { DotDensityMap } from '@antv/l7plot';
 
 class CuisineNationwide extends Component {
-  public map: PointCloudMap | undefined;
+  public map: DotDensityMap | undefined;
 
   constructor(props) {
     super(props);
@@ -14,7 +14,7 @@ class CuisineNationwide extends Component {
     );
     const data = await response.json();
 
-    const pointCloud = new PointCloudMap('container', {
+    const dotDensity = new DotDensityMap('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
@@ -40,7 +40,7 @@ class CuisineNationwide extends Component {
       },
     });
 
-    this.map = pointCloud;
+    this.map = dotDensity;
   }
 
   componentDidMount() {

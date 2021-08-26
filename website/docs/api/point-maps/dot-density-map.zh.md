@@ -1,17 +1,17 @@
 ---
-title: 点云图 - Point Cloud Map
+title: 点密度图 - Dot Density Map
 order: 3
 ---
 
-`PointCloudMap` 继承自 [PointMap](/zh/docs/api/point-maps/point-map)。
+`DotDensityMap` 继承自 [PointMap](/zh/docs/api/point-maps/point-map)。
 
 ## 一、配置
 
 创建地图实例：
 
 ```ts
-import { PointCloudMap } from '@antv/l7plot';
-const pointCloudMap = new PointCloudMap(container, options);
+import { DotDensityMap } from '@antv/l7plot';
+const dotDensityMap = new DotDensityMap(container, options);
 ```
 
 ### container
@@ -22,7 +22,7 @@ const pointCloudMap = new PointCloudMap(container, options);
 
 ### options
 
-`PointCloudMapOptions` required
+`DotDensityMapOptions` required
 
 点云地图的所有配置项，继承自 [Map options](/zh/docs/api/map-api#options)。
 
@@ -48,7 +48,7 @@ const pointCloudMap = new PointCloudMap(container, options);
 
 继承 [Map 属性](/zh/docs/api/map-api#二、属性)。
 
-### pointCloudLayer
+### dotDensityLayer
 
 `ILayer`
 
@@ -70,9 +70,9 @@ const pointCloudMap = new PointCloudMap(container, options);
 
 内置图层名称分别为：
 
-- 'pointCloudLayer'
+- 'dotDensityLayer'
 - 'labelLayer'
 
 ```js
-pointCloudMap.on('pointCloudLayer:click', (e) => {});
+pointCloudMap.on('dotDensityLayer:click', (e) => {});
 ```

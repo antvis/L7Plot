@@ -28,7 +28,6 @@ class Earthquake extends Component {
           y: 'lat',
         },
       },
-      autoFit: true,
 
       color: {
         field: 'mag',
@@ -52,6 +51,7 @@ class Earthquake extends Component {
         strokeWidth: 0,
       },
       state: { active: { color: '#FFF684' } },
+      autoFit: true,
       zoom: {
         position: 'bottomright',
       },

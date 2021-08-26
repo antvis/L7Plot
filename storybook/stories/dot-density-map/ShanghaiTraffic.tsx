@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { PointCloudMap } from '@antv/l7plot';
+import { DotDensityMap } from '@antv/l7plot';
 
 class ShanghaiTraffic extends Component {
-  public map: PointCloudMap | undefined;
+  public map: DotDensityMap | undefined;
 
   constructor(props) {
     super(props);
@@ -12,7 +12,7 @@ class ShanghaiTraffic extends Component {
     const response = await fetch('https://gw.alipayobjects.com/os/rmsportal/BElVQFEFvpAKzddxFZxJ.txt');
     const data = await response.text();
 
-    const pointCloud = new PointCloudMap('container', {
+    const dotDensity = new DotDensityMap('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
@@ -39,7 +39,7 @@ class ShanghaiTraffic extends Component {
       },
     });
 
-    this.map = pointCloud;
+    this.map = dotDensity;
   }
 
   componentDidMount() {
