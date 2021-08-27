@@ -13,7 +13,7 @@ export class DotDensityMap extends PointMap<DotDensityMapOptions> {
   /**
    * 地图类型
    */
-  public type = Plot.MapType.PointCloud;
+  public type = Plot.MapType.DotDensity;
 
   /**
    * 点密度图层
