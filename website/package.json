@@ -1,7 +1,7 @@
 {
   "name": "l7plot-website",
   "private": true,
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.4",
   "license": "MIT",
   "author": "yunji",
   "scripts": {
@@ -14,16 +14,16 @@
     "prettier": "prettier -c -w docs examples"
   },
   "dependencies": {
-    "@antv/l7plot": "^0.0.1-alpha.3",
+    "@antv/l7plot": "^0.0.1-alpha.4",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
   },
   "devDependencies": {
-    "@antv/gatsby-theme-antv": "^1.1.5",
+    "@antv/gatsby-theme-antv": "^1.1.10",
     "@types/react": "^16.14.8",
     "@types/react-dom": "^16.9.13",
     "gatsby": "^2.32.13",
     "gh-pages": "^3.2.1",
-    "postcss": "^8.3.5"
+    "postcss": "^8.3.6"
   }
 }

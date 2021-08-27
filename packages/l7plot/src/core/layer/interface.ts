@@ -93,6 +93,11 @@ export interface ILineLayerStyleOptions {
 }
 
 /**
+ * 面图层 图形形状
+ */
+export type PolygonShape = 'fill' | 'line' | 'extrude';
+
+/**
  * 面图层 图层样式
  */
 export interface IPolygonLayerStyleOptions {
@@ -163,7 +168,7 @@ export interface ILIneLayerConfig extends Partial<IBaseLayerConfig & ILineLayerS
  * 面图层基础配置
  */
 export interface IPolygonLayerConfig extends Partial<IBaseLayerConfig & IPolygonLayerStyleOptions> {
-  shape?: ShapeAttr<string>;
+  shape?: PolygonShape;
   color?: ColorAttr;
   size?: SizeAttr;
   state?: IStateAttribute;

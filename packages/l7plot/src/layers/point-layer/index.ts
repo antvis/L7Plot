@@ -1,5 +1,5 @@
 import { uniqueId } from '@antv/util';
-import { PointLayer as PLayer } from '@antv/l7-layers';
+import { PointLayer } from '@antv/l7-layers';
 import { BaseLayerWrapper } from '../../core/layer/base-layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
@@ -21,7 +21,7 @@ export class PointLayerWrapper<O extends IPointLayerOptions = IPointLayerOptions
     this.options = deepAssign({}, Point_DEFAULT_OPTIONS, options);
 
     const config = this.pickLayerConfig(this.options);
-    this.layer = new PLayer({ ...config, name: layerName });
+    this.layer = new PointLayer({ ...config, name: layerName });
 
     this.mappingLayer(this.layer, this.options);
     this.layer.setSource(source);

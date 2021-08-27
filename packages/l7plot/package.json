@@ -1,12 +1,14 @@
 {
   "name": "@antv/l7plot",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.4",
   "description": "A map charting library",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
   "module": "dist/esm/index.js",
   "unpkg": "dist/umd/index.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "npm run clean && npm run dev:cjs",
     "dev:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib --watch",
@@ -44,7 +46,7 @@
   "dependencies": {
     "@antv/event-emitter": "^0.1.2",
     "@antv/l7": "^2.5.5",
-    "@antv/l7plot-component": "^0.0.1-alpha.3",
+    "@antv/l7plot-component": "^0.0.1-alpha.4",
     "@antv/util": "^2.0.13",
     "lodash-es": "^4.17.21"
   },
