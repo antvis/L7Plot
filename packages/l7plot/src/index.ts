@@ -31,10 +31,6 @@ export { L7Plot } from './plot';
 export { Dot } from './plots/dot';
 export type { DotOptions } from './plots/dot/interface';
 
-// 散点图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { Scatter } from './plots/scatter';
-export type { ScatterOptions } from './plots/scatter/interface';
-
 // 点密度图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { DotDensity } from './plots/dot-density';
 export type { DotDensityOptions } from './plots/dot-density/interface';

@@ -1,10 +1,10 @@
-import { Scatter } from '@antv/l7plot';
+import { Dot } from '@antv/l7plot';
 
 async function initMap() {
   const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/g5hIthhKlr/quanguoshixianweizhi.json');
   const { list } = await response.json();
 
-  new Scatter('container', {
+  new Dot('container', {
     map: {
       type: 'mapbox',
       style: 'dark',

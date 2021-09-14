@@ -1,4 +1,4 @@
-import { Scatter } from '@antv/l7plot';
+import { Dot } from '@antv/l7plot';
 
 async function initMap() {
   const response = await fetch(
@@ -6,7 +6,7 @@ async function initMap() {
   );
   const data = await response.text();
 
-  new Scatter('container', {
+  new Dot('container', {
     map: {
       type: 'mapbox',
       style: 'dark',

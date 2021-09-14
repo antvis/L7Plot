@@ -1,1 +1,1 @@
-`markdown:docs/api/plots/scatter.zh.md`
+`markdown:docs/api/plots/dot.zh.md`
