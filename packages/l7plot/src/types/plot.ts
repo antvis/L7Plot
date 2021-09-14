@@ -24,7 +24,7 @@ export interface IPlotOptions extends IMapOptions {
   /**
    * 具体的数据
    */
-  readonly source: ISource;
+  source: ISource;
   /**
    * 是否自动缩放到图层范围，默认为 false
    */

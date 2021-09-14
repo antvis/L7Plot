@@ -2,6 +2,7 @@ import { Map } from '../map';
 import { LabelLayer } from '../../layers/label-layer';
 import { MapType, IPlotOptions, ILabelOptions, Source, ISourceCFG, Scene } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
+import { MappingSource } from '../../adaptor/source';
 
 const DEFAULT_OPTIONS: Partial<IPlotOptions> = {
   autoFit: false,
@@ -53,6 +54,16 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
    */
   protected getDefaultOptions(): Partial<IPlotOptions> {
     return Plot.DefaultOptions;
+  }
+
+  /**
+   * 创建 source 实例
+   */
+  protected createSource() {
+    const { data, aggregation, ...sourceCFG } = this.options.source;
+    aggregation && MappingSource.aggregation(sourceCFG, aggregation);
+    const source = new Source(data, sourceCFG);
+    return source;
   }
 
   /**

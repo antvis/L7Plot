@@ -11,7 +11,6 @@ import {
   IMapOptions,
   AMapInstance,
   MapboxInstance,
-  Source,
   IZoomControlOptions,
   ILayerMenuControlOptions,
   IScaleControlOptions,
@@ -26,7 +25,6 @@ import { LayerEventList, MapEventList, SceneEventList } from './constants';
 import { FONT_FACE_CACHE, ICON_FONT_CACHE, IMAGES_CACHE } from './register';
 import { getTheme } from '../../theme';
 import { createTheme } from '../../theme/util';
-import { MappingSource } from '../../adaptor/source';
 
 const DEFAULT_OPTIONS: Partial<IMapOptions> = {
   map: { type: BaseMapType.Amap },
@@ -178,16 +176,6 @@ export abstract class Map<O extends IMapOptions> {
     });
 
     return scene;
-  }
-
-  /**
-   * 创建 source 实例
-   */
-  protected createSource() {
-    const { data, aggregation, ...sourceCFG } = this.options.source;
-    aggregation && MappingSource.aggregation(sourceCFG, aggregation);
-    const source = new Source(data, sourceCFG);
-    return source;
   }
 
   /**
