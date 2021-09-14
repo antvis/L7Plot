@@ -1,17 +1,17 @@
-import { IMapOptions } from './map';
+import { IMapOptions, ISource } from './map';
 import { IStateAttribute } from './attr';
+import { ILabelOptions } from './label';
 
 /**
  * 地图图表类型
  */
 export enum MapType {
-  Point = 'point',
+  Dot = 'dot',
   Bubble = 'bubble',
   Scatter = 'scatter',
   DotDensity = 'dotDensity',
   Icon = 'icon',
   Clustere = 'clustere',
-  Heat = 'heat',
   Heatmap = 'heatmap',
   Grid = 'grid',
   Hexagon = 'hexagon',
@@ -22,17 +22,27 @@ export enum MapType {
  */
 export interface IPlotOptions extends IMapOptions {
   /**
+   * 具体的数据
+   */
+  readonly source: ISource;
+  /**
    * 是否自动缩放到图层范围，默认为 false
    */
-  readonly autoFit?: boolean;
-
+  autoFit?: boolean;
   /**
    * 交互反馈
    */
-  readonly state?: IStateAttribute;
+  state?: IStateAttribute;
+  /**
+   * 数据标签配置
+   */
+  label?: false | ILabelOptions;
 }
 
+/**
+ * 高级 plot options 配置
+ */
 export interface IL7PlotOptions extends IMapOptions {
-  // TODO:
-  plots: any[];
+  plots?: any[];
+  layers?: any[];
 }

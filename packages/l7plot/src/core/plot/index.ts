@@ -1,5 +1,7 @@
 import { Map } from '../map';
-import { MapType, IPlotOptions } from '../../types';
+import { LabelLayer } from '../../layers/label-layer';
+import { MapType, IPlotOptions, ILabelOptions, Source, ISourceCFG, Scene } from '../../types';
+import { LayerGroup } from '../layer/layer-group';
 
 const DEFAULT_OPTIONS: Partial<IPlotOptions> = {
   autoFit: false,
@@ -15,14 +17,117 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
    */
   static MapType = MapType;
   /**
-   * map 类型名称
+   * 图表类型名称
    */
   public abstract readonly type: MapType | string;
+  /**
+   * 数据
+   */
+  public source: Source;
+
+  constructor(container: O);
+  constructor(container: string | HTMLDivElement, options: O);
+  constructor(container: string | HTMLDivElement | O, options?: O) {
+    if (typeof container === 'string' || container instanceof Element) {
+      if (options === undefined) {
+        throw new Error('options is undefined');
+      }
+      super(options);
+      this.container = this.createContainer(container);
+
+      this.theme = this.createTheme();
+      this.scene = this.createScene();
+      this.source = this.createSource();
+
+      this.registerResources();
+      this.render();
+      this.inited = true;
+    } else {
+      super(container);
+      this.source = this.createSource();
+    }
+  }
 
   /**
    * 获取默认配置
    */
   protected getDefaultOptions(): Partial<IPlotOptions> {
     return Plot.DefaultOptions;
+  }
+
+  /**
+   * 创建图层
+   */
+  protected abstract createLayers(source: Source): LayerGroup;
+
+  /**
+   * 更新图层
+   */
+  protected abstract updateLayers(options: Partial<O>): void;
+
+  /**
+   * 创建数据标签图层
+   */
+  protected createLabelLayer(source: Source, label: ILabelOptions): LabelLayer {
+    const labelLayerWrapper = new LabelLayer({ name: 'labelLayer', source, ...label });
+    return labelLayerWrapper;
+  }
+
+  /**
+   * 渲染
+   */
+  public render() {
+    const layerGroup = this.createLayers(this.source);
+    if (this.inited) {
+      this.layerGroup.removeAllLayer();
+      layerGroup.addTo(this.scene);
+      this.layerGroup = layerGroup;
+      this.initControls();
+      this.initTooltip();
+    } else {
+      const onLoaded = () => {
+        this.initControls();
+        this.initTooltip();
+        this.loaded = true;
+        this.emit('loaded');
+      };
+      if (this.scene['sceneService'].loaded) {
+        this.sceneLoaded = true;
+        this.layersLoaded && onLoaded();
+      } else {
+        this.scene.once('loaded', () => {
+          this.sceneLoaded = true;
+          this.layersLoaded && onLoaded();
+        });
+      }
+      if (layerGroup.isEmpty()) {
+        this.layersLoaded = true;
+      } else {
+        layerGroup.once('inited-all', () => {
+          this.layersLoaded = true;
+          this.sceneLoaded && onLoaded();
+        });
+      }
+      layerGroup.addTo(this.scene);
+      this.layerGroup = layerGroup;
+    }
+  }
+
+  /**
+   * 渲染到容器
+   */
+  public renderToScene(scene: Scene, theme: Record<string, any>) {
+    this.scene = scene;
+    this.theme = theme;
+    this.render();
+    this.inited = true;
+  }
+
+  /**
+   * 更新: 更新数据
+   */
+  public changeData(data: any, cfg?: ISourceCFG) {
+    // TODO: deepAssign old cfg
+    this.source.setData(data, cfg);
   }
 }

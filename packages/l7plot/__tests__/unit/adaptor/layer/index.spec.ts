@@ -1,13 +1,13 @@
 import { getLayerStyleAttribute } from '../../../helper/layer';
-import { PointLayerWrapper } from '../../../../src/layers/point-layer';
+import { DotLayer } from '../../../../src/layers/dot-layer';
 import { Source } from '../../../../src/types';
-import { IPointLayerOptions } from '../../../../src/layers/point-layer/interface';
+import { IDotLayerOptions } from '../../../../src/layers/dot-layer/interface';
 
 describe('mapping layer', () => {
   const source = new Source([], { parser: { type: 'json', x: 'x', y: 'y' } });
 
   it('mapping shape', () => {
-    const layerWrapper = new PointLayerWrapper<IPointLayerOptions>({
+    const layerWrapper = new DotLayer<IDotLayerOptions>({
       source: source,
       shape: 'circle',
     });
@@ -50,7 +50,7 @@ describe('mapping layer', () => {
   });
 
   it('mapping size', () => {
-    const layerWrapper = new PointLayerWrapper<IPointLayerOptions>({
+    const layerWrapper = new DotLayer<IDotLayerOptions>({
       source: source,
       size: 12,
     });
@@ -89,7 +89,7 @@ describe('mapping layer', () => {
   });
 
   it('mapping color', () => {
-    const layerWrapper = new PointLayerWrapper<IPointLayerOptions>({
+    const layerWrapper = new DotLayer<IDotLayerOptions>({
       source: source,
       color: 'red',
     });
@@ -132,7 +132,7 @@ describe('mapping layer', () => {
   });
 
   it('mapping style', () => {
-    const layerWrapper = new PointLayerWrapper({
+    const layerWrapper = new DotLayer({
       source: source,
       style: { opacity: 1, strokeWidth: 1, stroke: 'red' },
     });
@@ -143,7 +143,7 @@ describe('mapping layer', () => {
   });
 
   it('mapping state', () => {
-    const layerWrapper = new PointLayerWrapper({
+    const layerWrapper = new DotLayer({
       source: source,
       state: { active: true, select: true },
     });
@@ -155,7 +155,7 @@ describe('mapping layer', () => {
   });
 
   it('mapping rotate', () => {
-    const layerWrapper = new PointLayerWrapper({
+    const layerWrapper = new DotLayer({
       source: source,
       // rotate: 45,
     });
@@ -169,7 +169,7 @@ describe('mapping layer', () => {
   });
 
   it('mapping animate', () => {
-    const layerWrapper = new PointLayerWrapper({
+    const layerWrapper = new DotLayer({
       source: source,
       animate: true,
     });
@@ -180,7 +180,7 @@ describe('mapping layer', () => {
   });
 
   it('mapping scale', () => {
-    const layerWrapper = new PointLayerWrapper({
+    const layerWrapper = new DotLayer({
       source: source,
       size: {
         field: 'x',

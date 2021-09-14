@@ -2,11 +2,11 @@ import { Map as MapboxglMap } from 'mapbox-gl';
 import { IAMapInstance, IMapboxInstance } from '@antv/l7-maps/typings';
 import { IStatusOptions, PositionName, ISourceCFG, MapStyle } from '@antv/l7-core';
 import Source from '@antv/l7-source';
-import { ILabelOptions } from './label';
 import { IPopupOptions } from './popup';
 import { ITooltipOptions } from './tooltip';
 import { ILegendOptions } from './legend';
 import { ILayerMenuControlOptions, IScaleControlOptions, IZoomControlOptions } from './control';
+import { IGridAggregation } from './attr';
 
 export { MapboxglMap, Source, IStatusOptions };
 
@@ -84,6 +84,10 @@ export interface ILogo {
  */
 export interface ISource extends ISourceCFG {
   data: any;
+  /**
+   * 网格聚合
+   */
+  aggregation?: IGridAggregation;
 }
 
 /**
@@ -121,19 +125,9 @@ export interface IMapOptions {
   readonly logo?: boolean | ILogo;
 
   /**
-   * 具体的数据
-   */
-  readonly source: ISource;
-
-  /**
    * 主题，string 或 object
    */
   readonly theme?: string | Record<string, any>;
-
-  /**
-   * 数据标签配置
-   */
-  readonly label?: false | ILabelOptions;
 
   // 组件相关
   /**

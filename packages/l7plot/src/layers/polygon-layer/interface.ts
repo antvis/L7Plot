@@ -1,6 +1,9 @@
-import { IPolygonLayerConfig } from '../../core/layer/interface';
-import { Source } from '../../types';
+import { IPolygonLayerConfig } from '../../types/layer';
+import { ISource, Source } from '../../types';
 
 export interface IPolygonLayerOptions extends IPolygonLayerConfig {
-  source: Source;
+  /**
+   * 具体的数据
+   */
+  source: ISource | Source;
 }

@@ -37,8 +37,7 @@ describe('heatmap', () => {
     return new Promise<void>((resolve, reject) => {
       heatmap.on('heatmapLayer:add', () => {
         try {
-          expect(heatmap.heatmapLayer?.inited).toBeTruthy();
-          expect(heatmap.getLayerByName('heatmapLayer')).toBeDefined();
+          expect(heatmap.heatmapLayer?.layer.inited).toBeTruthy();
           resolve();
         } catch (err) {
           reject(err);

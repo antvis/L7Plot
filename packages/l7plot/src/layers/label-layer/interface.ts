@@ -1,6 +1,9 @@
-import { ILabelLayerConfig } from '../../core/layer/interface';
-import { Source } from '../../types';
+import { ILabelLayerConfig } from '../../types/layer';
+import { ISource, Source } from '../../types';
 
 export interface ILabelLayerOptions extends ILabelLayerConfig {
-  source: Source;
+  /**
+   * 具体的数据
+   */
+  source: ISource | Source;
 }

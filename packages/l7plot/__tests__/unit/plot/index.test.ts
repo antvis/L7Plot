@@ -9,6 +9,7 @@ describe('L7Plot', () => {
       parser: { type: 'json', x: 'j', y: 'w' },
     },
     plots: [],
+    layers: [],
   });
 
   it('l7Plot', () => {

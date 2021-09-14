@@ -1,9 +1,9 @@
-import { PolygonLayerWrapper } from '../../../../src/layers/polygon-layer';
+import { PolygonLayer } from '../../../../src/layers/polygon-layer';
 
 describe('polygon layer', () => {
-  const layerWrapper = new PolygonLayerWrapper();
+  const layer = new PolygonLayer({ source: { data: [] } });
 
-  it('layerWrapper', () => {
-    expect(layerWrapper).toBeDefined();
+  it('layer', () => {
+    expect(layer).toBeDefined();
   });
 });

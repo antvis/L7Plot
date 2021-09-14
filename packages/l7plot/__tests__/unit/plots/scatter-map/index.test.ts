@@ -1,15 +1,15 @@
-import { ScatterMap } from '../../../../src';
-import { DEFAULT_OPTIONS } from '../../../../src/plots/scatter-map/constants';
+import { Scatter } from '../../../../src';
+import { DEFAULT_OPTIONS } from '../../../../src/plots/scatter/constants';
 import { createDiv } from '../../../helper/dom';
 import data from '../../../data-set/point-temperature.json';
 
-describe('scatter map', () => {
+describe('scatter', () => {
   it('defaultOptions', () => {
-    expect(ScatterMap.DefaultOptions).toEqual(DEFAULT_OPTIONS);
+    expect(Scatter.DefaultOptions).toEqual(DEFAULT_OPTIONS);
   });
 
   it('source', () => {
-    const scatterMap = new ScatterMap(createDiv(), {
+    const scatterMap = new Scatter(createDiv(), {
       source: {
         data: data.list,
         parser: { type: 'json', x: 'j', y: 'w' },
@@ -37,7 +37,7 @@ describe('scatter map', () => {
   });
 
   it('event', () => {
-    const scatterMap = new ScatterMap(createDiv(), {
+    const scatterMap = new Scatter(createDiv(), {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -47,8 +47,7 @@ describe('scatter map', () => {
     return new Promise<void>((resolve, reject) => {
       scatterMap.on('scatterLayer:add', () => {
         try {
-          expect(scatterMap.scatterLayer?.inited).toBeTruthy();
-          expect(scatterMap.getLayerByName('scatterLayer')).toBeDefined();
+          expect(scatterMap.scatterLayer?.layer.inited).toBeTruthy();
           resolve();
         } catch (err) {
           reject(err);

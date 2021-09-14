@@ -61,6 +61,10 @@ export type AggregationMethod = 'count' | 'max' | 'min' | 'sum' | 'mean';
 /** 网格聚合 */
 export interface IGridAggregation {
   /**
+   * 聚合类型
+   */
+  type?: 'grid' | 'hexagon';
+  /**
    * 聚合字段
    */
   field: string;
@@ -71,5 +75,5 @@ export interface IGridAggregation {
   /**
    * 聚合方法
    */
-  type?: AggregationMethod;
+  method?: AggregationMethod;
 }

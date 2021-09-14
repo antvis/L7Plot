@@ -1,1 +1,1 @@
-export class LineLayerWrapper {}
+export class LineLayer {}

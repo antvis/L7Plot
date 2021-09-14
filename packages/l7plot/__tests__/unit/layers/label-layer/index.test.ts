@@ -1,9 +1,9 @@
 import { getLayerStyleAttribute } from '../../../helper/layer';
-import { LabelLayerWrapper } from '../../../../src/layers/label-layer';
+import { LabelLayer } from '../../../../src/layers/label-layer';
 import { Source } from '../../../../src/types';
 
 describe('label layer', () => {
-  const layerWrapper = new LabelLayerWrapper({
+  const layer = new LabelLayer({
     source: new Source([], { parser: { type: 'json', x: 'x', y: 'y' } }),
     content: 'label',
     style: {
@@ -22,25 +22,26 @@ describe('label layer', () => {
   });
 
   it('type', () => {
-    expect(layerWrapper.layer.type).toBe('PointLayer');
+    expect(layer.type).toBe('labelLayer');
+    expect(layer.layer.type).toBe('PointLayer');
   });
 
   it('size', () => {
-    expect(getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'size')).toEqual({
+    expect(getLayerStyleAttribute(layer.layer['pendingStyleAttributes'], 'size')).toEqual({
       attributeName: 'size',
       attributeField: 12,
     });
   });
 
   it('color', () => {
-    expect(getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'color')).toEqual({
+    expect(getLayerStyleAttribute(layer.layer['pendingStyleAttributes'], 'color')).toEqual({
       attributeName: 'color',
       attributeField: '#fff',
     });
   });
 
   it('shape', () => {
-    expect(getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'shape')).toEqual({
+    expect(getLayerStyleAttribute(layer.layer['pendingStyleAttributes'], 'shape')).toEqual({
       attributeName: 'shape',
       attributeField: 'label',
       attributeValues: 'text',
@@ -48,7 +49,7 @@ describe('label layer', () => {
   });
 
   it('style', () => {
-    expect(layerWrapper.layer['rawConfig']).toMatchObject({
+    expect(layer.layer['rawConfig']).toMatchObject({
       opacity: 0.6,
       textAnchor: 'top',
       textOffset: [0, 20],
@@ -61,7 +62,7 @@ describe('label layer', () => {
   });
 
   it('state', () => {
-    expect(layerWrapper.layer['needUpdateConfig'].enableHighlight).toBeTruthy();
-    expect(layerWrapper.layer['needUpdateConfig'].enableSelect).toBeTruthy();
+    expect(layer.layer['needUpdateConfig'].enableHighlight).toBeTruthy();
+    expect(layer.layer['needUpdateConfig'].enableSelect).toBeTruthy();
   });
 });

@@ -1,4 +1,4 @@
-import { IBaseLayerConfig } from '../core/layer/interface';
+import { IBaseLayerConfig } from './layer';
 import { ColorAttr, IStateAttribute, SizeAttr } from './attr';
 
 export type AnchorType =

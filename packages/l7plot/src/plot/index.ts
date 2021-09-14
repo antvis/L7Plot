@@ -1,6 +1,6 @@
 import { LayerGroup } from '../core/layer/layer-group';
 import { Map } from '../core/map';
-import { IL7PlotOptions, Source } from '../types';
+import { IL7PlotOptions } from '../types';
 
 const DEFAULT_OPTIONS: Partial<IL7PlotOptions> = {};
 
@@ -10,6 +10,18 @@ export class L7Plot extends Map<IL7PlotOptions> {
    */
   static DefaultOptions = DEFAULT_OPTIONS;
 
+  constructor(container: string | HTMLDivElement, options: IL7PlotOptions) {
+    super(options);
+    this.container = this.createContainer(container);
+
+    this.theme = this.createTheme();
+    this.scene = this.createScene();
+
+    this.registerResources();
+    this.render();
+    this.inited = true;
+  }
+
   /**
    * 获取默认配置
    */
@@ -18,17 +30,9 @@ export class L7Plot extends Map<IL7PlotOptions> {
   }
 
   /**
-   * 创建图层之前 hook
-   */
-  protected beforeCreateLayers(options: IL7PlotOptions) {
-    return { options };
-  }
-
-  /**
    * 创建图层
    */
-  protected createLayers(source: Source): LayerGroup {
-    const options = this.beforeCreateLayers(this.options);
+  protected createLayers(): LayerGroup {
     const layerGroup = new LayerGroup([]);
 
     return layerGroup;
@@ -38,6 +42,31 @@ export class L7Plot extends Map<IL7PlotOptions> {
    * 更新图层
    */
   protected updateLayers(options: Partial<IL7PlotOptions>) {
+    //
+  }
+
+  /**
+   * 渲染
+   */
+  public render() {
+    this.renderPlots();
+  }
+
+  /**
+   * 渲染 plots
+   */
+  public renderPlots() {
+    const plots = this.options.plots || [];
+    for (let index = 0; index < plots.length; index++) {
+      const plot = plots[index];
+    }
+  }
+
+  /**
+   * 渲染 layers
+   */
+  public renderLayers() {
+    const layers = this.options.layers || [];
     //
   }
 }

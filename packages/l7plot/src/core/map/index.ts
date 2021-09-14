@@ -17,18 +17,16 @@ import {
   IScaleControlOptions,
   ILegendOptions,
   IEvent,
-  ILabelOptions,
-  ILayer,
-  ISourceCFG,
+  IBaseLayer,
   UpdateMapConfig,
   Bounds,
 } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { LayerEventList, MapEventList, SceneEventList } from './constants';
 import { FONT_FACE_CACHE, ICON_FONT_CACHE, IMAGES_CACHE } from './register';
-import { LabelLayerWrapper } from '../../layers/label-layer';
 import { getTheme } from '../../theme';
 import { createTheme } from '../../theme/util';
+import { MappingSource } from '../../adaptor/source';
 
 const DEFAULT_OPTIONS: Partial<IMapOptions> = {
   map: { type: BaseMapType.Amap },
@@ -49,10 +47,6 @@ export abstract class Map<O extends IMapOptions> {
    */
   public inited = false;
   /**
-   * 是否场景与所有图层加载完成
-   */
-  public loaded = false;
-  /**
    * 是否场景加载完成
    */
   public sceneLoaded = false;
@@ -61,33 +55,29 @@ export abstract class Map<O extends IMapOptions> {
    */
   public layersLoaded = false;
   /**
+   * 是否场景与所有图层加载完成
+   */
+  public loaded = false;
+  /**
    * map 的 schema 配置
    */
   public options: O;
   /**
    * map 绘制的 dom
    */
-  public readonly container: HTMLDivElement;
+  public container!: HTMLDivElement;
   /**
    * scene 实例
    */
-  public scene: Scene;
-  /**
-   * 数据
-   */
-  public source: Source;
+  public scene!: Scene;
   /**
    * 图层组
    */
   public layerGroup = new LayerGroup();
   /**
-   * 带交互的图层
-   */
-  protected interactionLayers: ILayer[] = [];
-  /**
    * 主题配置
    */
-  protected theme: Record<string, any>;
+  protected theme!: Record<string, any>;
   /**
    * zoom 放缩器 Control
    */
@@ -109,17 +99,8 @@ export abstract class Map<O extends IMapOptions> {
    */
   public tooltip: Tooltip | undefined;
 
-  constructor(container: string | HTMLDivElement, options: O) {
+  constructor(options: O) {
     this.options = deepAssign({}, this.getDefaultOptions(), options);
-    this.container = this.createContainer(container);
-
-    this.theme = this.createTheme();
-    this.scene = this.createScene();
-    this.source = this.createSource();
-
-    this.registerResources();
-    this.render();
-    this.inited = true;
   }
 
   /**
@@ -132,7 +113,7 @@ export abstract class Map<O extends IMapOptions> {
   /**
    * 创建 DOM 容器
    */
-  private createContainer(container: string | HTMLDivElement) {
+  protected createContainer(container: string | HTMLDivElement) {
     const { width, height } = this.options;
     const dom = typeof container === 'string' ? (document.getElementById(container) as HTMLDivElement) : container;
     dom.style.position || (dom.style.position = 'relative');
@@ -149,7 +130,7 @@ export abstract class Map<O extends IMapOptions> {
   /**
    * 注册主题
    */
-  private createTheme() {
+  protected createTheme() {
     const theme = isObject(this.options.theme)
       ? deepAssign({}, getTheme('default'), createTheme(this.options.theme))
       : getTheme(this.options.theme);
@@ -159,7 +140,7 @@ export abstract class Map<O extends IMapOptions> {
   /**
    * 创建 map 容器
    */
-  private createMap() {
+  protected createMap() {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const mapConfig = this.options.map ? this.options.map : DEFAULT_OPTIONS.map!;
     const { type, ...config } = mapConfig;
@@ -171,7 +152,7 @@ export abstract class Map<O extends IMapOptions> {
   /**
    * 创建 scene 实例
    */
-  private createScene() {
+  protected createScene() {
     const { logo, antialias, preserveDrawingBuffer } = this.options;
     const logoConfig = isBoolean(logo)
       ? { logoVisible: logo }
@@ -203,73 +184,21 @@ export abstract class Map<O extends IMapOptions> {
    * 创建 source 实例
    */
   protected createSource() {
-    const { data, ...sourceCFG } = this.options.source;
+    const { data, aggregation, ...sourceCFG } = this.options.source;
+    aggregation && MappingSource.aggregation(sourceCFG, aggregation);
     const source = new Source(data, sourceCFG);
     return source;
   }
 
   /**
-   * 创建图层
-   */
-  protected abstract createLayers(source: Source): LayerGroup;
-
-  /**
-   * 更新图层
-   */
-  protected abstract updateLayers(options: Partial<O>): void;
-
-  /**
-   * 创建数据标签图层
-   */
-  protected createLabelLayer(source: Source, label: ILabelOptions): LabelLayerWrapper {
-    const labelLayerWrapper = new LabelLayerWrapper({ name: 'labelLayer', source, ...label });
-    return labelLayerWrapper;
-  }
-
-  /**
    * 渲染
    */
-  public render() {
-    const layerGroup = this.createLayers(this.source);
-    if (this.inited) {
-      this.layerGroup.removeAllLayer();
-      layerGroup.addTo(this.scene);
-      this.layerGroup = layerGroup;
-      this.initControls();
-      this.initTooltip();
-    } else {
-      const onLoaded = () => {
-        this.initControls();
-        this.initTooltip();
-        this.loaded = true;
-        this.emit('loaded');
-      };
-      if (this.scene['sceneService'].loaded) {
-        this.sceneLoaded = true;
-        this.layersLoaded && onLoaded();
-      } else {
-        this.scene.once('loaded', () => {
-          this.sceneLoaded = true;
-          this.layersLoaded && onLoaded();
-        });
-      }
-      if (layerGroup.isEmpty()) {
-        this.layersLoaded = true;
-      } else {
-        layerGroup.once('inited-all', () => {
-          this.layersLoaded = true;
-          this.sceneLoaded && onLoaded();
-        });
-      }
-      layerGroup.addTo(this.scene);
-      this.layerGroup = layerGroup;
-    }
-  }
+  public abstract render(): void;
 
   /**
    * 注册静态资源
    */
-  private registerResources() {
+  protected registerResources() {
     if (IMAGES_CACHE.size) {
       IMAGES_CACHE.forEach((img, id) => {
         this.scene.addImage(id, img);
@@ -323,14 +252,6 @@ export abstract class Map<O extends IMapOptions> {
     if (zoom && center) {
       this.scene.setZoomAndCenter(zoom, center);
     }
-  }
-
-  /**
-   * 更新: 更新数据
-   */
-  public changeData(data: any, cfg?: ISourceCFG) {
-    // TODO: deepAssign old cfg
-    this.source.setData(data, cfg);
   }
 
   /**
@@ -416,29 +337,29 @@ export abstract class Map<O extends IMapOptions> {
   /**
    * 添加图层
    */
-  public addLayer(layer: ILayer) {
-    this.scene.addLayer(layer);
+  public addLayer(layer: IBaseLayer) {
+    this.layerGroup.addlayer(layer);
   }
 
   /**
    * 获取所有图层
    */
-  public getLayes(): ILayer[] {
-    return this.scene.getLayers();
+  public getLayes(): IBaseLayer[] {
+    return this.layerGroup.getLayers();
   }
 
   /**
    * 根据图层名称获取图层
    */
-  public getLayerByName(name: string): ILayer | undefined {
-    return this.scene.getLayerByName(name);
+  public getLayerByName(name: string): IBaseLayer | undefined {
+    return this.layerGroup.getLayerByName(name);
   }
 
   /**
    * 移除图层
    */
-  public removeLayer(layer: ILayer) {
-    this.scene.removeLayer(layer);
+  public removeLayer(layer: IBaseLayer) {
+    this.layerGroup.addlayer(layer);
   }
 
   /**
@@ -479,7 +400,7 @@ export abstract class Map<O extends IMapOptions> {
   /**
    * 初始化控件
    */
-  private initControls() {
+  protected initControls() {
     const { zoom, scale, layerMenu, legend } = this.options;
     scale ? this.addScaleControl(scale) : this.removeScaleControl();
     zoom ? this.addZoomControl(zoom) : this.removeZoomControl();
@@ -591,14 +512,15 @@ export abstract class Map<O extends IMapOptions> {
   /**
    * 初始化 tooltip
    */
-  private initTooltip() {
+  protected initTooltip() {
     if (this.tooltip) {
       this.tooltip.destroy();
     }
     const { tooltip } = this.options;
     if (tooltip) {
       const options = deepAssign({}, { domStyles: this.theme['components'].tooltip.domStyles }, tooltip);
-      this.tooltip = new Tooltip(this.scene, this.interactionLayers, options);
+      const interactionLayers = this.layerGroup.getInteractionLayers();
+      this.tooltip = new Tooltip(this.scene, interactionLayers, options);
       this.tooltip.on('*', (event: IEvent) => this.emit(event.type, event));
     }
   }
