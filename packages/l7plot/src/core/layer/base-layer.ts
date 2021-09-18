@@ -1,7 +1,7 @@
 import { pick } from '@antv/util';
 import Source from '@antv/l7-source';
 import { IBaseLayer, IBaseLayerConfig } from '../../types/layer';
-import { ILayer, ILayerConfig, ISource } from '../../types';
+import { Scene, ILayer, ILayerConfig, ISource } from '../../types';
 import { MappingSource } from '../../adaptor/source';
 
 const LayerConfigkeys = ['name', 'zIndex', 'visible', 'minZoom', 'maxZoom', 'pickingBuffer', 'autoFit', 'blend'];
@@ -33,9 +33,17 @@ export abstract class BaseLayer<O extends IBaseLayerConfig> implements IBaseLaye
     return config;
   }
 
+  public addTo(scene: Scene) {
+    scene.addLayer(this.layer);
+  }
+
+  public remove(scene: Scene) {
+    scene.removeLayer(this.layer);
+  }
+
   public abstract updateOptions(options: Partial<O>): void;
 
-  public setSource(source: ISource | Source) {
+  protected setSource(source: ISource | Source) {
     if (source instanceof Source) {
       this.layer.setSource(source);
     } else {

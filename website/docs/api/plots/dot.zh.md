@@ -1,5 +1,5 @@
 ---
-title: 点示图 - Dot
+title: 散点图 - Dot
 order: 0
 ---
 

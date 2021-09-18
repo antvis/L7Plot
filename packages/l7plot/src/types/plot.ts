@@ -1,5 +1,4 @@
 import { IMapOptions, ISource } from './map';
-import { IStateAttribute } from './attr';
 import { ILabelOptions } from './label';
 
 /**
@@ -7,14 +6,12 @@ import { ILabelOptions } from './label';
  */
 export enum MapType {
   Dot = 'dot',
-  Bubble = 'bubble',
-  Scatter = 'scatter',
   DotDensity = 'dotDensity',
-  Icon = 'icon',
-  Clustere = 'clustere',
   Heatmap = 'heatmap',
   Grid = 'grid',
   Hexagon = 'hexagon',
+  Choropleth = 'choropleth',
+  ChinaDistrict = 'chinaDistrict',
 }
 
 /**
@@ -29,10 +26,6 @@ export interface IPlotOptions extends IMapOptions {
    * 是否自动缩放到图层范围，默认为 false
    */
   autoFit?: boolean;
-  /**
-   * 交互反馈
-   */
-  state?: IStateAttribute;
   /**
    * 数据标签配置
    */

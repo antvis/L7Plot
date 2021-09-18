@@ -1,7 +1,6 @@
 import { uniqueId } from '@antv/util';
-import { Scene } from '@antv/l7-scene';
 import EventEmitter from '@antv/event-emitter';
-import { IBaseLayer } from '../../types';
+import { Scene, IBaseLayer } from '../../types';
 
 export interface ILayerGroupOption {
   name?: string;
@@ -34,7 +33,7 @@ export class LayerGroup extends EventEmitter {
     this.scene = scene;
     let layerIndex = 0;
     const layerLength = this.layers.length;
-    this.layers.forEach(({ layer }) => {
+    this.layers.forEach((layer) => {
       layer.once('inited', (e) => {
         layerIndex++;
         this.emit('inited', e);
@@ -42,7 +41,7 @@ export class LayerGroup extends EventEmitter {
           this.emit('inited-all');
         }
       });
-      scene.addLayer(layer);
+      layer.addTo(scene);
     });
   }
 
@@ -60,8 +59,8 @@ export class LayerGroup extends EventEmitter {
     // TODO: duplicate layer
     this.layers.push(layer);
     if (this.scene) {
-      layer.layer.once('inited', (e) => this.emit('inited', e));
-      this.scene.addLayer(layer.layer);
+      layer.once('inited', (e) => this.emit('inited', e));
+      layer.addTo(this.scene);
     }
   }
 
@@ -73,7 +72,7 @@ export class LayerGroup extends EventEmitter {
     if (layerIndex === -1) return false;
     this.layers.splice(layerIndex, 1);
     if (this.scene) {
-      this.scene.removeLayer(layer.layer);
+      layer.remove(this.scene);
     }
     return true;
   }
@@ -110,9 +109,9 @@ export class LayerGroup extends EventEmitter {
    * 移除所有的图层对象
    */
   public removeAllLayer() {
-    this.layers.forEach(({ layer }) => {
+    this.layers.forEach((layer) => {
       if (this.scene) {
-        this.scene.removeLayer(layer);
+        layer.remove(this.scene);
       }
     });
     this.layers = [];

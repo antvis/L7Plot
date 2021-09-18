@@ -1,5 +1,5 @@
 import { Map } from '../map';
-import { LabelLayer } from '../../layers/label-layer';
+import { TextLayer } from '../../layers/text-layer';
 import { MapType, IPlotOptions, ILabelOptions, Source, ISourceCFG, Scene } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { MappingSource } from '../../adaptor/source';
@@ -79,9 +79,16 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
   /**
    * 创建数据标签图层
    */
-  protected createLabelLayer(source: Source, label: ILabelOptions): LabelLayer {
-    const labelLayerWrapper = new LabelLayer({ name: 'labelLayer', source, ...label });
+  protected createLabelLayer(source: Source, label: ILabelOptions): TextLayer {
+    const labelLayerWrapper = new TextLayer({ name: 'labelLayer', source, ...label });
     return labelLayerWrapper;
+  }
+
+  /**
+   * 初始化图层事件
+   */
+  protected initLayerEvent() {
+    //
   }
 
   /**
@@ -122,6 +129,7 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
       layerGroup.addTo(this.scene);
       this.layerGroup = layerGroup;
     }
+    this.initLayerEvent();
   }
 
   /**

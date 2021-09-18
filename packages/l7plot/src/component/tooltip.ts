@@ -108,16 +108,18 @@ export class Tooltip extends EventEmitter {
     } else if (items) {
       items.forEach((item: string | ITooltipItem) => {
         if (isString(item)) {
+          const name = item.split('.').pop() || item;
           const value = getValueByPath(feature, item);
           if (value !== undefined) {
-            tooltipItems.push({ name: item, value });
+            tooltipItems.push({ name, value });
           }
         } else {
           const { field, alias, customValue } = item;
+          const name = alias || field.split('.').pop() || field;
           const value = getValueByPath(feature, field);
           if (value !== undefined) {
             tooltipItems.push({
-              name: alias || field,
+              name,
               value: customValue ? customValue(value, feature, featureId) : value,
             });
           }

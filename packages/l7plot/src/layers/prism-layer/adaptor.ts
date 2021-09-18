@@ -1,11 +1,11 @@
 import { MappingLayer } from '../../adaptor/layer';
 import { ILayer } from '../../types';
-import { IPolygonLayerOptions } from './interface';
+import { IPrismLayerOptions } from './interface';
 
-export function mappingLayer(layer: ILayer, options: IPolygonLayerOptions): void {
-  const { shape, color, size, style, state } = options;
+export function mappingLayer(layer: ILayer, options: IPrismLayerOptions): void {
+  const { color, size, style, state } = options;
   // mapping shape
-  shape && MappingLayer.shape(layer, shape);
+  MappingLayer.shape(layer, 'extrude');
 
   // mapping size
   size && MappingLayer.size(layer, size);

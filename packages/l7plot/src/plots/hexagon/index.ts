@@ -3,7 +3,7 @@ import { Plot } from '../../core/plot';
 import { HexagonOptions } from './interface';
 import { DEFAULT_OPTIONS } from './constants';
 import { Source } from '../../types';
-import { LabelLayer } from '../../layers/label-layer';
+import { TextLayer } from '../../layers/text-layer';
 import { HexagonLayer } from '../../layers/hexagon-layer';
 import { LayerGroup } from '../../core/layer/layer-group';
 
@@ -16,7 +16,7 @@ export class Hexagon extends Plot<HexagonOptions> {
   /**
    * 地图类型
    */
-  public type = Plot.MapType.Heatmap;
+  public type = Plot.MapType.Hexagon;
 
   /**
    * 蜂窝图层
@@ -26,7 +26,7 @@ export class Hexagon extends Plot<HexagonOptions> {
   /**
    * 标注图层
    */
-  public labelLayer: LabelLayer | undefined;
+  public labelLayer: TextLayer | undefined;
 
   /**
    * 获取默认配置

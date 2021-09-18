@@ -3,7 +3,7 @@ import { Plot } from '../../core/plot';
 import { HeatmapOptions } from './interface';
 import { DEFAULT_OPTIONS } from './constants';
 import { ILegendOptions, Source } from '../../types';
-import { LabelLayer } from '../../layers/label-layer';
+import { TextLayer } from '../../layers/text-layer';
 import { HeatmapLayer } from '../../layers/heatmap-layer';
 import { LayerGroup } from '../../core/layer/layer-group';
 export class Heatmap extends Plot<HeatmapOptions> {
@@ -25,7 +25,7 @@ export class Heatmap extends Plot<HeatmapOptions> {
   /**
    * 标注图层
    */
-  public labelLayer: LabelLayer | undefined;
+  public labelLayer: TextLayer | undefined;
 
   /**
    * 获取默认配置

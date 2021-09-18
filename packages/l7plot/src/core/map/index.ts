@@ -441,8 +441,8 @@ export abstract class Map<O extends IMapOptions> {
     this.removeLayerMenuControl();
     const baseLayers = {};
     const overlayers = {};
-    this.layerGroup.getLayers().forEach((layer) => {
-      overlayers[layer.name] = layer;
+    this.layerGroup.getLayers().forEach(({ name, layer }) => {
+      overlayers[name] = layer;
     });
     this.layerMenuControl = new Layers(Object.assign({}, options, { baseLayers, overlayers }));
     this.scene.addControl(this.layerMenuControl);

@@ -56,7 +56,7 @@ describe('point', () => {
     });
 
     return new Promise<void>((resolve, reject) => {
-      dotMap.on('pointLayer:add', () => {
+      dotMap.on('dotLayer:add', () => {
         try {
           expect(dotMap.dotLayer?.layer.inited).toBeTruthy();
           resolve();

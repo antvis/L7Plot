@@ -1,4 +1,4 @@
-export const version = '0.0.1-alpha.1';
+export const version = '0.0.1-alpha.4';
 
 // 资源静态注册
 export {
@@ -27,7 +27,7 @@ export * from './types';
 /** 高级图表 */
 export { L7Plot } from './plot';
 
-// 点示图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+// 散点图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { Dot } from './plots/dot';
 export type { DotOptions } from './plots/dot/interface';
 
@@ -46,3 +46,7 @@ export type { GridOptions } from './plots/grid/interface';
 // 蜂窝图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { Hexagon } from './plots/hexagon';
 export type { HexagonOptions } from './plots/hexagon/interface';
+
+// 区域图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { Choropleth } from './plots/choropleth';
+export type { ChoroplethOptions } from './plots/choropleth/interface';

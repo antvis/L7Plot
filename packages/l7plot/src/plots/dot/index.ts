@@ -3,7 +3,7 @@ import { Plot } from '../../core/plot';
 import { DotOptions } from './interface';
 import { DEFAULT_OPTIONS } from './constants';
 import { DotLayer } from '../../layers/dot-layer';
-import { LabelLayer } from '../../layers/label-layer';
+import { TextLayer } from '../../layers/text-layer';
 import { ILegendOptions, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
 
@@ -26,7 +26,7 @@ export class Dot extends Plot<DotOptions> {
   /**
    * 标注图层
    */
-  public labelLayer: LabelLayer | undefined;
+  public labelLayer: TextLayer | undefined;
 
   /**
    * 获取默认配置

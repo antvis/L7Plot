@@ -102,7 +102,7 @@ module.exports = {
         slug: 'dot',
         icon: 'point',
         title: {
-          zh: '点示图',
+          zh: '散点图',
           en: 'Dot',
         },
       },

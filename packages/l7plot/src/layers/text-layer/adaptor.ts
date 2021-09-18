@@ -1,8 +1,8 @@
 import { MappingLayer } from '../../adaptor/layer';
 import { ILayer } from '../../types';
-import { ILabelLayerOptions } from './interface';
+import { ITextLayerOptions } from './interface';
 
-export function mappingLayer(layer: ILayer, options: ILabelLayerOptions): void {
+export function mappingLayer(layer: ILayer, options: ITextLayerOptions): void {
   const {
     field,
     content,

@@ -3,7 +3,7 @@ import { Plot } from '../../core/plot';
 import { GridOptions } from './interface';
 import { DEFAULT_OPTIONS } from './constants';
 import { Source } from '../../types';
-import { LabelLayer } from '../../layers/label-layer';
+import { TextLayer } from '../../layers/text-layer';
 import { GridLayer } from '../../layers/grid-layer';
 import { LayerGroup } from '../../core/layer/layer-group';
 
@@ -16,7 +16,7 @@ export class Grid extends Plot<GridOptions> {
   /**
    * 地图类型
    */
-  public type = Plot.MapType.Heatmap;
+  public type = Plot.MapType.Grid;
 
   /**
    * 网格图层
@@ -26,7 +26,7 @@ export class Grid extends Plot<GridOptions> {
   /**
    * 标注图层
    */
-  public labelLayer: LabelLayer | undefined;
+  public labelLayer: TextLayer | undefined;
 
   /**
    * 获取默认配置
