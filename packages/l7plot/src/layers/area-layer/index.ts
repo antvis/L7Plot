@@ -81,14 +81,22 @@ export class AreaLayer extends BaseLayer<IAreaLayerOptions> {
 
   protected setSource(source: ISource | Source) {
     super.setSource(source);
-    const layerSource = this.layer.getSource();
-    this.strokeLayer.setSource(layerSource);
+    this.setStrokeLayerSource();
     this.highlightLayer.source({ type: 'FeatureCollection', features: [] });
+  }
+
+  protected setStrokeLayerSource() {
+    const layerSource = this.layer.getSource();
+    if (layerSource) {
+      this.strokeLayer.setSource(layerSource);
+    } else {
+      const { data, options } = this.layer.sourceOption;
+      this.strokeLayer.source(data, options);
+    }
   }
 
   protected setHighlightLayerSource(feature?: any) {
     const features = feature ? [feature] : [];
-    this.highlightLayer.source({ type: 'FeatureCollection', features });
     this.highlightLayer.setData({ type: 'FeatureCollection', features });
   }
 

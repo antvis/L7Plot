@@ -1,9 +1,9 @@
 import { getLayerStyleAttribute } from '../../../helper/layer';
-import { LabelLayer } from '../../../../src/layers/label-layer';
+import { TextLayer } from '../../../../src/layers/text-layer';
 import { Source } from '../../../../src/types';
 
-describe('label layer', () => {
-  const layer = new LabelLayer({
+describe('text layer', () => {
+  const layer = new TextLayer({
     source: new Source([], { parser: { type: 'json', x: 'x', y: 'y' } }),
     content: 'label',
     style: {
@@ -22,7 +22,7 @@ describe('label layer', () => {
   });
 
   it('type', () => {
-    expect(layer.type).toBe('labelLayer');
+    expect(layer.type).toBe('textLayer');
     expect(layer.layer.type).toBe('PointLayer');
   });
 
