@@ -6,6 +6,8 @@ import { DotDensityOptions } from './interface';
 import { LayerGroup } from '../../core/layer/layer-group';
 import { DotDensityLayer } from '../../layers/dot-density-layer';
 
+export type { DotDensityOptions };
+
 export class DotDensity extends Plot<DotDensityOptions> {
   /**
    * 默认配置项

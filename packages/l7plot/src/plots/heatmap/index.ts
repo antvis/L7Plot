@@ -6,6 +6,9 @@ import { ILegendOptions, Source } from '../../types';
 import { TextLayer } from '../../layers/text-layer';
 import { HeatmapLayer } from '../../layers/heatmap-layer';
 import { LayerGroup } from '../../core/layer/layer-group';
+
+export type { HeatmapOptions };
+
 export class Heatmap extends Plot<HeatmapOptions> {
   /**
    * 默认配置项

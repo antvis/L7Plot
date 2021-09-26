@@ -1,11 +1,13 @@
 import { uniqueId } from '@antv/util';
 import { PointLayer } from '@antv/l7-layers';
-import { BaseLayer } from '../../core/layer/base-layer';
+import { PlotLayer } from '../../core/layer/plot-layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
 import { IDotLayerOptions } from './interface';
 import { ILayer } from '../../types';
 import { getColorLegendItems } from './helper';
+
+export type { IDotLayerOptions };
 
 const DEFAULT_OPTIONS = {
   source: {
@@ -22,7 +24,7 @@ const DEFAULT_OPTIONS = {
 };
 const LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state', 'animate'];
 
-export class DotLayer<O extends IDotLayerOptions = IDotLayerOptions> extends BaseLayer<O> {
+export class DotLayer<O extends IDotLayerOptions = IDotLayerOptions> extends PlotLayer<O> {
   /**
    * 默认配置项
    */
@@ -46,7 +48,7 @@ export class DotLayer<O extends IDotLayerOptions = IDotLayerOptions> extends Bas
   /**
    * 图层类型
    */
-  public type = 'dotLayer';
+  public type = PlotLayer.LayerType.DotLayer;
   /**
    * 图层是否具有交互属性
    */

@@ -7,6 +7,8 @@ import { TextLayer } from '../../layers/text-layer';
 import { ILegendOptions, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
 
+export type { DotOptions };
+
 export class Dot extends Plot<DotOptions> {
   /**
    * 默认配置项

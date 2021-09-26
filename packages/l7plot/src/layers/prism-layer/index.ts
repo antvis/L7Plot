@@ -1,16 +1,18 @@
 import { uniqueId } from '@antv/util';
 import { PolygonLayer } from '@antv/l7-layers';
-import { BaseLayer } from '../../core/layer/base-layer';
+import { PlotLayer } from '../../core/layer/plot-layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
 import { IPrismLayerOptions } from './interface';
 import { ILayer } from '../../types';
 import { getColorLegendItems } from '../dot-layer/helper';
 
+export type { IPrismLayerOptions };
+
 const DEFAULT_OPTIONS = {};
 const LAYER_OPTIONS_KEYS = ['autoFit', 'color', 'size', 'style', 'state'];
 
-export class PrismLayer extends BaseLayer<IPrismLayerOptions> {
+export class PrismLayer extends PlotLayer<IPrismLayerOptions> {
   /**
    * 默认配置项
    */
@@ -34,7 +36,7 @@ export class PrismLayer extends BaseLayer<IPrismLayerOptions> {
   /**
    * 图层类型
    */
-  public type = 'prismLayer';
+  public type = PlotLayer.LayerType.PrismLayer;
   /**
    * 图层是否具有交互属性
    */

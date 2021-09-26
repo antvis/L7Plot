@@ -1,11 +1,13 @@
 import { uniqueId } from '@antv/util';
 import { PolygonLayer, LineLayer } from '@antv/l7-layers';
-import { BaseLayer } from '../../core/layer/base-layer';
+import { PlotLayer } from '../../core/layer/plot-layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
 import { IAreaLayerOptions, ISource } from './interface';
 import { ILayer, IMouseEvent, Scene, Source } from '../../types';
 import { getColorLegendItems } from '../dot-layer/helper';
+
+export type { IAreaLayerOptions };
 
 const DEFAULT_OPTIONS = {
   state: {
@@ -14,7 +16,7 @@ const DEFAULT_OPTIONS = {
 };
 const LAYER_OPTIONS_KEYS = ['autoFit', 'color', 'style', 'state'];
 
-export class AreaLayer extends BaseLayer<IAreaLayerOptions> {
+export class AreaLayer extends PlotLayer<IAreaLayerOptions> {
   /**
    * 默认配置项
    */
@@ -46,7 +48,7 @@ export class AreaLayer extends BaseLayer<IAreaLayerOptions> {
   /**
    * 图层类型
    */
-  public type = 'polygonLayer';
+  public type = PlotLayer.LayerType.AreaLayer;
   /**
    * 图层是否具有交互属性
    */

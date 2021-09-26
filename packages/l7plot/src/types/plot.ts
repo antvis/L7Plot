@@ -1,5 +1,6 @@
 import { IMapOptions, ISource } from './map';
 import { ILabelOptions } from './label';
+import { LayerConfigType, PlotConfigType } from '../plot/types';
 
 /**
  * 地图图表类型
@@ -36,6 +37,12 @@ export interface IPlotOptions extends IMapOptions {
  * 高级 plot options 配置
  */
 export interface IL7PlotOptions extends IMapOptions {
-  plots?: any[];
-  layers?: any[];
+  /**
+   * 支持使用已有的 plot
+   */
+  plots?: PlotConfigType[];
+  /**
+   * L7Plot 内置的的图层
+   */
+  layers?: LayerConfigType[];
 }

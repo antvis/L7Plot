@@ -2,8 +2,10 @@ import { deepAssign } from '../../utils';
 import { DotLayer } from '../dot-layer';
 import { IDotDensityLayerOptions } from './interface';
 
+export type { IDotDensityLayerOptions };
+
 export class DotDensityLayer extends DotLayer<IDotDensityLayerOptions> {
-  public type = 'DotDensityLayer';
+  public type = DotLayer.LayerType.DotDensity;
   public interaction = false;
 
   /**

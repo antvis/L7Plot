@@ -7,6 +7,8 @@ import { TextLayer } from '../../layers/text-layer';
 import { GridLayer } from '../../layers/grid-layer';
 import { LayerGroup } from '../../core/layer/layer-group';
 
+export type { GridOptions };
+
 export class Grid extends Plot<GridOptions> {
   /**
    * 默认配置项

@@ -6,6 +6,8 @@ import { AreaLayer } from '../../layers/area-layer';
 import { ILegendOptions, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
 
+export type { ChinaDistrictOptions };
+
 export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
   /**
    * 默认配置项

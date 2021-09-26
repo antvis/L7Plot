@@ -7,6 +7,8 @@ import { TextLayer } from '../../layers/text-layer';
 import { HexagonLayer } from '../../layers/hexagon-layer';
 import { LayerGroup } from '../../core/layer/layer-group';
 
+export type { HexagonOptions };
+
 export class Hexagon extends Plot<HexagonOptions> {
   /**
    * 默认配置项

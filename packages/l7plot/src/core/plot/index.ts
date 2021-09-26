@@ -133,9 +133,9 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
   }
 
   /**
-   * 渲染到容器
+   * 挂载到容器
    */
-  public renderToScene(scene: Scene, theme: Record<string, any>) {
+  public attachToScene(scene: Scene, theme: Record<string, any>) {
     this.scene = scene;
     this.theme = theme;
     this.render();

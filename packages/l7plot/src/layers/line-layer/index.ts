@@ -1,15 +1,17 @@
 import { uniqueId } from '@antv/util';
 import { LineLayer as Line } from '@antv/l7-layers';
-import { BaseLayer } from '../../core/layer/base-layer';
+import { PlotLayer } from '../../core/layer/plot-layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
 import { ILineLayerOptions } from './interface';
 import { ILayer } from '../../types';
 
+export type { ILineLayerOptions };
+
 const DEFAULT_OPTIONS = {};
 const LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state', 'animate'];
 
-export class LineLayer<O extends ILineLayerOptions = ILineLayerOptions> extends BaseLayer<O> {
+export class LineLayer<O extends ILineLayerOptions = ILineLayerOptions> extends PlotLayer<O> {
   /**
    * 默认配置项
    */
@@ -33,7 +35,7 @@ export class LineLayer<O extends ILineLayerOptions = ILineLayerOptions> extends 
   /**
    * 图层类型
    */
-  public type = 'lineLayer';
+  public type = PlotLayer.LayerType.LineLayer;
   /**
    * 图层是否具有交互属性
    */

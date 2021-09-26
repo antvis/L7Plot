@@ -1,34 +1,38 @@
 import { pick } from '@antv/util';
 import Source from '@antv/l7-source';
-import { IBaseLayer, IBaseLayerConfig } from '../../types/layer';
+import { LayerType, IPLotLayer, IPlotLayerConfig } from '../../types/layer';
 import { Scene, ILayer, ILayerConfig, ISource } from '../../types';
 import { MappingSource } from '../../adaptor/source';
 
 const LayerConfigkeys = ['name', 'zIndex', 'visible', 'minZoom', 'maxZoom', 'pickingBuffer', 'autoFit', 'blend'];
 
-export abstract class BaseLayer<O extends IBaseLayerConfig> implements IBaseLayer {
+export abstract class PlotLayer<O extends IPlotLayerConfig> implements IPLotLayer {
+  /**
+   * 地图图表类型
+   */
+  static LayerType = LayerType;
   /**
    * layer 的 schema 配置
    */
-  public abstract options: O;
+  public abstract readonly options: O;
   /**
    * layer 实例
    */
-  public abstract layer: ILayer;
+  public abstract readonly layer: ILayer;
   /**
    * layer 名称
    */
-  public abstract name: string;
+  public abstract readonly name: string;
   /**
    * layer 类型
    */
-  public abstract type: string;
+  public abstract readonly type: LayerType | string;
   /**
    * layer 是否具有交互效果，用于 tooltip
    */
-  public abstract interaction: boolean;
+  public abstract readonly interaction: boolean;
 
-  public pickLayerConfig<T extends IBaseLayerConfig>(params: T): Partial<ILayerConfig> {
+  public pickLayerConfig<T extends IPlotLayerConfig>(params: T): Partial<ILayerConfig> {
     const config = pick<any>(params, LayerConfigkeys);
     return config;
   }

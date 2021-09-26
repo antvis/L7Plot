@@ -1,10 +1,12 @@
 import { uniqueId } from '@antv/util';
 import { HeatmapLayer as Heatmap } from '@antv/l7-layers';
-import { BaseLayer } from '../../core/layer/base-layer';
+import { PlotLayer } from '../../core/layer/plot-layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
 import { IGridLayerOptions } from './interface';
 import { ILayer } from '../../types';
+
+export type { IGridLayerOptions };
 
 const DEFAULT_OPTIONS: IGridLayerOptions = {
   source: {
@@ -31,7 +33,7 @@ const DEFAULT_OPTIONS: IGridLayerOptions = {
 };
 const LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state'];
 
-export class GridLayer extends BaseLayer<IGridLayerOptions> {
+export class GridLayer extends PlotLayer<IGridLayerOptions> {
   /**
    * 默认配置项
    */
@@ -55,7 +57,7 @@ export class GridLayer extends BaseLayer<IGridLayerOptions> {
   /**
    * 图层类型
    */
-  public type = 'gridLayer';
+  public type = PlotLayer.LayerType.GridLayer;
   /**
    * 图层是否具有交互属性
    */

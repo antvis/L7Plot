@@ -16,7 +16,7 @@ import {
   IScaleControlOptions,
   ILegendOptions,
   IEvent,
-  IBaseLayer,
+  IPLotLayer,
   UpdateMapConfig,
   Bounds,
 } from '../../types';
@@ -325,28 +325,28 @@ export abstract class Map<O extends IMapOptions> {
   /**
    * 添加图层
    */
-  public addLayer(layer: IBaseLayer) {
+  public addLayer(layer: IPLotLayer) {
     this.layerGroup.addlayer(layer);
   }
 
   /**
    * 获取所有图层
    */
-  public getLayes(): IBaseLayer[] {
+  public getLayes(): IPLotLayer[] {
     return this.layerGroup.getLayers();
   }
 
   /**
    * 根据图层名称获取图层
    */
-  public getLayerByName(name: string): IBaseLayer | undefined {
+  public getLayerByName(name: string): IPLotLayer | undefined {
     return this.layerGroup.getLayerByName(name);
   }
 
   /**
    * 移除图层
    */
-  public removeLayer(layer: IBaseLayer) {
+  public removeLayer(layer: IPLotLayer) {
     this.layerGroup.addlayer(layer);
   }
 

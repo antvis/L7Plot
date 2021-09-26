@@ -8,7 +8,7 @@ import {
   ITooltipListItem,
 } from '@antv/l7plot-component';
 import { isEqual, get as getValueByPath } from 'lodash-es';
-import { IBaseLayer, ILngLat, TooltipAnchorType, IEvent, ITooltipOptions, IMouseEvent, ITooltipItem } from '../types';
+import { IPLotLayer, ILngLat, TooltipAnchorType, IEvent, ITooltipOptions, IMouseEvent, ITooltipItem } from '../types';
 import { deepAssign } from '../utils';
 
 const TRIGGER_LIST = ['mousemove', 'click'];
@@ -21,7 +21,7 @@ export class Tooltip extends EventEmitter {
   /**
    * 带交互的图层
    */
-  protected interactionLayers: IBaseLayer[];
+  protected interactionLayers: IPLotLayer[];
   /**
    * tooltip 的 schema 配置
    */
@@ -43,7 +43,7 @@ export class Tooltip extends EventEmitter {
    */
   private lastComponentOptions: any;
 
-  constructor(scene: Scene, interactionLayers: IBaseLayer[], options: ITooltipOptions) {
+  constructor(scene: Scene, interactionLayers: IPLotLayer[], options: ITooltipOptions) {
     super();
     this.scene = scene;
     this.interactionLayers = interactionLayers;

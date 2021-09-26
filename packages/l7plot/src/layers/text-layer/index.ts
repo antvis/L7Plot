@@ -1,11 +1,13 @@
 import { uniqueId } from '@antv/util';
 import { PointLayer } from '@antv/l7-layers';
-import { BaseLayer } from '../../core/layer/base-layer';
+import { PlotLayer } from '../../core/layer/plot-layer';
 import { ITextLayerConfig } from '../../types/layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
 import { ITextLayerOptions } from './interface';
 import { ILayer } from '../../types';
+
+export type { ITextLayerOptions };
 
 const DEFAULT_OPTIONS = {
   style: {
@@ -13,7 +15,7 @@ const DEFAULT_OPTIONS = {
   },
 };
 
-export class TextLayer extends BaseLayer<ITextLayerOptions> {
+export class TextLayer extends PlotLayer<ITextLayerOptions> {
   /**
    * 默认配置项
    */
@@ -33,7 +35,7 @@ export class TextLayer extends BaseLayer<ITextLayerOptions> {
   /**
    * 图层类型
    */
-  public type = 'textLayer';
+  public type = PlotLayer.LayerType.TextLayer;
   /**
    * 图层是否具有交互属性
    */

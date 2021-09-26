@@ -64,14 +64,35 @@ class Combination extends Component {
               padding: [10, 10],
             },
           },
-          zoom: {
-            position: 'bottomright',
-          },
           layerMenu: {
             position: 'topright',
           },
         },
       ],
+      layers: [
+        {
+          type: 'textLayer',
+          source: {
+            data: data,
+            parser: {
+              type: 'csv',
+              x: 'Longitude',
+              y: 'Latitude',
+            },
+          },
+          field: 'Magnitude',
+          style: {
+            fill: '#fff',
+            fontSize: 12,
+            textAnchor: 'top',
+            textOffset: [0, 20],
+            padding: [10, 10],
+          },
+        },
+      ],
+      zoom: {
+        position: 'bottomright',
+      },
     });
 
     this.map = plot;

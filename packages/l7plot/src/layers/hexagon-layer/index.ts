@@ -1,10 +1,12 @@
 import { uniqueId } from '@antv/util';
 import { HeatmapLayer as Heatmap } from '@antv/l7-layers';
-import { BaseLayer } from '../../core/layer/base-layer';
+import { PlotLayer } from '../../core/layer/plot-layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
 import { IHexagonLayerOptions } from './interface';
 import { ILayer } from '../../types';
+
+export type { IHexagonLayerOptions };
 
 const DEFAULT_OPTIONS: IHexagonLayerOptions = {
   source: {
@@ -31,7 +33,7 @@ const DEFAULT_OPTIONS: IHexagonLayerOptions = {
 };
 const LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state'];
 
-export class HexagonLayer extends BaseLayer<IHexagonLayerOptions> {
+export class HexagonLayer extends PlotLayer<IHexagonLayerOptions> {
   /**
    * 默认配置项
    */
@@ -55,7 +57,7 @@ export class HexagonLayer extends BaseLayer<IHexagonLayerOptions> {
   /**
    * 图层类型
    */
-  public type = 'hexagonLayer';
+  public type = PlotLayer.LayerType.HexagonLayer;
   /**
    * 图层是否具有交互属性
    */

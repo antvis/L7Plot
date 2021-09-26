@@ -7,7 +7,7 @@ import { ISource, Source } from './map';
 /**
  * 图层基础配置
  */
-export interface IBaseLayerConfig {
+export interface IPlotLayerConfig {
   name?: string;
   zIndex?: number;
   visible?: boolean;
@@ -49,7 +49,7 @@ export type pointShape = pointShape2d | pointShape3d;
 /**
  * 点图层基础配置
  */
-export interface IPointLayerConfig extends Partial<IBaseLayerConfig> {
+export interface IPointLayerConfig extends Partial<IPlotLayerConfig> {
   /**
    * 图形形状
    */
@@ -79,7 +79,7 @@ export interface IPointLayerConfig extends Partial<IBaseLayerConfig> {
 /**
  * 文字图层基础配置
  */
-export interface ITextLayerConfig extends Partial<IBaseLayerConfig & ILabelOptions> {
+export interface ITextLayerConfig extends Partial<IPlotLayerConfig & ILabelOptions> {
   color?: ColorAttr;
   size?: SizeAttr;
   state?: IStateAttribute;
@@ -132,7 +132,7 @@ export type heatmapShape = 'heatmap' | 'heatmap3D' | heatmapShape2d | heatmapSha
 /**
  * 热力图层基础配置
  */
-export interface IHeatmapLayerConfig extends Partial<IBaseLayerConfig> {
+export interface IHeatmapLayerConfig extends Partial<IPlotLayerConfig> {
   /**
    * 图形形状
    */
@@ -181,7 +181,7 @@ export interface ILineLayerStyleOptions {
 /**
  * 线图层基础配置
  */
-export interface ILineLayerConfig extends Partial<IBaseLayerConfig> {
+export interface ILineLayerConfig extends Partial<IPlotLayerConfig> {
   /**
    * 图形形状
    */
@@ -223,7 +223,7 @@ export interface IPolygonLayerStyleOptions {
 /**
  * 面图层基础配置
  */
-export interface IPolygonLayerConfig extends Partial<IBaseLayerConfig> {
+export interface IPolygonLayerConfig extends Partial<IPlotLayerConfig> {
   /**
    * 图形形状
    */
@@ -247,16 +247,16 @@ export interface IPolygonLayerConfig extends Partial<IBaseLayerConfig> {
 }
 
 /**
- * 基类图层接口
+ * L7Plot 内置图层的基类接口
  */
-export interface IBaseLayer {
+export interface IPLotLayer {
   name: string;
   type: string;
   layer: ILayer;
   interaction: boolean;
-  options: IBaseLayerConfig;
+  options: IPlotLayerConfig;
 
-  pickLayerConfig<T extends IBaseLayerConfig>(params: T): Partial<ILayerConfig>;
+  pickLayerConfig<T extends IPlotLayerConfig>(params: T): Partial<ILayerConfig>;
   addTo(scene: Scene): void;
   remove(scene: Scene): void;
   updateOptions<T>(options: T): void;
@@ -267,4 +267,20 @@ export interface IBaseLayer {
   on(name: string, callback: (...args: any[]) => void): void;
   once(name: string, callback: (...args: any[]) => void): void;
   off(name: string, callback: (...args: any[]) => void): void;
+}
+
+/**
+ * L7Plot 内置图层类型
+ */
+export enum LayerType {
+  TextLayer = 'textLayer',
+  DotLayer = 'dotLayer',
+  DotDensity = 'dotDensityLayer',
+  ColumnLayer = 'columnLayer',
+  HeatmapLayer = 'heatmapLayer',
+  GridLayer = 'gridLayer',
+  HexagonLayer = 'hexagonLayer',
+  LineLayer = 'lineLayer',
+  AreaLayer = 'areaLayer',
+  PrismLayer = 'prismLayer',
 }

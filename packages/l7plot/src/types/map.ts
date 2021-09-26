@@ -2,7 +2,6 @@ import { Map as MapboxglMap } from 'mapbox-gl';
 import { IAMapInstance, IMapboxInstance } from '@antv/l7-maps/typings';
 import { IStatusOptions, PositionName, ISourceCFG, MapStyle } from '@antv/l7-core';
 import Source from '@antv/l7-source';
-import { IPopupOptions } from './popup';
 import { ITooltipOptions } from './tooltip';
 import { ILegendOptions } from './legend';
 import { ILayerMenuControlOptions, IScaleControlOptions, IZoomControlOptions } from './control';
@@ -138,7 +137,7 @@ export interface IMapOptions {
   /**
    * popup 配置项
    */
-  readonly popup?: false | IPopupOptions;
+  // readonly popup?: false | IPopupOptions;
 
   /**
    * 图例 legend 配置项

@@ -28,25 +28,19 @@ export * from './types';
 export { L7Plot } from './plot';
 
 // 散点图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { Dot } from './plots/dot';
-export type { DotOptions } from './plots/dot/interface';
+export { Dot, DotOptions } from './plots/dot';
 
 // 点密度图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { DotDensity } from './plots/dot-density';
-export type { DotDensityOptions } from './plots/dot-density/interface';
+export { DotDensity, DotDensityOptions } from './plots/dot-density';
 
 // 热力图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { Heatmap } from './plots/heatmap';
-export type { HeatmapOptions } from './plots/heatmap/interface';
+export { Heatmap, HeatmapOptions } from './plots/heatmap';
 
 // 网格图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { Grid } from './plots/grid';
-export type { GridOptions } from './plots/grid/interface';
+export { Grid, GridOptions } from './plots/grid';
 
 // 蜂窝图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { Hexagon } from './plots/hexagon';
-export type { HexagonOptions } from './plots/hexagon/interface';
+export { Hexagon, HexagonOptions } from './plots/hexagon';
 
 // 区域图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { Choropleth } from './plots/choropleth';
-export type { ChoroplethOptions } from './plots/choropleth/interface';
+export { Choropleth, ChoroplethOptions } from './plots/choropleth';
