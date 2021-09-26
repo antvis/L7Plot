@@ -264,6 +264,7 @@ export interface IPLotLayer {
   show(): void;
   hide(): void;
   toggleVisible(): void;
+  fitBounds(fitBoundsOptions?: unknown): void;
   on(name: string, callback: (...args: any[]) => void): void;
   once(name: string, callback: (...args: any[]) => void): void;
   off(name: string, callback: (...args: any[]) => void): void;

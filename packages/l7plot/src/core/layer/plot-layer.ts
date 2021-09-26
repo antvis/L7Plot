@@ -73,6 +73,10 @@ export abstract class PlotLayer<O extends IPlotLayerConfig> implements IPLotLaye
     this.layer.isVisible() ? this.layer.hide() : this.layer.show();
   }
 
+  public fitBounds(fitBoundsOptions?: unknown) {
+    this.layer.fitBounds(fitBoundsOptions);
+  }
+
   /**
    * 事件代理: 绑定事件
    */
