@@ -1,9 +1,9 @@
-import { LineLayerWrapper } from '../../../../src/layers/line-layer';
+import { LineLayer } from '../../../../src/layers/line-layer';
 
 describe('line layer', () => {
-  const layerWrapper = new LineLayerWrapper();
+  const layer = new LineLayer({ source: { data: [] } });
 
-  it('layerWrapper', () => {
-    expect(layerWrapper).toBeDefined();
+  it('layer', () => {
+    expect(layer).toBeDefined();
   });
 });

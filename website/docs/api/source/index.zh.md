@@ -240,7 +240,7 @@ order: 1
 
 是否开启数据聚合处理。
 
-### `source.`clusterOption
+## `source.`clusterOption
 
 `object` optional
 
@@ -261,19 +261,19 @@ order: 1
 }
 ```
 
-#### `clusterOption.`radius
+### `clusterOption.`radius
 
 `number` optional default: `40`
 
 聚合半径。
 
-#### `clusterOption.`minZoom
+### `clusterOption.`minZoom
 
 `number` optional default: `0`
 
 最小聚合缩放等级。
 
-#### `clusterOption.`maxZoom
+### `clusterOption.`maxZoom
 
 `number` optional default: `16`
 

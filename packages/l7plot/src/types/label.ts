@@ -1,4 +1,4 @@
-import { IBaseLayerConfig } from '../core/layer/interface';
+import { IPlotLayerConfig } from './layer';
 import { ColorAttr, IStateAttribute, SizeAttr } from './attr';
 
 export type AnchorType =
@@ -53,7 +53,7 @@ export interface IPointTextLayerStyleOptions {
 /**
  * Label
  */
-export interface ILabelOptions extends IBaseLayerConfig {
+export interface ILabelOptions extends IPlotLayerConfig {
   /** 映射的字段 */
   field?: string;
   // TODO: 多字段支持

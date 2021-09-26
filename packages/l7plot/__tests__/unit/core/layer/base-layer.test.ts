@@ -1,19 +1,19 @@
-import { PointLayerWrapper } from '../../../../src/layers/point-layer';
-import { PointMap } from '../../../../src';
+import { DotLayer } from '../../../../src/layers/dot-layer';
+import { Dot } from '../../../../src';
 import { createDiv } from '../../../helper/dom';
 
 describe('base layer', () => {
   it('show hide', () => {
-    const pointMap = new PointMap(createDiv(), {
+    const dot = new Dot(createDiv(), {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
       },
     });
     return new Promise<void>((resolve, reject) => {
-      pointMap.on('loaded', () => {
+      dot.on('loaded', () => {
         try {
-          const layerWrapper = pointMap['pointLayerWrapper'] as PointLayerWrapper;
+          const layerWrapper = dot['dotLayer'] as DotLayer;
           layerWrapper.hide();
           expect(layerWrapper.layer.isVisible()).toBeFalsy();
 
@@ -23,22 +23,22 @@ describe('base layer', () => {
         } catch (err) {
           reject(err);
         }
-        setTimeout(() => pointMap.destroy(), 0);
+        setTimeout(() => dot.destroy(), 0);
       });
     });
   });
 
   it('toggleVisible', () => {
-    const pointMap = new PointMap(createDiv(), {
+    const dot = new Dot(createDiv(), {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
       },
     });
     return new Promise<void>((resolve, reject) => {
-      pointMap.on('loaded', () => {
+      dot.on('loaded', () => {
         try {
-          const layerWrapper = pointMap['pointLayerWrapper'] as PointLayerWrapper;
+          const layerWrapper = dot['dotLayer'] as DotLayer;
           layerWrapper.hide();
           layerWrapper.toggleVisible();
           expect(layerWrapper.layer.isVisible()).toBeTruthy();
@@ -50,7 +50,7 @@ describe('base layer', () => {
         } catch (err) {
           reject(err);
         }
-        setTimeout(() => pointMap.destroy(), 0);
+        setTimeout(() => dot.destroy(), 0);
       });
     });
   });

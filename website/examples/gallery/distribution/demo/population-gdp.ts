@@ -1,4 +1,4 @@
-import { BubbleMap } from '@antv/l7plot';
+import { Dot } from '@antv/l7plot';
 
 async function initMap() {
   const response = await fetch(
@@ -16,7 +16,7 @@ async function initMap() {
     'rgba(139,0,0,0.95)',
   ];
 
-  new BubbleMap('container', {
+  new Dot('container', {
     map: {
       type: 'mapbox',
       style: 'dark',

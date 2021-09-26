@@ -1,4 +1,4 @@
-export const version = '0.0.1-alpha.1';
+export const version = '0.0.1-alpha.4';
 
 // 资源静态注册
 export {
@@ -23,40 +23,24 @@ export { Plot } from './core/plot';
 
 // 类型定义导出
 export * from './types';
-export * from './core/layer/interface';
 
-// 点地图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { PointMap } from './plots/point-map';
-export type { PointMapOptions } from './plots/point-map/interface';
-
-// 气泡图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { BubbleMap } from './plots/bubble-map';
-export type { BubbleMapOptions } from './plots/bubble-map/interface';
+/** 高级图表 */
+export { L7Plot } from './plot';
 
 // 散点图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { ScatterMap } from './plots/scatter-map';
-export type { ScatterMapOptions } from './plots/scatter-map/interface';
+export { Dot, DotOptions } from './plots/dot';
 
 // 点密度图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { DotDensityMap } from './plots/dot-density-map';
-export type { DotDensityMapOptions } from './plots/dot-density-map/interface';
-
-// 图标图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { IconMap } from './plots/icon-map';
-export type { IconMapOptions } from './plots/icon-map/interface';
-
-// 聚合图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { ClustereMap } from './plots/clustere-map';
-export type { ClustereMapOptions } from './plots/clustere-map/interface';
+export { DotDensity, DotDensityOptions } from './plots/dot-density';
 
 // 热力图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { Heatmap } from './plots/heatmap';
-export type { HeatmapOptions } from './plots/heatmap/interface';
+export { Heatmap, HeatmapOptions } from './plots/heatmap';
 
 // 网格图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { GridMap } from './plots/grid-map';
-export type { GridMapOptions } from './plots/grid-map/interface';
+export { Grid, GridOptions } from './plots/grid';
 
 // 蜂窝图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { HexagonMap } from './plots/hexagon-map';
-export type { HexagonMapOptions } from './plots/hexagon-map/interface';
+export { Hexagon, HexagonOptions } from './plots/hexagon';
+
+// 区域图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { Choropleth, ChoroplethOptions } from './plots/choropleth';

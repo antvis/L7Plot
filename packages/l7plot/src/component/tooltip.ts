@@ -8,7 +8,7 @@ import {
   ITooltipListItem,
 } from '@antv/l7plot-component';
 import { isEqual, get as getValueByPath } from 'lodash-es';
-import { ILayer, ILngLat, TooltipAnchorType, IEvent, ITooltipOptions, IMouseEvent, ITooltipItem } from '../types';
+import { IPLotLayer, ILngLat, TooltipAnchorType, IEvent, ITooltipOptions, IMouseEvent, ITooltipItem } from '../types';
 import { deepAssign } from '../utils';
 
 const TRIGGER_LIST = ['mousemove', 'click'];
@@ -21,7 +21,7 @@ export class Tooltip extends EventEmitter {
   /**
    * 带交互的图层
    */
-  protected interactionLayers: ILayer[];
+  protected interactionLayers: IPLotLayer[];
   /**
    * tooltip 的 schema 配置
    */
@@ -43,7 +43,7 @@ export class Tooltip extends EventEmitter {
    */
   private lastComponentOptions: any;
 
-  constructor(scene: Scene, interactionLayers: ILayer[], options: ITooltipOptions) {
+  constructor(scene: Scene, interactionLayers: IPLotLayer[], options: ITooltipOptions) {
     super();
     this.scene = scene;
     this.interactionLayers = interactionLayers;
@@ -87,7 +87,7 @@ export class Tooltip extends EventEmitter {
       throw new Error('trigger is mousemove or click');
     }
 
-    this.interactionLayers.forEach((layer) => {
+    this.interactionLayers.forEach(({ layer }) => {
       layer.on(trigger, this.interactionTriggerHander);
       layer.on(`un${trigger}`, this.interactionUntriggerHander);
     });
@@ -108,16 +108,18 @@ export class Tooltip extends EventEmitter {
     } else if (items) {
       items.forEach((item: string | ITooltipItem) => {
         if (isString(item)) {
+          const name = item.split('.').pop() || item;
           const value = getValueByPath(feature, item);
           if (value !== undefined) {
-            tooltipItems.push({ name: item, value });
+            tooltipItems.push({ name, value });
           }
         } else {
           const { field, alias, customValue } = item;
+          const name = alias || field.split('.').pop() || field;
           const value = getValueByPath(feature, field);
           if (value !== undefined) {
             tooltipItems.push({
-              name: alias || field,
+              name,
               value: customValue ? customValue(value, feature, featureId) : value,
             });
           }
@@ -136,7 +138,7 @@ export class Tooltip extends EventEmitter {
 
   private unBindInteractionEvent() {
     const trigger = this.options.trigger || 'mousemove';
-    this.interactionLayers.forEach((layer) => {
+    this.interactionLayers.forEach(({ layer }) => {
       layer.off(trigger, this.interactionTriggerHander);
       layer.off(`un${trigger}`, this.interactionUntriggerHander);
     });

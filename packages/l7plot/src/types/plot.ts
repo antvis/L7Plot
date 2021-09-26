@@ -1,20 +1,18 @@
-import { IMapOptions } from './map';
-import { IStateAttribute } from './attr';
+import { IMapOptions, ISource } from './map';
+import { ILabelOptions } from './label';
+import { LayerConfigType, PlotConfigType } from '../plot/types';
 
 /**
  * 地图图表类型
  */
 export enum MapType {
-  Point = 'point',
-  Bubble = 'bubble',
-  Scatter = 'scatter',
+  Dot = 'dot',
   DotDensity = 'dotDensity',
-  Icon = 'icon',
-  Clustere = 'clustere',
-  Heat = 'heat',
   Heatmap = 'heatmap',
   Grid = 'grid',
   Hexagon = 'hexagon',
+  Choropleth = 'choropleth',
+  ChinaDistrict = 'chinaDistrict',
 }
 
 /**
@@ -22,17 +20,29 @@ export enum MapType {
  */
 export interface IPlotOptions extends IMapOptions {
   /**
+   * 具体的数据
+   */
+  source: ISource;
+  /**
    * 是否自动缩放到图层范围，默认为 false
    */
-  readonly autoFit?: boolean;
-
+  autoFit?: boolean;
   /**
-   * 交互反馈
+   * 数据标签配置
    */
-  readonly state?: IStateAttribute;
+  label?: false | ILabelOptions;
 }
 
+/**
+ * 高级 plot options 配置
+ */
 export interface IL7PlotOptions extends IMapOptions {
-  // TODO:
-  plots: any[];
+  /**
+   * 支持使用已有的 plot
+   */
+  plots?: PlotConfigType[];
+  /**
+   * L7Plot 内置的的图层
+   */
+  layers?: LayerConfigType[];
 }

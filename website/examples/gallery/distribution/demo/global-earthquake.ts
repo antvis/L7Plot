@@ -1,11 +1,11 @@
-import { BubbleMap } from '@antv/l7plot';
+import { Dot } from '@antv/l7plot';
 
 async function initMap() {
   const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/uvnCDHPafR/quanqiudizhenshuju.json');
   const data = await response.json();
   const depthColors = ['#D60352', '#F86615', '#F86615', '#F86615', '#F86615'];
 
-  new BubbleMap('container', {
+  new Dot('container', {
     map: {
       type: 'mapbox',
       style: 'dark',
