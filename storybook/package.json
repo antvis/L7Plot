@@ -1,7 +1,7 @@
 {
   "name": "l7plot-storybook",
   "private": true,
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.2-alpha.0",
   "license": "MIT",
   "author": "yunji",
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@antv/l7": "^2.5.5",
-    "@antv/l7plot": "^0.0.1-alpha.4",
+    "@antv/l7plot": "^0.0.2-alpha.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
