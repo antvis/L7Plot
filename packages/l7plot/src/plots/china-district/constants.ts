@@ -8,8 +8,8 @@ import { ChinaDistrictOptions } from './interface';
 export const DEFAULT_OPTIONS: Partial<ChinaDistrictOptions> = deepAssign({}, Plot.DefaultOptions, {
   source: {
     data: [],
-    parser: {
-      type: 'geojson',
+    joinBy: {
+      targetField: 'adcode',
     },
   },
 });

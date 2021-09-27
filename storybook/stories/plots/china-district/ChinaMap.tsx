@@ -20,10 +20,13 @@ class ChinaMap extends Component {
 
       source: {
         data: [],
-        parser: {
-          type: 'json',
+        joinBy: {
+          sourceField: '',
+          targetField: '',
         },
       },
+
+      initialLevel: 'china',
 
       color: {
         field: 'name',
@@ -33,7 +36,8 @@ class ChinaMap extends Component {
         opacity: 0.8,
         stroke: '#fff',
         lineType: 'dash',
-        lineWidth: 1,
+        lineDash: [1, 10],
+        lineWidth: 0.5,
         lineOpacity: 0.5,
       },
       // state: { active: true, select: false },
