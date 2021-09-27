@@ -172,9 +172,13 @@ export enum lineStyleType {
  * 线图层 图层样式
  */
 export interface ILineLayerStyleOptions {
+  // 透明度
   opacity?: number;
+  // 线类型
   lineType?: keyof typeof lineStyleType;
+  // 虚线间隔
   dashArray?: [number, number];
+  // 弧线分段数
   segmentNumber?: number;
 }
 

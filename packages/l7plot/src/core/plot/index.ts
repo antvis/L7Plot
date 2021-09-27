@@ -41,12 +41,34 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
       this.source = this.createSource();
 
       this.registerResources();
-      this.render();
-      this.inited = true;
+      this.initLayers();
     } else {
       super(container);
       this.source = this.createSource();
     }
+  }
+
+  /**
+   * 初始化图层
+   */
+  protected initLayers() {
+    this.render();
+    this.inited = true;
+  }
+
+  /**
+   * 初始化图层事件
+   */
+  protected initLayersEvent() {
+    //
+  }
+
+  /**
+   * 初始化组件
+   */
+  protected initComponents() {
+    this.initControls();
+    this.initTooltip();
   }
 
   /**
@@ -85,13 +107,6 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
   }
 
   /**
-   * 初始化图层事件
-   */
-  protected initLayerEvent() {
-    //
-  }
-
-  /**
    * 渲染
    */
   public render() {
@@ -100,36 +115,41 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
       this.layerGroup.removeAllLayer();
       layerGroup.addTo(this.scene);
       this.layerGroup = layerGroup;
-      this.initControls();
-      this.initTooltip();
+      this.initComponents();
     } else {
-      const onLoaded = () => {
-        this.initControls();
-        this.initTooltip();
-        this.loaded = true;
-        this.emit('loaded');
-      };
-      if (this.scene['sceneService'].loaded) {
+      this.layerGroup = layerGroup;
+      this.onLayersLoaded();
+      layerGroup.addTo(this.scene);
+    }
+    this.initLayersEvent();
+  }
+
+  /**
+   * 图表图层加载成功
+   */
+  protected onLayersLoaded() {
+    const onLoaded = () => {
+      this.initComponents();
+      this.loaded = true;
+      this.emit('loaded');
+    };
+    if (this.scene['sceneService'].loaded) {
+      this.sceneLoaded = true;
+      this.layersLoaded && onLoaded();
+    } else {
+      this.scene.once('loaded', () => {
         this.sceneLoaded = true;
         this.layersLoaded && onLoaded();
-      } else {
-        this.scene.once('loaded', () => {
-          this.sceneLoaded = true;
-          this.layersLoaded && onLoaded();
-        });
-      }
-      if (layerGroup.isEmpty()) {
-        this.layersLoaded = true;
-      } else {
-        layerGroup.once('inited-all', () => {
-          this.layersLoaded = true;
-          this.sceneLoaded && onLoaded();
-        });
-      }
-      layerGroup.addTo(this.scene);
-      this.layerGroup = layerGroup;
+      });
     }
-    this.initLayerEvent();
+    if (this.layerGroup.isEmpty()) {
+      this.layersLoaded = true;
+    } else {
+      this.layerGroup.once('inited-all', () => {
+        this.layersLoaded = true;
+        this.sceneLoaded && onLoaded();
+      });
+    }
   }
 
   /**

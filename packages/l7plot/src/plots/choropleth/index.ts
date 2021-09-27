@@ -79,7 +79,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 初始化图层事件
    */
-  protected initLayerEvent() {
+  protected initLayersEvent() {
     //
   }
 
