@@ -102,8 +102,8 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
    * 创建数据标签图层
    */
   protected createLabelLayer(source: Source, label: ILabelOptions): TextLayer {
-    const labelLayerWrapper = new TextLayer({ name: 'labelLayer', source, ...label });
-    return labelLayerWrapper;
+    const textLayer = new TextLayer({ name: 'labelLayer', source, ...label });
+    return textLayer;
   }
 
   /**

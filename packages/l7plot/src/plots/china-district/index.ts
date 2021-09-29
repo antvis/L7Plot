@@ -29,6 +29,10 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
    */
   private provinceData: any;
   /**
+   * 当前行政数据数据
+   */
+  private currentDistrictData = { type: 'FeatureCollection', features: [] };
+  /**
    * 国界图层
    */
   public chinaBoundaryLayer!: LineLayer;
@@ -40,7 +44,6 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
    * 填充面图层
    */
   public fillAreaLayer!: AreaLayer;
-
   /**
    * 标注图层
    */
@@ -68,13 +71,17 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
    */
   protected createSource() {
     const { data: joinData, joinBy, ...sourceCFG } = this.options.source;
-    const { sourceField, targetField, data = { type: 'FeatureCollection', features: [] } } = joinBy;
+    const { sourceField, targetField } = joinBy;
     const config = { type: 'join', sourceField, targetField, data: joinData };
     if (sourceCFG.transforms) {
       sourceCFG.transforms.push(config);
     } else {
       sourceCFG.transforms = [config];
     }
+    if (sourceCFG['parser']) {
+      delete sourceCFG['parser'];
+    }
+    const data = this.currentDistrictData || { type: 'FeatureCollection', features: [] };
     const source = new Source(data, sourceCFG);
     return source;
   }
@@ -86,10 +93,6 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
     const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(this.chinaBoundaryData);
     this.chinaBoundaryLayer = chinaBoundaryLayer;
     this.chinaDisputeBoundaryLayer = chinaDisputeBoundaryLayer;
-    // this.fillAreaLayer = new AreaLayer({
-    //   source: { data: this.provinceData },
-    //   ...pick<any>(this.options, AreaLayer.LayerOptionsKeys),
-    // });
     this.fillAreaLayer = this.createFillAreaLayer();
 
     const layerGroup = new LayerGroup([this.fillAreaLayer, this.chinaBoundaryLayer, this.chinaDisputeBoundaryLayer]);
@@ -118,9 +121,23 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
    * 创建数据标签图层
    */
   protected createLabelLayer(source: Source, label: ILabelOptions): TextLayer {
-    // TODO: get source.data center
-    const labelLayerWrapper = new TextLayer({ name: 'labelLayer', source, ...label });
-    return labelLayerWrapper;
+    const { data: joinData, joinBy } = this.options.source;
+    const { sourceField, targetField } = joinBy;
+    const config = { type: 'join', sourceField, targetField, data: joinData };
+
+    const data = this.currentDistrictData.features
+      .map(({ properties }) => properties)
+      .filter(({ centroid }) => centroid);
+    const textLayer = new TextLayer({
+      name: 'labelLayer',
+      source: {
+        data,
+        parser: { type: 'json', coordinates: 'centroid' },
+        transforms: [config],
+      },
+      ...label,
+    });
+    return textLayer;
   }
 
   /**
@@ -183,7 +200,7 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
 
     try {
       this.provinceData = await this.fetchData(DISTRICT_URL.Province);
-      this.options.source.joinBy.data = this.provinceData;
+      this.currentDistrictData = this.provinceData;
     } catch (err) {
       throw new Error(`Failed to get provinceData data，${err}`);
     }

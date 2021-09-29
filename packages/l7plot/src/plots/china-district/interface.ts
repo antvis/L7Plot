@@ -13,10 +13,6 @@ export interface IJoinBy {
    * 地理数据字段
    */
   targetField?: string;
-  /**
-   * 地理数据
-   */
-  data?: any;
 }
 
 /**
@@ -39,16 +35,22 @@ export interface ChinaDistrictOptions extends IPlotOptions, IAreaLayerOptions {
    * 具体的数据
    */
   source: ISource;
+
   /**
-   * 初始化行政级别
+   * 初始化行政范围
    */
-  initialLevel: 'china' | 'region' | 'province' | 'city' | 'county';
-  /**
-   * 初始化显示行政名称
-   */
-  initialAdname?: string;
-  /**
-   * 初始化行政范围代码
-   */
-  initialAdcode?: number;
+  initialView?: {
+    /**
+     * 初始化行政级别
+     */
+    level: 'country' | 'region' | 'province' | 'city' | 'county';
+    /**
+     * 初始化显示行政名称
+     */
+    adName?: string;
+    /**
+     * 初始化显示行政代码
+     */
+    adCode?: number;
+  };
 }

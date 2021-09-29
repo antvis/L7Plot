@@ -22,7 +22,8 @@ export const DISTRICT_URL = {
   ChinaBoundary: 'https://gw.alipayobjects.com/os/antfincdn/fFMSsgcuGf/100000_boundary.json',
   Country: {},
   Region: {},
-  Province: 'https://gw.alipayobjects.com/os/antfincdn/iUxSKWSIms/100000_full.json',
+  // Province: 'https://gw.alipayobjects.com/os/antfincdn/iUxSKWSIms/100000_full.json',
+  Province: 'http://127.0.0.1:8080/100000_full.json',
   City: {},
   County: {},
 };
