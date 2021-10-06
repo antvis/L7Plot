@@ -31,6 +31,6 @@ export interface IMouseEvent extends IEvent {
   y: number;
   type: string;
   lngLat: ILngLat;
-  feature: unknown;
+  feature: any;
   featureId: number;
 }

@@ -1,14 +1,15 @@
 import { pick } from '@antv/util';
 import { Plot } from '../../core/plot';
 import { deepAssign } from '../../utils';
-import { ChinaDistrictOptions, ISource } from './interface';
-import { DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS, DISTRICT_URL } from './constants';
+import { ChinaDistrictOptions, DrillStep, ISource, IDrill, AreaDepthData } from './interface';
+import { DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS, Area_URL } from './constants';
 import { AreaLayer } from '../../layers/area-layer';
 import { LinesLayer } from '../../layers/lines-layer';
 import { TextLayer } from '../../layers/text-layer';
-import { ILabelOptions, ILegendOptions, Source } from '../../types';
+import { ILabelOptions, ILegendOptions, IMouseEvent, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
 import { createCountryBoundaryLayer } from './layer';
+import { getCacheArea, registerCacheArea } from './cache';
 
 export type { ChinaDistrictOptions };
 
@@ -45,6 +46,10 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
    * 标注图层
    */
   public labelLayer: TextLayer | undefined;
+  /**
+   * 行政层级数据
+   */
+  private areaDepthData: AreaDepthData[] = [];
 
   /**
    * 初始化图层
@@ -116,6 +121,7 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
   protected createFillAreaLayer() {
     this.source = this.createSource();
     const fillAreaLayer = new AreaLayer({
+      name: 'fillAreaLayer',
       source: this.source,
       ...pick<any>(this.options, AreaLayer.LayerOptionsKeys),
     });
@@ -126,7 +132,6 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
    * 创建数据标签图层
    */
   protected createLabelLayer(source: Source, label: ILabelOptions): TextLayer {
-    const sourceCFG = this.parserSourceConfig(this.options.source);
     const data = this.currentDistrictData.features
       .map(({ properties }) => properties)
       .filter(({ centroid }) => centroid);
@@ -135,10 +140,18 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
       source: {
         data,
         parser: { type: 'json', coordinates: 'centroid' },
-        transforms: sourceCFG.transforms,
+        transforms: this.source.transforms,
       },
       ...label,
     });
+
+    this.source.on('update', () => {
+      const data = this.currentDistrictData.features
+        .map(({ properties }) => properties)
+        .filter(({ centroid }) => centroid);
+      textLayer.layer.setData(data);
+    });
+
     return textLayer;
   }
 
@@ -167,7 +180,35 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
    * 初始化图层事件
    */
   protected initLayersEvent() {
-    // this.fillAreaLayer.on()
+    this.initDrillEvent();
+  }
+
+  /**
+   * 初始化钻取事件
+   */
+  private initDrillEvent() {
+    if (!this.options.drill) return;
+    const { level, adCode, granularity = DEFAULT_AREA_GRANULARITY[level] } = this.options.initialView;
+    const { steps, triggerUp = 'unclick', triggerDown = 'click' } = this.options.drill;
+    const dillSteps = steps.map((step: DrillStep | DrillStep['level']) => {
+      if (typeof step === 'string') {
+        return {
+          level: step,
+          granularity: DEFAULT_AREA_GRANULARITY[step],
+        };
+      }
+      if (!step.granularity) {
+        step.granularity = DEFAULT_AREA_GRANULARITY[step.level] as DrillStep['granularity'];
+      }
+      return step;
+    }) as Required<DrillStep>[];
+    this.areaDepthData = [{ level, adCode, granularity, source: this.options.source }];
+
+    // 下钻事件
+    this.fillAreaLayer.on(triggerDown, (event: IMouseEvent) => this.drillDown(event, dillSteps));
+
+    // 上卷事件
+    this.fillAreaLayer.on(triggerUp, this.drillUp.bind(this));
   }
 
   /**
@@ -185,22 +226,26 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
   /**
    * 请求数据
    */
-  private async fetchData(url: string) {
-    const response = await fetch(url);
-    return await response.json();
+  private async fetchData(level: string, adCode: string | number, granularity: string) {
+    const fileName = `${adCode}_${level}_${granularity}`;
+    const cacheArea = getCacheArea(fileName);
+    if (cacheArea) {
+      return cacheArea;
+    }
+    const response = await fetch(`${Area_URL}/${level}/${fileName}.json`);
+    const data = response.json();
+    registerCacheArea(fileName, data);
+    return data;
   }
 
   /**
    * 请求初始化行政数据
    */
   private async getInitDistrictData() {
-    const fetchChinaBoundaryData = this.fetchData(DISTRICT_URL.ChinaBoundary);
-    const { level, adCode, granularity } = this.options.initialView;
-    const granularity_ = granularity || DEFAULT_AREA_GRANULARITY[level];
+    const fetchChinaBoundaryData = this.fetchData('country', 'china', 'boundary');
+    const { level, adCode, granularity = DEFAULT_AREA_GRANULARITY[level] } = this.options.initialView;
     console.log(' level, adCode, granularity: ', level, adCode, granularity);
-    const fetchCurrentDistrictData = this.fetchData(
-      `${DISTRICT_URL.Area}/${level}/${adCode}_${level}${granularity_ ? `_${granularity_}` : ''}.json`
-    );
+    const fetchCurrentDistrictData = this.fetchData(level, adCode, granularity);
 
     try {
       [this.chinaBoundaryData, this.currentDistrictData] = await Promise.all([
@@ -223,17 +268,63 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
 
   /**
    * 向下钻取
-   * 自定义钻取交互行为时使用
    */
-  drillDown() {
-    //
+  drillDown(event: IMouseEvent, dillSteps: Required<DrillStep>[]) {
+    const { steps, onDown } = this.options.drill as IDrill;
+    const properties = event.feature?.properties;
+    const { adcode } = properties;
+    const from = this.areaDepthData.slice(-1)[0];
+    const to: AreaDepthData = {
+      level: 'province',
+      adCode: adcode,
+      granularity: 'city',
+      source: { data: [], joinBy: this.options.source.joinBy },
+    };
+
+    // 已经下钻到最后
+    if (this.areaDepthData.length === steps.length + 1) {
+      return;
+    }
+    // 还没有开始钻取
+    if (this.areaDepthData.length === 1) {
+      const { level, granularity } = dillSteps[0];
+      to.level = level;
+      to.granularity = granularity;
+    } else {
+      const { level, granularity } = dillSteps[this.areaDepthData.length - 1];
+      to.level = level;
+      to.granularity = granularity;
+    }
+
+    this.fetchData(to.level, adcode, to.granularity).then((currentDistrictData) => {
+      if (currentDistrictData.features.length) {
+        this.currentDistrictData = currentDistrictData;
+        this.changeData([]);
+        this.areaDepthData.push(to);
+      }
+    });
+
+    onDown && onDown(from, to, properties);
   }
 
   /**
    * 向上钻取
-   * 自定义钻取交互行为时使用
    */
-  drillUp() {
-    //
+  drillUp(event: IMouseEvent) {
+    const { onUp } = this.options.drill as IDrill;
+    // 已经上卷到最高层级
+    if (this.areaDepthData.length === 1) {
+      return;
+    }
+    const properties = event.feature;
+    const from = this.areaDepthData.pop() as AreaDepthData;
+    const to = this.areaDepthData.slice(-1)[0];
+
+    this.fetchData(to.level, to.adCode, to.granularity).then((currentDistrictData) => {
+      this.currentDistrictData = currentDistrictData;
+      this.changeData([]);
+    });
+
+    onUp && onUp(from, to, properties);
   }
 }

@@ -7,6 +7,7 @@ export const createCountryBoundaryLayer = (data: any) => {
   );
   const disputeBoundaryFeatures = data.features.filter(({ properties }) => properties.type === '争议');
   const chinaBoundaryLayer = new LinesLayer({
+    name: 'chinaBoundaryLayer',
     source: {
       data: { type: 'FeatureCollection', features: chinaBoundaryFeatures },
       parser: { type: 'geojson' },
@@ -29,6 +30,7 @@ export const createCountryBoundaryLayer = (data: any) => {
     },
   });
   const chinaDisputeBoundaryLayer = new LinesLayer({
+    name: 'chinaDisputeBoundaryLayer',
     source: {
       data: { type: 'FeatureCollection', features: disputeBoundaryFeatures },
       parser: { type: 'geojson' },

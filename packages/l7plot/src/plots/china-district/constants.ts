@@ -21,21 +21,18 @@ export const DEFAULT_OPTIONS: Partial<ChinaDistrictOptions> = deepAssign({}, Plo
 /**
  * 行政数据默认显示粒度
  */
-export const DEFAULT_AREA_GRANULARITY = {
+export const DEFAULT_AREA_GRANULARITY: Record<string, 'country' | 'province' | 'city' | 'district'> = {
   world: 'country',
   country: 'province',
   province: 'city',
   city: 'district',
-  district: null,
+  district: 'district',
 };
 
 /**
  * 行政数据服务地址
  */
-export const DISTRICT_URL = {
-  ChinaBoundary: 'http://127.0.0.1:8080/area-combination/country/china_country.json',
-  Area: 'http://127.0.0.1:8080/area-combination',
-};
+export const Area_URL = 'http://127.0.0.1:8080/area-combination';
 
 /**
  * 国界样式
