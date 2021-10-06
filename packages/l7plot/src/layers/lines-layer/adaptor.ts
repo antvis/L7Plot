@@ -1,8 +1,8 @@
 import { MappingLayer } from '../../adaptor/layer';
 import { ILayer } from '../../types';
-import { ILineLayerOptions } from './interface';
+import { ILinesLayerOptions } from './interface';
 
-export function mappingLayer(layer: ILayer, options: ILineLayerOptions): void {
+export function mappingLayer(layer: ILayer, options: ILinesLayerOptions): void {
   const { shape, color, size, style, state, animate } = options;
   // mapping shape
   shape && MappingLayer.shape(layer, shape);

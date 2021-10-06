@@ -1,6 +1,7 @@
 import { Map } from '../map';
+import { deepAssign } from '../../utils';
 import { TextLayer } from '../../layers/text-layer';
-import { MapType, IPlotOptions, ILabelOptions, Source, ISourceCFG, Scene } from '../../types';
+import { MapType, IPlotOptions, ILabelOptions, Source, ISource, Scene } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { MappingSource } from '../../adaptor/source';
 
@@ -41,12 +42,34 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
       this.source = this.createSource();
 
       this.registerResources();
-      this.render();
-      this.inited = true;
+      this.initLayers();
     } else {
       super(container);
       this.source = this.createSource();
     }
+  }
+
+  /**
+   * 初始化图层
+   */
+  protected initLayers() {
+    this.render();
+    this.inited = true;
+  }
+
+  /**
+   * 初始化图层事件
+   */
+  protected initLayersEvent() {
+    //
+  }
+
+  /**
+   * 初始化组件
+   */
+  protected initComponents() {
+    this.initControls();
+    this.initTooltip();
   }
 
   /**
@@ -80,15 +103,8 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
    * 创建数据标签图层
    */
   protected createLabelLayer(source: Source, label: ILabelOptions): TextLayer {
-    const labelLayerWrapper = new TextLayer({ name: 'labelLayer', source, ...label });
-    return labelLayerWrapper;
-  }
-
-  /**
-   * 初始化图层事件
-   */
-  protected initLayerEvent() {
-    //
+    const textLayer = new TextLayer({ name: 'labelLayer', source, ...label });
+    return textLayer;
   }
 
   /**
@@ -100,36 +116,41 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
       this.layerGroup.removeAllLayer();
       layerGroup.addTo(this.scene);
       this.layerGroup = layerGroup;
-      this.initControls();
-      this.initTooltip();
+      this.initComponents();
     } else {
-      const onLoaded = () => {
-        this.initControls();
-        this.initTooltip();
-        this.loaded = true;
-        this.emit('loaded');
-      };
-      if (this.scene['sceneService'].loaded) {
+      this.layerGroup = layerGroup;
+      this.onLayersLoaded();
+      layerGroup.addTo(this.scene);
+    }
+    this.initLayersEvent();
+  }
+
+  /**
+   * 图表图层加载成功
+   */
+  protected onLayersLoaded() {
+    const onLoaded = () => {
+      this.initComponents();
+      this.loaded = true;
+      this.emit('loaded');
+    };
+    if (this.scene['sceneService'].loaded) {
+      this.sceneLoaded = true;
+      this.layersLoaded && onLoaded();
+    } else {
+      this.scene.once('loaded', () => {
         this.sceneLoaded = true;
         this.layersLoaded && onLoaded();
-      } else {
-        this.scene.once('loaded', () => {
-          this.sceneLoaded = true;
-          this.layersLoaded && onLoaded();
-        });
-      }
-      if (layerGroup.isEmpty()) {
-        this.layersLoaded = true;
-      } else {
-        layerGroup.once('inited-all', () => {
-          this.layersLoaded = true;
-          this.sceneLoaded && onLoaded();
-        });
-      }
-      layerGroup.addTo(this.scene);
-      this.layerGroup = layerGroup;
+      });
     }
-    this.initLayerEvent();
+    if (this.layerGroup.isEmpty()) {
+      this.layersLoaded = true;
+    } else {
+      this.layerGroup.once('inited-all', () => {
+        this.layersLoaded = true;
+        this.sceneLoaded && onLoaded();
+      });
+    }
   }
 
   /**
@@ -145,8 +166,11 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
   /**
    * 更新: 更新数据
    */
-  public changeData(data: any, cfg?: ISourceCFG) {
-    // TODO: deepAssign old cfg
-    this.source.setData(data, cfg);
+  public changeData(data: any, cfg?: Omit<ISource, 'data'>) {
+    this.options.source = deepAssign({}, this.options.source, { data, ...cfg });
+    const { aggregation, ...sourceCFG } = this.options.source;
+    aggregation && MappingSource.aggregation(sourceCFG, aggregation);
+
+    this.source.setData(this.options.source.data, sourceCFG);
   }
 }

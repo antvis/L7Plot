@@ -38,6 +38,20 @@ class ChinaCitys extends Component {
         lineWidth: 1,
         lineOpacity: 0.5,
       },
+      label: {
+        visible: true,
+        field: 'name',
+        style: {
+          fill: '#fff',
+          opacity: 0.8,
+          fontSize: 12,
+          textAnchor: 'center', // 文本相对锚点的位置 center|left|right|top|bottom|top-left
+          spacing: 1, // 字符间距
+          padding: [15, 15], // 文本包围盒 padding [水平，垂直]，影响碰撞检测结果，避免相邻文本靠的太近
+          stroke: '#ffffff', // 描边颜色
+          strokeWidth: 0.3, // 描边宽度
+        },
+      },
       state: { active: true, select: false },
       tooltip: {
         items: ['properties.name', 'properties.code'],
