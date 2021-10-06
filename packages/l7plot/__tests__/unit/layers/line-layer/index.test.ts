@@ -1,7 +1,7 @@
-import { LineLayer } from '../../../../src/layers/line-layer';
+import { LinesLayer } from '../../../../src/layers/lines-layer';
 
-describe('line layer', () => {
-  const layer = new LineLayer({ source: { data: [] } });
+describe('lines layer', () => {
+  const layer = new LinesLayer({ source: { data: [] } });
 
   it('layer', () => {
     expect(layer).toBeDefined();

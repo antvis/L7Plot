@@ -12,20 +12,29 @@ export const DEFAULT_OPTIONS: Partial<ChinaDistrictOptions> = deepAssign({}, Plo
       targetField: 'adcode',
     },
   },
+  initialView: {
+    level: 'country',
+    adCode: '100000',
+  },
 });
+
+/**
+ * 行政数据默认显示粒度
+ */
+export const DEFAULT_AREA_GRANULARITY = {
+  world: 'country',
+  country: 'province',
+  province: 'city',
+  city: 'district',
+  district: null,
+};
 
 /**
  * 行政数据服务地址
  */
 export const DISTRICT_URL = {
-  // ChinaBoundary: 'https://geo.datav.aliyun.com/areas_v3/bound/100000.json',
-  ChinaBoundary: 'https://gw.alipayobjects.com/os/antfincdn/fFMSsgcuGf/100000_boundary.json',
-  Country: {},
-  Region: {},
-  // Province: 'https://gw.alipayobjects.com/os/antfincdn/iUxSKWSIms/100000_full.json',
-  Province: 'http://127.0.0.1:8080/100000_full.json',
-  City: {},
-  County: {},
+  ChinaBoundary: 'http://127.0.0.1:8080/area-combination/country/china_country.json',
+  Area: 'http://127.0.0.1:8080/area-combination',
 };
 
 /**
@@ -34,34 +43,23 @@ export const DISTRICT_URL = {
 export const CHINA_BOUNDARY_STYLE = {
   国界: {
     color: 'red',
-    weight: 2,
-    fillOpacity: 1,
-    fillColor: '#fff',
-  },
-  省界: {
-    color: '#F2F7F7',
-    weight: 0.2,
-    fillOpacity: 0.2,
-    fillColor: '#fff',
-    dashArray: [1, 10],
+    width: 1,
+    opacity: 1,
   },
   争议: {
     color: 'red',
-    weight: 2,
-    fillOpacity: 0.2,
-    fillColor: '#fff',
+    width: 1,
+    opacity: 0.8,
     dashArray: [1, 6],
   },
   海洋: {
     color: 'blue',
-    weight: 0.7,
-    fillOpacity: 0.2,
-    fillColor: '#fff',
+    width: 0.7,
+    opacity: 0.8,
   },
   港澳: {
     color: 'gray',
-    weight: 0.7,
-    fillOpacity: 0.2,
-    fillColor: '#fff',
+    width: 0.7,
+    opacity: 0.8,
   },
 };

@@ -11,7 +11,7 @@ import { IDotDensityLayerOptions } from '../layers/dot-density-layer';
 import { DotLayer, IDotLayerOptions } from '../layers/dot-layer';
 import { GridLayer, IGridLayerOptions } from '../layers/grid-layer';
 import { HexagonLayer, IHexagonLayerOptions } from '../layers/hexagon-layer';
-import { ILineLayerOptions, LineLayer } from '../layers/line-layer';
+import { ILinesLayerOptions, LinesLayer } from '../layers/lines-layer';
 import { ITextLayerOptions, TextLayer } from '../layers/text-layer';
 import { HeatmapLayer, IHeatmapLayerOptions } from '../layers/heatmap-layer';
 import { IPrismLayerOptions, PrismLayer } from '../layers/prism-layer';
@@ -58,7 +58,7 @@ export type LayerConfigType =
   | ({ type: 'heatmapLayer' } & IHeatmapLayerOptions)
   | ({ type: 'gridLayer' } & IGridLayerOptions)
   | ({ type: 'hexagonLayer' } & IHexagonLayerOptions)
-  | ({ type: 'lineLayer' } & ILineLayerOptions)
+  | ({ type: 'lineLayer' } & ILinesLayerOptions)
   | ({ type: 'areaLayer' } & IAreaLayerOptions)
   | ({ type: 'prismLayer' } & IPrismLayerOptions);
 
@@ -72,7 +72,7 @@ export const LAYERS_MAP = {
   [LayerType.HeatmapLayer]: HeatmapLayer,
   [LayerType.GridLayer]: GridLayer,
   [LayerType.HexagonLayer]: HexagonLayer,
-  [LayerType.LineLayer]: LineLayer,
+  [LayerType.LinesLayer]: LinesLayer,
   [LayerType.AreaLayer]: AreaLayer,
   [LayerType.PrismLayer]: PrismLayer,
 };

@@ -1,6 +1,7 @@
 import { Map } from '../map';
+import { deepAssign } from '../../utils';
 import { TextLayer } from '../../layers/text-layer';
-import { MapType, IPlotOptions, ILabelOptions, Source, ISourceCFG, Scene } from '../../types';
+import { MapType, IPlotOptions, ILabelOptions, Source, ISource, Scene } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { MappingSource } from '../../adaptor/source';
 
@@ -165,8 +166,11 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
   /**
    * 更新: 更新数据
    */
-  public changeData(data: any, cfg?: ISourceCFG) {
-    // TODO: deepAssign old cfg
-    this.source.setData(data, cfg);
+  public changeData(data: any, cfg?: Omit<ISource, 'data'>) {
+    this.options.source = deepAssign({}, this.options.source, { data, ...cfg });
+    const { aggregation, ...sourceCFG } = this.options.source;
+    aggregation && MappingSource.aggregation(sourceCFG, aggregation);
+
+    this.source.setData(this.options.source.data, sourceCFG);
   }
 }

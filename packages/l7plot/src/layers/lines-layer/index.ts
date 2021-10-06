@@ -1,17 +1,17 @@
 import { uniqueId } from '@antv/util';
-import { LineLayer as Line } from '@antv/l7-layers';
+import { LineLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
-import { ILineLayerOptions } from './interface';
+import { ILinesLayerOptions } from './interface';
 import { ILayer } from '../../types';
 
-export type { ILineLayerOptions };
+export type { ILinesLayerOptions };
 
 const DEFAULT_OPTIONS = {};
 const LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state', 'animate'];
 
-export class LineLayer<O extends ILineLayerOptions = ILineLayerOptions> extends PlotLayer<O> {
+export class LinesLayer<O extends ILinesLayerOptions = ILinesLayerOptions> extends PlotLayer<O> {
   /**
    * 默认配置项
    */
@@ -35,7 +35,7 @@ export class LineLayer<O extends ILineLayerOptions = ILineLayerOptions> extends 
   /**
    * 图层类型
    */
-  public type = PlotLayer.LayerType.LineLayer;
+  public type = PlotLayer.LayerType.LinesLayer;
   /**
    * 图层是否具有交互属性
    */
@@ -48,7 +48,7 @@ export class LineLayer<O extends ILineLayerOptions = ILineLayerOptions> extends 
     this.options = deepAssign({}, this.getDefaultOptions(), options);
 
     const config = this.pickLayerConfig(this.options);
-    this.layer = new Line({ ...config, name: this.name });
+    this.layer = new LineLayer({ ...config, name: this.name });
 
     this.mappingLayer(this.layer, this.options);
     this.setSource(source);
@@ -57,7 +57,7 @@ export class LineLayer<O extends ILineLayerOptions = ILineLayerOptions> extends 
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<ILineLayerOptions> {
+  public getDefaultOptions(): Partial<ILinesLayerOptions> {
     return DEFAULT_OPTIONS;
   }
 

@@ -171,9 +171,9 @@ export enum lineStyleType {
 /**
  * 线图层 图层样式
  */
-export interface ILineLayerStyleOptions {
+export interface ILinesLayerStyleOptions {
   // 透明度
-  opacity?: number;
+  opacity?: number | [string, (data: any) => number] | [string, [number, number]];
   // 线类型
   lineType?: keyof typeof lineStyleType;
   // 虚线间隔
@@ -185,7 +185,7 @@ export interface ILineLayerStyleOptions {
 /**
  * 线图层基础配置
  */
-export interface ILineLayerConfig extends Partial<IPlotLayerConfig> {
+export interface ILinesLayerConfig extends Partial<IPlotLayerConfig> {
   /**
    * 图形形状
    */
@@ -201,7 +201,7 @@ export interface ILineLayerConfig extends Partial<IPlotLayerConfig> {
   /**
    * 图层样式
    */
-  style?: ILineLayerStyleOptions;
+  style?: ILinesLayerStyleOptions;
   /**
    * animation 配置
    */
@@ -285,7 +285,7 @@ export enum LayerType {
   HeatmapLayer = 'heatmapLayer',
   GridLayer = 'gridLayer',
   HexagonLayer = 'hexagonLayer',
-  LineLayer = 'lineLayer',
+  LinesLayer = 'linesLayer',
   AreaLayer = 'areaLayer',
   PrismLayer = 'prismLayer',
 }

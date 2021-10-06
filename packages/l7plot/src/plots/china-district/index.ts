@@ -1,11 +1,12 @@
 import { pick } from '@antv/util';
 import { Plot } from '../../core/plot';
-import { ChinaDistrictOptions } from './interface';
-import { DEFAULT_OPTIONS, DISTRICT_URL } from './constants';
+import { deepAssign } from '../../utils';
+import { ChinaDistrictOptions, ISource } from './interface';
+import { DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS, DISTRICT_URL } from './constants';
 import { AreaLayer } from '../../layers/area-layer';
-import { LineLayer } from '../../layers/line-layer';
+import { LinesLayer } from '../../layers/lines-layer';
 import { TextLayer } from '../../layers/text-layer';
-import { ILabelOptions, ILegendOptions, ISourceCFG, Source } from '../../types';
+import { ILabelOptions, ILegendOptions, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
 import { createCountryBoundaryLayer } from './layer';
 
@@ -23,11 +24,7 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
   /**
    * 国界数据
    */
-  private chinaBoundaryData: any;
-  /**
-   * 省份数据
-   */
-  private provinceData: any;
+  private chinaBoundaryData = { type: 'FeatureCollection', features: [] };
   /**
    * 当前行政数据数据
    */
@@ -35,11 +32,11 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
   /**
    * 国界图层
    */
-  public chinaBoundaryLayer!: LineLayer;
+  public chinaBoundaryLayer!: LinesLayer;
   /**
    * 国界争议图层
    */
-  public chinaDisputeBoundaryLayer!: LineLayer;
+  public chinaDisputeBoundaryLayer!: LinesLayer;
   /**
    * 填充面图层
    */
@@ -67,10 +64,10 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
   }
 
   /**
-   * 创建 source 实例
+   * 解析 source 配置
    */
-  protected createSource() {
-    const { data: joinData, joinBy, ...sourceCFG } = this.options.source;
+  protected parserSourceConfig(source: ISource) {
+    const { data: joinData, joinBy, ...sourceCFG } = source;
     const { sourceField, targetField } = joinBy;
     const config = { type: 'join', sourceField, targetField, data: joinData };
     if (sourceCFG.transforms) {
@@ -81,6 +78,14 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
     if (sourceCFG['parser']) {
       delete sourceCFG['parser'];
     }
+    return sourceCFG;
+  }
+
+  /**
+   * 创建 source 实例
+   */
+  protected createSource() {
+    const sourceCFG = this.parserSourceConfig(this.options.source);
     const data = this.currentDistrictData || { type: 'FeatureCollection', features: [] };
     const source = new Source(data, sourceCFG);
     return source;
@@ -121,10 +126,7 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
    * 创建数据标签图层
    */
   protected createLabelLayer(source: Source, label: ILabelOptions): TextLayer {
-    const { data: joinData, joinBy } = this.options.source;
-    const { sourceField, targetField } = joinBy;
-    const config = { type: 'join', sourceField, targetField, data: joinData };
-
+    const sourceCFG = this.parserSourceConfig(this.options.source);
     const data = this.currentDistrictData.features
       .map(({ properties }) => properties)
       .filter(({ centroid }) => centroid);
@@ -133,7 +135,7 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
       source: {
         data,
         parser: { type: 'json', coordinates: 'centroid' },
-        transforms: [config],
+        transforms: sourceCFG.transforms,
       },
       ...label,
     });
@@ -165,7 +167,7 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
    * 初始化图层事件
    */
   protected initLayersEvent() {
-    //
+    // this.fillAreaLayer.on()
   }
 
   /**
@@ -192,25 +194,46 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
    * 请求初始化行政数据
    */
   private async getInitDistrictData() {
-    try {
-      this.chinaBoundaryData = await this.fetchData(DISTRICT_URL.ChinaBoundary);
-    } catch (err) {
-      throw new Error(`Failed to get chinaBoundary data，${err}`);
-    }
+    const fetchChinaBoundaryData = this.fetchData(DISTRICT_URL.ChinaBoundary);
+    const { level, adCode, granularity } = this.options.initialView;
+    const granularity_ = granularity || DEFAULT_AREA_GRANULARITY[level];
+    console.log(' level, adCode, granularity: ', level, adCode, granularity);
+    const fetchCurrentDistrictData = this.fetchData(
+      `${DISTRICT_URL.Area}/${level}/${adCode}_${level}${granularity_ ? `_${granularity_}` : ''}.json`
+    );
 
     try {
-      this.provinceData = await this.fetchData(DISTRICT_URL.Province);
-      this.currentDistrictData = this.provinceData;
+      [this.chinaBoundaryData, this.currentDistrictData] = await Promise.all([
+        fetchChinaBoundaryData,
+        fetchCurrentDistrictData,
+      ]);
     } catch (err) {
-      throw new Error(`Failed to get provinceData data，${err}`);
+      throw new Error(`Failed to get district data，${err}`);
     }
   }
 
   /**
    * 更新: 更新数据
    */
-  public changeData(data: any, cfg?: ISourceCFG) {
-    // TODO: deepAssign old cfg
-    this.source.setData(data, cfg);
+  public changeData(data: any[], cfg?: Omit<ISource, 'data'>) {
+    this.options.source = deepAssign({}, this.options.source, { data, ...cfg });
+    const sourceCFG = this.parserSourceConfig(this.options.source);
+    this.source.setData(this.currentDistrictData, sourceCFG);
+  }
+
+  /**
+   * 向下钻取
+   * 自定义钻取交互行为时使用
+   */
+  drillDown() {
+    //
+  }
+
+  /**
+   * 向上钻取
+   * 自定义钻取交互行为时使用
+   */
+  drillUp() {
+    //
   }
 }

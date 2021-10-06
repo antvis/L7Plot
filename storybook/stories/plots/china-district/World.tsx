@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ChinaDistrict } from '@antv/l7plot';
 
-class ChinaMap extends Component {
+class World extends Component {
   public map: ChinaDistrict | undefined;
 
   constructor(props) {
@@ -27,23 +27,20 @@ class ChinaMap extends Component {
       },
 
       initialView: {
-        level: 'city',
-        adCode: '330100',
-        // granularity: 'district',
+        level: 'world',
+        adCode: 'all',
       },
       autoFit: true,
 
       color: {
         field: 'name',
-        value: ['#B8E1FF', '#7DAAFF', '#3D76DD', '#0047A5', '#001D70'],
+        value: ['#feedde', '#fdd0a2', '#fdae6b', '#fd8d3c', '#e6550d', '#a63603'],
       },
       style: {
-        opacity: 0.8,
-        stroke: '#F2F7F7',
-        lineType: 'dash',
-        lineDash: [1, 10],
+        opacity: 1,
+        stroke: '#ccc',
         lineWidth: 0.6,
-        lineOpacity: 0.8,
+        lineOpacity: 1,
       },
       label: {
         visible: true,
@@ -60,7 +57,7 @@ class ChinaMap extends Component {
       },
       // state: { active: true, select: false },
       tooltip: {
-        items: ['properties.name', 'properties.adcode'],
+        items: ['properties.name', 'properties.adcode', 'properties.value'],
       },
       zoom: {
         position: 'bottomright',
@@ -103,4 +100,4 @@ class ChinaMap extends Component {
   }
 }
 
-export default ChinaMap;
+export default World;

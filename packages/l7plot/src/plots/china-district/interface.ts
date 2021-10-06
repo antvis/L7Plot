@@ -29,6 +29,24 @@ export interface ISource extends Pick<ISourceCFG, 'transforms'> {
   joinBy: IJoinBy;
 }
 
+/**
+ * 初始化行政范围
+ */
+export interface IInitialView {
+  /**
+   * 初始化行政级别
+   */
+  level: 'world' | 'country' | 'province' | 'city' | 'district';
+  /**
+   * 初始化显示行政代码/行政名称
+   */
+  adCode: number | string;
+  /**
+   * 化行政级别下的粒度
+   */
+  granularity?: 'country' | 'province' | 'city' | 'district';
+}
+
 /** 中国行政区域图的配置类型定义 */
 export interface ChinaDistrictOptions extends IPlotOptions, IAreaLayerOptions {
   /**
@@ -39,18 +57,5 @@ export interface ChinaDistrictOptions extends IPlotOptions, IAreaLayerOptions {
   /**
    * 初始化行政范围
    */
-  initialView?: {
-    /**
-     * 初始化行政级别
-     */
-    level: 'country' | 'region' | 'province' | 'city' | 'county';
-    /**
-     * 初始化显示行政名称
-     */
-    adName?: string;
-    /**
-     * 初始化显示行政代码
-     */
-    adCode?: number;
-  };
+  initialView: IInitialView;
 }
