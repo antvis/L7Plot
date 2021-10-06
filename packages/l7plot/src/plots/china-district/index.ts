@@ -2,7 +2,7 @@ import { pick } from '@antv/util';
 import { Plot } from '../../core/plot';
 import { deepAssign } from '../../utils';
 import { ChinaDistrictOptions, DrillStep, ISource, IDrill, AreaDepthData } from './interface';
-import { DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS, Area_URL } from './constants';
+import { DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS, AREA_URL } from './constants';
 import { AreaLayer } from '../../layers/area-layer';
 import { LinesLayer } from '../../layers/lines-layer';
 import { TextLayer } from '../../layers/text-layer';
@@ -232,7 +232,7 @@ export class ChinaDistrict extends Plot<ChinaDistrictOptions> {
     if (cacheArea) {
       return cacheArea;
     }
-    const response = await fetch(`${Area_URL}/${level}/${fileName}.json`);
+    const response = await fetch(`${AREA_URL}/${level}/${fileName}.json`);
     const data = response.json();
     registerCacheArea(fileName, data);
     return data;
