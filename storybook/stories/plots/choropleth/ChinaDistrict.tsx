@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { ChinaDistrict } from '@antv/l7plot';
+import { Choropleth } from '@antv/l7plot';
 
 class ChinaProvince extends Component {
-  public map: ChinaDistrict | undefined;
+  public map: Choropleth | undefined;
 
   constructor(props) {
     super(props);
   }
 
   async initMap() {
-    const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/m7zeqwcRmF/city-list.json');
-    const cityData = await response.json();
+    const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/BzVMWtI7Qk/district-list.json');
+    const districtData = await response.json();
 
-    const chinaMap = new ChinaDistrict('container', {
+    const chinaMap = new Choropleth('container', {
       map: {
         type: 'amap',
         style: 'blank',
@@ -22,7 +22,7 @@ class ChinaProvince extends Component {
       },
 
       source: {
-        data: cityData,
+        data: districtData,
         joinBy: {
           sourceField: 'adcode',
           targetField: 'adcode',
@@ -31,8 +31,8 @@ class ChinaProvince extends Component {
 
       initialView: {
         level: 'country',
-        adCode: '100000',
-        granularity: 'city',
+        adcode: '100000',
+        granularity: 'district',
       },
       autoFit: true,
 

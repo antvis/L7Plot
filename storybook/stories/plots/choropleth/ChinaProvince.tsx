@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ChinaDistrict } from '@antv/l7plot';
+import { Choropleth } from '@antv/l7plot';
 
 const ProvinceData = [
   {
@@ -175,14 +175,14 @@ const ProvinceData = [
 ];
 
 class ChinaProvince extends Component {
-  public map: ChinaDistrict | undefined;
+  public map: Choropleth | undefined;
 
   constructor(props) {
     super(props);
   }
 
   async initMap() {
-    const chinaMap = new ChinaDistrict('container', {
+    const chinaMap = new Choropleth('container', {
       map: {
         type: 'amap',
         style: 'blank',
@@ -201,7 +201,7 @@ class ChinaProvince extends Component {
 
       initialView: {
         level: 'country',
-        adCode: '100000',
+        adcode: '100000',
       },
       autoFit: true,
 

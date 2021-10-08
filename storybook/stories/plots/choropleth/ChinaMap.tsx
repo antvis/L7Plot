@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { ChinaDistrict } from '@antv/l7plot';
+import { Choropleth } from '@antv/l7plot';
 
-class World extends Component {
-  public map: ChinaDistrict | undefined;
+class ChinaMap extends Component {
+  public map: Choropleth | undefined;
 
   constructor(props) {
     super(props);
   }
 
   async initMap() {
-    const chinaMap = new ChinaDistrict('container', {
+    const chinaMap = new Choropleth('container', {
       map: {
         type: 'amap',
         style: 'blank',
@@ -27,20 +27,23 @@ class World extends Component {
       },
 
       initialView: {
-        level: 'world',
-        adCode: 'all',
+        level: 'city',
+        adcode: '330100',
+        // granularity: 'district',
       },
       autoFit: true,
 
       color: {
         field: 'name',
-        value: ['#feedde', '#fdd0a2', '#fdae6b', '#fd8d3c', '#e6550d', '#a63603'],
+        value: ['#B8E1FF', '#7DAAFF', '#3D76DD', '#0047A5', '#001D70'],
       },
       style: {
-        opacity: 1,
-        stroke: '#ccc',
+        opacity: 0.8,
+        stroke: '#F2F7F7',
+        lineType: 'dash',
+        lineDash: [1, 10],
         lineWidth: 0.6,
-        lineOpacity: 1,
+        lineOpacity: 0.8,
       },
       label: {
         visible: true,
@@ -57,7 +60,7 @@ class World extends Component {
       },
       // state: { active: true, select: false },
       tooltip: {
-        items: ['properties.name', 'properties.adcode', 'properties.value'],
+        items: ['properties.name', 'properties.adcode'],
       },
       zoom: {
         position: 'bottomright',
@@ -100,4 +103,4 @@ class World extends Component {
   }
 }
 
-export default World;
+export default ChinaMap;

@@ -11,8 +11,8 @@ export enum MapType {
   Heatmap = 'heatmap',
   Grid = 'grid',
   Hexagon = 'hexagon',
+  Area = 'area',
   Choropleth = 'choropleth',
-  ChinaDistrict = 'chinaDistrict',
 }
 
 /**

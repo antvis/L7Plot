@@ -57,15 +57,15 @@ export interface ILabelOptions extends IPlotLayerConfig {
   /** 映射的字段 */
   field?: string;
   // TODO: 多字段支持
-  // readonly fields?: string[];
+  //  fields?: string[];
   /** 回调函数 */
   content?: string;
   // TODO: 多字段 CallBack 支持
-  // readonly content?: string | ((data: Record<string, string | number>) => string);
+  //  content?: string | ((data: Record<string, string | number>) => string);
   /** 字体样式 */
   style?: IPointTextLayerStyleOptions;
   /* 旋转文字 */
   // rotate?: RotateAttr;
   /* 交互反馈 */
-  readonly state?: IStateAttribute;
+  state?: IStateAttribute;
 }
