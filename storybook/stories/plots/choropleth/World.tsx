@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import { ChinaDistrict } from '@antv/l7plot';
+import { Choropleth } from '@antv/l7plot';
 
-class ChinaProvince extends Component {
-  public map: ChinaDistrict | undefined;
+class World extends Component {
+  public map: Choropleth | undefined;
 
   constructor(props) {
     super(props);
   }
 
   async initMap() {
-    const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/BzVMWtI7Qk/district-list.json');
-    const districtData = await response.json();
-
-    const chinaMap = new ChinaDistrict('container', {
+    const chinaMap = new Choropleth('container', {
       map: {
         type: 'amap',
         style: 'blank',
@@ -22,23 +19,22 @@ class ChinaProvince extends Component {
       },
 
       source: {
-        data: districtData,
+        data: [],
         joinBy: {
-          sourceField: 'adcode',
+          sourceField: 'code',
           targetField: 'adcode',
         },
       },
 
       initialView: {
-        level: 'country',
-        adCode: '100000',
-        granularity: 'district',
+        level: 'world',
+        adcode: 'all',
       },
       autoFit: true,
 
       color: {
-        field: 'value',
-        value: ['#fee5d9', '#fcae91', '#fb6a4a', '#de2d26', '#a50f15'],
+        field: 'name',
+        value: ['#feedde', '#fdd0a2', '#fdae6b', '#fd8d3c', '#e6550d', '#a63603'],
       },
       style: {
         opacity: 1,
@@ -104,4 +100,4 @@ class ChinaProvince extends Component {
   }
 }
 
-export default ChinaProvince;
+export default World;

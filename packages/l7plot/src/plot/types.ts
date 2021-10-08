@@ -4,7 +4,7 @@ import { DotDensity, DotDensityOptions } from '../plots/dot-density';
 import { Heatmap, HeatmapOptions } from '../plots/heatmap';
 import { Grid, GridOptions } from '../plots/grid';
 import { Hexagon, HexagonOptions } from '../plots/hexagon';
-import { Choropleth, ChoroplethOptions } from '../plots/choropleth';
+import { Area, AreaOptions } from '../plots/area';
 import { AreaLayer, IAreaLayerOptions } from '../layers/area-layer';
 import { ColumnLayer, IColumnLayerOptions } from '../layers/column-layer';
 import { IDotDensityLayerOptions } from '../layers/dot-density-layer';
@@ -33,7 +33,7 @@ export type PlotConfigType =
   | ({ type: 'heatmap' } & OmitPlotOptions<HeatmapOptions>)
   | ({ type: 'grid' } & OmitPlotOptions<GridOptions>)
   | ({ type: 'hexagon' } & OmitPlotOptions<HexagonOptions>)
-  | ({ type: 'choropleth' } & OmitPlotOptions<ChoroplethOptions>);
+  | ({ type: 'area' } & OmitPlotOptions<AreaOptions>);
 
 /**
  * plots 的 class
@@ -44,7 +44,7 @@ export const PLOTS_MAP = {
   [MapType.Heatmap]: Heatmap,
   [MapType.Grid]: Grid,
   [MapType.Hexagon]: Hexagon,
-  [MapType.Choropleth]: Choropleth,
+  [MapType.Area]: Area,
 };
 
 /**

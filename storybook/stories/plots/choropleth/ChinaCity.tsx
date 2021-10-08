@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { ChinaDistrict } from '@antv/l7plot';
+import { Choropleth } from '@antv/l7plot';
 
-class ChinaMap extends Component {
-  public map: ChinaDistrict | undefined;
+class ChinaProvince extends Component {
+  public map: Choropleth | undefined;
 
   constructor(props) {
     super(props);
   }
 
   async initMap() {
-    const chinaMap = new ChinaDistrict('container', {
+    const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/m7zeqwcRmF/city-list.json');
+    const cityData = await response.json();
+
+    const chinaMap = new Choropleth('container', {
       map: {
         type: 'amap',
         style: 'blank',
@@ -19,31 +22,29 @@ class ChinaMap extends Component {
       },
 
       source: {
-        data: [],
+        data: cityData,
         joinBy: {
-          sourceField: 'code',
+          sourceField: 'adcode',
           targetField: 'adcode',
         },
       },
 
       initialView: {
-        level: 'city',
-        adCode: '330100',
-        // granularity: 'district',
+        level: 'country',
+        adcode: '100000',
+        granularity: 'city',
       },
       autoFit: true,
 
       color: {
-        field: 'name',
-        value: ['#B8E1FF', '#7DAAFF', '#3D76DD', '#0047A5', '#001D70'],
+        field: 'value',
+        value: ['#fee5d9', '#fcae91', '#fb6a4a', '#de2d26', '#a50f15'],
       },
       style: {
-        opacity: 0.8,
-        stroke: '#F2F7F7',
-        lineType: 'dash',
-        lineDash: [1, 10],
+        opacity: 1,
+        stroke: '#ccc',
         lineWidth: 0.6,
-        lineOpacity: 0.8,
+        lineOpacity: 1,
       },
       label: {
         visible: true,
@@ -60,7 +61,7 @@ class ChinaMap extends Component {
       },
       // state: { active: true, select: false },
       tooltip: {
-        items: ['properties.name', 'properties.adcode'],
+        items: ['properties.name', 'properties.adcode', 'properties.value'],
       },
       zoom: {
         position: 'bottomright',
@@ -103,4 +104,4 @@ class ChinaMap extends Component {
   }
 }
 
-export default ChinaMap;
+export default ChinaProvince;

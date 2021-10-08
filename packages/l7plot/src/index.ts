@@ -43,7 +43,7 @@ export { Grid, GridOptions } from './plots/grid';
 export { Hexagon, HexagonOptions } from './plots/hexagon';
 
 // 区域图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { Choropleth, ChoroplethOptions } from './plots/choropleth';
+export { Area, AreaOptions } from './plots/area';
 
-// 中国行政区划图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { ChinaDistrict, ChinaDistrictOptions } from './plots/china-district';
+// 地区分布图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { Choropleth, ChoroplethOptions } from './plots/choropleth';

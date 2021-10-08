@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Choropleth } from '@antv/l7plot';
+import { Area } from '@antv/l7plot';
 
 class ChinaCitys extends Component {
-  public map: Choropleth | undefined;
+  public map: Area | undefined;
 
   constructor(props) {
     super(props);
@@ -12,7 +12,7 @@ class ChinaCitys extends Component {
     const response = await fetch('https://gw.alipayobjects.com/os/bmw-prod/707cd4be-8ffe-4778-b863-3335eefd5fd5.json');
     const data = await response.json();
 
-    const choroplethMap = new Choropleth('container', {
+    const choroplethMap = new Area('container', {
       map: {
         type: 'mapbox',
         style: 'dark',

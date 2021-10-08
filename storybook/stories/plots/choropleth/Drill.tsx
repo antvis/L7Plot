@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { ChinaDistrict } from '@antv/l7plot';
+import { Choropleth } from '@antv/l7plot';
 
 class Drill extends Component {
-  public map: ChinaDistrict | undefined;
+  public map: Choropleth | undefined;
 
   constructor(props) {
     super(props);
   }
 
   async initMap() {
-    const chinaMap = new ChinaDistrict('container', {
+    const chinaMap = new Choropleth('container', {
       map: {
         type: 'mapbox',
         style: 'blank',
@@ -28,13 +28,30 @@ class Drill extends Component {
 
       initialView: {
         level: 'country',
-        adCode: '100000',
+        adcode: '100000',
         granularity: 'province',
       },
       autoFit: true,
 
       drill: {
-        steps: ['province', 'city', 'district'],
+        // steps: ['province', 'city', 'district'],
+        steps: [
+          {
+            level: 'province',
+            source: { data: [] },
+            color: { field: 'name' },
+          },
+          {
+            level: 'city',
+            source: { data: [] },
+            color: { field: 'name' },
+          },
+          {
+            level: 'district',
+            source: { data: [] },
+            color: { field: 'name' },
+          },
+        ],
       },
 
       color: {
