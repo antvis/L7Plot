@@ -1,6 +1,6 @@
-import { Hexagon } from '../../../../src';
+import { createPlot } from '../../../helper/plot';
+import { Hexagon, HexagonOptions } from '../../../../src';
 import { DEFAULT_OPTIONS } from '../../../../src/plots/hexagon/constants';
-import { createDiv } from '../../../helper/dom';
 import data from '../../../data-set/heat-map.json';
 
 describe('hexagon', () => {
@@ -9,7 +9,7 @@ describe('hexagon', () => {
   });
 
   it('source', () => {
-    const hexagonMap = new Hexagon(createDiv(), {
+    const hexagonMap = createPlot<Hexagon, HexagonOptions>(Hexagon, {
       source: {
         data: data,
         parser: { type: 'geojson' },
@@ -32,7 +32,7 @@ describe('hexagon', () => {
   });
 
   it('event', () => {
-    const hexagonMap = new Hexagon(createDiv(), {
+    const hexagonMap = createPlot<Hexagon, HexagonOptions>(Hexagon, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },

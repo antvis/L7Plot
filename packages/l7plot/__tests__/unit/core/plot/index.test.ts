@@ -1,9 +1,9 @@
-import { Dot } from '../../../../src';
-import { createDiv } from '../../../helper/dom';
+import { Dot, DotOptions } from '../../../../src';
+import { createPlot } from '../../../helper/plot';
 
 describe('core plot', () => {
   it('render', () => {
-    const dotMap = new Dot(createDiv(), {
+    const dotMap = createPlot<Dot, DotOptions>(Dot, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -28,7 +28,7 @@ describe('core plot', () => {
   it(
     'update',
     () => {
-      const dotMap = new Dot(createDiv(), {
+      const dotMap = createPlot<Dot, DotOptions>(Dot, {
         source: {
           data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
           parser: { type: 'json' },
@@ -52,7 +52,7 @@ describe('core plot', () => {
   );
 
   it('change data', () => {
-    const dotMap = new Dot(createDiv(), {
+    const dotMap = createPlot<Dot, DotOptions>(Dot, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -74,7 +74,7 @@ describe('core plot', () => {
   });
 
   it('change size', () => {
-    const dotMap = new Dot(createDiv(), {
+    const dotMap = createPlot<Dot, DotOptions>(Dot, {
       width: 700,
       height: 300,
       source: {
@@ -98,7 +98,7 @@ describe('core plot', () => {
   });
 
   it('controls', () => {
-    const dotMap = new Dot(createDiv(), {
+    const dotMap = createPlot<Dot, DotOptions>(Dot, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -132,7 +132,7 @@ describe('core plot', () => {
   });
 
   it('loaded event', () => {
-    const dotMap = new Dot(createDiv(), {
+    const dotMap = createPlot<Dot, DotOptions>(Dot, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -152,7 +152,7 @@ describe('core plot', () => {
   });
 
   it('layer add event', () => {
-    const dotMap = new Dot(createDiv(), {
+    const dotMap = createPlot<Dot, DotOptions>(Dot, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },

@@ -1,9 +1,8 @@
-import { L7Plot } from '../../../src/plot';
-import { createDiv } from '../../helper/dom';
+import { createL7Plot } from '../../helper/plot';
 import data from '../../data-set/point-temperature.json';
 
 describe('L7Plot', () => {
-  const l7Plot = new L7Plot(createDiv(), {
+  const l7Plot = createL7Plot({
     plots: [],
     layers: [],
   });

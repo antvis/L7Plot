@@ -1,6 +1,6 @@
-import { Heatmap } from '../../../../src';
+import { createPlot } from '../../../helper/plot';
+import { Heatmap, HeatmapOptions } from '../../../../src';
 import { DEFAULT_OPTIONS } from '../../../../src/plots/heatmap/constants';
-import { createDiv } from '../../../helper/dom';
 import data from '../../../data-set/heat-map.json';
 
 describe('heatmap', () => {
@@ -9,7 +9,7 @@ describe('heatmap', () => {
   });
 
   it('source', () => {
-    const heatmap = new Heatmap(createDiv(), {
+    const heatmap = createPlot<Heatmap, HeatmapOptions>(Heatmap, {
       source: {
         data: data,
         parser: { type: 'geojson' },
@@ -27,7 +27,7 @@ describe('heatmap', () => {
   });
 
   it('event', () => {
-    const heatmap = new Heatmap(createDiv(), {
+    const heatmap = createPlot<Heatmap, HeatmapOptions>(Heatmap, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -48,7 +48,7 @@ describe('heatmap', () => {
   });
 
   it('legend', () => {
-    const heatmap = new Heatmap(createDiv(), {
+    const heatmap = createPlot<Heatmap, HeatmapOptions>(Heatmap, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },

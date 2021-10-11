@@ -1,11 +1,11 @@
-import { Dot, registerFontFace, registerImage, registerImages } from '../../../../src';
-import { createDiv } from '../../../helper/dom';
+import { createPlot } from '../../../helper/plot';
+import { Dot, DotOptions, registerFontFace, registerImage, registerImages } from '../../../../src';
 
 describe('register', () => {
   it('registerImage', () => {
     registerImage('01', 'https://gw.alipayobjects.com/zos/basement_prod/604b5e7f-309e-40db-b95b-4fac746c5153.svg');
 
-    const dotMap = new Dot(createDiv(), {
+    const dotMap = createPlot<Dot, DotOptions>(Dot, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -24,7 +24,7 @@ describe('register', () => {
     ];
     registerImages(images);
 
-    const dotMap = new Dot(createDiv(), {
+    const dotMap = createPlot<Dot, DotOptions>(Dot, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -39,10 +39,10 @@ describe('register', () => {
 
   it('registerFontFace', () => {
     const fontFamily = 'iconfont';
-    const fontPath = '//at.alicdn.com/t/font_2534097_iiet9d3nekn.woff2?t=1620444089776';
+    const fontPath = 'https://at.alicdn.com/t/font_2534097_iiet9d3nekn.woff2?t=1620444089776';
     registerFontFace(fontFamily, fontPath);
 
-    const dotMap = new Dot(createDiv(), {
+    const dotMap = createPlot<Dot, DotOptions>(Dot, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },

@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "dev": "npm run clean && npm run dev:cjs",
-    "dev:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib --watch",
+    "dev:cjs": "tsc -p tsconfig.json --target ES6 --module CommonJS --outDir dist/lib --watch",
     "lint": "eslint src __tests__ --ext .js,.ts",
     "lint-fix": "eslint src __tests__ --ext .js,.ts --fix",
     "prettier": "prettier src __tests__ -c -w",

@@ -1,10 +1,10 @@
 import { DotLayer } from '../../../../src/layers/dot-layer';
-import { Dot } from '../../../../src';
-import { createDiv } from '../../../helper/dom';
+import { Dot, DotOptions } from '../../../../src';
+import { createPlot } from '../../../helper/plot';
 
 describe('base layer', () => {
   it('show hide', () => {
-    const dot = new Dot(createDiv(), {
+    const dot = createPlot<Dot, DotOptions>(Dot, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -29,7 +29,7 @@ describe('base layer', () => {
   });
 
   it('toggleVisible', () => {
-    const dot = new Dot(createDiv(), {
+    const dot = createPlot<Dot, DotOptions>(Dot, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },

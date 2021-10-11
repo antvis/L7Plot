@@ -1,6 +1,6 @@
-import { Grid } from '../../../../src';
+import { createPlot } from '../../../helper/plot';
+import { Grid, GridOptions } from '../../../../src';
 import { DEFAULT_OPTIONS } from '../../../../src/plots/grid/constants';
-import { createDiv } from '../../../helper/dom';
 import data from '../../../data-set/heat-map.json';
 
 describe('grid', () => {
@@ -9,7 +9,7 @@ describe('grid', () => {
   });
 
   it('source', () => {
-    const gridMap = new Grid(createDiv(), {
+    const gridMap = createPlot<Grid, GridOptions>(Grid, {
       source: {
         data: data,
         parser: { type: 'geojson' },
@@ -30,7 +30,7 @@ describe('grid', () => {
   });
 
   it('event', () => {
-    const gridMap = new Grid(createDiv(), {
+    const gridMap = createPlot<Grid, GridOptions>(Grid, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
