@@ -108,6 +108,7 @@ export class Tooltip extends EventEmitter {
     } else if (items) {
       items.forEach((item: string | ITooltipItem) => {
         if (isString(item)) {
+          // TODO: GEOJSON properties
           const name = item.split('.').pop() || item;
           const value = getValueByPath(feature, item);
           if (value !== undefined) {

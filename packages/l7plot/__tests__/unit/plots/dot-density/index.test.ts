@@ -1,6 +1,6 @@
-import { DotDensity } from '../../../../src';
+import { createPlot } from '../../../helper/plot';
+import { DotDensity, DotDensityOptions } from '../../../../src';
 import { DEFAULT_OPTIONS } from '../../../../src/plots/dot-density/constants';
-import { createDiv } from '../../../helper/dom';
 import data from '../../../data-set/point-temperature.json';
 
 describe('dot density', () => {
@@ -9,7 +9,7 @@ describe('dot density', () => {
   });
 
   it('source', () => {
-    const dotDensityMap = new DotDensity(createDiv(), {
+    const dotDensityMap = createPlot<DotDensity, DotDensityOptions>(DotDensity, {
       source: {
         data: data.list,
         parser: { type: 'json', x: 'j', y: 'w' },
@@ -33,7 +33,7 @@ describe('dot density', () => {
   });
 
   it('event', () => {
-    const dotDensityMap = new DotDensity(createDiv(), {
+    const dotDensityMap = createPlot<DotDensity, DotDensityOptions>(DotDensity, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },

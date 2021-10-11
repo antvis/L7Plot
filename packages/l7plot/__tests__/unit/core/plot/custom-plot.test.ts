@@ -1,6 +1,6 @@
 import { LayerGroup } from '../../../../src/core/layer/layer-group';
 import { IPlotOptions, Plot, Source } from '../../../../src';
-import { createDiv } from '../../../helper/dom';
+import { createPlot } from '../../../helper/plot';
 
 describe('custom plot', () => {
   it('default-options', () => {
@@ -17,7 +17,10 @@ describe('custom plot', () => {
         options;
       }
     }
-    const customMap = new CustomPlot(createDiv(), { source: { data: [], parser: { type: 'json', x: 'x', y: 'y' } } });
+
+    const customMap = createPlot<CustomPlot, CustomPlotOptions>(CustomPlot, {
+      source: { data: [], parser: { type: 'json', x: 'x', y: 'y' } },
+    });
     expect(Plot.DefaultOptions).toEqual(CustomPlot.DefaultOptions);
 
     customMap.on('loaded', () => setTimeout(() => customMap.destroy(), 0));

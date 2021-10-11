@@ -1,6 +1,6 @@
-import { Dot, registerImages } from '../../../../src';
+import { createPlot } from '../../../helper/plot';
+import { Dot, DotOptions, registerImages } from '../../../../src';
 import { DEFAULT_OPTIONS } from '../../../../src/plots/dot/constants';
-import { createDiv } from '../../../helper/dom';
 import data from '../../../data-set/point-temperature.json';
 
 describe('point', () => {
@@ -13,7 +13,7 @@ describe('point', () => {
       { id: '01', image: 'https://gw.alipayobjects.com/zos/basement_prod/604b5e7f-309e-40db-b95b-4fac746c5153.svg' },
     ];
     registerImages(images);
-    const dotMap = new Dot(createDiv(), {
+    const dotMap = createPlot<Dot, DotOptions>(Dot, {
       source: {
         data: data.list,
         parser: { type: 'json', x: 'j', y: 'w' },
@@ -48,7 +48,7 @@ describe('point', () => {
   });
 
   it('event', () => {
-    const dotMap = new Dot(createDiv(), {
+    const dotMap = createPlot<Dot, DotOptions>(Dot, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -69,7 +69,7 @@ describe('point', () => {
   });
 
   it('legend', () => {
-    const dotMap = new Dot(createDiv(), {
+    const dotMap = createPlot<Dot, DotOptions>(Dot, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
