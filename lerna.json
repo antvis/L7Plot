@@ -1,14 +1,16 @@
 {
-  "packages": ["packages/*", "website", "storybook"],
+  "npmClient": "yarn",
+  "useWorkspaces": true,
   "version": "independent",
   "command": {
     "publish": {
-      "ignoreChanges": ["__tests__", "*.md"],
+      "ignoreChanges": ["l7plot-website", "l7plot-storybook", "__tests__", "*.md"],
       "registry": "https://registry.npmjs.com",
       "message": "chore: publish"
     }
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "packages": ["packages/*", "website", "storybook"]
 }

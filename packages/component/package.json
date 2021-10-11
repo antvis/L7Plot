@@ -27,6 +27,7 @@
     "l7plot",
     "component"
   ],
+  "sideEffects": false,
   "author": "yunji",
   "license": "MIT",
   "homepage": "https://github.com/antvis/L7Plot#readme",
