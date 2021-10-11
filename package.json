@@ -3,9 +3,14 @@
   "private": true,
   "author": "yunji",
   "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "storybook",
+    "website"
+  ],
   "scripts": {
     "prepare": "husky install",
-    "bootstrap": "lerna bootstrap --hoist",
+    "bootstrap": "yarn",
     "dev": "lerna run dev --stream --parallel --ignore=l7plot-website",
     "dev-l7lot": "lerna run dev --stream --scope=@antv/l7plot",
     "dev-component": "lerna run dev --stream --scope=@antv/l7plot-component",
@@ -20,7 +25,8 @@
     "build": "lerna run build --stream --ignore=l7plot-website",
     "build-l7lot": "lerna run build --stream --scope=@antv/l7plot",
     "build-component": "lerna run build --stream --scope=@antv/l7plot-component",
-    "build-website": "lerna run build --stream --scope=l7plot-website"
+    "build-website": "lerna run build --stream --scope=l7plot-website",
+    "publish": "lerna publish"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
@@ -29,27 +35,28 @@
     "@rollup/plugin-node-resolve": "^13.0.2",
     "@rollup/plugin-typescript": "^8.2.3",
     "@types/jest": "^26.0.24",
-    "@typescript-eslint/eslint-plugin": "^4.28.5",
-    "@typescript-eslint/parser": "^4.28.5",
-    "eslint": "^7.31.0",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-jest": "^24.4.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "husky": "^7.0.1",
+    "eslint-plugin-jest": "^24.7.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "husky": "^7.0.2",
     "jest": "^26.6.3",
     "jest-electron": "^0.1.11",
     "lerna": "^4.0.0",
-    "lint-staged": "^11.1.1",
-    "prettier": "^2.3.2",
+    "lint-staged": "^11.2.3",
+    "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
-    "rollup": "^2.55.0",
+    "rollup": "^2.58.0",
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-filesize": "^9.1.1",
     "rollup-plugin-node-polyfills": "^0.2.1",
     "rollup-plugin-terser": "^7.0.2",
     "ts-jest": "^26.5.6",
-    "tslib": "^2.3.0",
-    "typescript": "^4.3.5"
+    "tslib": "^2.3.1",
+    "typedoc": "^0.22.5",
+    "typescript": "^4.4.3"
   },
   "dependencies": {}
 }

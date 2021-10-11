@@ -17,7 +17,7 @@
     "prettier": "prettier src __tests__ -c -w",
     "typedoc": "typedoc",
     "clean": "rimraf dist",
-    "build": "npm run clean && npm run build:cjs",
+    "build": "npm run clean && npm run build:cjs && npm run build:esm",
     "build:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib",
     "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm",
     "rollup": "rollup -c rollup.config.js"
@@ -28,6 +28,7 @@
     "l7",
     "plot"
   ],
+  "sideEffects": false,
   "author": "yunji",
   "license": "MIT",
   "homepage": "https://github.com/antvis/L7Plot#readme",
@@ -39,8 +40,7 @@
     "url": "https://github.com/antvis/L7Plot/issues"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.4",
-    "typedoc": "^0.21.2"
+    "@types/lodash-es": "^4.17.4"
   },
   "dependencies": {
     "@antv/event-emitter": "^0.1.2",

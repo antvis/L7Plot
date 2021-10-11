@@ -5,21 +5,23 @@
 ## 本地开发
 
 ```bash
+# 全局安装 yarn
+$ npm install yarn -g
+
 # 安装项目依赖
-$ npm install
-$ npm run bootstrap
+$ yarn bootstrap
 
 # 实时编译各 package 并启动 storybook
-$ npm run dev
+$ yarn dev
 
 # 运行网站
-$ npm run dev-website
+$ yarn dev-website
 
 # 运行单元测试
-$ npm run test
+$ yarn test
 
 # 打开 electron 运行单元测试，并监听测试文件
-$ npm run test-live
+$ yarn test-live
 ```
 
 ## 如何贡献
