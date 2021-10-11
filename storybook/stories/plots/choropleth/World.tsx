@@ -57,7 +57,7 @@ class World extends Component {
       },
       // state: { active: true, select: false },
       tooltip: {
-        items: ['properties.name', 'properties.adcode', 'properties.value'],
+        items: ['name', 'adcode', 'value'],
       },
       zoom: {
         position: 'bottomright',

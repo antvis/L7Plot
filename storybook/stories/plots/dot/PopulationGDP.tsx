@@ -59,9 +59,9 @@ class PopulationGDP extends Component {
       },
       tooltip: {
         items: [
-          { field: 'properties.名称', alias: '名称' },
-          { field: 'properties.PerCapitaGDP', alias: '人均GDP' },
-          { field: 'properties.population', alias: '人口' },
+          { field: '名称', alias: '名称' },
+          { field: 'PerCapitaGDP', alias: '人均GDP' },
+          { field: 'population', alias: '人口' },
         ],
       },
     });

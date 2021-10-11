@@ -54,7 +54,7 @@ class ChinaCitys extends Component {
       },
       state: { active: true, select: false },
       tooltip: {
-        items: ['properties.name', 'properties.code'],
+        items: ['name', 'code'],
       },
       zoom: {
         position: 'bottomright',

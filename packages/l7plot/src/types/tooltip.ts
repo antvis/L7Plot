@@ -4,7 +4,7 @@ import { anchorType as TooltipAnchorType } from '@antv/l7-utils';
 export interface ITooltipItem {
   field: string;
   alias?: string;
-  customValue?: (value: any, feature: any, featureId: number) => any;
+  customValue?: (value: any, properties: any, featureId: number) => any;
 }
 
 export { TooltipAnchorType };

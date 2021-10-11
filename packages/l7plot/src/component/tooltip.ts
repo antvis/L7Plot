@@ -96,6 +96,10 @@ export class Tooltip extends EventEmitter {
   private interactionTriggerHander = (event: IMouseEvent) => {
     const { lngLat, feature, featureId } = event;
     const { title, customTitle, items, customItems } = this.options;
+    // is GeoJson type
+    const isGeoFeature = feature.type === 'Feature' && feature.geometry && feature.properties;
+    // parse GeoJson properties
+    const data = isGeoFeature ? feature.properties : feature;
     let tooltipItems: ITooltipListItem[] = [];
 
     if (customItems) {
@@ -108,27 +112,26 @@ export class Tooltip extends EventEmitter {
     } else if (items) {
       items.forEach((item: string | ITooltipItem) => {
         if (isString(item)) {
-          // TODO: GEOJSON properties
           const name = item.split('.').pop() || item;
-          const value = getValueByPath(feature, item);
+          const value = getValueByPath(data, item);
           if (value !== undefined) {
             tooltipItems.push({ name, value });
           }
         } else {
           const { field, alias, customValue } = item;
           const name = alias || field.split('.').pop() || field;
-          const value = getValueByPath(feature, field);
+          const value = getValueByPath(data, field);
           if (value !== undefined) {
             tooltipItems.push({
               name,
-              value: customValue ? customValue(value, feature, featureId) : value,
+              value: customValue ? customValue(value, data, featureId) : value,
             });
           }
         }
       });
     }
 
-    const componentOptions = { title: customTitle ? customTitle(feature) : title, items: tooltipItems };
+    const componentOptions = { title: customTitle ? customTitle(data) : title, items: tooltipItems };
 
     this.showTooltip(lngLat, componentOptions);
   };
