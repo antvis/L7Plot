@@ -99,7 +99,7 @@ export class Tooltip extends EventEmitter {
     // is GeoJson type
     const isGeoFeature = feature.type === 'Feature' && feature.geometry && feature.properties;
     // parse GeoJson properties
-    const data = isGeoFeature ? feature.properties : feature;
+    const properties = isGeoFeature ? feature.properties : feature;
     let tooltipItems: ITooltipListItem[] = [];
 
     if (customItems) {
@@ -113,25 +113,25 @@ export class Tooltip extends EventEmitter {
       items.forEach((item: string | ITooltipItem) => {
         if (isString(item)) {
           const name = item.split('.').pop() || item;
-          const value = getValueByPath(data, item);
+          const value = getValueByPath(properties, item);
           if (value !== undefined) {
             tooltipItems.push({ name, value });
           }
         } else {
           const { field, alias, customValue } = item;
           const name = alias || field.split('.').pop() || field;
-          const value = getValueByPath(data, field);
+          const value = getValueByPath(properties, field);
           if (value !== undefined) {
             tooltipItems.push({
               name,
-              value: customValue ? customValue(value, data, featureId) : value,
+              value: customValue ? customValue(value, properties, featureId) : value,
             });
           }
         }
       });
     }
 
-    const componentOptions = { title: customTitle ? customTitle(data) : title, items: tooltipItems };
+    const componentOptions = { title: customTitle ? customTitle(properties) : title, items: tooltipItems };
 
     this.showTooltip(lngLat, componentOptions);
   };
