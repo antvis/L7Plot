@@ -70,9 +70,9 @@ class GlobalEarthquake extends Component {
       },
       tooltip: {
         items: [
-          { field: 'properties.addr', alias: 'addr' },
-          { field: 'properties.level', alias: 'level' },
-          { field: 'properties.depth', alias: 'depth' },
+          { field: 'addr', alias: 'addr' },
+          { field: 'level', alias: 'level' },
+          { field: 'depth', alias: 'depth' },
         ],
       },
     });

@@ -44,7 +44,7 @@ async function initMap() {
       position: 'topright',
     },
     tooltip: {
-      items: [{ field: 'properties.cityName', alias: '名称' }],
+      items: [{ field: 'cityName', alias: '名称' }],
     },
   });
 }

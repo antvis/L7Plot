@@ -81,7 +81,7 @@ class Drill extends Component {
       },
       // state: { active: true, select: false },
       tooltip: {
-        items: ['properties.name', 'properties.adcode'],
+        items: ['name', 'adcode'],
       },
       zoom: {
         position: 'bottomright',
