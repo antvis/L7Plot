@@ -99,6 +99,10 @@ export interface IDrill {
 /** 地区分布图的配置类型定义 */
 export interface ChoroplethOptions extends IPlotOptions, IAreaLayerOptions {
   /**
+   * 行政地理数据静态服务址
+   */
+  url?: string;
+  /**
    * 具体的数据
    */
   source: ISource;

@@ -133,7 +133,9 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    */
   protected createLabelLayer(source: Source, label: ILabelOptions): TextLayer {
     const data = this.currentDistrictData.features
-      .map(({ properties }) => properties)
+      .map(({ properties }) =>
+        Object.assign({}, properties, { centroid: properties['centroid'] || properties['center'] })
+      )
       .filter(({ centroid }) => centroid);
     const textLayer = new TextLayer({
       name: 'labelLayer',
@@ -232,7 +234,8 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     if (cacheArea) {
       return cacheArea;
     }
-    const response = await fetch(`${AREA_URL}/${level}/${fileName}.json`);
+    const baseUrl = this.options.url || AREA_URL;
+    const response = await fetch(`${baseUrl}/${level}/${fileName}.json`);
     const data = response.json();
     registerCacheArea(fileName, data);
     return data;
