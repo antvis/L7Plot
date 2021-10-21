@@ -70,6 +70,8 @@ export class MappingLayer {
      */
     if (isNumber(size)) {
       layer.size(size);
+    } else if (isArray(size)) {
+      layer.size(size);
     } else if (isFunction(size)) {
       // TODO: size mappingFields
       const mappingFields = [];
