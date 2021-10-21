@@ -19,7 +19,7 @@ export interface IColorStyleAttribute {
 
 export interface ISizeStyleAttribute {
   field?: string;
-  value?: number | number[] | Callback<number>;
+  value?: number | number[] | Callback<number | number[]>;
   scale?: IScale;
 }
 
@@ -44,7 +44,7 @@ export interface IStateAttribute {
 export type ColorAttr = string | Callback<string> | IColorStyleAttribute;
 
 /** 大小 */
-export type SizeAttr = number | Callback<number> | ISizeStyleAttribute;
+export type SizeAttr = number | number[] | Callback<number | number[]> | ISizeStyleAttribute;
 
 /** 旋转 */
 export type RotateAttr = number | Callback<number> | IRotateStyleAttribute;

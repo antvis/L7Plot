@@ -2,7 +2,7 @@ import { Scene } from '@antv/l7-scene';
 import { Mapbox, GaodeMap } from '@antv/l7-maps';
 import { Scale, Layers, Zoom } from '@antv/l7-component';
 import EventEmitter from '@antv/event-emitter';
-import { isObject, isBoolean } from '@antv/util';
+import { isObject, isBoolean, isUndefined, isEqual } from '@antv/util';
 import { Tooltip } from '../../component/tooltip';
 import { Legend, LegendItem } from '../../component/legend';
 import { deepAssign } from '../../utils';
@@ -61,6 +61,10 @@ export abstract class Map<O extends IMapOptions> {
    */
   public options: O;
   /**
+   * map 上一次的 schema 配置
+   */
+  protected lastOptions: O;
+  /**
    * map 绘制的 dom
    */
   public container!: HTMLDivElement;
@@ -99,6 +103,7 @@ export abstract class Map<O extends IMapOptions> {
 
   constructor(options: O) {
     this.options = deepAssign({}, this.getDefaultOptions(), options);
+    this.lastOptions = this.options;
   }
 
   /**
@@ -208,10 +213,10 @@ export abstract class Map<O extends IMapOptions> {
    * 更新: 更新配置且重新渲染
    */
   public update(options: Partial<O>) {
-    if (options.map) {
+    this.updateOption(options);
+    if (options.map && !isEqual(this.lastOptions.map, this.options.map)) {
       this.updateMap(options.map);
     }
-    this.updateOption(options);
     this.render();
   }
 
@@ -219,6 +224,7 @@ export abstract class Map<O extends IMapOptions> {
    * 更新: 更新配置
    */
   public updateOption(options: Partial<O>) {
+    this.lastOptions = this.options;
     this.options = deepAssign({}, this.options, options);
   }
 
@@ -227,11 +233,15 @@ export abstract class Map<O extends IMapOptions> {
    */
   public updateMap(updateMapConfig: UpdateMapConfig) {
     if (!this.scene) return;
-    const { style, center, zoom, rotation = 0, pitch = 0 } = updateMapConfig;
+    const { style, center, zoom, rotation, pitch } = updateMapConfig;
 
-    this.scene.setPitch(pitch);
+    if (!isUndefined(pitch)) {
+      this.scene.setPitch(pitch);
+    }
 
-    this.scene.setRotation(rotation);
+    if (!isUndefined(rotation)) {
+      this.scene.setRotation(rotation);
+    }
 
     if (style && style !== this.options.map?.style) {
       this.scene.setMapStyle(style);

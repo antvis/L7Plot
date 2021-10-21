@@ -22,11 +22,11 @@ class Drill extends Component {
         data: [],
         joinBy: {
           sourceField: 'code',
-          targetField: 'adcode',
+          geoField: 'adcode',
         },
       },
 
-      initialView: {
+      viewLevel: {
         level: 'country',
         adcode: '100000',
         granularity: 'province',
@@ -38,13 +38,13 @@ class Drill extends Component {
         steps: [
           {
             level: 'province',
-            source: { data: [] },
-            color: { field: 'name' },
+            // source: { data: [] },
+            // color: { field: 'name' },
           },
           {
             level: 'city',
-            source: { data: [] },
-            color: { field: 'name' },
+            // source: { data: [] },
+            // color: { field: 'name' },
           },
           {
             level: 'district',
@@ -89,9 +89,9 @@ class Drill extends Component {
       scale: {
         position: 'bottomright',
       },
-      layerMenu: {
-        position: 'topright',
-      },
+      // layerMenu: {
+      //   position: 'topright',
+      // },
       legend: {
         position: 'bottomleft',
       },

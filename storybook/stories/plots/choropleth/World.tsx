@@ -22,11 +22,11 @@ class World extends Component {
         data: [],
         joinBy: {
           sourceField: 'code',
-          targetField: 'adcode',
+          geoField: 'adcode',
         },
       },
 
-      initialView: {
+      viewLevel: {
         level: 'world',
         adcode: 'all',
       },

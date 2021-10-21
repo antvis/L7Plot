@@ -22,11 +22,11 @@ class ChinaMap extends Component {
         data: [],
         joinBy: {
           sourceField: 'code',
-          targetField: 'adcode',
+          geoField: 'adcode',
         },
       },
 
-      initialView: {
+      viewLevel: {
         level: 'city',
         adcode: '330100',
         // granularity: 'district',
