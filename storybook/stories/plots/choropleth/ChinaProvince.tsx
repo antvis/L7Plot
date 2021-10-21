@@ -195,11 +195,11 @@ class ChinaProvince extends Component {
         data: ProvinceData,
         joinBy: {
           sourceField: 'code',
-          targetField: 'adcode',
+          geoField: 'adcode',
         },
       },
 
-      initialView: {
+      viewLevel: {
         level: 'country',
         adcode: '100000',
       },

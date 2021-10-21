@@ -2,6 +2,11 @@ import { IAreaLayerOptions } from '../../layers/area-layer/interface';
 import { IPlotOptions, ISourceCFG } from '../../types';
 
 /**
+ * GeoJson 数据格式
+ */
+type GeoJson = { type: 'FeatureCollection'; features: any[] };
+
+/**
  * 地理元数据关联
  */
 export interface IJoinBy {
@@ -12,7 +17,11 @@ export interface IJoinBy {
   /**
    * 地理数据字段
    */
-  targetField?: string;
+  geoField?: string;
+  /**
+   * 地理数据
+   */
+  geoData?: GeoJson;
 }
 
 /**
@@ -48,9 +57,15 @@ export type ViewLevel = {
 };
 
 /**
+ * 钻取维度配置项
+ */
+export type DrillStepConfig = Partial<Pick<IAreaLayerOptions, 'color' | 'style' | 'state'>> &
+  Pick<IPlotOptions, 'label' | 'tooltip'> & { source?: Partial<ISource> };
+
+/**
  * 钻取维度
  */
-export type DrillStep = {
+export type DrillStep = DrillStepConfig & {
   /**
    * 行政级别
    */
@@ -59,21 +74,13 @@ export type DrillStep = {
    * 化行政级别下的粒度
    */
   granularity?: 'province' | 'city' | 'district';
-  /**
-   * 具体的数据
-   */
-  source?: Partial<ISource>;
-  /**
-   * 图形颜色
-   */
-  color?: IAreaLayerOptions['color'];
 };
 
 /**
  * 数据钻取
  * 下钻上卷
  */
-export interface IDrill {
+export type Drill = {
   /**
    * 钻取维度顺序
    */
@@ -89,12 +96,16 @@ export interface IDrill {
   /**
    * 上卷事件回调
    */
-  onUp?: (from: ViewLevel, to: ViewLevel) => void | Promise<any>;
+  onUp?: (from: ViewLevel, to: ViewLevel, callback: (config?: DrillStepConfig) => void) => void;
   /**
    * 下钻事件回调
    */
-  onDown?: (from: ViewLevel, to: ViewLevel, data: any) => void | Promise<any>;
-}
+  onDown?: (
+    from: ViewLevel,
+    to: ViewLevel & { properties: Record<string, any> },
+    callback: (config?: DrillStepConfig) => void
+  ) => void;
+};
 
 /** 地区分布图的配置类型定义 */
 export interface ChoroplethOptions extends IPlotOptions, IAreaLayerOptions {
@@ -108,17 +119,17 @@ export interface ChoroplethOptions extends IPlotOptions, IAreaLayerOptions {
   source: ISource;
 
   /**
-   * 初始化行政范围
+   * 初始化行政级别及范围
    */
-  initialView: ViewLevel;
+  viewLevel: ViewLevel;
 
   /**
    * 数据钻取
    */
-  drill?: false | IDrill;
+  drill?: false | Drill;
 }
 
 /**
  * 行政层级数据
  */
-export type AreaDepthData = Required<ViewLevel> & { source: ISource; color: IAreaLayerOptions['color'] };
+export type DrillStack = Required<ViewLevel> & { config: DrillStepConfig };

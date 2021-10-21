@@ -81,6 +81,30 @@ export class Tooltip extends EventEmitter {
     };
   }
 
+  /**
+   * 更新 tooltip 组件
+   */
+  public update(options: Partial<ITooltipOptions>) {
+    this.marker.remove();
+    this.visible = false;
+    this.options = deepAssign({}, this.options, options);
+
+    const { offsets, showTitle, customContent, domStyles, anchor, className } = this.options;
+
+    this.marker = new Marker({
+      offsets,
+      anchor,
+      draggable: false,
+    });
+    this.tooltipComponent.update({
+      showTitle,
+      customContent,
+      domStyles,
+      className,
+    });
+    this.setComponent();
+  }
+
   private initInteractionEvent() {
     const trigger = this.options.trigger || 'mousemove';
     if (!TRIGGER_LIST.includes(trigger)) {
@@ -149,7 +173,7 @@ export class Tooltip extends EventEmitter {
   }
 
   public showTooltip(position: ILngLat, componentOptions: Partial<ITooltipComponentOptions>) {
-    this.update(position, componentOptions);
+    this.updateComponent(position, componentOptions);
     this.addTo();
   }
 
@@ -158,9 +182,9 @@ export class Tooltip extends EventEmitter {
   }
 
   /**
-   * 更新 tooltip
+   * 更新 tooltip 组件
    */
-  public update(position: ILngLat, componentOptions: Partial<ITooltipComponentOptions>) {
+  public updateComponent(position: ILngLat, componentOptions: Partial<ITooltipComponentOptions>) {
     if (!isEqual(this.lastComponentOptions, componentOptions)) {
       this.tooltipComponent.update(componentOptions);
       this.lastComponentOptions = componentOptions;

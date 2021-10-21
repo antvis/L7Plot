@@ -4,6 +4,7 @@ import { TextLayer } from '../../layers/text-layer';
 import { MapType, IPlotOptions, ILabelOptions, Source, ISource, Scene } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { MappingSource } from '../../adaptor/source';
+import { isEqual } from '@antv/util';
 
 const DEFAULT_OPTIONS: Partial<IPlotOptions> = {
   autoFit: false,
@@ -25,7 +26,7 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
   /**
    * 数据
    */
-  public source: Source;
+  public source!: Source;
 
   constructor(container: O);
   constructor(container: string | HTMLDivElement, options: O);
@@ -39,13 +40,11 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
 
       this.theme = this.createTheme();
       this.scene = this.createScene();
-      this.source = this.createSource();
 
       this.registerResources();
       this.initLayers();
     } else {
       super(container);
-      this.source = this.createSource();
     }
   }
 
@@ -53,6 +52,7 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
    * 初始化图层
    */
   protected initLayers() {
+    this.source = this.createSource();
     this.render();
     this.inited = true;
   }
@@ -159,8 +159,22 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
   public attachToScene(scene: Scene, theme: Record<string, any>) {
     this.scene = scene;
     this.theme = theme;
+    this.initLayers();
+  }
+
+  /**
+   * 更新: 更新配置且重新渲染
+   */
+  public update(options: Partial<O>) {
+    if (options.map && !isEqual(options.map, this.options.map)) {
+      this.updateMap(options.map);
+    }
+    if (options.source && !isEqual(options.source, this.options.source)) {
+      const { data, ...sourceConfig } = options.source;
+      this.changeData(data, sourceConfig);
+    }
+    this.updateOption(options);
     this.render();
-    this.inited = true;
   }
 
   /**
@@ -172,5 +186,6 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
     aggregation && MappingSource.aggregation(sourceCFG, aggregation);
 
     this.source.setData(this.options.source.data, sourceCFG);
+    // TODO: update Legend
   }
 }

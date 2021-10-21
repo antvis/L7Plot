@@ -94,7 +94,9 @@ export abstract class PlotLayer<O extends IPlotLayerConfig> implements IPLotLaye
   /**
    * 事件代理: 解绑事件
    */
-  public off(name: string, callback: (...args: any[]) => void) {
+  public off(name: string, callback?: (...args: any[]) => void) {
+    // eslint-disable-next-line
+    // @ts-ignore
     this.layer.off(name, callback);
   }
 }

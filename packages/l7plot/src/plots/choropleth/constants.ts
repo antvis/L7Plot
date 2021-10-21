@@ -9,10 +9,10 @@ export const DEFAULT_OPTIONS: Partial<ChoroplethOptions> = deepAssign({}, Plot.D
   source: {
     data: [],
     joinBy: {
-      targetField: 'adcode',
+      geoField: 'adcode',
     },
   },
-  initialView: {
+  viewLevel: {
     level: 'country',
     adcode: '100000',
   },
