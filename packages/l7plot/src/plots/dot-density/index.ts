@@ -2,7 +2,7 @@ import { pick } from '@antv/util';
 import { Source } from '../../types';
 import { Plot } from '../../core/plot';
 import { DEFAULT_OPTIONS } from './constants';
-import { DotDensityOptions } from './interface';
+import { DotDensityOptions } from './types';
 import { LayerGroup } from '../../core/layer/layer-group';
 import { DotDensityLayer } from '../../layers/dot-density-layer';
 
@@ -17,7 +17,7 @@ export class DotDensity extends Plot<DotDensityOptions> {
   /**
    * 地图类型
    */
-  public type = Plot.MapType.DotDensity;
+  public type = Plot.PlotType.DotDensity;
 
   /**
    * 点密度图层

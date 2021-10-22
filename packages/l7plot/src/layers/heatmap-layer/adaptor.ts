@@ -1,10 +1,10 @@
 import { IColorRamp } from '@antv/l7-utils';
 import { MappingLayer } from '../../adaptor/layer';
-import { IHeatmapLayerStyleOptions } from '../../types/layer';
+import { HeatmapLayerStyleOptions } from '../../types/layer';
 import { ILayer } from '../../types';
-import { IHeatmapLayerOptions } from './interface';
+import { HeatmapLayerOptions } from './types';
 
-function getRampColors(style: IHeatmapLayerStyleOptions): IColorRamp {
+function getRampColors(style: HeatmapLayerStyleOptions): IColorRamp {
   const { colorsRamp } = style;
   const rampColors: IColorRamp = { colors: [], positions: [] };
   colorsRamp.forEach(({ color, position }) => {
@@ -14,7 +14,7 @@ function getRampColors(style: IHeatmapLayerStyleOptions): IColorRamp {
   return rampColors;
 }
 
-export function mappingLayer(layer: ILayer, options: IHeatmapLayerOptions) {
+export function mappingLayer(layer: ILayer, options: HeatmapLayerOptions) {
   const { shape, size, style, state } = options;
   // mapping shape
   shape && MappingLayer.shape(layer, shape);

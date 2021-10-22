@@ -3,15 +3,15 @@ import { LineLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
-import { ILinesLayerOptions } from './interface';
+import { LinesLayerOptions } from './types';
 import { ILayer } from '../../types';
 
-export type { ILinesLayerOptions };
+export type { LinesLayerOptions };
 
 const DEFAULT_OPTIONS = {};
 const LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state', 'animate'];
 
-export class LinesLayer<O extends ILinesLayerOptions = ILinesLayerOptions> extends PlotLayer<O> {
+export class LinesLayer<O extends LinesLayerOptions = LinesLayerOptions> extends PlotLayer<O> {
   /**
    * 默认配置项
    */
@@ -57,7 +57,7 @@ export class LinesLayer<O extends ILinesLayerOptions = ILinesLayerOptions> exten
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<ILinesLayerOptions> {
+  public getDefaultOptions(): Partial<LinesLayerOptions> {
     return DEFAULT_OPTIONS;
   }
 

@@ -1,4 +1,4 @@
-export interface IStyleSheet {
+export type StyleSheet = {
   /** 底图样式 */
   mapStyle?: string;
   /** 主题色 */
@@ -86,11 +86,11 @@ export interface IStyleSheet {
 
   /** 点图 selected 状态下填充颜色 */
   pointSelectedFillColor?: string;
-}
+};
 
 /** createTheme 主题样式表配置 */
 export type StyleSheetCfg = Pick<
-  IStyleSheet,
+  StyleSheet,
   | 'mapStyle'
   | 'subColor'
   | 'brandColor'

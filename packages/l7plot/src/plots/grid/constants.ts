@@ -1,6 +1,6 @@
 import { Plot } from '../../core/plot';
 import { deepAssign } from '../../utils';
-import { GridOptions } from './interface';
+import { GridOptions } from './types';
 
 /**
  * 默认配置项

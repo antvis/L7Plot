@@ -4,11 +4,11 @@ import EventEmitter from '@antv/event-emitter';
 import { isString } from '@antv/util';
 import {
   Tooltip as TooltipComponent,
-  ITooltipOptions as ITooltipComponentOptions,
-  ITooltipListItem,
+  TooltipOptions as ITooltipComponentOptions,
+  TooltipListItem,
 } from '@antv/l7plot-component';
 import { isEqual, get as getValueByPath } from 'lodash-es';
-import { IPLotLayer, ILngLat, TooltipAnchorType, IEvent, ITooltipOptions, IMouseEvent, ITooltipItem } from '../types';
+import { IPLotLayer, ILngLat, TooltipAnchorType, Event, TooltipOptions, MouseEvent, ITooltipItem } from '../types';
 import { deepAssign } from '../utils';
 
 const TRIGGER_LIST = ['mousemove', 'click'];
@@ -25,7 +25,7 @@ export class Tooltip extends EventEmitter {
   /**
    * tooltip 的 schema 配置
    */
-  protected options: ITooltipOptions;
+  protected options: TooltipOptions;
   /**
    * marker 实例
    */
@@ -43,7 +43,7 @@ export class Tooltip extends EventEmitter {
    */
   private lastComponentOptions: any;
 
-  constructor(scene: Scene, interactionLayers: IPLotLayer[], options: ITooltipOptions) {
+  constructor(scene: Scene, interactionLayers: IPLotLayer[], options: TooltipOptions) {
     super();
     this.scene = scene;
     this.interactionLayers = interactionLayers;
@@ -71,7 +71,7 @@ export class Tooltip extends EventEmitter {
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<ITooltipOptions> {
+  protected getDefaultOptions(): Partial<TooltipOptions> {
     return {
       showTitle: true,
       items: [],
@@ -84,7 +84,7 @@ export class Tooltip extends EventEmitter {
   /**
    * 更新 tooltip 组件
    */
-  public update(options: Partial<ITooltipOptions>) {
+  public update(options: Partial<TooltipOptions>) {
     this.marker.remove();
     this.visible = false;
     this.options = deepAssign({}, this.options, options);
@@ -117,14 +117,14 @@ export class Tooltip extends EventEmitter {
     });
   }
 
-  private interactionTriggerHander = (event: IMouseEvent) => {
+  private interactionTriggerHander = (event: MouseEvent) => {
     const { lngLat, feature, featureId } = event;
     const { title, customTitle, items, customItems } = this.options;
     // is GeoJson type
     const isGeoFeature = feature.type === 'Feature' && feature.geometry && feature.properties;
     // parse GeoJson properties
     const properties = isGeoFeature ? feature.properties : feature;
-    let tooltipItems: ITooltipListItem[] = [];
+    let tooltipItems: TooltipListItem[] = [];
 
     if (customItems) {
       const items = customItems(feature);
@@ -217,7 +217,7 @@ export class Tooltip extends EventEmitter {
     if (this.visible) return;
     this.scene.addMarker(this.marker);
     this.visible = true;
-    const event: IEvent = { type: 'tooltip:show' };
+    const event: Event = { type: 'tooltip:show' };
     this.emit('tooltip:show', event);
   }
 
@@ -228,7 +228,7 @@ export class Tooltip extends EventEmitter {
     if (!this.visible) return;
     this.marker.remove();
     this.visible = false;
-    const event: IEvent = { type: 'tooltip:hide' };
+    const event: Event = { type: 'tooltip:hide' };
     this.emit('tooltip:hide', event);
   }
 

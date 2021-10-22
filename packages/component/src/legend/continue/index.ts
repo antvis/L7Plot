@@ -3,10 +3,10 @@ import { modifyCSS } from '@antv/dom-util';
 import DomStyles from './theme';
 import { CONTAINER_CLASS, CONTAINER_TPL, TITLE_CLASS, RIBBON_CONTAINER_CLASS, RIBBON_TPL } from './constants';
 import { Component } from '../../core/component';
-import { ContinueLegendCustomContent, IContinueLegendOptions } from '../../types';
+import { ContinueLegendCustomContent, ContinueLegendOptions } from '../../types';
 import { clearDom } from '../../utils/dom';
 
-export class ContinueLegend<O extends IContinueLegendOptions = IContinueLegendOptions> extends Component<O> {
+export class ContinueLegend<O extends ContinueLegendOptions = ContinueLegendOptions> extends Component<O> {
   /**
    * 缓存 title DOM
    */
@@ -19,7 +19,7 @@ export class ContinueLegend<O extends IContinueLegendOptions = IContinueLegendOp
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<IContinueLegendOptions> {
+  protected getDefaultOptions(): Partial<ContinueLegendOptions> {
     return deepMix({}, super.getDefaultOptions(), {
       id: 'l7plot-continue-legend',
       name: 'l7plot-continue-legend',

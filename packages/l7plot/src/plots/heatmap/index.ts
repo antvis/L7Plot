@@ -1,8 +1,8 @@
 import { pick } from '@antv/util';
 import { Plot } from '../../core/plot';
-import { HeatmapOptions } from './interface';
+import { HeatmapOptions } from './types';
 import { DEFAULT_OPTIONS } from './constants';
-import { ILegendOptions, Source } from '../../types';
+import { LegendOptions, Source } from '../../types';
 import { TextLayer } from '../../layers/text-layer';
 import { HeatmapLayer } from '../../layers/heatmap-layer';
 import { LayerGroup } from '../../core/layer/layer-group';
@@ -18,7 +18,7 @@ export class Heatmap extends Plot<HeatmapOptions> {
   /**
    * 地图类型
    */
-  public type = Plot.MapType.Heatmap;
+  public type = Plot.PlotType.Heatmap;
 
   /**
    * 热力图层
@@ -79,7 +79,7 @@ export class Heatmap extends Plot<HeatmapOptions> {
   /**
    * 实现 legend 配置项
    */
-  public getLegendOptions(): ILegendOptions {
+  public getLegendOptions(): LegendOptions {
     const sizeLegendItems = this.heatmapLayer.layer.getLegendItems('size');
     if (Array.isArray(sizeLegendItems) && sizeLegendItems.length !== 0) {
       const min = sizeLegendItems[0].value;

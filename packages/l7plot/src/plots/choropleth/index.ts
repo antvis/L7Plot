@@ -1,12 +1,20 @@
 import { pick, isEqual } from '@antv/util';
 import { Plot } from '../../core/plot';
 import { deepAssign } from '../../utils';
-import { ChoroplethOptions, DrillStep, ISource, Drill, DrillStack, ViewLevel, DrillStepConfig } from './interface';
+import {
+  ChoroplethOptions,
+  DrillStep,
+  ChoroplethSourceOptions,
+  Drill,
+  DrillStack,
+  ViewLevel,
+  DrillStepConfig,
+} from './types';
 import { DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS, AREA_URL } from './constants';
 import { AreaLayer } from '../../layers/area-layer';
 import { LinesLayer } from '../../layers/lines-layer';
 import { TextLayer } from '../../layers/text-layer';
-import { ILabelOptions, ILegendOptions, IMouseEvent, Source } from '../../types';
+import { LabelOptions, LegendOptions, MouseEvent, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
 import { createCountryBoundaryLayer } from './layer';
 import { getCacheArea, registerCacheArea } from './cache';
@@ -22,7 +30,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 图表类型
    */
-  public type = Plot.MapType.Choropleth;
+  public type = Plot.PlotType.Choropleth;
   /**
    * 国界数据
    */
@@ -101,7 +109,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 解析 source 配置
    */
-  protected parserSourceConfig(source: ISource) {
+  protected parserSourceConfig(source: ChoroplethSourceOptions) {
     const { data: joinData, joinBy, ...sourceCFG } = source;
     const { sourceField, geoField: targetField, geoData } = joinBy;
     const data = geoData || this.currentDistrictData || { type: 'FeatureCollection', features: [] };
@@ -129,7 +137,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 更新: 更新数据
    */
-  public changeData(data: any[], cfg?: Partial<Omit<ISource, 'data'>>) {
+  public changeData(data: any[], cfg?: Partial<Omit<ChoroplethSourceOptions, 'data'>>) {
     this.options.source = deepAssign({}, this.options.source, { data, ...cfg });
     const { data: currentDistrictData, sourceCFG } = this.parserSourceConfig(this.options.source);
     this.source.setData(currentDistrictData, sourceCFG);
@@ -161,7 +169,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 创建数据标签图层
    */
-  protected createLabelLayer(source: Source, label: ILabelOptions): TextLayer {
+  protected createLabelLayer(source: Source, label: LabelOptions): TextLayer {
     const data = source['originData'].features
       .map(({ properties }) =>
         Object.assign({}, properties, { centroid: properties['centroid'] || properties['center'] })
@@ -247,7 +255,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 实现 legend 配置项
    */
-  public getLegendOptions(): ILegendOptions {
+  public getLegendOptions(): LegendOptions {
     const colorLegendItems = this.fillAreaLayer.getColorLegendItems();
     if (colorLegendItems.length !== 0) {
       return { type: 'category', items: colorLegendItems };
@@ -295,7 +303,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 向下钻取事件回调
    */
-  private onDrillDownHander = (event: IMouseEvent) => {
+  private onDrillDownHander = (event: MouseEvent) => {
     const { steps, onDown } = this.options.drill as Drill;
     const properties = event.feature?.properties;
     const { adcode } = properties;

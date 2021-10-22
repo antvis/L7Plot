@@ -3,12 +3,12 @@ import { HeatmapLayer as Heatmap } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
-import { IHexagonLayerOptions } from './interface';
+import { HexagonLayerOptions } from './types';
 import { ILayer } from '../../types';
 
-export type { IHexagonLayerOptions };
+export type { HexagonLayerOptions };
 
-const DEFAULT_OPTIONS: IHexagonLayerOptions = {
+const DEFAULT_OPTIONS: HexagonLayerOptions = {
   source: {
     data: [],
     parser: {
@@ -33,7 +33,7 @@ const DEFAULT_OPTIONS: IHexagonLayerOptions = {
 };
 const LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state'];
 
-export class HexagonLayer extends PlotLayer<IHexagonLayerOptions> {
+export class HexagonLayer extends PlotLayer<HexagonLayerOptions> {
   /**
    * 默认配置项
    */
@@ -45,7 +45,7 @@ export class HexagonLayer extends PlotLayer<IHexagonLayerOptions> {
   /**
    * 图层配置项
    */
-  public options: IHexagonLayerOptions;
+  public options: HexagonLayerOptions;
   /**
    * 图层名称
    */
@@ -63,7 +63,7 @@ export class HexagonLayer extends PlotLayer<IHexagonLayerOptions> {
    */
   public interaction = false;
 
-  constructor(options: IHexagonLayerOptions) {
+  constructor(options: HexagonLayerOptions) {
     super();
     const { name, source } = options;
     this.name = name ? name : uniqueId(this.type);
@@ -79,15 +79,15 @@ export class HexagonLayer extends PlotLayer<IHexagonLayerOptions> {
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<IHexagonLayerOptions> {
+  public getDefaultOptions(): Partial<HexagonLayerOptions> {
     return DEFAULT_OPTIONS;
   }
 
-  protected mappingLayer(layer: ILayer, options: IHexagonLayerOptions) {
+  protected mappingLayer(layer: ILayer, options: HexagonLayerOptions) {
     mappingLayer(layer, options);
   }
 
-  public updateOptions(options: Partial<IHexagonLayerOptions>) {
+  public updateOptions(options: Partial<HexagonLayerOptions>) {
     this.options = deepAssign({}, this.options, options);
     this.mappingLayer(this.layer, this.options);
   }

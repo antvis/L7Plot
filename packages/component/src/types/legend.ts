@@ -1,9 +1,9 @@
-import { IComponentOptions } from './component';
+import { ComponentOptions } from './component';
 
 /**
  * 分类列表项接口
  */
-export interface ICategoryLegendListItem {
+export type CategoryLegendListItem = {
   /**
    * 唯一值，用于查找
    */
@@ -18,14 +18,14 @@ export interface ICategoryLegendListItem {
   value: [number, number] | [string, string] | string;
 
   [key: string]: any;
-}
+};
 
-export type CategoryLegendCustomContent = (title: string, items: ICategoryLegendListItem[]) => string | HTMLElement;
+export type CategoryLegendCustomContent = (title: string, items: CategoryLegendListItem[]) => string | HTMLElement;
 
 /**
  * 分类 Legend 配置接口
  */
-export interface ICategoryLegendOptions extends IComponentOptions {
+export interface CategoryLegendOptions extends ComponentOptions {
   /**
    * 标题
    */
@@ -33,7 +33,7 @@ export interface ICategoryLegendOptions extends IComponentOptions {
   /**
    * 列表项集合
    */
-  items: ICategoryLegendListItem[];
+  items: CategoryLegendListItem[];
   /**
    * 列表项的模板
    */
@@ -58,7 +58,7 @@ export type ContinueLegendCustomContent = (
 /**
  * 连续 Legend 配置接口
  */
-export interface IContinueLegendOptions extends IComponentOptions {
+export interface ContinueLegendOptions extends ComponentOptions {
   /**
    * 标题
    */

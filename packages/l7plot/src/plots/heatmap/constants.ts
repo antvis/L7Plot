@@ -1,6 +1,6 @@
 import { Plot } from '../../core/plot';
 import { deepAssign } from '../../utils';
-import { HeatmapOptions } from './interface';
+import { HeatmapOptions } from './types';
 
 /**
  * 默认配置项

@@ -3,11 +3,11 @@ import { PointLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
-import { IDotLayerOptions } from './interface';
+import { DotLayerOptions } from './types';
 import { ILayer } from '../../types';
 import { getColorLegendItems } from './helper';
 
-export type { IDotLayerOptions };
+export type { DotLayerOptions };
 
 const DEFAULT_OPTIONS = {
   source: {
@@ -24,7 +24,7 @@ const DEFAULT_OPTIONS = {
 };
 const LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state', 'animate'];
 
-export class DotLayer<O extends IDotLayerOptions = IDotLayerOptions> extends PlotLayer<O> {
+export class DotLayer<O extends DotLayerOptions = DotLayerOptions> extends PlotLayer<O> {
   /**
    * 默认配置项
    */
@@ -70,7 +70,7 @@ export class DotLayer<O extends IDotLayerOptions = IDotLayerOptions> extends Plo
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<IDotLayerOptions> {
+  public getDefaultOptions(): Partial<DotLayerOptions> {
     return DEFAULT_OPTIONS;
   }
 

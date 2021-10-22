@@ -1,6 +1,6 @@
 import { Plot } from '../../core/plot';
 import { deepAssign } from '../../utils';
-import { DotOptions } from './interface';
+import { DotOptions } from './types';
 
 /**
  * 默认配置项

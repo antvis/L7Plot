@@ -1,13 +1,13 @@
 import { uniqueId } from '@antv/util';
 import { PointLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
-import { ITextLayerConfig } from '../../types/layer';
+import { TextLayerConfig } from '../../types/layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
-import { ITextLayerOptions } from './interface';
+import { TextLayerOptions } from './types';
 import { ILayer } from '../../types';
 
-export type { ITextLayerOptions };
+export type { TextLayerOptions };
 
 const DEFAULT_OPTIONS = {
   style: {
@@ -15,7 +15,7 @@ const DEFAULT_OPTIONS = {
   },
 };
 
-export class TextLayer extends PlotLayer<ITextLayerOptions> {
+export class TextLayer extends PlotLayer<TextLayerOptions> {
   /**
    * 默认配置项
    */
@@ -23,7 +23,7 @@ export class TextLayer extends PlotLayer<ITextLayerOptions> {
   /**
    * 图层配置项
    */
-  public options: ITextLayerOptions;
+  public options: TextLayerOptions;
   /**
    * 图层名称
    */
@@ -41,7 +41,7 @@ export class TextLayer extends PlotLayer<ITextLayerOptions> {
    */
   public interaction = false;
 
-  constructor(options: ITextLayerOptions) {
+  constructor(options: TextLayerOptions) {
     super();
     const { name, source } = options;
     this.name = name ? name : uniqueId(this.type);
@@ -57,15 +57,15 @@ export class TextLayer extends PlotLayer<ITextLayerOptions> {
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<ITextLayerOptions> {
+  public getDefaultOptions(): Partial<TextLayerOptions> {
     return DEFAULT_OPTIONS;
   }
 
-  protected mappingLayer(layer: ILayer, options: ITextLayerOptions) {
+  protected mappingLayer(layer: ILayer, options: TextLayerOptions) {
     mappingLayer(layer, options);
   }
 
-  public updateOptions(options: ITextLayerConfig) {
+  public updateOptions(options: TextLayerConfig) {
     this.options = deepAssign({}, this.options, options);
     this.mappingLayer(this.layer, this.options);
   }

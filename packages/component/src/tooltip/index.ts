@@ -3,10 +3,10 @@ import { modifyCSS } from '@antv/dom-util';
 import DomStyles from './theme';
 import { CONTAINER_CLASS, CONTAINER_TPL, ITEM_TPL, LIST_CLASS, TITLE_CLASS } from './constants';
 import { Component } from '../core/component';
-import { TooltipCustomContent, ITooltipOptions } from '../types';
+import { TooltipCustomContent, TooltipOptions } from '../types';
 import { clearDom } from '../utils/dom';
 
-export class Tooltip<O extends ITooltipOptions = ITooltipOptions> extends Component<O> {
+export class Tooltip<O extends TooltipOptions = TooltipOptions> extends Component<O> {
   /**
    * 缓存 title DOM
    */
@@ -19,7 +19,7 @@ export class Tooltip<O extends ITooltipOptions = ITooltipOptions> extends Compon
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<ITooltipOptions> {
+  protected getDefaultOptions(): Partial<TooltipOptions> {
     return deepMix({}, super.getDefaultOptions(), {
       id: 'l7plot-tooltip',
       name: 'l7plot-tooltip',

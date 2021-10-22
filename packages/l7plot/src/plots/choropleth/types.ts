@@ -1,5 +1,5 @@
-import { IAreaLayerOptions } from '../../layers/area-layer/interface';
-import { IPlotOptions, ISourceCFG } from '../../types';
+import { AreaLayerOptions } from '../../layers/area-layer/types';
+import { PlotOptions, ISourceCFG } from '../../types';
 
 /**
  * GeoJson 数据格式
@@ -9,7 +9,7 @@ type GeoJson = { type: 'FeatureCollection'; features: any[] };
 /**
  * 地理元数据关联
  */
-export interface IJoinBy {
+export type JoinBy = {
   /**
    * 业务元数据地理字段
    */
@@ -22,12 +22,12 @@ export interface IJoinBy {
    * 地理数据
    */
   geoData?: GeoJson;
-}
+};
 
 /**
  * 数据配置
  */
-export interface ISource extends Pick<ISourceCFG, 'transforms'> {
+export interface ChoroplethSourceOptions extends Pick<ISourceCFG, 'transforms'> {
   /**
    * 业务数据
    */
@@ -35,7 +35,7 @@ export interface ISource extends Pick<ISourceCFG, 'transforms'> {
   /**
    * 地理元数据关联
    */
-  joinBy: IJoinBy;
+  joinBy: JoinBy;
 }
 
 /**
@@ -59,8 +59,8 @@ export type ViewLevel = {
 /**
  * 钻取维度配置项
  */
-export type DrillStepConfig = Partial<Pick<IAreaLayerOptions, 'color' | 'style' | 'state'>> &
-  Pick<IPlotOptions, 'label' | 'tooltip'> & { source?: Partial<ISource> };
+export type DrillStepConfig = Partial<Pick<AreaLayerOptions, 'color' | 'style' | 'state'>> &
+  Pick<PlotOptions, 'label' | 'tooltip'> & { source?: Partial<ChoroplethSourceOptions> };
 
 /**
  * 钻取维度
@@ -108,7 +108,7 @@ export type Drill = {
 };
 
 /** 地区分布图的配置类型定义 */
-export interface ChoroplethOptions extends IPlotOptions, IAreaLayerOptions {
+export interface ChoroplethOptions extends PlotOptions, AreaLayerOptions {
   /**
    * 行政地理数据静态服务址
    */
@@ -116,7 +116,7 @@ export interface ChoroplethOptions extends IPlotOptions, IAreaLayerOptions {
   /**
    * 具体的数据
    */
-  source: ISource;
+  source: ChoroplethSourceOptions;
 
   /**
    * 初始化行政级别及范围

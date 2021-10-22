@@ -1,10 +1,10 @@
 import { pick } from '@antv/util';
 import { Plot } from '../../core/plot';
-import { DotOptions } from './interface';
+import { DotOptions } from './types';
 import { DEFAULT_OPTIONS } from './constants';
 import { DotLayer } from '../../layers/dot-layer';
 import { TextLayer } from '../../layers/text-layer';
-import { ILegendOptions, Source } from '../../types';
+import { LegendOptions, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
 
 export type { DotOptions };
@@ -18,7 +18,7 @@ export class Dot extends Plot<DotOptions> {
   /**
    * 图表类型
    */
-  public type = Plot.MapType.Dot;
+  public type = Plot.PlotType.Dot;
 
   /**
    * 点图层
@@ -79,7 +79,7 @@ export class Dot extends Plot<DotOptions> {
   /**
    * 实现 legend 配置项
    */
-  public getLegendOptions(): ILegendOptions {
+  public getLegendOptions(): LegendOptions {
     const colorLegendItems = this.dotLayer.getColorLegendItems();
     if (colorLegendItems.length !== 0) {
       return { type: 'category', items: colorLegendItems };

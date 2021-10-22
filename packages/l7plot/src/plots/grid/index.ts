@@ -1,6 +1,6 @@
 import { pick } from '@antv/util';
 import { Plot } from '../../core/plot';
-import { GridOptions } from './interface';
+import { GridOptions } from './types';
 import { DEFAULT_OPTIONS } from './constants';
 import { Source } from '../../types';
 import { TextLayer } from '../../layers/text-layer';
@@ -18,7 +18,7 @@ export class Grid extends Plot<GridOptions> {
   /**
    * 地图类型
    */
-  public type = Plot.MapType.Grid;
+  public type = Plot.PlotType.Grid;
 
   /**
    * 网格图层

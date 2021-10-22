@@ -1,16 +1,16 @@
 import { Map } from '../map';
 import { deepAssign } from '../../utils';
 import { TextLayer } from '../../layers/text-layer';
-import { MapType, IPlotOptions, ILabelOptions, Source, ISource, Scene } from '../../types';
+import { PlotType, PlotOptions, LabelOptions, Source, SourceOptions, Scene } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { MappingSource } from '../../adaptor/source';
 import { isEqual } from '@antv/util';
 
-const DEFAULT_OPTIONS: Partial<IPlotOptions> = {
+const DEFAULT_OPTIONS: Partial<PlotOptions> = {
   autoFit: false,
 };
 
-export abstract class Plot<O extends IPlotOptions> extends Map<O> {
+export abstract class Plot<O extends PlotOptions> extends Map<O> {
   /**
    * 默认的 options 配置项
    */
@@ -18,11 +18,11 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
   /**
    * 地图图表类型
    */
-  static MapType = MapType;
+  static PlotType = PlotType;
   /**
    * 图表类型名称
    */
-  public abstract readonly type: MapType | string;
+  public abstract readonly type: PlotType | string;
   /**
    * 数据
    */
@@ -75,7 +75,7 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<IPlotOptions> {
+  protected getDefaultOptions(): Partial<PlotOptions> {
     return Plot.DefaultOptions;
   }
 
@@ -102,7 +102,7 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
   /**
    * 创建数据标签图层
    */
-  protected createLabelLayer(source: Source, label: ILabelOptions): TextLayer {
+  protected createLabelLayer(source: Source, label: LabelOptions): TextLayer {
     const textLayer = new TextLayer({ name: 'labelLayer', source, ...label });
     return textLayer;
   }
@@ -180,7 +180,7 @@ export abstract class Plot<O extends IPlotOptions> extends Map<O> {
   /**
    * 更新: 更新数据
    */
-  public changeData(data: any, cfg?: Omit<ISource, 'data'>) {
+  public changeData(data: any, cfg?: Omit<SourceOptions, 'data'>) {
     this.options.source = deepAssign({}, this.options.source, { data, ...cfg });
     const { aggregation, ...sourceCFG } = this.options.source;
     aggregation && MappingSource.aggregation(sourceCFG, aggregation);

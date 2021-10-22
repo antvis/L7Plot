@@ -8,14 +8,14 @@ import { Legend, LegendItem } from '../../component/legend';
 import { deepAssign } from '../../utils';
 import {
   BaseMapType,
-  IMapOptions,
+  MapOptions,
   AMapInstance,
   MapboxInstance,
-  IZoomControlOptions,
-  ILayerMenuControlOptions,
-  IScaleControlOptions,
-  ILegendOptions,
-  IEvent,
+  ZoomControlOptions,
+  LayerMenuControlOptions,
+  ScaleControlOptions,
+  LegendOptions,
+  Event,
   IPLotLayer,
   UpdateMapConfig,
   Bounds,
@@ -26,12 +26,12 @@ import { FONT_FACE_CACHE, ICON_FONT_CACHE, IMAGES_CACHE } from './register';
 import { getTheme } from '../../theme';
 import { createTheme } from '../../theme/util';
 
-const DEFAULT_OPTIONS: Partial<IMapOptions> = {
+const DEFAULT_OPTIONS: Partial<MapOptions> = {
   map: { type: BaseMapType.Amap },
   logo: true,
 };
 
-export abstract class Map<O extends IMapOptions> {
+export abstract class Map<O extends MapOptions> {
   /**
    * 默认的 options 配置项
    */
@@ -109,7 +109,7 @@ export abstract class Map<O extends IMapOptions> {
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<IMapOptions> {
+  protected getDefaultOptions(): Partial<MapOptions> {
     return Map.DefaultOptions;
   }
 
@@ -409,7 +409,7 @@ export abstract class Map<O extends IMapOptions> {
   /**
    * 添加 zoom 控件
    */
-  public addZoomControl(options: IZoomControlOptions) {
+  public addZoomControl(options: ZoomControlOptions) {
     this.removeZoomControl();
     this.zoomControl = new Zoom(options);
     this.scene.addControl(this.zoomControl);
@@ -428,7 +428,7 @@ export abstract class Map<O extends IMapOptions> {
   /**
    * 添加 scale 控件
    */
-  public addScaleControl(options: IScaleControlOptions) {
+  public addScaleControl(options: ScaleControlOptions) {
     this.removeScaleControl();
     this.scaleControl = new Scale(options);
     this.scene.addControl(this.scaleControl);
@@ -447,7 +447,7 @@ export abstract class Map<O extends IMapOptions> {
   /**
    * 添加 layerMenu 控件
    */
-  public addLayerMenuControl(options: ILayerMenuControlOptions) {
+  public addLayerMenuControl(options: LayerMenuControlOptions) {
     this.removeLayerMenuControl();
     const baseLayers = {};
     const overlayers = {};
@@ -472,17 +472,17 @@ export abstract class Map<O extends IMapOptions> {
    * 获取 legend 配置项
    * 由各图各自实现，不同的图 legend 可能不同
    */
-  public getLegendOptions(): ILegendOptions {
+  public getLegendOptions(): LegendOptions {
     return {};
   }
 
   /**
    * 添加 legend 控件
    */
-  public addLegendControl(options: ILegendOptions) {
+  public addLegendControl(options: LegendOptions) {
     this.removeLegendControl();
     const legendTheme = this.theme['components'].legend;
-    const legendOptions: ILegendOptions = deepAssign({}, this.getLegendOptions(), options);
+    const legendOptions: LegendOptions = deepAssign({}, this.getLegendOptions(), options);
     const { type, position, ...rest } = legendOptions;
     const items: LegendItem[] = [];
     if (type === 'category') {
@@ -519,7 +519,7 @@ export abstract class Map<O extends IMapOptions> {
       const options = deepAssign({}, { domStyles: this.theme['components'].tooltip.domStyles }, tooltip);
       const interactionLayers = this.layerGroup.getInteractionLayers();
       this.tooltip = new Tooltip(this.scene, interactionLayers, options);
-      this.tooltip.on('*', (event: IEvent) => this.emit(event.type, event));
+      this.tooltip.on('*', (event: Event) => this.emit(event.type, event));
     }
   }
 

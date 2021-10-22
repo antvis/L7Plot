@@ -1,16 +1,16 @@
 import { deepAssign } from '../../utils';
 import { DotLayer } from '../dot-layer';
-import { IColumnLayerOptions } from './interface';
+import { ColumnLayerOptions } from './types';
 
-export type { IColumnLayerOptions };
+export type { ColumnLayerOptions };
 
-export class ColumnLayer extends DotLayer<IColumnLayerOptions> {
+export class ColumnLayer extends DotLayer<ColumnLayerOptions> {
   public type = DotLayer.LayerType.ColumnLayer;
 
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<IColumnLayerOptions> {
+  public getDefaultOptions(): Partial<ColumnLayerOptions> {
     return deepAssign({}, DotLayer.DefaultOptions, {
       shape: 'cylinder',
     });

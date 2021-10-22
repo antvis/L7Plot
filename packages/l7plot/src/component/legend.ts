@@ -1,15 +1,15 @@
 import { IControlOption } from '@antv/l7-core';
 import { Control } from '@antv/l7-component';
-import { ICategoryLegendOptions, IContinueLegendOptions, CategoryLegend, ContinueLegend } from '@antv/l7plot-component';
+import { CategoryLegendOptions, ContinueLegendOptions, CategoryLegend, ContinueLegend } from '@antv/l7plot-component';
 
 export type LegendType = 'category' | 'continue';
 
 export type LegendItem = {
   type: LegendType;
-  options: ICategoryLegendOptions & IContinueLegendOptions;
+  options: CategoryLegendOptions & ContinueLegendOptions;
 };
 
-export interface ILegendOptions extends Partial<IControlOption> {
+export interface LegendOptions extends Partial<IControlOption> {
   items: LegendItem[];
 }
 
@@ -17,13 +17,13 @@ export class Legend extends Control {
   /**
    * legend 的 schema 配置
    */
-  protected options: ILegendOptions;
+  protected options: LegendOptions;
   /**
    * legendComponents 实例
    */
   private legendComponents: (CategoryLegend | ContinueLegend)[] = [];
 
-  constructor(options: ILegendOptions) {
+  constructor(options: LegendOptions) {
     super(options);
     this.options = options;
     this.legendComponents = this.initLegendComponents(options.items);
@@ -63,7 +63,7 @@ export class Legend extends Control {
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<ILegendOptions> {
+  protected getDefaultOptions(): Partial<LegendOptions> {
     return {
       position: 'bottomleft',
     };

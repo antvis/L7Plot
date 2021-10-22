@@ -1,6 +1,6 @@
 import { pick } from '@antv/util';
 import { Plot } from '../../core/plot';
-import { HexagonOptions } from './interface';
+import { HexagonOptions } from './types';
 import { DEFAULT_OPTIONS } from './constants';
 import { Source } from '../../types';
 import { TextLayer } from '../../layers/text-layer';
@@ -18,7 +18,7 @@ export class Hexagon extends Plot<HexagonOptions> {
   /**
    * 地图类型
    */
-  public type = Plot.MapType.Hexagon;
+  public type = Plot.PlotType.Hexagon;
 
   /**
    * 蜂窝图层

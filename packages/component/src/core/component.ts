@@ -1,9 +1,9 @@
 import { deepMix, each, isString } from '@antv/util';
 import { createDom, modifyCSS } from '@antv/dom-util';
-import { IComponentOptions } from '../types';
+import { ComponentOptions } from '../types';
 import { hasClass } from '../utils/dom';
 
-export abstract class Component<O extends IComponentOptions = IComponentOptions> {
+export abstract class Component<O extends ComponentOptions = ComponentOptions> {
   /**
    * Component 的 schema 配置
    */
@@ -27,7 +27,7 @@ export abstract class Component<O extends IComponentOptions = IComponentOptions>
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<IComponentOptions> {
+  protected getDefaultOptions(): Partial<ComponentOptions> {
     return {
       name: '',
       containerTpl: '<div></div>',
