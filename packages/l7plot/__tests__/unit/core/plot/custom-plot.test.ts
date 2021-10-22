@@ -1,10 +1,10 @@
 import { LayerGroup } from '../../../../src/core/layer/layer-group';
-import { IPlotOptions, Plot, Source } from '../../../../src';
+import { PlotOptions, Plot, Source } from '../../../../src';
 import { createPlot } from '../../../helper/plot';
 
 describe('custom plot', () => {
   it('default-options', () => {
-    type CustomPlotOptions = IPlotOptions;
+    type CustomPlotOptions = PlotOptions;
     class CustomPlot extends Plot<CustomPlotOptions> {
       type = 'custom';
       protected interactionLayers = [];

@@ -1,7 +1,7 @@
-import { IGridAggregation, ISource } from '../../types';
+import { GridAggregation, SourceOptions } from '../../types';
 
 export class MappingSource {
-  static aggregation(source: Partial<ISource>, aggregation: IGridAggregation) {
+  static aggregation(source: Partial<SourceOptions>, aggregation: GridAggregation) {
     const { type = 'grid', radius, method, field } = aggregation;
     const config = { type, size: radius, method, field };
     if (source.transforms) {

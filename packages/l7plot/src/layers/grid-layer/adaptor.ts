@@ -1,8 +1,8 @@
 import { MappingLayer } from '../../adaptor/layer';
 import { ILayer } from '../../types';
-import { IGridLayerOptions } from './interface';
+import { GridLayerOptions } from './types';
 
-export function mappingLayer(layer: ILayer, options: IGridLayerOptions) {
+export function mappingLayer(layer: ILayer, options: GridLayerOptions) {
   const { shape, color, size, style, state } = options;
   // mapping shape
   shape && MappingLayer.shape(layer, shape);

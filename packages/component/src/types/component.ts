@@ -1,4 +1,4 @@
-export interface IComponentOptions {
+export interface ComponentOptions {
   /**
    * 唯一标定组件的 id
    */

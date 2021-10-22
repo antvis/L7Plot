@@ -3,12 +3,12 @@ import { HeatmapLayer as Heatmap } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
-import { IGridLayerOptions } from './interface';
+import { GridLayerOptions } from './types';
 import { ILayer } from '../../types';
 
-export type { IGridLayerOptions };
+export type { GridLayerOptions };
 
-const DEFAULT_OPTIONS: IGridLayerOptions = {
+const DEFAULT_OPTIONS: GridLayerOptions = {
   source: {
     data: [],
     parser: {
@@ -33,7 +33,7 @@ const DEFAULT_OPTIONS: IGridLayerOptions = {
 };
 const LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state'];
 
-export class GridLayer extends PlotLayer<IGridLayerOptions> {
+export class GridLayer extends PlotLayer<GridLayerOptions> {
   /**
    * 默认配置项
    */
@@ -45,7 +45,7 @@ export class GridLayer extends PlotLayer<IGridLayerOptions> {
   /**
    * 图层配置项
    */
-  public options: IGridLayerOptions;
+  public options: GridLayerOptions;
   /**
    * 图层名称
    */
@@ -63,7 +63,7 @@ export class GridLayer extends PlotLayer<IGridLayerOptions> {
    */
   public interaction = false;
 
-  constructor(options: IGridLayerOptions) {
+  constructor(options: GridLayerOptions) {
     super();
     const { name, source } = options;
     this.name = name ? name : uniqueId(this.type);
@@ -79,15 +79,15 @@ export class GridLayer extends PlotLayer<IGridLayerOptions> {
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<IGridLayerOptions> {
+  public getDefaultOptions(): Partial<GridLayerOptions> {
     return DEFAULT_OPTIONS;
   }
 
-  protected mappingLayer(layer: ILayer, options: IGridLayerOptions) {
+  protected mappingLayer(layer: ILayer, options: GridLayerOptions) {
     mappingLayer(layer, options);
   }
 
-  public updateOptions(options: Partial<IGridLayerOptions>) {
+  public updateOptions(options: Partial<GridLayerOptions>) {
     this.options = deepAssign({}, this.options, options);
     this.mappingLayer(this.layer, this.options);
   }

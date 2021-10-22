@@ -1,8 +1,8 @@
 import { MappingLayer } from '../../adaptor/layer';
 import { ILayer } from '../../types';
-import { IHexagonLayerOptions } from './interface';
+import { HexagonLayerOptions } from './types';
 
-export function mappingLayer(layer: ILayer, options: IHexagonLayerOptions) {
+export function mappingLayer(layer: ILayer, options: HexagonLayerOptions) {
   const { shape, color, size, style, state } = options;
   // mapping shape
   shape && MappingLayer.shape(layer, shape);

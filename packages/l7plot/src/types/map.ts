@@ -2,17 +2,16 @@ import { Map as MapboxglMap } from 'mapbox-gl';
 import { IAMapInstance, IMapboxInstance } from '@antv/l7-maps/typings';
 import { IStatusOptions, PositionName, ISourceCFG, MapStyle } from '@antv/l7-core';
 import Source from '@antv/l7-source';
-import { ITooltipOptions } from './tooltip';
-import { ILegendOptions } from './legend';
-import { ILayerMenuControlOptions, IScaleControlOptions, IZoomControlOptions } from './control';
-import { IGridAggregation } from './attr';
+import { TooltipOptions } from './tooltip';
+import { LegendOptions } from './legend';
+import { LayerMenuControlOptions, ScaleControlOptions, ZoomControlOptions } from './control';
+import { GridAggregation } from './attr';
 
-export { MapboxglMap, Source, IStatusOptions };
+export { MapboxglMap, Source };
 
+export type StatusOptions = IStatusOptions;
 export type AMapInstance = AMap.Map & IAMapInstance;
-
 export type MapboxInstance = MapboxglMap & IMapboxInstance;
-
 export type MapInstance = AMapInstance | MapboxInstance;
 
 /**
@@ -26,7 +25,7 @@ export enum BaseMapType {
 /**
  * 地图配置
  */
-export interface IMapConfig {
+export type MapConfig = {
   /**
    * 底图类型
    */
@@ -63,36 +62,36 @@ export interface IMapConfig {
    * 最大缩放等级
    */
   maxZoom?: number;
-}
+};
 
 /**
  * 地图更新配置
  */
-export type UpdateMapConfig = Pick<IMapConfig, 'center' | 'pitch' | 'rotation' | 'zoom' | 'style'>;
+export type UpdateMapConfig = Pick<MapConfig, 'center' | 'pitch' | 'rotation' | 'zoom' | 'style'>;
 
 /**
  * logo 配置
  */
-export interface ILogo {
+export type Logo = {
   position?: PositionName;
   visible?: boolean;
-}
+};
 
 /**
  * 数据配置
  */
-export interface ISource extends ISourceCFG {
+export interface SourceOptions extends ISourceCFG {
   data: any;
   /**
    * 网格聚合
    */
-  aggregation?: IGridAggregation;
+  aggregation?: GridAggregation;
 }
 
 /**
  * 基础 map options 配置
  */
-export interface IMapOptions {
+export interface MapOptions {
   // 地图容器基本配置
   /**
    * 容器宽度
@@ -108,7 +107,7 @@ export interface IMapOptions {
   /**
    * 地图配置
    */
-  readonly map?: IMapConfig;
+  readonly map?: MapConfig;
 
   /**
    * 是否开启抗锯齿
@@ -121,7 +120,7 @@ export interface IMapOptions {
   /**
    * logo 配置
    */
-  readonly logo?: boolean | ILogo;
+  readonly logo?: boolean | Logo;
 
   /**
    * 主题，string 或 object
@@ -132,27 +131,27 @@ export interface IMapOptions {
   /**
    * tooltip 配置项
    */
-  readonly tooltip?: false | ITooltipOptions;
+  readonly tooltip?: false | TooltipOptions;
 
   /**
    * popup 配置项
    */
-  // readonly popup?: false | IPopupOptions;
+  // readonly popup?: false | PopupOptions;
 
   /**
    * 图例 legend 配置项
    */
-  readonly legend?: false | ILegendOptions;
+  readonly legend?: false | LegendOptions;
   /**
    * zoom 配置
    */
-  readonly zoom?: false | IZoomControlOptions;
+  readonly zoom?: false | ZoomControlOptions;
   /**
    * scale 配置
    */
-  readonly scale?: false | IScaleControlOptions;
+  readonly scale?: false | ScaleControlOptions;
   /**
    * layerMenu 配置
    */
-  readonly layerMenu?: false | ILayerMenuControlOptions;
+  readonly layerMenu?: false | LayerMenuControlOptions;
 }

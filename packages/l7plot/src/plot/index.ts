@@ -2,13 +2,13 @@ import { isUndefined } from '@antv/util';
 import { Map } from '../core/map';
 import { Plot } from '../core/plot';
 import { deepAssign } from '../utils';
-import { IL7PlotOptions, IPLotLayer } from '../types';
+import { L7PlotOptions, IPLotLayer } from '../types';
 import { LayerGroup } from '../core/layer/layer-group';
 import { LayerConfigType, LAYERS_MAP, PlotConfigType, PLOTS_MAP } from './types';
 
-const DEFAULT_OPTIONS: Partial<IL7PlotOptions> = {};
+const DEFAULT_OPTIONS: Partial<L7PlotOptions> = {};
 
-export class L7Plot extends Map<IL7PlotOptions> {
+export class L7Plot extends Map<L7PlotOptions> {
   /**
    * 默认的 options 配置项
    */
@@ -19,7 +19,7 @@ export class L7Plot extends Map<IL7PlotOptions> {
    */
   private plots: Plot<any>[] = [];
 
-  constructor(container: string | HTMLDivElement, options: IL7PlotOptions) {
+  constructor(container: string | HTMLDivElement, options: L7PlotOptions) {
     super(options);
     this.container = this.createContainer(container);
 
@@ -34,7 +34,7 @@ export class L7Plot extends Map<IL7PlotOptions> {
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<IL7PlotOptions> {
+  protected getDefaultOptions(): Partial<L7PlotOptions> {
     return deepAssign({}, Map.DefaultOptions, L7Plot.DefaultOptions);
   }
 

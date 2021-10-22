@@ -1,13 +1,13 @@
 import { getLayerStyleAttribute } from '../../../helper/layer';
 import { DotLayer } from '../../../../src/layers/dot-layer';
 import { Source } from '../../../../src/types';
-import { IDotLayerOptions } from '../../../../src/layers/dot-layer/interface';
+import { DotLayerOptions } from '../../../../src/layers/dot-layer';
 
 describe('mapping layer', () => {
   const source = new Source([], { parser: { type: 'json', x: 'x', y: 'y' } });
 
   it('mapping shape', () => {
-    const layerWrapper = new DotLayer<IDotLayerOptions>({
+    const layerWrapper = new DotLayer<DotLayerOptions>({
       source: source,
       shape: 'circle',
     });
@@ -50,7 +50,7 @@ describe('mapping layer', () => {
   });
 
   it('mapping size', () => {
-    const layerWrapper = new DotLayer<IDotLayerOptions>({
+    const layerWrapper = new DotLayer<DotLayerOptions>({
       source: source,
       size: 12,
     });
@@ -89,7 +89,7 @@ describe('mapping layer', () => {
   });
 
   it('mapping color', () => {
-    const layerWrapper = new DotLayer<IDotLayerOptions>({
+    const layerWrapper = new DotLayer<DotLayerOptions>({
       source: source,
       color: 'red',
     });

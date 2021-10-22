@@ -1,10 +1,10 @@
 import { pick } from '@antv/util';
 import { Plot } from '../../core/plot';
-import { AreaOptions } from './interface';
+import { AreaOptions } from './types';
 import { DEFAULT_OPTIONS } from './constants';
 import { AreaLayer } from '../../layers/area-layer';
 import { TextLayer } from '../../layers/text-layer';
-import { ILegendOptions, Source } from '../../types';
+import { LegendOptions, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
 
 export type { AreaOptions };
@@ -18,7 +18,7 @@ export class Area extends Plot<AreaOptions> {
   /**
    * 图表类型
    */
-  public type = Plot.MapType.Area;
+  public type = Plot.PlotType.Area;
 
   /**
    * 填充面图层
@@ -86,7 +86,7 @@ export class Area extends Plot<AreaOptions> {
   /**
    * 实现 legend 配置项
    */
-  public getLegendOptions(): ILegendOptions {
+  public getLegendOptions(): LegendOptions {
     const colorLegendItems = this.areaLayer.getColorLegendItems();
     if (colorLegendItems.length !== 0) {
       return { type: 'category', items: colorLegendItems };

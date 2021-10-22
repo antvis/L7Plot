@@ -1,13 +1,13 @@
 import { DotLayer } from '../../../../src/layers/dot-layer';
 import { LayerGroup } from '../../../../src/core/layer/layer-group';
 import { Source } from '../../../../src/types';
-import { IDotLayerOptions } from '../../../../src/layers/dot-layer/interface';
+import { DotLayerOptions } from '../../../../src/layers/dot-layer';
 
 describe('layer group', () => {
   const layerGroup = new LayerGroup([]);
 
   it('layer', () => {
-    const layer = new DotLayer<IDotLayerOptions>({
+    const layer = new DotLayer<DotLayerOptions>({
       source: new Source([], { parser: { type: 'json', x: 'x', y: 'y' } }),
       size: 12,
       color: '#fff',

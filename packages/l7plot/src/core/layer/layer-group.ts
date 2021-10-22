@@ -2,7 +2,7 @@ import { uniqueId } from '@antv/util';
 import EventEmitter from '@antv/event-emitter';
 import { Scene, IPLotLayer } from '../../types';
 
-export interface ILayerGroupOption {
+export interface LayerGroupOption {
   name?: string;
 }
 
@@ -20,7 +20,7 @@ export class LayerGroup extends EventEmitter {
    */
   public scene: Scene | undefined;
 
-  constructor(layers: IPLotLayer[] = [], option: ILayerGroupOption = {}) {
+  constructor(layers: IPLotLayer[] = [], option: LayerGroupOption = {}) {
     super();
     this.name = option.name ? option.name : uniqueId('layerGroup');
     this.layers = layers;

@@ -1,12 +1,12 @@
 import { MappingLayer } from '../../adaptor/layer';
 import { ILayer } from '../../types';
-import { IAreaLayerOptions } from './interface';
+import { AreaLayerOptions } from './types';
 
 export function mappingLayer(
   layer: ILayer,
   strokeLayer: ILayer,
   highlightLayer: ILayer,
-  options: IAreaLayerOptions
+  options: AreaLayerOptions
 ): void {
   const { color, style, state } = options;
   const fillState = {

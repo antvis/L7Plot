@@ -1,8 +1,8 @@
 import { MappingLayer } from '../../adaptor/layer';
 import { ILayer } from '../../types';
-import { IPrismLayerOptions } from './interface';
+import { PrismLayerOptions } from './types';
 
-export function mappingLayer(layer: ILayer, options: IPrismLayerOptions): void {
+export function mappingLayer(layer: ILayer, options: PrismLayerOptions): void {
   const { color, size, style, state } = options;
   // mapping shape
   MappingLayer.shape(layer, 'extrude');

@@ -1,5 +1,5 @@
 import { pick } from '@antv/util';
-import { ChoroplethOptions, DrillStep, DrillStepConfig } from './interface';
+import { ChoroplethOptions, DrillStep, DrillStepConfig } from './types';
 
 export const isEqualDrillSteps = (newSteps: DrillStep[], oldSteps: DrillStep[]) => {
   if (newSteps.length !== oldSteps.length) {

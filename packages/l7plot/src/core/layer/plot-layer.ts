@@ -1,12 +1,12 @@
 import { pick } from '@antv/util';
 import Source from '@antv/l7-source';
-import { LayerType, IPLotLayer, IPlotLayerConfig } from '../../types/layer';
-import { Scene, ILayer, ILayerConfig, ISource } from '../../types';
+import { LayerType, IPLotLayer, PlotLayerConfig } from '../../types/layer';
+import { Scene, ILayer, ILayerConfig, SourceOptions } from '../../types';
 import { MappingSource } from '../../adaptor/source';
 
 const LayerConfigkeys = ['name', 'zIndex', 'visible', 'minZoom', 'maxZoom', 'pickingBuffer', 'autoFit', 'blend'];
 
-export abstract class PlotLayer<O extends IPlotLayerConfig> implements IPLotLayer {
+export abstract class PlotLayer<O extends PlotLayerConfig> implements IPLotLayer {
   /**
    * 地图图表类型
    */
@@ -32,7 +32,7 @@ export abstract class PlotLayer<O extends IPlotLayerConfig> implements IPLotLaye
    */
   public abstract readonly interaction: boolean;
 
-  public pickLayerConfig<T extends IPlotLayerConfig>(params: T): Partial<ILayerConfig> {
+  public pickLayerConfig<T extends PlotLayerConfig>(params: T): Partial<ILayerConfig> {
     const config = pick<any>(params, LayerConfigkeys);
     return config;
   }
@@ -47,7 +47,7 @@ export abstract class PlotLayer<O extends IPlotLayerConfig> implements IPLotLaye
 
   public abstract updateOptions(options: Partial<O>): void;
 
-  protected setSource(source: ISource | Source) {
+  protected setSource(source: SourceOptions | Source) {
     if (source instanceof Source) {
       this.layer.setSource(source);
     } else {
@@ -57,7 +57,7 @@ export abstract class PlotLayer<O extends IPlotLayerConfig> implements IPLotLaye
     }
   }
 
-  public changeData(source: ISource | Source) {
+  public changeData(source: SourceOptions | Source) {
     this.setSource(source);
   }
 

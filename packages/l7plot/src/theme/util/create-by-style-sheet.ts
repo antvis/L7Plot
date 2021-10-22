@@ -1,13 +1,13 @@
 import * as TOOLTIP_CSS_CONST from '@antv/l7plot-component/dist/lib/tooltip/constants';
 import * as CATEGORY_LEGEND_CSS_CONST from '@antv/l7plot-component/dist/lib/legend/category/constants';
 import * as CONTINUE_LEGEND_CSS_CONST from '@antv/l7plot-component/dist/lib/legend/continue/constants';
-import { IStyleSheet } from '../../types';
+import { StyleSheet } from '../../types';
 
 /**
  * 根据主题样式表生成主题结构
  * @param styleSheet 主题样式表
  */
-export function createThemeByStyleSheet(styleSheet: IStyleSheet): Record<string, any> {
+export function createThemeByStyleSheet(styleSheet: StyleSheet): Record<string, any> {
   const shapeStyles = {
     point: {
       default: {

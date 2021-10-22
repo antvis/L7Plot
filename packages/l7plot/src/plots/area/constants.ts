@@ -1,6 +1,6 @@
 import { Plot } from '../../core/plot';
 import { deepAssign } from '../../utils';
-import { AreaOptions } from './interface';
+import { AreaOptions } from './types';
 
 /**
  * 默认配置项

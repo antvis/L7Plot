@@ -1,9 +1,9 @@
-import { IComponentOptions } from './component';
+import { ComponentOptions } from './component';
 
 /**
  * 列表选项接口
  */
-export interface ITooltipListItem {
+export type TooltipListItem = {
   /**
    * 唯一值，用于查找
    */
@@ -18,14 +18,14 @@ export interface ITooltipListItem {
   value: any;
 
   [key: string]: any;
-}
+};
 
-export type TooltipCustomContent = (title: string, items: ITooltipListItem[]) => string | HTMLElement;
+export type TooltipCustomContent = (title: string, items: TooltipListItem[]) => string | HTMLElement;
 
 /**
  * Tooltip 配置接口
  */
-export interface ITooltipOptions extends IComponentOptions {
+export interface TooltipOptions extends ComponentOptions {
   /**
    * 标题
    */
@@ -37,7 +37,7 @@ export interface ITooltipOptions extends IComponentOptions {
   /**
    * 列表项集合
    */
-  items: ITooltipListItem[];
+  items: TooltipListItem[];
   /**
    * 列表项的模板
    */

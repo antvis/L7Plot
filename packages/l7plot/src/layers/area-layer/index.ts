@@ -3,11 +3,11 @@ import { PolygonLayer, LineLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
-import { IAreaLayerOptions, ISource } from './interface';
-import { ILayer, IMouseEvent, Scene, Source } from '../../types';
+import { AreaLayerOptions, AreaLayerSourceOptions } from './types';
+import { ILayer, MouseEvent, Scene, Source } from '../../types';
 import { getColorLegendItems } from '../dot-layer/helper';
 
-export type { IAreaLayerOptions };
+export type { AreaLayerOptions };
 
 const DEFAULT_OPTIONS = {
   state: {
@@ -16,7 +16,7 @@ const DEFAULT_OPTIONS = {
 };
 const LAYER_OPTIONS_KEYS = ['autoFit', 'color', 'style', 'state'];
 
-export class AreaLayer extends PlotLayer<IAreaLayerOptions> {
+export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   /**
    * 默认配置项
    */
@@ -28,7 +28,7 @@ export class AreaLayer extends PlotLayer<IAreaLayerOptions> {
   /**
    * 图层配置项
    */
-  public options: IAreaLayerOptions;
+  public options: AreaLayerOptions;
   /**
    * 图层名称
    */
@@ -54,7 +54,7 @@ export class AreaLayer extends PlotLayer<IAreaLayerOptions> {
    */
   public interaction = true;
 
-  constructor(options: IAreaLayerOptions) {
+  constructor(options: AreaLayerOptions) {
     super();
     const { name, source } = options;
     this.name = name ? name : uniqueId(this.type);
@@ -73,15 +73,15 @@ export class AreaLayer extends PlotLayer<IAreaLayerOptions> {
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<IAreaLayerOptions> {
+  public getDefaultOptions(): Partial<AreaLayerOptions> {
     return DEFAULT_OPTIONS;
   }
 
-  private mappingLayer(options: IAreaLayerOptions) {
+  private mappingLayer(options: AreaLayerOptions) {
     mappingLayer(this.layer, this.strokeLayer, this.highlightLayer, options);
   }
 
-  protected setSource(source: ISource | Source) {
+  protected setSource(source: AreaLayerSourceOptions | Source) {
     super.setSource(source);
     this.setStrokeLayerSource();
     this.highlightLayer.source({ type: 'FeatureCollection', features: [] });
@@ -133,7 +133,7 @@ export class AreaLayer extends PlotLayer<IAreaLayerOptions> {
     scene.removeLayer(this.highlightLayer);
   }
 
-  public updateOptions(options: Partial<IAreaLayerOptions>) {
+  public updateOptions(options: Partial<AreaLayerOptions>) {
     this.options = deepAssign({}, this.options, options);
     this.mappingLayer(this.options);
   }

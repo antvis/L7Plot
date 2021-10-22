@@ -1,14 +1,14 @@
-import { IPolygonLayerConfig } from '../../types/layer';
+import { PolygonLayerConfig } from '../../types/layer';
 import { ISourceCFG, Source } from '../../types';
 
 /**
  * 数据配置
  */
-export interface ISource extends Pick<ISourceCFG, 'parser' | 'transforms'> {
+export interface AreaLayerSourceOptions extends Pick<ISourceCFG, 'parser' | 'transforms'> {
   data: any;
 }
 
-interface IAreaLayerStyle {
+type AreaLayerStyle = {
   // 填充透明度
   opacity?: number;
   // 描边
@@ -22,31 +22,31 @@ interface IAreaLayerStyle {
   lineDash?: [number, number];
   // 描边透明度
   lineOpacity?: number;
-}
+};
 
-interface IAreaLayerActiveOptions {
+type AreaLayerActiveOptions = {
   // 填充颜色
   fill: string;
   // 描边颜色
   stroke: string;
   // 描边的宽度
   lineWidth?: number;
-}
+};
 
-export interface IAreaLayerOptions extends Omit<IPolygonLayerConfig, 'style' | 'state' | 'shape' | 'size'> {
+export interface AreaLayerOptions extends Omit<PolygonLayerConfig, 'style' | 'state' | 'shape' | 'size'> {
   /**
    * 具体的数据
    */
-  source: ISource | Source;
+  source: AreaLayerSourceOptions | Source;
   /**
    * 图层样式
    */
-  style?: IAreaLayerStyle;
+  style?: AreaLayerStyle;
   /**
    * 交互反馈
    */
   state?: {
-    active?: boolean | IAreaLayerActiveOptions;
-    select?: boolean | IAreaLayerActiveOptions;
+    active?: boolean | AreaLayerActiveOptions;
+    select?: boolean | AreaLayerActiveOptions;
   };
 }

@@ -1,8 +1,8 @@
 import { MappingLayer } from '../../adaptor/layer';
 import { ILayer } from '../../types';
-import { IDotLayerOptions } from './interface';
+import { DotLayerOptions } from './types';
 
-export function mappingLayer(layer: ILayer, options: IDotLayerOptions): void {
+export function mappingLayer(layer: ILayer, options: DotLayerOptions): void {
   const { shape, color, size, style, state, animate } = options;
   // mapping shape
   shape && MappingLayer.shape(layer, shape);

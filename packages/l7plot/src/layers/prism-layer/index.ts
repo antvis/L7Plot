@@ -3,16 +3,16 @@ import { PolygonLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
-import { IPrismLayerOptions } from './interface';
+import { PrismLayerOptions } from './types';
 import { ILayer } from '../../types';
 import { getColorLegendItems } from '../dot-layer/helper';
 
-export type { IPrismLayerOptions };
+export type { PrismLayerOptions };
 
 const DEFAULT_OPTIONS = {};
 const LAYER_OPTIONS_KEYS = ['autoFit', 'color', 'size', 'style', 'state'];
 
-export class PrismLayer extends PlotLayer<IPrismLayerOptions> {
+export class PrismLayer extends PlotLayer<PrismLayerOptions> {
   /**
    * 默认配置项
    */
@@ -24,7 +24,7 @@ export class PrismLayer extends PlotLayer<IPrismLayerOptions> {
   /**
    * 图层配置项
    */
-  public options: IPrismLayerOptions;
+  public options: PrismLayerOptions;
   /**
    * 图层名称
    */
@@ -42,7 +42,7 @@ export class PrismLayer extends PlotLayer<IPrismLayerOptions> {
    */
   public interaction = true;
 
-  constructor(options: IPrismLayerOptions) {
+  constructor(options: PrismLayerOptions) {
     super();
     const { name, source } = options;
     this.name = name ? name : uniqueId(this.type);
@@ -58,15 +58,15 @@ export class PrismLayer extends PlotLayer<IPrismLayerOptions> {
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<IPrismLayerOptions> {
+  public getDefaultOptions(): Partial<PrismLayerOptions> {
     return DEFAULT_OPTIONS;
   }
 
-  protected mappingLayer(layer: ILayer, options: IPrismLayerOptions) {
+  protected mappingLayer(layer: ILayer, options: PrismLayerOptions) {
     mappingLayer(layer, options);
   }
 
-  public updateOptions(options: Partial<IPrismLayerOptions>) {
+  public updateOptions(options: Partial<PrismLayerOptions>) {
     this.options = deepAssign({}, this.options, options);
     this.mappingLayer(this.layer, this.options);
   }
