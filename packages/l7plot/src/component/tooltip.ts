@@ -8,7 +8,7 @@ import {
   TooltipListItem,
 } from '@antv/l7plot-component';
 import { isEqual, get as getValueByPath } from 'lodash-es';
-import { IPLotLayer, ILngLat, TooltipAnchorType, Event, TooltipOptions, MouseEvent, ITooltipItem } from '../types';
+import { IPLotLayer, ILngLat, TooltipAnchorType, Event, TooltipOptions, MouseEvent, TooltipItem } from '../types';
 import { deepAssign } from '../utils';
 
 const TRIGGER_LIST = ['mousemove', 'click'];
@@ -134,7 +134,7 @@ export class Tooltip extends EventEmitter {
         throw new Error('customItems return array');
       }
     } else if (items) {
-      items.forEach((item: string | ITooltipItem) => {
+      items.forEach((item: string | TooltipItem) => {
         if (isString(item)) {
           const name = item.split('.').pop() || item;
           const value = getValueByPath(properties, item);

@@ -4,7 +4,7 @@ import { PlotOptions, ISourceCFG } from '../../types';
 /**
  * GeoJson 数据格式
  */
-type GeoJson = { type: 'FeatureCollection'; features: any[] };
+export type GeoJson = { type: 'FeatureCollection'; features: any[] };
 
 /**
  * 地理元数据关联
@@ -112,7 +112,7 @@ export interface ChoroplethOptions extends PlotOptions, AreaLayerOptions {
   /**
    * 行政地理数据静态服务址
    */
-  url?: string;
+  geoUrl?: string;
   /**
    * 具体的数据
    */

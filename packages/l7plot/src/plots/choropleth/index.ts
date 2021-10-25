@@ -9,6 +9,7 @@ import {
   DrillStack,
   ViewLevel,
   DrillStepConfig,
+  GeoJson,
 } from './types';
 import { DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS, AREA_URL } from './constants';
 import { AreaLayer } from '../../layers/area-layer';
@@ -34,11 +35,11 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 国界数据
    */
-  private chinaBoundaryData = { type: 'FeatureCollection', features: [] };
+  private chinaBoundaryData: GeoJson = { type: 'FeatureCollection', features: [] };
   /**
    * 当前行政数据数据
    */
-  private currentDistrictData = { type: 'FeatureCollection', features: [] };
+  private currentDistrictData: GeoJson = { type: 'FeatureCollection', features: [] };
   /**
    * 国界图层
    */
@@ -76,6 +77,22 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   }
 
   /**
+   * 渲染
+   */
+  public render() {
+    if (this.inited) {
+      this.updateLayers(this.options);
+      this.initComponents();
+    } else {
+      const layerGroup = this.createLayers(this.source);
+      this.layerGroup = layerGroup;
+      this.onLayersLoaded();
+      layerGroup.addTo(this.scene);
+    }
+    this.initLayersEvent();
+  }
+
+  /**
    * 更新: 更新配置且重新渲染
    */
   public update(options: Partial<ChoroplethOptions>) {
@@ -91,7 +108,8 @@ export class Choropleth extends Plot<ChoroplethOptions> {
       this.render();
     };
     if (options.viewLevel && !isEqual(this.lastOptions.viewLevel, this.options.viewLevel)) {
-      this.getInitDistrictData().then(() => {
+      const geoData = options.source?.joinBy.geoData;
+      this.getInitDistrictData(geoData).then(() => {
         callback();
       });
     } else {
@@ -112,7 +130,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   protected parserSourceConfig(source: ChoroplethSourceOptions) {
     const { data: joinData, joinBy, ...sourceCFG } = source;
     const { sourceField, geoField: targetField, geoData } = joinBy;
-    const data = geoData || this.currentDistrictData || { type: 'FeatureCollection', features: [] };
+    const data = geoData;
     const config = { type: 'join', sourceField, targetField, data: joinData };
     if (sourceCFG.transforms) {
       sourceCFG.transforms.push(config);
@@ -139,8 +157,8 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    */
   public changeData(data: any[], cfg?: Partial<Omit<ChoroplethSourceOptions, 'data'>>) {
     this.options.source = deepAssign({}, this.options.source, { data, ...cfg });
-    const { data: currentDistrictData, sourceCFG } = this.parserSourceConfig(this.options.source);
-    this.source.setData(currentDistrictData, sourceCFG);
+    const { data: geoData, sourceCFG } = this.parserSourceConfig(this.options.source);
+    this.source.setData(geoData, sourceCFG);
   }
 
   /**
@@ -227,7 +245,17 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    * 初始化钻取事件
    */
   private initDrillEvent() {
-    if (!this.options.drill) return;
+    // 更新：取消上次绑定事件
+    if (this.lastOptions.drill) {
+      const { triggerUp = 'unclick', triggerDown = 'click' } = this.lastOptions.drill;
+      this.fillAreaLayer.off(triggerUp, this.onDrillUpHander);
+      this.fillAreaLayer.off(triggerDown, this.onDrillDownHander);
+    }
+    // 没有下钻
+    if (!this.options.drill) {
+      return;
+    }
+
     const { steps, triggerUp = 'unclick', triggerDown = 'click' } = this.options.drill;
     const dillSteps = steps.map((step: DrillStep | DrillStep['level']) => {
       if (typeof step === 'string') {
@@ -244,12 +272,20 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     // 初始化或钻取路径更新时
     if (!isEqualDrillSteps(dillSteps, this.drillSteps)) {
       this.drillSteps = dillSteps;
+      this.drillStacks = [];
     }
 
-    // 下钻事件
-    this.fillAreaLayer.on(triggerDown, this.onDrillDownHander);
     // 上卷事件
     this.fillAreaLayer.on(triggerUp, this.onDrillUpHander);
+    // 下钻事件
+    this.fillAreaLayer.on(triggerDown, this.onDrillDownHander);
+  }
+
+  /**
+   * 重置钻取缓存数据
+   */
+  private resetDrill() {
+    this.drillStacks = [];
   }
 
   /**
@@ -273,7 +309,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     if (cacheArea) {
       return cacheArea;
     }
-    const baseUrl = this.options.url || AREA_URL;
+    const baseUrl = this.options.geoUrl || AREA_URL;
     const response = await fetch(`${baseUrl}/${level}/${fileName}.json`);
     const data = response.json();
     registerCacheArea(fileName, data);
@@ -283,11 +319,10 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 请求初始化区域数据
    */
-  private async getInitDistrictData() {
+  private async getInitDistrictData(geoData?: GeoJson) {
     const fetchChinaBoundaryData = this.fetchData('country', 'china', 'boundary');
     const { level, adcode, granularity = DEFAULT_AREA_GRANULARITY[level] } = this.options.viewLevel;
     console.log(' level, adcode, granularity: ', level, adcode, granularity);
-    const geoData = this.options.source.joinBy.geoData;
     const fetchCurrentDistrictData = geoData ? Promise.resolve(geoData) : this.fetchData(level, adcode, granularity);
 
     try {
@@ -295,6 +330,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
         fetchChinaBoundaryData,
         fetchCurrentDistrictData,
       ]);
+      this.options.source = deepAssign({}, this.options.source, { joinBy: { geoData: this.currentDistrictData } });
     } catch (err) {
       throw new Error(`Failed to get district data，${err}`);
     }
@@ -323,7 +359,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     // 已开始下钻
     const from = this.drillStacks.slice(-1)[0];
     const depth = this.drillStacks.length - 1;
-    const { level, granularity = 'city', ...drillConfig } = this.drillSteps[depth];
+    const { level, granularity = DEFAULT_AREA_GRANULARITY[level], ...drillConfig } = this.drillSteps[depth];
 
     const downParams = {
       from: { level: from.level, adcode: from.adcode, granularity: from.granularity },
@@ -331,10 +367,10 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     };
     const callback = (config: DrillStepConfig = {}) => {
       const view = { level, adcode, granularity };
-      const options = deepAssign({}, drillConfig, config);
-      this.changeView(view, options).then((drillLastStack) => {
-        if (drillLastStack) {
-          this.drillStacks.push(drillLastStack);
+      const mergeConfig = deepAssign({}, drillConfig, config);
+      this.changeView(view, mergeConfig).then((drillData) => {
+        if (drillData) {
+          this.drillStacks.push(drillData);
           this.emit('drilldown', downParams);
         }
       });
@@ -357,18 +393,21 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     if (isTopDrillStack) {
       return;
     }
-    const from = this.drillStacks.pop() as DrillStack;
-    const to = this.drillStacks.slice(-1)[0];
+
+    const lastIndex = this.drillStacks.length - 1;
+    const from = this.drillStacks[lastIndex];
+    const to = this.drillStacks[lastIndex - 1];
     const upParams = {
       from: { level: from.level, adcode: from.adcode, granularity: from.granularity },
       to: { level: to.level, adcode: to.adcode, granularity: to.granularity },
     };
     const callback = (config: DrillStepConfig = {}) => {
       const view = upParams.to;
-      const options = deepAssign({}, to.config, config);
-      this.changeView(view, options).then((drillLastStack) => {
-        if (drillLastStack) {
+      const mergeConfig = deepAssign({}, to.config, config);
+      this.changeView(view, mergeConfig).then((drillData) => {
+        if (drillData) {
           this.emit('drillup', upParams);
+          this.drillStacks.pop();
         }
       });
     };
@@ -384,47 +423,53 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    * 向下钻取方法
    */
   public drillDown(view: ViewLevel, config: DrillStepConfig = {}) {
-    this.changeView(view, config);
-    // .then((drillLastStack) => {
-    //   this.drillStacks.push(drillLastStack);
-    // });
+    this.changeView(view, config).then((drillData) => {
+      drillData && this.drillStacks.push(drillData);
+    });
   }
 
   /**
    * 向上钻取方法
    */
-  public drillUp(view: ViewLevel, config: DrillStepConfig = {}) {
-    this.changeView(view, config);
+  public drillUp(config: DrillStepConfig = {}) {
+    // 已经上卷到最高层级
+    const isTopDrillStack = this.drillStacks.length === 0 || this.drillStacks.length === 1;
+    if (isTopDrillStack) {
+      return;
+    }
+    const lastIndex = this.drillStacks.length - 1;
+    const { config: drillConfig, ...view } = this.drillStacks[lastIndex - 1];
+    const mergeConfig = deepAssign({}, drillConfig, config);
+    this.changeView(view, mergeConfig);
+    this.drillStacks.pop();
   }
 
   /**
    * 更新显示区域
    */
-  public changeView(view: ViewLevel, config: DrillStepConfig = {}) {
+  public async changeView(view: ViewLevel, config: DrillStepConfig = {}) {
     const { level, adcode, granularity = DEFAULT_AREA_GRANULARITY[level] } = view;
-    return this.fetchData(level, adcode, granularity).then((currentDistrictData) => {
-      if (!currentDistrictData.features.length) return;
-      const drillLastStack: DrillStack = {
-        level,
-        adcode,
-        granularity,
-        config: deepAssign({}, getDrillStepDefaultConfig(this.options), config),
-      };
-      const { data = [], ...sourceConfig } = drillLastStack.config.source || {};
-      this.currentDistrictData = currentDistrictData;
-      this.changeData(data, sourceConfig);
-      this.render();
-      // // 钻取配置不一样需要重新映射
-      // if (!isEqual(drillLastStack.config, from.config)) {
-      //   const { color, style, state, label, tooltip } = drillLastStack.config;
-      //   this.fillAreaLayer.updateOptions({ color, style, state });
-      //   this.labelLayer?.updateOptions({ ...label });
-      //   if (tooltip) {
-      //     this.tooltip?.update(tooltip);
-      //   }
-      // }
-      // this.options.viewLevel = view;
-      return drillLastStack;
+    const geoData = await this.fetchData(level, adcode, granularity);
+    if (!geoData.features.length) return;
+    const mergeConfig = deepAssign({}, getDrillStepDefaultConfig(this.options), config, {
+      source: { joinBy: { geoData } },
     });
+    this.update(mergeConfig);
+    // // 钻取配置不一样需要重新映射
+    // isEqual(mergeConfig, from.config)
+    // const { color, style, state, label, tooltip } = mergeConfig;
+    // this.fillAreaLayer.updateOptions({ color, style, state });
+    // this.labelLayer?.updateOptions({ ...label });
+    // if (tooltip) {
+    //   this.tooltip?.update(tooltip);
+    // }
+
+    const drillData: DrillStack = {
+      level,
+      adcode,
+      granularity,
+      config: mergeConfig,
+    };
+    return drillData;
   }
 }
