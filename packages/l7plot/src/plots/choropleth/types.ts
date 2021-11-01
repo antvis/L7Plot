@@ -4,7 +4,7 @@ import { PlotOptions, ISourceCFG } from '../../types';
 /**
  * GeoJson 数据格式
  */
-type GeoJson = { type: 'FeatureCollection'; features: any[] };
+export type GeoJson = { type: 'FeatureCollection'; features: any[] };
 
 /**
  * 地理元数据关联
@@ -82,6 +82,10 @@ export type DrillStep = DrillStepConfig & {
  */
 export type Drill = {
   /**
+   * 是否启用下钻
+   */
+  enabled?: boolean;
+  /**
    * 钻取维度顺序
    */
   steps: DrillStep[] | DrillStep['level'][];
@@ -113,20 +117,26 @@ export interface ChoroplethOptions extends PlotOptions, AreaLayerOptions {
    * 行政地理数据静态服务址
    */
   url?: string;
+
   /**
    * 具体的数据
    */
   source: ChoroplethSourceOptions;
 
   /**
-   * 初始化行政级别及范围
+   * 行政级别及范围
    */
   viewLevel: ViewLevel;
 
   /**
+   * 中国国界线
+   */
+  chinaBorder?: boolean;
+
+  /**
    * 数据钻取
    */
-  drill?: false | Drill;
+  drill?: Drill;
 }
 
 /**

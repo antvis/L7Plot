@@ -18,8 +18,6 @@ class Drill extends Component {
         pitch: 0,
       },
 
-      // url: 'http://127.0.0.1:8080',
-
       source: {
         data: [],
         joinBy: {
@@ -33,28 +31,20 @@ class Drill extends Component {
         adcode: '100000',
         granularity: 'province',
       },
-      // chinaBorder: false,
       autoFit: true,
 
       drill: {
-        // steps: ['province', 'city', 'district'],
-        steps: [
-          {
-            level: 'province',
-            // source: { data: [] },
-            // color: { field: 'name' },
-          },
-          {
-            level: 'city',
-            // source: { data: [] },
-            // color: { field: 'name' },
-          },
-          {
-            level: 'district',
-            source: { data: [] },
-            color: { field: 'name' },
-          },
-        ],
+        steps: ['province', 'city', 'district'],
+        onDown: (from, to, callback) => {
+          const { level, adcode, granularity } = to;
+          this.map?.drillDown(
+            { level, adcode, granularity },
+            { source: { data: [], joinBy: { sourceField: 'code' } } }
+          );
+        },
+        onUp: (from, to, callback) => {
+          this.map?.drillUp();
+        },
       },
 
       color: {
@@ -82,7 +72,6 @@ class Drill extends Component {
           padding: [5, 5],
         },
       },
-      // state: { active: true, select: false },
       tooltip: {
         items: ['name', 'adcode'],
       },
@@ -92,9 +81,6 @@ class Drill extends Component {
       scale: {
         position: 'bottomright',
       },
-      // layerMenu: {
-      //   position: 'topright',
-      // },
       legend: {
         position: 'bottomleft',
       },

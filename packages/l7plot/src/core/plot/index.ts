@@ -166,14 +166,14 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
    * 更新: 更新配置且重新渲染
    */
   public update(options: Partial<O>) {
-    if (options.map && !isEqual(options.map, this.options.map)) {
+    this.updateOption(options);
+    if (options.map && !isEqual(this.lastOptions.map, this.options.map)) {
       this.updateMap(options.map);
     }
-    if (options.source && !isEqual(options.source, this.options.source)) {
+    if (options.source && !isEqual(this.lastOptions.source, this.options.source)) {
       const { data, ...sourceConfig } = options.source;
       this.changeData(data, sourceConfig);
     }
-    this.updateOption(options);
     this.render();
   }
 

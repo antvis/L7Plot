@@ -1,65 +1,41 @@
 import React, { Component } from 'react';
-import { Choropleth } from '@antv/l7plot';
+import { Area } from '@antv/l7plot';
 
-class Drill extends Component {
-  public map: Choropleth | undefined;
+class ChinaMap extends Component {
+  public map: Area | undefined;
 
   constructor(props) {
     super(props);
   }
 
   async initMap() {
-    const chinaMap = new Choropleth('container', {
+    const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/pFamPtMl1f/xx.json');
+    const data = await response.json();
+    const geoJson = {
+      features: data.features.filter((item) => item.properties.philosophers.length),
+      type: 'FeatureCollection',
+    };
+    const chinaMap = new Area('container', {
       map: {
         type: 'mapbox',
-        style: 'blank',
+        style: 'light',
         center: [120.19382669582967, 30.258134],
         zoom: 3,
         pitch: 0,
       },
 
-      // url: 'http://127.0.0.1:8080',
-
       source: {
-        data: [],
-        joinBy: {
-          sourceField: 'code',
-          geoField: 'adcode',
+        data: geoJson,
+        parser: {
+          type: 'geojson',
         },
       },
-
-      viewLevel: {
-        level: 'country',
-        adcode: '100000',
-        granularity: 'province',
-      },
-      // chinaBorder: false,
       autoFit: true,
 
-      drill: {
-        // steps: ['province', 'city', 'district'],
-        steps: [
-          {
-            level: 'province',
-            // source: { data: [] },
-            // color: { field: 'name' },
-          },
-          {
-            level: 'city',
-            // source: { data: [] },
-            // color: { field: 'name' },
-          },
-          {
-            level: 'district',
-            source: { data: [] },
-            color: { field: 'name' },
-          },
-        ],
-      },
-
       color: {
-        field: 'name',
-        value: ['#B8E1FF', '#7DAAFF', '#3D76DD', '#0047A5', '#001D70'],
+        field: 'philosopherSum',
+        value: ['#B8E1FF', '#7DAAFF', '#3D76DD', '#0047A5'],
+        scale: { type: 'quantize' },
       },
       style: {
         opacity: 0.8,
@@ -89,9 +65,9 @@ class Drill extends Component {
       zoom: {
         position: 'bottomright',
       },
-      scale: {
-        position: 'bottomright',
-      },
+      // scale: {
+      //   position: 'bottomright',
+      // },
       // layerMenu: {
       //   position: 'topright',
       // },
@@ -127,4 +103,4 @@ class Drill extends Component {
   }
 }
 
-export default Drill;
+export default ChinaMap;

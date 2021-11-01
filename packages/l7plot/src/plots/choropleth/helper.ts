@@ -8,7 +8,7 @@ export const isEqualDrillSteps = (newSteps: DrillStep[], oldSteps: DrillStep[]) 
 
   for (let index = 0; index < newSteps.length; index++) {
     const { level, granularity } = newSteps[index];
-    if (oldSteps[index].level !== level || oldSteps[index].level !== granularity) {
+    if (oldSteps[index].level !== level || oldSteps[index].granularity !== granularity) {
       return false;
     }
   }

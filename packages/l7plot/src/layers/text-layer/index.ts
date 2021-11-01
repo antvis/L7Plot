@@ -1,4 +1,4 @@
-import { uniqueId } from '@antv/util';
+import { uniqueId, isBoolean } from '@antv/util';
 import { PointLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { TextLayerConfig } from '../../types/layer';
@@ -65,8 +65,12 @@ export class TextLayer extends PlotLayer<TextLayerOptions> {
     mappingLayer(layer, options);
   }
 
-  public updateOptions(options: TextLayerConfig) {
+  public updateOptions(options: Partial<TextLayerConfig>) {
     this.options = deepAssign({}, this.options, options);
     this.mappingLayer(this.layer, this.options);
+
+    if (isBoolean(options.visible)) {
+      options.visible ? this.show() : this.hide();
+    }
   }
 }
