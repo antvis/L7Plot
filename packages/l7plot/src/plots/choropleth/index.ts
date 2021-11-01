@@ -43,11 +43,11 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 国界图层
    */
-  public chinaBoundaryLayer!: LinesLayer;
+  public chinaBoundaryLayer: LinesLayer | undefined;
   /**
    * 国界争议图层
    */
-  public chinaDisputeBoundaryLayer!: LinesLayer;
+  public chinaDisputeBoundaryLayer: LinesLayer | undefined;
   /**
    * 填充面图层
    */
@@ -61,7 +61,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    */
   private drillSteps: DrillStep[] = [];
   /**
-   * 行政层级数据
+   * 钻取行政栈数据
    */
   private drillStacks: DrillStack[] = [];
 
@@ -100,20 +100,28 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     if (options.map && !isEqual(this.lastOptions.map, this.options.map)) {
       this.updateMap(options.map);
     }
-    const callback = () => {
+    // 下钻路径发生更新
+    if (
+      options.drill &&
+      options.drill.enabled !== false &&
+      !isEqual(this.lastOptions.drill?.steps, this.options.drill?.steps)
+    ) {
+      this.drillReset();
+    }
+    // 行政级别及范围发生更新
+    if (options.viewLevel && !isEqual(this.lastOptions.viewLevel, this.options.viewLevel)) {
+      const geoData = options.source?.joinBy.geoData;
+      this.getDistrictData(geoData).then(() => {
+        const { data, ...sourceConfig } = this.options.source;
+        this.changeData(data, sourceConfig);
+        this.render();
+      });
+    } else {
       if (options.source && !isEqual(this.lastOptions.source, this.options.source)) {
         const { data, ...sourceConfig } = this.options.source;
         this.changeData(data, sourceConfig);
       }
       this.render();
-    };
-    if (options.viewLevel && !isEqual(this.lastOptions.viewLevel, this.options.viewLevel)) {
-      const geoData = options.source?.joinBy.geoData;
-      this.getInitDistrictData(geoData).then(() => {
-        callback();
-      });
-    } else {
-      callback();
     }
   }
 
@@ -165,16 +173,21 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    * 创建图层
    */
   protected createLayers(source: Source): LayerGroup {
-    const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(this.chinaBoundaryData);
-    this.chinaBoundaryLayer = chinaBoundaryLayer;
-    this.chinaDisputeBoundaryLayer = chinaDisputeBoundaryLayer;
     this.fillAreaLayer = new AreaLayer({
       name: 'fillAreaLayer',
       source,
       ...pick<any>(this.options, AreaLayer.LayerOptionsKeys),
     });
 
-    const layerGroup = new LayerGroup([this.fillAreaLayer, this.chinaBoundaryLayer, this.chinaDisputeBoundaryLayer]);
+    const layerGroup = new LayerGroup([this.fillAreaLayer]);
+
+    if (this.options.chinaBorder) {
+      const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(this.chinaBoundaryData);
+      this.chinaBoundaryLayer = chinaBoundaryLayer;
+      this.chinaDisputeBoundaryLayer = chinaDisputeBoundaryLayer;
+      layerGroup.addlayer(this.chinaBoundaryLayer);
+      layerGroup.addlayer(this.chinaDisputeBoundaryLayer);
+    }
 
     if (this.options.label) {
       this.labelLayer = this.createLabelLayer(source, this.options.label);
@@ -220,6 +233,23 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     const fillAreaLayerConfig = pick<any>(options, AreaLayer.LayerOptionsKeys);
     this.fillAreaLayer.updateOptions(fillAreaLayerConfig);
 
+    if (options.chinaBorder) {
+      if (!this.chinaBoundaryLayer) {
+        const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(this.chinaBoundaryData);
+        this.chinaBoundaryLayer = chinaBoundaryLayer;
+        this.chinaDisputeBoundaryLayer = chinaDisputeBoundaryLayer;
+        this.layerGroup.addlayer(this.chinaBoundaryLayer);
+        this.layerGroup.addlayer(this.chinaDisputeBoundaryLayer);
+      }
+    } else {
+      if (this.chinaBoundaryLayer) {
+        this.layerGroup.removelayer(this.chinaBoundaryLayer);
+      }
+      if (this.chinaDisputeBoundaryLayer) {
+        this.layerGroup.removelayer(this.chinaDisputeBoundaryLayer);
+      }
+    }
+
     if (options.label) {
       if (this.labelLayer) {
         this.labelLayer.updateOptions({ ...options.label });
@@ -252,7 +282,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
       this.fillAreaLayer.off(triggerDown, this.onDrillDownHander);
     }
     // 没有下钻
-    if (!this.options.drill) {
+    if (!this.options.drill || this.options.drill.enabled === false) {
       return;
     }
 
@@ -284,7 +314,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 重置钻取缓存数据
    */
-  private resetDrill() {
+  private drillReset() {
     this.drillStacks = [];
   }
 
@@ -309,7 +339,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     if (cacheArea) {
       return cacheArea;
     }
-    const baseUrl = this.options.geoUrl || AREA_URL;
+    const baseUrl = this.options.url || AREA_URL;
     const response = await fetch(`${baseUrl}/${level}/${fileName}.json`);
     const data = response.json();
     registerCacheArea(fileName, data);
@@ -319,17 +349,26 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 请求初始化区域数据
    */
-  private async getInitDistrictData(geoData?: GeoJson) {
-    const fetchChinaBoundaryData = this.fetchData('country', 'china', 'boundary');
+  private async getInitDistrictData() {
+    const fetchChinaBoundaryData = this.fetchData('country', '100000', 'boundary');
+    const geoData = this.options.source?.joinBy.geoData;
+
+    try {
+      [this.chinaBoundaryData] = await Promise.all([fetchChinaBoundaryData, this.getDistrictData(geoData)]);
+    } catch (err) {
+      throw new Error(`Failed to get china boundary data，${err}`);
+    }
+  }
+
+  /**
+   * 请求区域数据
+   */
+  private async getDistrictData(geoData?: GeoJson) {
     const { level, adcode, granularity = DEFAULT_AREA_GRANULARITY[level] } = this.options.viewLevel;
-    console.log(' level, adcode, granularity: ', level, adcode, granularity);
     const fetchCurrentDistrictData = geoData ? Promise.resolve(geoData) : this.fetchData(level, adcode, granularity);
 
     try {
-      [this.chinaBoundaryData, this.currentDistrictData] = await Promise.all([
-        fetchChinaBoundaryData,
-        fetchCurrentDistrictData,
-      ]);
+      this.currentDistrictData = await fetchCurrentDistrictData;
       this.options.source = deepAssign({}, this.options.source, { joinBy: { geoData: this.currentDistrictData } });
     } catch (err) {
       throw new Error(`Failed to get district data，${err}`);
@@ -406,8 +445,8 @@ export class Choropleth extends Plot<ChoroplethOptions> {
       const mergeConfig = deepAssign({}, to.config, config);
       this.changeView(view, mergeConfig).then((drillData) => {
         if (drillData) {
-          this.emit('drillup', upParams);
           this.drillStacks.pop();
+          this.emit('drillup', upParams);
         }
       });
     };
@@ -452,11 +491,12 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     const geoData = await this.fetchData(level, adcode, granularity);
     if (!geoData.features.length) return;
     const mergeConfig = deepAssign({}, getDrillStepDefaultConfig(this.options), config, {
+      viewLevel: { level, adcode, granularity },
       source: { joinBy: { geoData } },
     });
     this.update(mergeConfig);
-    // // 钻取配置不一样需要重新映射
-    // isEqual(mergeConfig, from.config)
+
+    // // 钻取配置不一样需要重新映射 isEqual
     // const { color, style, state, label, tooltip } = mergeConfig;
     // this.fillAreaLayer.updateOptions({ color, style, state });
     // this.labelLayer?.updateOptions({ ...label });

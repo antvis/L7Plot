@@ -16,6 +16,7 @@ export const DEFAULT_OPTIONS: Partial<ChoroplethOptions> = deepAssign({}, Plot.D
     level: 'country',
     adcode: '100000',
   },
+  chinaBorder: true,
 });
 
 /**

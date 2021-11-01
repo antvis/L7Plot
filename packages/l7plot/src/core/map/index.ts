@@ -243,7 +243,7 @@ export abstract class Map<O extends MapOptions> {
       this.scene.setRotation(rotation);
     }
 
-    if (style && style !== this.options.map?.style) {
+    if (style && style !== this.lastOptions.map?.style) {
       this.scene.setMapStyle(style);
     }
 
