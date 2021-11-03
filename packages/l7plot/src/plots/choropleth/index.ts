@@ -80,6 +80,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    * 渲染
    */
   public render() {
+    console.time('l7plot choropleth render time');
     if (this.inited) {
       this.updateLayers(this.options);
       this.initComponents();
@@ -90,6 +91,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
       layerGroup.addTo(this.scene);
     }
     this.initLayersEvent();
+    console.timeEnd('l7plot choropleth render time');
   }
 
   /**
@@ -111,10 +113,12 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     // 行政级别及范围发生更新
     if (options.viewLevel && !isEqual(this.lastOptions.viewLevel, this.options.viewLevel)) {
       const geoData = options.source?.joinBy.geoData;
+      console.time('update viewLevel');
       this.getDistrictData(geoData).then(() => {
         const { data, ...sourceConfig } = this.options.source;
         this.changeData(data, sourceConfig);
         this.render();
+        console.timeEnd('update viewLevel');
       });
     } else {
       if (options.source && !isEqual(this.lastOptions.source, this.options.source)) {
@@ -164,9 +168,11 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    * 更新: 更新数据
    */
   public changeData(data: any[], cfg?: Partial<Omit<ChoroplethSourceOptions, 'data'>>) {
+    console.time('l7plot update data time');
     this.options.source = deepAssign({}, this.options.source, { data, ...cfg });
     const { data: geoData, sourceCFG } = this.parserSourceConfig(this.options.source);
     this.source.setData(geoData, sourceCFG);
+    console.timeEnd('l7plot update data time');
   }
 
   /**

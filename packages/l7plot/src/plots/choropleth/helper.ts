@@ -22,7 +22,7 @@ export const topojson2geojson = (json: Topology) => {
     const geojson = topojson.feature(json, 'json');
     return geojson;
   } catch (err) {
-    throw new Error('topojson to geojson failed, topojson default layer name "json"');
+    throw new Error('Failed convert to geojson from topojson, topojson default layer name "json"');
   }
 };
 
