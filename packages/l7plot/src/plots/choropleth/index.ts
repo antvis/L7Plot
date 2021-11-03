@@ -9,7 +9,7 @@ import {
   DrillStack,
   ViewLevel,
   DrillStepConfig,
-  GeoJson,
+  FeatureCollection,
 } from './types';
 import { DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS, AREA_URL } from './constants';
 import { AreaLayer } from '../../layers/area-layer';
@@ -19,7 +19,7 @@ import { LabelOptions, LegendOptions, MouseEvent, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
 import { createCountryBoundaryLayer } from './layer';
 import { getCacheArea, registerCacheArea } from './cache';
-import { getDrillStepDefaultConfig, isEqualDrillSteps } from './helper';
+import { getDrillStepDefaultConfig, getGeoAreaConfig, isEqualDrillSteps, topojson2geojson } from './helper';
 
 export type { ChoroplethOptions };
 
@@ -35,11 +35,11 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 国界数据
    */
-  private chinaBoundaryData: GeoJson = { type: 'FeatureCollection', features: [] };
+  private chinaBoundaryData: FeatureCollection = { type: 'FeatureCollection', features: [] };
   /**
    * 当前行政数据数据
    */
-  private currentDistrictData: GeoJson = { type: 'FeatureCollection', features: [] };
+  private currentDistrictData: FeatureCollection = { type: 'FeatureCollection', features: [] };
   /**
    * 国界图层
    */
@@ -336,12 +336,13 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   private async fetchData(level: string, adcode: string | number, granularity: string) {
     const fileName = `${adcode}_${level}_${granularity}`;
     const cacheArea = getCacheArea(fileName);
-    if (cacheArea) {
-      return cacheArea;
+    if (cacheArea) return cacheArea;
+    const { url, type, extension } = getGeoAreaConfig(this.options.geoArea);
+    const response = await fetch(`${url}/${level}/${fileName}.${extension}`);
+    let data = await response.json();
+    if (type === 'topojson') {
+      data = topojson2geojson(data);
     }
-    const baseUrl = this.options.url || AREA_URL;
-    const response = await fetch(`${baseUrl}/${level}/${fileName}.json`);
-    const data = response.json();
     registerCacheArea(fileName, data);
     return data;
   }
@@ -363,7 +364,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 请求区域数据
    */
-  private async getDistrictData(geoData?: GeoJson) {
+  private async getDistrictData(geoData?: FeatureCollection) {
     const { level, adcode, granularity = DEFAULT_AREA_GRANULARITY[level] } = this.options.viewLevel;
     const fetchCurrentDistrictData = geoData ? Promise.resolve(geoData) : this.fetchData(level, adcode, granularity);
 

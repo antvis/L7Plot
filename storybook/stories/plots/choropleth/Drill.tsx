@@ -18,7 +18,9 @@ class Drill extends Component {
         pitch: 0,
       },
 
-      // url: 'http://127.0.0.1:8080',
+      geoArea: {
+        type: 'geojson',
+      },
 
       source: {
         data: [],
@@ -64,10 +66,8 @@ class Drill extends Component {
       style: {
         opacity: 0.8,
         stroke: '#F2F7F7',
-        lineType: 'dash',
-        lineDash: [1, 10],
-        lineWidth: 0.6,
-        lineOpacity: 0.8,
+        lineWidth: 0.5,
+        lineOpacity: 0.5,
       },
       label: {
         visible: true,

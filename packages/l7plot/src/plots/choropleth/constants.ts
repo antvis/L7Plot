@@ -33,29 +33,34 @@ export const DEFAULT_AREA_GRANULARITY: Record<string, 'country' | 'province' | '
 /**
  * 行政数据服务地址
  */
-export const AREA_URL = 'https://gw.alipayobjects.com/os/alisis/geo-data-v0.0.3/choropleth-data';
+export const AREA_URL = 'http://localhost:8080';
+// export const AREA_URL = 'https://gw.alipayobjects.com/os/alisis/geo-data-v0.0.48/choropleth-data';
 
 /**
  * 中国国界样式
  */
 export const CHINA_BOUNDARY_STYLE = {
-  国界: {
+  // 国界
+  national: {
     color: 'red',
     width: 1,
     opacity: 1,
   },
-  争议: {
+  // 争议
+  dispute: {
     color: 'red',
     width: 1,
     opacity: 0.8,
     dashArray: [1, 6],
   },
-  海洋: {
+  // 海洋
+  coast: {
     color: 'blue',
     width: 0.7,
     opacity: 0.8,
   },
-  港澳: {
+  // 港澳
+  hkm: {
     color: 'gray',
     width: 0.7,
     opacity: 0.8,
