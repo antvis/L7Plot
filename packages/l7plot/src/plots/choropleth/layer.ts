@@ -3,9 +3,9 @@ import { CHINA_BOUNDARY_STYLE } from './constants';
 
 export const createCountryBoundaryLayer = (data: any) => {
   const chinaBoundaryFeatures = data.features.filter(({ properties }) =>
-    ['海洋', '港澳', '国界'].includes(properties.type)
+    ['coast', 'hkm', 'national'].includes(properties.type)
   );
-  const disputeBoundaryFeatures = data.features.filter(({ properties }) => properties.type === '争议');
+  const disputeBoundaryFeatures = data.features.filter(({ properties }) => properties.type === 'dispute');
   const chinaBoundaryLayer = new LinesLayer({
     name: 'chinaBoundaryLayer',
     source: {
@@ -36,12 +36,12 @@ export const createCountryBoundaryLayer = (data: any) => {
       parser: { type: 'geojson' },
     },
     shape: 'line',
-    color: CHINA_BOUNDARY_STYLE['争议'].color,
-    size: CHINA_BOUNDARY_STYLE['争议'].width,
+    color: CHINA_BOUNDARY_STYLE['dispute'].color,
+    size: CHINA_BOUNDARY_STYLE['dispute'].width,
     style: {
-      opacity: CHINA_BOUNDARY_STYLE['争议'].opacity,
+      opacity: CHINA_BOUNDARY_STYLE['dispute'].opacity,
       lineType: 'dash',
-      dashArray: CHINA_BOUNDARY_STYLE['争议'].dashArray as [number, number],
+      dashArray: CHINA_BOUNDARY_STYLE['dispute'].dashArray as [number, number],
     },
   });
 

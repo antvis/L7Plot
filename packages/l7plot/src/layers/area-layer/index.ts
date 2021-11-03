@@ -46,6 +46,10 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
    */
   public highlightLayer: ILayer;
   /**
+   * 选中高亮图层
+   */
+  public highlightSelectLayer: ILayer;
+  /**
    * 图层类型
    */
   public type = PlotLayer.LayerType.AreaLayer;
@@ -64,6 +68,7 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
     this.layer = new PolygonLayer({ ...config, name: this.name });
     this.strokeLayer = new LineLayer({ name: 'strokeLayer' });
     this.highlightLayer = new LineLayer({ name: 'highlightLayer' });
+    this.highlightSelectLayer = new LineLayer({ name: 'highlightSelectLayer' });
 
     this.mappingLayer(this.options);
     this.setSource(source);
@@ -136,6 +141,7 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   public updateOptions(options: Partial<AreaLayerOptions>) {
     this.options = deepAssign({}, this.options, options);
     this.mappingLayer(this.options);
+    this.highlightLayer.source({ type: 'FeatureCollection', features: [] });
   }
 
   public show() {

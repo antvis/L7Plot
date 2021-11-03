@@ -47,7 +47,7 @@ class ChinaProvince extends Component {
         lineOpacity: 1,
       },
       label: {
-        visible: true,
+        visible: false,
         field: 'name',
         style: {
           fill: '#000',

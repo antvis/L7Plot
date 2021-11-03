@@ -40,14 +40,17 @@
     "url": "https://github.com/antvis/L7Plot/issues"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.4"
+    "@types/geojson": "^7946.0.8",
+    "@types/lodash-es": "^4.17.4",
+    "@types/topojson-client": "^3.1.0"
   },
   "dependencies": {
     "@antv/event-emitter": "^0.1.2",
     "@antv/l7": "^2.5.5",
     "@antv/l7plot-component": "^0.0.2-alpha.2",
     "@antv/util": "^2.0.13",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "topojson-client": "^3.1.0"
   },
   "publishConfig": {
     "access": "public"

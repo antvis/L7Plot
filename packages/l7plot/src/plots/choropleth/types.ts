@@ -2,9 +2,14 @@ import { AreaLayerOptions } from '../../layers/area-layer/types';
 import { PlotOptions, ISourceCFG } from '../../types';
 
 /**
- * GeoJson 数据格式
+ * GeoJson FeatureCollection 数据格式
  */
-export type GeoJson = { type: 'FeatureCollection'; features: any[] };
+export type FeatureCollection = GeoJSON.FeatureCollection;
+
+/**
+ * 行政地理数据地址
+ */
+export type GeoArea = { url?: string; type: 'geojson' | 'topojson' };
 
 /**
  * 地理元数据关联
@@ -21,7 +26,7 @@ export type JoinBy = {
   /**
    * 地理数据
    */
-  geoData?: GeoJson;
+  geoData?: FeatureCollection;
 };
 
 /**
@@ -114,9 +119,9 @@ export type Drill = {
 /** 地区分布图的配置类型定义 */
 export interface ChoroplethOptions extends PlotOptions, AreaLayerOptions {
   /**
-   * 行政地理数据静态服务址
+   * 行政地理数据地址
    */
-  url?: string;
+  geoArea?: string | GeoArea;
 
   /**
    * 具体的数据
