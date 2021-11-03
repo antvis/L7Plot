@@ -4,7 +4,8 @@
   "version": "independent",
   "command": {
     "publish": {
-      "ignoreChanges": ["l7plot-website", "l7plot-storybook", "__tests__", "*.md"],
+      "packages": ["packages/*"],
+      "ignoreChanges": ["__tests__", "*.md"],
       "registry": "https://registry.npmjs.com",
       "message": "chore: publish"
     }
