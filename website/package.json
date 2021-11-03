@@ -1,7 +1,7 @@
 {
   "name": "l7plot-website",
   "private": true,
-  "version": "0.0.2-alpha.1",
+  "version": "0.0.3-alpha.0",
   "license": "MIT",
   "author": "yunji",
   "scripts": {
@@ -14,7 +14,7 @@
     "prettier": "prettier -c -w docs examples"
   },
   "dependencies": {
-    "@antv/l7plot": "^0.0.2-alpha.2",
+    "@antv/l7plot": "^0.0.3-alpha.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
   },
