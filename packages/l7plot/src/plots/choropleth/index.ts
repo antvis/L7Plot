@@ -11,7 +11,7 @@ import {
   DrillStepConfig,
   FeatureCollection,
 } from './types';
-import { DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS, AREA_URL } from './constants';
+import { DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS } from './constants';
 import { AreaLayer } from '../../layers/area-layer';
 import { LinesLayer } from '../../layers/lines-layer';
 import { TextLayer } from '../../layers/text-layer';

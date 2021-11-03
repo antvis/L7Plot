@@ -33,8 +33,8 @@ export const DEFAULT_AREA_GRANULARITY: Record<string, 'country' | 'province' | '
 /**
  * 行政数据服务地址
  */
-export const AREA_URL = 'http://localhost:8080';
-// export const AREA_URL = 'https://gw.alipayobjects.com/os/alisis/geo-data-v0.0.48/choropleth-data';
+// export const AREA_URL = 'http://localhost:8080';
+export const AREA_URL = 'https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.0/choropleth-data';
 
 /**
  * 中国国界样式
