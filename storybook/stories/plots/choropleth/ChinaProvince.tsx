@@ -226,7 +226,7 @@ class ChinaProvince extends Component {
           strokeWidth: 0.5, // 描边宽度
         },
       },
-      // state: { active: true, select: false },
+      state: { active: true },
       tooltip: {
         items: ['name', 'adcode', 'value'],
       },

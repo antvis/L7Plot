@@ -1,4 +1,4 @@
-import { uniqueId } from '@antv/util';
+import { uniqueId, clone } from '@antv/util';
 import { PolygonLayer, LineLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { deepAssign } from '../../utils';
@@ -14,8 +14,9 @@ const DEFAULT_OPTIONS = {
     active: false,
     select: false,
   },
+  enabledMultiSelect: false,
 };
-const LAYER_OPTIONS_KEYS = ['autoFit', 'color', 'style', 'state'];
+const LAYER_OPTIONS_KEYS = ['autoFit', 'color', 'style', 'state', 'enabledMultiSelect'];
 
 export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   /**
@@ -49,7 +50,7 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   /**
    * 高亮描边数据
    */
-  public highlightLayerData: any;
+  private highlightLayerData: any;
   /**
    * 选中填充面图层
    */
@@ -61,7 +62,7 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   /**
    * 选中数据
    */
-  public selectData: { feature: any; featureId: number }[] = [];
+  private selectData: { feature: any; featureId: number }[] = [];
   /**
    * 图层类型
    */
@@ -166,16 +167,27 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   };
 
   private onSelectHandle = (event: MouseEvent) => {
+    const enabledMultiSelect = this.options.enabledMultiSelect;
     const { feature, featureId } = event;
     const index = this.selectData.findIndex((item) => item.featureId === featureId);
+
     if (index === -1) {
-      this.selectData.push({ feature, featureId });
-      // this.emit('select', feature)
+      if (enabledMultiSelect) {
+        this.selectData.push({ feature, featureId });
+      } else {
+        this.selectData = [{ feature, featureId }];
+      }
+      this.emit('select', feature, clone(this.selectData));
     } else {
       const unselectFeature = this.selectData[index];
-      this.selectData.splice(index, 1);
-      // this.emit('unselect', unselectFeature)
+      if (enabledMultiSelect) {
+        this.selectData.splice(index, 1);
+      } else {
+        this.selectData = [];
+      }
+      this.emit('unselect', unselectFeature, clone(this.selectData));
     }
+
     const features = this.selectData.map(({ feature }) => feature);
     this.setSelectLayerSource(features);
   };
@@ -207,16 +219,23 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   public show() {
     this.layer.show();
     this.strokeLayer.show();
+    this.selectFillLayer.show();
+    this.selectStrokeLayer.show();
   }
 
   public hide() {
     this.layer.hide();
     this.strokeLayer.hide();
+    this.selectFillLayer.hide();
+    this.selectStrokeLayer.hide();
   }
 
   public toggleVisible() {
-    this.layer.isVisible() ? this.layer.hide() : this.layer.show();
-    this.strokeLayer.isVisible() ? this.strokeLayer.hide() : this.strokeLayer.show();
+    if (this.layer.isVisible()) {
+      this.hide();
+    } else {
+      this.show();
+    }
   }
 
   public getColorLegendItems() {
@@ -227,5 +246,13 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
     }
 
     return [];
+  }
+
+  public setActive(id: number) {
+    // TODO: L7 method pickFeature(id|{x,y})
+  }
+
+  public setSelect(id: number) {
+    // TODO: L7 method pickFeature(id|{x,y})
   }
 }

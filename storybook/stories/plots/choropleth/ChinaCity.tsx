@@ -59,7 +59,7 @@ class ChinaProvince extends Component {
           padding: [5, 5],
         },
       },
-      // state: { active: true, select: false },
+      state: { active: true },
       tooltip: {
         items: ['name', 'adcode', 'value'],
       },

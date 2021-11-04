@@ -9,13 +9,13 @@ const defaultState: { active: Required<AreaLayerActiveOptions>; select: Required
   active: {
     fill: false,
     stroke: defaultHighlightColor,
-    lineWidth: 2,
+    lineWidth: 1.5,
     lineOpacity: 0.8,
   },
   select: {
-    fill: 'rbga(255, 255, 255, 0.5)',
+    fill: false,
     stroke: defaultHighlightColor,
-    lineWidth: 2,
+    lineWidth: 1.5,
     lineOpacity: 0.8,
   },
 };
@@ -127,6 +127,9 @@ export function mappingLayer(
     color && MappingLayer.color(highlightLayer, color);
     // style
     style && MappingLayer.style(highlightLayer, style);
+    highlightLayer.show();
+  } else {
+    highlightLayer.hide();
   }
 
   /**
@@ -142,6 +145,9 @@ export function mappingLayer(
     fillStyle && MappingLayer.style(selectFillLayer, fillStyle);
     // state
     MappingLayer.state(selectFillLayer, { select: false, active: false });
+    selectFillLayer.show();
+  } else {
+    selectFillLayer.hide();
   }
 
   /**
@@ -159,5 +165,8 @@ export function mappingLayer(
     color && MappingLayer.color(selectStrokeLayer, color);
     // style
     style && MappingLayer.style(selectStrokeLayer, style);
+    selectStrokeLayer.show();
+  } else {
+    selectStrokeLayer.hide();
   }
 }

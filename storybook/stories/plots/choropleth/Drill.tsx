@@ -82,7 +82,9 @@ class Drill extends Component {
           padding: [5, 5],
         },
       },
-      // state: { active: true, select: false },
+      state: {
+        active: { stroke: 'red' },
+      },
       tooltip: {
         items: ['name', 'adcode'],
       },

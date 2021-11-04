@@ -51,4 +51,8 @@ export interface AreaLayerOptions extends Omit<PolygonLayerConfig, 'style' | 'st
     active?: boolean | AreaLayerActiveOptions;
     select?: boolean | AreaLayerActiveOptions;
   };
+  /**
+   * 是否启用多选
+   */
+  enabledMultiSelect?: boolean;
 }

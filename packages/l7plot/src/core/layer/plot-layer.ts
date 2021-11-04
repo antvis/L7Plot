@@ -1,12 +1,14 @@
 import { pick } from '@antv/util';
 import Source from '@antv/l7-source';
+import EventEmitter from '@antv/event-emitter';
 import { LayerType, IPLotLayer, PlotLayerConfig } from '../../types/layer';
 import { Scene, ILayer, ILayerConfig, SourceOptions } from '../../types';
 import { MappingSource } from '../../adaptor/source';
+import { LayerEventList } from '../map/constants';
 
 const LayerConfigkeys = ['name', 'zIndex', 'visible', 'minZoom', 'maxZoom', 'pickingBuffer', 'autoFit', 'blend'];
 
-export abstract class PlotLayer<O extends PlotLayerConfig> implements IPLotLayer {
+export abstract class PlotLayer<O extends PlotLayerConfig> extends EventEmitter implements IPLotLayer {
   /**
    * 地图图表类型
    */
@@ -81,22 +83,35 @@ export abstract class PlotLayer<O extends PlotLayerConfig> implements IPLotLayer
    * 事件代理: 绑定事件
    */
   public on(name: string, callback: (...args: any[]) => void) {
-    this.layer.on(name, callback);
+    if (LayerEventList.indexOf(name) !== -1) {
+      this.layer.on(name, callback);
+    } else {
+      super.on(name, callback);
+    }
+    return this;
   }
 
   /**
    * 事件代理: 绑定一次事件
    */
   public once(name: string, callback: (...args: any[]) => void) {
-    this.layer.once(name, callback);
+    if (LayerEventList.indexOf(name) !== -1) {
+      this.layer.once(name, callback);
+    } else {
+      super.once(name, callback);
+    }
+    return this;
   }
 
   /**
    * 事件代理: 解绑事件
    */
-  public off(name: string, callback?: (...args: any[]) => void) {
-    // eslint-disable-next-line
-    // @ts-ignore
-    this.layer.off(name, callback);
+  public off(name: string, callback: (...args: any[]) => void) {
+    if (LayerEventList.indexOf(name) !== -1) {
+      this.layer.off(name, callback);
+    } else {
+      super.off(name, callback);
+    }
+    return this;
   }
 }

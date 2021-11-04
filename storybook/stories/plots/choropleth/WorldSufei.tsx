@@ -74,7 +74,7 @@ class ChinaMap extends Component {
           padding: [5, 5],
         },
       },
-      // state: { active: true, select: false },
+      state: { active: true, select: false },
       tooltip: {
         items: ['name', 'adcode'],
       },
