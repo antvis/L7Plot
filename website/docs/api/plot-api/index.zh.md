@@ -583,10 +583,7 @@ map.off(event?: string, callback?: Function);
 
 #### 组件事件
 
-##### Tooltip
-
-- tooltip:show：显示事件。
-- tooltip:hide：隐藏事件。
+详见各组件事件。
 
 ## 五、资源注册
 

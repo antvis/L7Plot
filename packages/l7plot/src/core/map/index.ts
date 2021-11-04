@@ -31,15 +31,11 @@ const DEFAULT_OPTIONS: Partial<MapOptions> = {
   logo: true,
 };
 
-export abstract class Map<O extends MapOptions> {
+export abstract class Map<O extends MapOptions> extends EventEmitter {
   /**
    * 默认的 options 配置项
    */
   static DefaultOptions = DEFAULT_OPTIONS;
-  /**
-   * 自定义事件中心
-   */
-  private readonly eventEmitter = new EventEmitter();
   /**
    * 是否初始化成功
    */
@@ -102,6 +98,7 @@ export abstract class Map<O extends MapOptions> {
   public tooltip: Tooltip | undefined;
 
   constructor(options: O) {
+    super();
     this.options = deepAssign({}, this.getDefaultOptions(), options);
     this.lastOptions = this.options;
   }
@@ -263,17 +260,11 @@ export abstract class Map<O extends MapOptions> {
   }
 
   /**
-   * 自定义事件: 事件触发
-   */
-  protected emit(name: string, ...args: any[]) {
-    this.eventEmitter.emit(name, ...args);
-  }
-
-  /**
    * 事件代理: 绑定事件
    */
   public on(name: string, callback: (...args: any[]) => void) {
     this.proxyEventHander('on', name, callback);
+    return this;
   }
 
   /**
@@ -281,6 +272,7 @@ export abstract class Map<O extends MapOptions> {
    */
   public once(name: string, callback: (...args: any[]) => void) {
     this.proxyEventHander('once', name, callback);
+    return this;
   }
 
   /**
@@ -288,6 +280,7 @@ export abstract class Map<O extends MapOptions> {
    */
   public off(name: string, callback: (...args: any[]) => void) {
     this.proxyEventHander('off', name, callback);
+    return this;
   }
 
   /**
@@ -308,7 +301,7 @@ export abstract class Map<O extends MapOptions> {
         throw new Error(`No event name "${name}"`);
       }
     } else {
-      this.eventEmitter[type](name, callback);
+      super[type](name, callback);
     }
   }
 
@@ -534,8 +527,8 @@ export abstract class Map<O extends MapOptions> {
    * 销毁
    */
   public destroy() {
-    // TODO: 清空已经绑定的事件
-    this.eventEmitter.off('*');
+    // TODO: 清空已经绑定其他的事件
+    super.off('*');
     this.removeScaleControl();
     this.removeZoomControl();
     this.removeLayerMenuControl();
