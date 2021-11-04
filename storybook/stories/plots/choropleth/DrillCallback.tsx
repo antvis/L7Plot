@@ -59,6 +59,7 @@ class Drill extends Component {
         lineWidth: 0.6,
         lineOpacity: 0.8,
       },
+      state: { active: { stroke: 'red' } },
       label: {
         visible: true,
         field: 'name',

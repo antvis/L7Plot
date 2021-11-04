@@ -55,7 +55,14 @@ class World extends Component {
           padding: [5, 5],
         },
       },
-      // state: { active: true, select: false },
+      state: {
+        active: true,
+        select: {
+          stroke: 'black',
+          lineWidth: 1.5,
+          lineOpacity: 0.8,
+        },
+      },
       tooltip: {
         items: ['name', 'adcode', 'value'],
       },

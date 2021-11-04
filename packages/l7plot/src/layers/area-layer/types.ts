@@ -24,13 +24,15 @@ type AreaLayerStyle = {
   lineOpacity?: number;
 };
 
-type AreaLayerActiveOptions = {
+export type AreaLayerActiveOptions = {
   // 填充颜色
-  fill: string;
+  fill?: false | string;
   // 描边颜色
-  stroke: string;
+  stroke?: false | string;
   // 描边的宽度
   lineWidth?: number;
+  // 描边透明度
+  lineOpacity?: number;
 };
 
 export interface AreaLayerOptions extends Omit<PolygonLayerConfig, 'style' | 'state' | 'shape' | 'size'> {
@@ -49,4 +51,8 @@ export interface AreaLayerOptions extends Omit<PolygonLayerConfig, 'style' | 'st
     active?: boolean | AreaLayerActiveOptions;
     select?: boolean | AreaLayerActiveOptions;
   };
+  /**
+   * 是否启用多选
+   */
+  enabledMultiSelect?: boolean;
 }
