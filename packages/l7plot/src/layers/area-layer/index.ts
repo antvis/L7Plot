@@ -11,7 +11,8 @@ export type { AreaLayerOptions };
 
 const DEFAULT_OPTIONS = {
   state: {
-    active: true,
+    active: false,
+    select: false,
   },
 };
 const LAYER_OPTIONS_KEYS = ['autoFit', 'color', 'style', 'state'];
@@ -42,13 +43,25 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
    */
   public strokeLayer: ILayer;
   /**
-   * 高亮图层
+   * 高亮描边图层
    */
   public highlightLayer: ILayer;
   /**
-   * 选中高亮图层
+   * 高亮描边数据
    */
-  public highlightSelectLayer: ILayer;
+  public highlightLayerData: any;
+  /**
+   * 选中填充面图层
+   */
+  public selectFillLayer: ILayer;
+  /**
+   * 选中描边图层
+   */
+  public selectStrokeLayer: ILayer;
+  /**
+   * 选中数据
+   */
+  public selectData: { feature: any; featureId: number }[] = [];
   /**
    * 图层类型
    */
@@ -68,7 +81,8 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
     this.layer = new PolygonLayer({ ...config, name: this.name });
     this.strokeLayer = new LineLayer({ name: 'strokeLayer' });
     this.highlightLayer = new LineLayer({ name: 'highlightLayer' });
-    this.highlightSelectLayer = new LineLayer({ name: 'highlightSelectLayer' });
+    this.selectFillLayer = new PolygonLayer({ name: 'selectFillLayer' });
+    this.selectStrokeLayer = new LineLayer({ name: 'selectStrokeLayer' });
 
     this.mappingLayer(this.options);
     this.setSource(source);
@@ -83,13 +97,21 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   }
 
   private mappingLayer(options: AreaLayerOptions) {
-    mappingLayer(this.layer, this.strokeLayer, this.highlightLayer, options);
+    mappingLayer(
+      this.layer,
+      this.strokeLayer,
+      this.highlightLayer,
+      this.selectFillLayer,
+      this.selectStrokeLayer,
+      options
+    );
   }
 
   protected setSource(source: AreaLayerSourceOptions | Source) {
     super.setSource(source);
     this.setStrokeLayerSource();
-    this.highlightLayer.source({ type: 'FeatureCollection', features: [] });
+    this.setHighlightLayerSource();
+    this.setSelectLayerSource();
   }
 
   protected setStrokeLayerSource() {
@@ -102,46 +124,84 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
     }
   }
 
-  protected setHighlightLayerSource(feature?: any) {
+  protected setHighlightLayerSource(feature?: any, featureId = -999) {
+    if (this.highlightLayerData === featureId) {
+      return;
+    }
     const features = feature ? [feature] : [];
-    this.highlightLayer.setData({ type: 'FeatureCollection', features });
+    this.highlightLayer.setData({ type: 'FeatureCollection', features }, { parser: { type: 'geojson' } });
+    this.highlightLayerData = featureId;
+  }
+
+  protected setSelectLayerSource(features: any[] = []) {
+    this.selectFillLayer.setData({ type: 'FeatureCollection', features }, { parser: { type: 'geojson' } });
+    this.selectStrokeLayer.setData({ type: 'FeatureCollection', features }, { parser: { type: 'geojson' } });
   }
 
   private initEvent() {
+    this.layer.off('mousemove', this.onHighlighHandle);
+    this.layer.off('unmousemove', this.onHighlighHandle);
+    this.layer.off('click', this.onSelectHandle);
+    this.selectData = [];
+    this.highlightLayerData = null;
     if (!this.options.state) return;
     // active
-    // if (this.options.state.active) {
-    //   this.layer.on('mousemove', (event: IMouseEvent) => {
-    //     this.setHighlightLayerSource(event.feature);
-    //   });
-    // }
+    if (this.options.state.active) {
+      this.layer.on('mousemove', this.onHighlighHandle);
+      this.layer.on('unmousemove', this.onUnhighlighHandle);
+    }
     // select
-    // if (this.options.state.select) {
-    //   this.layer.on('click', (event: IMouseEvent) => {
-    //     this.setHighlightLayerSource(event.feature);
-    //   });
-    //   this.layer.on('unclick', () => {
-    //     this.setHighlightLayerSource();
-    //   });
-    // }
+    if (this.options.state.select) {
+      this.layer.on('click', this.onSelectHandle);
+    }
   }
+
+  private onHighlighHandle = (event: MouseEvent) => {
+    const { feature, featureId } = event;
+    this.setHighlightLayerSource(feature, featureId);
+  };
+
+  private onUnhighlighHandle = () => {
+    this.setHighlightLayerSource();
+  };
+
+  private onSelectHandle = (event: MouseEvent) => {
+    const { feature, featureId } = event;
+    const index = this.selectData.findIndex((item) => item.featureId === featureId);
+    if (index === -1) {
+      this.selectData.push({ feature, featureId });
+      // this.emit('select', feature)
+    } else {
+      const unselectFeature = this.selectData[index];
+      this.selectData.splice(index, 1);
+      // this.emit('unselect', unselectFeature)
+    }
+    const features = this.selectData.map(({ feature }) => feature);
+    this.setSelectLayerSource(features);
+  };
 
   public addTo(scene: Scene) {
     scene.addLayer(this.layer);
     scene.addLayer(this.strokeLayer);
     scene.addLayer(this.highlightLayer);
+    scene.addLayer(this.selectFillLayer);
+    scene.addLayer(this.selectStrokeLayer);
   }
 
   public remove(scene: Scene) {
     scene.removeLayer(this.layer);
     scene.removeLayer(this.strokeLayer);
     scene.removeLayer(this.highlightLayer);
+    scene.removeLayer(this.selectFillLayer);
+    scene.removeLayer(this.selectStrokeLayer);
   }
 
   public updateOptions(options: Partial<AreaLayerOptions>) {
     this.options = deepAssign({}, this.options, options);
     this.mappingLayer(this.options);
-    this.highlightLayer.source({ type: 'FeatureCollection', features: [] });
+    this.setHighlightLayerSource();
+    this.setSelectLayerSource();
+    this.initEvent();
   }
 
   public show() {

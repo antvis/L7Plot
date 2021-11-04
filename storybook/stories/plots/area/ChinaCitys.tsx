@@ -52,7 +52,7 @@ class ChinaCitys extends Component {
           strokeWidth: 0.3, // 描边宽度
         },
       },
-      state: { active: true, select: false },
+      state: { active: true, select: true },
       tooltip: {
         items: ['name', 'code'],
       },

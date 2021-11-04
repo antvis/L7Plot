@@ -103,7 +103,7 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
    * 创建数据标签图层
    */
   protected createLabelLayer(source: Source, label: LabelOptions): TextLayer {
-    const textLayer = new TextLayer({ name: 'labelLayer', source, ...label });
+    const textLayer = new TextLayer({ name: 'labelLayer', zIndex: 999, source, ...label });
     return textLayer;
   }
 
