@@ -49,7 +49,7 @@
 }
 ```
 
-#### `size.`type
+#### `size.`scale
 
 `markdown:docs/common/attribute/scale.zh.md`
 
@@ -62,7 +62,7 @@
   size: {
     fied: 't',
     value: [12, 15],
-    type: 'quantile'
+    scale: {type: 'quantile'}
   }
 }
 ```

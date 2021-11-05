@@ -7,11 +7,11 @@ redirect_from:
 
 `Plot` 是所有图表的基类，定义了地图图表的通用属性和方法。
 
-## 一、配置
-
-```ts
+```js
 constructor(container: string | HTMLDivElement, options: PlotOptions)
 ```
+
+## 一、配置
 
 ### container
 
@@ -148,13 +148,13 @@ constructor(container: string | HTMLDivElement, options: PlotOptions)
 
 ### `options.`state
 
-`IStateAttribute` optional
+`StateAttribute` optional
 
 元素交互反馈效果。
 
 #### `state.`active
 
-`boolean｜IActiveOption` optional default: `false`
+`boolean｜ActiveOption` optional default: `false`
 
 标签 mousehover 高亮效果，开启 mousehover 元素高亮效果：
 
@@ -222,43 +222,43 @@ constructor(container: string | HTMLDivElement, options: PlotOptions)
 
 `HTMLDivElement`
 
-当前地图渲染的 DOM 容器。
+当前图表渲染的 DOM 容器。
 
 ### options
 
 `PlotOptions`
 
-当前地图的所有配置项。
+当前图表的所有配置项。
 
 ### scene
 
 `Scene`
 
-当前地图的场景实例。
+当前图表的地图场景实例。
 
 ### type
 
 `string`
 
-当前地图所属类型。
+当前图表所属类型。
 
 ### layerGroup
 
 `LayerGroup`
 
-当前地图的图层组。
+当前图表的图层组。
 
 ### sceneLoaded
 
 `boolean`
 
-当前地图的场景是否加载完成。
+当前图表的地图场景是否加载完成。
 
 ### layersLoaded
 
 `boolean`
 
-当前地图的图层是否加载完成。
+当前图表的图层是否加载完成。
 
 ### zoomControl
 
@@ -296,212 +296,212 @@ constructor(container: string | HTMLDivElement, options: PlotOptions)
 
 更新配置且重新渲染。
 
-```ts
-map.update(options: Partial<PlotOptions>);
+```js
+plot.update(options: Partial<PlotOptions>);
 ```
 
 ### changeData
 
 更新数据源。
 
-```ts
-map.changeData(data: any, cfg?: ISourceCFG);
+```js
+plot.changeData(data: any, cfg?: SourceOptions);
 ```
 
 ### changeSize
 
 修改容器大小。
 
-```ts
-map.changeSize(width: number, height: number);
+```js
+plot.changeSize(width: number, height: number);
 ```
 
 ### getScene
 
-获取 scene 实例。
+获取图表的地图 scene 实例。
 
-```ts
-map.getScene() : Scene;
+```js
+plot.getScene() : Scene;
 ```
 
 ### getMap
 
-获取 map 实例。
+获取图表的 map 实例。
 
-```ts
-map.getMap() : MapboxInstance | AMapInstance;
+```js
+plot.getMap() : MapboxInstance | AMapInstance;
 ```
 
 ### addLayer
 
 添加图层。
 
-```ts
-map.addLayer(layer: IBaseLayer);
+```js
+plot.addLayer(layer: PLotLayer);
 ```
 
 ### getLayes
 
 获取所有图层。
 
-```ts
-map.getLayes(): IBaseLayer[];
+```js
+plot.getLayes(): PLotLayer[];
 ```
 
 ### getLayerByName
 
 根据图层名称获取图层。
 
-```ts
-map.getLayes(name: string): IBaseLayer | undefined;
+```js
+plot.getLayes(name: string): PLotLayer | undefined;
 ```
 
 ### removeLayer
 
 移除图层。
 
-```ts
-map.removeLayer(layer: IBaseLayer);
+```js
+plot.removeLayer(layer: PLotLayer);
 ```
 
 ### removeAllLayer
 
 移除容器内所有的图层。
 
-```ts
-map.removeAllLayer();
+```js
+plot.removeAllLayer();
 ```
 
 ### zoomIn
 
 地图放大一级。
 
-```ts
-map.zoomIn();
+```js
+plot.zoomIn();
 ```
 
 ### zoomOut
 
 地图缩小一级。
 
-```ts
-map.zoomOut();
+```js
+plot.zoomOut();
 ```
 
 ### setPitch
 
 设置地图倾角。
 
-```ts
-map.setPitch(pitch: number);
+```js
+plot.setPitch(pitch: number);
 ```
 
 ### fitBounds
 
 设置地图缩放范围。
 
-```ts
-map.fitBounds(bound: Bounds);
+```js
+plot.fitBounds(bound: Bounds);
 ```
 
 ### addZoomControl
 
 添加地图缩放器控件。
 
-```ts
-map.addZoomControl(options: IZoomControlOptions);
+```js
+plot.addZoomControl(options: ZoomControlOptions);
 ```
 
 ### removeZoomControl
 
 移除地图缩放器控件。
 
-```ts
-map.removeZoomControl();
+```js
+plot.removeZoomControl();
 ```
 
 ### addScaleControl
 
 添加地图比例尺控件。
 
-```ts
-map.addScaleControl(options: IScaleControlOptions);
+```js
+plot.addScaleControl(options: ScaleControlOptions);
 ```
 
 ### removeScaleControl
 
 移除地图比例尺控件。
 
-```ts
-map.removeScaleControl();
+```js
+plot.removeScaleControl();
 ```
 
 ### addLayerMenuControl
 
 添加地图图层列表控件。
 
-```ts
-map.addLayerMenuControl(options: ILayerMenuControlOptions);
+```js
+plot.addLayerMenuControl(options: LayerMenuControlOptions);
 ```
 
 ### removeLayerMenuControl
 
 移除地图图层列表控件。
 
-```ts
-map.removeLayerMenuControl();
+```js
+plot.removeLayerMenuControl();
 ```
 
 ### addLegendControl
 
 添加图例控件。
 
-```ts
-map.addLegendControl(options: ILegendOptions);
+```js
+plot.addLegendControl(options: LegendOptions);
 ```
 
 ### removeLegendControl
 
 移除图例控件。
 
-```ts
-map.removeLegendControl();
+```js
+plot.removeLegendControl();
 ```
 
 ### exportPng
 
-```ts
-map.exportPng(type?: 'png' | 'jpg');
+```js
+plot.exportPng(type?: 'png' | 'jpg');
 ```
 
 ### on
 
 绑定事件。
 
-```ts
-map.on(event: string, callback: Function);
+```js
+plot.on(event: string, callback: Function);
 ```
 
 ### once
 
 绑定一次事件。
 
-```ts
-map.once(event: string, callback: Function);
+```js
+plot.once(event: string, callback: Function);
 ```
 
 ### off
 
 解绑事件。
 
-```ts
-map.off(event?: string, callback?: Function);
+```js
+plot.off(event: string, callback: Function);
 ```
 
 ### destroy
 
-```ts
-map.destroy();
+```js
+plot.destroy();
 ```
 
 ## 四、事件
@@ -510,20 +510,20 @@ map.destroy();
 
 #### 绑定事件
 
-```ts
-map.on(event: string, callback: Function);
+```js
+plot.on(event: string, callback: Function);
 ```
 
 #### 绑定一次事件
 
-```ts
-map.once(event: string, callback: Function);
+```js
+plot.once(event: string, callback: Function);
 ```
 
 #### 解绑事件
 
-```ts
-map.off(event?: string, callback?: Function);
+```js
+plot.off(event: string, callback: Function);
 ```
 
 ### 事件类别
@@ -599,6 +599,8 @@ params:
 - image: `HTMLImageElement|File|string`
 
 ```js
+import { registerImage } from '@antv/l7plot';
+
 registerImage('01', 'https://l7plot.antv.vision/xxx.svg');
 ```
 
@@ -613,6 +615,8 @@ params:
   - image: `HTMLImageElement|File|string`
 
 ```js
+import { registerImages } from '@antv/l7plot';
+
 const images = [{ id: '01', image: 'https://l7plot.antv.vision/xxx.svg' }];
 registerImages(images);
 ```
@@ -629,6 +633,8 @@ params:
 - fontPath: `string`
 
 ```js
+import { registerFontFace } from '@antv/l7plot';
+
 registerFontFace('iconfont', 'https://l7plot.antv.vision/xxx.woff2');
 ```
 
@@ -644,6 +650,8 @@ params:
 - fontUnicode: `string`
 
 ```js
+import { registerIconFont } from '@antv/l7plot';
+
 registerIconFont('icon1', '&#xe64b;');
 ```
 
@@ -658,6 +666,8 @@ params:
   - fontUnicode: `string`
 
 ```js
+import { registerIconFonts } from '@antv/l7plot';
+
 const iconFonts = [{ name: 'icon1', fontUnicode: '&#xe64b;' }];
 registerIconFonts(iconFonts);
 ```

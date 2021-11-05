@@ -81,12 +81,20 @@ module.exports = {
         order: 4,
       },
       {
-        slug: 'api/advanced-plots',
+        slug: 'api/layers',
         title: {
-          zh: '高级图表 - Advanced plot',
-          en: 'Advanced plot',
+          zh: '图层 - Layers',
+          en: 'Layers',
         },
         order: 5,
+      },
+      {
+        slug: 'api/advanced-plots',
+        title: {
+          zh: '高级图表 - Advanced Plot',
+          en: 'Advanced Plot',
+        },
+        order: 6,
       },
     ],
     examples: [
@@ -112,6 +120,30 @@ module.exports = {
         title: {
           zh: '热力图',
           en: 'Heatmap',
+        },
+      },
+      {
+        slug: 'line',
+        icon: 'line',
+        title: {
+          zh: '路径图',
+          en: 'line',
+        },
+      },
+      {
+        slug: 'polygon',
+        icon: 'polygon',
+        title: {
+          zh: '区域图',
+          en: 'polygon',
+        },
+      },
+      {
+        slug: 'advanced-plot',
+        icon: 'other',
+        title: {
+          zh: '高级图表',
+          en: 'advanced-plot',
         },
       },
     ],

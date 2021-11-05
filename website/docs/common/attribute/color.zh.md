@@ -49,7 +49,7 @@
 }
 ```
 
-#### `color.`type
+#### `color.`scale
 
 `markdown:docs/common/attribute/scale.zh.md`
 
@@ -62,7 +62,7 @@
   color: {
     fied: 't',
     value: ['blue', 'red'],
-    type: 'quantile'
+    scale: {type: 'quantile'}
   }
 }
 ```
