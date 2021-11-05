@@ -12,6 +12,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "packages": ["packages/*", "website", "storybook"]
+  }
 }

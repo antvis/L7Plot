@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@antv/l7plot": "^0.0.3-alpha.0",
+    "antd": "^4.16.13",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
   },

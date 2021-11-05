@@ -113,12 +113,12 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     // 行政级别及范围发生更新
     if (options.viewLevel && !isEqual(this.lastOptions.viewLevel, this.options.viewLevel)) {
       const geoData = options.source?.joinBy.geoData;
-      console.time('update viewLevel');
+      console.time('l7plot update viewLevel');
       this.getDistrictData(geoData).then(() => {
         const { data, ...sourceConfig } = this.options.source;
         this.changeData(data, sourceConfig);
         this.render();
-        console.timeEnd('update viewLevel');
+        console.timeEnd('l7plot update viewLevel');
       });
     } else {
       if (options.source && !isEqual(this.lastOptions.source, this.options.source)) {
