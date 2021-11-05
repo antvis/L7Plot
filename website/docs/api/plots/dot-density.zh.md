@@ -50,13 +50,13 @@ const dotDensity = new DotDensity(container, options);
 
 ### dotDensityLayer
 
-`IBaseLayer`
+`PlotLayer`
 
 散点图层实例。
 
 ### labelLayer
 
-`undefined|IBaseLayer`
+`undefined|PlotLayer`
 
 数据标签图层实例。
 
@@ -70,9 +70,9 @@ const dotDensity = new DotDensity(container, options);
 
 内置图层名称分别为：
 
-- 'dotDensityLayer'
-- 'labelLayer'
+- dotDensityLayer
+- labelLayer
 
 ```js
-dotDensity.on('dotDensityLayer:click', (e) => {});
+dotDensity.on('dotDensityLayer:click', (e: MouseEvent) => void);
 ```

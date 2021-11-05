@@ -126,13 +126,13 @@ const gridMap = new GridMap(container, options);
 
 ### gridLayer
 
-`ILayer`
+`PlotLayer`
 
 网格图层实例。
 
 ### labelLayer
 
-`undefined|ILayer`
+`undefined|PlotLayer`
 
 数据标签图层实例。
 
@@ -146,9 +146,9 @@ const gridMap = new GridMap(container, options);
 
 内置图层名称分别为：
 
-- 'gridLayer'
-- 'labelLayer'
+- gridLayer
+- labelLayer
 
 ```js
-gridMap.on('gridLayer:click', (e) => {});
+gridMap.on('gridLayer:click', (e: MouseEvent) => void);
 ```

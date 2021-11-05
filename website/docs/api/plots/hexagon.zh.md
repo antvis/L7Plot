@@ -1,6 +1,6 @@
 ---
 title: 蜂窝图 - Hexagon
-order: 4
+order: 5
 ---
 
 `Hexagon` 继承基类 [Plot](/zh/docs/api/plot-api)。
@@ -107,7 +107,7 @@ const hexagon = new Hexagon(container, options);
 
 蜂窝大小值映射值。
 
-#### `size.`type
+#### `size.`scale
 
 `markdown:docs/common/attribute/scale.zh.md`
 
@@ -121,13 +121,13 @@ const hexagon = new Hexagon(container, options);
 
 ### hexagonLayer
 
-`ILayer`
+`PlotLayer`
 
 蜂窝图层实例。
 
 ### labelLayer
 
-`undefined|ILayer`
+`undefined|PlotLayer`
 
 数据标签图层实例。
 
@@ -141,9 +141,9 @@ const hexagon = new Hexagon(container, options);
 
 内置图层名称分别为：
 
-- 'hexagonLayer'
-- 'labelLayer'
+- hexagonLayer
+- labelLayer
 
 ```js
-hexagon.on('hexagonLayer:click', (e) => {});
+hexagon.on('hexagonLayer:click', (e: MouseEvent) => void);
 ```

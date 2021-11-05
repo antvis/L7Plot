@@ -72,7 +72,7 @@ const heatmap = new Heatmap(container, options);
 
 热力数据映射区间。
 
-#### `size.`type
+#### `size.`scale
 
 `markdown:docs/common/attribute/scale.zh.md`
 
@@ -137,13 +137,13 @@ params:
 
 ### heatmapLayer
 
-`IBaseLayer`
+`PlotLayer`
 
 热力图层实例。
 
 ### labelLayer
 
-`undefined|IBaseLayer`
+`undefined|PlotLayer`
 
 数据标签图层实例。
 
@@ -157,9 +157,9 @@ params:
 
 内置图层名称分别为：
 
-- 'heatmapLayer'
-- 'labelLayer'
+- heatmapLayer
+- labelLayer
 
 ```js
-heatmap.on('heatmapLayer:click', (e) => {});
+heatmap.on('heatmapLayer:click', (e: MouseEvent) => void);
 ```

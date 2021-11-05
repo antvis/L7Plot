@@ -58,5 +58,8 @@
     "typedoc": "^0.22.5",
     "typescript": "^4.4.3"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "resolutions": {
+    "monaco-editor": "0.21.3"
+  }
 }

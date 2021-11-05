@@ -8,7 +8,16 @@ import {
   TooltipListItem,
 } from '@antv/l7plot-component';
 import { isEqual, get as getValueByPath } from 'lodash-es';
-import { IPLotLayer, ILngLat, TooltipAnchorType, Event, TooltipOptions, MouseEvent, TooltipItem } from '../types';
+import {
+  IPLotLayer,
+  ILngLat,
+  TooltipAnchorType,
+  Event,
+  TooltipOptions,
+  MouseEvent,
+  TooltipItem,
+  TooltipEvent,
+} from '../types';
 import { deepAssign } from '../utils';
 
 const TRIGGER_LIST = ['mousemove', 'click'];
@@ -37,7 +46,7 @@ export class Tooltip extends EventEmitter {
   /**
    * tooltip 是否可见
    */
-  public visible = false;
+  public currentVisible = false;
   /**
    * TooltipComponent 更新项
    */
@@ -74,6 +83,7 @@ export class Tooltip extends EventEmitter {
   protected getDefaultOptions(): Partial<TooltipOptions> {
     return {
       showTitle: true,
+      showComponent: true,
       items: [],
       offsets: [15, 0],
       trigger: 'mousemove',
@@ -86,7 +96,7 @@ export class Tooltip extends EventEmitter {
    */
   public update(options: Partial<TooltipOptions>) {
     this.marker.remove();
-    this.visible = false;
+    this.currentVisible = false;
     this.options = deepAssign({}, this.options, options);
 
     const { offsets, showTitle, customContent, domStyles, anchor, className } = this.options;
@@ -118,7 +128,7 @@ export class Tooltip extends EventEmitter {
   }
 
   private interactionTriggerHander = (event: MouseEvent) => {
-    const { lngLat, feature, featureId } = event;
+    const { feature, featureId } = event;
     const { title, customTitle, items, customItems } = this.options;
     // is GeoJson type
     const isGeoFeature = feature.type === 'Feature' && feature.geometry && feature.properties;
@@ -157,7 +167,7 @@ export class Tooltip extends EventEmitter {
 
     const componentOptions = { title: customTitle ? customTitle(properties) : title, items: tooltipItems };
 
-    this.showTooltip(lngLat, componentOptions);
+    this.updateTooltip(event, componentOptions);
   };
 
   private interactionUntriggerHander = () => {
@@ -172,24 +182,54 @@ export class Tooltip extends EventEmitter {
     });
   }
 
-  public showTooltip(position: ILngLat, componentOptions: Partial<ITooltipComponentOptions>) {
-    this.updateComponent(position, componentOptions);
-    this.addTo();
+  private updateTooltip(mouseEvent: MouseEvent, componentOptions: Partial<ITooltipComponentOptions>) {
+    const { lngLat, x, y } = mouseEvent;
+    if (this.options.showComponent) {
+      this.updateComponent(componentOptions);
+      this.setPostion(lngLat);
+    }
+    if (this.currentVisible) {
+      const event: TooltipEvent = { type: 'tooltip:change', data: componentOptions, lngLat, x, y };
+      this.emit('tooltip:change', event);
+    } else {
+      this.showTooltip();
+      const event: TooltipEvent = { type: 'tooltip:show', data: componentOptions, lngLat, x, y };
+      this.emit('tooltip:show', event);
+    }
   }
 
+  /**
+   * tooltip 添加到地图上
+   */
+  public showTooltip() {
+    if (this.currentVisible) return;
+    if (this.options.showComponent) {
+      this.scene.addMarker(this.marker);
+    }
+    this.currentVisible = true;
+  }
+
+  /**
+   * tooltip 从地图上移除
+   */
   public hideTooltip() {
-    this.remove();
+    if (!this.currentVisible) return;
+    if (this.options.showComponent) {
+      this.marker.remove();
+    }
+    this.currentVisible = false;
+    const event: Event = { type: 'tooltip:hide' };
+    this.emit('tooltip:hide', event);
   }
 
   /**
    * 更新 tooltip 组件
    */
-  public updateComponent(position: ILngLat, componentOptions: Partial<ITooltipComponentOptions>) {
+  private updateComponent(componentOptions: Partial<ITooltipComponentOptions>) {
     if (!isEqual(this.lastComponentOptions, componentOptions)) {
       this.tooltipComponent.update(componentOptions);
       this.lastComponentOptions = componentOptions;
     }
-    this.setPostion(position);
   }
 
   /**
@@ -208,28 +248,6 @@ export class Tooltip extends EventEmitter {
    */
   private setPostion(position: ILngLat) {
     this.marker.setLnglat(position);
-  }
-
-  /**
-   * tooltip 添加到地图上
-   */
-  public addTo() {
-    if (this.visible) return;
-    this.scene.addMarker(this.marker);
-    this.visible = true;
-    const event: Event = { type: 'tooltip:show' };
-    this.emit('tooltip:show', event);
-  }
-
-  /**
-   * tooltip 从地图上移除
-   */
-  public remove() {
-    if (!this.visible) return;
-    this.marker.remove();
-    this.visible = false;
-    const event: Event = { type: 'tooltip:hide' };
-    this.emit('tooltip:hide', event);
   }
 
   /**

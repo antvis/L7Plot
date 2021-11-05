@@ -41,7 +41,10 @@ const getDefaultState = (state?: AreaLayerOptions['state']) => {
     }
 
     if (typeof state.active.lineWidth === 'number') {
-      defaultState.active.lineWidth === state.active.lineWidth;
+      defaultState.active.lineWidth = state.active.lineWidth;
+    }
+    if (typeof state.active.lineOpacity === 'number') {
+      defaultState.active.lineOpacity = state.active.lineOpacity;
     }
   }
 
@@ -61,7 +64,10 @@ const getDefaultState = (state?: AreaLayerOptions['state']) => {
     }
 
     if (typeof state.select.lineWidth === 'number') {
-      defaultState.select.lineWidth === state.select.lineWidth;
+      defaultState.select.lineWidth = state.select.lineWidth;
+    }
+    if (typeof state.select.lineOpacity === 'number') {
+      defaultState.select.lineOpacity = state.select.lineOpacity;
     }
   }
 

@@ -119,7 +119,7 @@ registerImages(images);
 }
 ```
 
-#### `shape.`type
+#### `shape.`scale
 
 `markdown:docs/common/attribute/scale.zh.md`
 
@@ -132,7 +132,7 @@ registerImages(images);
   shape: {
     fied: 't',
     value: ['circle', 'triangle'],
-    type: 'quantile'
+    scale: {type: 'quantile'}
   }
 }
 ```
@@ -151,13 +151,13 @@ registerImages(images);
 
 ### dotLayer
 
-`IBaseLayer`
+`PlotLayer`
 
 点图层实例。
 
 ### labelLayer
 
-`undefined|IBaseLayer`
+`undefined|PlotLayer`
 
 数据标签图层实例。
 
@@ -171,9 +171,9 @@ registerImages(images);
 
 内置图层名称分别为：
 
-- 'dotLayer'
-- 'labelLayer'
+- dotLayer
+- labelLayer
 
 ```js
-dotMap.on('dotLayer:click', (e) => {});
+dotMap.on('dotLayer:click', (e: MouseEvent) => void);
 ```
