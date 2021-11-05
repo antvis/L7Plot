@@ -49,6 +49,6 @@ export class DotDensity extends Plot<DotDensityOptions> {
    */
   protected updateLayers(options: DotDensityOptions) {
     const bubbleLayerConfig = pick<any>(options, DotDensityLayer.LayerOptionsKeys);
-    this.dotDensityLayer.updateOptions(bubbleLayerConfig);
+    this.dotDensityLayer.update(bubbleLayerConfig);
   }
 }

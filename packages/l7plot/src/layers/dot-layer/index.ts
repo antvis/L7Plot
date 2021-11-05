@@ -1,7 +1,6 @@
-import { uniqueId } from '@antv/util';
+import { uniqueId, isUndefined, isEqual } from '@antv/util';
 import { PointLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
-import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
 import { DotLayerOptions } from './types';
 import { ILayer } from '../../types';
@@ -34,10 +33,6 @@ export class DotLayer<O extends DotLayerOptions = DotLayerOptions> extends PlotL
    */
   static LayerOptionsKeys = LAYER_OPTIONS_KEYS;
   /**
-   * 图层配置项
-   */
-  public options: O;
-  /**
    * 图层名称
    */
   public name: string;
@@ -55,12 +50,11 @@ export class DotLayer<O extends DotLayerOptions = DotLayerOptions> extends PlotL
   public interaction = true;
 
   constructor(options: O) {
-    super();
-    const { name, source } = options;
-    this.name = name ? name : uniqueId(this.type);
-    this.options = deepAssign({}, this.getDefaultOptions(), options);
-
+    super(options);
+    const { name, source } = this.options;
     const config = this.pickLayerConfig(this.options);
+
+    this.name = name ? name : uniqueId(this.type);
     this.layer = new PointLayer({ ...config, name: this.name });
 
     this.mappingLayer(this.layer, this.options);
@@ -70,17 +64,21 @@ export class DotLayer<O extends DotLayerOptions = DotLayerOptions> extends PlotL
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<DotLayerOptions> {
-    return DEFAULT_OPTIONS;
+  public getDefaultOptions(): Partial<O> {
+    return DEFAULT_OPTIONS as O;
   }
 
   protected mappingLayer(layer: ILayer, options: O) {
     mappingLayer(layer, options);
   }
 
-  public updateOptions(options: Partial<O>) {
-    this.options = deepAssign({}, this.options, options);
+  public update(options: Partial<O>) {
+    this.updateOption(options);
     this.mappingLayer(this.layer, this.options);
+
+    if (!isUndefined(options.visible) && !isEqual(this.lastOptions.visible, this.options.visible)) {
+      options.visible ? this.show() : this.hide();
+    }
   }
 
   public getColorLegendItems() {

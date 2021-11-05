@@ -5,6 +5,7 @@ import { LayerType, IPLotLayer, PlotLayerConfig } from '../../types/layer';
 import { Scene, ILayer, ILayerConfig, SourceOptions } from '../../types';
 import { MappingSource } from '../../adaptor/source';
 import { LayerEventList } from '../map/constants';
+import { deepAssign } from '../../utils';
 
 const LayerConfigkeys = ['name', 'zIndex', 'visible', 'minZoom', 'maxZoom', 'pickingBuffer', 'autoFit', 'blend'];
 
@@ -16,7 +17,11 @@ export abstract class PlotLayer<O extends PlotLayerConfig> extends EventEmitter 
   /**
    * layer 的 schema 配置
    */
-  public abstract readonly options: O;
+  public options: O;
+  /**
+   * layer 上一次的 schema 配置
+   */
+  public lastOptions: O;
   /**
    * layer 实例
    */
@@ -34,6 +39,19 @@ export abstract class PlotLayer<O extends PlotLayerConfig> extends EventEmitter 
    */
   public abstract readonly interaction: boolean;
 
+  constructor(options: O) {
+    super();
+    this.options = deepAssign({}, this.getDefaultOptions(), options);
+    this.lastOptions = this.options;
+  }
+
+  /**
+   * 获取默认配置
+   */
+  protected getDefaultOptions(): Partial<O> {
+    return {};
+  }
+
   public pickLayerConfig<T extends PlotLayerConfig>(params: T): Partial<ILayerConfig> {
     const config = pick<any>(params, LayerConfigkeys);
     return config;
@@ -47,7 +65,19 @@ export abstract class PlotLayer<O extends PlotLayerConfig> extends EventEmitter 
     scene.removeLayer(this.layer);
   }
 
-  public abstract updateOptions(options: Partial<O>): void;
+  public abstract update(options: Partial<O>): void;
+
+  /**
+   * 更新: 更新配置
+   */
+  public updateOption(options: Partial<O>) {
+    this.lastOptions = this.options;
+    this.options = deepAssign({}, this.options, options);
+  }
+
+  public render() {
+    this.layer.renderLayers();
+  }
 
   protected setSource(source: SourceOptions | Source) {
     if (source instanceof Source) {
@@ -72,7 +102,11 @@ export abstract class PlotLayer<O extends PlotLayerConfig> extends EventEmitter 
   }
 
   public toggleVisible() {
-    this.layer.isVisible() ? this.layer.hide() : this.layer.show();
+    this.isVisible() ? this.hide() : this.show();
+  }
+
+  public isVisible() {
+    return this.layer.inited ? this.layer.isVisible() : this.options.visible;
   }
 
   public fitBounds(fitBoundsOptions?: unknown) {

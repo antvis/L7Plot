@@ -1,7 +1,6 @@
-import { uniqueId } from '@antv/util';
+import { uniqueId, isUndefined, isEqual } from '@antv/util';
 import { HeatmapLayer as Heatmap } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
-import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
 import { HeatmapLayerOptions } from './types';
 import { ILayer } from '../../types';
@@ -47,10 +46,6 @@ export class HeatmapLayer extends PlotLayer<HeatmapLayerOptions> {
    */
   static LayerOptionsKeys = LAYER_OPTIONS_KEYS;
   /**
-   * 图层配置项
-   */
-  public options: HeatmapLayerOptions;
-  /**
    * 图层名称
    */
   public name: string;
@@ -68,12 +63,11 @@ export class HeatmapLayer extends PlotLayer<HeatmapLayerOptions> {
   public interaction = false;
 
   constructor(options: HeatmapLayerOptions) {
-    super();
-    const { name, source } = options;
-    this.name = name ? name : uniqueId(this.type);
-    this.options = deepAssign({}, this.getDefaultOptions(), options);
-
+    super(options);
+    const { name, source } = this.options;
     const config = this.pickLayerConfig(this.options);
+
+    this.name = name ? name : uniqueId(this.type);
     this.layer = new Heatmap({ ...config, name: this.name });
 
     this.mappingLayer(this.layer, this.options);
@@ -91,8 +85,12 @@ export class HeatmapLayer extends PlotLayer<HeatmapLayerOptions> {
     mappingLayer(layer, options);
   }
 
-  public updateOptions(options: Partial<HeatmapLayerOptions>) {
-    this.options = deepAssign({}, this.options, options);
+  public update(options: Partial<HeatmapLayerOptions>) {
+    this.updateOption(options);
     this.mappingLayer(this.layer, this.options);
+
+    if (!isUndefined(options.visible) && !isEqual(this.lastOptions.visible, this.options.visible)) {
+      options.visible ? this.show() : this.hide();
+    }
   }
 }

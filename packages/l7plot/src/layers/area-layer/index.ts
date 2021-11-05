@@ -1,8 +1,7 @@
-import { uniqueId, clone } from '@antv/util';
+import { uniqueId, clone, isEqual, isUndefined } from '@antv/util';
 import { PolygonLayer, LineLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
-import { deepAssign } from '../../utils';
-import { mappingLayer } from './adaptor';
+import { getDefaultState, mappingLayer } from './adaptor';
 import { AreaLayerOptions, AreaLayerSourceOptions } from './types';
 import { ILayer, MouseEvent, Scene, Source } from '../../types';
 import { getColorLegendItems } from '../dot-layer/helper';
@@ -10,6 +9,7 @@ import { getColorLegendItems } from '../dot-layer/helper';
 export type { AreaLayerOptions };
 
 const DEFAULT_OPTIONS = {
+  visible: true,
   state: {
     active: false,
     select: false,
@@ -27,10 +27,6 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
    * 图层配置项 Keys
    */
   static LayerOptionsKeys = LAYER_OPTIONS_KEYS;
-  /**
-   * 图层配置项
-   */
-  public options: AreaLayerOptions;
   /**
    * 图层名称
    */
@@ -73,17 +69,27 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   public interaction = true;
 
   constructor(options: AreaLayerOptions) {
-    super();
-    const { name, source } = options;
-    this.name = name ? name : uniqueId(this.type);
-    this.options = deepAssign({}, this.getDefaultOptions(), options);
-
+    super(options);
+    const { name, source, visible } = this.options;
     const config = this.pickLayerConfig(this.options);
+    const defaultState = getDefaultState(this.options.state);
+
+    this.name = name ? name : uniqueId(this.type);
     this.layer = new PolygonLayer({ ...config, name: this.name });
-    this.strokeLayer = new LineLayer({ name: 'strokeLayer' });
-    this.highlightLayer = new LineLayer({ name: 'highlightLayer' });
-    this.selectFillLayer = new PolygonLayer({ name: 'selectFillLayer' });
-    this.selectStrokeLayer = new LineLayer({ name: 'selectStrokeLayer' });
+    this.strokeLayer = new LineLayer({ name: 'strokeLayer', visible });
+
+    this.highlightLayer = new LineLayer({
+      name: 'highlightLayer',
+      visible: visible && Boolean(defaultState.active.stroke),
+    });
+    this.selectFillLayer = new PolygonLayer({
+      name: 'selectFillLayer',
+      visible: visible && Boolean(defaultState.select.fill),
+    });
+    this.selectStrokeLayer = new LineLayer({
+      name: 'selectStrokeLayer',
+      visible: visible && Boolean(defaultState.select.stroke),
+    });
 
     this.mappingLayer(this.options);
     this.setSource(source);
@@ -135,6 +141,9 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   }
 
   protected setSelectLayerSource(features: any[] = []) {
+    if (this.selectData.length === features.length) {
+      return;
+    }
     this.selectFillLayer.setData({ type: 'FeatureCollection', features }, { parser: { type: 'geojson' } });
     this.selectStrokeLayer.setData({ type: 'FeatureCollection', features }, { parser: { type: 'geojson' } });
   }
@@ -208,12 +217,45 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
     scene.removeLayer(this.selectStrokeLayer);
   }
 
-  public updateOptions(options: Partial<AreaLayerOptions>) {
-    this.options = deepAssign({}, this.options, options);
+  public update(options: Partial<AreaLayerOptions>) {
+    this.updateOption(options);
     this.mappingLayer(this.options);
-    this.setHighlightLayerSource();
-    this.setSelectLayerSource();
+
+    if (!isUndefined(options.visible) && !isEqual(this.lastOptions.visible, this.options.visible)) {
+      options.visible ? this.show() : this.hide();
+    }
+
+    if (this.options.visible) {
+      if (!isUndefined(options.state) && !isEqual(this.lastOptions.state, this.options.state)) {
+        this.updateHighlightLayer();
+      }
+      const defaultState = getDefaultState(this.options.state);
+      if (defaultState.active.stroke) {
+        this.setHighlightLayerSource();
+      }
+      if (defaultState.select.fill || defaultState.select.stroke) {
+        this.setSelectLayerSource();
+      }
+    }
+
     this.initEvent();
+  }
+
+  private updateHighlightLayer() {
+    const defaultState = getDefaultState(this.options.state);
+    const lasetDefaultState = getDefaultState(this.lastOptions.state);
+
+    if (lasetDefaultState.active.stroke !== defaultState.active.stroke) {
+      defaultState.active.stroke ? this.highlightLayer.show() : this.highlightLayer.hide();
+    }
+
+    if (lasetDefaultState.select.fill !== defaultState.select.fill) {
+      defaultState.select.fill ? this.selectFillLayer.show() : this.selectFillLayer.hide();
+    }
+
+    if (lasetDefaultState.select.stroke !== defaultState.select.stroke) {
+      defaultState.select.stroke ? this.selectStrokeLayer.show() : this.selectStrokeLayer.hide();
+    }
   }
 
   public show() {
@@ -228,14 +270,6 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
     this.strokeLayer.hide();
     this.selectFillLayer.hide();
     this.selectStrokeLayer.hide();
-  }
-
-  public toggleVisible() {
-    if (this.layer.isVisible()) {
-      this.hide();
-    } else {
-      this.show();
-    }
   }
 
   public getColorLegendItems() {

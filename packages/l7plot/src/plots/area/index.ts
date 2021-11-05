@@ -60,11 +60,11 @@ export class Area extends Plot<AreaOptions> {
    */
   protected updateLayers(options: AreaOptions) {
     const polygonLayerConfig = pick<any>(options, AreaLayer.LayerOptionsKeys);
-    this.areaLayer.updateOptions(polygonLayerConfig);
+    this.areaLayer.update(polygonLayerConfig);
 
     if (options.label) {
       if (this.labelLayer) {
-        this.labelLayer.updateOptions({ ...options.label });
+        this.labelLayer.update({ ...options.label });
       } else {
         this.labelLayer = this.createLabelLayer(this.source, options.label);
         this.layerGroup.addlayer(this.labelLayer);

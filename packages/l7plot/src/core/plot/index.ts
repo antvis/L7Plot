@@ -73,6 +73,14 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
   }
 
   /**
+   * 更新化组件
+   */
+  protected updateComponents() {
+    this.updateControls();
+    this.initTooltip();
+  }
+
+  /**
    * 获取默认配置
    */
   protected getDefaultOptions(): Partial<PlotOptions> {
@@ -116,7 +124,7 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
       this.layerGroup.removeAllLayer();
       layerGroup.addTo(this.scene);
       this.layerGroup = layerGroup;
-      this.initComponents();
+      this.updateComponents();
     } else {
       this.layerGroup = layerGroup;
       this.onLayersLoaded();
@@ -186,6 +194,10 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
     aggregation && MappingSource.aggregation(sourceCFG, aggregation);
 
     this.source.setData(this.options.source.data, sourceCFG);
-    // TODO: update Legend
+
+    // 更新 legend
+    if (this.options.legend) {
+      this.updateLegendControl(this.options.legend);
+    }
   }
 }
