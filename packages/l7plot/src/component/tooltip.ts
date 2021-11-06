@@ -1,13 +1,13 @@
 import { Scene } from '@antv/l7-scene';
 import { Marker } from '@antv/l7-component';
 import EventEmitter from '@antv/event-emitter';
-import { isString } from '@antv/util';
+import { isString, isEqual } from '@antv/util';
 import {
   Tooltip as TooltipComponent,
   TooltipOptions as ITooltipComponentOptions,
   TooltipListItem,
 } from '@antv/l7plot-component';
-import { isEqual, get as getValueByPath } from 'lodash-es';
+import getValueByPath from 'lodash-es/get';
 import {
   IPLotLayer,
   ILngLat,

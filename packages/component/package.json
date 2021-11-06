@@ -10,16 +10,15 @@
     "dist"
   ],
   "scripts": {
-    "dev": "npm run clean && npm run dev:cjs",
+    "dev": "yarn run clean && yarn run dev:cjs",
     "dev:cjs": "tsc -p tsconfig.json --target ES6 --module CommonJS --outDir dist/lib --watch",
     "lint": "eslint src __tests__ --ext .js,.ts",
     "lint-fix": "eslint src __tests__ --ext .js,.ts --fix",
     "prettier": "prettier src __tests__ -c -w",
     "clean": "rimraf dist",
-    "build": "npm run clean && npm run build:cjs && npm run build:esm",
+    "build": "yarn run clean && yarn run build:cjs && yarn run build:esm",
     "build:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib",
-    "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm",
-    "rollup": "rollup -c rollup.config.js"
+    "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm"
   },
   "keywords": [
     "antv",

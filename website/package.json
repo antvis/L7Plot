@@ -5,10 +5,10 @@
   "license": "MIT",
   "author": "yunji",
   "scripts": {
-    "dev": "npm run clean && npm run develop",
+    "dev": "yarn run clean && yarn run develop",
     "develop": "gatsby develop -H 0.0.0.0 -p 8900 --open",
-    "build": "npm run clean && gatsby build --prefix-paths",
-    "deploy": "npm run build && gh-pages -d public",
+    "build": "yarn run clean && gatsby build --prefix-paths",
+    "deploy": "yarn run build && gh-pages -d public",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "prettier": "prettier -c -w docs examples"
