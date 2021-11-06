@@ -1,15 +1,15 @@
 import { isFunction, isObject, isString, isNumber, isBoolean, isArray } from '@antv/util';
 import {
   ILayer,
-  IScale,
-  IScaleOptions,
+  ScaleConfig,
+  ScaleConfigMap,
   ColorAttr,
   SizeAttr,
   ShapeAttr,
   RotateAttr,
   AnimateAttr,
-  IStateAttribute,
-} from '../../types/';
+  StateAttribute,
+} from '../../types';
 
 /**
  * 获得映射函数
@@ -70,6 +70,8 @@ export class MappingLayer {
      */
     if (isNumber(size)) {
       layer.size(size);
+    } else if (isArray(size)) {
+      layer.size(size);
     } else if (isFunction(size)) {
       // TODO: size mappingFields
       const mappingFields = [];
@@ -122,7 +124,7 @@ export class MappingLayer {
     style && layer.style(style);
   }
 
-  static state(layer: ILayer, state: IStateAttribute) {
+  static state(layer: ILayer, state: StateAttribute) {
     const { active, select } = state;
     active && layer.active(active);
     select && layer.select(select);
@@ -157,7 +159,7 @@ export class MappingLayer {
     }
   }
 
-  static scale(layer: ILayer, field: string | IScaleOptions, cfg?: IScale) {
+  static scale(layer: ILayer, field: string | ScaleConfigMap, cfg: ScaleConfig) {
     /**
      * scale 的几种情况
      * layer.scale('name', {type: 'cat'});

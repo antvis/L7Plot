@@ -1,13 +1,13 @@
 import * as TOOLTIP_CSS_CONST from '@antv/l7plot-component/dist/lib/tooltip/constants';
 import * as CATEGORY_LEGEND_CSS_CONST from '@antv/l7plot-component/dist/lib/legend/category/constants';
 import * as CONTINUE_LEGEND_CSS_CONST from '@antv/l7plot-component/dist/lib/legend/continue/constants';
-import { IStyleSheet } from '../../types';
+import { StyleSheet } from '../../types';
 
 /**
  * 根据主题样式表生成主题结构
  * @param styleSheet 主题样式表
  */
-export function createThemeByStyleSheet(styleSheet: IStyleSheet): Record<string, any> {
+export function createThemeByStyleSheet(styleSheet: StyleSheet): Record<string, any> {
   const shapeStyles = {
     point: {
       default: {
@@ -70,13 +70,14 @@ export function createThemeByStyleSheet(styleSheet: IStyleSheet): Record<string,
               borderRadius: `${styleSheet.legendContainerBorderRadius}px`,
               color: styleSheet.legendTextFillColor,
               fontFamily: styleSheet.fontFamily,
-              padding: '10px 10px 6px 10px',
-              lineHeight: styleSheet.legendTextLineHeight,
+              padding: '10px',
+              lineHeight: '1',
               fontSize: `${styleSheet.legendTextFontSize}px`,
             },
             [CATEGORY_LEGEND_CSS_CONST.TITLE_CLASS]: {
-              lineHeight: '18px',
-              marginBottom: '5px',
+              fontSize: '13px',
+              lineHeight: '19px',
+              marginBottom: '8px',
             },
             [CATEGORY_LEGEND_CSS_CONST.LIST_CLASS]: {
               listStyleType: 'none',
@@ -104,24 +105,26 @@ export function createThemeByStyleSheet(styleSheet: IStyleSheet): Record<string,
               borderRadius: `${styleSheet.legendContainerBorderRadius}px`,
               color: styleSheet.legendTextFillColor,
               fontFamily: styleSheet.fontFamily,
-              padding: '10px 10px 6px 10px',
-              lineHeight: styleSheet.legendTextLineHeight,
+              padding: '10px',
+              lineHeight: 1,
               fontSize: `${styleSheet.legendTextFontSize}px`,
             },
             [CONTINUE_LEGEND_CSS_CONST.TITLE_CLASS]: {
-              lineHeight: '18px',
-              marginBottom: '5px',
+              fontSize: '13px',
+              lineHeight: '19px',
+              marginBottom: '8px',
             },
             [CONTINUE_LEGEND_CSS_CONST.RIBBON_CLASS]: {
               display: 'flex',
               alignItems: 'center',
             },
             [CONTINUE_LEGEND_CSS_CONST.GRADIENT_BAR_CLASS]: {
-              width: '130px',
-              height: '20px',
+              width: '140px',
+              height: '12px',
+              margin: '0px 5px',
             },
             [CONTINUE_LEGEND_CSS_CONST.VALUE_RANGE_CLASS]: {
-              padding: '0px 5px',
+              padding: '0px',
             },
           },
         },
@@ -156,7 +159,11 @@ export function createThemeByStyleSheet(styleSheet: IStyleSheet): Record<string,
             listStyleType: 'none',
             marginBottom: '4px',
           },
+          [TOOLTIP_CSS_CONST.NAME_CLASS]: {
+            color: styleSheet.tooltipItemNameFillColor,
+          },
           [TOOLTIP_CSS_CONST.VALUE_CLASS]: {
+            color: styleSheet.tooltipItemValueFillColor,
             display: 'inline-block',
             float: 'right',
             marginLeft: '30px',

@@ -1,4 +1,4 @@
-export interface IStyleSheet {
+export type StyleSheet = {
   /** 底图样式 */
   mapStyle?: string;
   /** 主题色 */
@@ -46,6 +46,10 @@ export interface IStyleSheet {
 
   /** tooltip 文本颜色 */
   tooltipTextFillColor?: string;
+  /** tooltip 数据项名称颜色 */
+  tooltipItemNameFillColor?: string;
+  /** tooltip 数据项数据颜色 */
+  tooltipItemValueFillColor?: string;
   /** tooltip 文本字体大小 */
   tooltipTextFontSize?: number;
   /** tooltip 文本行高 */
@@ -82,11 +86,11 @@ export interface IStyleSheet {
 
   /** 点图 selected 状态下填充颜色 */
   pointSelectedFillColor?: string;
-}
+};
 
 /** createTheme 主题样式表配置 */
 export type StyleSheetCfg = Pick<
-  IStyleSheet,
+  StyleSheet,
   | 'mapStyle'
   | 'subColor'
   | 'brandColor'

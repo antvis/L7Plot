@@ -1,4 +1,4 @@
-`string` optional default: `'linear'`
+`ScaleConfig` optional default: `{type: 'linear'}`
 
 关联字段的映射 scale 类型，有以下 scale 类型：
 

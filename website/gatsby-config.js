@@ -41,10 +41,10 @@ module.exports = {
     ],
     docs: [
       {
-        slug: 'api/map-api',
+        slug: 'api/plot-api',
         title: {
-          zh: '地图 - Map',
-          en: 'Map',
+          zh: '图表 - Plot',
+          en: 'Plot',
         },
         order: 0,
       },
@@ -57,28 +57,20 @@ module.exports = {
         order: 1,
       },
       {
-        slug: 'api/point-maps',
+        slug: 'api/plots',
         title: {
-          zh: '点地图 - Point Map',
-          en: 'Point Map',
+          zh: '基础图表 - Plots',
+          en: 'Plots',
         },
         order: 2,
       },
       {
-        slug: 'api/heat-maps',
-        title: {
-          zh: '热力图 - Heatmap',
-          en: 'Heatmap',
-        },
-        order: 3,
-      },
-      {
         slug: 'api/components',
         title: {
-          zh: '地图组件 - Components',
+          zh: '组件 - Components',
           en: 'Components',
         },
-        order: 4,
+        order: 3,
       },
       {
         slug: 'api/theme',
@@ -86,13 +78,21 @@ module.exports = {
           zh: '主题',
           en: '主题 - Theme',
         },
+        order: 4,
+      },
+      {
+        slug: 'api/layers',
+        title: {
+          zh: '图层 - Layers',
+          en: 'Layers',
+        },
         order: 5,
       },
       {
-        slug: 'api/advanced-plot',
+        slug: 'api/advanced-plots',
         title: {
-          zh: '组合地图',
-          en: '组合地图 - Advanced Plot',
+          zh: '高级图表 - Advanced Plot',
+          en: 'Advanced Plot',
         },
         order: 6,
       },
@@ -107,19 +107,43 @@ module.exports = {
         },
       },
       {
-        slug: 'point-map',
+        slug: 'dot',
         icon: 'point',
         title: {
-          zh: '点地图',
-          en: 'Point Map',
+          zh: '散点图',
+          en: 'Dot',
         },
       },
       {
-        slug: 'heat-map',
+        slug: 'heatmap',
         icon: 'heatmap',
         title: {
-          zh: '热力地图',
-          en: 'Heat Map',
+          zh: '热力图',
+          en: 'Heatmap',
+        },
+      },
+      {
+        slug: 'line',
+        icon: 'line',
+        title: {
+          zh: '路径图',
+          en: 'line',
+        },
+      },
+      {
+        slug: 'polygon',
+        icon: 'polygon',
+        title: {
+          zh: '区域图',
+          en: 'polygon',
+        },
+      },
+      {
+        slug: 'advanced-plot',
+        icon: 'other',
+        title: {
+          zh: '高级图表',
+          en: 'advanced-plot',
         },
       },
     ],

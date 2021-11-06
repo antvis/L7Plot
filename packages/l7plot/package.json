@@ -1,24 +1,26 @@
 {
   "name": "@antv/l7plot",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.3-alpha.1",
   "description": "A map charting library",
   "main": "dist/lib/index.js",
-  "types": "dist/lib/index.d.ts",
   "module": "dist/esm/index.js",
-  "unpkg": "dist/umd/index.js",
+  "types": "dist/esm/index.d.ts",
+  "unpkg": "dist/umd/l7plot.min.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "npm run clean && npm run dev:cjs",
-    "dev:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib --watch",
+    "dev": "yarn run clean && yarn run dev:cjs",
+    "dev:cjs": "tsc -p tsconfig.json --target ES6 --module CommonJS --outDir dist/lib --watch",
     "lint": "eslint src __tests__ --ext .js,.ts",
     "lint-fix": "eslint src __tests__ --ext .js,.ts --fix",
     "prettier": "prettier src __tests__ -c -w",
     "typedoc": "typedoc",
     "clean": "rimraf dist",
-    "build": "npm run clean && npm run build:cjs",
+    "build": "yarn run clean && yarn run build:cjs && npm run build:esm && npm run build:umd",
     "build:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib",
     "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm",
-    "build:umd": "tsc -p tsconfig.json --target ES5 --module UMD --outDir dist/umd --resolveJsonModule false",
-    "rollup": "rollup -c rollup.config.js"
+    "build:umd": "rollup -c rollup.config.js"
   },
   "keywords": [
     "antv",
@@ -26,6 +28,7 @@
     "l7",
     "plot"
   ],
+  "sideEffects": false,
   "author": "yunji",
   "license": "MIT",
   "homepage": "https://github.com/antvis/L7Plot#readme",
@@ -37,14 +40,19 @@
     "url": "https://github.com/antvis/L7Plot/issues"
   },
   "devDependencies": {
+    "@types/geojson": "^7946.0.8",
     "@types/lodash-es": "^4.17.4",
-    "typedoc": "^0.21.2"
+    "@types/topojson-client": "^3.1.0"
   },
   "dependencies": {
     "@antv/event-emitter": "^0.1.2",
     "@antv/l7": "^2.5.5",
-    "@antv/l7plot-component": "^0.0.1-alpha.1",
+    "@antv/l7plot-component": "^0.0.3-alpha.1",
     "@antv/util": "^2.0.13",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "topojson-client": "^3.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -1,5 +1,5 @@
 import { PositionType } from '@antv/l7-core';
 
-export interface IPopupOptions {
+export type PopupOptions = {
   position: PositionType;
-}
+};

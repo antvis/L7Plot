@@ -55,12 +55,12 @@ const IndexPage = () => {
   // const coverImage = <img width='100%' src='https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*o40BRo-ANLoAAAAAAAAAAABkARQnAQ' alt='cover' />
   return (
     <>
-      <SEO title={t('L7Plot 地理空间数据可视化图表库')} lang={i18n.language} />
+      <SEO title={t('L7Plot 地理可视化图表库')} lang={i18n.language} />
       <Banner
         // coverImage={coverImage}
         coverImage={<BannerSVG />}
-        title={t('L7Plot 地理空间数据可视化图表库')}
-        description={t('L7Plot 是简单易用的地理空间数据统计图表库')}
+        title={t('L7Plot 地理可视化图表库')}
+        description={t('L7Plot 是简单易用的地理空间数据可视化图表库')}
         className="banner"
         buttons={bannerButtons}
         showGithubStars={false}

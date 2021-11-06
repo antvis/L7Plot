@@ -3,9 +3,11 @@ title: 数据 - Source
 order: 1
 ---
 
-## `source.`data
+## 属性配置
 
-`array | object | string` required
+### `source.`data
+
+`array|object|string` required
 
 数据源配置。
 
@@ -18,19 +20,19 @@ order: 1
 }
 ```
 
-## `source.`parser
+### `source.`parser
 
 `object` required
 
 数据格式解析配置
 
-### `parser.`type
+#### `parser.`type
 
 `string` required
 
 支持以下数据类型：
 
-- `csv`
+- <tag color="cyan" text="CSV">CSV</tag>
 
 ```js
 {
@@ -42,7 +44,7 @@ order: 1
 }
 ```
 
-- `json`
+- <tag color="green" text="JSON">JSON</tag>
 
 ```js
 {
@@ -53,7 +55,7 @@ order: 1
 }
 ```
 
-- `geojson`
+- <tag color="blue" text="GEOJSON">GEOJSON</tag>
 
 ```js
 {
@@ -73,7 +75,7 @@ order: 1
 }
 ```
 
-### `parser.`x
+#### `parser.`x
 
 `string` optional
 
@@ -88,13 +90,13 @@ order: 1
 }
 ```
 
-### `parser.`y
+#### `parser.`y
 
 `string` optional
 
 点数据的维度映射。
 
-### `parser.`x1
+#### `parser.`x1
 
 `string` optional
 
@@ -115,13 +117,13 @@ order: 1
 }
 ```
 
-### `parser.`y1
+#### `parser.`y1
 
 `string` optional
 
 线数据的第二个点维度映射。
 
-### `parser.`coordinates
+#### `parser.`coordinates
 
 `array` optional
 
@@ -141,13 +143,13 @@ order: 1
 }
 ```
 
-## `source.`transform
+### `source.`transform
 
 `array` optional
 
 数据处理配置。
 
-### `transform.`grid
+#### `transform.`grid
 
 将数据处理为方格网布局，以下为配置参数：
 
@@ -173,7 +175,7 @@ order: 1
 }
 ```
 
-### `transform.`hexagon
+#### `transform.`hexagon
 
 将数据处理为六边形网格布局，以下为配置参数：
 
@@ -199,7 +201,7 @@ order: 1
 }
 ```
 
-### `transform.`join
+#### `transform.`join
 
 将地理数据和元数据进行关联，以下为配置参数：
 
@@ -234,7 +236,7 @@ order: 1
 }
 ```
 
-## `source.`cluster
+### `source.`cluster
 
 `boolean` optional default: `false`
 

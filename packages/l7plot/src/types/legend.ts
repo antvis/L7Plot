@@ -1,34 +1,37 @@
 import { PositionName } from '@antv/l7-core';
 import {
   CategoryLegendCustomContent,
-  ICategoryLegendListItem,
+  CategoryLegendListItem,
   ContinueLegendCustomContent,
 } from '@antv/l7plot-component';
+import { LegendType } from '../component/legend';
 
 /**
  * LegendControl
  */
-export interface ILegendOptions {
+export interface LegendOptions
+  extends Omit<CategoryLegendOptions, 'customContent'>,
+    Omit<ContinueLegendOptions, 'customContent'> {
+  type?: LegendType;
   position?: PositionName;
-  category?: ICategoryLegendOptions;
-  continue?: IContinueLegendOptions;
+  customContent?: CategoryLegendCustomContent | ContinueLegendCustomContent;
 }
 
 /**
  * CategoryLegend
  */
-export interface ICategoryLegendOptions {
+export type CategoryLegendOptions = {
   title?: string;
-  items?: ICategoryLegendListItem[];
+  items?: CategoryLegendListItem[];
   className?: string;
   customContent?: CategoryLegendCustomContent;
   domStyles?: Record<string, any>;
-}
+};
 
 /**
  * ContinueLegend
  */
-export interface IContinueLegendOptions {
+export type ContinueLegendOptions = {
   title?: string;
   min?: number;
   max?: number;
@@ -36,4 +39,4 @@ export interface IContinueLegendOptions {
   className?: string;
   customContent?: ContinueLegendCustomContent;
   domStyles?: Record<string, any>;
-}
+};

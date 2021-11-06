@@ -1,12 +1,12 @@
-import { deepMix, each, isString, substitute } from '@antv/util';
+import { deepMix, isString, substitute } from '@antv/util';
 import { modifyCSS } from '@antv/dom-util';
 import DomStyles from './theme';
 import { CONTAINER_CLASS, CONTAINER_TPL, ITEM_TPL, LIST_CLASS, TITLE_CLASS } from './constants';
 import { Component } from '../../core/component';
-import { CategoryLegendCustomContent, ICategoryLegendOptions } from '../../types';
+import { CategoryLegendCustomContent, CategoryLegendOptions } from '../../types';
 import { clearDom } from '../../utils/dom';
 
-export class CategoryLegend<O extends ICategoryLegendOptions = ICategoryLegendOptions> extends Component<O> {
+export class CategoryLegend<O extends CategoryLegendOptions = CategoryLegendOptions> extends Component<O> {
   /**
    * 缓存 title DOM
    */
@@ -19,7 +19,7 @@ export class CategoryLegend<O extends ICategoryLegendOptions = ICategoryLegendOp
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<ICategoryLegendOptions> {
+  protected getDefaultOptions(): Partial<CategoryLegendOptions> {
     return deepMix({}, super.getDefaultOptions(), {
       id: 'l7plot-category-legend',
       name: 'l7plot-category-legend',
@@ -219,8 +219,9 @@ export class CategoryLegend<O extends ICategoryLegendOptions = ICategoryLegendOp
     const itemTpl = this.options.itemTpl || ITEM_TPL;
     const listDom = this.listDom;
     if (listDom) {
-      each(items, (item) => {
-        const substituteObj = { ...item };
+      items.forEach((item) => {
+        const value = Array.isArray(item.value) ? item.value.join('-') : item.value;
+        const substituteObj = { ...item, value };
 
         const domStr = substitute(itemTpl, substituteObj);
         const itemDom = this.createDom(domStr);

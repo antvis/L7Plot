@@ -1,37 +1,37 @@
 import { PositionType, PositionName } from '@antv/l7-core';
 
-export { PositionType };
+export { PositionType, PositionName };
 
 /**
  * ZoomControl
  */
-export interface IZoomControlOptions {
+export type ZoomControlOptions = {
   position?: PositionName;
   zoomInText?: string;
   zoomInTitle?: string;
   zoomOutText?: string;
   zoomOutTitle?: string;
-}
+};
 
 /**
  * ScaleControl
  */
-export interface IScaleControlOptions {
+export type ScaleControlOptions = {
   position?: PositionName;
   maxWidth?: number;
   metric?: boolean;
   updateWhenIdle?: boolean;
   imperial?: boolean;
-}
+};
 
 /**
  * LayerMenuControl
  */
-export interface ILayerMenuControlOptions {
+export type LayerMenuControlOptions = {
   position?: PositionName;
   collapsed?: boolean;
   autoZIndex?: boolean;
   hideSingleBase?: boolean;
   sortLayers?: boolean;
   sortFunction?: (...args: any[]) => any;
-}
+};

@@ -1,9 +1,9 @@
 import { getLayerStyleAttribute } from '../../../helper/layer';
-import { HeatmapLayerWrapper } from '../../../../src/layers/heatmap-layer';
+import { HeatmapLayer } from '../../../../src/layers/heatmap-layer';
 import { Source } from '../../../../src/types';
 
 describe('heatmap layer', () => {
-  const layerWrapper = new HeatmapLayerWrapper({
+  const layer = new HeatmapLayer({
     source: new Source([], { parser: { type: 'json', x: 'x', y: 'y' } }),
     shape: 'heatmap',
     size: {
@@ -26,11 +26,12 @@ describe('heatmap layer', () => {
   });
 
   it('type', () => {
-    expect(layerWrapper.layer.type).toBe('HeatMapLayer');
+    expect(layer.type).toBe('heatmapLayer');
+    expect(layer.layer.type).toBe('HeatMapLayer');
   });
 
   it('size', () => {
-    expect(getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'size')).toEqual({
+    expect(getLayerStyleAttribute(layer.layer['pendingStyleAttributes'], 'size')).toEqual({
       attributeName: 'size',
       attributeField: 'mag',
       attributeValues: [0, 1],
@@ -38,14 +39,14 @@ describe('heatmap layer', () => {
   });
 
   it('shape', () => {
-    expect(getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'shape')).toEqual({
+    expect(getLayerStyleAttribute(layer.layer['pendingStyleAttributes'], 'shape')).toEqual({
       attributeName: 'shape',
       attributeField: 'heatmap',
     });
   });
 
   it('style', () => {
-    expect(layerWrapper.layer['rawConfig']).toMatchObject({
+    expect(layer.layer['rawConfig']).toMatchObject({
       intensity: 3,
       radius: 20,
       opacity: 1,

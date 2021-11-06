@@ -1,9 +1,8 @@
 import { uniqueId } from '@antv/util';
-import { Scene } from '@antv/l7-scene';
 import EventEmitter from '@antv/event-emitter';
-import { ILayer } from '../../types';
+import { Scene, IPLotLayer } from '../../types';
 
-export interface ILayerGroupOption {
+export interface LayerGroupOption {
   name?: string;
 }
 
@@ -15,13 +14,13 @@ export class LayerGroup extends EventEmitter {
   /**
    * 子图层
    */
-  public layers: ILayer[];
+  public layers: IPLotLayer[];
   /**
    * 地图容器
    */
   public scene: Scene | undefined;
 
-  constructor(layers: ILayer[] = [], option: ILayerGroupOption = {}) {
+  constructor(layers: IPLotLayer[] = [], option: LayerGroupOption = {}) {
     super();
     this.name = option.name ? option.name : uniqueId('layerGroup');
     this.layers = layers;
@@ -42,38 +41,38 @@ export class LayerGroup extends EventEmitter {
           this.emit('inited-all');
         }
       });
-      scene.addLayer(layer);
+      layer.addTo(scene);
     });
   }
 
   /**
    * 图层组是否有该图层
    */
-  hasLayer(layer: ILayer): boolean {
+  hasLayer(layer: IPLotLayer): boolean {
     return this.layers.some((itemLayer) => itemLayer === layer);
   }
 
   /**
    * 增加图层
    */
-  public addlayer(layer: ILayer) {
+  public addlayer(layer: IPLotLayer) {
     // TODO: duplicate layer
     this.layers.push(layer);
     if (this.scene) {
       layer.once('inited', (e) => this.emit('inited', e));
-      this.scene.addLayer(layer);
+      layer.addTo(this.scene);
     }
   }
 
   /**
    * 移除 layer 图层
    */
-  public removelayer(layer: ILayer): boolean {
+  public removelayer(layer: IPLotLayer): boolean {
     const layerIndex = this.layers.findIndex((itemLayer) => itemLayer === layer);
     if (layerIndex === -1) return false;
     this.layers.splice(layerIndex, 1);
     if (this.scene) {
-      this.scene.removeLayer(layer);
+      layer.remove(this.scene);
     }
     return true;
   }
@@ -81,21 +80,28 @@ export class LayerGroup extends EventEmitter {
   /**
    * 获取所有的地图图层
    */
-  public getLayers(): ILayer[] {
+  public getLayers(): IPLotLayer[] {
     return this.layers;
+  }
+
+  /**
+   * 获取所有的带交互图层
+   */
+  public getInteractionLayers(): IPLotLayer[] {
+    return this.layers.filter(({ interaction }) => interaction);
   }
 
   /**
    * 根据图层 ID 获取图层对象
    */
-  public getLayer(id: string): ILayer | undefined {
-    return this.layers.find((itemLayer) => itemLayer.id === id);
+  public getLayer(id: string): IPLotLayer | undefined {
+    return this.layers.find(({ layer }) => layer.id === id);
   }
 
   /**
    * 根据图层 name 获取图层对象
    */
-  public getLayerByName(name: string): ILayer | undefined {
+  public getLayerByName(name: string): IPLotLayer | undefined {
     return this.layers.find((itemLayer) => itemLayer.name === name);
   }
 
@@ -103,9 +109,9 @@ export class LayerGroup extends EventEmitter {
    * 移除所有的图层对象
    */
   public removeAllLayer() {
-    this.layers.forEach((itemLayer) => {
+    this.layers.forEach((layer) => {
       if (this.scene) {
-        this.scene.removeLayer(itemLayer);
+        layer.remove(this.scene);
       }
     });
     this.layers = [];

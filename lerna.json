@@ -1,4 +1,16 @@
 {
-  "packages": ["packages/*", "website", "storybook"],
-  "version": "0.0.1-alpha.1"
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "version": "independent",
+  "command": {
+    "publish": {
+      "packages": ["packages/*"],
+      "ignoreChanges": ["__tests__", "*.md", "website", "storybook"],
+      "registry": "https://registry.npmjs.com",
+      "message": "chore: publish"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

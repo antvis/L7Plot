@@ -1,56 +1,56 @@
-import { IScale } from '@antv/l7';
 import { IAnimateOption, IActiveOption } from '@antv/l7-core';
+import { ScaleConfig } from './common';
 
 export type Callback<T> = (data: Record<string, any>) => T | T[];
 
 /** 颜色色板 */
 export type ColorsAttr = string | string[];
 
-export interface IStyleAttribute<T> {
+export type StyleAttribute<T> = {
   field?: string | string[];
   value?: T | T[] | Callback<T>;
-}
+};
 
-export interface IColorStyleAttribute {
+export type ColorStyleAttribute = {
   field?: string | string[];
   value?: string | string[] | Callback<string>;
-  scale?: IScale;
-}
+  scale?: ScaleConfig;
+};
 
-export interface ISizeStyleAttribute {
+export type SizeStyleAttribute = {
   field?: string;
-  value?: number | number[] | Callback<number>;
-  scale?: IScale;
-}
+  value?: number | number[] | Callback<number | number[]>;
+  scale?: ScaleConfig;
+};
 
-export interface IShapeStyleAttribute<T> {
+export type ShapeStyleAttribute<T> = {
   field?: string | string[];
   value?: T | T[] | Callback<T>;
-  scale?: IScale;
-}
+  scale?: ScaleConfig;
+};
 
-export interface IRotateStyleAttribute {
+export type RotateStyleAttribute = {
   field?: string;
   value?: number | number[] | Callback<number>;
-}
+};
 
 /** 图形交互反馈 */
-export interface IStateAttribute {
+export type StateAttribute = {
   active?: boolean | IActiveOption;
   select?: boolean | IActiveOption;
-}
+};
 
 /** 颜色 */
-export type ColorAttr = string | Callback<string> | IColorStyleAttribute;
+export type ColorAttr = string | Callback<string> | ColorStyleAttribute;
 
 /** 大小 */
-export type SizeAttr = number | Callback<number> | ISizeStyleAttribute;
+export type SizeAttr = number | number[] | Callback<number | number[]> | SizeStyleAttribute;
 
 /** 旋转 */
-export type RotateAttr = number | Callback<number> | IRotateStyleAttribute;
+export type RotateAttr = number | Callback<number> | RotateStyleAttribute;
 
 /** 图形形状 */
-export type ShapeAttr<T> = T | Callback<T> | IShapeStyleAttribute<T>;
+export type ShapeAttr<T> = T | Callback<T> | ShapeStyleAttribute<T>;
 
 /** 图形动画 */
 export type AnimateAttr = boolean | Partial<IAnimateOption>;
@@ -59,7 +59,11 @@ export type AnimateAttr = boolean | Partial<IAnimateOption>;
 export type AggregationMethod = 'count' | 'max' | 'min' | 'sum' | 'mean';
 
 /** 网格聚合 */
-export interface IGridAggregation {
+export type GridAggregation = {
+  /**
+   * 聚合类型
+   */
+  type?: 'grid' | 'hexagon';
   /**
    * 聚合字段
    */
@@ -71,5 +75,5 @@ export interface IGridAggregation {
   /**
    * 聚合方法
    */
-  type?: AggregationMethod;
-}
+  method?: AggregationMethod;
+};

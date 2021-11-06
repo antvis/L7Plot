@@ -1,5 +1,5 @@
-import { IBaseLayerConfig } from '../core/layer/interface';
-import { ColorAttr, IStateAttribute, SizeAttr } from './attr';
+import { PlotLayerConfig } from './layer';
+import { ColorAttr, StateAttribute, SizeAttr } from './attr';
 
 export type AnchorType =
   | 'right'
@@ -17,7 +17,7 @@ export type AnchorType =
   | 'top-left'
   | 'center';
 
-export interface IPointTextLayerStyleOptions {
+export type PointTextLayerStyleOptions = {
   /* 字体颜色 */
   fill?: ColorAttr;
   /* 字体大小 */
@@ -48,24 +48,24 @@ export interface IPointTextLayerStyleOptions {
   fontWeight?: string;
   /* 是否换行 */
   textAllowOverlap?: boolean;
-}
+};
 
 /**
  * Label
  */
-export interface ILabelOptions extends IBaseLayerConfig {
+export interface LabelOptions extends PlotLayerConfig {
   /** 映射的字段 */
   field?: string;
   // TODO: 多字段支持
-  // readonly fields?: string[];
+  //  fields?: string[];
   /** 回调函数 */
   content?: string;
   // TODO: 多字段 CallBack 支持
-  // readonly content?: string | ((data: Record<string, string | number>) => string);
+  //  content?: string | ((data: Record<string, string | number>) => string);
   /** 字体样式 */
-  style?: IPointTextLayerStyleOptions;
+  style?: PointTextLayerStyleOptions;
   /* 旋转文字 */
   // rotate?: RotateAttr;
   /* 交互反馈 */
-  readonly state?: IStateAttribute;
+  state?: StateAttribute;
 }
