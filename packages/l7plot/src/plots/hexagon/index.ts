@@ -60,11 +60,11 @@ export class Hexagon extends Plot<HexagonOptions> {
    */
   protected updateLayers(options: HexagonOptions) {
     const heatMapLayerConfig = pick<any>(options, HexagonLayer.LayerOptionsKeys);
-    this.hexagonLayer.updateOptions(heatMapLayerConfig);
+    this.hexagonLayer.update(heatMapLayerConfig);
 
     if (options.label) {
       if (this.labelLayer) {
-        this.labelLayer.updateOptions({ ...options.label });
+        this.labelLayer.update({ ...options.label });
       } else {
         this.labelLayer = this.createLabelLayer(this.source, options.label);
         this.layerGroup.addlayer(this.labelLayer);

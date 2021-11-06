@@ -60,11 +60,11 @@ export class Heatmap extends Plot<HeatmapOptions> {
    */
   protected updateLayers(options: HeatmapOptions) {
     const heatMapLayerConfig = pick<any>(options, HeatmapLayer.LayerOptionsKeys);
-    this.heatmapLayer.updateOptions(heatMapLayerConfig);
+    this.heatmapLayer.update(heatMapLayerConfig);
 
     if (options.label) {
       if (this.labelLayer) {
-        this.labelLayer.updateOptions({ ...options.label });
+        this.labelLayer.update({ ...options.label });
       } else {
         this.labelLayer = this.createLabelLayer(this.source, options.label);
         this.layerGroup.addlayer(this.labelLayer);

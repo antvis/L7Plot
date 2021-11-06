@@ -20,7 +20,7 @@ const defaultState: { active: Required<AreaLayerActiveOptions>; select: Required
   },
 };
 
-const getDefaultState = (state?: AreaLayerOptions['state']) => {
+export const getDefaultState = (state?: AreaLayerOptions['state']) => {
   if (isUndefined(state)) {
     return defaultState;
   }
@@ -133,9 +133,6 @@ export function mappingLayer(
     color && MappingLayer.color(highlightLayer, color);
     // style
     style && MappingLayer.style(highlightLayer, style);
-    highlightLayer.show();
-  } else {
-    highlightLayer.hide();
   }
 
   /**
@@ -151,11 +148,7 @@ export function mappingLayer(
     fillStyle && MappingLayer.style(selectFillLayer, fillStyle);
     // state
     MappingLayer.state(selectFillLayer, { select: false, active: false });
-    selectFillLayer.show();
-  } else {
-    selectFillLayer.hide();
   }
-
   /**
    * 选中描边图层
    */
@@ -171,8 +164,5 @@ export function mappingLayer(
     color && MappingLayer.color(selectStrokeLayer, color);
     // style
     style && MappingLayer.style(selectStrokeLayer, style);
-    selectStrokeLayer.show();
-  } else {
-    selectStrokeLayer.hide();
   }
 }

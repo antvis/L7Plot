@@ -393,19 +393,51 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
    */
   protected initControls() {
     const { zoom, scale, layerMenu, legend } = this.options;
-    scale ? this.addScaleControl(scale) : this.removeScaleControl();
-    zoom ? this.addZoomControl(zoom) : this.removeZoomControl();
-    layerMenu ? this.addLayerMenuControl(layerMenu) : this.removeLayerMenuControl();
-    legend ? this.addLegendControl(legend) : this.removeLegendControl();
+    scale && this.addScaleControl(scale);
+    zoom && this.addZoomControl(zoom);
+    layerMenu && this.addLayerMenuControl(layerMenu);
+    legend && this.addLegendControl(legend);
+  }
+
+  /**
+   * 更新控件
+   */
+  protected updateControls() {
+    const { zoom, scale, layerMenu, legend } = this.options;
+    if (!isEqual(this.lastOptions.zoom, zoom)) {
+      zoom ? this.updateZoomControl(zoom) : this.removeZoomControl();
+    }
+    if (!isEqual(this.lastOptions.scale, scale)) {
+      scale ? this.updateScaleControl(scale) : this.removeScaleControl();
+    }
+    if (!isEqual(this.lastOptions.layerMenu, layerMenu)) {
+      layerMenu ? this.updateLayerMenuControl(layerMenu) : this.removeLayerMenuControl();
+    }
+    if (!isEqual(this.lastOptions.legend, legend)) {
+      legend ? this.updateLegendControl(legend) : this.removeLegendControl();
+    }
   }
 
   /**
    * 添加 zoom 控件
    */
   public addZoomControl(options: ZoomControlOptions) {
-    this.removeZoomControl();
+    if (this.zoomControl) {
+      return;
+    }
     this.zoomControl = new Zoom(options);
     this.scene.addControl(this.zoomControl);
+  }
+
+  /**
+   * 更新 zoom 控件
+   */
+  public updateZoomControl(options: ZoomControlOptions) {
+    if (!this.zoomControl) {
+      return;
+    }
+    this.removeZoomControl();
+    this.addZoomControl(options);
   }
 
   /**
@@ -422,9 +454,22 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
    * 添加 scale 控件
    */
   public addScaleControl(options: ScaleControlOptions) {
-    this.removeScaleControl();
+    if (this.scaleControl) {
+      return;
+    }
     this.scaleControl = new Scale(options);
     this.scene.addControl(this.scaleControl);
+  }
+
+  /**
+   * 更新 scale 控件
+   */
+  public updateScaleControl(options: ScaleControlOptions) {
+    if (!this.scaleControl) {
+      return;
+    }
+    this.removeScaleControl();
+    this.addScaleControl(options);
   }
 
   /**
@@ -441,7 +486,9 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
    * 添加 layerMenu 控件
    */
   public addLayerMenuControl(options: LayerMenuControlOptions) {
-    this.removeLayerMenuControl();
+    if (this.layerMenuControl) {
+      return;
+    }
     const baseLayers = {};
     const overlayers = {};
     this.layerGroup.getLayers().forEach(({ name, layer }) => {
@@ -449,6 +496,17 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
     });
     this.layerMenuControl = new Layers(Object.assign({}, options, { baseLayers, overlayers }));
     this.scene.addControl(this.layerMenuControl);
+  }
+
+  /**
+   * 更新 layerMenu 控件
+   */
+  public updateLayerMenuControl(options: LayerMenuControlOptions) {
+    if (!this.layerMenuControl) {
+      return;
+    }
+    this.removeLayerMenuControl();
+    this.addLayerMenuControl(options);
   }
 
   /**
@@ -473,7 +531,9 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
    * 添加 legend 控件
    */
   public addLegendControl(options: LegendOptions) {
-    this.removeLegendControl();
+    if (this.legendControl) {
+      return;
+    }
     const legendTheme = this.theme['components'].legend;
     const legendOptions: LegendOptions = deepAssign({}, this.getLegendOptions(), options);
     const { type, position, ...rest } = legendOptions;
@@ -488,6 +548,17 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
 
     this.legendControl = new Legend({ position, items });
     this.scene.addControl(this.legendControl);
+  }
+
+  /**
+   * 更新 legend 控件
+   */
+  public updateLegendControl(options: LegendOptions) {
+    if (!this.legendControl) {
+      return;
+    }
+    this.removeLegendControl();
+    this.addLegendControl(options);
   }
 
   /**

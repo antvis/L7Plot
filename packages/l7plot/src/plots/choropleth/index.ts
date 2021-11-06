@@ -83,7 +83,8 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     console.time('l7plot choropleth render time');
     if (this.inited) {
       this.updateLayers(this.options);
-      this.initComponents();
+      this.updateComponents();
+      // this.fillAreaLayer.render();
     } else {
       const layerGroup = this.createLayers(this.source);
       this.layerGroup = layerGroup;
@@ -102,6 +103,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     if (options.map && !isEqual(this.lastOptions.map, this.options.map)) {
       this.updateMap(options.map);
     }
+
     // 下钻路径发生更新
     if (
       options.drill &&
@@ -110,15 +112,16 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     ) {
       this.drillReset();
     }
+
     // 行政级别及范围发生更新
     if (options.viewLevel && !isEqual(this.lastOptions.viewLevel, this.options.viewLevel)) {
       const geoData = options.source?.joinBy.geoData;
-      console.time('l7plot update viewLevel');
+      console.time('l7plot choropleth update viewLevel time');
       this.getDistrictData(geoData).then(() => {
         const { data, ...sourceConfig } = this.options.source;
         this.changeData(data, sourceConfig);
         this.render();
-        console.timeEnd('l7plot update viewLevel');
+        console.timeEnd('l7plot choropleth update viewLevel time');
       });
     } else {
       if (options.source && !isEqual(this.lastOptions.source, this.options.source)) {
@@ -126,6 +129,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
         this.changeData(data, sourceConfig);
       }
       this.render();
+      // this.fillAreaLayer.render();
     }
   }
 
@@ -168,11 +172,16 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    * 更新: 更新数据
    */
   public changeData(data: any[], cfg?: Partial<Omit<ChoroplethSourceOptions, 'data'>>) {
-    console.time('l7plot update data time');
+    console.time('l7plot choropleth update data time');
     this.options.source = deepAssign({}, this.options.source, { data, ...cfg });
     const { data: geoData, sourceCFG } = this.parserSourceConfig(this.options.source);
     this.source.setData(geoData, sourceCFG);
-    console.timeEnd('l7plot update data time');
+    console.timeEnd('l7plot choropleth update data time');
+
+    // 更新 legend
+    if (this.options.legend) {
+      this.updateLegendControl(this.options.legend);
+    }
   }
 
   /**
@@ -237,7 +246,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    */
   protected updateLayers(options: ChoroplethOptions) {
     const fillAreaLayerConfig = pick<any>(options, AreaLayer.LayerOptionsKeys);
-    this.fillAreaLayer.updateOptions(fillAreaLayerConfig);
+    this.fillAreaLayer.update(fillAreaLayerConfig);
 
     if (options.chinaBorder) {
       if (!this.chinaBoundaryLayer) {
@@ -258,7 +267,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
 
     if (options.label) {
       if (this.labelLayer) {
-        this.labelLayer.updateOptions({ ...options.label });
+        this.labelLayer.update({ ...options.label });
       } else {
         this.labelLayer = this.createLabelLayer(this.source, options.label);
         this.layerGroup.addlayer(this.labelLayer);

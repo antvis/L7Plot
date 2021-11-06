@@ -1,8 +1,7 @@
-import { uniqueId, isBoolean } from '@antv/util';
+import { uniqueId, isUndefined, isEqual } from '@antv/util';
 import { PointLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { TextLayerConfig } from '../../types/layer';
-import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
 import { TextLayerOptions } from './types';
 import { ILayer } from '../../types';
@@ -21,10 +20,6 @@ export class TextLayer extends PlotLayer<TextLayerOptions> {
    */
   static DefaultOptions = DEFAULT_OPTIONS;
   /**
-   * 图层配置项
-   */
-  public options: TextLayerOptions;
-  /**
    * 图层名称
    */
   public name: string;
@@ -42,12 +37,11 @@ export class TextLayer extends PlotLayer<TextLayerOptions> {
   public interaction = false;
 
   constructor(options: TextLayerOptions) {
-    super();
-    const { name, source } = options;
-    this.name = name ? name : uniqueId(this.type);
-    this.options = deepAssign({}, this.getDefaultOptions(), options);
-
+    super(options);
+    const { name, source } = this.options;
     const config = this.pickLayerConfig(this.options);
+
+    this.name = name ? name : uniqueId(this.type);
     this.layer = new PointLayer({ ...config, name: this.name });
 
     this.mappingLayer(this.layer, this.options);
@@ -65,11 +59,11 @@ export class TextLayer extends PlotLayer<TextLayerOptions> {
     mappingLayer(layer, options);
   }
 
-  public updateOptions(options: Partial<TextLayerConfig>) {
-    this.options = deepAssign({}, this.options, options);
+  public update(options: Partial<TextLayerConfig>) {
+    this.updateOption(options);
     this.mappingLayer(this.layer, this.options);
 
-    if (isBoolean(options.visible)) {
+    if (!isUndefined(options.visible) && !isEqual(this.lastOptions.visible, this.options.visible)) {
       options.visible ? this.show() : this.hide();
     }
   }

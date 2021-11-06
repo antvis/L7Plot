@@ -60,11 +60,11 @@ export class Grid extends Plot<GridOptions> {
    */
   protected updateLayers(options: GridOptions) {
     const heatMapLayerConfig = pick<any>(options, GridLayer.LayerOptionsKeys);
-    this.gridLayer.updateOptions(heatMapLayerConfig);
+    this.gridLayer.update(heatMapLayerConfig);
 
     if (options.label) {
       if (this.labelLayer) {
-        this.labelLayer.updateOptions({ ...options.label });
+        this.labelLayer.update({ ...options.label });
       } else {
         this.labelLayer = this.createLabelLayer(this.source, options.label);
         this.layerGroup.addlayer(this.labelLayer);

@@ -1,7 +1,6 @@
-import { uniqueId } from '@antv/util';
+import { uniqueId, isUndefined, isEqual } from '@antv/util';
 import { LineLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
-import { deepAssign } from '../../utils';
 import { mappingLayer } from './adaptor';
 import { LinesLayerOptions } from './types';
 import { ILayer } from '../../types';
@@ -21,10 +20,6 @@ export class LinesLayer<O extends LinesLayerOptions = LinesLayerOptions> extends
    */
   static LayerOptionsKeys = LAYER_OPTIONS_KEYS;
   /**
-   * 图层配置项
-   */
-  public options: O;
-  /**
    * 图层名称
    */
   public name: string;
@@ -42,12 +37,11 @@ export class LinesLayer<O extends LinesLayerOptions = LinesLayerOptions> extends
   public interaction = true;
 
   constructor(options: O) {
-    super();
-    const { name, source } = options;
-    this.name = name ? name : uniqueId(this.type);
-    this.options = deepAssign({}, this.getDefaultOptions(), options);
-
+    super(options);
+    const { name, source } = this.options;
     const config = this.pickLayerConfig(this.options);
+
+    this.name = name ? name : uniqueId(this.type);
     this.layer = new LineLayer({ ...config, name: this.name });
 
     this.mappingLayer(this.layer, this.options);
@@ -57,7 +51,7 @@ export class LinesLayer<O extends LinesLayerOptions = LinesLayerOptions> extends
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<LinesLayerOptions> {
+  public getDefaultOptions(): Partial<O> {
     return DEFAULT_OPTIONS;
   }
 
@@ -65,8 +59,12 @@ export class LinesLayer<O extends LinesLayerOptions = LinesLayerOptions> extends
     mappingLayer(layer, options);
   }
 
-  public updateOptions(options: Partial<O>) {
-    this.options = deepAssign({}, this.options, options);
+  public update(options: Partial<O>) {
+    this.updateOption(options);
     this.mappingLayer(this.layer, this.options);
+
+    if (!isUndefined(options.visible) && !isEqual(this.lastOptions.visible, this.options.visible)) {
+      options.visible ? this.show() : this.hide();
+    }
   }
 }

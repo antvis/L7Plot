@@ -263,8 +263,10 @@ export interface IPLotLayer {
   pickLayerConfig<T extends PlotLayerConfig>(params: T): Partial<ILayerConfig>;
   addTo(scene: Scene): void;
   remove(scene: Scene): void;
-  updateOptions<T>(options: T): void;
+  update<T>(options: T): void;
+  updateOption<T>(options: T): void;
   changeData(source: SourceOptions | Source): void;
+  render(): void;
   show(): void;
   hide(): void;
   toggleVisible(): void;

@@ -60,11 +60,11 @@ export class Dot extends Plot<DotOptions> {
    */
   protected updateLayers(options: DotOptions) {
     const dotLayerConfig = pick<any>(options, DotLayer.LayerOptionsKeys);
-    this.dotLayer.updateOptions(dotLayerConfig);
+    this.dotLayer.update(dotLayerConfig);
 
     if (options.label) {
       if (this.labelLayer) {
-        this.labelLayer.updateOptions({ ...options.label });
+        this.labelLayer.update({ ...options.label });
       } else {
         this.labelLayer = this.createLabelLayer(this.source, options.label);
         this.layerGroup.addlayer(this.labelLayer);
