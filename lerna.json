@@ -6,6 +6,7 @@
     "publish": {
       "packages": ["packages/*"],
       "ignoreChanges": ["__tests__", "*.md"],
+      "ignore": ["storybook", "website"],
       "registry": "https://registry.npmjs.com",
       "message": "chore: publish"
     }
