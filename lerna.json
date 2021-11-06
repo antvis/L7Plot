@@ -5,8 +5,7 @@
   "command": {
     "publish": {
       "packages": ["packages/*"],
-      "ignoreChanges": ["__tests__", "*.md"],
-      "ignore": ["storybook", "website"],
+      "ignoreChanges": ["__tests__", "*.md", "website", "storybook"],
       "registry": "https://registry.npmjs.com",
       "message": "chore: publish"
     }
