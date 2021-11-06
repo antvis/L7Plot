@@ -5,7 +5,7 @@
   "license": "MIT",
   "author": "yunji",
   "scripts": {
-    "dev": "npm run storybook",
+    "dev": "yarn run storybook",
     "storybook": "start-storybook -p 6066",
     "build-storybook": "build-storybook",
     "lint": "eslint stories --ext .js,.ts,.tsx",
