@@ -11,6 +11,7 @@ export enum PlotType {
   Heatmap = 'heatmap',
   Grid = 'grid',
   Hexagon = 'hexagon',
+  Trail = 'trail',
   Area = 'area',
   Choropleth = 'choropleth',
 }

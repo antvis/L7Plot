@@ -288,6 +288,7 @@ export enum LayerType {
   GridLayer = 'gridLayer',
   HexagonLayer = 'hexagonLayer',
   LinesLayer = 'linesLayer',
+  PathLayer = 'pathLayer',
   AreaLayer = 'areaLayer',
   PrismLayer = 'prismLayer',
 }

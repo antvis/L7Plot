@@ -5,6 +5,9 @@ import { ColumnLayerOptions } from './types';
 export type { ColumnLayerOptions };
 
 export class ColumnLayer extends DotLayer<ColumnLayerOptions> {
+  /**
+   * 图层类型
+   */
   public type = DotLayer.LayerType.ColumnLayer;
 
   /**

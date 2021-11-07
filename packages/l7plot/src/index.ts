@@ -62,6 +62,9 @@ export { Grid, GridOptions } from './plots/grid';
 // 蜂窝图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { Hexagon, HexagonOptions } from './plots/hexagon';
 
+// 路径图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { Path, PathOptions } from './plots/path';
+
 // 区域图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { Area, AreaOptions } from './plots/area';
 
