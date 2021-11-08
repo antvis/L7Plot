@@ -13,7 +13,7 @@ import {
 } from './types';
 import { DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS } from './constants';
 import { AreaLayer } from '../../layers/area-layer';
-import { LinesLayer } from '../../layers/lines-layer';
+import { PathLayer } from '../../layers/path-layer';
 import { TextLayer } from '../../layers/text-layer';
 import { LabelOptions, LegendOptions, MouseEvent, Source } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
@@ -43,11 +43,11 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 国界图层
    */
-  public chinaBoundaryLayer: LinesLayer | undefined;
+  public chinaBoundaryLayer: PathLayer | undefined;
   /**
    * 国界争议图层
    */
-  public chinaDisputeBoundaryLayer: LinesLayer | undefined;
+  public chinaDisputeBoundaryLayer: PathLayer | undefined;
   /**
    * 填充面图层
    */

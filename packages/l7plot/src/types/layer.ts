@@ -158,7 +158,9 @@ export interface HeatmapLayerConfig extends Partial<PlotLayerConfig> {
 /**
  * 线图层 图形形状
  */
-export type LineShape = 'line' | 'arc' | 'arc3d' | 'greatcircle';
+export type ArcLineShape = 'arc' | 'arc3d' | 'greatcircle';
+
+export type LineShape = 'line' | ArcLineShape;
 
 /**
  * 线图层 线类型
@@ -180,6 +182,10 @@ export type LinesLayerStyleOptions = {
   dashArray?: [number, number];
   // 弧线分段数
   segmentNumber?: number;
+  // 起点颜色
+  sourceColor?: string;
+  // 终点颜色
+  targetColor?: string;
 };
 
 /**
@@ -288,6 +294,8 @@ export enum LayerType {
   GridLayer = 'gridLayer',
   HexagonLayer = 'hexagonLayer',
   LinesLayer = 'linesLayer',
+  PathLayer = 'pathLayer',
+  ConnectionLayer = 'connectionLayer',
   AreaLayer = 'areaLayer',
   PrismLayer = 'prismLayer',
 }

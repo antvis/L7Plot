@@ -1,4 +1,4 @@
-import { LinesLayer } from '../../layers/lines-layer';
+import { PathLayer } from '../../layers/path-layer';
 import { CHINA_BOUNDARY_STYLE } from './constants';
 
 export const createCountryBoundaryLayer = (data: any) => {
@@ -6,13 +6,12 @@ export const createCountryBoundaryLayer = (data: any) => {
     ['coast', 'hkm', 'national'].includes(properties.type)
   );
   const disputeBoundaryFeatures = data.features.filter(({ properties }) => properties.type === 'dispute');
-  const chinaBoundaryLayer = new LinesLayer({
+  const chinaBoundaryLayer = new PathLayer({
     name: 'chinaBoundaryLayer',
     source: {
       data: { type: 'FeatureCollection', features: chinaBoundaryFeatures },
       parser: { type: 'geojson' },
     },
-    shape: 'line',
     color: {
       field: 'type',
       value: ({ type }) => {
@@ -29,13 +28,12 @@ export const createCountryBoundaryLayer = (data: any) => {
       opacity: ['type', (type) => CHINA_BOUNDARY_STYLE[type].opacity],
     },
   });
-  const chinaDisputeBoundaryLayer = new LinesLayer({
+  const chinaDisputeBoundaryLayer = new PathLayer({
     name: 'chinaDisputeBoundaryLayer',
     source: {
       data: { type: 'FeatureCollection', features: disputeBoundaryFeatures },
       parser: { type: 'geojson' },
     },
-    shape: 'line',
     color: CHINA_BOUNDARY_STYLE['dispute'].color,
     size: CHINA_BOUNDARY_STYLE['dispute'].width,
     style: {

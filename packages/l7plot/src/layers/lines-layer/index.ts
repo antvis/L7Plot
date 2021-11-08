@@ -4,6 +4,7 @@ import { PlotLayer } from '../../core/layer/plot-layer';
 import { mappingLayer } from './adaptor';
 import { LinesLayerOptions } from './types';
 import { ILayer } from '../../types';
+import { getColorLegendItems } from '../dot-layer/helper';
 
 export type { LinesLayerOptions };
 
@@ -66,5 +67,16 @@ export class LinesLayer<O extends LinesLayerOptions = LinesLayerOptions> extends
     if (!isUndefined(options.visible) && !isEqual(this.lastOptions.visible, this.options.visible)) {
       options.visible ? this.show() : this.hide();
     }
+  }
+
+  public getColorLegendItems() {
+    const colorLegendItems = this.layer.getLegendItems('color');
+    console.log('colorLegendItems: ', colorLegendItems);
+    if (Array.isArray(colorLegendItems) && colorLegendItems.length !== 0) {
+      const items = getColorLegendItems(colorLegendItems);
+      return items;
+    }
+
+    return [];
   }
 }

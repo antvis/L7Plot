@@ -11,7 +11,8 @@ import { DotDensityLayer, DotDensityLayerOptions } from '../layers/dot-density-l
 import { DotLayer, DotLayerOptions } from '../layers/dot-layer';
 import { GridLayer, GridLayerOptions } from '../layers/grid-layer';
 import { HexagonLayer, HexagonLayerOptions } from '../layers/hexagon-layer';
-import { LinesLayer, LinesLayerOptions } from '../layers/lines-layer';
+import { PathLayer, PathLayerOptions } from '../layers/path-layer';
+import { ConnectionLayer, ConnectionLayerOptions } from '../layers/connection-layer';
 import { TextLayer, TextLayerOptions } from '../layers/text-layer';
 import { HeatmapLayer, HeatmapLayerOptions } from '../layers/heatmap-layer';
 import { PrismLayer, PrismLayerOptions } from '../layers/prism-layer';
@@ -58,7 +59,8 @@ export type LayerConfigType =
   | ({ type: 'heatmapLayer' } & HeatmapLayerOptions)
   | ({ type: 'gridLayer' } & GridLayerOptions)
   | ({ type: 'hexagonLayer' } & HexagonLayerOptions)
-  | ({ type: 'lineLayer' } & LinesLayerOptions)
+  | ({ type: 'pathLayer' } & PathLayerOptions)
+  | ({ type: 'connectionLayer' } & ConnectionLayerOptions)
   | ({ type: 'areaLayer' } & AreaLayerOptions)
   | ({ type: 'prismLayer' } & PrismLayerOptions);
 
@@ -73,7 +75,8 @@ export const LAYERS_MAP = {
   [LayerType.HeatmapLayer]: HeatmapLayer,
   [LayerType.GridLayer]: GridLayer,
   [LayerType.HexagonLayer]: HexagonLayer,
-  [LayerType.LinesLayer]: LinesLayer,
+  [LayerType.PathLayer]: PathLayer,
+  [LayerType.ConnectionLayer]: ConnectionLayer,
   [LayerType.AreaLayer]: AreaLayer,
   [LayerType.PrismLayer]: PrismLayer,
 };

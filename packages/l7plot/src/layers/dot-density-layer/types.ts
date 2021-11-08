@@ -8,15 +8,11 @@ export interface DotDensityLayerSourceOptions extends Pick<ISourceCFG, 'parser' 
   data: any;
 }
 
-export interface DotDensityLayerOptions extends DotLayerOptions {
+export interface DotDensityLayerOptions extends Omit<DotLayerOptions, 'shape'> {
   /**
    * 具体的数据
    */
   source: DotDensityLayerSourceOptions | Source;
-  /**
-   * 图形形状
-   */
-  shape?: 'dot';
   /**
    * 图形大小
    */
