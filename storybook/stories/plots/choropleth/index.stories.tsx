@@ -9,7 +9,7 @@ import Drill from './Drill';
 import DrillCallback from './DrillCallback';
 import WorldSufei from './WorldSufei';
 
-storiesOf('区域分布图', module)
+storiesOf('行政区域分布图', module)
   .add('中国省级行政图', () => <ChinaProvince />)
   .add('中国市级行政图', () => <ChinaCity />)
   .add('中国区县级行政图', () => <ChinaDistrict />)
