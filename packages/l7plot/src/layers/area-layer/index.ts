@@ -118,7 +118,8 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
     super.setSource(source);
     this.setStrokeLayerSource();
     this.setHighlightLayerSource();
-    this.setSelectLayerSource();
+    this.selectFillLayer.source({ type: 'FeatureCollection', features: [] }, { parser: { type: 'geojson' } });
+    this.selectStrokeLayer.source({ type: 'FeatureCollection', features: [] }, { parser: { type: 'geojson' } });
   }
 
   protected setStrokeLayerSource() {
@@ -140,12 +141,14 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
     this.highlightLayerData = featureId;
   }
 
-  protected setSelectLayerSource(features: any[] = []) {
-    if (this.selectData.length === features.length) {
+  protected setSelectLayerSource(selectData: any[] = []) {
+    if (this.selectData.length === selectData.length) {
       return;
     }
+    const features = selectData.map(({ feature }) => feature);
     this.selectFillLayer.setData({ type: 'FeatureCollection', features }, { parser: { type: 'geojson' } });
     this.selectStrokeLayer.setData({ type: 'FeatureCollection', features }, { parser: { type: 'geojson' } });
+    this.selectData = selectData;
   }
 
   private initEvent() {
@@ -178,27 +181,27 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   private onSelectHandle = (event: MouseEvent) => {
     const enabledMultiSelect = this.options.enabledMultiSelect;
     const { feature, featureId } = event;
-    const index = this.selectData.findIndex((item) => item.featureId === featureId);
+    let selectData = clone(this.selectData);
+    const index = selectData.findIndex((item) => item.featureId === featureId);
 
     if (index === -1) {
       if (enabledMultiSelect) {
-        this.selectData.push({ feature, featureId });
+        selectData.push({ feature, featureId });
       } else {
-        this.selectData = [{ feature, featureId }];
+        selectData = [{ feature, featureId }];
       }
-      this.emit('select', feature, clone(this.selectData));
+      this.emit('select', feature, clone(selectData));
     } else {
-      const unselectFeature = this.selectData[index];
+      const unselectFeature = selectData[index];
       if (enabledMultiSelect) {
-        this.selectData.splice(index, 1);
+        selectData.splice(index, 1);
       } else {
-        this.selectData = [];
+        selectData = [];
       }
-      this.emit('unselect', unselectFeature, clone(this.selectData));
+      this.emit('unselect', unselectFeature, clone(selectData));
     }
 
-    const features = this.selectData.map(({ feature }) => feature);
-    this.setSelectLayerSource(features);
+    this.setSelectLayerSource(selectData);
   };
 
   public addTo(scene: Scene) {
