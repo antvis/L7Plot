@@ -7,34 +7,30 @@ const images = [
 ];
 registerImages(images);
 
-async function initMap() {
-  const response = await fetch(
-    'https://gw.alipayobjects.com/os/basement_prod/893d1d5f-11d9-45f3-8322-ee9140d288ae.json'
-  );
-  const data = await response.json();
-
-  new Dot('container', {
-    map: {
-      type: 'mapbox',
-      style: 'dark',
-      center: [121.409765, 31.256735],
-      zoom: 14.5,
-      pitch: 0,
-    },
-    source: {
-      data: data,
-      parser: {
-        type: 'json',
-        x: 'longitude',
-        y: 'latitude',
+fetch('https://gw.alipayobjects.com/os/basement_prod/893d1d5f-11d9-45f3-8322-ee9140d288ae.json')
+  .then((response) => response.json())
+  .then((data) => {
+    new Dot('container', {
+      map: {
+        type: 'mapbox',
+        style: 'dark',
+        center: [121.409765, 31.256735],
+        zoom: 14.5,
+        pitch: 0,
       },
-    },
-    shape: {
-      field: 'name',
-      value: ['01', '02', '03'],
-    },
-    size: 20,
+      source: {
+        data: data,
+        parser: {
+          type: 'json',
+          x: 'longitude',
+          y: 'latitude',
+        },
+      },
+      color: '#fff',
+      shape: {
+        field: 'name',
+        value: ['01', '02', '03'],
+      },
+      size: 20,
+    });
   });
-}
-
-initMap();

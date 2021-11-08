@@ -37,9 +37,6 @@ export default function Trail() {
           zoom: {
             position: 'bottomright',
           },
-          scale: {
-            position: 'bottomright',
-          },
           layerMenu: {
             position: 'topright',
           },

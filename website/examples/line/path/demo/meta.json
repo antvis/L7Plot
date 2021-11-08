@@ -1,0 +1,40 @@
+{
+  "title": {
+    "zh": "分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "beijingBusPath.ts",
+      "title": {
+        "zh": "北京公交线路",
+        "en": "Beijing Bus Path"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/lvcKgkC21g/f5fed9c1-0bc3-4c96-a05a-0ac98dc396a6.png"
+    },
+    {
+      "filename": "beijingMetro.ts",
+      "title": {
+        "zh": "北京地铁线",
+        "en": "Beijing Metro"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/0BBZcXixuK/ec49b3ab-4f47-42ef-907c-9912a9c3e4ea.png"
+    },
+    {
+      "filename": "busLevelRoutes.ts",
+      "title": {
+        "zh": "分类公交路线",
+        "en": "Bus Level Routes"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/y9%26C49CVvy/72b49289-9325-4836-816e-99560385d698.png"
+    },
+    {
+      "filename": "trail.ts",
+      "title": {
+        "zh": "轨迹图",
+        "en": "trail"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/EQVpMcc11v/ab32657b-2410-4770-99ee-f73f62a4848b.png"
+    }
+  ]
+}

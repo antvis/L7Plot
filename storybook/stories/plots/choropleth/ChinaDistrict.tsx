@@ -39,6 +39,7 @@ class ChinaProvince extends Component {
       color: {
         field: 'value',
         value: ['#fee5d9', '#fcae91', '#fb6a4a', '#de2d26', '#a50f15'],
+        scale: { type: 'quantize' },
       },
       style: {
         opacity: 1,
@@ -59,7 +60,9 @@ class ChinaProvince extends Component {
           padding: [5, 5],
         },
       },
-      state: { active: true },
+      state: {
+        active: { stroke: 'yellow' },
+      },
       tooltip: {
         items: ['name', 'adcode', 'value'],
       },

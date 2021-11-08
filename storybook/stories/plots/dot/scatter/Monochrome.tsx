@@ -27,14 +27,24 @@ class Monochrome extends Component {
           coordinates: 'lnglat',
         },
       },
-      color: '#14B4C9',
-      size: 2,
-
+      size: 4,
+      color: {
+        field: 'style',
+        value: ({ style }) => {
+          if (style == 0) {
+            return '#14B4C9';
+          } else if (style == 1) {
+            return '#3771D9';
+          } else {
+            return '#B8EFE2';
+          }
+        },
+      },
       style: {
         opacity: 0.8,
         strokeWidth: 0,
       },
-
+      state: { active: { color: '#FFF684' } },
       label: {
         visible: false,
         field: 'name',
@@ -51,6 +61,18 @@ class Monochrome extends Component {
       },
       layerMenu: {
         position: 'topright',
+      },
+      tooltip: {
+        items: ['name'],
+      },
+      legend: {
+        type: 'category',
+        position: 'bottomleft',
+        items: [
+          { color: '#14B4C9', value: '地级市' },
+          { color: '#3771D9', value: '县城市' },
+          { color: '#B8EFE2', value: '区县' },
+        ],
       },
     });
 

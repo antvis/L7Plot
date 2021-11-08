@@ -12,35 +12,32 @@ const images = [
 ];
 registerImages(images);
 
-async function initMap() {
-  const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/h%26vOn55UIF/yinhangwangdian.json');
-  const data = await response.json();
-
-  new Dot('container', {
-    map: {
-      type: 'mapbox',
-      style: 'dark',
-      center: [116.473168, 39.993015],
-      zoom: 15,
-      pitch: 0,
-    },
-    source: {
-      data: data.list,
-      parser: {
-        type: 'json',
-        coordinates: 'location',
+fetch('https://gw.alipayobjects.com/os/antfincdn/h%26vOn55UIF/yinhangwangdian.json')
+  .then((response) => response.json())
+  .then((data) => {
+    new Dot('container', {
+      map: {
+        type: 'mapbox',
+        style: 'dark',
+        center: [116.473168, 39.993015],
+        zoom: 15,
+        pitch: 0,
       },
-    },
-
-    shape: {
-      field: 'typecode',
-      value: ({ typecode }) => typecode,
-    },
-    size: 10,
-    tooltip: {
-      items: ['name', 'address', 'tel'],
-    },
+      source: {
+        data: data.list,
+        parser: {
+          type: 'json',
+          coordinates: 'location',
+        },
+      },
+      color: '#fff',
+      shape: {
+        field: 'typecode',
+        value: ({ typecode }) => typecode,
+      },
+      size: 10,
+      tooltip: {
+        items: ['name', 'address', 'tel'],
+      },
+    });
   });
-}
-
-initMap();

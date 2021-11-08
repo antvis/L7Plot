@@ -32,6 +32,9 @@ class Heat3D extends Component {
         field: 'avg',
         value: ({ avg }) => avg / 100,
       },
+      legend: {
+        position: 'bottomleft',
+      },
     });
 
     this.map = heatmap;

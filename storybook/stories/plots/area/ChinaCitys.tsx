@@ -39,7 +39,7 @@ class ChinaCitys extends Component {
         lineOpacity: 0.5,
       },
       label: {
-        visible: true,
+        visible: false,
         field: 'name',
         style: {
           fill: '#fff',
