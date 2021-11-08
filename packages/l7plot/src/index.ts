@@ -43,6 +43,12 @@ export { GridLayer, GridLayerOptions } from './layers/grid-layer';
 // 蜂窝图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { HexagonLayer, HexagonLayerOptions } from './layers/hexagon-layer';
 
+// 路径图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { PathLayer, PathLayerOptions } from './layers/path-layer';
+
+// 连接图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { ConnectionLayer, ConnectionLayerOptions } from './layers/connection-layer';
+
 // 区域图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { AreaLayer, AreaLayerOptions } from './layers/area-layer';
 
@@ -64,6 +70,9 @@ export { Hexagon, HexagonOptions } from './plots/hexagon';
 
 // 路径图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { Path, PathOptions } from './plots/path';
+
+// 连接图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { Connection, ConnectionOptions } from './plots/connection';
 
 // 区域图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { Area, AreaOptions } from './plots/area';

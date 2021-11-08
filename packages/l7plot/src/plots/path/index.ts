@@ -17,10 +17,10 @@ export class Path extends Plot<PathOptions> {
   /**
    * 图表类型
    */
-  public type = Plot.PlotType.Trail;
+  public type = Plot.PlotType.Path;
 
   /**
-   * 路径图图层
+   * 路径图层
    */
   public pathLayer!: PathLayer;
 

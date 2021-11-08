@@ -7,7 +7,7 @@ import { AreaOptions } from './types';
  */
 export const DEFAULT_OPTIONS: Partial<AreaOptions> = deepAssign({}, Plot.DefaultOptions, {
   source: {
-    data: [],
+    data: { type: 'FeatureCollection', features: [] },
     parser: {
       type: 'geojson',
     },
