@@ -36,14 +36,13 @@ fetch('https://gw.alipayobjects.com/os/bmw-prod/d6da7ac1-8b4f-4a55-93ea-e81aa08f
         visible: true,
         field: 'name',
         style: {
-          fill: '#fff',
+          fill: '#000',
           opacity: 0.8,
-          fontSize: 12,
-          textAnchor: 'center', // 文本相对锚点的位置 center|left|right|top|bottom|top-left
-          spacing: 1, // 字符间距
-          padding: [15, 15], // 文本包围盒 padding [水平，垂直]，影响碰撞检测结果，避免相邻文本靠的太近
-          stroke: '#c0c0c0', // 描边颜色
-          strokeWidth: 0.5, // 描边宽度
+          fontSize: 10,
+          stroke: '#fff',
+          strokeWidth: 1.5,
+          textAllowOverlap: false,
+          padding: [5, 5],
         },
       },
       tooltip: {

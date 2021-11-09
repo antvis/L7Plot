@@ -59,6 +59,14 @@
         "en": "Xihu District Map"
       },
       "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/04xm5U4yvt/828e6055-f005-4dba-8936-aaf451487db9.png"
+    },
+    {
+      "filename": "administrative-switch.tsx",
+      "title": {
+        "zh": "行政切换",
+        "en": "Administrative Switch"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/qSFaP32j8q/4428acf4-9362-4705-90c9-de950be5a177.png"
     }
   ]
 }

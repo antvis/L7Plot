@@ -9,9 +9,9 @@ new Choropleth('container', {
     pitch: 0,
   },
   source: {
-    data: [],
+    data: [{ adcode: 330106, value: 200 }],
     joinBy: {
-      sourceField: 'code',
+      sourceField: 'adcode',
       geoField: 'adcode',
     },
   },
@@ -21,8 +21,9 @@ new Choropleth('container', {
   },
   autoFit: true,
   color: {
-    field: 'name',
+    field: 'value',
     value: ['#B8E1FF', '#7DAAFF', '#3D76DD', '#0047A5', '#001D70'],
+    scale: { type: 'quantize' },
   },
   style: {
     opacity: 1,
@@ -34,11 +35,13 @@ new Choropleth('container', {
     visible: true,
     field: 'name',
     style: {
-      fill: '#fff',
+      fill: '#000',
       opacity: 0.8,
-      fontSize: 12,
-      stroke: '#fff', // 描边颜色
-      strokeWidth: 0.5, // 描边宽度
+      fontSize: 10,
+      stroke: '#fff',
+      strokeWidth: 1.5,
+      textAllowOverlap: false,
+      padding: [5, 5],
     },
   },
   state: {
@@ -49,5 +52,8 @@ new Choropleth('container', {
   },
   zoom: {
     position: 'bottomright',
+  },
+  legend: {
+    position: 'bottomleft',
   },
 });

@@ -81,14 +81,17 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
     this.highlightLayer = new LineLayer({
       name: 'highlightLayer',
       visible: visible && Boolean(defaultState.active.stroke),
+      zIndex: 2,
     });
     this.selectFillLayer = new PolygonLayer({
       name: 'selectFillLayer',
       visible: visible && Boolean(defaultState.select.fill),
+      zIndex: 2,
     });
     this.selectStrokeLayer = new LineLayer({
       name: 'selectStrokeLayer',
       visible: visible && Boolean(defaultState.select.stroke),
+      zIndex: 2,
     });
 
     this.mappingLayer(this.options);
