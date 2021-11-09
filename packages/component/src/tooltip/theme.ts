@@ -5,7 +5,7 @@ export default {
   // css style for tooltip
   [CONTAINER_CLASS]: {
     visibility: 'visible',
-    zIndex: 1,
+    zIndex: 999,
     transition:
       'visibility 0.2s cubic-bezier(0.23, 1, 0.32, 1), ' +
       'left 0.4s cubic-bezier(0.23, 1, 0.32, 1), ' +
@@ -30,11 +30,12 @@ export default {
   [LIST_ITEM_CLASS]: {
     listStyleType: 'none',
     marginBottom: '4px',
+    whiteSpace: 'nowrap',
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   [NAME_CLASS]: {},
   [VALUE_CLASS]: {
-    display: 'inline-block',
-    float: 'right',
     marginLeft: '30px',
   },
 };

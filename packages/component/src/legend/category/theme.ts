@@ -21,16 +21,19 @@ export default {
     marginBottom: '8px',
   },
   [LIST_CLASS]: {
+    margin: '0px',
     listStyleType: 'none',
+    padding: '0px',
   },
   [LIST_ITEM_CLASS]: {
     listStyleType: 'none',
     display: 'flex',
     alignItems: 'center',
+    marginBottom: '2px',
   },
   [MARKER_CLASS]: {
     width: '24px',
-    height: '12px',
+    height: '13px',
     marginRight: '8px',
   },
   [VALUE_CLASS]: {},

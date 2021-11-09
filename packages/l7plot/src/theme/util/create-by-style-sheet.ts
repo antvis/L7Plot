@@ -80,16 +80,15 @@ export function createThemeByStyleSheet(styleSheet: StyleSheet): Record<string, 
               marginBottom: '8px',
             },
             [CATEGORY_LEGEND_CSS_CONST.LIST_CLASS]: {
-              listStyleType: 'none',
+              margin: '0px',
+              padding: '0px',
             },
             [CATEGORY_LEGEND_CSS_CONST.LIST_ITEM_CLASS]: {
-              listStyleType: 'none',
-              display: 'flex',
-              alignItems: 'center',
+              marginBottom: '2px',
             },
             [CATEGORY_LEGEND_CSS_CONST.MARKER_CLASS]: {
               width: '24px',
-              height: '12px',
+              height: '14px',
               marginRight: '8px',
             },
             [CATEGORY_LEGEND_CSS_CONST.VALUE_CLASS]: {},
@@ -120,7 +119,7 @@ export function createThemeByStyleSheet(styleSheet: StyleSheet): Record<string, 
             },
             [CONTINUE_LEGEND_CSS_CONST.GRADIENT_BAR_CLASS]: {
               width: '140px',
-              height: '12px',
+              height: '14px',
               margin: '0px 5px',
             },
             [CONTINUE_LEGEND_CSS_CONST.VALUE_RANGE_CLASS]: {
@@ -134,7 +133,7 @@ export function createThemeByStyleSheet(styleSheet: StyleSheet): Record<string, 
         domStyles: {
           [TOOLTIP_CSS_CONST.CONTAINER_CLASS]: {
             visibility: 'visible',
-            zIndex: 1,
+            zIndex: 999,
             transition:
               'visibility 0.2s cubic-bezier(0.23, 1, 0.32, 1), ' +
               'left 0.4s cubic-bezier(0.23, 1, 0.32, 1), ' +
@@ -152,11 +151,9 @@ export function createThemeByStyleSheet(styleSheet: StyleSheet): Record<string, 
           },
           [TOOLTIP_CSS_CONST.LIST_CLASS]: {
             margin: '0px',
-            listStyleType: 'none',
             padding: '0px',
           },
           [TOOLTIP_CSS_CONST.LIST_ITEM_CLASS]: {
-            listStyleType: 'none',
             marginBottom: '4px',
           },
           [TOOLTIP_CSS_CONST.NAME_CLASS]: {
@@ -164,8 +161,6 @@ export function createThemeByStyleSheet(styleSheet: StyleSheet): Record<string, 
           },
           [TOOLTIP_CSS_CONST.VALUE_CLASS]: {
             color: styleSheet.tooltipItemValueFillColor,
-            display: 'inline-block',
-            float: 'right',
             marginLeft: '30px',
           },
         },

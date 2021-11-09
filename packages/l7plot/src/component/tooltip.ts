@@ -238,7 +238,13 @@ export class Tooltip extends EventEmitter {
   private setComponent() {
     const tooltip = this.tooltipComponent.getContainer();
     const container = window.document.createElement('div');
+    container.style.cursor = 'auto';
+    container.style.userSelect = 'text';
     container.className = 'l7plot-tooltip-container';
+    // stopPropagation
+    ['mousemove', 'mousedown', 'mouseup', 'click', 'dblclick'].forEach((type) => {
+      container.addEventListener(type, (e) => e.stopPropagation());
+    });
     container.appendChild(tooltip);
     this.marker.setElement(container);
   }

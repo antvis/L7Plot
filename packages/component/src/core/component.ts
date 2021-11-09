@@ -32,6 +32,7 @@ export abstract class Component<O extends ComponentOptions = ComponentOptions> {
       name: '',
       containerTpl: '<div></div>',
       visible: true,
+      capture: true,
       domStyles: {},
     };
   }
