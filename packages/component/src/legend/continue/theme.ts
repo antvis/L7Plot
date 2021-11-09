@@ -26,7 +26,7 @@ export default {
   },
   [GRADIENT_BAR_CLASS]: {
     width: '140px',
-    height: '20px',
+    height: '14px',
     margin: '0px 5px',
   },
   [VALUE_RANGE_CLASS]: {
