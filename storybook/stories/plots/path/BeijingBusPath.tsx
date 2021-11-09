@@ -39,9 +39,6 @@ export default function BeijingBusPath() {
           zoom: {
             position: 'bottomright',
           },
-          scale: {
-            position: 'bottomright',
-          },
           layerMenu: {
             position: 'topright',
           },

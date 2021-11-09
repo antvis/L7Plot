@@ -77,5 +77,5 @@ export { Connection, ConnectionOptions } from './plots/connection';
 // 区域图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { Area, AreaOptions } from './plots/area';
 
-// 地区分布图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+// 行政区域图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { Choropleth, ChoroplethOptions } from './plots/choropleth';

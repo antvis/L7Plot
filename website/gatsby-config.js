@@ -131,11 +131,19 @@ module.exports = {
         },
       },
       {
-        slug: 'polygon',
+        slug: 'area',
         icon: 'polygon',
         title: {
           zh: '区域图',
-          en: 'polygon',
+          en: 'area',
+        },
+      },
+      {
+        slug: 'choropleth',
+        icon: 'polygon',
+        title: {
+          zh: '行政区域图',
+          en: 'choropleth',
         },
       },
       {

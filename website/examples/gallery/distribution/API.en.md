@@ -1,1 +1,1 @@
-`markdown:docs/api/map-api/index.en.md`
+`markdown:docs/api/plots/dot.en.md`

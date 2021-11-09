@@ -30,7 +30,6 @@ class Classified extends Component {
           y: 'Latitude',
         },
       },
-
       color: {
         field: 'Magnitude',
         value: [
@@ -47,12 +46,11 @@ class Classified extends Component {
         ],
       },
       size: 3,
-
       style: {
         opacity: 0.8,
         strokeWidth: 0,
       },
-
+      state: { active: { color: '#FFF684' } },
       label: {
         visible: false,
         field: 'Magnitude',
@@ -63,6 +61,9 @@ class Classified extends Component {
           textOffset: [0, 20],
           padding: [10, 10],
         },
+      },
+      tooltip: {
+        items: ['Magnitude'],
       },
       zoom: {
         position: 'bottomright',

@@ -6,7 +6,7 @@
 
 ```js
 {
-  color: 'red';
+  color: 'red',
 }
 ```
 
@@ -19,12 +19,10 @@
 ```js
 {
   source: {
-    data: [{ lng: 104.101, lat: 30.649, c: 'red', n: 'chengdu' }],
+    data: [{ lng: 104.101, lat: 30.649, c: 'red', t: 20, n: 'chengdu' }],
     parser: { type: 'json', x: 'lng', y: 'lat' }
   },
-  color: {
-    fied: 'c'
-  }
+  color: { fied: 'c' }
 }
 ```
 
@@ -36,10 +34,6 @@
 
 ```js
 {
-  source: {
-    data: [{ lng: 104.101, lat: 30.649, t: 24.6, n: 'chengdu' }],
-    parser: { type: 'json', x: 'lng', y: 'lat' }
-  },
   color: {
     fied: 't',
     value: ({ t }) => {
@@ -55,10 +49,6 @@
 
 ```js
 {
-  source: {
-    data: [{ lng: 104.101, lat: 30.649, t: 24.6, n: 'chengdu' }],
-    parser: { type: 'json', x: 'lng', y: 'lat' }
-  },
   color: {
     fied: 't',
     value: ['blue', 'red'],

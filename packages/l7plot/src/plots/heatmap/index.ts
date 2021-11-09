@@ -84,7 +84,7 @@ export class Heatmap extends Plot<HeatmapOptions> {
     if (Array.isArray(sizeLegendItems) && sizeLegendItems.length !== 0) {
       const min = sizeLegendItems[0].value;
       const max = sizeLegendItems[sizeLegendItems.length - 1].value;
-      const colors = this.options.style?.colorsRamp.map(({ color }) => color);
+      const colors = this.heatmapLayer.options.style?.colorsRamp.map(({ color }) => color);
 
       return { type: 'continue', min, max, colors };
     }

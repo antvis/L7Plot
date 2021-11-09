@@ -48,11 +48,11 @@ export interface ChoroplethSourceOptions extends Pick<ISourceCFG, 'transforms'> 
  */
 export type ViewLevel = {
   /**
-   * 初始化行政级别
+   * 行政级别
    */
   level: 'world' | 'country' | 'province' | 'city' | 'district';
   /**
-   * 初始化显示行政代码/行政名称
+   * 显示行政代码/行政名称
    */
   adcode: number | string;
   /**
@@ -116,7 +116,7 @@ export type Drill = {
   ) => void;
 };
 
-/** 地区分布图的配置类型定义 */
+/** 行政区域图的配置类型定义 */
 export interface ChoroplethOptions extends PlotOptions, AreaLayerOptions {
   /**
    * 行政地理数据地址

@@ -89,7 +89,7 @@ registerImages(images);
 ```js
 {
   source: {
-    data: [{ lng: 104.101, lat: 30.649, s: 'circle', n: 'chengdu' }],
+    data: [{ lng: 104.101, lat: 30.649, s: 'circle', t: 24.6, n: 'chengdu' }],
     parser: { type: 'json', x: 'lng', y: 'lat' }
   },
   shape: {
@@ -106,10 +106,6 @@ registerImages(images);
 
 ```js
 {
-  source: {
-    data: [{ lng: 104.101, lat: 30.649, t: 24.6, n: 'chengdu' }],
-    parser: { type: 'json', x: 'lng', y: 'lat' }
-  },
   shape: {
     fied: 't',
     value: ({ t }) => {
@@ -125,10 +121,6 @@ registerImages(images);
 
 ```js
 {
-  source: {
-    data: [{ lng: 104.101, lat: 30.649, t: 24.6, n: 'chengdu' }],
-    parser: { type: 'json', x: 'lng', y: 'lat' }
-  },
   shape: {
     fied: 't',
     value: ['circle', 'triangle'],

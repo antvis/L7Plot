@@ -43,9 +43,11 @@ class Heat extends Component {
           { color: 'rgb(178,24,43,1.0)', position: 1 },
         ],
       },
-
       zoom: {
         position: 'bottomright',
+      },
+      legend: {
+        position: 'bottomleft',
       },
     });
 

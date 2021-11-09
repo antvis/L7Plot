@@ -142,7 +142,13 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   }
 
   protected setSelectLayerSource(selectData: any[] = []) {
-    if (this.selectData.length === selectData.length) {
+    if (
+      this.selectData.length === selectData.length &&
+      isEqual(
+        this.selectData.map(({ featureId }) => featureId),
+        selectData.map(({ featureId }) => featureId)
+      )
+    ) {
       return;
     }
     const features = selectData.map(({ feature }) => feature);

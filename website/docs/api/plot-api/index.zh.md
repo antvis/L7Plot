@@ -180,7 +180,7 @@ constructor(container: string | HTMLDivElement, options: PlotOptions)
 
 #### `state.`select
 
-`boolean｜IActiveOption` optional default: `false`
+`boolean｜ActiveOption` optional default: `false`
 
 元素 mouseclick 选中高亮效果，开启 mouseclick 元素高亮效果：
 

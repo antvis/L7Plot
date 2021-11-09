@@ -44,9 +44,6 @@ export default function BusRoutes() {
           zoom: {
             position: 'bottomright',
           },
-          scale: {
-            position: 'bottomright',
-          },
           layerMenu: {
             position: 'topright',
           },

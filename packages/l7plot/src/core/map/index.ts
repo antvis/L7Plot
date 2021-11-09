@@ -546,8 +546,10 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
       items.push({ type, options });
     }
 
-    this.legendControl = new Legend({ position, items });
-    this.scene.addControl(this.legendControl);
+    if (items.length) {
+      this.legendControl = new Legend({ position, items });
+      this.scene.addControl(this.legendControl);
+    }
   }
 
   /**

@@ -35,9 +35,6 @@ export default function BeijingMetro() {
           zoom: {
             position: 'bottomright',
           },
-          scale: {
-            position: 'bottomright',
-          },
           layerMenu: {
             position: 'topright',
           },
