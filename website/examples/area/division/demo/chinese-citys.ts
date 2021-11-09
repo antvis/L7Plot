@@ -36,11 +36,13 @@ fetch('https://gw.alipayobjects.com/os/bmw-prod/707cd4be-8ffe-4778-b863-3335eefd
         visible: true,
         field: 'name',
         style: {
-          opacity: 1,
-          fill: '#fff',
-          strokeWidth: 0,
-          padding: [15, 15],
+          fill: '#000',
+          opacity: 0.8,
+          fontSize: 10,
+          stroke: '#fff',
+          strokeWidth: 1.5,
           textAllowOverlap: false,
+          padding: [8, 8],
         },
       },
       tooltip: {

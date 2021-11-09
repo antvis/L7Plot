@@ -17,7 +17,7 @@ order: 3
 
 ## `label.`style
 
-`IPointTextLayerStyleOptions` optional
+`PointTextLayerStyleOptions` optional
 
 标签字体样式。
 
@@ -73,7 +73,7 @@ order: 3
 
 `boolean` optional default: `false`
 
-是否换行。
+是否允许文本覆盖。
 
 ### `style.`textAnchor
 

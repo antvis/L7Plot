@@ -1,54 +1,67 @@
 import { Choropleth } from '@antv/l7plot';
 
-new Choropleth('container', {
-  map: {
-    type: 'mapbox',
-    style: 'blank',
-    center: [120.19382669582967, 30.258134],
-    zoom: 3,
-    pitch: 0,
-  },
-  source: {
-    data: [],
-    joinBy: {
-      sourceField: 'code',
-      geoField: 'adcode',
-    },
-  },
-  viewLevel: {
-    level: 'province',
-    adcode: 330000,
-    granularity: 'district',
-  },
-  autoFit: true,
-  color: {
-    field: 'name',
-    value: ['#B8E1FF', '#7DAAFF', '#3D76DD', '#0047A5', '#001D70'],
-  },
-  style: {
-    opacity: 1,
-    stroke: '#ccc',
-    lineWidth: 0.6,
-    lineOpacity: 1,
-  },
-  label: {
-    visible: true,
-    field: 'name',
-    style: {
-      fill: '#fff',
-      opacity: 0.8,
-      fontSize: 12,
-      stroke: '#fff', // 描边颜色
-      strokeWidth: 0.5, // 描边宽度
-    },
-  },
-  state: {
-    active: { stroke: '#fff', lineWidth: 1 },
-  },
-  tooltip: {
-    items: ['name', 'adcode', 'value'],
-  },
-  zoom: {
-    position: 'bottomright',
-  },
-});
+fetch('https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.0/administrative-data/area-list.json')
+  .then((response) => response.json())
+  .then((list) => {
+    const data = list
+      .filter(({ level }) => level === 'district')
+      .map((item) => Object.assign({}, item, { value: Math.random() * 5000 }));
+    new Choropleth('container', {
+      map: {
+        type: 'mapbox',
+        style: 'blank',
+        center: [120.19382669582967, 30.258134],
+        zoom: 3,
+        pitch: 0,
+      },
+      source: {
+        data: data,
+        joinBy: {
+          sourceField: 'adcode',
+          geoField: 'adcode',
+        },
+      },
+      viewLevel: {
+        level: 'province',
+        adcode: 330000,
+        granularity: 'district',
+      },
+      autoFit: true,
+      color: {
+        field: 'value',
+        value: ['#B8E1FF', '#7DAAFF', '#3D76DD', '#0047A5', '#001D70'],
+        scale: { type: 'quantize' },
+      },
+      style: {
+        opacity: 1,
+        stroke: '#ccc',
+        lineWidth: 0.6,
+        lineOpacity: 1,
+      },
+      label: {
+        visible: true,
+        field: 'name',
+        style: {
+          fill: '#000',
+          opacity: 0.8,
+          fontSize: 10,
+          stroke: '#fff',
+          strokeWidth: 1.5,
+          textAllowOverlap: false,
+          padding: [5, 5],
+        },
+      },
+      state: {
+        active: { stroke: 'black', lineWidth: 1 },
+      },
+      tooltip: {
+        items: ['name', 'adcode', 'value'],
+      },
+      zoom: {
+        position: 'bottomright',
+      },
+      legend: {
+        position: 'bottomleft',
+      },
+    });
+  });

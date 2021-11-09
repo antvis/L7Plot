@@ -208,15 +208,17 @@ new Choropleth('container', {
     visible: true,
     field: 'name',
     style: {
-      fill: '#fff',
+      fill: '#000',
       opacity: 0.8,
-      fontSize: 12,
-      stroke: '#fff', // 描边颜色
-      strokeWidth: 0.5, // 描边宽度
+      fontSize: 10,
+      stroke: '#fff',
+      strokeWidth: 1.5,
+      textAllowOverlap: false,
+      padding: [5, 5],
     },
   },
   state: {
-    active: { stroke: '#fff', lineWidth: 1 },
+    active: { stroke: 'black', lineWidth: 1 },
   },
   tooltip: {
     items: ['name', 'adcode', 'value'],

@@ -434,6 +434,7 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
    */
   public updateZoomControl(options: ZoomControlOptions) {
     if (!this.zoomControl) {
+      this.addZoomControl(options);
       return;
     }
     this.removeZoomControl();
@@ -466,6 +467,7 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
    */
   public updateScaleControl(options: ScaleControlOptions) {
     if (!this.scaleControl) {
+      this.addScaleControl(options);
       return;
     }
     this.removeScaleControl();
@@ -503,6 +505,7 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
    */
   public updateLayerMenuControl(options: LayerMenuControlOptions) {
     if (!this.layerMenuControl) {
+      this.addLayerMenuControl(options);
       return;
     }
     this.removeLayerMenuControl();
@@ -557,6 +560,7 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
    */
   public updateLegendControl(options: LegendOptions) {
     if (!this.legendControl) {
+      this.addLegendControl(options);
       return;
     }
     this.removeLegendControl();
