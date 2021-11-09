@@ -50,7 +50,7 @@ const data = {
   features: [
     {
       type: 'Feature',
-      properties: { name: '上海市', code: '310000', c: 'red', t: 20 },
+      properties: { name: '上海市', code: 310000, c: 'red', t: 20 },
       geometry: {
         type: 'Polygon',
         coordinates: [

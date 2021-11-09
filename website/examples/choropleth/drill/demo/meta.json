@@ -5,12 +5,36 @@
   },
   "demos": [
     {
-      "filename": "bank.ts",
+      "filename": "order-drill.ts",
       "title": {
-        "zh": "银行网点",
-        "en": "Bank outlets"
+        "zh": "省市区下钻",
+        "en": "Order Drill"
       },
-      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/zWvhGhbuTY/08a0857b-814b-4165-b787-b375d73a5b6c.png"
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/qSFaP32j8q/4428acf4-9362-4705-90c9-de950be5a177.png"
+    },
+    {
+      "filename": "unorder-drill.ts",
+      "title": {
+        "zh": "跨粒度下钻",
+        "en": "Unorder Drill"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/qSFaP32j8q/4428acf4-9362-4705-90c9-de950be5a177.png"
+    },
+    {
+      "filename": "drill-callback.ts",
+      "title": {
+        "zh": "下钻回调",
+        "en": "Drill Callback"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/qSFaP32j8q/4428acf4-9362-4705-90c9-de950be5a177.png"
+    },
+    {
+      "filename": "drill-intercept.ts",
+      "title": {
+        "zh": "下钻拦截",
+        "en": "Drill Intercept"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/qSFaP32j8q/4428acf4-9362-4705-90c9-de950be5a177.png"
     }
   ]
 }

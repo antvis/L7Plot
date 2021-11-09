@@ -1,4 +1,4 @@
 ---
-title: Choropleth
+title: Drill down
 order: 1
 ---
