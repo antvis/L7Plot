@@ -10,7 +10,7 @@
         "zh": "省市区下钻",
         "en": "Order Drill"
       },
-      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/qSFaP32j8q/4428acf4-9362-4705-90c9-de950be5a177.png"
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/ftd%248FdI08/zuanqu.gif"
     },
     {
       "filename": "unorder-drill.ts",
@@ -18,7 +18,7 @@
         "zh": "跨粒度下钻",
         "en": "Unorder Drill"
       },
-      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/qSFaP32j8q/4428acf4-9362-4705-90c9-de950be5a177.png"
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/w4VwQsFCgy/zuanqu.gif"
     },
     {
       "filename": "drill-callback.ts",
@@ -26,7 +26,7 @@
         "zh": "下钻回调",
         "en": "Drill Callback"
       },
-      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/qSFaP32j8q/4428acf4-9362-4705-90c9-de950be5a177.png"
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/kNXBgAN4%26Z/zuanqu2.gif"
     },
     {
       "filename": "drill-intercept.ts",
@@ -34,7 +34,7 @@
         "zh": "下钻拦截",
         "en": "Drill Intercept"
       },
-      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/qSFaP32j8q/4428acf4-9362-4705-90c9-de950be5a177.png"
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/rftSqwzjdj/zuanqu3.gif"
     }
   ]
 }
