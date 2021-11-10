@@ -1,16 +1,16 @@
 import { pick, isUndefined } from '@antv/util';
 import * as topojson from 'topojson-client';
 import { Topology } from 'topojson-specification';
-import { AREA_URL } from './constants';
+import { GEO_AREA_URL } from './constants';
 import { ChoroplethOptions, DrillStep, DrillStepConfig } from './types';
 
 export const getGeoAreaConfig = (geoArea?: ChoroplethOptions['geoArea']) => {
-  const config = { url: AREA_URL, type: 'topojson', extension: 'topo.json' };
+  const config = { url: GEO_AREA_URL, type: 'topojson', extension: 'topo.json' };
   if (isUndefined(geoArea)) return config;
   if (typeof geoArea === 'string') {
     config.url = geoArea;
   } else {
-    config.url = geoArea?.url || AREA_URL;
+    config.url = geoArea?.url || GEO_AREA_URL;
     config.type = geoArea.type;
     config.extension = geoArea.type === 'topojson' ? 'topo.json' : 'json';
   }

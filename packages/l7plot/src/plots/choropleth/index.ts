@@ -11,7 +11,7 @@ import {
   DrillStepConfig,
   FeatureCollection,
 } from './types';
-import { DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS } from './constants';
+import { GEO_DATA_URL, GEO_AREA_URL, DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS } from './constants';
 import { AreaLayer } from '../../layers/area-layer';
 import { PathLayer } from '../../layers/path-layer';
 import { TextLayer } from '../../layers/text-layer';
@@ -28,6 +28,14 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    * 默认配置项
    */
   static DefaultOptions = DEFAULT_OPTIONS;
+  /**
+   * 地理数据地址
+   */
+  static GeoDataUrl = GEO_DATA_URL;
+  /**
+   * 行政数据地址
+   */
+  static GeoAreaUrl = GEO_AREA_URL;
   /**
    * 图表类型
    */

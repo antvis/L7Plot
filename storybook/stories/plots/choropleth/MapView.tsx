@@ -13,15 +13,16 @@ function MapView() {
   };
 
   useEffect(() => {
-    fetch('https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.0/administrative-data/area-tree.json')
+    fetch(`${Choropleth.GeoDataUrl}/administrative-data/area-tree.json`)
       .then((response) => response.json())
       .then((data) => {
-        setAdministrativeTree(data);
+        const china = data.filter(({ adcode }) => adcode === 100000);
+        setAdministrativeTree(china);
       });
   }, []);
 
   useEffect(() => {
-    fetch('https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.0/administrative-data/area-list.json')
+    fetch(`${Choropleth.GeoDataUrl}/administrative-data/area-list.json`)
       .then((response) => response.json())
       .then((list) => {
         administrativeList.current = list;
