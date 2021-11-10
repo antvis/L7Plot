@@ -1,9 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Cascader } from 'antd';
-import 'antd/lib/cascader/style/css';
+import ReactDOM from 'react-dom';
 import { Choropleth } from '@antv/l7plot';
 
-function MapView() {
+function AdministrativeDrill() {
   const administrativeList = useRef([]);
   const [administrativeTree, setAdministrativeTree] = useState([]);
   const map = useRef<Choropleth>();
@@ -13,16 +12,15 @@ function MapView() {
   };
 
   useEffect(() => {
-    fetch(`${Choropleth.GeoDataUrl}/administrative-data/area-tree.json`)
+    fetch('https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.0/administrative-data/area-tree.json')
       .then((response) => response.json())
       .then((data) => {
-        const china = data.filter(({ adcode }) => adcode === 100000);
-        setAdministrativeTree(china);
+        setAdministrativeTree(data);
       });
   }, []);
 
   useEffect(() => {
-    fetch(`${Choropleth.GeoDataUrl}/administrative-data/area-list.json`)
+    fetch('https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.0/administrative-data/area-list.json')
       .then((response) => response.json())
       .then((list) => {
         administrativeList.current = list;
@@ -30,7 +28,7 @@ function MapView() {
           .filter(({ level }) => level === 'province')
           .map((item) => Object.assign({}, item, { value: getRandomNumber() }));
 
-        const chinaMap = new Choropleth('container', {
+        const chinaMap = new Choropleth('mapContainer', {
           map: {
             type: 'amap',
             style: 'blank',
@@ -56,10 +54,13 @@ function MapView() {
             scale: { type: 'quantize' },
           },
           style: {
-            opacity: 1,
-            stroke: '#ccc',
-            lineWidth: 0.6,
-            lineOpacity: 1,
+            fill: '#000',
+            opacity: 0.8,
+            fontSize: 10,
+            stroke: '#fff',
+            strokeWidth: 1.5,
+            textAllowOverlap: false,
+            padding: [5, 5],
           },
           label: {
             visible: true,
@@ -94,21 +95,10 @@ function MapView() {
     return () => map.current?.destroy();
   }, []);
 
-  const onCascaderChange = (value, selectedOptions) => {
-    const currentSelected = selectedOptions[selectedOptions.length - 1];
-    const { adcode, level, children } = currentSelected;
-    if (map.current) {
-      const data = children
-        ? children.map((item) => ({ adcode: item.adcode, value: getRandomNumber() }))
-        : [{ adcode, value: getRandomNumber() }];
-      map.current.changeView({ adcode, level }, { source: { data } });
-    }
-  };
-
   return (
     <>
       <div
-        id="container"
+        id="mapContainer"
         style={{
           position: 'absolute',
           top: 0,
@@ -117,25 +107,8 @@ function MapView() {
           bottom: 0,
         }}
       />
-      {administrativeTree.length && (
-        <Cascader
-          style={{
-            width: 300,
-            zIndex: 2,
-            position: 'absolute',
-            right: '10px',
-            top: '10px',
-          }}
-          changeOnSelect
-          allowClear={false}
-          fieldNames={{ label: 'name', value: 'adcode', children: 'children' }}
-          defaultValue={[100000]}
-          options={administrativeTree}
-          onChange={onCascaderChange}
-        />
-      )}
     </>
   );
 }
 
-export default MapView;
+ReactDOM.render(<AdministrativeDrill />, document.getElementById('container'));
