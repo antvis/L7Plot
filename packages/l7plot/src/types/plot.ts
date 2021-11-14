@@ -12,7 +12,7 @@ export enum PlotType {
   Grid = 'grid',
   Hexagon = 'hexagon',
   Path = 'path',
-  Connection = 'connection',
+  Flow = 'flow',
   Area = 'area',
   Choropleth = 'choropleth',
 }

@@ -1,10 +1,10 @@
 import { deepAssign } from '../../utils';
 import { LinesLayer } from '../lines-layer';
-import { ConnectionLayerOptions } from './types';
+import { FlowLayerOptions } from './types';
 
-export type { ConnectionLayerOptions };
+export type { FlowLayerOptions };
 
-export class ConnectionLayer extends LinesLayer<ConnectionLayerOptions> {
+export class FlowLayer extends LinesLayer<FlowLayerOptions> {
   /**
    * 图层类型
    */
@@ -13,7 +13,7 @@ export class ConnectionLayer extends LinesLayer<ConnectionLayerOptions> {
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<ConnectionLayerOptions> {
+  public getDefaultOptions(): Partial<FlowLayerOptions> {
     return deepAssign({}, LinesLayer.DefaultOptions, {
       shape: 'arc3d',
     });
