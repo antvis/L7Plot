@@ -3,14 +3,14 @@ import { Dot, DotOptions } from '../plots/dot';
 import { DotDensity, DotDensityOptions } from '../plots/dot-density';
 import { Heatmap, HeatmapOptions } from '../plots/heatmap';
 import { Grid, GridOptions } from '../plots/grid';
-import { Hexagon, HexagonOptions } from '../plots/hexagon';
+import { Hexbin, HexbinOptions } from '../plots/hexbin';
 import { Area, AreaOptions } from '../plots/area';
 import { AreaLayer, AreaLayerOptions } from '../layers/area-layer';
 import { ColumnLayer, ColumnLayerOptions } from '../layers/column-layer';
 import { DotDensityLayer, DotDensityLayerOptions } from '../layers/dot-density-layer';
 import { DotLayer, DotLayerOptions } from '../layers/dot-layer';
 import { GridLayer, GridLayerOptions } from '../layers/grid-layer';
-import { HexagonLayer, HexagonLayerOptions } from '../layers/hexagon-layer';
+import { HexbinLayer, HexbinLayerOptions } from '../layers/hexbin-layer';
 import { PathLayer, PathLayerOptions } from '../layers/path-layer';
 import { ConnectionLayer, ConnectionLayerOptions } from '../layers/connection-layer';
 import { TextLayer, TextLayerOptions } from '../layers/text-layer';
@@ -33,7 +33,7 @@ export type PlotConfigType =
   | ({ type: 'dotDensity' } & OmitPlotOptions<DotDensityOptions>)
   | ({ type: 'heatmap' } & OmitPlotOptions<HeatmapOptions>)
   | ({ type: 'grid' } & OmitPlotOptions<GridOptions>)
-  | ({ type: 'hexagon' } & OmitPlotOptions<HexagonOptions>)
+  | ({ type: 'hexbin' } & OmitPlotOptions<HexbinOptions>)
   | ({ type: 'area' } & OmitPlotOptions<AreaOptions>);
 
 /**
@@ -44,7 +44,7 @@ export const PLOTS_MAP = {
   [PlotType.DotDensity]: DotDensity,
   [PlotType.Heatmap]: Heatmap,
   [PlotType.Grid]: Grid,
-  [PlotType.Hexagon]: Hexagon,
+  [PlotType.Hexagon]: Hexbin,
   [PlotType.Area]: Area,
 };
 
@@ -58,7 +58,7 @@ export type LayerConfigType =
   | ({ type: 'columnLayer' } & ColumnLayerOptions)
   | ({ type: 'heatmapLayer' } & HeatmapLayerOptions)
   | ({ type: 'gridLayer' } & GridLayerOptions)
-  | ({ type: 'hexagonLayer' } & HexagonLayerOptions)
+  | ({ type: 'hexbinLayer' } & HexbinLayerOptions)
   | ({ type: 'pathLayer' } & PathLayerOptions)
   | ({ type: 'connectionLayer' } & ConnectionLayerOptions)
   | ({ type: 'areaLayer' } & AreaLayerOptions)
@@ -74,7 +74,7 @@ export const LAYERS_MAP = {
   [LayerType.ColumnLayer]: ColumnLayer,
   [LayerType.HeatmapLayer]: HeatmapLayer,
   [LayerType.GridLayer]: GridLayer,
-  [LayerType.HexagonLayer]: HexagonLayer,
+  [LayerType.HexbinLayer]: HexbinLayer,
   [LayerType.PathLayer]: PathLayer,
   [LayerType.ConnectionLayer]: ConnectionLayer,
   [LayerType.AreaLayer]: AreaLayer,

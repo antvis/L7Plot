@@ -1,15 +1,15 @@
 import { pick } from '@antv/util';
 import { Plot } from '../../core/plot';
-import { HexagonOptions } from './types';
+import { HexbinOptions } from './types';
 import { DEFAULT_OPTIONS } from './constants';
 import { Source } from '../../types';
 import { TextLayer } from '../../layers/text-layer';
-import { HexagonLayer } from '../../layers/hexagon-layer';
+import { HexbinLayer } from '../../layers/hexbin-layer';
 import { LayerGroup } from '../../core/layer/layer-group';
 
-export type { HexagonOptions };
+export type { HexbinOptions };
 
-export class Hexagon extends Plot<HexagonOptions> {
+export class Hexbin extends Plot<HexbinOptions> {
   /**
    * 默认配置项
    */
@@ -23,7 +23,7 @@ export class Hexagon extends Plot<HexagonOptions> {
   /**
    * 蜂窝图层
    */
-  public hexagonLayer!: HexagonLayer;
+  public hexbinLayer!: HexbinLayer;
 
   /**
    * 标注图层
@@ -33,19 +33,19 @@ export class Hexagon extends Plot<HexagonOptions> {
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<HexagonOptions> {
-    return Hexagon.DefaultOptions;
+  protected getDefaultOptions(): Partial<HexbinOptions> {
+    return Hexbin.DefaultOptions;
   }
 
   /**
    * 创建图层
    */
   protected createLayers(source: Source): LayerGroup {
-    this.hexagonLayer = new HexagonLayer({
+    this.hexbinLayer = new HexbinLayer({
       source,
-      ...pick<any>(this.options, HexagonLayer.LayerOptionsKeys),
+      ...pick<any>(this.options, HexbinLayer.LayerOptionsKeys),
     });
-    const layerGroup = new LayerGroup([this.hexagonLayer]);
+    const layerGroup = new LayerGroup([this.hexbinLayer]);
 
     if (this.options.label) {
       this.labelLayer = this.createLabelLayer(this.source, this.options.label);
@@ -58,9 +58,9 @@ export class Hexagon extends Plot<HexagonOptions> {
   /**
    * 更新图层
    */
-  protected updateLayers(options: HexagonOptions) {
-    const heatMapLayerConfig = pick<any>(options, HexagonLayer.LayerOptionsKeys);
-    this.hexagonLayer.update(heatMapLayerConfig);
+  protected updateLayers(options: HexbinOptions) {
+    const heatMapLayerConfig = pick<any>(options, HexbinLayer.LayerOptionsKeys);
+    this.hexbinLayer.update(heatMapLayerConfig);
 
     if (options.label) {
       if (this.labelLayer) {

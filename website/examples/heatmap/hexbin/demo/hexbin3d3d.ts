@@ -1,9 +1,9 @@
-import { Hexagon } from '@antv/l7plot';
+import { Hexbin } from '@antv/l7plot';
 
 fetch('https://gw.alipayobjects.com/os/basement_prod/a1a8158d-6fe3-424b-8e50-694ccf61c4d7.csv')
   .then((response) => response.text())
   .then((data) => {
-    new Hexagon('container', {
+    new Hexbin('container', {
       map: {
         type: 'mapbox',
         style: 'dark',

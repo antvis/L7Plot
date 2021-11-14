@@ -4,7 +4,7 @@ import { GridAggregation, ISourceCFG, Source } from '../../types';
 /**
  * 数据配置
  */
-export interface HexagonLayerSourceOptions extends Pick<ISourceCFG, 'parser' | 'transforms'> {
+export interface HexbinLayerSourceOptions extends Pick<ISourceCFG, 'parser' | 'transforms'> {
   data: any;
   /**
    * 六边形网格聚合
@@ -12,11 +12,11 @@ export interface HexagonLayerSourceOptions extends Pick<ISourceCFG, 'parser' | '
   aggregation: GridAggregation;
 }
 
-export interface HexagonLayerOptions extends HeatmapLayerConfig {
+export interface HexbinLayerOptions extends HeatmapLayerConfig {
   /**
    * 具体的数据
    */
-  source: HexagonLayerSourceOptions | Source;
+  source: HexbinLayerSourceOptions | Source;
   /**
    * 图形形状
    */

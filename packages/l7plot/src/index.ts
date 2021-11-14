@@ -41,7 +41,7 @@ export { HeatmapLayer, HeatmapLayerOptions } from './layers/heatmap-layer';
 export { GridLayer, GridLayerOptions } from './layers/grid-layer';
 
 // 蜂窝图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { HexagonLayer, HexagonLayerOptions } from './layers/hexagon-layer';
+export { HexbinLayer, HexbinLayerOptions } from './layers/hexbin-layer';
 
 // 路径图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { PathLayer, PathLayerOptions } from './layers/path-layer';
@@ -66,7 +66,7 @@ export { Heatmap, HeatmapOptions } from './plots/heatmap';
 export { Grid, GridOptions } from './plots/grid';
 
 // 蜂窝图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { Hexagon, HexagonOptions } from './plots/hexagon';
+export { Hexbin, HexbinOptions } from './plots/hexbin';
 
 // 路径图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { Path, PathOptions } from './plots/path';

@@ -1,15 +1,15 @@
 import { createPlot } from '../../../helper/plot';
-import { Hexagon, HexagonOptions } from '../../../../src';
-import { DEFAULT_OPTIONS } from '../../../../src/plots/hexagon/constants';
+import { Hexbin, HexbinOptions } from '../../../../src';
+import { DEFAULT_OPTIONS } from '../../../../src/plots/hexbin/constants';
 import data from '../../../data-set/heat-map.json';
 
-describe('hexagon', () => {
+describe('hexbin', () => {
   it('defaultOptions', () => {
-    expect(Hexagon.DefaultOptions).toEqual(DEFAULT_OPTIONS);
+    expect(Hexbin.DefaultOptions).toEqual(DEFAULT_OPTIONS);
   });
 
   it('source', () => {
-    const hexagonMap = createPlot<Hexagon, HexagonOptions>(Hexagon, {
+    const hexbinMap = createPlot<Hexbin, HexbinOptions>(Hexbin, {
       source: {
         data: data,
         parser: { type: 'geojson' },
@@ -24,15 +24,15 @@ describe('hexagon', () => {
       },
     });
 
-    expect(hexagonMap.type).toEqual('hexagon');
-    expect(hexagonMap.hexagonLayer).toBeDefined();
-    expect(hexagonMap.labelLayer).toBeFalsy();
+    expect(hexbinMap.type).toEqual('hexbin');
+    expect(hexbinMap.hexbinLayer).toBeDefined();
+    expect(hexbinMap.labelLayer).toBeFalsy();
 
-    hexagonMap.on('loaded', () => setTimeout(() => hexagonMap.destroy(), 0));
+    hexbinMap.on('loaded', () => setTimeout(() => hexbinMap.destroy(), 0));
   });
 
   it('event', () => {
-    const hexagonMap = createPlot<Hexagon, HexagonOptions>(Hexagon, {
+    const hexbinMap = createPlot<Hexbin, HexbinOptions>(Hexbin, {
       source: {
         data: [{ y: 19.1, t: 24.6, s: '海南', x: 108.6167 }],
         parser: { type: 'json' },
@@ -41,14 +41,14 @@ describe('hexagon', () => {
     });
 
     return new Promise<void>((resolve, reject) => {
-      hexagonMap.on('hexagonLayer:add', () => {
+      hexbinMap.on('hexbinLayer:add', () => {
         try {
-          expect(hexagonMap.hexagonLayer?.layer.inited).toBeTruthy();
+          expect(hexbinMap.hexbinLayer?.layer.inited).toBeTruthy();
           resolve();
         } catch (err) {
           reject(err);
         }
-        setTimeout(() => hexagonMap.destroy(), 0);
+        setTimeout(() => hexbinMap.destroy(), 0);
       });
     });
   });

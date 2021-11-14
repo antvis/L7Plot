@@ -1,4 +1,4 @@
 ---
-title: Hexagon
+title: Hexbin
 order: 2
 ---
