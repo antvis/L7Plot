@@ -1,4 +1,4 @@
-import { PlotLayerConfig } from './layer';
+import { PlotLayerOptions } from './layer';
 import { ColorAttr, StateAttribute, SizeAttr } from './attr';
 
 export type AnchorType =
@@ -53,7 +53,7 @@ export type PointTextLayerStyleOptions = {
 /**
  * Label
  */
-export interface LabelOptions extends PlotLayerConfig {
+export interface LabelOptions extends PlotLayerOptions {
   /** 映射的字段 */
   field?: string;
   // TODO: 多字段支持
