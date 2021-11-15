@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Hexagon } from '@antv/l7plot';
+import { Hexbin } from '@antv/l7plot';
 
-class HexagonDelay extends Component {
-  public map: Hexagon | undefined;
+class HexbinDelay extends Component {
+  public map: Hexbin | undefined;
 
   constructor(props) {
     super(props);
@@ -12,7 +12,7 @@ class HexagonDelay extends Component {
     const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/Ml2DwikvFC/20210726100731.json');
     const data = await response.json();
 
-    const hexagonMap = new Hexagon('container', {
+    const hexagonMap = new Hexbin('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
@@ -78,4 +78,4 @@ class HexagonDelay extends Component {
   }
 }
 
-export default HexagonDelay;
+export default HexbinDelay;

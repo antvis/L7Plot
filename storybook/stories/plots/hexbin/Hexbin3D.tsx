@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Hexagon } from '@antv/l7plot';
+import { Hexbin } from '@antv/l7plot';
 
-class Hexagon3D extends Component {
-  public map: Hexagon | undefined;
+class Hexbin3D extends Component {
+  public map: Hexbin | undefined;
 
   constructor(props) {
     super(props);
@@ -14,7 +14,7 @@ class Hexagon3D extends Component {
     );
     const data = await response.text();
 
-    const hexagonMap = new Hexagon('container', {
+    const hexagonMap = new Hexbin('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
@@ -94,4 +94,4 @@ class Hexagon3D extends Component {
   }
 }
 
-export default Hexagon3D;
+export default Hexbin3D;
