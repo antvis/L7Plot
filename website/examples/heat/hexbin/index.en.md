@@ -1,4 +1,4 @@
 ---
-title: 蜂窝图
+title: Hexbin
 order: 2
 ---

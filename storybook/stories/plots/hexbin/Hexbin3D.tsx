@@ -1,9 +1,20 @@
-import { Hexagon } from '@antv/l7plot';
+import React, { Component } from 'react';
+import { Hexbin } from '@antv/l7plot';
 
-fetch('https://gw.alipayobjects.com/os/basement_prod/a1a8158d-6fe3-424b-8e50-694ccf61c4d7.csv')
-  .then((response) => response.text())
-  .then((data) => {
-    new Hexagon('container', {
+class Hexbin3D extends Component {
+  public map: Hexbin | undefined;
+
+  constructor(props) {
+    super(props);
+  }
+
+  async initMap() {
+    const response = await fetch(
+      'https://gw.alipayobjects.com/os/basement_prod/a1a8158d-6fe3-424b-8e50-694ccf61c4d7.csv'
+    );
+    const data = await response.text();
+
+    const hexagonMap = new Hexbin('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
@@ -19,11 +30,12 @@ fetch('https://gw.alipayobjects.com/os/basement_prod/a1a8158d-6fe3-424b-8e50-694
           y: 'lat',
         },
         aggregation: {
-          field: 'v',
           radius: 2500,
+          field: 'v',
           method: 'sum',
         },
       },
+
       shape: 'hexagonColumn',
       size: {
         field: 'sum',
@@ -54,4 +66,32 @@ fetch('https://gw.alipayobjects.com/os/basement_prod/a1a8158d-6fe3-424b-8e50-694
         opacity: 1.0,
       },
     });
-  });
+
+    this.map = hexagonMap;
+  }
+
+  componentDidMount() {
+    this.initMap();
+  }
+
+  componentWillUnmount() {
+    this.map && this.map.destroy();
+  }
+
+  render() {
+    return (
+      <div
+        id="container"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+        }}
+      ></div>
+    );
+  }
+}
+
+export default Hexbin3D;

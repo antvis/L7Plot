@@ -2,12 +2,12 @@ import { uniqueId, isUndefined, isEqual } from '@antv/util';
 import { HeatmapLayer as Heatmap } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { mappingLayer } from './adaptor';
-import { HexagonLayerOptions } from './types';
+import { HexbinLayerOptions } from './types';
 import { ILayer } from '../../types';
 
-export type { HexagonLayerOptions };
+export type { HexbinLayerOptions };
 
-const DEFAULT_OPTIONS: HexagonLayerOptions = {
+const DEFAULT_OPTIONS: HexbinLayerOptions = {
   source: {
     data: [],
     parser: {
@@ -32,7 +32,7 @@ const DEFAULT_OPTIONS: HexagonLayerOptions = {
 };
 const LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state'];
 
-export class HexagonLayer extends PlotLayer<HexagonLayerOptions> {
+export class HexbinLayer extends PlotLayer<HexbinLayerOptions> {
   /**
    * 默认配置项
    */
@@ -52,13 +52,13 @@ export class HexagonLayer extends PlotLayer<HexagonLayerOptions> {
   /**
    * 图层类型
    */
-  public type = PlotLayer.LayerType.HexagonLayer;
+  public type = PlotLayer.LayerType.HexbinLayer;
   /**
    * 图层是否具有交互属性
    */
   public interaction = false;
 
-  constructor(options: HexagonLayerOptions) {
+  constructor(options: HexbinLayerOptions) {
     super(options);
     const { name, source } = this.options;
     const config = this.pickLayerConfig(this.options);
@@ -73,15 +73,15 @@ export class HexagonLayer extends PlotLayer<HexagonLayerOptions> {
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<HexagonLayerOptions> {
+  public getDefaultOptions(): Partial<HexbinLayerOptions> {
     return DEFAULT_OPTIONS;
   }
 
-  protected mappingLayer(layer: ILayer, options: HexagonLayerOptions) {
+  protected mappingLayer(layer: ILayer, options: HexbinLayerOptions) {
     mappingLayer(layer, options);
   }
 
-  public update(options: Partial<HexagonLayerOptions>) {
+  public update(options: Partial<HexbinLayerOptions>) {
     this.updateOption(options);
     this.mappingLayer(this.layer, this.options);
 

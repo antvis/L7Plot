@@ -115,11 +115,11 @@ module.exports = {
         },
       },
       {
-        slug: 'heatmap',
+        slug: 'heat',
         icon: 'heatmap',
         title: {
           zh: '热力图',
-          en: 'Heatmap',
+          en: 'Heat',
         },
       },
       {

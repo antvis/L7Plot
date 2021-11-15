@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
-import { Hexagon } from '@antv/l7plot';
+import { Hexbin } from '@antv/l7plot';
 
-class Hexagon3D extends Component {
-  public map: Hexagon | undefined;
+class HexbinDelay extends Component {
+  public map: Hexbin | undefined;
 
   constructor(props) {
     super(props);
   }
 
   async initMap() {
-    const response = await fetch(
-      'https://gw.alipayobjects.com/os/basement_prod/a1a8158d-6fe3-424b-8e50-694ccf61c4d7.csv'
-    );
-    const data = await response.text();
+    const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/Ml2DwikvFC/20210726100731.json');
+    const data = await response.json();
 
-    const hexagonMap = new Hexagon('container', {
+    const hexagonMap = new Hexbin('container', {
       map: {
         type: 'mapbox',
         style: 'dark',
@@ -25,40 +23,26 @@ class Hexagon3D extends Component {
       source: {
         data: data,
         parser: {
-          type: 'csv',
-          x: 'lng',
-          y: 'lat',
+          type: 'geojson',
         },
         aggregation: {
-          radius: 2500,
-          field: 'v',
+          radius: 1200,
+          field: 'rank',
           method: 'sum',
         },
       },
+      autoFit: true,
 
       shape: 'hexagonColumn',
       size: {
         field: 'sum',
         value: ({ sum }) => {
-          return sum * 200;
+          return sum * 10;
         },
       },
       color: {
         field: 'sum',
-        value: [
-          '#094D4A',
-          '#146968',
-          '#1D7F7E',
-          '#289899',
-          '#34B6B7',
-          '#4AC5AF',
-          '#5FD3A6',
-          '#7BE39E',
-          '#A1EDB8',
-          '#C3F9CC',
-          '#DEFAC0',
-          '#ECFFB1',
-        ],
+        value: ['#0553A1', '#0B79B0', '#10B3B0', '#7CCF98', '#DCE872'],
       },
       style: {
         coverage: 0.8,
@@ -94,4 +78,4 @@ class Hexagon3D extends Component {
   }
 }
 
-export default Hexagon3D;
+export default HexbinDelay;

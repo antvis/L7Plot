@@ -292,7 +292,7 @@ export enum LayerType {
   ColumnLayer = 'columnLayer',
   HeatmapLayer = 'heatmapLayer',
   GridLayer = 'gridLayer',
-  HexagonLayer = 'hexagonLayer',
+  HexbinLayer = 'hexbinLayer',
   LinesLayer = 'linesLayer',
   PathLayer = 'pathLayer',
   ConnectionLayer = 'connectionLayer',
