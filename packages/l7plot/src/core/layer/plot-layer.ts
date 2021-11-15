@@ -1,7 +1,7 @@
 import { pick } from '@antv/util';
 import Source from '@antv/l7-source';
 import EventEmitter from '@antv/event-emitter';
-import { LayerType, IPLotLayer, PlotLayerConfig } from '../../types/layer';
+import { LayerType, IPLotLayer, PlotLayerOptions } from '../../types/layer';
 import { Scene, ILayer, ILayerConfig, SourceOptions } from '../../types';
 import { MappingSource } from '../../adaptor/source';
 import { LayerEventList } from '../map/constants';
@@ -9,7 +9,7 @@ import { deepAssign } from '../../utils';
 
 const LayerConfigkeys = ['name', 'zIndex', 'visible', 'minZoom', 'maxZoom', 'pickingBuffer', 'autoFit', 'blend'];
 
-export abstract class PlotLayer<O extends PlotLayerConfig> extends EventEmitter implements IPLotLayer {
+export abstract class PlotLayer<O extends PlotLayerOptions> extends EventEmitter implements IPLotLayer {
   /**
    * 地图图表类型
    */
@@ -52,7 +52,7 @@ export abstract class PlotLayer<O extends PlotLayerConfig> extends EventEmitter 
     return {};
   }
 
-  public pickLayerConfig<T extends PlotLayerConfig>(params: T): Partial<ILayerConfig> {
+  public pickLayerConfig<T extends PlotLayerOptions>(params: T): Partial<ILayerConfig> {
     const config = pick<any>(params, LayerConfigkeys);
     return config;
   }

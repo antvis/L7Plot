@@ -559,31 +559,19 @@ plot.off(event: string, callback: Function);
 
 #### 图层事件
 
-- 生命周期事件
-  - layerName:inited：图层初始化完成事件。
-  - layerName:add：图层添加到场景 scene 事件。
-  - layerName:remove：图层移除时事件。
-  - layerName:dataUpdate：图层数据源更新事件。
-- 单击事件
-  - layerName:click：左键点击图层事件。
-  - layerName:unclick：图层外左键点击事件。
-- 右键事件
-  - layerName:contextmenu：图层要素点击右键菜单事件。
-  - layerName:uncontextmenu：图层外点击右键事件。
-- 滑动事件
-  - layerName:mouseenter：鼠标进入图层要素事件。
-  - layerName:mousemove：鼠标在图层上移动时触发事件。
-  - layerName:unmousemove：图层外鼠标移动事件。
-  - layerName:mouseout：鼠标移出图层要素事件。
-  - layerName:mouseup：鼠标在图层上单击抬起事件。
-  - layerName:unmouseup：图层外鼠标抬起。
-  - layerName:mousedown：鼠标在图层上单击按下事件。
-  - layerName:unmousedown：图层外单击按下事件。
-- layerName:unpick： 图层外的操作的所有事件。
+详见[图层事件](/zh/docs/api/layers/plot-layer#四事件)，使用方式如下：
+
+```js
+plot.on('layerName:click', (event) => {});
+```
 
 #### 组件事件
 
-详见各组件事件。
+详见各组件事件，使用方式如下：
+
+```js
+plot.on('tooltip:change', (event) => {});
+```
 
 ## 五、资源注册
 

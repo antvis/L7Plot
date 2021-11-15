@@ -5,9 +5,9 @@ import { AnimateAttr, ColorAttr, StateAttribute, ShapeAttr, SizeAttr } from './a
 import { SourceOptions, Source } from './map';
 
 /**
- * 图层基础配置
+ * 图表图层的基础配置
  */
-export interface PlotLayerConfig {
+export interface PlotLayerOptions {
   name?: string;
   zIndex?: number;
   visible?: boolean;
@@ -49,7 +49,7 @@ export type PointShape = PointShape2d | PointShape3d;
 /**
  * 点图层基础配置
  */
-export interface PointLayerConfig extends Partial<PlotLayerConfig> {
+export interface PointLayerConfig extends Partial<PlotLayerOptions> {
   /**
    * 图形形状
    */
@@ -79,7 +79,7 @@ export interface PointLayerConfig extends Partial<PlotLayerConfig> {
 /**
  * 文字图层基础配置
  */
-export interface TextLayerConfig extends Partial<PlotLayerConfig & LabelOptions> {
+export interface TextLayerConfig extends Partial<PlotLayerOptions & LabelOptions> {
   color?: ColorAttr;
   size?: SizeAttr;
   state?: StateAttribute;
@@ -132,7 +132,7 @@ export type HeatmapShape = 'heatmap' | 'heatmap3D' | HeatmapShape2d | HeatmapSha
 /**
  * 热力图层基础配置
  */
-export interface HeatmapLayerConfig extends Partial<PlotLayerConfig> {
+export interface HeatmapLayerConfig extends Partial<PlotLayerOptions> {
   /**
    * 图形形状
    */
@@ -191,7 +191,7 @@ export type LinesLayerStyleOptions = {
 /**
  * 线图层基础配置
  */
-export interface LinesLayerConfig extends Partial<PlotLayerConfig> {
+export interface LinesLayerConfig extends Partial<PlotLayerOptions> {
   /**
    * 图形形状
    */
@@ -233,7 +233,7 @@ export type PolygonLayerStyleOptions = {
 /**
  * 面图层基础配置
  */
-export interface PolygonLayerConfig extends Partial<PlotLayerConfig> {
+export interface PolygonLayerConfig extends Partial<PlotLayerOptions> {
   /**
    * 图形形状
    */
@@ -264,9 +264,9 @@ export interface IPLotLayer {
   type: string;
   layer: ILayer;
   interaction: boolean;
-  options: PlotLayerConfig;
+  options: PlotLayerOptions;
 
-  pickLayerConfig<T extends PlotLayerConfig>(params: T): Partial<ILayerConfig>;
+  pickLayerConfig<T extends PlotLayerOptions>(params: T): Partial<ILayerConfig>;
   addTo(scene: Scene): void;
   remove(scene: Scene): void;
   update<T>(options: T): void;

@@ -87,11 +87,12 @@ export function createThemeByStyleSheet(styleSheet: StyleSheet): Record<string, 
               marginBottom: '2px',
             },
             [CATEGORY_LEGEND_CSS_CONST.MARKER_CLASS]: {
-              width: '24px',
-              height: '14px',
-              marginRight: '8px',
+              width: '10px',
+              height: '10px',
             },
-            [CATEGORY_LEGEND_CSS_CONST.VALUE_CLASS]: {},
+            [CATEGORY_LEGEND_CSS_CONST.VALUE_CLASS]: {
+              paddingLeft: '8px',
+            },
           },
         },
         continue: {

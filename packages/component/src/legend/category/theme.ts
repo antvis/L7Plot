@@ -32,9 +32,10 @@ export default {
     marginBottom: '2px',
   },
   [MARKER_CLASS]: {
-    width: '24px',
-    height: '13px',
-    marginRight: '8px',
+    width: '10px',
+    height: '10px',
   },
-  [VALUE_CLASS]: {},
+  [VALUE_CLASS]: {
+    paddingLeft: '8px',
+  },
 };
