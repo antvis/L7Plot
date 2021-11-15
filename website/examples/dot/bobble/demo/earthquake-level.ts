@@ -13,23 +13,12 @@ fetch('https://gw.alipayobjects.com/os/antfincdn/m5r7MFHt8U/wenchuandizhenshuju.
       },
       source: {
         data: data,
-        parser: {
-          type: 'json',
-          x: 'lng',
-          y: 'lat',
-        },
+        parser: { type: 'json', x: 'lng', y: 'lat' },
       },
       color: {
         field: 'mag',
-        value: ({ mag }) => {
-          if (mag > 7) {
-            return '#82cf9c';
-          } else if (mag <= 7 && mag >= 5.5) {
-            return '#10b3b0';
-          } else {
-            return '#2033ab';
-          }
-        },
+        value: ['#82cf9c', '#10b3b0', '#2033ab'],
+        scale: { type: 'quantize' },
       },
       size: {
         field: 'mag',
@@ -39,16 +28,21 @@ fetch('https://gw.alipayobjects.com/os/antfincdn/m5r7MFHt8U/wenchuandizhenshuju.
         opacity: 0.8,
         strokeWidth: 0,
       },
-      state: { active: { color: '#FFF684' } },
+      state: {
+        active: { color: '#FFF684' },
+      },
       autoFit: true,
       zoom: {
-        position: 'bottomright',
+        position: 'topright',
       },
       scale: {
-        position: 'bottomleft',
+        position: 'bottomright',
       },
       tooltip: {
         items: ['title', 'mag', 'depth'],
+      },
+      legend: {
+        position: 'bottomleft',
       },
     });
   });
