@@ -1,5 +1,5 @@
 ---
-title: 蜂窝图 - Hexbin
+title: 蜂窝聚合图 - Hexbin
 order: 5
 ---
 

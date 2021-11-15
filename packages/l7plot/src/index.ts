@@ -37,10 +37,10 @@ export { TextLayer, TextLayerOptions } from './layers/text-layer';
 // 热力图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { HeatmapLayer, HeatmapLayerOptions } from './layers/heatmap-layer';
 
-// 网格图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+// 网格聚合图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { GridLayer, GridLayerOptions } from './layers/grid-layer';
 
-// 蜂窝图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+// 蜂窝聚合图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { HexbinLayer, HexbinLayerOptions } from './layers/hexbin-layer';
 
 // 路径图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
@@ -62,10 +62,10 @@ export { DotDensity, DotDensityOptions } from './plots/dot-density';
 // 热力图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { Heatmap, HeatmapOptions } from './plots/heatmap';
 
-// 网格图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+// 网格聚合图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { Grid, GridOptions } from './plots/grid';
 
-// 蜂窝图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+// 蜂窝聚合图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { Hexbin, HexbinOptions } from './plots/hexbin';
 
 // 路径图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)

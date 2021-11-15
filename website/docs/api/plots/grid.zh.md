@@ -1,5 +1,5 @@
 ---
-title: 网格图 - Grid
+title: 网格聚合图 - Grid
 order: 4
 ---
 
