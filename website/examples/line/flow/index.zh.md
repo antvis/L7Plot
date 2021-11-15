@@ -1,4 +1,4 @@
 ---
-title: 连接图
+title: 流向图
 order: 1
 ---

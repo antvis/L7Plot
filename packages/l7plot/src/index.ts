@@ -46,8 +46,8 @@ export { HexbinLayer, HexbinLayerOptions } from './layers/hexbin-layer';
 // 路径图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { PathLayer, PathLayerOptions } from './layers/path-layer';
 
-// 连接图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { ConnectionLayer, ConnectionLayerOptions } from './layers/connection-layer';
+// 流向图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { FlowLayer, FlowLayerOptions } from './layers/flow-layer';
 
 // 区域图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { AreaLayer, AreaLayerOptions } from './layers/area-layer';
@@ -71,8 +71,8 @@ export { Hexbin, HexbinOptions } from './plots/hexbin';
 // 路径图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { Path, PathOptions } from './plots/path';
 
-// 连接图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { Connection, ConnectionOptions } from './plots/connection';
+// 流向图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { Flow, FlowOptions } from './plots/flow';
 
 // 区域图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { Area, AreaOptions } from './plots/area';

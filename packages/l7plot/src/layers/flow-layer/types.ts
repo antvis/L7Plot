@@ -1,7 +1,7 @@
 import { ArcLineShape } from '../../types';
 import { LinesLayerOptions } from '../lines-layer/types';
 
-export interface ConnectionLayerOptions extends LinesLayerOptions {
+export interface FlowLayerOptions extends LinesLayerOptions {
   /**
    * 图形形状
    */
