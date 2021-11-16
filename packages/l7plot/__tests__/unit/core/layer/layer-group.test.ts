@@ -14,13 +14,13 @@ describe('layer group', () => {
       shape: 'circle',
     });
 
-    layerGroup.addlayer(layer);
+    layerGroup.addLayer(layer);
 
     expect(layerGroup.getLayer(layer.layer.id)).toEqual(layer);
 
-    expect(layerGroup.removelayer(layer)).toBeTruthy();
+    expect(layerGroup.removeLayer(layer)).toBeTruthy();
 
-    layerGroup.addlayer(layer);
+    layerGroup.addLayer(layer);
 
     expect(layerGroup.getLayerByName(layer.name)).toEqual(layer);
 

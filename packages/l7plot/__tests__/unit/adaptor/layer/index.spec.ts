@@ -7,180 +7,172 @@ describe('mapping layer', () => {
   const source = new Source([], { parser: { type: 'json', x: 'x', y: 'y' } });
 
   it('mapping shape', () => {
-    const layerWrapper = new DotLayer<DotLayerOptions>({
+    const plotLayer = new DotLayer<DotLayerOptions>({
       source: source,
       shape: 'circle',
     });
 
-    expect(layerWrapper.layer.type).toBe('PointLayer');
+    expect(plotLayer.layer.type).toBe('PointLayer');
 
-    expect(getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'shape')).toEqual({
+    expect(getLayerStyleAttribute(plotLayer.layer['pendingStyleAttributes'], 'shape')).toEqual({
       attributeName: 'shape',
       attributeField: 'circle',
     });
 
-    layerWrapper.updateOptions({
+    plotLayer.update({
       shape: () => 'square',
     });
-    expect(
-      getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'shape')?.attributeValues
-    ).toBeDefined();
+    expect(getLayerStyleAttribute(plotLayer.layer['pendingStyleAttributes'], 'shape')?.attributeValues).toBeDefined();
 
-    layerWrapper.updateOptions({
+    plotLayer.update({
       shape: {
         field: 'x',
         value: ['circle', 'square'],
       },
     });
-    expect(getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'shape')).toEqual({
+    expect(getLayerStyleAttribute(plotLayer.layer['pendingStyleAttributes'], 'shape')).toEqual({
       attributeName: 'shape',
       attributeField: 'x',
       attributeValues: ['circle', 'square'],
     });
 
-    layerWrapper.updateOptions({
+    plotLayer.update({
       shape: {
         field: 'shape',
         value: ({ shape }) => shape,
       },
     });
-    expect(
-      getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'shape')?.attributeValues
-    ).toBeDefined();
+    expect(getLayerStyleAttribute(plotLayer.layer['pendingStyleAttributes'], 'shape')?.attributeValues).toBeDefined();
   });
 
   it('mapping size', () => {
-    const layerWrapper = new DotLayer<DotLayerOptions>({
+    const plotLayer = new DotLayer<DotLayerOptions>({
       source: source,
       size: 12,
     });
 
-    expect(layerWrapper.layer.type).toBe('PointLayer');
+    expect(plotLayer.layer.type).toBe('PointLayer');
 
-    expect(getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'size')).toEqual({
+    expect(getLayerStyleAttribute(plotLayer.layer['pendingStyleAttributes'], 'size')).toEqual({
       attributeName: 'size',
       attributeField: 12,
     });
 
-    layerWrapper.updateOptions({
+    plotLayer.update({
       size: () => 12,
     });
-    expect(getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'size')?.attributeValues).toBeDefined();
+    expect(getLayerStyleAttribute(plotLayer.layer['pendingStyleAttributes'], 'size')?.attributeValues).toBeDefined();
 
-    layerWrapper.updateOptions({
+    plotLayer.update({
       size: {
         field: 'x',
         value: [12, 14],
       },
     });
-    expect(getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'size')).toEqual({
+    expect(getLayerStyleAttribute(plotLayer.layer['pendingStyleAttributes'], 'size')).toEqual({
       attributeName: 'size',
       attributeField: 'x',
       attributeValues: [12, 14],
     });
 
-    layerWrapper.updateOptions({
+    plotLayer.update({
       size: {
         field: 'size',
         value: ({ size }) => size,
       },
     });
-    expect(getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'size')?.attributeValues).toBeDefined();
+    expect(getLayerStyleAttribute(plotLayer.layer['pendingStyleAttributes'], 'size')?.attributeValues).toBeDefined();
   });
 
   it('mapping color', () => {
-    const layerWrapper = new DotLayer<DotLayerOptions>({
+    const plotLayer = new DotLayer<DotLayerOptions>({
       source: source,
       color: 'red',
     });
 
-    expect(layerWrapper.layer.type).toBe('PointLayer');
+    expect(plotLayer.layer.type).toBe('PointLayer');
 
-    expect(getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'color')).toEqual({
+    expect(getLayerStyleAttribute(plotLayer.layer['pendingStyleAttributes'], 'color')).toEqual({
       attributeName: 'color',
       attributeField: 'red',
     });
 
-    layerWrapper.updateOptions({
+    plotLayer.update({
       color: () => 'red',
     });
-    expect(
-      getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'color')?.attributeValues
-    ).toBeDefined();
+    expect(getLayerStyleAttribute(plotLayer.layer['pendingStyleAttributes'], 'color')?.attributeValues).toBeDefined();
 
-    layerWrapper.updateOptions({
+    plotLayer.update({
       color: {
         field: 'x',
         value: ['red', 'blue'],
       },
     });
-    expect(getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'color')).toEqual({
+    expect(getLayerStyleAttribute(plotLayer.layer['pendingStyleAttributes'], 'color')).toEqual({
       attributeName: 'color',
       attributeField: 'x',
       attributeValues: ['red', 'blue'],
     });
 
-    layerWrapper.updateOptions({
+    plotLayer.update({
       color: {
         field: 'color',
         value: ({ color }) => color,
       },
     });
-    expect(
-      getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'color')?.attributeValues
-    ).toBeDefined();
+    expect(getLayerStyleAttribute(plotLayer.layer['pendingStyleAttributes'], 'color')?.attributeValues).toBeDefined();
   });
 
   it('mapping style', () => {
-    const layerWrapper = new DotLayer({
+    const plotLayer = new DotLayer({
       source: source,
       style: { opacity: 1, strokeWidth: 1, stroke: 'red' },
     });
 
-    expect(layerWrapper.layer.type).toBe('PointLayer');
+    expect(plotLayer.layer.type).toBe('PointLayer');
 
-    expect(layerWrapper.layer['rawConfig']).toMatchObject({ opacity: 1, strokeWidth: 1, stroke: 'red' });
+    expect(plotLayer.layer['rawConfig']).toMatchObject({ opacity: 1, strokeWidth: 1, stroke: 'red' });
   });
 
   it('mapping state', () => {
-    const layerWrapper = new DotLayer({
+    const plotLayer = new DotLayer({
       source: source,
       state: { active: true, select: true },
     });
 
-    expect(layerWrapper.layer.type).toBe('PointLayer');
+    expect(plotLayer.layer.type).toBe('PointLayer');
 
-    expect(layerWrapper.layer['needUpdateConfig'].enableHighlight).toBeTruthy();
-    expect(layerWrapper.layer['needUpdateConfig'].enableSelect).toBeTruthy();
+    expect(plotLayer.layer['needUpdateConfig'].enableHighlight).toBeTruthy();
+    expect(plotLayer.layer['needUpdateConfig'].enableSelect).toBeTruthy();
   });
 
   it('mapping rotate', () => {
-    const layerWrapper = new DotLayer({
+    const plotLayer = new DotLayer({
       source: source,
       // rotate: 45,
     });
 
-    expect(layerWrapper.layer.type).toBe('PointLayer');
+    expect(plotLayer.layer.type).toBe('PointLayer');
 
-    // expect(getLayerStyleAttribute(layerWrapper.layer['pendingStyleAttributes'], 'rotate')).toEqual({
+    // expect(getLayerStyleAttribute(plotLayer.layer['pendingStyleAttributes'], 'rotate')).toEqual({
     //   attributeName: 'rotate',
     //   attributeField: 45,
     // });
   });
 
   it('mapping animate', () => {
-    const layerWrapper = new DotLayer({
+    const plotLayer = new DotLayer({
       source: source,
       animate: true,
     });
 
-    expect(layerWrapper.layer.type).toBe('PointLayer');
+    expect(plotLayer.layer.type).toBe('PointLayer');
 
-    expect(layerWrapper.layer['needUpdateConfig'].animateOption.enable).toBeTruthy();
+    expect(plotLayer.layer['needUpdateConfig'].animateOption.enable).toBeTruthy();
   });
 
   it('mapping scale', () => {
-    const layerWrapper = new DotLayer({
+    const plotLayer = new DotLayer({
       source: source,
       size: {
         field: 'x',
@@ -189,8 +181,8 @@ describe('mapping layer', () => {
       },
     });
 
-    expect(layerWrapper.layer.type).toBe('PointLayer');
+    expect(plotLayer.layer.type).toBe('PointLayer');
 
-    expect(layerWrapper.layer.getScaleOptions()).toEqual({ x: { type: 'quantize' } });
+    expect(plotLayer.layer.getScaleOptions()).toEqual({ x: { type: 'quantize' } });
   });
 });

@@ -2,7 +2,7 @@ import { DotLayer } from '../../../../src/layers/dot-layer';
 import { Dot, DotOptions } from '../../../../src';
 import { createPlot } from '../../../helper/plot';
 
-describe('base layer', () => {
+describe('plot layer', () => {
   it('show hide', () => {
     const dot = createPlot<Dot, DotOptions>(Dot, {
       source: {
