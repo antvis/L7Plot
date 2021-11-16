@@ -1,7 +1,7 @@
 import { IColorRamp } from '@antv/l7-utils';
 import { BlendType, ILayer, ILayerConfig, Scene } from './common';
 import { LabelOptions } from './label';
-import { AnimateAttr, ColorAttr, StateAttribute, ShapeAttr, SizeAttr } from './attr';
+import { AnimateAttr, ColorAttr, StateAttribute, ShapeAttr, SizeAttr, TextureAttr } from './attr';
 import { SourceOptions, Source } from './map';
 
 /**
@@ -182,10 +182,20 @@ export type LinesLayerStyleOptions = {
   dashArray?: [number, number];
   // 弧线分段数
   segmentNumber?: number;
-  // 起点颜色
+  // 渐变起点颜色
   sourceColor?: string;
-  // 终点颜色
+  // 渐变终点颜色
   targetColor?: string;
+  // 是否反向，arc 支持
+  forward?: boolean;
+  // 弧线的偏移量，arc 支持
+  thetaOffset?: number;
+  // 是否开启纹理贴图
+  lineTexture?: boolean;
+  // 纹理贴图步长
+  iconStep?: number;
+  // 纹理混合方式
+  textureBlend?: string;
 };
 
 /**
@@ -216,6 +226,10 @@ export interface LinesLayerConfig extends Partial<PlotLayerOptions> {
    * 交互反馈
    */
   state?: StateAttribute;
+  /**
+   * 纹理贴图
+   */
+  texture?: TextureAttr;
 }
 
 /**
@@ -295,7 +309,7 @@ export enum LayerType {
   HexbinLayer = 'hexbinLayer',
   LinesLayer = 'linesLayer',
   PathLayer = 'pathLayer',
-  ConnectionLayer = 'connectionLayer',
+  FlowLayer = 'flowLayer',
   AreaLayer = 'areaLayer',
   PrismLayer = 'prismLayer',
 }

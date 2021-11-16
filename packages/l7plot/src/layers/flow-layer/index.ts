@@ -8,7 +8,7 @@ export class FlowLayer extends LinesLayer<FlowLayerOptions> {
   /**
    * 图层类型
    */
-  public type = LinesLayer.LayerType.ConnectionLayer;
+  public type = LinesLayer.LayerType.FlowLayer;
 
   /**
    * 获取默认配置

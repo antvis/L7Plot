@@ -389,6 +389,22 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
   }
 
   /**
+   * 初始化组件
+   */
+  protected initComponents() {
+    this.initControls();
+    this.initTooltip();
+  }
+
+  /**
+   * 更新化组件
+   */
+  protected updateComponents() {
+    this.updateControls();
+    this.initTooltip();
+  }
+
+  /**
    * 初始化控件
    */
   protected initControls() {
