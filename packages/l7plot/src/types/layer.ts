@@ -309,7 +309,7 @@ export enum LayerType {
   HexbinLayer = 'hexbinLayer',
   LinesLayer = 'linesLayer',
   PathLayer = 'pathLayer',
-  FlowLayer = 'flowLayer',
+  ArcLayer = 'arcLayer',
   AreaLayer = 'areaLayer',
   PrismLayer = 'prismLayer',
 }

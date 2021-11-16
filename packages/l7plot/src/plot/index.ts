@@ -52,7 +52,7 @@ export class L7Plot extends Map<L7PlotOptions> {
         throw new Error(`Don't exist ${type} layer`);
       }
       const layer: IPLotLayer = new (LayerClass as any)(options);
-      layerGroup.addlayer(layer);
+      layerGroup.addLayer(layer);
     }
 
     return layerGroup;

@@ -16,7 +16,7 @@ import { DotDensityLayer, DotDensityLayerOptions } from '../layers/dot-density-l
 import { GridLayer, GridLayerOptions } from '../layers/grid-layer';
 import { HexbinLayer, HexbinLayerOptions } from '../layers/hexbin-layer';
 import { PathLayer, PathLayerOptions } from '../layers/path-layer';
-import { FlowLayer, FlowLayerOptions } from '../layers/flow-layer';
+import { ArcLayer, ArcLayerOptions } from '../layers/arc-layer';
 import { HeatmapLayer, HeatmapLayerOptions } from '../layers/heatmap-layer';
 import { AreaLayer, AreaLayerOptions } from '../layers/area-layer';
 import { PrismLayer, PrismLayerOptions } from '../layers/prism-layer';
@@ -69,7 +69,7 @@ export type LayerConfigType = { id?: string } & (
   | ({ type: 'gridLayer' } & GridLayerOptions)
   | ({ type: 'hexbinLayer' } & HexbinLayerOptions)
   | ({ type: 'pathLayer' } & PathLayerOptions)
-  | ({ type: 'flowLayer' } & FlowLayerOptions)
+  | ({ type: 'arcLayer' } & ArcLayerOptions)
   | ({ type: 'areaLayer' } & AreaLayerOptions)
   | ({ type: 'prismLayer' } & PrismLayerOptions)
 );
@@ -86,7 +86,7 @@ export const LAYERS_MAP = {
   [LayerType.GridLayer]: GridLayer,
   [LayerType.HexbinLayer]: HexbinLayer,
   [LayerType.PathLayer]: PathLayer,
-  [LayerType.FlowLayer]: FlowLayer,
+  [LayerType.ArcLayer]: ArcLayer,
   [LayerType.AreaLayer]: AreaLayer,
   [LayerType.PrismLayer]: PrismLayer,
 };

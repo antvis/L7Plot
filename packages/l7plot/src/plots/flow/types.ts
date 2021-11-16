@@ -1,4 +1,4 @@
-import { FlowLayerOptions } from '../../layers/flow-layer';
+import { ArcLayerOptions } from '../../layers/arc-layer';
 import { PlotOptions, SizeAttr, SourceOptions } from '../../types';
 
 /**
@@ -16,7 +16,7 @@ type FlowRadiation = {
 };
 
 /** 流向图的配置类型定义 */
-export interface FlowOptions extends Omit<PlotOptions, 'label'>, FlowLayerOptions {
+export interface FlowOptions extends PlotOptions, ArcLayerOptions {
   /**
    * 具体的数据
    */

@@ -46,8 +46,8 @@ export { HexbinLayer, HexbinLayerOptions } from './layers/hexbin-layer';
 // 路径图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { PathLayer, PathLayerOptions } from './layers/path-layer';
 
-// 流向图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
-export { FlowLayer, FlowLayerOptions } from './layers/flow-layer';
+// 弧线图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { ArcLayer, ArcLayerOptions } from './layers/arc-layer';
 
 // 区域图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { AreaLayer, AreaLayerOptions } from './layers/area-layer';

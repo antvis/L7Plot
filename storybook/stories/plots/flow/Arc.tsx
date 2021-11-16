@@ -7,7 +7,7 @@ export default function Arc() {
     fetch('https://gw.alipayobjects.com/os/antfincdn/%26%26hmITfpCp/home_comp_line.json')
       .then((response) => response.json())
       .then((data) => {
-        const connectionMap = new Flow('container', {
+        const plot = new Flow('container', {
           theme: 'dark',
           map: {
             type: 'mapbox',
@@ -25,13 +25,13 @@ export default function Arc() {
               y1: 'toLng',
             },
           },
+          autoFit: true,
           shape: 'arc3d',
           size: 1.5,
           color: '#1CD5FF',
           style: {
             opacity: 0.8,
           },
-          autoFit: true,
           zoom: {
             position: 'bottomright',
           },
@@ -43,7 +43,7 @@ export default function Arc() {
           },
         });
 
-        map.current = connectionMap;
+        map.current = plot;
       });
 
     return () => map.current?.destroy();

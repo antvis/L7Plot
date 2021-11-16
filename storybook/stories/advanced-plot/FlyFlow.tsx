@@ -55,7 +55,7 @@ function FlyFlow() {
           },
           {
             name: 'flyLine',
-            type: 'flowLayer',
+            type: 'arcLayer',
             source: {
               data: flydata,
               parser: {

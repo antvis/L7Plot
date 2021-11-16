@@ -7,7 +7,7 @@ export default function Airline() {
     fetch('https://gw.alipayobjects.com/os/antfincdn/AUom1g4loR/openflight_airline_1.json')
       .then((response) => response.json())
       .then((data) => {
-        const connectionMap = new Flow('container', {
+        const plot = new Flow('container', {
           map: {
             type: 'mapbox',
             style: 'dark',
@@ -25,16 +25,15 @@ export default function Airline() {
               y1: 'toLat',
             },
           },
-          shape: 'arc3d',
           size: 2,
-          color: '#07d2e8',
+          color: '#ff6b34',
           style: {
             opacity: 0.8,
           },
           animate: {
-            interval: 0.6, // 间隔
-            trailLength: 2, // 流线长度
-            duration: 2, // 持续时间，延时
+            interval: 2,
+            trailLength: 1,
+            duration: 2,
           },
           autoFit: true,
           zoom: {
@@ -48,7 +47,7 @@ export default function Airline() {
           },
         });
 
-        map.current = connectionMap;
+        map.current = plot;
       });
 
     return () => map.current?.destroy();

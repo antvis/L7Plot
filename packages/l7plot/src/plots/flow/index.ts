@@ -1,8 +1,8 @@
-import { isUndefined, pick } from '@antv/util';
+import { pick } from '@antv/util';
 import { Plot } from '../../core/plot';
 import { FlowOptions } from './types';
 import { DEFAULT_OPTIONS } from './constants';
-import { FlowLayer } from '../../layers/flow-layer';
+import { ArcLayer } from '../../layers/arc-layer';
 import { DotLayer } from '../../layers/dot-layer';
 import { TextLayer } from '../../layers/text-layer';
 import { LabelOptions, LegendOptions, Source } from '../../types';
@@ -24,12 +24,17 @@ export class Flow extends Plot<FlowOptions> {
   /**
    * 流向图层
    */
-  public flowLayer!: FlowLayer;
+  public flowLayer!: ArcLayer;
 
   /**
    * 辐射圈图层
    */
   public radiationLayer: DotLayer | undefined;
+
+  /**
+   * 落地点标注图层
+   */
+  public labelLayer: TextLayer | undefined;
 
   /**
    * 获取默认配置
@@ -42,15 +47,21 @@ export class Flow extends Plot<FlowOptions> {
    * 创建图层
    */
   protected createLayers(source: Source): LayerGroup {
-    this.flowLayer = new FlowLayer({
+    this.flowLayer = new ArcLayer({
+      name: 'flowLayer',
       source,
-      ...pick<any>(this.options, FlowLayer.LayerOptionsKeys),
+      ...pick<any>(this.options, ArcLayer.LayerOptionsKeys),
     });
     const layerGroup = new LayerGroup([this.flowLayer]);
 
     if (this.options.radiation) {
       this.radiationLayer = this.createRadiationLayer(source);
-      layerGroup.addlayer(this.radiationLayer);
+      layerGroup.addLayer(this.radiationLayer);
+    }
+
+    if (this.options.label) {
+      this.labelLayer = this.createLabelLayer(source, this.options.label);
+      layerGroup.addLayer(this.labelLayer);
     }
 
     return layerGroup;
@@ -60,19 +71,16 @@ export class Flow extends Plot<FlowOptions> {
    * 解析流向图起终点数据
    */
   private parserPointData(source: Source) {
-    const pointMap = {};
+    // const pointMap = {};
     const data: any[] = [];
     source.data.dataArray.forEach((item) => {
       const { coordinates } = item;
       const [startPoint, endPoint] = coordinates;
-      if (isUndefined(pointMap[startPoint.toString()])) {
-        data.push({ ...item, coordinates: startPoint });
-        pointMap[startPoint.toString()] = true;
-      }
-      if (isUndefined(pointMap[endPoint.toString()])) {
-        data.push({ ...item, coordinates: endPoint });
-        pointMap[endPoint.toString()] = true;
-      }
+      // if (isUndefined(pointMap[startPoint.toString()])) {
+      //   data.push({ ...item, coordinates: startPoint });
+      //   pointMap[startPoint.toString()] = true;
+      // }
+      data.push({ ...item, coordinates: endPoint });
     });
 
     return data;
@@ -108,7 +116,7 @@ export class Flow extends Plot<FlowOptions> {
    */
   protected createLabelLayer(source: Source, label: LabelOptions): TextLayer {
     const data = this.parserPointData(source);
-    const textLayer = new TextLayer({
+    const labelLayer = new TextLayer({
       name: 'labelLayer',
       source: {
         data,
@@ -119,27 +127,40 @@ export class Flow extends Plot<FlowOptions> {
 
     source.on('update', () => {
       const data = this.parserPointData(this.source);
-      textLayer.layer.setData(data);
+      labelLayer.layer.setData(data);
     });
 
-    return textLayer;
+    return labelLayer;
   }
 
   /**
    * 更新图层
    */
   protected updateLayers(options: FlowOptions) {
-    const dotLayerConfig = pick<any>(options, FlowLayer.LayerOptionsKeys);
-    this.flowLayer.update(dotLayerConfig);
+    const flowLayerConfig = pick<any>(options, ArcLayer.LayerOptionsKeys);
+    this.flowLayer.update(flowLayerConfig);
 
     if (options.radiation) {
       if (!this.radiationLayer) {
         this.radiationLayer = this.createRadiationLayer(this.source);
-        this.layerGroup.addlayer(this.radiationLayer);
+        this.layerGroup.addLayer(this.radiationLayer);
       }
     } else {
       if (this.radiationLayer) {
-        this.layerGroup.removelayer(this.radiationLayer);
+        this.layerGroup.removeLayer(this.radiationLayer);
+      }
+    }
+
+    if (options.label) {
+      if (this.labelLayer) {
+        this.labelLayer.update({ ...options.label });
+      } else {
+        this.labelLayer = this.createLabelLayer(this.source, options.label);
+        this.layerGroup.addLayer(this.labelLayer);
+      }
+    } else {
+      if (this.labelLayer) {
+        this.layerGroup.removeLayer(this.labelLayer);
       }
     }
   }

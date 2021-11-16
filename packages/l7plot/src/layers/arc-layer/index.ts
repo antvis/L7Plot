@@ -8,14 +8,14 @@ export class ArcLayer extends LinesLayer<ArcLayerOptions> {
   /**
    * 图层类型
    */
-  public type = LinesLayer.LayerType.FlowLayer;
+  public type = LinesLayer.LayerType.ArcLayer;
 
   /**
    * 获取默认配置
    */
   public getDefaultOptions(): Partial<ArcLayerOptions> {
     return deepAssign({}, LinesLayer.DefaultOptions, {
-      shape: 'arc3d',
+      shape: 'arc',
     });
   }
 }

@@ -49,7 +49,7 @@ export class Hexbin extends Plot<HexbinOptions> {
 
     if (this.options.label) {
       this.labelLayer = this.createLabelLayer(this.source, this.options.label);
-      layerGroup.addlayer(this.labelLayer);
+      layerGroup.addLayer(this.labelLayer);
     }
 
     return layerGroup;
@@ -67,11 +67,11 @@ export class Hexbin extends Plot<HexbinOptions> {
         this.labelLayer.update({ ...options.label });
       } else {
         this.labelLayer = this.createLabelLayer(this.source, options.label);
-        this.layerGroup.addlayer(this.labelLayer);
+        this.layerGroup.addLayer(this.labelLayer);
       }
     } else {
       if (this.labelLayer) {
-        this.layerGroup.removelayer(this.labelLayer);
+        this.layerGroup.removeLayer(this.labelLayer);
       }
     }
   }

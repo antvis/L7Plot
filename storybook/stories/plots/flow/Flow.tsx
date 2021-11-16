@@ -7,7 +7,7 @@ export default function FlowMap() {
     fetch('https://gw.alipayobjects.com/os/antfincdn/SIybYh6xr1/arc.json')
       .then((response) => response.json())
       .then((data) => {
-        const connectionMap = new Flow('container', {
+        const plot = new Flow('container', {
           map: {
             type: 'mapbox',
             style: 'dark',
@@ -25,18 +25,18 @@ export default function FlowMap() {
               y1: 'y',
             },
           },
+          autoFit: true,
           shape: 'arc3d',
           size: 1.5,
           color: {
             field: 'count',
-            value: ['rgba(1,124,247,0.1)', 'rgba(230,129,28,0.1)'],
+            value: ['rgba(1,124,247,0.9)', 'rgba(230,129,28,0.9)'],
             scale: { type: 'quantize' },
           },
           style: {
             opacity: 0.8,
             segmentNumber: 60,
           },
-          autoFit: true,
           animate: {
             interval: 2,
             trailLength: 1,
@@ -45,6 +45,20 @@ export default function FlowMap() {
           radiation: {
             color: 'white',
             size: 30,
+          },
+          label: {
+            visible: true,
+            field: 'dis',
+            style: {
+              fill: '#000',
+              opacity: 0.8,
+              fontSize: 10,
+              stroke: '#fff',
+              strokeWidth: 2,
+              textAllowOverlap: true,
+              padding: [5, 5],
+              textOffset: [0, 35],
+            },
           },
           zoom: {
             position: 'bottomright',
@@ -55,9 +69,12 @@ export default function FlowMap() {
           layerMenu: {
             position: 'topright',
           },
+          legend: {
+            position: 'bottomleft',
+          },
         });
 
-        map.current = connectionMap;
+        map.current = plot;
       });
 
     return () => map.current?.destroy();

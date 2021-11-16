@@ -76,7 +76,7 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
 
     this.name = name ? name : uniqueId(this.type);
     this.layer = new PolygonLayer({ ...config, name: this.name });
-    this.strokeLayer = new LineLayer({ name: 'strokeLayer', visible });
+    this.strokeLayer = new LineLayer({ name: 'strokeLayer', visible, zIndex });
 
     this.highlightLayer = new LineLayer({
       name: 'highlightLayer',
