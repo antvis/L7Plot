@@ -123,11 +123,19 @@ module.exports = {
         },
       },
       {
-        slug: 'line',
+        slug: 'path',
         icon: 'line',
         title: {
           zh: '路径图',
-          en: 'line',
+          en: 'path',
+        },
+      },
+      {
+        slug: 'flow',
+        icon: 'line',
+        title: {
+          zh: '流向图',
+          en: 'flow',
         },
       },
       {

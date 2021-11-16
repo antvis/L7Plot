@@ -5,10 +5,10 @@
   },
   "demos": [
     {
-      "filename": "bank.ts",
+      "filename": "flow.ts",
       "title": {
-        "zh": "TODO",
-        "en": "TODO"
+        "zh": "贴地流向图",
+        "en": "Ground flow map"
       },
       "screenshot": ""
     }

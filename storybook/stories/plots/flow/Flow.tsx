@@ -3,6 +3,7 @@ import { Flow } from '@antv/l7plot';
 
 export default function FlowMap() {
   const map = useRef<Flow>();
+
   useEffect(() => {
     fetch('https://gw.alipayobjects.com/os/antfincdn/SIybYh6xr1/arc.json')
       .then((response) => response.json())
