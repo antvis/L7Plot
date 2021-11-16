@@ -1,16 +1,16 @@
 import React, { useRef, useEffect } from 'react';
-import { Connection } from '@antv/l7plot';
+import { Flow } from '@antv/l7plot';
 
 export default function WindField() {
-  const map = useRef<Connection>();
+  const map = useRef<Flow>();
   useEffect(() => {
     fetch('https://gw.alipayobjects.com/os/bmw-prod/7455fead-1dc0-458d-b91a-fb4cf99e701e.txt')
       .then((response) => response.text())
       .then((data) => {
-        const connectionMap = new Connection('container', {
-          theme: 'dark',
+        const connectionMap = new Flow('container', {
           map: {
             type: 'mapbox',
+            style: 'dark',
             center: [60, 40.7128],
             zoom: 2,
           },

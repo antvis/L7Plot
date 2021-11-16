@@ -1,13 +1,13 @@
 import React, { useRef, useEffect } from 'react';
-import { Connection } from '@antv/l7plot';
+import { Flow } from '@antv/l7plot';
 
-export default function Flow() {
-  const map = useRef<Connection>();
+export default function Arc() {
+  const map = useRef<Flow>();
   useEffect(() => {
-    fetch('https://gw.alipayobjects.com/os/antfincdn/SIybYh6xr1/arc.json')
+    fetch('https://gw.alipayobjects.com/os/antfincdn/%26%26hmITfpCp/home_comp_line.json')
       .then((response) => response.json())
       .then((data) => {
-        const connectionMap = new Connection('container', {
+        const connectionMap = new Flow('container', {
           theme: 'dark',
           map: {
             type: 'mapbox',
@@ -19,10 +19,10 @@ export default function Flow() {
             data: data,
             parser: {
               type: 'json',
-              x: 'x',
-              y: 'y',
-              x1: 'x1',
-              y1: 'y1',
+              x: 'fromLat',
+              y: 'fromLng',
+              x1: 'toLat',
+              y1: 'toLng',
             },
           },
           shape: 'arc3d',
@@ -30,15 +30,8 @@ export default function Flow() {
           color: '#1CD5FF',
           style: {
             opacity: 0.8,
-            sourceColor: '#8ce1f5',
-            targetColor: '#1CD5FF',
           },
           autoFit: true,
-          animate: {
-            interval: 2,
-            trailLength: 1,
-            duration: 2,
-          },
           zoom: {
             position: 'bottomright',
           },

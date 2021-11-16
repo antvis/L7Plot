@@ -71,7 +71,6 @@ export class LinesLayer<O extends LinesLayerOptions = LinesLayerOptions> extends
 
   public getColorLegendItems() {
     const colorLegendItems = this.layer.getLegendItems('color');
-    console.log('colorLegendItems: ', colorLegendItems);
     if (Array.isArray(colorLegendItems) && colorLegendItems.length !== 0) {
       const items = getColorLegendItems(colorLegendItems);
       return items;
