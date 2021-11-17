@@ -208,13 +208,13 @@ export class Choropleth extends Plot<ChoroplethOptions> {
       const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(this.chinaBoundaryData);
       this.chinaBoundaryLayer = chinaBoundaryLayer;
       this.chinaDisputeBoundaryLayer = chinaDisputeBoundaryLayer;
-      layerGroup.addlayer(this.chinaBoundaryLayer);
-      layerGroup.addlayer(this.chinaDisputeBoundaryLayer);
+      layerGroup.addLayer(this.chinaBoundaryLayer);
+      layerGroup.addLayer(this.chinaDisputeBoundaryLayer);
     }
 
     if (this.options.label) {
       this.labelLayer = this.createLabelLayer(source, this.options.label);
-      layerGroup.addlayer(this.labelLayer);
+      layerGroup.addLayer(this.labelLayer);
     }
 
     return layerGroup;
@@ -261,15 +261,15 @@ export class Choropleth extends Plot<ChoroplethOptions> {
         const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(this.chinaBoundaryData);
         this.chinaBoundaryLayer = chinaBoundaryLayer;
         this.chinaDisputeBoundaryLayer = chinaDisputeBoundaryLayer;
-        this.layerGroup.addlayer(this.chinaBoundaryLayer);
-        this.layerGroup.addlayer(this.chinaDisputeBoundaryLayer);
+        this.layerGroup.addLayer(this.chinaBoundaryLayer);
+        this.layerGroup.addLayer(this.chinaDisputeBoundaryLayer);
       }
     } else {
       if (this.chinaBoundaryLayer) {
-        this.layerGroup.removelayer(this.chinaBoundaryLayer);
+        this.layerGroup.removeLayer(this.chinaBoundaryLayer);
       }
       if (this.chinaDisputeBoundaryLayer) {
-        this.layerGroup.removelayer(this.chinaDisputeBoundaryLayer);
+        this.layerGroup.removeLayer(this.chinaDisputeBoundaryLayer);
       }
     }
 
@@ -278,11 +278,11 @@ export class Choropleth extends Plot<ChoroplethOptions> {
         this.labelLayer.update({ ...options.label });
       } else {
         this.labelLayer = this.createLabelLayer(this.source, options.label);
-        this.layerGroup.addlayer(this.labelLayer);
+        this.layerGroup.addLayer(this.labelLayer);
       }
     } else {
       if (this.labelLayer) {
-        this.layerGroup.removelayer(this.labelLayer);
+        this.layerGroup.removeLayer(this.labelLayer);
       }
     }
   }

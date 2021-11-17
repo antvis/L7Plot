@@ -9,6 +9,7 @@ import {
   RotateAttr,
   AnimateAttr,
   StateAttribute,
+  TextureAttr,
 } from '../../types';
 
 /**
@@ -145,6 +146,16 @@ export class MappingLayer {
       // TODO: rotate isFunction
     } else if (isObject(rotate)) {
       // TODO: L7 rotate
+    }
+  }
+
+  static texture(layer: ILayer, texture: TextureAttr) {
+    /**
+     * texture 的几种情况
+     * layer.texture('plane');
+     */
+    if (isString(texture)) {
+      layer.texture(texture);
     }
   }
 

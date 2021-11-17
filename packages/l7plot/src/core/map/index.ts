@@ -329,7 +329,7 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
    * 添加图层
    */
   public addLayer(layer: IPLotLayer) {
-    this.layerGroup.addlayer(layer);
+    this.layerGroup.addLayer(layer);
   }
 
   /**
@@ -350,7 +350,7 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
    * 移除图层
    */
   public removeLayer(layer: IPLotLayer) {
-    this.layerGroup.addlayer(layer);
+    this.layerGroup.addLayer(layer);
   }
 
   /**
@@ -386,6 +386,22 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
    */
   public fitBounds(bound: Bounds) {
     this.scene.fitBounds(bound);
+  }
+
+  /**
+   * 初始化组件
+   */
+  protected initComponents() {
+    this.initControls();
+    this.initTooltip();
+  }
+
+  /**
+   * 更新化组件
+   */
+  protected updateComponents() {
+    this.updateControls();
+    this.initTooltip();
   }
 
   /**

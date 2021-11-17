@@ -1,20 +1,24 @@
 import { LayerType, PlotType } from '../types';
+
 import { Dot, DotOptions } from '../plots/dot';
 import { DotDensity, DotDensityOptions } from '../plots/dot-density';
 import { Heatmap, HeatmapOptions } from '../plots/heatmap';
 import { Grid, GridOptions } from '../plots/grid';
 import { Hexbin, HexbinOptions } from '../plots/hexbin';
+import { Path, PathOptions } from '../plots/path';
 import { Area, AreaOptions } from '../plots/area';
-import { AreaLayer, AreaLayerOptions } from '../layers/area-layer';
+import { Choropleth, ChoroplethOptions } from '../plots/choropleth';
+
+import { TextLayer, TextLayerOptions } from '../layers/text-layer';
+import { DotLayer, DotLayerOptions } from '../layers/dot-layer';
 import { ColumnLayer, ColumnLayerOptions } from '../layers/column-layer';
 import { DotDensityLayer, DotDensityLayerOptions } from '../layers/dot-density-layer';
-import { DotLayer, DotLayerOptions } from '../layers/dot-layer';
 import { GridLayer, GridLayerOptions } from '../layers/grid-layer';
 import { HexbinLayer, HexbinLayerOptions } from '../layers/hexbin-layer';
 import { PathLayer, PathLayerOptions } from '../layers/path-layer';
-import { FlowLayer, FlowLayerOptions } from '../layers/flow-layer';
-import { TextLayer, TextLayerOptions } from '../layers/text-layer';
+import { ArcLayer, ArcLayerOptions } from '../layers/arc-layer';
 import { HeatmapLayer, HeatmapLayerOptions } from '../layers/heatmap-layer';
+import { AreaLayer, AreaLayerOptions } from '../layers/area-layer';
 import { PrismLayer, PrismLayerOptions } from '../layers/prism-layer';
 
 /**
@@ -28,13 +32,16 @@ type OmitPlotOptions<T> = Omit<
 /**
  * plots 类型
  */
-export type PlotConfigType =
+export type PlotConfigType = { id?: string } & (
   | ({ type: 'dot' } & OmitPlotOptions<DotOptions>)
   | ({ type: 'dotDensity' } & OmitPlotOptions<DotDensityOptions>)
   | ({ type: 'heatmap' } & OmitPlotOptions<HeatmapOptions>)
   | ({ type: 'grid' } & OmitPlotOptions<GridOptions>)
   | ({ type: 'hexbin' } & OmitPlotOptions<HexbinOptions>)
-  | ({ type: 'area' } & OmitPlotOptions<AreaOptions>);
+  | ({ type: 'path' } & OmitPlotOptions<PathOptions>)
+  | ({ type: 'area' } & OmitPlotOptions<AreaOptions>)
+  | ({ type: 'choropleth' } & OmitPlotOptions<ChoroplethOptions>)
+);
 
 /**
  * plots 的 class
@@ -45,13 +52,15 @@ export const PLOTS_MAP = {
   [PlotType.Heatmap]: Heatmap,
   [PlotType.Grid]: Grid,
   [PlotType.Hexagon]: Hexbin,
+  [PlotType.Path]: Path,
   [PlotType.Area]: Area,
+  [PlotType.Choropleth]: Choropleth,
 };
 
 /**
  * L7Plot 内置的 layers 类型
  */
-export type LayerConfigType =
+export type LayerConfigType = { id?: string } & (
   | ({ type: 'textLayer' } & TextLayerOptions)
   | ({ type: 'dotLayer' } & DotLayerOptions)
   | ({ type: 'dotDensity' } & DotDensityLayerOptions)
@@ -60,9 +69,10 @@ export type LayerConfigType =
   | ({ type: 'gridLayer' } & GridLayerOptions)
   | ({ type: 'hexbinLayer' } & HexbinLayerOptions)
   | ({ type: 'pathLayer' } & PathLayerOptions)
-  | ({ type: 'flowLayer' } & FlowLayerOptions)
+  | ({ type: 'arcLayer' } & ArcLayerOptions)
   | ({ type: 'areaLayer' } & AreaLayerOptions)
-  | ({ type: 'prismLayer' } & PrismLayerOptions);
+  | ({ type: 'prismLayer' } & PrismLayerOptions)
+);
 
 /**
  * L7Plot 内置的 layers 的 class
@@ -76,7 +86,7 @@ export const LAYERS_MAP = {
   [LayerType.GridLayer]: GridLayer,
   [LayerType.HexbinLayer]: HexbinLayer,
   [LayerType.PathLayer]: PathLayer,
-  [LayerType.ConnectionLayer]: FlowLayer,
+  [LayerType.ArcLayer]: ArcLayer,
   [LayerType.AreaLayer]: AreaLayer,
   [LayerType.PrismLayer]: PrismLayer,
 };

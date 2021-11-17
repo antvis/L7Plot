@@ -1,16 +1,16 @@
 import React, { useRef, useEffect } from 'react';
-import { Connection } from '@antv/l7plot';
+import { Flow } from '@antv/l7plot';
 
-export default function Flow() {
-  const map = useRef<Connection>();
+export default function Airline() {
+  const map = useRef<Flow>();
   useEffect(() => {
-    fetch('https://gw.alipayobjects.com/os/antfincdn/SIybYh6xr1/arc.json')
+    fetch('https://gw.alipayobjects.com/os/antfincdn/AUom1g4loR/openflight_airline_1.json')
       .then((response) => response.json())
       .then((data) => {
-        const connectionMap = new Connection('container', {
-          theme: 'dark',
+        const plot = new Flow('container', {
           map: {
             type: 'mapbox',
+            style: 'dark',
             center: [116.3956, 39.9392],
             pitch: 45,
             zoom: 10,
@@ -19,26 +19,23 @@ export default function Flow() {
             data: data,
             parser: {
               type: 'json',
-              x: 'x',
-              y: 'y',
-              x1: 'x1',
-              y1: 'y1',
+              x: 'fromLng',
+              y: 'fromLat',
+              x1: 'toLng',
+              y1: 'toLat',
             },
           },
-          shape: 'arc3d',
-          size: 1.5,
-          color: '#1CD5FF',
+          size: 2,
+          color: '#ff6b34',
           style: {
             opacity: 0.8,
-            sourceColor: '#8ce1f5',
-            targetColor: '#1CD5FF',
           },
-          autoFit: true,
           animate: {
             interval: 2,
             trailLength: 1,
             duration: 2,
           },
+          autoFit: true,
           zoom: {
             position: 'bottomright',
           },
@@ -50,7 +47,7 @@ export default function Flow() {
           },
         });
 
-        map.current = connectionMap;
+        map.current = plot;
       });
 
     return () => map.current?.destroy();

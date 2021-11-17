@@ -55,7 +55,7 @@ export class LayerGroup extends EventEmitter {
   /**
    * 增加图层
    */
-  public addlayer(layer: IPLotLayer) {
+  public addLayer(layer: IPLotLayer) {
     // TODO: duplicate layer
     this.layers.push(layer);
     if (this.scene) {
@@ -67,7 +67,7 @@ export class LayerGroup extends EventEmitter {
   /**
    * 移除 layer 图层
    */
-  public removelayer(layer: IPLotLayer): boolean {
+  public removeLayer(layer: IPLotLayer): boolean {
     const layerIndex = this.layers.findIndex((itemLayer) => itemLayer === layer);
     if (layerIndex === -1) return false;
     this.layers.splice(layerIndex, 1);

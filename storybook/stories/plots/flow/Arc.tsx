@@ -1,39 +1,36 @@
 import React, { useRef, useEffect } from 'react';
-import { Connection } from '@antv/l7plot';
+import { Flow } from '@antv/l7plot';
 
-export default function WindField() {
-  const map = useRef<Connection>();
+export default function Arc() {
+  const map = useRef<Flow>();
   useEffect(() => {
-    fetch('https://gw.alipayobjects.com/os/bmw-prod/7455fead-1dc0-458d-b91a-fb4cf99e701e.txt')
-      .then((response) => response.text())
+    fetch('https://gw.alipayobjects.com/os/antfincdn/%26%26hmITfpCp/home_comp_line.json')
+      .then((response) => response.json())
       .then((data) => {
-        const connectionMap = new Connection('container', {
+        const plot = new Flow('container', {
           theme: 'dark',
           map: {
             type: 'mapbox',
-            center: [60, 40.7128],
-            zoom: 2,
+            center: [116.3956, 39.9392],
+            pitch: 45,
+            zoom: 10,
           },
           source: {
             data: data,
             parser: {
-              type: 'csv',
-              x: 'lng1',
-              y: 'lat1',
-              x1: 'lng2',
-              y1: 'lat2',
+              type: 'json',
+              x: 'fromLat',
+              y: 'fromLng',
+              x1: 'toLat',
+              y1: 'toLng',
             },
           },
-          shape: 'arc',
-          size: 0.5,
-          color: '#6495ED',
+          autoFit: true,
+          shape: 'arc3d',
+          size: 1.5,
+          color: '#1CD5FF',
           style: {
             opacity: 0.8,
-          },
-          animate: {
-            duration: 4,
-            interval: 0.2,
-            trailLength: 0.6,
           },
           zoom: {
             position: 'bottomright',
@@ -41,9 +38,12 @@ export default function WindField() {
           scale: {
             position: 'bottomright',
           },
+          layerMenu: {
+            position: 'topright',
+          },
         });
 
-        map.current = connectionMap;
+        map.current = plot;
       });
 
     return () => map.current?.destroy();

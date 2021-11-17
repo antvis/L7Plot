@@ -70,28 +70,28 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
 
   constructor(options: AreaLayerOptions) {
     super(options);
-    const { name, source, visible } = this.options;
+    const { name, source, visible, zIndex = 0 } = this.options;
     const config = this.pickLayerConfig(this.options);
     const defaultState = getDefaultState(this.options.state);
 
     this.name = name ? name : uniqueId(this.type);
     this.layer = new PolygonLayer({ ...config, name: this.name });
-    this.strokeLayer = new LineLayer({ name: 'strokeLayer', visible });
+    this.strokeLayer = new LineLayer({ name: 'strokeLayer', visible, zIndex });
 
     this.highlightLayer = new LineLayer({
       name: 'highlightLayer',
       visible: visible && Boolean(defaultState.active.stroke),
-      zIndex: 2,
+      zIndex: zIndex + 1,
     });
     this.selectFillLayer = new PolygonLayer({
       name: 'selectFillLayer',
       visible: visible && Boolean(defaultState.select.fill),
-      zIndex: 2,
+      zIndex: zIndex + 1,
     });
     this.selectStrokeLayer = new LineLayer({
       name: 'selectStrokeLayer',
       visible: visible && Boolean(defaultState.select.stroke),
-      zIndex: 2,
+      zIndex: zIndex + 1,
     });
 
     this.mappingLayer(this.options);

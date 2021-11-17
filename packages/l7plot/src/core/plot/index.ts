@@ -65,22 +65,6 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
   }
 
   /**
-   * 初始化组件
-   */
-  protected initComponents() {
-    this.initControls();
-    this.initTooltip();
-  }
-
-  /**
-   * 更新化组件
-   */
-  protected updateComponents() {
-    this.updateControls();
-    this.initTooltip();
-  }
-
-  /**
    * 获取默认配置
    */
   protected getDefaultOptions(): Partial<PlotOptions> {

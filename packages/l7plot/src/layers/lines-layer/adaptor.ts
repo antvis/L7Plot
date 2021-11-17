@@ -3,7 +3,7 @@ import { ILayer } from '../../types';
 import { LinesLayerOptions } from './types';
 
 export function mappingLayer(layer: ILayer, options: LinesLayerOptions): void {
-  const { shape, color, size, style, state, animate } = options;
+  const { shape, color, size, style, state, animate, texture } = options;
   // mapping shape
   shape && MappingLayer.shape(layer, shape);
 
@@ -21,4 +21,7 @@ export function mappingLayer(layer: ILayer, options: LinesLayerOptions): void {
 
   // mapping animate
   animate && MappingLayer.animate(layer, animate);
+
+  // mapping texture
+  texture && MappingLayer.texture(layer, texture);
 }

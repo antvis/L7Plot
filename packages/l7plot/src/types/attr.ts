@@ -55,6 +55,9 @@ export type ShapeAttr<T> = T | Callback<T> | ShapeStyleAttribute<T>;
 /** 图形动画 */
 export type AnimateAttr = boolean | Partial<IAnimateOption>;
 
+/** 纹理贴图 */
+export type TextureAttr = string;
+
 /** 聚合方法 */
 export type AggregationMethod = 'count' | 'max' | 'min' | 'sum' | 'mean';
 
