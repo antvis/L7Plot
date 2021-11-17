@@ -12,7 +12,7 @@ export default function GroundFlow() {
             type: 'mapbox',
             style: 'dark',
             center: [116.3956, 39.9392],
-            pitch: 45,
+            pitch: 0,
             zoom: 10,
           },
           source: {

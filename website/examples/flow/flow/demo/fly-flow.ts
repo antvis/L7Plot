@@ -44,7 +44,7 @@ fetch('https://gw.alipayobjects.com/os/antfincdn/SIybYh6xr1/arc.json')
       },
       label: {
         visible: true,
-        field: 'dis',
+        field: 'count',
         style: {
           fill: '#000',
           opacity: 0.8,

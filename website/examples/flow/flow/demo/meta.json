@@ -5,12 +5,20 @@
   },
   "demos": [
     {
-      "filename": "flow.ts",
+      "filename": "ground-flow.ts",
       "title": {
         "zh": "贴地流向图",
         "en": "Ground flow map"
       },
-      "screenshot": ""
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/%26fdYw4HPc2/dcc23314-d910-4887-998a-ed5470bbb7d0.png"
+    },
+    {
+      "filename": "fly-flow.ts",
+      "title": {
+        "zh": "飞线流向图",
+        "en": "Fly flow map"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/CHihJw0kuI/c4144d36-fd67-4138-950a-28ffe2f3c2ef.png"
     }
   ]
 }

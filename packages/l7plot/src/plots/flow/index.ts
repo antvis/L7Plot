@@ -91,7 +91,7 @@ export class Flow extends Plot<FlowOptions> {
    */
   protected createRadiationLayer(source: Source): DotLayer {
     const data = this.parserPointData(source);
-    const { color, size } = this.options.radiation || {};
+    const { color, size } = this.options.radiation || { size: 20 };
     const radiationLayer = new DotLayer({
       name: 'radiationLayer',
       source: {
