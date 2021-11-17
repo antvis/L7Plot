@@ -10,6 +10,7 @@ import {
   AnimateAttr,
   StateAttribute,
   TextureAttr,
+  FilterAttr,
 } from '../../types';
 
 /**
@@ -177,5 +178,15 @@ export class MappingLayer {
      * layer.scale({name: {type: 'cat'}, value: {type: 'linear'}});
      */
     layer.scale(field, cfg);
+  }
+
+  static filter(layer: ILayer, filter: FilterAttr) {
+    /**
+     * scale 的几种情况
+     * layer.filter('name', ({ name }) => name === 'name');
+     */
+    const field = filter.field ? filter.field : '';
+    const mappingFields = isArray(field) ? field : field.split('*');
+    layer.filter(mappingFields.join('*'), getMappingFunction(mappingFields, filter.value));
   }
 }

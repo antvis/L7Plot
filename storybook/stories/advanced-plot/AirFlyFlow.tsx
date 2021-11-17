@@ -65,6 +65,7 @@ function AirFlyFlow() {
                 coordinates: 'coord',
               },
             },
+            shape: 'arc3d',
             color: '#ff6b34',
             size: 1,
             style: {
@@ -84,6 +85,7 @@ function AirFlyFlow() {
                 coordinates: 'coord',
               },
             },
+            shape: 'arc3d',
             color: '#ff6b34',
             size: 20,
             texture: 'plane',

@@ -70,28 +70,34 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
 
   constructor(options: AreaLayerOptions) {
     super(options);
-    const { name, source, visible, zIndex = 0 } = this.options;
+    const { name, source, visible, minZoom, maxZoom, zIndex = 0 } = this.options;
     const config = this.pickLayerConfig(this.options);
     const defaultState = getDefaultState(this.options.state);
 
     this.name = name ? name : uniqueId(this.type);
     this.layer = new PolygonLayer({ ...config, name: this.name });
-    this.strokeLayer = new LineLayer({ name: 'strokeLayer', visible, zIndex });
+    this.strokeLayer = new LineLayer({ name: 'strokeLayer', visible, zIndex, minZoom, maxZoom });
 
     this.highlightLayer = new LineLayer({
       name: 'highlightLayer',
       visible: visible && Boolean(defaultState.active.stroke),
       zIndex: zIndex + 1,
+      minZoom,
+      maxZoom,
     });
     this.selectFillLayer = new PolygonLayer({
       name: 'selectFillLayer',
       visible: visible && Boolean(defaultState.select.fill),
       zIndex: zIndex + 1,
+      minZoom,
+      maxZoom,
     });
     this.selectStrokeLayer = new LineLayer({
       name: 'selectStrokeLayer',
       visible: visible && Boolean(defaultState.select.stroke),
       zIndex: zIndex + 1,
+      minZoom,
+      maxZoom,
     });
 
     this.mappingLayer(this.options);
@@ -230,12 +236,8 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   }
 
   public update(options: Partial<AreaLayerOptions>) {
-    this.updateOption(options);
+    super.update(options);
     this.mappingLayer(this.options);
-
-    if (!isUndefined(options.visible) && !isEqual(this.lastOptions.visible, this.options.visible)) {
-      options.visible ? this.show() : this.hide();
-    }
 
     if (this.options.visible) {
       if (!isUndefined(options.state) && !isEqual(this.lastOptions.state, this.options.state)) {
@@ -270,7 +272,32 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
     }
   }
 
+  public setIndex(zIndex: number) {
+    this.layer.setIndex(zIndex);
+    this.strokeLayer.setIndex(zIndex);
+    this.highlightLayer.setIndex(zIndex + 1);
+    this.selectFillLayer.setIndex(zIndex + 1);
+    this.selectStrokeLayer.setIndex(zIndex + 1);
+  }
+
+  public setMinZoom(minZoom: number) {
+    this.layer.setMinZoom(minZoom);
+    this.strokeLayer.setMinZoom(minZoom);
+    this.highlightLayer.setMinZoom(minZoom);
+    this.selectFillLayer.setMinZoom(minZoom);
+    this.selectStrokeLayer.setMinZoom(minZoom);
+  }
+
+  public setMaxZoom(maxZoom: number) {
+    this.layer.setMaxZoom(maxZoom);
+    this.strokeLayer.setMaxZoom(maxZoom);
+    this.highlightLayer.setMaxZoom(maxZoom);
+    this.selectFillLayer.setMaxZoom(maxZoom);
+    this.selectStrokeLayer.setMaxZoom(maxZoom);
+  }
+
   public show() {
+    if (!this.layer.inited) return;
     this.layer.show();
     this.strokeLayer.show();
     this.selectFillLayer.show();
@@ -278,6 +305,7 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   }
 
   public hide() {
+    if (!this.layer.inited) return;
     this.layer.hide();
     this.strokeLayer.hide();
     this.selectFillLayer.hide();

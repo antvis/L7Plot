@@ -5,6 +5,11 @@ import { AnimateAttr, ColorAttr, StateAttribute, ShapeAttr, SizeAttr, TextureAtt
 import { SourceOptions, Source } from './map';
 
 /**
+ * 图层混合配置
+ */
+export type LayerBlend = keyof typeof BlendType;
+
+/**
  * 图表图层的基础配置
  */
 export interface PlotLayerOptions {
@@ -15,7 +20,7 @@ export interface PlotLayerOptions {
   maxZoom?: number;
   pickingBuffer?: number;
   autoFit?: boolean;
-  blend?: keyof typeof BlendType;
+  blend?: LayerBlend;
 }
 
 /**

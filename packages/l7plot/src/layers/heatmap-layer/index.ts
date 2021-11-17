@@ -1,4 +1,4 @@
-import { uniqueId, isUndefined, isEqual } from '@antv/util';
+import { uniqueId } from '@antv/util';
 import { HeatmapLayer as Heatmap } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { mappingLayer } from './adaptor';
@@ -86,11 +86,7 @@ export class HeatmapLayer extends PlotLayer<HeatmapLayerOptions> {
   }
 
   public update(options: Partial<HeatmapLayerOptions>) {
-    this.updateOption(options);
+    super.update(options);
     this.mappingLayer(this.layer, this.options);
-
-    if (!isUndefined(options.visible) && !isEqual(this.lastOptions.visible, this.options.visible)) {
-      options.visible ? this.show() : this.hide();
-    }
   }
 }

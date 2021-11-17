@@ -1,4 +1,4 @@
-import { uniqueId, isUndefined, isEqual } from '@antv/util';
+import { uniqueId } from '@antv/util';
 import { PointLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { TextLayerConfig } from '../../types/layer';
@@ -60,11 +60,8 @@ export class TextLayer extends PlotLayer<TextLayerOptions> {
   }
 
   public update(options: Partial<TextLayerConfig>) {
-    this.updateOption(options);
-    this.mappingLayer(this.layer, this.options);
+    super.update(options);
 
-    if (!isUndefined(options.visible) && !isEqual(this.lastOptions.visible, this.options.visible)) {
-      options.visible ? this.show() : this.hide();
-    }
+    this.mappingLayer(this.layer, this.options);
   }
 }
