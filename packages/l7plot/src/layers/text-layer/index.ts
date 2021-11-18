@@ -13,12 +13,17 @@ const DEFAULT_OPTIONS = {
     fontSize: 12,
   },
 };
+const LAYER_OPTIONS_KEYS = [];
 
 export class TextLayer extends PlotLayer<TextLayerOptions> {
   /**
    * 默认配置项
    */
   static DefaultOptions = DEFAULT_OPTIONS;
+  /**
+   * 图层配置项 Keys
+   */
+  static LayerOptionsKeys = PlotLayer.LayerConfigkeys.concat(LAYER_OPTIONS_KEYS);
   /**
    * 图层名称
    */

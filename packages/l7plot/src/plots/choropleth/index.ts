@@ -205,7 +205,10 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     const layerGroup = new LayerGroup([this.fillAreaLayer]);
 
     if (this.options.chinaBorder) {
-      const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(this.chinaBoundaryData);
+      const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(
+        this.chinaBoundaryData,
+        this.options
+      );
       this.chinaBoundaryLayer = chinaBoundaryLayer;
       this.chinaDisputeBoundaryLayer = chinaDisputeBoundaryLayer;
       layerGroup.addLayer(this.chinaBoundaryLayer);
@@ -229,6 +232,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
         Object.assign({}, properties, { centroid: properties['centroid'] || properties['center'] })
       )
       .filter(({ centroid }) => centroid);
+    const { visible, minZoom, maxZoom, zIndex = 0 } = this.options;
     const textLayer = new TextLayer({
       name: 'labelLayer',
       source: {
@@ -236,6 +240,10 @@ export class Choropleth extends Plot<ChoroplethOptions> {
         parser: { type: 'json', coordinates: 'centroid' },
         transforms: source.transforms,
       },
+      visible,
+      minZoom,
+      maxZoom,
+      zIndex: zIndex + 0.1,
       ...label,
     });
 
@@ -258,7 +266,10 @@ export class Choropleth extends Plot<ChoroplethOptions> {
 
     if (options.chinaBorder) {
       if (!this.chinaBoundaryLayer) {
-        const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(this.chinaBoundaryData);
+        const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(
+          this.chinaBoundaryData,
+          this.options
+        );
         this.chinaBoundaryLayer = chinaBoundaryLayer;
         this.chinaDisputeBoundaryLayer = chinaDisputeBoundaryLayer;
         this.layerGroup.addLayer(this.chinaBoundaryLayer);

@@ -56,7 +56,7 @@ class ChinaProvince extends Component {
           fontSize: 10,
           stroke: '#fff',
           strokeWidth: 2,
-          textAllowOverlap: true,
+          textAllowOverlap: false,
           padding: [5, 5],
         },
       },

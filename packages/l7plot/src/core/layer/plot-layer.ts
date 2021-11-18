@@ -15,6 +15,10 @@ export abstract class PlotLayer<O extends PlotLayerOptions> extends EventEmitter
    */
   static LayerType = LayerType;
   /**
+   * 图层属性配置项 Keys
+   */
+  static LayerConfigkeys = LayerConfigkeys;
+  /**
    * layer 的 schema 配置
    */
   public options: O;

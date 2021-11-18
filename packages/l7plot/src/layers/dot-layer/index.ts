@@ -21,7 +21,7 @@ const DEFAULT_OPTIONS = {
   size: 12,
   color: '#5FD3A6',
 };
-const LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state', 'animate'];
+const LAYER_OPTIONS_KEYS = ['shape', 'color', 'size', 'style', 'state', 'animate'];
 
 export class DotLayer<O extends DotLayerOptions = DotLayerOptions> extends PlotLayer<O> {
   /**
@@ -31,7 +31,7 @@ export class DotLayer<O extends DotLayerOptions = DotLayerOptions> extends PlotL
   /**
    * 图层配置项 Keys
    */
-  static LayerOptionsKeys = LAYER_OPTIONS_KEYS;
+  static LayerOptionsKeys = PlotLayer.LayerConfigkeys.concat(LAYER_OPTIONS_KEYS);
   /**
    * 图层名称
    */

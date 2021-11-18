@@ -16,7 +16,7 @@ const DEFAULT_OPTIONS = {
   },
   enabledMultiSelect: false,
 };
-const LAYER_OPTIONS_KEYS = ['autoFit', 'color', 'style', 'state', 'enabledMultiSelect'];
+const LAYER_OPTIONS_KEYS = ['color', 'style', 'state', 'enabledMultiSelect'];
 
 export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   /**
@@ -26,7 +26,7 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   /**
    * 图层配置项 Keys
    */
-  static LayerOptionsKeys = LAYER_OPTIONS_KEYS;
+  static LayerOptionsKeys = PlotLayer.LayerConfigkeys.concat(LAYER_OPTIONS_KEYS);
   /**
    * 图层名称
    */
@@ -81,21 +81,21 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
     this.highlightLayer = new LineLayer({
       name: 'highlightLayer',
       visible: visible && Boolean(defaultState.active.stroke),
-      zIndex: zIndex + 1,
+      zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
     });
     this.selectFillLayer = new PolygonLayer({
       name: 'selectFillLayer',
       visible: visible && Boolean(defaultState.select.fill),
-      zIndex: zIndex + 1,
+      zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
     });
     this.selectStrokeLayer = new LineLayer({
       name: 'selectStrokeLayer',
       visible: visible && Boolean(defaultState.select.stroke),
-      zIndex: zIndex + 1,
+      zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
     });
@@ -275,9 +275,9 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   public setIndex(zIndex: number) {
     this.layer.setIndex(zIndex);
     this.strokeLayer.setIndex(zIndex);
-    this.highlightLayer.setIndex(zIndex + 1);
-    this.selectFillLayer.setIndex(zIndex + 1);
-    this.selectStrokeLayer.setIndex(zIndex + 1);
+    this.highlightLayer.setIndex(zIndex + 0.1);
+    this.selectFillLayer.setIndex(zIndex + 0.1);
+    this.selectStrokeLayer.setIndex(zIndex + 0.1);
   }
 
   public setMinZoom(minZoom: number) {

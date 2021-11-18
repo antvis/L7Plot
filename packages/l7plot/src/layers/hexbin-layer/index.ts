@@ -30,7 +30,7 @@ const DEFAULT_OPTIONS: HexbinLayerOptions = {
     opacity: 1.0,
   },
 };
-const LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state'];
+const LAYER_OPTIONS_KEYS = ['shape', 'color', 'size', 'style', 'state'];
 
 export class HexbinLayer extends PlotLayer<HexbinLayerOptions> {
   /**
@@ -40,7 +40,7 @@ export class HexbinLayer extends PlotLayer<HexbinLayerOptions> {
   /**
    * 图层配置项 Keys
    */
-  static LayerOptionsKeys = LAYER_OPTIONS_KEYS;
+  static LayerOptionsKeys = PlotLayer.LayerConfigkeys.concat(LAYER_OPTIONS_KEYS);
   /**
    * 图层名称
    */

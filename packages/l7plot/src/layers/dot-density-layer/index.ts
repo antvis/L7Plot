@@ -4,13 +4,13 @@ import { DotDensityLayerOptions } from './types';
 
 export type { DotDensityLayerOptions };
 
-const LAYER_OPTIONS_KEYS = ['autoFit', 'color', 'size', 'style', 'state', 'animate'];
+const LAYER_OPTIONS_KEYS = ['color', 'size', 'style', 'state', 'animate'];
 
 export class DotDensityLayer extends DotLayer<DotDensityLayerOptions> {
   /**
    * 图层配置项 Keys
    */
-  static LayerOptionsKeys = LAYER_OPTIONS_KEYS;
+  static LayerOptionsKeys = DotLayer.LayerConfigkeys.concat(LAYER_OPTIONS_KEYS);
   /**
    * 图层类型
    */

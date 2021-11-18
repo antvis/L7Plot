@@ -1,7 +1,7 @@
 import { Map } from '../map';
 import { deepAssign } from '../../utils';
 import { TextLayer } from '../../layers/text-layer';
-import { PlotType, PlotOptions, LabelOptions, Source, SourceOptions, Scene } from '../../types';
+import { PlotType, PlotOptions, LabelOptions, Source, SourceOptions, Scene, PlotLayerOptions } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { MappingSource } from '../../adaptor/source';
 import { isEqual } from '@antv/util';
@@ -94,8 +94,17 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
   /**
    * 创建数据标签图层
    */
-  protected createLabelLayer(source: Source, label: LabelOptions): TextLayer {
-    const textLayer = new TextLayer({ name: 'labelLayer', zIndex: 999, source, ...label });
+  protected createLabelLayer(source: Source, label: LabelOptions, plotLayerConfig?: PlotLayerOptions): TextLayer {
+    const { visible, minZoom, maxZoom, zIndex = 0 } = plotLayerConfig || {};
+    const textLayer = new TextLayer({
+      name: 'labelLayer',
+      visible,
+      minZoom,
+      maxZoom,
+      zIndex: zIndex + 0.1,
+      source,
+      ...label,
+    });
     return textLayer;
   }
 

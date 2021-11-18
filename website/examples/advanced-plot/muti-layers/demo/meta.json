@@ -5,12 +5,28 @@
   },
   "demos": [
     {
-      "filename": "bank.ts",
+      "filename": "fly-flow.ts",
       "title": {
-        "zh": "TODO",
-        "en": "TODO"
+        "zh": "飞线流向图",
+        "en": "Fly flow map"
       },
-      "screenshot": ""
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/FfjXy0yOng/a101f124-2b16-4e5e-98c3-f2b892ebef15.png"
+    },
+    {
+      "filename": "air-fly.ts",
+      "title": {
+        "zh": "航向图",
+        "en": "Air fly map"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/5%266ER7Qzw%26/6510f8b9-6384-4b43-8fae-b473b2f18b15.png"
+    },
+    {
+      "filename": "wind-field.ts",
+      "title": {
+        "zh": "风场图",
+        "en": "Wind field map"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/wuc%26qDZ5Ov/4b425019-66be-4ccc-84b9-c314ed6b3313.png"
     }
   ]
 }

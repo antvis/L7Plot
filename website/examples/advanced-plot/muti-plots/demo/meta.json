@@ -5,12 +5,20 @@
   },
   "demos": [
     {
-      "filename": "bank.ts",
+      "filename": "world-bubble.ts",
       "title": {
-        "zh": "TODO",
-        "en": "TODO"
+        "zh": "世界气泡图",
+        "en": "World bubble map"
       },
-      "screenshot": ""
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/EpjyRYMAuP/d9faa255-08f3-4d3c-b018-338e32055186.png"
+    },
+    {
+      "filename": "china-bubble.ts",
+      "title": {
+        "zh": "中国气泡图",
+        "en": "China bubble map"
+      },
+      "screenshot": "https://gw.alipayobjects.com/zos/antfincdn/JFbk%26oZuX6/712ac297-1c68-44ea-8f6c-274cb2484b48.png"
     }
   ]
 }

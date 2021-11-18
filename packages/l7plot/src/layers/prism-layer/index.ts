@@ -9,7 +9,7 @@ import { getColorLegendItems } from '../dot-layer/helper';
 export type { PrismLayerOptions };
 
 const DEFAULT_OPTIONS = {};
-const LAYER_OPTIONS_KEYS = ['autoFit', 'color', 'size', 'style', 'state'];
+const LAYER_OPTIONS_KEYS = ['color', 'size', 'style', 'state'];
 
 export class PrismLayer extends PlotLayer<PrismLayerOptions> {
   /**
@@ -19,7 +19,7 @@ export class PrismLayer extends PlotLayer<PrismLayerOptions> {
   /**
    * 图层配置项 Keys
    */
-  static LayerOptionsKeys = LAYER_OPTIONS_KEYS;
+  static LayerOptionsKeys = PlotLayer.LayerConfigkeys.concat(LAYER_OPTIONS_KEYS);
   /**
    * 图层名称
    */
