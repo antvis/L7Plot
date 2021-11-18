@@ -26,97 +26,15 @@ const gridMap = new GridMap(container, options);
 
 蜂窝地图的所有配置项，继承自 [Plot options](/zh/docs/api/plot-api#options)。
 
-### `options.source.`aggregation
+`markdown:docs/common/layers/grid-layer/source.zh.md`
 
-`IGridAggregation` required
+`markdown:docs/common/layers/grid-layer/shape.zh.md`
 
-生成方格网格布局。
+`markdown:docs/common/layers/dot-layer/color.zh.md`
 
-```js
-{
-  source: {
-    data: [{ lng: 104.101, lat: 30.649, t: 24.6, n: 'chengdu' }],
-    parser: { type: 'json', x: 'lng', y: 'lat' },
-    aggregation: { field: 't', radius: 15000, type: 'sum' }
-  }
-}
-```
+`markdown:docs/common/layers/grid-layer/size.zh.md`
 
-#### `aggregation.`field
-
-`string` required
-
-聚合字段。
-
-#### `aggregation.`radius
-
-`number` optional default: `15000`
-
-网格半径。
-
-#### `aggregation.`type
-
-`'count'|'max'|'min'|'sum'|'mean'` optional default: `'sum'`
-
-聚合类型。
-
-### `options.`shape
-
-`string` optional default: `'square'`
-
-元素形状，内置以下形状：
-
-- 2D
-  - circle: 圆形
-  - triangle: 三角形
-  - square: 正方形
-- 3D
-  - cylinder: 圆柱
-  - triangleColumn: 三角柱
-  - squareColumn: 方柱
-
-```js
-{
-  shape: 'square';
-}
-```
-
-`markdown:docs/common/attribute/color.zh.md`
-
-### `options.`size
-
-`number|object|Function` optional
-
-元素大小。
-
-**shape 为 2D 时，size 无需设置；shape 为 3D 时，size 表示高度。**
-
-```js
-{
-  size: {
-    field: 'value',
-    value: ({ value }) => value * 2
-  }
-}
-```
-
-#### `size.`field
-
-`string` required
-
-网格大小映射字段。
-
-#### `size.`value
-
-`number|number[]|Function` optional
-
-网格大小值映射值。
-
-#### `size.`type
-
-`markdown:docs/common/attribute/scale.zh.md`
-
-`markdown:docs/common/attribute/grid-style.zh.md`
+`markdown:docs/common/layers/grid-layer/style.zh.md`
 
 `markdown:docs/common/attribute/components.zh.md`
 
@@ -126,13 +44,13 @@ const gridMap = new GridMap(container, options);
 
 ### gridLayer
 
-`PlotLayer`
+`GridLayer`
 
 网格图层实例。
 
 ### labelLayer
 
-`undefined|PlotLayer`
+`undefined|GridLayer`
 
 数据标签图层实例。
 

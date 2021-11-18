@@ -19,10 +19,12 @@
 ```js
 {
   source: {
-    data: [{ lng: 104.101, lat: 30.649, s: 12, t: 20, n: 'chengdu' }],
-    parser: { type: 'json', x: 'lng', y: 'lat' }
+    data: [{ startX: 58.00, startY: 32.84, endX: 85.7, endY: 25.161, c: 'red', t: 20, n: 'chengdu' }],
+    parser: { type: 'json', x: 'startX', y: 'startY', x: 'endX', y: 'endY', }
   },
-  size: { fied: 's' }
+  size: {
+    fied: 's';
+  }
 }
 ```
 

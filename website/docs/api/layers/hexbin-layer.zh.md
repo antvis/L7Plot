@@ -1,15 +1,15 @@
 ---
-title: 网格聚合图层 - GridLayer
-order: 4
+title: 蜂窝聚合图层 - HexbinLayer
+order: 5
 ---
 
-`GridLayer` 继承 [PlotLayer](/zh/docs/api/layers/plot-layer)。
+`HexbinLayer` 继承 [PlotLayer](/zh/docs/api/layers/plot-layer)。
 
 ## 一、配置
 
 `markdown:docs/common/layers/grid-layer/source.zh.md`
 
-`markdown:docs/common/layers/grid-layer/shape.zh.md`
+`markdown:docs/common/layers/hexbin-layer/shape.zh.md`
 
 `markdown:docs/common/layers/dot-layer/color.zh.md`
 

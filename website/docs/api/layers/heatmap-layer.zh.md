@@ -3,7 +3,7 @@ title: 点热力图层 - HeatmapLayer
 order: 3
 ---
 
-`HeatmapLayer` 继承 [PlotLayer](/zh/docs/api/layers/dot-layer)。
+`HeatmapLayer` 继承 [PlotLayer](/zh/docs/api/layers/plot-layer)。
 
 ## 一、配置
 

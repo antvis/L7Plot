@@ -26,92 +26,15 @@ const hexbin = new Hexbin(container, options);
 
 蜂窝地图的所有配置项，继承自 [Plot options](/zh/docs/api/plot-api#options)。
 
-### `options.source.`aggregation
+`markdown:docs/common/layers/grid-layer/source.zh.md`
 
-`IGridAggregation` required
+`markdown:docs/common/layers/hexbin-layer/shape.zh.md`
 
-生成六边形网格布局。
+`markdown:docs/common/layers/dot-layer/color.zh.md`
 
-```js
-{
-  source: {
-    data: [{ lng: 104.101, lat: 30.649, t: 24.6, n: 'chengdu' }],
-    parser: { type: 'json', x: 'lng', y: 'lat' },
-    aggregation: { field: 't', radius: 15000, type: 'sum' }
-  }
-}
-```
+`markdown:docs/common/layers/grid-layer/size.zh.md`
 
-#### `aggregation.`field
-
-`string` required
-
-聚合字段。
-
-#### `aggregation.`radius
-
-`number` optional default: `15000`
-
-网格半径。
-
-#### `aggregation.`type
-
-`'count'|'max'|'min'|'sum'|'mean'` optional default: `'sum'`
-
-聚合类型。
-
-### `options.`shape
-
-`string` optional default: `'hexagon'`
-
-元素形状，内置以下形状：
-元素形状，分别支持 2D 与 3D 蜂窝：
-
-- hexagon: 蜂窝
-- hexagonColumn: 蜂窝柱
-
-```js
-{
-  shape: 'hexagon';
-}
-```
-
-`markdown:docs/common/attribute/color.zh.md`
-
-### `options.`size
-
-`number|Function|object` optional default: `12`
-
-元素大小。
-
-**shape 为 2D 时，size 无需设置；shape 为 3D 时，size 表示高度。**
-
-```js
-{
-  size: {
-    field: 'value',
-    value: ({ value }) => value * 2
-  }
-}
-```
-
-#### `size.`field
-
-`string` required
-
-蜂窝大小映射字段。
-
-#### `size.`value
-
-`number|number[]|Function` optional
-
-蜂窝大小值映射值。
-
-#### `size.`scale
-
-`markdown:docs/common/attribute/scale.zh.md`
-
-`markdown:docs/common/attribute/grid-style.zh.md`
+`markdown:docs/common/layers/grid-layer/style.zh.md`
 
 `markdown:docs/common/attribute/components.zh.md`
 
@@ -121,13 +44,13 @@ const hexbin = new Hexbin(container, options);
 
 ### hexbinLayer
 
-`PlotLayer`
+`HexbinLayer`
 
 蜂窝图层实例。
 
 ### labelLayer
 
-`undefined|PlotLayer`
+`undefined|HexbinLayer`
 
 数据标签图层实例。
 

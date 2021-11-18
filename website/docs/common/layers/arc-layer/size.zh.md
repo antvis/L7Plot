@@ -19,16 +19,11 @@
 ```js
 {
   source: {
-    data: [{
-        path: [[58.00, 32.84],[85.7, 25.161],[101.95, 41.77],[114.96, 39.63],[117.421, 28.61]],
-        s: 2,
-        t: 3,
-        n: 'chengdu'
-      }],
-    parser: { type: 'json', coordinates: 'path', }
+    data: [{ startX: 58.00, startY: 32.84, endX: 85.7, endY: 25.161, c: 'red', t: 20, n: 'chengdu' }],
+    parser: { type: 'json', x: 'startX', y: 'startY', x: 'endX', y: 'endY', }
   },
   size: {
-    fied: 's';
+    fied: 't';
   }
 }
 ```
