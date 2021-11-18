@@ -26,9 +26,24 @@ const flowMap = new Flow(container, options);
 
 连接图的所有配置项，继承自 [Plot options](/zh/docs/api/plot-api#options)。
 
+### `options.`source
+
+`SourceOptions` required
+
+数据配置，详见 [Source](/zh/docs/api/source)。
+
+```js
+{
+  source: {
+    data: [{ startX: 58.00, startY: 32.84, endX: 85.7, endY: 25.161, c: 'red', t: 20, n: 'chengdu' }],
+    parser: { type: 'json', x: 'startX', y: 'startY', x: 'endX', y: 'endY', }
+  }
+}
+```
+
 `markdown:docs/common/layers/arc-layer/shape.zh.md`
 
-`markdown:docs/common/layers/arc-layer/color.zh.md`
+`markdown:docs/common/attribute/color.zh.md`
 
 `markdown:docs/common/layers/arc-layer/size.zh.md`
 
@@ -48,7 +63,13 @@ const flowMap = new Flow(container, options);
 
 `ArcLayer`
 
-流向图层实例。
+弧线图层实例。
+
+### labelLayer
+
+`undefined|TextLayer`
+
+数据标签图层实例。
 
 ## 三、方法
 
@@ -61,6 +82,7 @@ const flowMap = new Flow(container, options);
 内置图层名称分别为：
 
 - flowLayer
+- labelLayer
 
 ```js
 pathMap.on('flowLayer:mousemove', (e: MouseEvent) => void);

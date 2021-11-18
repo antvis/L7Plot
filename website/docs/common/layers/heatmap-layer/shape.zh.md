@@ -8,7 +8,5 @@
 - heatmap3D
 
 ```js
-{
-  shape: 'heatmap';
-}
+{ shape: 'heatmap', }
 ```

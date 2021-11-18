@@ -15,7 +15,7 @@
   style: {
     opacity: 0.8,
     stroke: 'white',
-    strokeWidth: 2
+    strokeWidth: 2,
   }
 }
 ```

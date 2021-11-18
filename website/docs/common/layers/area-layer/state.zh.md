@@ -34,9 +34,7 @@ AreaLayerActiveOptions 配置如下：
 
 ```js
 {
-  state: {
-    active: true;
-  }
+  state: { active: true, }
 }
 ```
 
@@ -63,9 +61,7 @@ AreaLayerActiveOptions 配置如下：
 
 ```js
 {
-  state: {
-    select: true;
-  }
+  state: { select: true, }
 }
 ```
 

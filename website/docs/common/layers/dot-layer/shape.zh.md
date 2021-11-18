@@ -22,14 +22,12 @@
   - squareColumn: 方柱
 
 ```js
-{
-  shape: 'circle';
-}
+{ shape: 'circle', }
 ```
 
-除内置图标外，可自定义图标
+除内置图标外，还可**自定义图标**：
 
-注册图标
+1. 注册图标
 
 ```js
 const images = [
@@ -40,7 +38,7 @@ const images = [
 registerImages(images);
 ```
 
-使用注册图标
+2. 使用注册图标
 
 ```js
 {
@@ -48,7 +46,7 @@ registerImages(images);
     data: [{ lng: 104.101, lat: 30.649, s: '01', n: 'chengdu' }],
     parser: { type: 'json', x: 'lng', y: 'lat' }
   },
-  shape: 's'
+  shape: 's',
 }
 ```
 
@@ -64,9 +62,7 @@ registerImages(images);
     data: [{ lng: 104.101, lat: 30.649, s: 'circle', t: 24.6, n: 'chengdu' }],
     parser: { type: 'json', x: 'lng', y: 'lat' }
   },
-  shape: {
-    fied: 's'
-  }
+  shape: { fied: 's', }
 }
 ```
 
@@ -96,7 +92,7 @@ registerImages(images);
   shape: {
     fied: 't',
     value: ['circle', 'triangle'],
-    scale: {type: 'quantile'}
+    scale: { type: 'quantile' }
   }
 }
 ```

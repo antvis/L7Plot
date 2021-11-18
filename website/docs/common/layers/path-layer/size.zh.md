@@ -5,9 +5,7 @@
 元素大小。
 
 ```js
-{
-  size: 12,
-}
+{ size: 12, }
 ```
 
 #### `size.`field
@@ -18,13 +16,7 @@
 
 ```js
 {
-  source: {
-    data: [{ startX: 58.00, startY: 32.84, endX: 85.7, endY: 25.161, c: 'red', t: 20, n: 'chengdu' }],
-    parser: { type: 'json', x: 'startX', y: 'startY', x: 'endX', y: 'endY', }
-  },
-  size: {
-    fied: 's';
-  }
+  size: { fied: 't', }
 }
 ```
 
@@ -54,7 +46,7 @@
   size: {
     fied: 't',
     value: [12, 15],
-    scale: {type: 'quantile'}
+    scale: { type: 'quantile' },
   }
 }
 ```

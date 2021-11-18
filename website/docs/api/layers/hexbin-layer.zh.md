@@ -11,7 +11,7 @@ order: 5
 
 `markdown:docs/common/layers/hexbin-layer/shape.zh.md`
 
-`markdown:docs/common/layers/dot-layer/color.zh.md`
+`markdown:docs/common/attribute/color.zh.md`
 
 `markdown:docs/common/layers/grid-layer/size.zh.md`
 

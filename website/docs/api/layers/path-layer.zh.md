@@ -7,13 +7,9 @@ order: 6
 
 ## 一、配置
 
-### `options.`source
+`markdown:docs/common/layers/path-layer/source.zh.md`
 
-`SourceOptions` required
-
-数据配置，详见 [Source](/zh/docs/api/source)。
-
-`markdown:docs/common/layers/path-layer/color.zh.md`
+`markdown:docs/common/attribute/color.zh.md`
 
 `markdown:docs/common/layers/path-layer/size.zh.md`
 

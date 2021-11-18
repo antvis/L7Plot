@@ -9,7 +9,5 @@
 - greatcircle
 
 ```js
-{
-  shape: 'arc';
-}
+{ shape: 'arc', }
 ```

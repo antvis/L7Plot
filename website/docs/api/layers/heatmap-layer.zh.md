@@ -7,11 +7,7 @@ order: 3
 
 ## 一、配置
 
-### `options.`source
-
-`SourceOptions` required
-
-数据配置，详见 [Source](/zh/docs/api/source)。
+`markdown:docs/common/layers/dot-layer/source.zh.md`
 
 `markdown:docs/common/layers/heatmap-layer/shape.zh.md`
 

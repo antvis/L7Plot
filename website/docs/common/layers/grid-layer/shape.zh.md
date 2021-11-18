@@ -16,7 +16,5 @@
   - squareColumn: 方柱
 
 ```js
-{
-  shape: 'square',
-}
+{ shape: 'square', }
 ```

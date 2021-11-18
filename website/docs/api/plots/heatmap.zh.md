@@ -26,6 +26,8 @@ const heatmap = new Heatmap(container, options);
 
 热力地图的所有配置项，继承自 [Plot options](/zh/docs/api/plot-api#options)。
 
+`markdown:docs/common/layers/dot-layer/source.zh.md`
+
 `markdown:docs/common/layers/heatmap-layer/shape.zh.md`
 
 `markdown:docs/common/layers/heatmap-layer/size.zh.md`

@@ -26,7 +26,9 @@ const path = new Path(container, options);
 
 路径图的所有配置项，继承自 [Plot options](/zh/docs/api/plot-api#options)。
 
-`markdown:docs/common/layers/path-layer/color.zh.md`
+`markdown:docs/common/layers/path-layer/source.zh.md`
+
+`markdown:docs/common/attribute/color.zh.md`
 
 `markdown:docs/common/layers/path-layer/size.zh.md`
 

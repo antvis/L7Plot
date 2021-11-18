@@ -7,15 +7,11 @@ order: 1
 
 ## 一、配置
 
-### `options.`source
-
-`SourceOptions` required
-
-数据配置，详见 [Source](/zh/docs/api/source)。
+`markdown:docs/common/layers/dot-layer/source.zh.md`
 
 `markdown:docs/common/layers/dot-layer/shape.zh.md`
 
-`markdown:docs/common/layers/dot-layer/color.zh.md`
+`markdown:docs/common/attribute/color.zh.md`
 
 `markdown:docs/common/layers/dot-layer/size.zh.md`
 

@@ -7,11 +7,7 @@ order: 2
 
 ## 一、配置
 
-### `options.`source
-
-`SourceOptions` required
-
-数据配置，详见 [Source](/zh/docs/api/source)。
+`markdown:docs/common/layers/dot-layer/source.zh.md`
 
 ### `options.`size
 
@@ -19,7 +15,7 @@ order: 2
 
 圆点大小。
 
-`markdown:docs/common/layers/dot-layer/color.zh.md`
+`markdown:docs/common/attribute/color.zh.md`
 
 `markdown:docs/common/layers/dot-layer/style.zh.md`
 

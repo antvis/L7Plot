@@ -26,9 +26,11 @@ const dotMap = new Dot(container, options);
 
 点地图的所有配置项，继承自 [Plot options](/zh/docs/api/plot-api#options)。
 
+`markdown:docs/common/layers/dot-layer/source.zh.md`
+
 `markdown:docs/common/layers/dot-layer/shape.zh.md`
 
-`markdown:docs/common/layers/dot-layer/color.zh.md`
+`markdown:docs/common/attribute/color.zh.md`
 
 `markdown:docs/common/layers/dot-layer/size.zh.md`
 

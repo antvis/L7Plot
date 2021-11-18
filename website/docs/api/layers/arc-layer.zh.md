@@ -24,7 +24,7 @@ order: 7
 
 `markdown:docs/common/layers/arc-layer/shape.zh.md`
 
-`markdown:docs/common/layers/arc-layer/color.zh.md`
+`markdown:docs/common/attribute/color.zh.md`
 
 `markdown:docs/common/layers/arc-layer/size.zh.md`
 

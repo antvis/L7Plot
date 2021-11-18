@@ -12,9 +12,7 @@
 
 ```js
 {
-  state: {
-    active: true;
-  }
+  state: { active: true, }
 }
 ```
 
@@ -23,9 +21,7 @@
 ```js
 {
   state: {
-    active: {
-      color: 'red';
-    }
+    active: { color: 'red', }
   }
 }
 ```
@@ -38,9 +34,7 @@
 
 ```js
 {
-  state: {
-    select: true;
-  }
+  state: { select: true, }
 }
 ```
 
@@ -49,9 +43,7 @@
 ```js
 {
   state: {
-    select: {
-      color: 'red';
-    }
+    select: { color: 'red', }
   }
 }
 ```

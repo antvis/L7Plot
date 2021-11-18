@@ -31,6 +31,9 @@ export { L7Plot } from './plot';
 // 散点图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { DotLayer, DotLayerOptions } from './layers/dot-layer';
 
+// 点密度图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { DotDensityLayer, DotDensityLayerOptions } from './layers/dot-density-layer';
+
 // 文本图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { TextLayer, TextLayerOptions } from './layers/text-layer';
 
@@ -51,6 +54,9 @@ export { ArcLayer, ArcLayerOptions } from './layers/arc-layer';
 
 // 区域图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { AreaLayer, AreaLayerOptions } from './layers/area-layer';
+
+// 水晶体图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { PrismLayer, PrismLayerOptions } from './layers/prism-layer';
 
 /** 图表 **/
 // 散点图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)

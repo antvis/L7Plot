@@ -8,7 +8,5 @@
 - hexagonColumn: 蜂窝柱
 
 ```js
-{
-  shape: 'hexagon';
-}
+{ shape: 'hexagon', }
 ```
