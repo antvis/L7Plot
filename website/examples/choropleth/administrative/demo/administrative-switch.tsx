@@ -13,7 +13,7 @@ function AdministrativeSwitch() {
   };
 
   useEffect(() => {
-    fetch(`${Choropleth.GeoDataUrl}/administrative-data/area-tree.json`)
+    fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.1/administrative-data/area-tree.json`)
       .then((response) => response.json())
       .then((data) => {
         const china = data.filter(({ adcode }) => adcode === 100000);
@@ -22,7 +22,7 @@ function AdministrativeSwitch() {
   }, []);
 
   useEffect(() => {
-    fetch(`${Choropleth.GeoDataUrl}/administrative-data/area-list.json`)
+    fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.1/administrative-data/area-list.json`)
       .then((response) => response.json())
       .then((list) => {
         administrativeList.current = list;

@@ -1,6 +1,6 @@
 import { Choropleth } from '@antv/l7plot';
 
-fetch(`${Choropleth.GeoDataUrl}/administrative-data/area-list.json`)
+fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.1/administrative-data/area-list.json`)
   .then((response) => response.json())
   .then((list) => {
     const data = list
