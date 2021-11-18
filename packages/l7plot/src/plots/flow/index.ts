@@ -116,12 +116,17 @@ export class Flow extends Plot<FlowOptions> {
    */
   protected createLabelLayer(source: Source, label: LabelOptions): TextLayer {
     const data = this.parserPointData(source);
+    const { visible, minZoom, maxZoom, zIndex = 0 } = this.options;
     const labelLayer = new TextLayer({
       name: 'labelLayer',
       source: {
         data,
         parser: { type: 'json', coordinates: 'coordinates' },
       },
+      visible,
+      minZoom,
+      maxZoom,
+      zIndex: zIndex + 0.1,
       ...label,
     });
 

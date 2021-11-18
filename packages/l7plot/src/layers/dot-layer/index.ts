@@ -1,4 +1,4 @@
-import { uniqueId, isUndefined, isEqual } from '@antv/util';
+import { uniqueId } from '@antv/util';
 import { PointLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { mappingLayer } from './adaptor';
@@ -21,7 +21,7 @@ const DEFAULT_OPTIONS = {
   size: 12,
   color: '#5FD3A6',
 };
-const LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state', 'animate'];
+const LAYER_OPTIONS_KEYS = ['shape', 'color', 'size', 'style', 'state', 'animate'];
 
 export class DotLayer<O extends DotLayerOptions = DotLayerOptions> extends PlotLayer<O> {
   /**
@@ -31,7 +31,7 @@ export class DotLayer<O extends DotLayerOptions = DotLayerOptions> extends PlotL
   /**
    * 图层配置项 Keys
    */
-  static LayerOptionsKeys = LAYER_OPTIONS_KEYS;
+  static LayerOptionsKeys = PlotLayer.LayerConfigkeys.concat(LAYER_OPTIONS_KEYS);
   /**
    * 图层名称
    */
@@ -73,12 +73,9 @@ export class DotLayer<O extends DotLayerOptions = DotLayerOptions> extends PlotL
   }
 
   public update(options: Partial<O>) {
-    this.updateOption(options);
-    this.mappingLayer(this.layer, this.options);
+    super.update(options);
 
-    if (!isUndefined(options.visible) && !isEqual(this.lastOptions.visible, this.options.visible)) {
-      options.visible ? this.show() : this.hide();
-    }
+    this.mappingLayer(this.layer, this.options);
   }
 
   public getColorLegendItems() {

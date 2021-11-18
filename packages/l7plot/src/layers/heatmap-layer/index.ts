@@ -1,4 +1,4 @@
-import { uniqueId, isUndefined, isEqual } from '@antv/util';
+import { uniqueId } from '@antv/util';
 import { HeatmapLayer as Heatmap } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { mappingLayer } from './adaptor';
@@ -34,7 +34,7 @@ const DEFAULT_OPTIONS: HeatmapLayerOptions = {
     ],
   },
 };
-const LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state'];
+const LAYER_OPTIONS_KEYS = ['shape', 'color', 'size', 'style', 'state'];
 
 export class HeatmapLayer extends PlotLayer<HeatmapLayerOptions> {
   /**
@@ -44,7 +44,7 @@ export class HeatmapLayer extends PlotLayer<HeatmapLayerOptions> {
   /**
    * 图层配置项 Keys
    */
-  static LayerOptionsKeys = LAYER_OPTIONS_KEYS;
+  static LayerOptionsKeys = PlotLayer.LayerConfigkeys.concat(LAYER_OPTIONS_KEYS);
   /**
    * 图层名称
    */
@@ -86,11 +86,7 @@ export class HeatmapLayer extends PlotLayer<HeatmapLayerOptions> {
   }
 
   public update(options: Partial<HeatmapLayerOptions>) {
-    this.updateOption(options);
+    super.update(options);
     this.mappingLayer(this.layer, this.options);
-
-    if (!isUndefined(options.visible) && !isEqual(this.lastOptions.visible, this.options.visible)) {
-      options.visible ? this.show() : this.hide();
-    }
   }
 }

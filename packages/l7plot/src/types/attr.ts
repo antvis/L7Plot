@@ -58,6 +58,12 @@ export type AnimateAttr = boolean | Partial<IAnimateOption>;
 /** 纹理贴图 */
 export type TextureAttr = string;
 
+/** 数据过滤 */
+export type FilterAttr = {
+  field?: string | string[];
+  value: Callback<boolean>;
+};
+
 /** 聚合方法 */
 export type AggregationMethod = 'count' | 'max' | 'min' | 'sum' | 'mean';
 

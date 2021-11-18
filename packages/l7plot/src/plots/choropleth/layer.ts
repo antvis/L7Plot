@@ -1,13 +1,19 @@
 import { PathLayer } from '../../layers/path-layer';
+import { PlotLayerOptions } from '../../types';
 import { CHINA_BOUNDARY_STYLE } from './constants';
 
-export const createCountryBoundaryLayer = (data: any) => {
+export const createCountryBoundaryLayer = (data: any, plotLayerConfig?: PlotLayerOptions) => {
+  const { visible, minZoom, maxZoom, zIndex = 0 } = plotLayerConfig || {};
   const chinaBoundaryFeatures = data.features.filter(({ properties }) =>
     ['coast', 'hkm', 'national'].includes(properties.type)
   );
   const disputeBoundaryFeatures = data.features.filter(({ properties }) => properties.type === 'dispute');
   const chinaBoundaryLayer = new PathLayer({
     name: 'chinaBoundaryLayer',
+    visible,
+    minZoom,
+    maxZoom,
+    zIndex: zIndex + 0.1,
     source: {
       data: { type: 'FeatureCollection', features: chinaBoundaryFeatures },
       parser: { type: 'geojson' },
@@ -30,6 +36,10 @@ export const createCountryBoundaryLayer = (data: any) => {
   });
   const chinaDisputeBoundaryLayer = new PathLayer({
     name: 'chinaDisputeBoundaryLayer',
+    visible,
+    minZoom,
+    maxZoom,
+    zIndex: zIndex + 0.1,
     source: {
       data: { type: 'FeatureCollection', features: disputeBoundaryFeatures },
       parser: { type: 'geojson' },

@@ -4,13 +4,13 @@ import { PathLayerOptions } from './types';
 
 export type { PathLayerOptions };
 
-const LAYER_OPTIONS_KEYS = ['autoFit', 'color', 'size', 'style', 'state', 'animate'];
+const LAYER_OPTIONS_KEYS = ['color', 'size', 'style', 'state', 'animate'];
 
 export class PathLayer extends LinesLayer<PathLayerOptions> {
   /**
    * 图层配置项 Keys
    */
-  static LayerOptionsKeys = LAYER_OPTIONS_KEYS;
+  static LayerOptionsKeys = LinesLayer.LayerConfigkeys.concat(LAYER_OPTIONS_KEYS);
   /**
    * 图层类型
    */

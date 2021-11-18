@@ -51,7 +51,7 @@ fetch('https://gw.alipayobjects.com/os/antfincdn/SIybYh6xr1/arc.json')
           fontSize: 10,
           stroke: '#fff',
           strokeWidth: 2,
-          textAllowOverlap: true,
+          textAllowOverlap: false,
           padding: [5, 5],
           textOffset: [0, 35],
         },

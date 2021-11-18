@@ -63,6 +63,7 @@ function FlyFlow() {
                 coordinates: 'coord',
               },
             },
+            shape: 'arc3d',
             color: '#ff6b34',
             size: 2,
             style: {

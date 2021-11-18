@@ -48,7 +48,7 @@ export class Dot extends Plot<DotOptions> {
     const layerGroup = new LayerGroup([this.dotLayer]);
 
     if (this.options.label) {
-      this.labelLayer = this.createLabelLayer(source, this.options.label);
+      this.labelLayer = this.createLabelLayer(source, this.options.label, this.options);
       layerGroup.addLayer(this.labelLayer);
     }
 
@@ -66,7 +66,7 @@ export class Dot extends Plot<DotOptions> {
       if (this.labelLayer) {
         this.labelLayer.update({ ...options.label });
       } else {
-        this.labelLayer = this.createLabelLayer(this.source, options.label);
+        this.labelLayer = this.createLabelLayer(this.source, options.label, this.options);
         this.layerGroup.addLayer(this.labelLayer);
       }
     } else {

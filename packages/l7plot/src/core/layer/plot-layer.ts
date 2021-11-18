@@ -1,7 +1,7 @@
-import { pick } from '@antv/util';
+import { isEqual, isUndefined, pick } from '@antv/util';
 import Source from '@antv/l7-source';
 import EventEmitter from '@antv/event-emitter';
-import { LayerType, IPLotLayer, PlotLayerOptions } from '../../types/layer';
+import { LayerType, IPLotLayer, PlotLayerOptions, LayerBlend } from '../../types/layer';
 import { Scene, ILayer, ILayerConfig, SourceOptions } from '../../types';
 import { MappingSource } from '../../adaptor/source';
 import { LayerEventList } from '../map/constants';
@@ -14,6 +14,10 @@ export abstract class PlotLayer<O extends PlotLayerOptions> extends EventEmitter
    * 地图图表类型
    */
   static LayerType = LayerType;
+  /**
+   * 图层属性配置项 Keys
+   */
+  static LayerConfigkeys = LayerConfigkeys;
   /**
    * layer 的 schema 配置
    */
@@ -65,7 +69,13 @@ export abstract class PlotLayer<O extends PlotLayerOptions> extends EventEmitter
     scene.removeLayer(this.layer);
   }
 
-  public abstract update(options: Partial<O>): void;
+  /**
+   * 更新
+   */
+  public update(options: Partial<O>) {
+    this.updateOption(options);
+    this.updateConfig(options);
+  }
 
   /**
    * 更新: 更新配置
@@ -73,6 +83,29 @@ export abstract class PlotLayer<O extends PlotLayerOptions> extends EventEmitter
   public updateOption(options: Partial<O>) {
     this.lastOptions = this.options;
     this.options = deepAssign({}, this.options, options);
+  }
+
+  // 更新: 更新图层属性配置
+  public updateConfig(options: Partial<PlotLayerOptions>) {
+    if (!isUndefined(options.zIndex) && !isEqual(this.lastOptions.zIndex, this.options.zIndex)) {
+      this.setIndex(options.zIndex);
+    }
+
+    if (!isUndefined(options.blend) && !isEqual(this.lastOptions.blend, this.options.blend)) {
+      this.setBlend(options.blend);
+    }
+
+    if (!isUndefined(options.minZoom) && !isEqual(this.lastOptions.minZoom, this.options.minZoom)) {
+      this.setMinZoom(options.minZoom);
+    }
+
+    if (!isUndefined(options.maxZoom) && !isEqual(this.lastOptions.maxZoom, this.options.maxZoom)) {
+      this.setMinZoom(options.maxZoom);
+    }
+
+    if (!isUndefined(options.visible) && !isEqual(this.lastOptions.visible, this.options.visible)) {
+      options.visible ? this.show() : this.hide();
+    }
   }
 
   public render() {
@@ -93,12 +126,28 @@ export abstract class PlotLayer<O extends PlotLayerOptions> extends EventEmitter
     this.setSource(source);
   }
 
+  public setIndex(zIndex: number) {
+    this.layer.setIndex(zIndex);
+  }
+
+  public setBlend(blend: LayerBlend) {
+    this.layer.setBlend(blend);
+  }
+
+  public setMinZoom(minZoom: number) {
+    this.layer.setMinZoom(minZoom);
+  }
+
+  public setMaxZoom(maxZoom: number) {
+    this.layer.setMaxZoom(maxZoom);
+  }
+
   public show() {
-    this.layer.show();
+    this.layer.inited && this.layer.show();
   }
 
   public hide() {
-    this.layer.hide();
+    this.layer.inited && this.layer.hide();
   }
 
   public toggleVisible() {

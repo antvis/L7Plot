@@ -1,4 +1,4 @@
-import { uniqueId, isUndefined, isEqual } from '@antv/util';
+import { uniqueId } from '@antv/util';
 import { LineLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { mappingLayer } from './adaptor';
@@ -9,7 +9,7 @@ import { getColorLegendItems } from '../dot-layer/helper';
 export type { LinesLayerOptions };
 
 const DEFAULT_OPTIONS = {};
-const LAYER_OPTIONS_KEYS = ['autoFit', 'shape', 'color', 'size', 'style', 'state', 'animate'];
+const LAYER_OPTIONS_KEYS = ['shape', 'color', 'size', 'style', 'state', 'animate'];
 
 export class LinesLayer<O extends LinesLayerOptions = LinesLayerOptions> extends PlotLayer<O> {
   /**
@@ -19,7 +19,7 @@ export class LinesLayer<O extends LinesLayerOptions = LinesLayerOptions> extends
   /**
    * 图层配置项 Keys
    */
-  static LayerOptionsKeys = LAYER_OPTIONS_KEYS;
+  static LayerOptionsKeys = PlotLayer.LayerConfigkeys.concat(LAYER_OPTIONS_KEYS);
   /**
    * 图层名称
    */
@@ -61,12 +61,9 @@ export class LinesLayer<O extends LinesLayerOptions = LinesLayerOptions> extends
   }
 
   public update(options: Partial<O>) {
-    this.updateOption(options);
-    this.mappingLayer(this.layer, this.options);
+    super.update(options);
 
-    if (!isUndefined(options.visible) && !isEqual(this.lastOptions.visible, this.options.visible)) {
-      options.visible ? this.show() : this.hide();
-    }
+    this.mappingLayer(this.layer, this.options);
   }
 
   public getColorLegendItems() {
