@@ -9,19 +9,21 @@ order: 1
 
 ### `options.`source
 
-### `options.`shape
+`SourceOptions` required
 
-### `options.`color
+数据配置，详见 [Source](/zh/docs/api/source)。
 
-### `options.`size
+`markdown:docs/common/layers/dot-layer/shape.zh.md`
 
-### `options.`style
+`markdown:docs/common/layers/dot-layer/color.zh.md`
 
-### `options.`style
+`markdown:docs/common/layers/dot-layer/size.zh.md`
 
-### `options.`animate
+`markdown:docs/common/layers/dot-layer/style.zh.md`
 
-### `options.`state
+`markdown:docs/common/attribute/state.zh.md`
+
+`markdown:docs/common/layers/dot-layer/animate.zh.md`
 
 ## 二、属性
 

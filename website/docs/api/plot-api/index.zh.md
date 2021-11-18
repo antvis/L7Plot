@@ -146,64 +146,6 @@ constructor(container: string | HTMLDivElement, options: PlotOptions)
 
 图层完成初始化之后，地图是否自动缩放到图层的数据边界范围。
 
-### `options.`state
-
-`StateAttribute` optional
-
-元素交互反馈效果。
-
-#### `state.`active
-
-`boolean｜ActiveOption` optional default: `false`
-
-标签 mousehover 高亮效果，开启 mousehover 元素高亮效果：
-
-```js
-{
-  state: {
-    active: true;
-  }
-}
-```
-
-开启 mousehover 元素高亮效果并自定义设置高亮颜色：
-
-```js
-{
-  state: {
-    active: {
-      color: 'red';
-    }
-  }
-}
-```
-
-#### `state.`select
-
-`boolean｜ActiveOption` optional default: `false`
-
-元素 mouseclick 选中高亮效果，开启 mouseclick 元素高亮效果：
-
-```js
-{
-  state: {
-    select: true;
-  }
-}
-```
-
-开启 mousehover 元素高亮效果并自定义设置高亮颜色：
-
-```js
-{
-  state: {
-    select: {
-      color: 'red';
-    }
-  }
-}
-```
-
 ### `options.`theme
 
 `string|object` optional default: `'light'`
