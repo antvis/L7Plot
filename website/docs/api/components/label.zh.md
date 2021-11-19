@@ -1,5 +1,5 @@
 ---
-title: 数据标签 - Lable
+title: 数据标签 - Label
 order: 3
 ---
 

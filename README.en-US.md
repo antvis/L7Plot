@@ -27,10 +27,10 @@
 
 ## ✨ Features
 
-- Diagrams declaring profile geography Charting
-- Rich chart types and map components
-- Strong interactive ability, 2 / 3D View
-- Built-in multi-granularity administrative data
+- 📦 Out of the box: configurable geographic charts with built-in multi granularity administrative data
+- 🚀 Rich elements: rich chart types and map components, multi map basemap suppor
+- 💯 Easy to customize: data driven, from number to shape, support multi-layer and multi map surface stacking
+- 🌱 Dynamic interaction: strong chart interaction ability, support 2 / 3D perspective, and provide command dynamic interaction API
 
 ## 📦 Installation
 
