@@ -77,6 +77,7 @@ describe('point', () => {
       color: {
         field: 't',
         value: ['#34B6B7', '#4AC5AF', '#5FD3A6', '#7BE39E', '#A1EDB8', '#CEF8D6'],
+        scale: { type: 'quantile' },
       },
       legend: { position: 'bottomleft' },
     });
