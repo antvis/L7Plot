@@ -51,7 +51,7 @@ export const PLOTS_MAP = {
   [PlotType.DotDensity]: DotDensity,
   [PlotType.Heatmap]: Heatmap,
   [PlotType.Grid]: Grid,
-  [PlotType.Hexagon]: Hexbin,
+  [PlotType.Hexbin]: Hexbin,
   [PlotType.Path]: Path,
   [PlotType.Area]: Area,
   [PlotType.Choropleth]: Choropleth,
