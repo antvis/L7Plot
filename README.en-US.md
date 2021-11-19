@@ -18,7 +18,9 @@
 
 <p align="center">
   <a href="https://l7plot.antv.vision/en">Website</a> •
-  <a href="https://l7plot.antv.vision/en/docs/manual/quick-start">Quick Start</a>
+  <a href="https://l7plot.antv.vision/en/docs/manual/quick-start">Quick Start</a> •
+  <a href="https://l7plot.antv.vision/zh/docs/api/plot-api">API</a> •
+  <a href="https://l7plot.antv.vision/zh/examples/gallery">Example</a>
 </p>
 
 </div>

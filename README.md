@@ -18,7 +18,9 @@
 
 <p align="center">
   <a href="https://l7plot.antv.vision/zh">网站</a> •
-  <a href="https://l7plot.antv.vision/zh/docs/manual/quick-start">快速开始</a>
+  <a href="https://l7plot.antv.vision/zh/docs/manual/quick-start">快速开始</a> •
+  <a href="https://l7plot.antv.vision/zh/docs/api/plot-api">API</a> •
+  <a href="https://l7plot.antv.vision/zh/examples/gallery">图表示例</a>
 </p>
 
 </div>
