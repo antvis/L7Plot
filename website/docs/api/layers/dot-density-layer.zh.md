@@ -7,11 +7,19 @@ order: 2
 
 ## 一、配置
 
+`markdown:docs/common/layers/dot-layer/source.zh.md`
+
 ### `options.`size
 
 `number` optional default: `1`
 
-图层点大小。
+圆点大小。
+
+`markdown:docs/common/attribute/color.zh.md`
+
+`markdown:docs/common/layers/dot-layer/style.zh.md`
+
+`markdown:docs/common/attribute/state.zh.md`
 
 ## 二、属性
 

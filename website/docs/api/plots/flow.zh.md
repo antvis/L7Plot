@@ -26,202 +26,34 @@ const flowMap = new Flow(container, options);
 
 连接图的所有配置项，继承自 [Plot options](/zh/docs/api/plot-api#options)。
 
-### `options.`color
+### `options.`source
 
-`string|object|Function` optional default: `'#5FD3A6'`
+`SourceOptions` required
 
-元素颜色。
-
-```js
-{
-  color: 'red',
-}
-```
-
-#### `color.`field
-
-`string` optional
-
-元素颜色值映射关联字段。
+数据配置，详见 [Source](/zh/docs/api/source)。
 
 ```js
 {
   source: {
     data: [{ startX: 58.00, startY: 32.84, endX: 85.7, endY: 25.161, c: 'red', t: 20, n: 'chengdu' }],
     parser: { type: 'json', x: 'startX', y: 'startY', x: 'endX', y: 'endY', }
-  },
-  color: {
-    fied: 'c'
   }
 }
 ```
 
-#### `color.`value
+`markdown:docs/common/layers/arc-layer/shape.zh.md`
 
-`string|string[]|Function` optional
+`markdown:docs/common/attribute/color.zh.md`
 
-元素颜色值映射值。
+`markdown:docs/common/layers/arc-layer/size.zh.md`
 
-```js
-{
-  color: {
-    fied: 't',
-    value: ({ t }) => {
-      return t > 20 ? 'red': 'blue'
-    }
-  }
-}
-```
+`markdown:docs/common/layers/arc-layer/style.zh.md`
 
-#### `color.`scale
+`markdown:docs/common/attribute/radiation.zh.md`
 
-`markdown:docs/common/attribute/scale.zh.md`
+`markdown:docs/common/layers/lines-layer/animate.zh.md`
 
-```js
-{
-  color: {
-    fied: 't',
-    value: ['blue', 'red'],
-    scale: {type: 'quantile'}
-  }
-}
-```
-
-### `options.`size
-
-`number|object|Function` optional default: `12`
-
-元素大小。
-
-```js
-{
-  size: 12,
-}
-```
-
-#### `size.`field
-
-`string` optional
-
-元素大小值映射关联字段。
-
-```js
-{
-  source: {
-    data: [{ startX: 58.00, startY: 32.84, endX: 85.7, endY: 25.161, c: 'red', t: 20, n: 'chengdu' }],
-    parser: { type: 'json', x: 'startX', y: 'startY', x: 'endX', y: 'endY', }
-  },
-  size: {
-    fied: 's';
-  }
-}
-```
-
-#### `size.`value
-
-`number|number[]|Function` optional
-
-元素大小值映射值。
-
-```js
-{
-  size: {
-    fied: 't',
-    value: ({ t }) => {
-      return t > 20 ? 15 : 12
-    }
-  }
-}
-```
-
-#### `size.`scale
-
-`markdown:docs/common/attribute/scale.zh.md`
-
-```js
-{
-  size: {
-    fied: 't',
-    value: [12, 15],
-    scale: {type: 'quantile'}
-  }
-}
-```
-
-### `options.`style
-
-`object` optional
-
-全局样式。
-
-```js
-{
-  style: {
-    opacity: 0.8,
-    lineType: 'dash',
-    dashArray: [2, 2],
-  }
-}
-```
-
-#### `style.`opacity
-
-`number` optional
-
-线透明度。
-
-#### `style.`lineType
-
-`‘solid’｜'dash'` optional ‘solid’
-
-线类型，支持实线与虚线。
-
-#### `style.`dashArray
-
-`[number, number]` optional
-
-虚线间隔，虚线间隔，第一个值为虚线每个分段的长度，第二个值为分段间隔的距离。lineDash 设为 `[0,0]` 的效果为没有虚线。
-
-#### `style.`sourceColor
-
-`string` optional
-
-渐变起点颜色。
-
-#### `style.`targetColor
-
-`string` optional
-
-渐变终点颜色。
-
-### `options.`radiation
-
-`object` optional
-
-落地点辐射圈。
-
-```js
-{
-  radiation: {
-    color: 'yellow',
-    size: 20,
-  }
-}
-```
-
-#### `radiation.`color
-
-`string` optional
-
-辐射圈颜色。
-
-#### `radiation.`size
-
-`number|object|Function` optional default: `20`
-
-辐射圈大小。
-
-`markdown:docs/common/attribute/path-components.zh.md`
+`markdown:docs/common/attribute/components.zh.md`
 
 ## 二、属性
 
@@ -229,9 +61,15 @@ const flowMap = new Flow(container, options);
 
 ### flowLayer
 
-`PlotLayer`
+`ArcLayer`
 
-流向图层实例。
+弧线图层实例。
+
+### labelLayer
+
+`undefined|TextLayer`
+
+数据标签图层实例。
 
 ## 三、方法
 
@@ -244,6 +82,7 @@ const flowMap = new Flow(container, options);
 内置图层名称分别为：
 
 - flowLayer
+- labelLayer
 
 ```js
 pathMap.on('flowLayer:mousemove', (e: MouseEvent) => void);

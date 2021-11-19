@@ -42,8 +42,8 @@ const choropleth = new Choropleth(container, options);
 ```js
 {
   geoArea: {
-    url: 'https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.0/choropleth-data',
-    type: 'topojson'
+    url: 'https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.1/choropleth-data',
+    type: 'topojson',
   },
 }
 ```
@@ -101,70 +101,11 @@ const choropleth = new Choropleth(container, options);
 }
 ```
 
-### `options.`color
+`markdown:docs/common/attribute/color.zh.md`
 
-`string|object|Function` optional default: `'#5FD3A6'`
+`markdown:docs/common/layers/area-layer/style.zh.md`
 
-元素颜色。
-
-```js
-{
-  color: 'red',
-}
-```
-
-#### `color.`field
-
-`string` optional
-
-元素颜色值映射关联字段。
-
-```js
-{
-  source: {
-    data: [{ name: '上海市', code: 310000, c: 'red', t: 20 }],
-    joinBy: { sourceField: 'code', geoField: 'adcode' }
-  },
-  color: { fied: 'c' }
-}
-```
-
-#### `color.`value
-
-`string|string[]|Function` optional
-
-元素颜色值映射值。
-
-```js
-{
-  color: {
-    fied: 't',
-    value: ({ t }) => {
-      return t > 20 ? 'red': 'blue'
-    }
-  }
-}
-```
-
-#### `color.`scale
-
-`markdown:docs/common/attribute/scale.zh.md`
-
-```js
-{
-  color: {
-    fied: 't',
-    value: ['#B8E1FF', '#7DAAFF', '#3D76DD', '#0047A5', '#001D70'],
-    scale: { type: 'quantile' }
-  }
-}
-```
-
-`markdown:docs/common/attribute/area-style.zh.md`
-
-`markdown:docs/common/attribute/area-state.zh.md`
-
-`markdown:docs/common/attribute/components.zh.md`
+`markdown:docs/common/layers/area-layer/state.zh.md`
 
 ### `options.`chinaBorder
 
@@ -250,19 +191,21 @@ DrillStepConfig 配置如下：
 }
 ```
 
+`markdown:docs/common/attribute/components.zh.md`
+
 ## 二、属性
 
 继承 [Plot 属性](/zh/docs/api/plot-api#二、属性)。
 
 ### fillAreaLayer
 
-`PlotLayer`
+`AreaLayer`
 
 填充面图层实例。
 
 ### labelLayer
 
-`undefined|PlotLayer`
+`undefined|TextLayer`
 
 数据标签图层实例。
 

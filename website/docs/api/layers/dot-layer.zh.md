@@ -7,21 +7,19 @@ order: 1
 
 ## 一、配置
 
-### `options.`source
+`markdown:docs/common/layers/dot-layer/source.zh.md`
 
-### `options.`shape
+`markdown:docs/common/layers/dot-layer/shape.zh.md`
 
-### `options.`color
+`markdown:docs/common/attribute/color.zh.md`
 
-### `options.`size
+`markdown:docs/common/layers/dot-layer/size.zh.md`
 
-### `options.`style
+`markdown:docs/common/layers/dot-layer/style.zh.md`
 
-### `options.`style
+`markdown:docs/common/attribute/state.zh.md`
 
-### `options.`animate
-
-### `options.`state
+`markdown:docs/common/layers/dot-layer/animate.zh.md`
 
 ## 二、属性
 

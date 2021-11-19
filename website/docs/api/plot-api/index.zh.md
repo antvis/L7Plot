@@ -37,84 +37,7 @@ constructor(container: string | HTMLDivElement, options: PlotOptions)
 
 设置图表容器高度。
 
-### `options.`map
-
-`MapConfig` required
-
-地图容器配置项。
-
-#### `map.`type
-
-`string` optional default: `'amap'`
-
-地图类型，支持以下两种类型：
-
-- amap: 高德地图
-- mapbox: Mapbox 地图
-
-#### `map.`token
-
-`string` required
-
-地图服务 token，需服务平台申请。
-
-#### `map.`center
-
-`number[]` optional default: `[0, 0]`
-
-初始中心经纬度。
-
-#### `map.`pitch
-
-`number` optional default: `0`
-
-初始倾角。
-
-#### `map.`rotation
-
-`number` optional default: `0`
-
-初始旋转角度。
-
-#### `map.`zoom
-
-`number` optional default: `0`
-
-初始缩放层级，底图可缩放层级分布为：
-
-- Mapbox （0-24）
-- 高德 （2-19）
-
-#### `map.`minZoom
-
-`number` optional default: `0`
-
-地图最小缩放等级。
-
-#### `map.`maxZoom
-
-`number` optional default: `20`
-
-地图最大缩放等级，AMap 最大缩放等级 18，Mapbox 最大缩放等级 20。
-
-#### `map.`style
-
-`string` optional default: `dark`
-
-内置样式:
-
-- dark: 黑暗
-- light: 明亮
-- normal: 普通
-- blank: 无底图
-
-自定义样式:
-
-```js
-{
-  style: 'amap://styles/2a09079c3daac9420ee53b67307a8006?isPublic=true';
-}
-```
+`markdown:docs/common/attribute/map.zh.md`
 
 ### `options.`antialias
 
@@ -146,64 +69,6 @@ constructor(container: string | HTMLDivElement, options: PlotOptions)
 
 图层完成初始化之后，地图是否自动缩放到图层的数据边界范围。
 
-### `options.`state
-
-`StateAttribute` optional
-
-元素交互反馈效果。
-
-#### `state.`active
-
-`boolean｜ActiveOption` optional default: `false`
-
-标签 mousehover 高亮效果，开启 mousehover 元素高亮效果：
-
-```js
-{
-  state: {
-    active: true;
-  }
-}
-```
-
-开启 mousehover 元素高亮效果并自定义设置高亮颜色：
-
-```js
-{
-  state: {
-    active: {
-      color: 'red';
-    }
-  }
-}
-```
-
-#### `state.`select
-
-`boolean｜ActiveOption` optional default: `false`
-
-元素 mouseclick 选中高亮效果，开启 mouseclick 元素高亮效果：
-
-```js
-{
-  state: {
-    select: true;
-  }
-}
-```
-
-开启 mousehover 元素高亮效果并自定义设置高亮颜色：
-
-```js
-{
-  state: {
-    select: {
-      color: 'red';
-    }
-  }
-}
-```
-
 ### `options.`theme
 
 `string|object` optional default: `'light'`
@@ -222,43 +87,43 @@ constructor(container: string | HTMLDivElement, options: PlotOptions)
 
 `HTMLDivElement`
 
-当前图表渲染的 DOM 容器。
+图表渲染的 DOM 容器。
 
 ### options
 
 `PlotOptions`
 
-当前图表的所有配置项。
+图表的所有配置项。
 
 ### scene
 
 `Scene`
 
-当前图表的地图场景实例。
+图表的地图场景实例。
 
 ### type
 
 `string`
 
-当前图表所属类型。
+图表所属类型。
 
 ### layerGroup
 
 `LayerGroup`
 
-当前图表的图层组。
+图表的图层组。
 
 ### sceneLoaded
 
 `boolean`
 
-当前图表的地图场景是否加载完成。
+图表的地图场景是否加载完成。
 
 ### layersLoaded
 
 `boolean`
 
-当前图表的图层是否加载完成。
+图表的图层是否加载完成。
 
 ### zoomControl
 
