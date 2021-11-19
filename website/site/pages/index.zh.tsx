@@ -60,7 +60,7 @@ const IndexPage = () => {
         // coverImage={coverImage}
         coverImage={<BannerSVG />}
         title={t('L7Plot 地理空间可视化图表库')}
-        description={t('L7Plot 是简单易用的地理空间数据可视化图表库')}
+        description={t('L7Plot 是简单易用、图表丰富、支持定制的地理空间数据可视化地理图表库。')}
         className="banner"
         buttons={bannerButtons}
         showGithubStars={false}
