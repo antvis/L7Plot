@@ -44,21 +44,7 @@ const data = [
   { lng: 104.052, lat: 31.503, depth: 10, mag: 5, title: 'M 5.0 - eastern Sichuan, China' },
   { lng: 103.53, lat: 31.1, depth: 10, mag: 5, title: 'M 5.0 - eastern Sichuan, China' },
   { lng: 103.625, lat: 31.243, depth: 10, mag: 5.1, title: 'M 5.1 - eastern Sichuan, China' },
-  { lng: 105.134, lat: 32.165, depth: 10, mag: 5, title: 'M 5.0 - Sichuan-Gansu border region, China' },
-  { lng: 104.217, lat: 31.636, depth: 10, mag: 5.3, title: 'M 5.3 - eastern Sichuan, China' },
-  { lng: 104.908, lat: 32.195, depth: 10, mag: 5, title: 'M 5.0 - Sichuan-Gansu border region, China' },
-  { lng: 103.646, lat: 31.216, depth: 10, mag: 5, title: 'M 5.0 - eastern Sichuan, China' },
-  { lng: 104.638, lat: 31.857, depth: 10, mag: 5.1, title: 'M 5.1 - eastern Sichuan, China' },
-  { lng: 103.747, lat: 31.146, depth: 10, mag: 5.3, title: 'M 5.3 - eastern Sichuan, China' },
-  { lng: 105.202, lat: 32.372, depth: 10, mag: 5.1, title: 'M 5.1 - Sichuan-Gansu border region, China' },
-  { lng: 104.481, lat: 31.906, depth: 10, mag: 5.1, title: 'M 5.1 - eastern Sichuan, China' },
-  { lng: 105.234, lat: 32.436, depth: 10, mag: 5.3, title: 'M 5.3 - Sichuan-Gansu border region, China' },
-  { lng: 104.705, lat: 31.272, depth: 10, mag: 5.4, title: 'M 5.4 - eastern Sichuan, China' },
-  { lng: 103.715, lat: 31.211, depth: 10, mag: 5.8, title: 'M 5.8 - eastern Sichuan, China' },
-  { lng: 104.682, lat: 31.342, depth: 10, mag: 5.7, title: 'M 5.7 - eastern Sichuan, China' },
-  { lng: 104.032, lat: 31.586, depth: 10, mag: 5.7, title: 'M 5.7 - eastern Sichuan, China' },
-  { lng: 104.787, lat: 31.968, depth: 10, mag: 5.2, title: 'M 5.2 - eastern Sichuan, China' },
-  { lng: 103.322, lat: 31.002, depth: 19, mag: 7.9, title: 'M 7.9 - eastern Sichuan, China' },
+  // ......
 ];
 ```
 

@@ -3,6 +3,8 @@ title: 高级图表 - Advanced Plot
 order: 9
 ---
 
+<tag color="red" text="Unstable API">Unstable API</tag>
+
 `L7Plot` 是高级图表类，可以组合多个图层以及图表。
 
 ```js
