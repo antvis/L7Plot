@@ -51,6 +51,13 @@ jobs:
   #         registry-url: https://registry.npmjs.org/
   #     - run: yarn bootstrap
   #     - run: yarn build
-  #     - run: npm publish
+  #     - run: yarn bundle
+  #     - run: |
+  #         cd packages/l7plot
+  #         npm publish
+  #     - run: cd ../../
+  #     - run: |
+  #         cd packages/component
+  #         npm publish
   #       env:
   #         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

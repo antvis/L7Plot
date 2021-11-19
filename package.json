@@ -26,6 +26,7 @@
     "build-l7lot": "lerna run build --stream --scope=@antv/l7plot",
     "build-component": "lerna run build --stream --scope=@antv/l7plot-component",
     "build-website": "lerna run build --stream --scope=l7plot-website",
+    "bundle": "lerna run build:umd --stream --scope=@antv/l7plot",
     "deploy-website": "lerna run deploy --stream --scope=l7plot-website",
     "publish": "lerna publish"
   },
