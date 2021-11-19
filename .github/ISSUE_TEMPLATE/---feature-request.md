@@ -6,7 +6,7 @@ labels: Feature
 assignees: ''
 ---
 
-### 🥰 Features description [Please make everyone to understand it]
+### 💻 Features description [Please make everyone to understand it]
 
 ### 🏞 What problem does this feature solve
 
