@@ -15,7 +15,7 @@ $ npm install @antv/l7plot
 ## 🔨 使用
 
 <div align="center">
-<img src="https://gw.alipayobjects.com/zos/antfincdn/O2YLUqCydw/6646bc02-5bb5-4c85-af81-d3ed0df040b9.png" width="450" />
+<img src="https://gw.alipayobjects.com/zos/antfincdn/E9LGyUOfkx/865ff168-a623-40aa-9806-ece6357f18e0.png" width="450" />
 </div>
 
 ```html
@@ -37,7 +37,6 @@ const dot = new Dot('container', {
     style: 'light',
     center: [103.447303, 31.753574],
     zoom: 7,
-    pitch: 0,
   },
   autoFit: true,
   source: {
@@ -93,8 +92,12 @@ $ yarn test
 $ yarn test-live
 ```
 
-## 如何贡献
+## 🤝 如何贡献
 
 如果您在使用的过程中碰到问题，可以先通过 [issues](https://github.com/antvis/l7plot/issues) 看看有没有类似的 bug 或者建议。
 
 如需提交代码，请遵从我们的[贡献指南](https://github.com/antvis/l7plot/blob/master/CONTRIBUTING.zh-CN.md)。
+
+## 许可证
+
+MIT
