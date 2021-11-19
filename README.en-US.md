@@ -3,8 +3,32 @@
 <h1 align="center">L7Plot</h1>
 
 <div align="center">
-🌍 Geospatial Visualization Chart Library
+
+🌍 Geospatial Visualization Chart Library Based on <a href="https://github.com/antvis/L7">L7</a>.
+
+<!-- [![NPM downloads](https://img.shields.io/npm/dm/@antv/l7plot.svg)](https://npmjs.com/@antv/l7plot) -->
+<!-- ![Latest commit](https://badgen.net/github/last-commit/antvis/L7Plot)
+ -->
+
+[![Version](https://badgen.net/npm/v/@antv/l7plot)](https://npmjs.com/@antv/l7plot)
+[![build Status](https://github.com/antvis/L7Plot/workflows/build/badge.svg?branch=master)](https://github.com/antvis/L7Plot/actions?query=workflow%3Abuild)
+[![coverage](https://img.shields.io/coveralls/antvis/L7Plot/master.svg)](https://coveralls.io/github/antvis/L7Plot)
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/antvis/l7plot.svg)](http://isitmaintained.com/project/antvis/l7plot 'Percentage of issues still open')
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/antvis/l7plot.svg)](http://isitmaintained.com/project/antvis/l7plot 'Average time to resolve an issue')
+
+<p align="center">
+  <a href="https://l7plot.antv.vision/en">Website</a> •
+  <a href="https://l7plot.antv.vision/en/docs/manual/quick-start">Quick Start</a>
+</p>
+
 </div>
+
+## ✨ Features
+
+- Diagrams declaring profile geography Charting
+- Rich chart types and map components
+- Strong interactive ability, 2 / 3D View
+- Built-in multi-granularity administrative data
 
 ## 📦 Installation
 
@@ -15,12 +39,12 @@ $ npm install @antv/l7plot
 ## 🔨 Usage
 
 <div align="center">
-<img src="https://gw.alipayobjects.com/zos/antfincdn/E9LGyUOfkx/865ff168-a623-40aa-9806-ece6357f18e0.png" width="450" />
+<!-- <img src="https://gw.alipayobjects.com/zos/antfincdn/E9LGyUOfkx/865ff168-a623-40aa-9806-ece6357f18e0.png" width="450" /> -->
 </div>
 
-```html
+<!-- ```html
 <div id="container"></div>
-```
+``` -->
 
 ```ts
 import { Dot } from '@antv/l7plot';
@@ -52,20 +76,11 @@ const dot = new Dot('container', {
     field: 'mag',
     value: ({ mag }) => (mag - 4.3) * 10,
   },
-  state: {
-    active: true,
-  },
-  zoom: {
-    position: 'topright',
-  },
-  scale: {
-    position: 'bottomright',
-  },
+  state: { active: true },
+  scale: { position: 'bottomright' },
+  legend: { position: 'bottomleft' },
   tooltip: {
     items: ['title', 'mag', 'depth'],
-  },
-  legend: {
-    position: 'bottomleft',
   },
 });
 ```
