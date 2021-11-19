@@ -7,7 +7,7 @@ import {
   TooltipOptions as ITooltipComponentOptions,
   TooltipListItem,
 } from '@antv/l7plot-component';
-import getValueByPath from 'lodash-es/get';
+import { get as getValueByPath } from 'lodash-es';
 import {
   IPLotLayer,
   ILngLat,

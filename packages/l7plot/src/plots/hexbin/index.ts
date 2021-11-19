@@ -18,7 +18,7 @@ export class Hexbin extends Plot<HexbinOptions> {
   /**
    * 地图类型
    */
-  public type = Plot.PlotType.Hexagon;
+  public type = Plot.PlotType.Hexbin;
 
   /**
    * 蜂窝图层

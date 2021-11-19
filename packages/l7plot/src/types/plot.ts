@@ -10,7 +10,7 @@ export enum PlotType {
   DotDensity = 'dotDensity',
   Heatmap = 'heatmap',
   Grid = 'grid',
-  Hexagon = 'hexagon',
+  Hexbin = 'hexbin',
   Path = 'path',
   Flow = 'flow',
   Area = 'area',
