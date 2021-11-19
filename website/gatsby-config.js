@@ -3,14 +3,13 @@ module.exports = {
     {
       resolve: '@antv/gatsby-theme-antv',
       options: {
-        // GATrackingId: ``,
-        // theme: { 'primary-color': '#873bf4' },
+        GATrackingId: `UA-148148901`,
       },
     },
   ],
   siteMetadata: {
     title: 'L7Plot',
-    description: 'An map charting library',
+    description: 'Geospatial Visualization Chart Library',
     siteUrl: 'https://l7plot.antv.vision',
     githubUrl: 'https://github.com/antvis/L7Plot',
     navs: [

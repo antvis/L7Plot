@@ -1,11 +1,5 @@
-# l7plot-component
+<h1 align="center">L7Plot Component</h1>
 
-> Components for L7Plot
-
-## Usage
-
-```
-import { Legend } from '@antv/l7plot-component';
-
-// TODO: DEMONSTRATE API
-```
+<div align="center">
+Components for L7Plot
+</div>

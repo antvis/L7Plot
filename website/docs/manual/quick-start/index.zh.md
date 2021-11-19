@@ -10,7 +10,7 @@ order: 1
 通过下面的命令完成安装：
 
 ```js
-npm install @antv/l7plot --save
+npm install @antv/l7plot
 ```
 
 成功安装完成之后，就可以使用了。
