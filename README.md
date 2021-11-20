@@ -7,11 +7,10 @@
 🌍 基于 <a href="https://github.com/antvis/L7">L7</a> 的地理空间可视化图表库。
 
 <!-- [![NPM downloads](https://img.shields.io/npm/dm/@antv/l7plot.svg)](https://npmjs.com/@antv/l7plot) -->
-<!-- ![Latest commit](https://badgen.net/github/last-commit/antvis/L7Plot)
- -->
 
 [![Version](https://badgen.net/npm/v/@antv/l7plot)](https://npmjs.com/@antv/l7plot)
-[![build Status](https://github.com/antvis/L7Plot/workflows/build/badge.svg?branch=master)](https://github.com/antvis/L7Plot/actions?query=workflow%3Abuild)
+![Latest commit](https://badgen.net/github/last-commit/antvis/L7Plot)
+[![Release Status](https://github.com/antvis/L7Plot/workflows/release/badge.svg?branch=master)](https://github.com/antvis/L7Plot/actions?query=workflow:release)
 [![coverage](https://img.shields.io/coveralls/antvis/L7Plot/master.svg)](https://coveralls.io/github/antvis/L7Plot)
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/antvis/l7plot.svg)](http://isitmaintained.com/project/antvis/l7plot 'Percentage of issues still open')
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/antvis/l7plot.svg)](http://isitmaintained.com/project/antvis/l7plot 'Average time to resolve an issue')
