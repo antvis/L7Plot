@@ -176,6 +176,7 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
       this.changeData(data, sourceConfig);
     }
     this.render();
+    this.emit('update');
   }
 
   /**
@@ -192,5 +193,7 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
     if (this.options.legend) {
       this.updateLegendControl(this.options.legend);
     }
+
+    this.emit('change-data');
   }
 }

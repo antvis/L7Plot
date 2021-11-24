@@ -130,6 +130,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
         this.changeData(data, sourceConfig);
         this.render();
         console.timeEnd('l7plot choropleth update viewLevel time');
+        this.emit('update');
       });
     } else {
       if (options.source && !isEqual(this.lastOptions.source, this.options.source)) {
@@ -138,6 +139,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
       }
       this.render();
       // this.fillAreaLayer.render();
+      this.emit('update');
     }
   }
 
@@ -190,6 +192,8 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     if (this.options.legend) {
       this.updateLegendControl(this.options.legend);
     }
+
+    this.emit('change-data');
   }
 
   /**
