@@ -215,6 +215,7 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
       this.updateMap(options.map);
     }
     this.render();
+    this.emit('update');
   }
 
   /**
