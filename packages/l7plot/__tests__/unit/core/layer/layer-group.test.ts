@@ -1,6 +1,5 @@
 import { DotLayer } from '../../../../src/layers/dot-layer';
 import { LayerGroup } from '../../../../src/core/layer/layer-group';
-import { Source } from '../../../../src/types';
 import { DotLayerOptions } from '../../../../src/layers/dot-layer';
 
 describe('layer group', () => {
@@ -8,7 +7,7 @@ describe('layer group', () => {
 
   it('layer', () => {
     const layer = new DotLayer<DotLayerOptions>({
-      source: new Source([], { parser: { type: 'json', x: 'x', y: 'y' } }),
+      source: { data: [], parser: { type: 'json', x: 'x', y: 'y' } },
       size: 12,
       color: '#fff',
       shape: 'circle',
@@ -19,6 +18,8 @@ describe('layer group', () => {
     expect(layerGroup.getLayer(layer.layer.id)).toEqual(layer);
 
     expect(layerGroup.removeLayer(layer)).toBeTruthy();
+
+    expect(layerGroup.isEmpty()).toBeTruthy();
 
     layerGroup.addLayer(layer);
 

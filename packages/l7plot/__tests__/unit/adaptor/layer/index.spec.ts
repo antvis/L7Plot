@@ -2,6 +2,7 @@ import { getLayerStyleAttribute } from '../../../helper/layer';
 import { DotLayer } from '../../../../src/layers/dot-layer';
 import { Source } from '../../../../src/types';
 import { DotLayerOptions } from '../../../../src/layers/dot-layer';
+import { LinesLayer, LinesLayerOptions } from '../../../../src/layers/lines-layer';
 
 describe('mapping layer', () => {
   const source = new Source([], { parser: { type: 'json', x: 'x', y: 'y' } });
@@ -160,6 +161,28 @@ describe('mapping layer', () => {
     // });
   });
 
+  it('mapping texture', () => {
+    const linesLayer = new LinesLayer<LinesLayerOptions>({
+      source: { data: [], parser: { type: 'json', coordinates: 'coord' } },
+      texture: 'plane',
+    });
+
+    expect(linesLayer.layer.type).toBe('LineLayer');
+
+    expect(getLayerStyleAttribute(linesLayer.layer['pendingStyleAttributes'], 'texture')).toEqual({
+      attributeName: 'texture',
+      attributeField: 'plane',
+    });
+
+    linesLayer.update({
+      texture: 'air',
+    });
+    expect(getLayerStyleAttribute(linesLayer.layer['pendingStyleAttributes'], 'texture')).toEqual({
+      attributeName: 'texture',
+      attributeField: 'air',
+    });
+  });
+
   it('mapping animate', () => {
     const plotLayer = new DotLayer({
       source: source,
@@ -184,5 +207,20 @@ describe('mapping layer', () => {
     expect(plotLayer.layer.type).toBe('PointLayer');
 
     expect(plotLayer.layer.getScaleOptions()).toEqual({ x: { type: 'quantize' } });
+  });
+
+  it('mapping filter', () => {
+    const plotLayer = new DotLayer({
+      source: source,
+      filter: {
+        field: 'x',
+        value: ({ x }) => Boolean(x),
+      },
+    });
+
+    expect(plotLayer.layer.type).toBe('PointLayer');
+
+    // expect(getLayerStyleAttribute(plotLayer.layer['pendingStyleAttributes'], 'filter')?.attributeField).toEqual('x');
+    // expect(getLayerStyleAttribute(plotLayer.layer['pendingStyleAttributes'], 'filter')?.attributeValues).toBeDefined();
   });
 });
