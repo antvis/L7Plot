@@ -9,9 +9,14 @@ export const getColorLegendItems = (legendItems: LegendItemTick[] | LegendItemEx
   let items: LegendItemExtent[] = [];
 
   if (isLegendItemI(legendItems)) {
-    if (legendItems.length === 1) return [];
-    const cache = new Map<string, number[]>();
+    if (legendItems.length === 1) {
+      const { color, value } = legendItems[0];
+      const range = [value, value] as [number, number];
+      return [{ color, value: range }];
+    }
 
+    const cache = new Map<string, number[]>();
+    let preCacheData: number[] | undefined;
     for (let index = 0; index < legendItems.length; index++) {
       const { color, value } = legendItems[index];
       if (cache.has(color)) {
@@ -20,16 +25,19 @@ export const getColorLegendItems = (legendItems: LegendItemTick[] | LegendItemEx
           data.push(value);
         }
       } else {
-        cache.set(color, [value]);
+        const range = [value];
+        cache.set(color, range);
+        if (preCacheData) {
+          preCacheData.push(value);
+        }
+        preCacheData = range;
       }
     }
 
-    let preValue: number;
     cache.forEach((value, color) => {
       const min = value[0];
       const max = value[value.length - 1];
-      const range: [number, number] = [preValue ? preValue : min, max];
-      preValue = max;
+      const range: [number, number] = [min, max];
       items.push({ color, value: range });
     });
   } else {
