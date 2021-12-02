@@ -12,5 +12,5 @@ export const DEFAULT_OPTIONS: Partial<FlowOptions> = deepAssign({}, Plot.Default
       type: 'json',
     },
   },
-  shape: 'arc3d',
+  shape: 'arc',
 });
