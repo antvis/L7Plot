@@ -6,7 +6,7 @@ import { PlotOptions, PointShape2d, SizeAttr, SourceOptions } from '../../types'
  */
 type FlowRadiation = {
   /**
-   * 是否启用辐射圈
+   * 是否开启辐射圈
    */
   enabled?: boolean;
   /**
