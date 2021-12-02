@@ -91,16 +91,18 @@ export class Flow extends Plot<FlowOptions> {
    */
   protected createRadiationLayer(source: Source): DotLayer {
     const data = this.parserPointData(source);
-    const { color, size } = this.options.radiation || { size: 20 };
+    const { enabled = true, color, size = 20, shape = 'circle', animate = true } = this.options.radiation || {};
     const radiationLayer = new DotLayer({
       name: 'radiationLayer',
       source: {
         data,
         parser: { type: 'json', coordinates: 'coordinates' },
       },
+      visible: enabled,
       color,
       size,
-      animate: true,
+      shape,
+      animate,
     });
 
     source.on('update', () => {
@@ -146,7 +148,10 @@ export class Flow extends Plot<FlowOptions> {
     this.flowLayer.update(flowLayerConfig);
 
     if (options.radiation) {
-      if (!this.radiationLayer) {
+      if (this.radiationLayer) {
+        const radiation = { ...options.radiation, visible: options.radiation.enabled };
+        this.radiationLayer.update(radiation);
+      } else {
         this.radiationLayer = this.createRadiationLayer(this.source);
         this.layerGroup.addLayer(this.radiationLayer);
       }

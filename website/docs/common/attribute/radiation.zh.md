@@ -13,6 +13,12 @@
 }
 ```
 
+#### `radiation.`enabled
+
+`boolean` optional `true`
+
+是否开启辐射圈。
+
 #### `radiation.`color
 
 `string` optional
@@ -24,3 +30,9 @@
 `number|object|Function` optional default: `20`
 
 辐射圈大小。
+
+#### `radiation.`animate
+
+`boolean` optional `true`
+
+是否启用辐射圈动画。
