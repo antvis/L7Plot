@@ -1,5 +1,6 @@
 import { AreaLayerOptions } from '../../layers/area-layer/types';
 import { PlotOptions, ISourceCFG } from '../../types';
+import { CHINA_BOUNDARY_STYLE } from './constants';
 
 /**
  * GeoJson FeatureCollection 数据格式
@@ -10,6 +11,11 @@ export type FeatureCollection = GeoJSON.FeatureCollection;
  * 行政地理数据地址
  */
 export type GeoArea = { url?: string; type: 'geojson' | 'topojson' };
+
+/**
+ * 中国国界样式配置
+ */
+export type ChinaBoundaryStyle = Partial<typeof CHINA_BOUNDARY_STYLE>;
 
 /**
  * 地理元数据关联
@@ -136,7 +142,7 @@ export interface ChoroplethOptions extends PlotOptions, AreaLayerOptions {
   /**
    * 中国国界线
    */
-  chinaBorder?: boolean;
+  chinaBorder?: boolean | ChinaBoundaryStyle;
 
   /**
    * 数据钻取
