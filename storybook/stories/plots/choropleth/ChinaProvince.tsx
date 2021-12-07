@@ -184,7 +184,7 @@ class ChinaProvince extends Component {
   async initMap() {
     const chinaMap = new Choropleth('container', {
       map: {
-        type: 'amap',
+        type: 'mapbox',
         style: 'blank',
         center: [120.19382669582967, 30.258134],
         zoom: 3,
@@ -204,6 +204,13 @@ class ChinaProvince extends Component {
         adcode: '100000',
       },
       autoFit: true,
+      chinaBorder: {
+        national: {
+          color: 'red',
+          width: 0.6,
+          opacity: 0.5,
+        },
+      },
 
       color: {
         field: 'value',
