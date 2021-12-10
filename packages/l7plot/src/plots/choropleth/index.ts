@@ -91,7 +91,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     console.time('l7plot choropleth render time');
     if (this.inited) {
       this.updateLayers(this.options);
-      // this.scene.render()
+      this.scene.render();
       this.updateComponents();
     } else {
       const layerGroup = this.createLayers(this.source);

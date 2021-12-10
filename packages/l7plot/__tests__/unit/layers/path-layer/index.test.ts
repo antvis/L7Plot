@@ -1,18 +1,17 @@
 import { getLayerStyleAttribute } from '../../../helper/layer';
-import { LinesLayer } from '../../../../src/layers/lines-layer';
+import { PathLayer } from '../../../../src/layers/path-layer';
 
-describe('lines layer', () => {
-  const layer = new LinesLayer({
+describe('path layer', () => {
+  const layer = new PathLayer({
     source: { data: [], parser: { type: 'json', coordinates: 'coordinates' } },
     color: '#fff',
-    shape: 'line',
     size: 1,
     style: { opacity: 1, lineType: 'dash' },
     state: { active: true, select: true },
   });
 
   it('type', () => {
-    expect(layer.type).toBe('linesLayer');
+    expect(layer.type).toBe('pathLayer');
     expect(layer.layer.type).toBe('LineLayer');
   });
 

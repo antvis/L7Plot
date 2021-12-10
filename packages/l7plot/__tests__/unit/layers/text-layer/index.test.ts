@@ -5,7 +5,7 @@ import { Source } from '../../../../src/types';
 describe('text layer', () => {
   const layer = new TextLayer({
     source: new Source([], { parser: { type: 'json', x: 'x', y: 'y' } }),
-    content: 'label',
+    field: 'label',
     style: {
       fill: '#fff',
       opacity: 0.6,

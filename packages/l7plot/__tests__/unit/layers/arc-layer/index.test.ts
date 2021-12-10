@@ -1,18 +1,17 @@
 import { getLayerStyleAttribute } from '../../../helper/layer';
-import { LinesLayer } from '../../../../src/layers/lines-layer';
+import { ArcLayer } from '../../../../src/layers/arc-layer';
 
-describe('lines layer', () => {
-  const layer = new LinesLayer({
+describe('arc layer', () => {
+  const layer = new ArcLayer({
     source: { data: [], parser: { type: 'json', coordinates: 'coordinates' } },
     color: '#fff',
-    shape: 'line',
     size: 1,
-    style: { opacity: 1, lineType: 'dash' },
+    style: { opacity: 1 },
     state: { active: true, select: true },
   });
 
   it('type', () => {
-    expect(layer.type).toBe('linesLayer');
+    expect(layer.type).toBe('arcLayer');
     expect(layer.layer.type).toBe('LineLayer');
   });
 
@@ -33,12 +32,12 @@ describe('lines layer', () => {
   it('shape', () => {
     expect(getLayerStyleAttribute(layer.layer['pendingStyleAttributes'], 'shape')).toEqual({
       attributeName: 'shape',
-      attributeField: 'line',
+      attributeField: 'arc',
     });
   });
 
   it('style', () => {
-    expect(layer.layer['rawConfig']).toMatchObject({ opacity: 1, lineType: 'dash' });
+    expect(layer.layer['rawConfig']).toMatchObject({ opacity: 1 });
   });
 
   it('state', () => {
