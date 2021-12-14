@@ -85,3 +85,7 @@ export { Area, AreaOptions } from './plots/area';
 
 // 行政区域图及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { Choropleth, ChoroplethOptions } from './plots/choropleth';
+
+// ----- simple layers ------
+// simple point
+export { SimplePointLayer } from './simpleLayers/simplePoint';
