@@ -1,0 +1,44 @@
+{
+  "name": "@antv/l7plot-combination",
+  "version": "0.0.1",
+  "description": "Combination for L7Plot",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
+  "module": "dist/esm/index.js",
+  "unpkg": "dist/umd/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "yarn run clean && yarn run dev:cjs",
+    "dev:cjs": "tsc -p tsconfig.json --target ES6 --module CommonJS --outDir dist/lib --watch",
+    "lint": "eslint src __tests__ --ext .js,.ts",
+    "lint-fix": "eslint src __tests__ --ext .js,.ts --fix",
+    "prettier": "prettier src __tests__ -c -w",
+    "clean": "rimraf dist",
+    "build": "yarn run clean && yarn run build:cjs && yarn run build:esm",
+    "build:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib",
+    "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm"
+  },
+  "keywords": [
+    "l7"
+  ],
+  "sideEffects": false,
+  "author": "shihui",
+  "license": "MIT",
+  "homepage": "https://github.com/antvis/L7Plot#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antvis/L7Plot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/antvis/L7Plot/issues"
+  },
+  "dependencies": {
+    "@antv/dom-util": "^2.0.3",
+    "@antv/util": "^2.0.14"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
