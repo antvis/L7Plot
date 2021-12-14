@@ -99,6 +99,7 @@ export class Icon {
   set size(size: number) {
     this.options.size = size;
     this.layer?.size(size);
+    this.options.scene.render();
   }
 
   static addIconURL(scene: Scene, name: string, url: string) {
