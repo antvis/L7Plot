@@ -6,7 +6,7 @@ export class SimplePoint extends DotLayer {
   public simpleType: SimpleLayerType;
   private params: ISimpleParams;
   private originData: ISimpleData;
-  constructor(originData: ISimpleData, params?: ISimpleParams) {
+  constructor(originData: ISimpleData, params?) {
     const combinParams = Object.assign(DefaultParams, params);
     const option = buildPointOptions(originData, combinParams);
     super(option);

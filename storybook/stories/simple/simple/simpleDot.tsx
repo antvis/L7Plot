@@ -26,7 +26,10 @@ class SimpleDot extends Component {
       { lng: null, lat: 36, val: 3 },
       { lng: '123', lat: 38, val: 3 },
     ];
-    const dot = new SimplePoint(dotData);
+    const dot = new SimplePoint(dotData, {
+      color: '#ff0',
+      opacity: 0.5,
+    });
 
     scene.on('loaded', () => {
       dot.addTo(scene);
