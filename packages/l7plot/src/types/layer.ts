@@ -318,3 +318,9 @@ export enum LayerType {
   AreaLayer = 'areaLayer',
   PrismLayer = 'prismLayer',
 }
+
+export enum SimpleLayerType {
+  SimplePoint = 'SimplePoint',
+  SimpleWaterPoint = 'SimpleWaterPoint',
+  SimpleIconPoint = 'SimpleIconPoint',
+}

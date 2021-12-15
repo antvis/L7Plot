@@ -88,4 +88,8 @@ export { Choropleth, ChoroplethOptions } from './plots/choropleth';
 
 // ----- simple layers ------
 // simple point
-export { SimplePointLayer } from './simpleLayers/simplePoint';
+export { SimplePoint } from './simpleLayers/simplePoint';
+
+export { SimpleWaterPoint } from './simpleLayers/simpleWaterPoint';
+
+export { SimpleIconPoint } from './simpleLayers/simpleIconPoint';
