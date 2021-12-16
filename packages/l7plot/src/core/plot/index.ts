@@ -114,16 +114,16 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
   public render() {
     const layerGroup = this.createLayers(this.source);
     if (this.inited) {
-      this.layerGroup.removeAllLayer();
-      layerGroup.addTo(this.scene);
-      this.layerGroup = layerGroup;
-      this.updateComponents();
+      // this.layerGroup.removeAllLayer();
+      // layerGroup.addTo(this.scene);
+      // this.layerGroup = layerGroup;
+      this.scene.render();
     } else {
       this.layerGroup = layerGroup;
       this.onLayersLoaded();
       layerGroup.addTo(this.scene);
+      this.initLayersEvent();
     }
-    this.initLayersEvent();
   }
 
   /**
@@ -175,7 +175,9 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
       const { data, ...sourceConfig } = options.source;
       this.changeData(data, sourceConfig);
     }
+    this.updateLayers(options);
     this.render();
+    this.updateComponents();
     this.emit('update');
   }
 
