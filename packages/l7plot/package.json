@@ -1,6 +1,6 @@
 {
   "name": "@antv/l7plot",
-  "version": "0.0.3-alpha.9",
+  "version": "0.0.3-alpha.10",
   "description": "Geospatial Visualization Chart Library",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
