@@ -11,6 +11,7 @@ import { Choropleth, ChoroplethOptions } from '../plots/choropleth';
 
 import { TextLayer, TextLayerOptions } from '../layers/text-layer';
 import { DotLayer, DotLayerOptions } from '../layers/dot-layer';
+import { IconLayer, IconLayerOptions } from '../layers/icon-layer';
 import { ColumnLayer, ColumnLayerOptions } from '../layers/column-layer';
 import { DotDensityLayer, DotDensityLayerOptions } from '../layers/dot-density-layer';
 import { GridLayer, GridLayerOptions } from '../layers/grid-layer';
@@ -63,6 +64,7 @@ export const PLOTS_MAP = {
 export type LayerConfigType = { id?: string } & (
   | ({ type: 'textLayer' } & TextLayerOptions)
   | ({ type: 'dotLayer' } & DotLayerOptions)
+  | ({ type: 'iconLayer' } & IconLayerOptions)
   | ({ type: 'dotDensity' } & DotDensityLayerOptions)
   | ({ type: 'columnLayer' } & ColumnLayerOptions)
   | ({ type: 'heatmapLayer' } & HeatmapLayerOptions)
@@ -80,6 +82,7 @@ export type LayerConfigType = { id?: string } & (
 export const LAYERS_MAP = {
   [LayerType.TextLayer]: TextLayer,
   [LayerType.DotLayer]: DotLayer,
+  [LayerType.IconLayer]: IconLayer,
   [LayerType.DotDensity]: DotDensityLayer,
   [LayerType.ColumnLayer]: ColumnLayer,
   [LayerType.HeatmapLayer]: HeatmapLayer,

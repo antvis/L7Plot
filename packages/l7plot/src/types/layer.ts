@@ -307,6 +307,7 @@ export interface IPLotLayer {
 export enum LayerType {
   TextLayer = 'textLayer',
   DotLayer = 'dotLayer',
+  IconLayer = 'iconLayer',
   DotDensity = 'dotDensityLayer',
   ColumnLayer = 'columnLayer',
   HeatmapLayer = 'heatmapLayer',
