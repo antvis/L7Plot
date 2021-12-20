@@ -43,7 +43,7 @@ registerImages(images);
 ```js
 {
   shape: {
-    fied: 't',
+    field: 't',
     value: ({ t }) => {
       return t > 20 ? '01': '02'
     }

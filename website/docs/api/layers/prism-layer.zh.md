@@ -29,7 +29,7 @@ order: 9
 
 ```js
 {
-  size: { fied: 't' },
+  size: { field: 't' },
 }
 ```
 
@@ -42,7 +42,7 @@ order: 9
 ```js
 {
   size: {
-    fied: 't',
+    field: 't',
     value: ({ t }) => {
       return t > 20 ? 15 : 12
     }
@@ -57,7 +57,7 @@ order: 9
 ```js
 {
   size: {
-    fied: 't',
+    field: 't',
     value: [120, 250],
     scale: { type: 'quantile' },
   }
