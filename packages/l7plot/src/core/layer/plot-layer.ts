@@ -118,7 +118,12 @@ export abstract class PlotLayer<O extends PlotLayerOptions> extends EventEmitter
     } else {
       const { data, aggregation, ...option } = source;
       aggregation && MappingSource.aggregation(option, aggregation);
-      this.layer.source(data, option);
+      const layerSource = this.layer.getSource();
+      if (layerSource) {
+        this.layer.setData(data, option);
+      } else {
+        this.layer.source(data, option);
+      }
     }
   }
 
