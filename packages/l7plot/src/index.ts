@@ -31,6 +31,9 @@ export { L7Plot } from './plot';
 // 散点图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { DotLayer, DotLayerOptions } from './layers/dot-layer';
 
+// 图标图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
+export { IconLayer, IconLayerOptions } from './layers/icon-layer';
+
 // 点密度图层及类型定义 | author by [yunji]](https://github.com/liuvigongzuoshi)
 export { DotDensityLayer, DotDensityLayerOptions } from './layers/dot-density-layer';
 
