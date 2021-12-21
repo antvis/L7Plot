@@ -16,9 +16,10 @@ import {
   ScaleControlOptions,
   LegendOptions,
   Event,
-  IPLotLayer,
+  IPlotLayer,
   UpdateMapConfig,
   Bounds,
+  MapStatusOptions,
 } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { LayerEventList, MapEventList, SceneEventList } from './constants';
@@ -329,36 +330,36 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
   /**
    * 添加图层
    */
-  public addLayer(layer: IPLotLayer) {
+  public addLayer(layer: IPlotLayer) {
     this.layerGroup.addLayer(layer);
   }
 
   /**
    * 获取所有图层
    */
-  public getLayes(): IPLotLayer[] {
+  public getLayers(): IPlotLayer[] {
     return this.layerGroup.getLayers();
   }
 
   /**
    * 根据图层名称获取图层
    */
-  public getLayerByName(name: string): IPLotLayer | undefined {
+  public getLayerByName(name: string): IPlotLayer | undefined {
     return this.layerGroup.getLayerByName(name);
   }
 
   /**
    * 移除图层
    */
-  public removeLayer(layer: IPLotLayer) {
-    this.layerGroup.addLayer(layer);
+  public removeLayer(layer: IPlotLayer) {
+    return this.layerGroup.removeLayer(layer);
   }
 
   /**
-   * 移除容器内所有的图层
+   * 移除内置所有的图层
    */
   public removeAllLayer() {
-    this.scene.removeAllLayer();
+    this.layerGroup.removeAllLayer();
   }
 
   /**
@@ -387,6 +388,21 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
    */
   public fitBounds(bound: Bounds) {
     this.scene.fitBounds(bound);
+  }
+
+  /**
+   * 设置地图状态
+   * 可用来关闭地图的一些交互操作
+   */
+  public setMapStatus(status: MapStatusOptions) {
+    this.scene.setMapStatus(status);
+  }
+
+  /**
+   * 设置场景的背景色
+   */
+  public setBgColor(color: string) {
+    this.scene.setBgColor(color);
   }
 
   /**

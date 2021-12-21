@@ -9,7 +9,7 @@ import {
 } from '@antv/l7plot-component';
 import { get as getValueByPath } from 'lodash-es';
 import {
-  IPLotLayer,
+  IPlotLayer,
   ILngLat,
   TooltipAnchorType,
   Event,
@@ -30,7 +30,7 @@ export class Tooltip extends EventEmitter {
   /**
    * 带交互的图层
    */
-  protected interactionLayers: IPLotLayer[];
+  protected interactionLayers: IPlotLayer[];
   /**
    * tooltip 的 schema 配置
    */
@@ -52,7 +52,7 @@ export class Tooltip extends EventEmitter {
    */
   private lastComponentOptions: any;
 
-  constructor(scene: Scene, interactionLayers: IPLotLayer[], options: TooltipOptions) {
+  constructor(scene: Scene, interactionLayers: IPlotLayer[], options: TooltipOptions) {
     super();
     this.scene = scene;
     this.interactionLayers = interactionLayers;

@@ -62,6 +62,8 @@ export type MapConfig = {
    * 最大缩放等级
    */
   maxZoom?: number;
+
+  [key: string]: any;
 };
 
 /**

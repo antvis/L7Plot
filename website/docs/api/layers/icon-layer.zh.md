@@ -34,7 +34,7 @@ registerImages(images);
     data: [{ lng: 104.101, lat: 30.649, s: '01', t: 21,  n: 'chengdu' }],
     parser: { type: 'json', x: 'lng', y: 'lat' }
   },
-  shape: 's',
+  shape: '01',
 }
 ```
 
@@ -50,8 +50,6 @@ registerImages(images);
   }
 }
 ```
-
-`markdown:docs/common/layers/dot-layer/shape.zh.md`
 
 `markdown:docs/common/attribute/color.zh.md`
 

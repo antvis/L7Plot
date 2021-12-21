@@ -9,6 +9,7 @@ import {
   BlendType,
   IImage,
   ITransform,
+  IStatusOptions,
 } from '@antv/l7-core';
 import { Scene } from '@antv/l7-scene';
 
@@ -18,6 +19,7 @@ export type { Scene };
 
 export type ScaleConfig = IScale;
 export type ScaleConfigMap = IScaleOptions;
+export type MapStatusOptions = IStatusOptions;
 export type ValueOf<T> = T[keyof T];
 
 export interface Event {

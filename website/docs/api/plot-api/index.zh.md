@@ -202,15 +202,15 @@ plot.getMap() : MapboxInstance | AMapInstance;
 添加图层。
 
 ```js
-plot.addLayer(layer: PLotLayer);
+plot.addLayer(layer: PlotLayer);
 ```
 
-### getLayes
+### getLayers
 
 获取所有图层。
 
 ```js
-plot.getLayes(): PLotLayer[];
+plot.getLayers(): PlotLayer[];
 ```
 
 ### getLayerByName
@@ -218,7 +218,7 @@ plot.getLayes(): PLotLayer[];
 根据图层名称获取图层。
 
 ```js
-plot.getLayes(name: string): PLotLayer | undefined;
+plot.getLayerByName(name: string): PlotLayer | undefined;
 ```
 
 ### removeLayer
@@ -226,7 +226,7 @@ plot.getLayes(name: string): PLotLayer | undefined;
 移除图层。
 
 ```js
-plot.removeLayer(layer: PLotLayer);
+plot.removeLayer(layer: PlotLayer);
 ```
 
 ### removeAllLayer
@@ -267,6 +267,22 @@ plot.setPitch(pitch: number);
 
 ```js
 plot.fitBounds(bound: Bounds);
+```
+
+### setMapStatus
+
+设置地图交互操作状态，可用来关闭地图的一些交互操作，缩放、平移、旋转等。
+
+```js
+plot.setMapStatus(status: MapStatusOptions);
+```
+
+### setBgColor
+
+设置容器的背景色。
+
+```js
+plot.setBgColor(color: string);
 ```
 
 ### addZoomControl
