@@ -11,7 +11,7 @@
   "scripts": {
     "prepare": "husky install",
     "bootstrap": "yarn",
-    "dev": "lerna run dev --stream --parallel --ignore=l7plot-website",
+    "dev": "lerna run dev --stream --parallel --no-bail --ignore=l7plot-website",
     "dev-l7lot": "lerna run dev --stream --scope=@antv/l7plot",
     "dev-component": "lerna run dev --stream --scope=@antv/l7plot-component",
     "dev-storybook": "lerna run dev --stream --scope=l7plot-storybook",
@@ -22,7 +22,7 @@
     "test": "jest",
     "test-live": "DEBUG_MODE=1 jest --watch __tests__/unit",
     "test-cover": "jest --coverage",
-    "build": "lerna run build --stream --ignore=l7plot-website",
+    "build": "lerna run build --stream --scope=@antv/l7plot*",
     "build-l7lot": "lerna run build --stream --scope=@antv/l7plot",
     "build-component": "lerna run build --stream --scope=@antv/l7plot-component",
     "build-website": "lerna run build --stream --scope=l7plot-website",

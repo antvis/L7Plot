@@ -153,36 +153,39 @@ export class L7Plot extends Map<L7PlotOptions> {
   }
 
   /**
-   * 渲染 plot
+   * 渲染 plots
    */
-  private renderPlot(plot: PlotConfigType) {
+  private renderPlots() {
+    const plots = this.options.plots || [];
+    for (let index = 0; index < plots.length; index++) {
+      const plot = plots[index];
+      const plotInstance = this.createPlot(plot);
+      this.plots.push(plotInstance);
+    }
+  }
+
+  /**
+   * 创建 plot
+   */
+  private createPlot(plot: PlotConfigType) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { type, legend, layerMenu, ...options } = plot;
     const PlotClass = PLOTS_MAP[type];
     if (isUndefined(PlotClass)) {
       throw new Error(`Don't exist ${type} plot`);
     }
-    const plotInstance: Plot<any> = new (PlotClass as any)(options);
+    const plotInstance: Plot<PlotConfigType> = new (PlotClass as any)(options);
     plotInstance.attachToScene(this.scene, this.theme);
-    this.plots.push(plotInstance);
-  }
-
-  /**
-   * 渲染 plots
-   */
-  public renderPlots() {
-    const plots = this.options.plots || [];
-    for (let index = 0; index < plots.length; index++) {
-      const plot = plots[index];
-      this.renderPlot(plot);
-    }
+    return plotInstance;
   }
 
   /**
    * 添加图表
    */
-  addPlot(plotConfig: PlotConfigType) {
+  public addPlot(plotConfig: PlotConfigType) {
     // TODO: duplicate plot
-    this.renderPlot(plotConfig);
+    const plotInstance = this.createPlot(plotConfig);
+    this.plots.push(plotInstance);
   }
 
   /**

@@ -192,7 +192,7 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
   protected registerResources() {
     if (IMAGES_CACHE.size) {
       IMAGES_CACHE.forEach((img, id) => {
-        this.scene.addImage(id, img);
+        !this.scene.hasImage(id) && this.scene.addImage(id, img);
       });
     }
     if (FONT_FACE_CACHE.size) {
