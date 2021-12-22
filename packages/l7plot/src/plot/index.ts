@@ -95,16 +95,16 @@ export class L7Plot extends Map<L7PlotOptions> {
   /**
    * 更新图层
    */
-  protected updateLayers(layers: LayerConfigType[]) {
-    //
-  }
+  // protected updateLayers(layers: LayerConfigType[]) {
+  //   //
+  // }
 
   /**
    * 更新 Plot
    */
-  protected updatePlots(plots: PlotConfigType[]) {
-    //
-  }
+  // protected updatePlots(plots: PlotConfigType[]) {
+  //   //
+  // }
 
   /**
    * 渲染
