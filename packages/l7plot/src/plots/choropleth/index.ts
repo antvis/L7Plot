@@ -90,6 +90,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   public render() {
     console.time('l7plot choropleth render time');
     if (this.inited) {
+      this.scene.setEnableRender(true);
       this.scene.render();
     } else {
       const layerGroup = this.createLayers(this.source);
@@ -119,6 +120,8 @@ export class Choropleth extends Plot<ChoroplethOptions> {
       this.drillReset();
     }
 
+    this.scene.setEnableRender(false);
+
     // 行政级别及范围发生更新
     if (options.viewLevel && !isEqual(this.lastOptions.viewLevel, this.options.viewLevel)) {
       const geoData = options.source?.joinBy.geoData;
@@ -127,7 +130,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
         const { data, ...sourceConfig } = this.options.source;
         this.updateLayers(options);
         this.changeData(data, sourceConfig);
-        // this.render();
+        this.render();
         this.updateComponents();
         console.timeEnd('l7plot choropleth update viewLevel time');
         this.emit('update');

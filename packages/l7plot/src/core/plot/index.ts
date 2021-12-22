@@ -5,6 +5,7 @@ import { PlotType, PlotOptions, LabelOptions, Source, SourceOptions, Scene, Plot
 import { LayerGroup } from '../layer/layer-group';
 import { MappingSource } from '../../adaptor/source';
 import { isEqual } from '@antv/util';
+import { getTheme } from '../../theme';
 
 const DEFAULT_OPTIONS: Partial<PlotOptions> = {
   autoFit: false,
@@ -114,16 +115,16 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
   public render() {
     const layerGroup = this.createLayers(this.source);
     if (this.inited) {
-      // this.layerGroup.removeAllLayer();
-      // layerGroup.addTo(this.scene);
-      // this.layerGroup = layerGroup;
-      this.scene.render();
+      this.layerGroup.removeAllLayer();
+      layerGroup.addTo(this.scene);
+      this.layerGroup = layerGroup;
+      // this.scene.render();
     } else {
       this.layerGroup = layerGroup;
       this.onLayersLoaded();
       layerGroup.addTo(this.scene);
-      this.initLayersEvent();
     }
+    this.initLayersEvent();
   }
 
   /**
@@ -157,9 +158,10 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
   /**
    * 挂载到容器
    */
-  public attachToScene(scene: Scene, theme: Record<string, any>) {
+  public attachToScene(scene: Scene, theme?: Record<string, any>) {
     this.scene = scene;
-    this.theme = theme;
+    this.theme = theme ? theme : getTheme('default');
+    this.registerResources();
     this.initLayers();
   }
 
@@ -171,11 +173,13 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
     if (options.map && !isEqual(this.lastOptions.map, this.options.map)) {
       this.updateMap(options.map);
     }
+    this.scene.setEnableRender(false);
     if (options.source && !isEqual(this.lastOptions.source, this.options.source)) {
       const { data, ...sourceConfig } = options.source;
       this.changeData(data, sourceConfig);
     }
-    this.updateLayers(options);
+    // this.updateLayers(options);
+    this.scene.setEnableRender(true);
     this.render();
     this.updateComponents();
     this.emit('update');

@@ -13,18 +13,18 @@
     "prettier": "prettier stories -c -w"
   },
   "dependencies": {
-    "@antv/l7": "^2.5.5",
-    "@antv/l7plot": "^0.0.3-alpha.6",
+    "@antv/l7": "^2.6.22",
+    "@antv/l7plot": "^0.0.3-alpha.10",
     "antd": "^4.16.13",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
-    "@storybook/addon-actions": "^6.3.2",
-    "@storybook/addon-essentials": "^6.3.2",
-    "@storybook/addon-links": "^6.3.2",
-    "@storybook/react": "^6.3.2",
+    "@storybook/addon-actions": "^6.4.9",
+    "@storybook/addon-essentials": "^6.4.9",
+    "@storybook/addon-links": "^6.4.9",
+    "@storybook/react": "^6.4.9",
     "@types/react": "^16.14.8",
     "@types/react-dom": "^16.9.13",
     "babel-loader": "^8.2.2"
