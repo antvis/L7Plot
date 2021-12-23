@@ -95,16 +95,18 @@ export class L7Plot extends Map<L7PlotOptions> {
   /**
    * 更新图层
    */
-  // protected updateLayers(layers: LayerConfigType[]) {
-  //   //
-  // }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected updateLayers(layers: LayerConfigType[]) {
+    //
+  }
 
   /**
    * 更新 Plot
    */
-  // protected updatePlots(plots: PlotConfigType[]) {
-  //   //
-  // }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected updatePlots(plots: PlotConfigType[]) {
+    //
+  }
 
   /**
    * 渲染
