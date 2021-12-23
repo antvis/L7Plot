@@ -336,6 +336,15 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
 
   /**
    * 获取所有图层
+   *  @deprecate
+   */
+  public getLayes(): IPlotLayer[] {
+    console.warn('Replace to use getLayers()');
+    return this.getLayers();
+  }
+
+  /**
+   * 获取所有图层
    */
   public getLayers(): IPlotLayer[] {
     return this.layerGroup.getLayers();
