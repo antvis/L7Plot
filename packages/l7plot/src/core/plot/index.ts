@@ -157,12 +157,43 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
 
   /**
    * 挂载到容器
+   * 用于高级图表 L7Plot 挂载单个图表示例
    */
   public attachToScene(scene: Scene, theme?: Record<string, any>) {
     this.scene = scene;
     this.theme = theme ? theme : getTheme('default');
     this.registerResources();
     this.initLayers();
+  }
+
+  /**
+   * 取消挂载到容器上的 scene
+   * 用于高级图表 L7Plot 挂载单个图表示例
+   */
+  public unattachFromScene() {
+    this.removeAllLayer();
+    this.tooltip?.destroy();
+  }
+
+  /**
+   * 添加到容器
+   * 用于 L7 Scene 与图表混合使用场景
+   */
+  public addToScene(scene: Scene) {
+    this.attachToScene(scene);
+  }
+
+  /**
+   * 从容器上移除
+   * 用于 L7 Scene 与图表混合使用场景
+   */
+  public removeFromScene() {
+    this.removeAllLayer();
+    this.removeScaleControl();
+    this.removeZoomControl();
+    this.removeLayerMenuControl();
+    this.removeLegendControl();
+    this.tooltip?.destroy();
   }
 
   /**

@@ -351,8 +351,26 @@ plot.removeLegendControl();
 
 ### exportPng
 
+导出地图，目前仅支持导出可视化层，不支持底图导出。
+
 ```js
 plot.exportPng(type?: 'png' | 'jpg');
+```
+
+### addToScene
+
+添加到容器，用于 L7 Scene 与图表混合使用场景。
+
+```js
+plot.addToScene(scene: Scene);
+```
+
+### removeFromScene
+
+从容器上移除，用于 L7 Scene 与图表混合使用场景。
+
+```js
+plot.removeFromScene();
 ```
 
 ### on

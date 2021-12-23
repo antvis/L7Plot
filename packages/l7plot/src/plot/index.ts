@@ -209,7 +209,7 @@ export class L7Plot extends Map<L7PlotOptions> {
     const layerIndex = this.plots.findIndex((plot) => plot.options?.name === name);
     if (layerIndex === -1) return false;
     const [plot] = this.plots.splice(layerIndex, 1);
-    plot.removeAllLayer();
+    plot.unattachFromScene();
     return true;
   }
 
@@ -218,7 +218,7 @@ export class L7Plot extends Map<L7PlotOptions> {
    */
   public removeAllPlot() {
     this.plots.forEach((plot) => {
-      plot.removeAllLayer();
+      plot.unattachFromScene();
     });
     this.plots = [];
   }

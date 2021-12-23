@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Scene, GaodeMap } from '@antv/l7';
 import { Choropleth } from '@antv/l7plot';
 
-class Drill extends Component {
+class ChoroplethDrill extends Component {
   public scene: Scene | undefined;
   public choropleth: Choropleth | undefined;
 
@@ -124,4 +124,4 @@ class Drill extends Component {
   }
 }
 
-export default Drill;
+export default ChoroplethDrill;

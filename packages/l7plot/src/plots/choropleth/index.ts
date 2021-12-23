@@ -128,8 +128,8 @@ export class Choropleth extends Plot<ChoroplethOptions> {
       console.time('l7plot choropleth update viewLevel time');
       this.getDistrictData(geoData).then(() => {
         const { data, ...sourceConfig } = this.options.source;
-        this.updateLayers(options);
         this.changeData(data, sourceConfig);
+        this.updateLayers(options);
         this.render();
         this.updateComponents();
         console.timeEnd('l7plot choropleth update viewLevel time');
