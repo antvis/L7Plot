@@ -1,6 +1,6 @@
 import { uniqueId } from '@antv/util';
 import EventEmitter from '@antv/event-emitter';
-import { Scene, IPLotLayer } from '../../types';
+import { Scene, IPlotLayer } from '../../types';
 
 export interface LayerGroupOption {
   name?: string;
@@ -14,13 +14,13 @@ export class LayerGroup extends EventEmitter {
   /**
    * 子图层
    */
-  public layers: IPLotLayer[];
+  public layers: IPlotLayer[];
   /**
    * 地图容器
    */
   public scene: Scene | undefined;
 
-  constructor(layers: IPLotLayer[] = [], option: LayerGroupOption = {}) {
+  constructor(layers: IPlotLayer[] = [], option: LayerGroupOption = {}) {
     super();
     this.name = option.name ? option.name : uniqueId('layerGroup');
     this.layers = layers;
@@ -48,14 +48,14 @@ export class LayerGroup extends EventEmitter {
   /**
    * 图层组是否有该图层
    */
-  hasLayer(layer: IPLotLayer): boolean {
+  hasLayer(layer: IPlotLayer): boolean {
     return this.layers.some((itemLayer) => itemLayer === layer);
   }
 
   /**
    * 增加图层
    */
-  public addLayer(layer: IPLotLayer) {
+  public addLayer(layer: IPlotLayer) {
     // TODO: duplicate layer
     this.layers.push(layer);
     if (this.scene) {
@@ -67,7 +67,7 @@ export class LayerGroup extends EventEmitter {
   /**
    * 移除 layer 图层
    */
-  public removeLayer(layer: IPLotLayer): boolean {
+  public removeLayer(layer: IPlotLayer): boolean {
     const layerIndex = this.layers.findIndex((itemLayer) => itemLayer === layer);
     if (layerIndex === -1) return false;
     this.layers.splice(layerIndex, 1);
@@ -80,28 +80,28 @@ export class LayerGroup extends EventEmitter {
   /**
    * 获取所有的地图图层
    */
-  public getLayers(): IPLotLayer[] {
+  public getLayers(): IPlotLayer[] {
     return this.layers;
   }
 
   /**
    * 获取所有的带交互图层
    */
-  public getInteractionLayers(): IPLotLayer[] {
+  public getInteractionLayers(): IPlotLayer[] {
     return this.layers.filter(({ interaction }) => interaction);
   }
 
   /**
    * 根据图层 ID 获取图层对象
    */
-  public getLayer(id: string): IPLotLayer | undefined {
+  public getLayer(id: string): IPlotLayer | undefined {
     return this.layers.find(({ layer }) => layer.id === id);
   }
 
   /**
    * 根据图层 name 获取图层对象
    */
-  public getLayerByName(name: string): IPLotLayer | undefined {
+  public getLayerByName(name: string): IPlotLayer | undefined {
     return this.layers.find((itemLayer) => itemLayer.name === name);
   }
 

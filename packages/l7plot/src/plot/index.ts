@@ -2,7 +2,7 @@ import { isUndefined } from '@antv/util';
 import { Map } from '../core/map';
 import { Plot } from '../core/plot';
 import { deepAssign } from '../utils';
-import { L7PlotOptions, IPLotLayer } from '../types';
+import { L7PlotOptions, IPlotLayer } from '../types';
 import { LayerGroup } from '../core/layer/layer-group';
 import { LayerConfigType, LAYERS_MAP, PlotConfigType, PLOTS_MAP } from './types';
 
@@ -17,7 +17,7 @@ export class L7Plot extends Map<L7PlotOptions> {
   /**
    * 图表实例
    */
-  private plots: Plot<any>[] = [];
+  public plots: Plot<PlotConfigType>[] = [];
 
   constructor(container: string | HTMLDivElement, options: L7PlotOptions) {
     super(options);
@@ -39,19 +39,14 @@ export class L7Plot extends Map<L7PlotOptions> {
   }
 
   /**
-   * 创建图层
+   * 创建所有图层
    */
   protected createLayers(): LayerGroup {
     const layerGroup = new LayerGroup([]);
 
     const layers = this.options.layers || [];
     for (let index = 0; index < layers.length; index++) {
-      const { type, ...options } = layers[index];
-      const LayerClass = LAYERS_MAP[type];
-      if (isUndefined(LayerClass)) {
-        throw new Error(`Don't exist ${type} layer`);
-      }
-      const layer: IPLotLayer = new (LayerClass as any)(options);
+      const layer: IPlotLayer = this.createLayer(layers[index]);
       layerGroup.addLayer(layer);
     }
 
@@ -59,8 +54,48 @@ export class L7Plot extends Map<L7PlotOptions> {
   }
 
   /**
+   * 创建图层实例
+   */
+  private createLayer(layerConfig: LayerConfigType) {
+    const { type, ...options } = layerConfig;
+    const LayerClass = LAYERS_MAP[type];
+    if (isUndefined(LayerClass)) {
+      throw new Error(`Don't exist ${type} layer`);
+    }
+    const layer: IPlotLayer = new (LayerClass as any)(options);
+    return layer;
+  }
+
+  /**
+   * 添加图层
+   */
+  public addLayer(layer: LayerConfigType | IPlotLayer) {
+    const isLayerClass = (layer: LayerConfigType | IPlotLayer): layer is IPlotLayer => {
+      return typeof layer['render'] === 'function';
+    };
+    if (isLayerClass(layer)) {
+      super.addLayer(layer);
+    } else {
+      const plotLayer = this.createLayer(layer);
+      super.addLayer(plotLayer);
+    }
+  }
+
+  /**
+   * 移除图层
+   */
+  public removeLayerByName(name: string) {
+    const layer = this.layerGroup.getLayerByName(name);
+    if (layer) {
+      return this.layerGroup.removeLayer(layer);
+    }
+    return false;
+  }
+
+  /**
    * 更新图层
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected updateLayers(layers: LayerConfigType[]) {
     //
   }
@@ -68,6 +103,7 @@ export class L7Plot extends Map<L7PlotOptions> {
   /**
    * 更新 Plot
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected updatePlots(plots: PlotConfigType[]) {
     //
   }
@@ -119,40 +155,73 @@ export class L7Plot extends Map<L7PlotOptions> {
   }
 
   /**
-   * 渲染 plot
+   * 渲染 plots
    */
-  private renderPlot(plot: PlotConfigType) {
+  private renderPlots() {
+    const plots = this.options.plots || [];
+    for (let index = 0; index < plots.length; index++) {
+      const plot = plots[index];
+      const plotInstance = this.createPlot(plot);
+      this.plots.push(plotInstance);
+    }
+  }
+
+  /**
+   * 创建 plot
+   */
+  private createPlot(plot: PlotConfigType) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { type, legend, layerMenu, ...options } = plot;
     const PlotClass = PLOTS_MAP[type];
     if (isUndefined(PlotClass)) {
       throw new Error(`Don't exist ${type} plot`);
     }
-    const plotInstance: Plot<any> = new (PlotClass as any)(options);
+    const plotInstance: Plot<PlotConfigType> = new (PlotClass as any)(options);
     plotInstance.attachToScene(this.scene, this.theme);
-    this.plots.push(plotInstance);
-  }
-
-  /**
-   * 渲染 plots
-   */
-  public renderPlots() {
-    const plots = this.options.plots || [];
-    for (let index = 0; index < plots.length; index++) {
-      const plot = plots[index];
-      this.renderPlot(plot);
-    }
+    return plotInstance;
   }
 
   /**
    * 添加图表
    */
-  addPlot(plot: PlotConfigType) {
+  public addPlot(plotConfig: PlotConfigType) {
     // TODO: duplicate plot
-    this.renderPlot(plot);
+    const plotInstance = this.createPlot(plotConfig);
+    this.plots.push(plotInstance);
   }
 
   /**
-   * 移除图表
+   * 获取所有图表
    */
-  // public removePlot(name: string) {}
+  public getPlots(): Plot<PlotConfigType>[] {
+    return this.plots;
+  }
+
+  /**
+   * 根据图表名称获取图表
+   */
+  public getPlotByName(name: string): Plot<PlotConfigType> | undefined {
+    return this.plots.find((plot) => plot.options?.name === name);
+  }
+
+  /**
+   * 根据图表名称移除图表
+   */
+  public removePlotByName(name: string) {
+    const layerIndex = this.plots.findIndex((plot) => plot.options?.name === name);
+    if (layerIndex === -1) return false;
+    const [plot] = this.plots.splice(layerIndex, 1);
+    plot.unattachFromScene();
+    return true;
+  }
+
+  /**
+   * 移除所有的图表
+   */
+  public removeAllPlot() {
+    this.plots.forEach((plot) => {
+      plot.unattachFromScene();
+    });
+    this.plots = [];
+  }
 }

@@ -46,7 +46,7 @@ registerImages(images);
     data: [{ lng: 104.101, lat: 30.649, s: '01', n: 'chengdu' }],
     parser: { type: 'json', x: 'lng', y: 'lat' }
   },
-  shape: 's',
+  shape: '01',
 }
 ```
 

@@ -90,16 +90,15 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   public render() {
     console.time('l7plot choropleth render time');
     if (this.inited) {
-      this.updateLayers(this.options);
+      this.scene.setEnableRender(true);
       this.scene.render();
-      this.updateComponents();
     } else {
       const layerGroup = this.createLayers(this.source);
       this.layerGroup = layerGroup;
       this.onLayersLoaded();
       layerGroup.addTo(this.scene);
+      this.initLayersEvent();
     }
-    this.initLayersEvent();
     console.timeEnd('l7plot choropleth render time');
   }
 
@@ -121,6 +120,8 @@ export class Choropleth extends Plot<ChoroplethOptions> {
       this.drillReset();
     }
 
+    this.scene.setEnableRender(false);
+
     // 行政级别及范围发生更新
     if (options.viewLevel && !isEqual(this.lastOptions.viewLevel, this.options.viewLevel)) {
       const geoData = options.source?.joinBy.geoData;
@@ -128,7 +129,9 @@ export class Choropleth extends Plot<ChoroplethOptions> {
       this.getDistrictData(geoData).then(() => {
         const { data, ...sourceConfig } = this.options.source;
         this.changeData(data, sourceConfig);
+        this.updateLayers(options);
         this.render();
+        this.updateComponents();
         console.timeEnd('l7plot choropleth update viewLevel time');
         this.emit('update');
       });
@@ -137,7 +140,9 @@ export class Choropleth extends Plot<ChoroplethOptions> {
         const { data, ...sourceConfig } = this.options.source;
         this.changeData(data, sourceConfig);
       }
+      this.updateLayers(options);
       this.render();
+      this.updateComponents();
       this.emit('update');
     }
   }
@@ -263,7 +268,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 更新图层
    */
-  protected updateLayers(options: ChoroplethOptions) {
+  protected updateLayers(options: Partial<ChoroplethOptions>) {
     const fillAreaLayerConfig = pick<any>(options, AreaLayer.LayerOptionsKeys);
     this.fillAreaLayer.update(fillAreaLayerConfig);
 

@@ -278,7 +278,7 @@ export interface PolygonLayerConfig extends Partial<PlotLayerOptions> {
 /**
  * L7Plot 内置图层的基类接口
  */
-export interface IPLotLayer {
+export interface IPlotLayer {
   name: string;
   type: string;
   layer: ILayer;

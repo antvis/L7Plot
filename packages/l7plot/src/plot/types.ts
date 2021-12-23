@@ -6,6 +6,7 @@ import { Heatmap, HeatmapOptions } from '../plots/heatmap';
 import { Grid, GridOptions } from '../plots/grid';
 import { Hexbin, HexbinOptions } from '../plots/hexbin';
 import { Path, PathOptions } from '../plots/path';
+import { Flow, FlowOptions } from '../plots/flow';
 import { Area, AreaOptions } from '../plots/area';
 import { Choropleth, ChoroplethOptions } from '../plots/choropleth';
 
@@ -40,6 +41,7 @@ export type PlotConfigType = { id?: string } & (
   | ({ type: 'grid' } & OmitPlotOptions<GridOptions>)
   | ({ type: 'hexbin' } & OmitPlotOptions<HexbinOptions>)
   | ({ type: 'path' } & OmitPlotOptions<PathOptions>)
+  | ({ type: 'flow' } & OmitPlotOptions<FlowOptions>)
   | ({ type: 'area' } & OmitPlotOptions<AreaOptions>)
   | ({ type: 'choropleth' } & OmitPlotOptions<ChoroplethOptions>)
 );
@@ -54,6 +56,7 @@ export const PLOTS_MAP = {
   [PlotType.Grid]: Grid,
   [PlotType.Hexbin]: Hexbin,
   [PlotType.Path]: Path,
+  [PlotType.Flow]: Flow,
   [PlotType.Area]: Area,
   [PlotType.Choropleth]: Choropleth,
 };

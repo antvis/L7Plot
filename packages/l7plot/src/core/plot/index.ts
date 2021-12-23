@@ -5,6 +5,7 @@ import { PlotType, PlotOptions, LabelOptions, Source, SourceOptions, Scene, Plot
 import { LayerGroup } from '../layer/layer-group';
 import { MappingSource } from '../../adaptor/source';
 import { isEqual } from '@antv/util';
+import { getTheme } from '../../theme';
 
 const DEFAULT_OPTIONS: Partial<PlotOptions> = {
   autoFit: false,
@@ -117,7 +118,7 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
       this.layerGroup.removeAllLayer();
       layerGroup.addTo(this.scene);
       this.layerGroup = layerGroup;
-      this.updateComponents();
+      // this.scene.render();
     } else {
       this.layerGroup = layerGroup;
       this.onLayersLoaded();
@@ -156,11 +157,43 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
 
   /**
    * 挂载到容器
+   * 用于高级图表 L7Plot 挂载单个图表示例
    */
-  public attachToScene(scene: Scene, theme: Record<string, any>) {
+  public attachToScene(scene: Scene, theme?: Record<string, any>) {
     this.scene = scene;
-    this.theme = theme;
+    this.theme = theme ? theme : getTheme('default');
+    this.registerResources();
     this.initLayers();
+  }
+
+  /**
+   * 取消挂载到容器上的 scene
+   * 用于高级图表 L7Plot 挂载单个图表示例
+   */
+  public unattachFromScene() {
+    this.removeAllLayer();
+    this.tooltip?.destroy();
+  }
+
+  /**
+   * 添加到容器
+   * 用于 L7 Scene 与图表混合使用场景
+   */
+  public addToScene(scene: Scene) {
+    this.attachToScene(scene);
+  }
+
+  /**
+   * 从容器上移除
+   * 用于 L7 Scene 与图表混合使用场景
+   */
+  public removeFromScene() {
+    this.removeAllLayer();
+    this.removeScaleControl();
+    this.removeZoomControl();
+    this.removeLayerMenuControl();
+    this.removeLegendControl();
+    this.tooltip?.destroy();
   }
 
   /**
@@ -171,11 +204,15 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
     if (options.map && !isEqual(this.lastOptions.map, this.options.map)) {
       this.updateMap(options.map);
     }
+    this.scene.setEnableRender(false);
     if (options.source && !isEqual(this.lastOptions.source, this.options.source)) {
       const { data, ...sourceConfig } = options.source;
       this.changeData(data, sourceConfig);
     }
+    // this.updateLayers(options);
+    this.scene.setEnableRender(true);
     this.render();
+    this.updateComponents();
     this.emit('update');
   }
 

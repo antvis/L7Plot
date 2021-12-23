@@ -279,15 +279,15 @@ plot.getMap() : MapboxInstance | AMapInstance;
 添加图层。
 
 ```js
-plot.addLayer(layer: PLotLayer);
+plot.addLayer(layer: LayerConfigType | IPlotLayer);
 ```
 
-### getLayes
+### getLayers
 
 获取所有图层。
 
 ```js
-plot.getLayes(): PLotLayer[];
+plot.getLayers(): PlotLayer[];
 ```
 
 ### getLayerByName
@@ -295,7 +295,7 @@ plot.getLayes(): PLotLayer[];
 根据图层名称获取图层。
 
 ```js
-plot.getLayes(name: string): PLotLayer | undefined;
+plot.getLayerByName(name: string): PlotLayer | undefined;
 ```
 
 ### removeLayer
@@ -303,7 +303,15 @@ plot.getLayes(name: string): PLotLayer | undefined;
 移除图层。
 
 ```js
-plot.removeLayer(layer: PLotLayer);
+plot.removeLayer(layer: PlotLayer);
+```
+
+### removeLayerByName
+
+根据图层名称移除图层。
+
+```js
+plot.removeLayerByName(name: string);
 ```
 
 ### removeAllLayer
@@ -312,6 +320,46 @@ plot.removeLayer(layer: PLotLayer);
 
 ```js
 plot.removeAllLayer();
+```
+
+### addPlot
+
+添加图表。
+
+```js
+plot.addPlot(plotConfig: PlotConfigType);
+```
+
+### getPlots
+
+获取所有图表。
+
+```js
+plot.getPlots(): Plot[];
+```
+
+### getPlotByName
+
+根据图表名称获取图表。
+
+```js
+plot.getPlotByName(name: string): Plot | undefined;
+```
+
+### removePlotByName
+
+移除图表。
+
+```js
+plot.removePlotByName(name: string);
+```
+
+### removeAllPlot
+
+移除容器内所有的图表。
+
+```js
+plot.removeAllPlot();
 ```
 
 ### zoomIn

@@ -1,7 +1,7 @@
 import { isEqual, isUndefined, pick } from '@antv/util';
 import Source from '@antv/l7-source';
 import EventEmitter from '@antv/event-emitter';
-import { LayerType, IPLotLayer, PlotLayerOptions, LayerBlend } from '../../types/layer';
+import { LayerType, IPlotLayer, PlotLayerOptions, LayerBlend } from '../../types/layer';
 import { Scene, ILayer, ILayerConfig, SourceOptions } from '../../types';
 import { MappingSource } from '../../adaptor/source';
 import { LayerEventList } from '../map/constants';
@@ -9,7 +9,7 @@ import { deepAssign } from '../../utils';
 
 const LayerConfigkeys = ['name', 'zIndex', 'visible', 'minZoom', 'maxZoom', 'pickingBuffer', 'autoFit', 'blend'];
 
-export abstract class PlotLayer<O extends PlotLayerOptions> extends EventEmitter implements IPLotLayer {
+export abstract class PlotLayer<O extends PlotLayerOptions> extends EventEmitter implements IPlotLayer {
   /**
    * 地图图表类型
    */
