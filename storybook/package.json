@@ -13,7 +13,7 @@
     "prettier": "prettier stories -c -w"
   },
   "dependencies": {
-    "@antv/l7": "^2.6.22",
+    "@antv/l7": "^2.6.25",
     "@antv/l7plot": "^0.0.3-alpha.10",
     "antd": "^4.16.13",
     "react": "^16.14.0",

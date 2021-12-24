@@ -213,7 +213,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     const layerGroup = new LayerGroup([this.fillAreaLayer]);
 
     if (this.options.chinaBorder) {
-      const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(
+      const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = this.createCountryBoundaryLayer(
         this.chinaBoundaryData,
         this.options
       );
@@ -229,6 +229,14 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     }
 
     return layerGroup;
+  }
+
+  /**
+   * 创建中国国界线图层
+   */
+  private createCountryBoundaryLayer(data: FeatureCollection, plotConfig?: ChoroplethOptions) {
+    const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(data, plotConfig);
+    return { chinaBoundaryLayer, chinaDisputeBoundaryLayer };
   }
 
   /**
@@ -255,11 +263,16 @@ export class Choropleth extends Plot<ChoroplethOptions> {
       ...label,
     });
 
-    source.on('update', () => {
+    const updateCallback = () => {
       const data = this.source['originData'].features
         .map(({ properties }) => properties)
         .filter(({ centroid }) => centroid);
       textLayer.layer.setData(data);
+    };
+
+    source.on('update', updateCallback);
+    textLayer.on('remove', () => {
+      source.off('update', updateCallback);
     });
 
     return textLayer;
@@ -274,7 +287,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
 
     if (options.chinaBorder) {
       if (!this.chinaBoundaryLayer) {
-        const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(
+        const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = this.createCountryBoundaryLayer(
           this.chinaBoundaryData,
           this.options
         );
@@ -283,27 +296,13 @@ export class Choropleth extends Plot<ChoroplethOptions> {
         this.layerGroup.addLayer(this.chinaBoundaryLayer);
         this.layerGroup.addLayer(this.chinaDisputeBoundaryLayer);
       }
-    } else {
-      if (this.chinaBoundaryLayer) {
-        this.layerGroup.removeLayer(this.chinaBoundaryLayer);
-      }
-      if (this.chinaDisputeBoundaryLayer) {
-        this.layerGroup.removeLayer(this.chinaDisputeBoundaryLayer);
-      }
+      // todo 更新方法
+    } else if (options.chinaBorder === false) {
+      this.chinaBoundaryLayer && this.layerGroup.removeLayer(this.chinaBoundaryLayer);
+      this.chinaDisputeBoundaryLayer && this.layerGroup.removeLayer(this.chinaDisputeBoundaryLayer);
     }
 
-    if (options.label) {
-      if (this.labelLayer) {
-        this.labelLayer.update({ ...options.label });
-      } else {
-        this.labelLayer = this.createLabelLayer(this.source, options.label);
-        this.layerGroup.addLayer(this.labelLayer);
-      }
-    } else {
-      if (this.labelLayer) {
-        this.layerGroup.removeLayer(this.labelLayer);
-      }
-    }
+    this.updateLabelLayer(this.source, options.label, this.options, this.labelLayer);
   }
 
   /**

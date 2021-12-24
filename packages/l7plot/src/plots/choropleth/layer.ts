@@ -1,16 +1,19 @@
 import { deepAssign } from '../../utils';
-import { ChinaBoundaryStyle, ChoroplethOptions } from './types';
+import { ChinaBoundaryStyle, ChoroplethOptions, FeatureCollection } from './types';
 import { PathLayer } from '../../layers/path-layer';
 import { CHINA_BOUNDARY_STYLE } from './constants';
 
-export const createCountryBoundaryLayer = (data: any, plotConfig?: ChoroplethOptions) => {
+/**
+ * 创建中国国界线图层
+ */
+export const createCountryBoundaryLayer = (data: FeatureCollection, plotConfig?: ChoroplethOptions) => {
   const { visible, minZoom, maxZoom, zIndex = 0, chinaBorder } = plotConfig || {};
   const borderStyle: Required<ChinaBoundaryStyle> =
     typeof chinaBorder === 'object' ? deepAssign({}, CHINA_BOUNDARY_STYLE, chinaBorder) : CHINA_BOUNDARY_STYLE;
   const chinaBoundaryFeatures = data.features.filter(({ properties }) =>
-    ['coast', 'hkm', 'national'].includes(properties.type)
+    ['coast', 'hkm', 'national'].includes(properties?.['type'])
   );
-  const disputeBoundaryFeatures = data.features.filter(({ properties }) => properties.type === 'dispute');
+  const disputeBoundaryFeatures = data.features.filter(({ properties }) => properties?.['type']);
 
   const chinaBoundaryLayer = new PathLayer({
     name: 'chinaBoundaryLayer',

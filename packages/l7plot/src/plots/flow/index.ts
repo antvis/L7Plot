@@ -105,9 +105,14 @@ export class Flow extends Plot<FlowOptions> {
       animate,
     });
 
-    source.on('update', () => {
+    const updateCallback = () => {
       const data = this.parserPointData(this.source);
       radiationLayer.layer.setData(data);
+    };
+
+    source.on('update', updateCallback);
+    radiationLayer.on('remove', () => {
+      source.off('update', updateCallback);
     });
 
     return radiationLayer;
@@ -132,9 +137,14 @@ export class Flow extends Plot<FlowOptions> {
       ...label,
     });
 
-    source.on('update', () => {
+    const updateCallback = () => {
       const data = this.parserPointData(this.source);
       labelLayer.layer.setData(data);
+    };
+
+    source.on('update', updateCallback);
+    labelLayer.on('remove', () => {
+      source.off('update', updateCallback);
     });
 
     return labelLayer;
@@ -155,24 +165,9 @@ export class Flow extends Plot<FlowOptions> {
         this.radiationLayer = this.createRadiationLayer(this.source);
         this.layerGroup.addLayer(this.radiationLayer);
       }
-    } else {
-      if (this.radiationLayer) {
-        this.layerGroup.removeLayer(this.radiationLayer);
-      }
     }
 
-    if (options.label) {
-      if (this.labelLayer) {
-        this.labelLayer.update({ ...options.label });
-      } else {
-        this.labelLayer = this.createLabelLayer(this.source, options.label);
-        this.layerGroup.addLayer(this.labelLayer);
-      }
-    } else {
-      if (this.labelLayer) {
-        this.layerGroup.removeLayer(this.labelLayer);
-      }
-    }
+    this.updateLabelLayer(this.source, options.label, this.options, this.labelLayer);
   }
 
   /**

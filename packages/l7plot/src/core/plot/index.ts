@@ -110,6 +110,27 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
   }
 
   /**
+   * 更新数据标签图层
+   */
+  protected updateLabelLayer(
+    source: Source,
+    label?: false | LabelOptions,
+    plotLayerConfig?: PlotLayerOptions,
+    labelLayer?: TextLayer
+  ) {
+    if (label) {
+      if (labelLayer) {
+        labelLayer.update({ ...label });
+      } else {
+        labelLayer = this.createLabelLayer(source, label, plotLayerConfig);
+        this.layerGroup.addLayer(labelLayer);
+      }
+    } else if (label === false) {
+      labelLayer && this.layerGroup.removeLayer(labelLayer);
+    }
+  }
+
+  /**
    * 渲染
    */
   public render() {
