@@ -62,17 +62,6 @@ export class Hexbin extends Plot<HexbinOptions> {
     const heatMapLayerConfig = pick<any>(options, HexbinLayer.LayerOptionsKeys);
     this.hexbinLayer.update(heatMapLayerConfig);
 
-    if (options.label) {
-      if (this.labelLayer) {
-        this.labelLayer.update({ ...options.label });
-      } else {
-        this.labelLayer = this.createLabelLayer(this.source, options.label, this.options);
-        this.layerGroup.addLayer(this.labelLayer);
-      }
-    } else {
-      if (this.labelLayer) {
-        this.layerGroup.removeLayer(this.labelLayer);
-      }
-    }
+    this.updateLabelLayer(this.source, options.label, this.options, this.labelLayer);
   }
 }

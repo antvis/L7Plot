@@ -90,6 +90,7 @@ export function mappingLayer(
     select: false,
   };
   const fillStyle = { opacity: style?.opacity };
+  const fillBottomColor = style?.fillBottomColor;
   const strokeSize = style?.lineWidth;
   const strokeColor = style?.stroke;
   const strokeStyle = { opacity: style?.lineOpacity, dashArray: style?.lineDash, lineType: style?.lineType };
@@ -105,6 +106,8 @@ export function mappingLayer(
   fillStyle && MappingLayer.style(layer, fillStyle);
   // state
   fillState && MappingLayer.state(layer, fillState);
+  // bottomColor
+  fillBottomColor && layer.setBottomColor(fillBottomColor);
 
   /**
    * 描边图层

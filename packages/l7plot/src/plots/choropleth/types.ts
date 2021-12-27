@@ -42,7 +42,7 @@ export interface ChoroplethSourceOptions extends Pick<ISourceCFG, 'transforms'> 
   /**
    * 业务数据
    */
-  data: any[];
+  data: Record<string, any>[];
   /**
    * 地理元数据关联
    */

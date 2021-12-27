@@ -1,6 +1,6 @@
 {
   "name": "@antv/l7plot",
-  "version": "0.0.3-alpha.11",
+  "version": "0.0.4-alpha.1",
   "description": "Geospatial Visualization Chart Library",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@antv/event-emitter": "^0.1.2",
-    "@antv/l7": "^2.6.22",
+    "@antv/l7": "^2.6.25",
     "@antv/l7plot-component": "^0.0.3-alpha.5",
     "@antv/util": "^2.0.13",
     "lodash-es": "^4.17.21",

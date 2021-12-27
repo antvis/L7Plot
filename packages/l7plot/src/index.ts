@@ -1,4 +1,4 @@
-export const version = '0.0.3-alpha.11';
+export const version = '0.0.4-alpha.1';
 
 /** 资源静态注册 **/
 export {
