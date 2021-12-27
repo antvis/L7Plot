@@ -22,6 +22,8 @@ type AreaLayerStyle = {
   lineDash?: [number, number];
   // 描边透明度
   lineOpacity?: number;
+  // 填充兜底颜色，用于颜色值映值不存在时
+  fillBottomColor?: false | string;
 };
 
 export type AreaLayerActiveOptions = {
