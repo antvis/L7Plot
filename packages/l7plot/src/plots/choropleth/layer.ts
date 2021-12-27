@@ -13,7 +13,7 @@ export const createCountryBoundaryLayer = (data: FeatureCollection, plotConfig?:
   const chinaBoundaryFeatures = data.features.filter(({ properties }) =>
     ['coast', 'hkm', 'national'].includes(properties?.['type'])
   );
-  const disputeBoundaryFeatures = data.features.filter(({ properties }) => properties?.['type']);
+  const disputeBoundaryFeatures = data.features.filter(({ properties }) => properties?.['type'] === 'dispute');
 
   const chinaBoundaryLayer = new PathLayer({
     name: 'chinaBoundaryLayer',
