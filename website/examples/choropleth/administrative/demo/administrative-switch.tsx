@@ -32,7 +32,7 @@ function AdministrativeSwitch() {
 
         const chinaMap = new Choropleth('mapContainer', {
           map: {
-            type: 'amap',
+            type: 'mapbox',
             style: 'blank',
             center: [120.19382669582967, 30.258134],
             zoom: 3,
@@ -60,6 +60,16 @@ function AdministrativeSwitch() {
             stroke: '#ccc',
             lineWidth: 0.6,
             lineOpacity: 1,
+          },
+          chinaBorder: {
+            // 国界
+            national: { color: '#ccc', width: 1, opacity: 1 },
+            // 争议
+            dispute: { color: '#ccc', width: 1, opacity: 0.8, dashArray: [2, 2] },
+            // 海洋
+            coast: { color: '#ccc', width: 0.7, opacity: 0.8 },
+            // 港澳
+            hkm: { color: 'gray', width: 0.7, opacity: 0.8 },
           },
           label: {
             visible: true,

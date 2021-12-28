@@ -83,12 +83,6 @@ tooltip 相对锚点的位置，支持以下相对锚点的位置：
 
 tooltip 相对锚点的偏移量。
 
-### `tooltip.`offsets
-
-`number[]` optional default: `[15, 0]`
-
-tooltip 相对锚点的偏移量。
-
 ### `tooltip.`customContent
 
 `Function: (title: string, items: TooltipListItem[]) => string|HTMLElement` optional
