@@ -109,9 +109,16 @@ const choropleth = new Choropleth(container, options);
 
 ### `options.`chinaBorder
 
-`boolean` optional default: `ture`
+`boolean｜ChinaBoundaryStyle` optional default: `ture`
 
-是否显示中国国界线。
+是否显示中国国界线，国界线样式 ChinaBoundaryStyle 配置如下：
+
+| 属性      | 描述 | 类型                     | 默认值                                                      | 是否必填 |
+| --------- | ---- | ------------------------ | ----------------------------------------------------------- | -------- |
+| national  | 国界 | `LinesLayerStyleOptions` | `{ color: 'red', width: 1, opacity: 1 }`                    | optional |
+| dispute   | 争议 | `LinesLayerStyleOptions` | `{ color: 'red', width: 1, opacity: 1, dashArray: [1, 6] }` | optional |
+| coast     | 海洋 | `LinesLayerStyleOptions` | `{ color: 'blue', width: 1, opacity: 1 }`                   | optional |
+| triggerUp | 港澳 | `LinesLayerStyleOptions` | `{ color: 'gray', width: 1, opacity: 1 }`                   | optional |
 
 ### `options.`drill
 

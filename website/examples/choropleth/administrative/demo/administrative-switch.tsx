@@ -61,6 +61,16 @@ function AdministrativeSwitch() {
             lineWidth: 0.6,
             lineOpacity: 1,
           },
+          chinaBorder: {
+            // 国界
+            national: { color: '#ccc', width: 1, opacity: 1 },
+            // 争议
+            dispute: { color: '#ccc', width: 1, opacity: 0.8, dashArray: [2, 2] },
+            // 海洋
+            coast: { color: '#ccc', width: 0.7, opacity: 0.8 },
+            // 港澳
+            hkm: { color: 'gray', width: 0.7, opacity: 0.8 },
+          },
           label: {
             visible: true,
             field: 'name',
