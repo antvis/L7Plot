@@ -93,7 +93,20 @@ tooltip 相对锚点的偏移量。
 
 `object` optional default: `{}`
 
-自定义 tooltip 样式。
+自定义 tooltip 样式，CSS 样式自定义如下：
+
+```ts
+{
+  domStyles: {
+    'l7plot-tooltip'?: CSSProperties;
+    'l7plot-tooltip__title'?: CSSProperties;
+    'l7plot-tooltip__list'?: CSSProperties;
+    'l7plot-tooltip__list-item'?: CSSProperties;
+    'l7plot-tooltip__name'?: CSSProperties;
+    'l7plot-tooltip__value'?: CSSProperties;
+  }
+}
+```
 
 ### `tooltip.`showComponent
 
