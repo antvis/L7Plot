@@ -33,12 +33,12 @@ describe('tooltip', () => {
     const container = tooltip.getContainer();
 
     expect(Array.from(container.classList).includes('l7plot-tooltip')).toBe(true);
-    const title = container.getElementsByClassName('l7plot-tooltip-title')[0] as HTMLElement;
+    const title = container.getElementsByClassName('l7plot-tooltip__title')[0] as HTMLElement;
     expect(title.innerText).toBe('my title');
 
-    const listItems = Array.from(container.getElementsByClassName('l7plot-tooltip-list-item')) as HTMLElement[];
+    const listItems = Array.from(container.getElementsByClassName('l7plot-tooltip__list-item')) as HTMLElement[];
     each(listItems, (listItem, index) => {
-      expect(listItem.getElementsByClassName('l7plot-tooltip-value')[0].innerText).toBe(items[index].value);
+      expect(listItem.getElementsByClassName('l7plot-tooltip__value')[0].innerText).toBe(items[index].value);
     });
 
     each(Theme[Constants.CONTAINER_CLASS], (val, key) => {
