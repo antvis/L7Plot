@@ -28,7 +28,9 @@
     "build-website": "lerna run build --stream --scope=l7plot-website",
     "bundle": "lerna run build:umd --stream --scope=@antv/l7plot",
     "deploy-website": "lerna run deploy --stream --scope=l7plot-website",
-    "publish": "lerna publish"
+    "version": "lerna version",
+    "prepublish-package": "yarn build && yarn bundle",
+    "publish-package": "lerna publish from-package"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",

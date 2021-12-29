@@ -3,11 +3,13 @@
   "useWorkspaces": true,
   "version": "independent",
   "command": {
+    "version": {
+      "ignoreChanges": ["**/__tests__/**", "**/*.md"],
+      "message": "chore: publish %s",
+      "private": false
+    },
     "publish": {
-      "packages": ["packages/*"],
-      "ignoreChanges": ["__tests__", "*.md", "website", "storybook"],
-      "registry": "https://registry.npmjs.com",
-      "message": "chore: publish"
+      "registry": "https://registry.npmjs.org"
     }
   },
   "publishConfig": {
