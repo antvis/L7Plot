@@ -28,6 +28,8 @@
     "build-website": "lerna run build --stream --scope=l7plot-website",
     "bundle": "lerna run build:umd --stream --scope=@antv/l7plot",
     "deploy-website": "lerna run deploy --stream --scope=l7plot-website",
+    "version": "lerna version",
+    "prepublish": "yarn build && yarn bundle",
     "publish": "lerna publish"
   },
   "devDependencies": {
