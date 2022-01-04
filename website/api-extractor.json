@@ -1,5 +1,5 @@
 {
-  "mainEntryPointFilePath": "<projectFolder>/dist/lib/index.d.ts",
+  "mainEntryPointFilePath": "<projectFolder>/packages/l7plot/dist/lib/index.d.ts",
   "apiReport": {
     "enabled": false
   },
