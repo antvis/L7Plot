@@ -3,7 +3,7 @@ module.exports = {
     {
       resolve: '@antv/gatsby-theme-antv',
       options: {
-        GATrackingId: `UA-148148901`,
+        GATrackingId: `G-S7EDKPDSL6`,
       },
     },
   ],
@@ -172,7 +172,7 @@ module.exports = {
     showAPIDoc: true, // 是否在demo页展示API文档
     showChartResize: true, // 是否在demo页展示图表视图切换
     playground: {
-      container: '<div id="container" />',
+      container: '<div id="container" style="position: relative; width: 100%; height: 100vh;" />',
       playgroundDidMount: 'console.log("playgroundDidMount");',
       playgroundWillUnmount: 'console.log("playgroundWillUnmount");',
       devDependencies: {
