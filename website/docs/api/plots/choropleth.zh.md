@@ -236,12 +236,12 @@ plot.changeView(view: ViewLevel, config?: DrillStepConfig);
 plot.drillDown(view: ViewLevel, config?: DrillStepConfig);
 ```
 
-### drillDown
+### drillUp
 
 向上钻取方法。
 
 ```js
-plot.drillDown(config?: DrillStepConfig);
+plot.drillUp(config?: DrillStepConfig);
 ```
 
 ## 四、事件
