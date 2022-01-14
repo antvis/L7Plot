@@ -93,7 +93,7 @@ class ChoroplethDrill extends Component {
     });
 
     scene.on('loaded', () => {
-      choropleth.attachToScene(scene);
+      choropleth.addToScene(scene);
     });
 
     this.scene = scene;
