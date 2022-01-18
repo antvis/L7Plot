@@ -23,7 +23,6 @@ class ChinaMap extends Component {
         zoom: 3,
         pitch: 0,
       },
-
       source: {
         data: geoJson,
         parser: {
@@ -31,7 +30,6 @@ class ChinaMap extends Component {
         },
       },
       autoFit: true,
-
       color: {
         field: 'philosopherSum',
         value: ['#B8E1FF', '#7DAAFF', '#3D76DD', '#0047A5'],
@@ -60,17 +58,11 @@ class ChinaMap extends Component {
       },
       state: { active: true, select: false },
       tooltip: {
-        items: ['name', 'adcode'],
+        items: ['name', 'philosopherSum'],
       },
       zoom: {
         position: 'bottomright',
       },
-      // scale: {
-      //   position: 'bottomright',
-      // },
-      // layerMenu: {
-      //   position: 'topright',
-      // },
       legend: {
         position: 'bottomleft',
       },

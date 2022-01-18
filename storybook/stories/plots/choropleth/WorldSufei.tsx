@@ -82,9 +82,6 @@ class ChinaMap extends Component {
       zoom: {
         position: 'bottomright',
       },
-      // scale: {
-      //   position: 'bottomright',
-      // },
       legend: {
         position: 'bottomleft',
       },
