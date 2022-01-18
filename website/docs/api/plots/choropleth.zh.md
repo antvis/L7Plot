@@ -64,16 +64,34 @@ const choropleth = new Choropleth(container, options);
 | 属性        | 描述                                       | 类型                | 默认值     | 是否必填 |
 | ----------- | ------------------------------------------ | ------------------- | ---------- | -------- |
 | sourceField | 业务元数据地理字段                         | `string`            |            | required |
-| geoField    | 地理数据字段                               | `string`            | `'adcode'` | optional |
+| geoField    | 地理数据字段                               | `'adcode'｜'name'`  | `'adcode'` | optional |
 | geoData     | 地理数据，设置则覆盖当前层级的行政地址数据 | `FeatureCollection` |            | optional |
+
+业务数据与地理数据关联主要有以下两种方式。行政名称与编码映射关系详见[行政名称表格](https://www.yuque.com/antv/qbux5m/wrxc8h#yyIb)与[行政名称数据](https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.1/administrative-data/area-list.json)。
+
+1. 根据行政编码匹配渲染
 
 ```js
 {
   source: {
-    data: [{ name: '上海市', code: 310000, value: 200 }],
+    data: [{ cityName: '上海市', code: 310000, value: 200 }],
     joinBy: {
       sourceField: 'code',
       geoField: 'adcode',
+    },
+  },
+}
+```
+
+2. 根据行政名称匹配渲染
+
+```js
+{
+  source: {
+    data: [{ cityName: '上海市', code: 310000, value: 200 }],
+    joinBy: {
+      sourceField: 'cityName',
+      geoField: 'name',
     },
   },
 }
