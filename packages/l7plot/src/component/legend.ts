@@ -2,13 +2,9 @@ import { IControlOption } from '@antv/l7-core';
 import { Control } from '@antv/l7-component';
 import { CategoryLegendOptions, ContinueLegendOptions, CategoryLegend, ContinueLegend } from '@antv/l7plot-component';
 
-export type LegendType = 'category' | 'continue';
-
-export type LegendItem = {
-  type: LegendType;
-  options: CategoryLegendOptions & ContinueLegendOptions;
-};
-
+export type LegendItem =
+  | { type: 'category'; options: CategoryLegendOptions }
+  | { type: 'continue'; options: ContinueLegendOptions };
 export interface LegendOptions extends Partial<IControlOption> {
   items: LegendItem[];
 }
@@ -33,25 +29,25 @@ export class Legend extends Control {
     const legendComponents: (CategoryLegend | ContinueLegend)[] = [];
 
     for (let index = 0; index < legendItem.length; index++) {
-      const { type, options } = legendItem[index];
-      if (type === 'category') {
+      const item = legendItem[index];
+      if (item.type === 'category') {
         const legend = new CategoryLegend({
-          title: options.title,
-          items: options.items,
-          className: options.className,
-          customContent: options.customContent,
-          domStyles: options.domStyles,
+          title: item.options.title,
+          items: item.options.items,
+          className: item.options.className,
+          customContent: item.options.customContent,
+          domStyles: item.options.domStyles,
         });
         legendComponents.push(legend);
-      } else if (type === 'continue') {
+      } else if (item.type === 'continue') {
         const legend = new ContinueLegend({
-          title: options.title,
-          min: options.min,
-          max: options.max,
-          colors: options.colors,
-          className: options.className,
-          customContent: options.customContent,
-          domStyles: options.domStyles,
+          title: item.options.title,
+          min: item.options.min,
+          max: item.options.max,
+          colors: item.options.colors,
+          className: item.options.className,
+          customContent: item.options.customContent,
+          domStyles: item.options.domStyles,
         });
         legendComponents.push(legend);
       }

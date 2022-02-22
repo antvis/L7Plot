@@ -15,7 +15,7 @@ export type CategoryLegendListItem = {
   /**
    * 值
    */
-  value: [number, number] | [string, string] | string;
+  value: [number, number] | [string, string] | number | string;
 
   [key: string]: any;
 };
