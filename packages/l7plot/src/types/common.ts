@@ -10,10 +10,23 @@ import {
   IImage,
   ITransform,
   IStatusOptions,
+  ILegendSegmentItem,
+  ILegendClassificaItem,
 } from '@antv/l7-core';
 import { Scene } from '@antv/l7-scene';
 
-export { ILayer, ILayerConfig, ISourceCFG, ILngLat, Bounds, BlendType, IImage, ITransform };
+export {
+  ILayer,
+  ILayerConfig,
+  ISourceCFG,
+  ILngLat,
+  Bounds,
+  BlendType,
+  IImage,
+  ITransform,
+  ILegendSegmentItem,
+  ILegendClassificaItem,
+};
 
 export type { Scene };
 

@@ -51,7 +51,7 @@
     "topojson-client": "^3.1.0"
   },
   "peerDependencies": {
-    "@antv/l7": "^2.7.1"
+    "@antv/l7": "^2.7.22"
   },
   "publishConfig": {
     "access": "public"
