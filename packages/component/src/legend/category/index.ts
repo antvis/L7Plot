@@ -221,7 +221,7 @@ export class CategoryLegend<O extends CategoryLegendOptions = CategoryLegendOpti
     if (listDom) {
       items.forEach((item) => {
         const isEmpty = item.value === '';
-        const value = isEmpty ? '—' : Array.isArray(item.value) ? item.value.join('-') : item.value;
+        const value = isEmpty ? '—' : Array.isArray(item.value) ? item.value.join(' - ') : item.value;
         const substituteObj = { ...item, value };
 
         const domStr = substitute(itemTpl, substituteObj);
