@@ -215,12 +215,13 @@ export class CategoryLegend<O extends CategoryLegendOptions = CategoryLegendOpti
    */
   private renderItems() {
     this.clearItemDoms();
-    const items = this.options.items;
+    const items = this.options.items.length > 30 ? this.options.items.slice(0, 30) : this.options.items;
     const itemTpl = this.options.itemTpl || ITEM_TPL;
     const listDom = this.listDom;
     if (listDom) {
       items.forEach((item) => {
-        const value = Array.isArray(item.value) ? item.value.join('-') : item.value;
+        const isEmpty = item.value === '';
+        const value = isEmpty ? '—' : Array.isArray(item.value) ? item.value.join('-') : item.value;
         const substituteObj = { ...item, value };
 
         const domStr = substitute(itemTpl, substituteObj);
