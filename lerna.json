@@ -6,7 +6,7 @@
     "version": {
       "ignoreChanges": ["**/__tests__/**", "**/*.md"],
       "message": "chore: publish %s",
-      "private": false
+      "private": true
     },
     "publish": {
       "registry": "https://registry.npmjs.org"
