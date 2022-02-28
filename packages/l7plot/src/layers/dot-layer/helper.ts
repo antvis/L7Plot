@@ -1,3 +1,4 @@
+import { round } from 'lodash-es';
 import { CategoryLegendListItem } from '@antv/l7plot-component';
 import { ILegendClassificaItem, ILegendSegmentItem } from '../../types';
 
@@ -20,7 +21,7 @@ export const getColorLegendItems = (
   // TODO: scale nice
   const items: LegendItemExtent[] = legendItems.map((item) => ({
     ...item,
-    value: [Math.ceil(item.value[0]), Math.ceil(item.value[1])],
+    value: [round(item.value[0], 2), round(item.value[1], 2)],
   }));
 
   return items;

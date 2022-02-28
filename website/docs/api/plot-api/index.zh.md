@@ -354,7 +354,7 @@ plot.removeLegendControl();
 导出地图，目前仅支持导出可视化层，不支持底图导出。
 
 ```js
-plot.exportPng(type?: 'png' | 'jpg');
+plot.exportPng(type?: 'png' | 'jpg'): string;
 ```
 
 ### addToScene
