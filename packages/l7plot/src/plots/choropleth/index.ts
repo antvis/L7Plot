@@ -537,15 +537,8 @@ export class Choropleth extends Plot<ChoroplethOptions> {
       viewLevel: { level, adcode, granularity },
       source: { joinBy: { geoData } },
     });
-    this.update(mergeConfig);
 
-    // // 钻取配置不一样需要重新映射 isEqual
-    // const { color, style, state, label, tooltip } = mergeConfig;
-    // this.fillAreaLayer.updateOptions({ color, style, state });
-    // this.labelLayer?.updateOptions({ ...label });
-    // if (tooltip) {
-    //   this.tooltip?.update(tooltip);
-    // }
+    this.update(mergeConfig);
 
     const drillData: DrillStack = {
       level,
