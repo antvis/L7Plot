@@ -75,7 +75,8 @@ export class Flow extends Plot<FlowOptions> {
     const data: any[] = [];
     source.data.dataArray.forEach((item) => {
       const { coordinates } = item;
-      const [startPoint, endPoint] = coordinates;
+      // [startPoint, endPoint]
+      const [, endPoint] = coordinates;
       // if (isUndefined(pointMap[startPoint.toString()])) {
       //   data.push({ ...item, coordinates: startPoint });
       //   pointMap[startPoint.toString()] = true;
