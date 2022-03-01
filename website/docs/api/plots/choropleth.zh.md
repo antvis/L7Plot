@@ -262,6 +262,14 @@ plot.drillDown(view: ViewLevel, config?: DrillStepConfig);
 plot.drillUp(config?: DrillStepConfig);
 ```
 
+### getCurrentDrillSteps
+
+获取当前已钻取层级数据。
+
+```js
+plot.getCurrentDrillSteps(): ViewLevel[];
+```
+
 ## 四、事件
 
 继承 [Plot 方法](/zh/docs/api/plot-api#四、事件)。
