@@ -118,6 +118,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
       !isEqual(this.lastOptions.drill?.steps, this.options.drill?.steps)
     ) {
       this.drillReset();
+      this.initDrillEvent();
     }
 
     this.scene.setEnableRender(false);
