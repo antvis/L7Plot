@@ -69,7 +69,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    */
   private drillSteps: DrillStep[] = [];
   /**
-   * 钻取行政栈数据
+   * 钻取栈数据
    */
   private drillStacks: DrillStack[] = [];
 
@@ -341,10 +341,18 @@ export class Choropleth extends Plot<ChoroplethOptions> {
       }
       return step;
     });
+
     // 初始化或钻取路径更新时
     if (!isEqualDrillSteps(dillSteps, this.drillSteps)) {
       this.drillSteps = dillSteps;
       this.drillStacks = [];
+    }
+
+    // 初始化钻取栈第一钻数据
+    if (!this.drillStacks.length) {
+      const { level, adcode, granularity = DEFAULT_AREA_GRANULARITY[level] } = this.options.viewLevel;
+      const config = getDrillStepDefaultConfig(this.options);
+      this.drillStacks = [{ level, adcode, granularity, config }];
     }
 
     // 上卷事件
@@ -358,6 +366,15 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    */
   private drillReset() {
     this.drillStacks = [];
+  }
+
+  /**
+   * 获取当前已钻取层级数据
+   */
+  public getCurrentDrillSteps() {
+    const steps = this.drillStacks.map((item) => pick(item, ['level', 'adcode', 'granularity']) as Required<ViewLevel>);
+
+    return steps;
   }
 
   /**
@@ -425,13 +442,6 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     const { steps, onDown } = this.options.drill as Drill;
     const properties = event.feature?.properties;
     const { adcode } = properties;
-
-    // 还没有开始钻取
-    if (!this.drillStacks.length) {
-      const { level, adcode, granularity = DEFAULT_AREA_GRANULARITY[level] } = this.options.viewLevel;
-      const config = getDrillStepDefaultConfig(this.options);
-      this.drillStacks = [{ level, adcode, granularity, config }];
-    }
 
     // 已经下钻到最后
     if (this.drillStacks.length === steps.length + 1) {
