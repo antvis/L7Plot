@@ -5,73 +5,74 @@ import { AreaLayerActiveOptions, AreaLayerOptions } from './types';
 
 const defaultHighlightColor = '#2f54eb';
 
-const defaultState: { active: Required<AreaLayerActiveOptions>; select: Required<AreaLayerActiveOptions> } = {
-  active: {
-    fill: false,
-    stroke: defaultHighlightColor,
-    lineWidth: 1.5,
-    lineOpacity: 0.8,
-  },
-  select: {
-    fill: false,
-    stroke: defaultHighlightColor,
-    lineWidth: 1.5,
-    lineOpacity: 0.8,
-  },
-};
+export const defaultLayerState: { active: Required<AreaLayerActiveOptions>; select: Required<AreaLayerActiveOptions> } =
+  {
+    active: {
+      fill: false,
+      stroke: defaultHighlightColor,
+      lineWidth: 1.5,
+      lineOpacity: 0.8,
+    },
+    select: {
+      fill: false,
+      stroke: defaultHighlightColor,
+      lineWidth: 1.5,
+      lineOpacity: 0.8,
+    },
+  };
 
-export const getDefaultState = (state?: AreaLayerOptions['state']) => {
+export const getLayerState = (state?: AreaLayerOptions['state']) => {
   if (isUndefined(state)) {
-    return defaultState;
+    return defaultLayerState;
   }
 
   if (state.active === false) {
-    defaultState.active = Object.assign(defaultState.active, { fill: false, stroke: false });
+    defaultLayerState.active = Object.assign(defaultLayerState.active, { fill: false, stroke: false });
   } else if (typeof state.active === 'object') {
     if (state.active.fill === false) {
-      defaultState.active.fill = false;
+      defaultLayerState.active.fill = false;
     } else if (typeof state.active.fill === 'string') {
-      defaultState.active.fill = state.active.fill;
+      defaultLayerState.active.fill = state.active.fill;
     }
 
     if (state.active.stroke === false) {
-      defaultState.active.stroke = false;
+      defaultLayerState.active.stroke = false;
     } else if (typeof state.active.stroke === 'string') {
-      defaultState.active.stroke = state.active.stroke;
+      defaultLayerState.active.stroke = state.active.stroke;
     }
 
     if (typeof state.active.lineWidth === 'number') {
-      defaultState.active.lineWidth = state.active.lineWidth;
+      defaultLayerState.active.lineWidth = state.active.lineWidth;
     }
     if (typeof state.active.lineOpacity === 'number') {
-      defaultState.active.lineOpacity = state.active.lineOpacity;
+      defaultLayerState.active.lineOpacity = state.active.lineOpacity;
     }
   }
 
   if (state.select === false) {
-    defaultState.select = Object.assign(defaultState.select, { fill: false, stroke: false });
+    defaultLayerState.select = Object.assign(defaultLayerState.select, { fill: false, stroke: false });
   } else if (typeof state.select === 'object') {
     if (state.select.fill === false) {
-      defaultState.select.fill = false;
+      defaultLayerState.select.fill = false;
     } else if (typeof state.select.fill === 'string') {
-      defaultState.select.fill = state.select.fill;
+      defaultLayerState.select.fill = state.select.fill;
     }
 
     if (state.select.stroke === false) {
-      defaultState.select.stroke = false;
+      defaultLayerState.select.stroke = false;
     } else if (typeof state.select.stroke === 'string') {
-      defaultState.select.stroke = state.select.stroke;
+      defaultLayerState.select.stroke = state.select.stroke;
     }
 
     if (typeof state.select.lineWidth === 'number') {
-      defaultState.select.lineWidth = state.select.lineWidth;
+      defaultLayerState.select.lineWidth = state.select.lineWidth;
     }
     if (typeof state.select.lineOpacity === 'number') {
-      defaultState.select.lineOpacity = state.select.lineOpacity;
+      defaultLayerState.select.lineOpacity = state.select.lineOpacity;
     }
   }
 
-  return defaultState;
+  return defaultLayerState;
 };
 
 export function mappingLayer(
@@ -83,10 +84,10 @@ export function mappingLayer(
   options: AreaLayerOptions
 ): void {
   const { color, style, state } = options;
-  const defaultState = getDefaultState(state);
+  const layerState = getLayerState(state);
 
   const fillState = {
-    active: defaultState.active.fill === false ? false : { color: defaultState.active.fill },
+    active: layerState.active.fill === false ? false : { color: layerState.active.fill },
     select: false,
   };
   const fillStyle = { opacity: style?.opacity };
@@ -124,10 +125,10 @@ export function mappingLayer(
   /**
    * 高亮图层
    */
-  if (defaultState.active.stroke) {
-    const color = defaultState.active.stroke;
-    const size = defaultState.active.lineWidth || strokeSize;
-    const style = { opacity: defaultState.active.lineOpacity };
+  if (layerState.active.stroke) {
+    const color = layerState.active.stroke;
+    const size = layerState.active.lineWidth || strokeSize;
+    const style = { opacity: layerState.active.lineOpacity };
     // shape
     MappingLayer.shape(highlightLayer, 'line');
     // size
@@ -141,8 +142,8 @@ export function mappingLayer(
   /**
    * 选中填充图层
    */
-  if (defaultState.select.fill) {
-    const color = defaultState.select.fill;
+  if (layerState.select.fill) {
+    const color = layerState.select.fill;
     // shape
     MappingLayer.shape(selectFillLayer, 'fill');
     // color
@@ -155,10 +156,10 @@ export function mappingLayer(
   /**
    * 选中描边图层
    */
-  if (defaultState.select.stroke) {
-    const color = defaultState.select.stroke;
-    const size = defaultState.select.lineWidth || strokeSize;
-    const style = { opacity: defaultState.select.lineOpacity };
+  if (layerState.select.stroke) {
+    const color = layerState.select.stroke;
+    const size = layerState.select.lineWidth || strokeSize;
+    const style = { opacity: layerState.select.lineOpacity };
     // shape
     MappingLayer.shape(selectStrokeLayer, 'line');
     // size

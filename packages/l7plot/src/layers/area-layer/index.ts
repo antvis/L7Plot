@@ -1,7 +1,7 @@
 import { uniqueId, clone, isEqual, isUndefined } from '@antv/util';
 import { PolygonLayer, LineLayer } from '@antv/l7-layers';
 import { PlotLayer } from '../../core/layer/plot-layer';
-import { getDefaultState, mappingLayer } from './adaptor';
+import { defaultLayerState, getLayerState, mappingLayer } from './adaptor';
 import { AreaLayerOptions, AreaLayerSourceOptions } from './types';
 import { ILayer, MouseEvent, Scene, Source } from '../../types';
 import { getColorLegendItems } from '../dot-layer/helper';
@@ -67,34 +67,38 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
    * 图层是否具有交互属性
    */
   public interaction = true;
+  /**
+   * 图层交互配置状态
+   */
+  private layerState = defaultLayerState;
 
   constructor(options: AreaLayerOptions) {
     super(options);
     const { name, source, visible, minZoom, maxZoom, zIndex = 0 } = this.options;
     const config = this.pickLayerConfig(this.options);
-    const defaultState = getDefaultState(this.options.state);
 
     this.name = name ? name : uniqueId(this.type);
     this.layer = new PolygonLayer({ ...config, name: this.name });
     this.strokeLayer = new LineLayer({ name: 'strokeLayer', visible, zIndex, minZoom, maxZoom });
+    this.layerState = getLayerState(this.options.state);
 
     this.highlightLayer = new LineLayer({
       name: 'highlightLayer',
-      visible: visible && Boolean(defaultState.active.stroke),
+      visible: visible && Boolean(this.layerState.active.stroke),
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
     });
     this.selectFillLayer = new PolygonLayer({
       name: 'selectFillLayer',
-      visible: visible && Boolean(defaultState.select.fill),
+      visible: visible && Boolean(this.layerState.select.fill),
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
     });
     this.selectStrokeLayer = new LineLayer({
       name: 'selectStrokeLayer',
-      visible: visible && Boolean(defaultState.select.stroke),
+      visible: visible && Boolean(this.layerState.select.stroke),
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
@@ -194,8 +198,12 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   };
 
   private onSelectHandle = (event: MouseEvent) => {
-    const enabledMultiSelect = this.options.enabledMultiSelect;
     const { feature, featureId } = event;
+    this.handleSelectData(featureId, feature);
+  };
+
+  private handleSelectData(featureId: number, feature: any) {
+    const enabledMultiSelect = this.options.enabledMultiSelect;
     let selectData = clone(this.selectData);
     const index = selectData.findIndex((item) => item.featureId === featureId);
 
@@ -217,7 +225,7 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
     }
 
     this.setSelectLayerSource(selectData);
-  };
+  }
 
   public addTo(scene: Scene) {
     scene.addLayer(this.layer);
@@ -238,16 +246,17 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   public update(options: Partial<AreaLayerOptions>) {
     super.update(options);
     this.mappingLayer(this.options);
+    this.layerState = getLayerState(this.options.state);
 
     if (this.options.visible) {
       if (!isUndefined(options.state) && !isEqual(this.lastOptions.state, this.options.state)) {
         this.updateHighlightLayer();
       }
-      const defaultState = getDefaultState(this.options.state);
-      if (defaultState.active.stroke) {
+
+      if (this.layerState.active.stroke) {
         this.setHighlightLayerSource();
       }
-      if (defaultState.select.fill || defaultState.select.stroke) {
+      if (this.layerState.select.fill || this.layerState.select.stroke) {
         this.setSelectLayerSource();
       }
     }
@@ -256,19 +265,19 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
   }
 
   private updateHighlightLayer() {
-    const defaultState = getDefaultState(this.options.state);
-    const lasetDefaultState = getDefaultState(this.lastOptions.state);
+    const layerState = this.layerState;
+    const lasetLayerState = getLayerState(this.lastOptions.state);
 
-    if (lasetDefaultState.active.stroke !== defaultState.active.stroke) {
-      defaultState.active.stroke ? this.highlightLayer.show() : this.highlightLayer.hide();
+    if (lasetLayerState.active.stroke !== layerState.active.stroke) {
+      layerState.active.stroke ? this.highlightLayer.show() : this.highlightLayer.hide();
     }
 
-    if (lasetDefaultState.select.fill !== defaultState.select.fill) {
-      defaultState.select.fill ? this.selectFillLayer.show() : this.selectFillLayer.hide();
+    if (lasetLayerState.select.fill !== layerState.select.fill) {
+      layerState.select.fill ? this.selectFillLayer.show() : this.selectFillLayer.hide();
     }
 
-    if (lasetDefaultState.select.stroke !== defaultState.select.stroke) {
-      defaultState.select.stroke ? this.selectStrokeLayer.show() : this.selectStrokeLayer.hide();
+    if (lasetLayerState.select.stroke !== layerState.select.stroke) {
+      layerState.select.stroke ? this.selectStrokeLayer.show() : this.selectStrokeLayer.hide();
     }
   }
 
@@ -322,11 +331,36 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
     return [];
   }
 
-  public setActive(id: number) {
-    // TODO: L7 method pickFeature(id|{x,y})
+  public setActive(field: string, value: number | string) {
+    const source = this.layer.getSource();
+    const featureId = source.getFeatureId(field, value);
+    if (isUndefined(featureId)) {
+      throw new Error('Feature non-existent' + field + value);
+    }
+
+    if (this.layerState.active.fill) {
+      this.layer.setActive(featureId);
+    }
+
+    if (this.layerState.active.stroke) {
+      const feature = source.getFeatureById(featureId);
+      this.setHighlightLayerSource(feature, featureId);
+    }
   }
 
-  public setSelect(id: number) {
+  public setSelect(field: string, value: number | string) {
+    const source = this.layer.getSource();
+    const featureId = source.getFeatureId(field, value);
+    if (isUndefined(featureId)) {
+      throw new Error('Feature non-existent' + field + value);
+    }
+
+    if (this.layerState.select.stroke === false || this.layerState.select.fill === false) {
+      return;
+    }
+
+    const feature = source.getFeatureById(featureId);
+    this.handleSelectData(featureId, feature);
     // TODO: L7 method pickFeature(id|{x,y})
   }
 }
