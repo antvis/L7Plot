@@ -286,21 +286,30 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     const fillAreaLayerConfig = pick<any>(options, AreaLayer.LayerOptionsKeys);
     this.fillAreaLayer.update(fillAreaLayerConfig);
 
-    if (options.chinaBorder) {
-      if (!this.chinaBoundaryLayer) {
-        const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = this.createCountryBoundaryLayer(
-          this.chinaBoundaryData,
-          this.options
-        );
-        this.chinaBoundaryLayer = chinaBoundaryLayer;
-        this.chinaDisputeBoundaryLayer = chinaDisputeBoundaryLayer;
-        this.layerGroup.addLayer(this.chinaBoundaryLayer);
-        this.layerGroup.addLayer(this.chinaDisputeBoundaryLayer);
-      }
-      // todo 更新方法
-    } else if (options.chinaBorder === false) {
+    const createCountryBoundaryLayer = () => {
+      const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = this.createCountryBoundaryLayer(
+        this.chinaBoundaryData,
+        this.options
+      );
+      this.chinaBoundaryLayer = chinaBoundaryLayer;
+      this.chinaDisputeBoundaryLayer = chinaDisputeBoundaryLayer;
+      this.layerGroup.addLayer(this.chinaBoundaryLayer);
+      this.layerGroup.addLayer(this.chinaDisputeBoundaryLayer);
+    };
+    const removeCountryBoundaryLayer = () => {
       this.chinaBoundaryLayer && this.layerGroup.removeLayer(this.chinaBoundaryLayer);
       this.chinaDisputeBoundaryLayer && this.layerGroup.removeLayer(this.chinaDisputeBoundaryLayer);
+    };
+
+    if (options.chinaBorder) {
+      if (!this.chinaBoundaryLayer) {
+        createCountryBoundaryLayer();
+      } else {
+        removeCountryBoundaryLayer();
+        createCountryBoundaryLayer();
+      }
+    } else if (options.chinaBorder === false) {
+      removeCountryBoundaryLayer();
     }
 
     this.updateLabelLayer(this.source, options.label, this.options, this.labelLayer);
