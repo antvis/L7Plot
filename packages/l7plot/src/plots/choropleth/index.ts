@@ -1,4 +1,4 @@
-import { pick, isEqual, isUndefined } from '@antv/util';
+import { pick, isEqual } from '@antv/util';
 import { Plot } from '../../core/plot';
 import { deepAssign } from '../../utils';
 import {
