@@ -117,7 +117,7 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
   protected createContainer(container: string | HTMLDivElement) {
     const { width, height } = this.options;
     const dom = typeof container === 'string' ? (document.getElementById(container) as HTMLDivElement) : container;
-    dom.style.position || (dom.style.position = 'relative');
+    dom.style.position || (dom.style.position === 'relative');
     if (width) {
       dom.style.width || (dom.style.width = `${width}px`);
     }
