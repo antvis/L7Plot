@@ -524,6 +524,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    * 向下钻取方法
    */
   public drillDown(view: ViewLevel, config: DrillStepConfig = {}) {
+    // TODO: remove view
     this.changeView(view, config).then((drillData) => {
       drillData && this.drillStacks.push(drillData);
     });
@@ -532,17 +533,26 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   /**
    * 向上钻取方法
    */
-  public drillUp(config: DrillStepConfig = {}) {
+  public drillUp(config: DrillStepConfig = {}, level?: ViewLevel['level']) {
     // 已经上卷到最高层级
-    const isTopDrillStack = this.drillStacks.length === 0 || this.drillStacks.length === 1;
+    const drillStacksLength = this.drillStacks.length;
+    const isTopDrillStack = [0, 1].includes(drillStacksLength);
     if (isTopDrillStack) {
       return;
     }
-    const lastIndex = this.drillStacks.length - 1;
-    const { config: drillConfig, ...view } = this.drillStacks[lastIndex - 1];
+    const customUpStackIndex = level ? this.drillStacks.findIndex((item) => item.level === level) : -1;
+    const isCustomUp = customUpStackIndex !== -1;
+    const stacksIndex = isCustomUp ? customUpStackIndex : drillStacksLength - 2;
+    const { config: drillConfig, ...view } = this.drillStacks[stacksIndex];
     const mergeConfig = deepAssign({}, drillConfig, config);
+
     this.changeView(view, mergeConfig);
-    this.drillStacks.pop();
+
+    if (isCustomUp) {
+      this.drillStacks.splice(customUpStackIndex + 1);
+    } else {
+      this.drillStacks.pop();
+    }
   }
 
   /**

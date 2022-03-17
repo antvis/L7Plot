@@ -142,7 +142,7 @@ const choropleth = new Choropleth(container, options);
 
 `Drill` optional
 
-数据钻取配置，Drill 配置如下：
+开启数据钻取功能，Drill 配置如下：
 
 | 属性        | 描述               | 类型                                                                                                                           | 默认值    | 是否必填 |
 | ----------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------ | --------- | -------- |
@@ -240,7 +240,7 @@ DrillStepConfig 配置如下：
 
 ### changeView
 
-更新显示区域。
+更新显示区域，未开启[钻取功能](/zh/docs/api/plots/choropleth#`options.`drill)时，方法控制地图显示区域。
 
 ```js
 plot.changeView(view: ViewLevel, config?: DrillStepConfig);
@@ -248,7 +248,7 @@ plot.changeView(view: ViewLevel, config?: DrillStepConfig);
 
 ### drillDown
 
-向下钻取方法。
+向下钻取方法，配合开启[钻取功能](/zh/docs/api/plots/choropleth#`options.`drill)时，方法控制地图下钻。
 
 ```js
 plot.drillDown(view: ViewLevel, config?: DrillStepConfig);
@@ -256,10 +256,10 @@ plot.drillDown(view: ViewLevel, config?: DrillStepConfig);
 
 ### drillUp
 
-向上钻取方法。
+向上钻取方法，配合开启[钻取功能](/zh/docs/api/plots/choropleth#`options.`drill)时，方法控制地图上钻。上钻行政级别 `level` 可选，默认上钻到当前行政级别的上一层，也可以回到某一行政级别或最高层级别。
 
 ```js
-plot.drillUp(config?: DrillStepConfig);
+plot.drillUp(config?: DrillStepConfig, level?: `'world'｜'country'｜'province'｜'city'`);
 ```
 
 ### getCurrentDrillSteps
