@@ -527,13 +527,13 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   public drillUp(config: DrillStepConfig = {}, level?: ViewLevel['level']) {
     // 已经上卷到最高层级
     const drillStacksLength = this.drillStacks.length;
-    const isTopDrillStack = drillStacksLength === 0 || drillStacksLength === 1;
+    const isTopDrillStack = [0, 1].includes(drillStacksLength);
     if (isTopDrillStack) {
       return;
     }
     const customUpStackIndex = level ? this.drillStacks.findIndex((item) => item.level === level) : -1;
     const isCustomUp = customUpStackIndex !== -1;
-    const stacksIndex = isCustomUp ? customUpStackIndex : drillStacksLength - 1 - 1;
+    const stacksIndex = isCustomUp ? customUpStackIndex : drillStacksLength - 2;
     const { config: drillConfig, ...view } = this.drillStacks[stacksIndex];
     const mergeConfig = deepAssign({}, drillConfig, config);
 
