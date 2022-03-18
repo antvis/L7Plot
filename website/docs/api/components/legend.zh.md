@@ -106,5 +106,5 @@ DOM 容器自定义 className 。
 
 自定义 legend 内容。
 
-- 分类图例 _CategoryLegendCustomContent_: `(title: string, items: ILegendListItem[]) => string|HTMLElement`
-- 连续图例 _ContinueLegendCustomContent_: `(title: string, min: number, max: number, colors: string[]) => string | HTMLElement`
+- 分类图例 _CategoryLegendCustomContent_: `(title: string, items: ILegendListItem[]) => stringHTML | HTMLElement`
+- 连续图例 _ContinueLegendCustomContent_: `(title: string, min: number, max: number, colors: string[]) => stringHTML | HTMLElement`
