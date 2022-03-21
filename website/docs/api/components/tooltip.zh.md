@@ -85,7 +85,7 @@ tooltip 相对锚点的偏移量。
 
 ### `tooltip.`customContent
 
-`Function: (title: string, items: TooltipListItem[]) => string|HTMLElement` optional
+`Function: (title: string, items: TooltipListItem[]) => stringHTML | HTMLElement` optional
 
 自定义 tooltip 内容。
 
