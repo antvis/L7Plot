@@ -60,8 +60,9 @@ class Drill extends Component {
       },
 
       color: {
-        field: 'name',
+        field: 'adcode',
         value: ['#B8E1FF', '#7DAAFF', '#3D76DD', '#0047A5', '#001D70'],
+        scale: { type: 'quantize' },
       },
       style: {
         opacity: 0.8,

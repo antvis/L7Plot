@@ -248,8 +248,12 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
     this.source.setData(this.options.source.data, sourceCFG);
 
     // 更新 legend
-    if (this.options.legend) {
-      this.updateLegendControl(this.options.legend);
+    // TODO: 数据更新后，图层尚未执行更新，后续加图层 update 事件来解决
+    const legend = this.options.legend;
+    if (legend) {
+      setTimeout(() => {
+        this.updateLegendControl(legend);
+      });
     }
 
     this.emit('change-data');
