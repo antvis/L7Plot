@@ -194,8 +194,12 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     console.timeEnd('l7plot choropleth update data time');
 
     // 更新 legend
-    if (this.options.legend) {
-      this.updateLegendControl(this.options.legend);
+    // TODO: 数据更新后，图层尚未执行更新，后续加图层 update 事件来解决
+    const legend = this.options.legend;
+    if (legend) {
+      setTimeout(() => {
+        this.updateLegendControl(legend);
+      });
     }
 
     this.emit('change-data');

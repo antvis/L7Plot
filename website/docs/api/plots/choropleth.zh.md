@@ -264,7 +264,7 @@ plot.drillUp(config?: DrillStepConfig, level?: `'world'｜'country'｜'province'
 
 ### getCurrentDrillSteps
 
-获取当前已钻取层级数据。
+获取当前已钻取层级数据，配合开启[钻取功能](/zh/docs/api/plots/choropleth#`options.`drill)时使用。
 
 ```js
 plot.getCurrentDrillSteps(): ViewLevel[];
