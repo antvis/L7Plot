@@ -25,6 +25,10 @@
 
 </div>
 
+<div align="center">
+  <img src="https://gw.alipayobjects.com/zos/antfincdn/qS5tf5xUMi/0ebcb301-62d5-4e6c-a9e9-b7a24220fa22.png" width="800">
+</div>
+
 ## ✨ Features
 
 - 📦 Out of the box: configurable geographic charts with built-in multi granularity administrative data
@@ -41,12 +45,12 @@ $ npm install @antv/l7plot
 ## 🔨 Usage
 
 <div align="center">
-<!-- <img src="https://gw.alipayobjects.com/zos/antfincdn/E9LGyUOfkx/865ff168-a623-40aa-9806-ece6357f18e0.png" width="450" /> -->
+  <img src="https://gw.alipayobjects.com/zos/antfincdn/Yn%24QslMAWP/20220326145659.jpg" width="600" />
 </div>
 
-<!-- ```html
+```html
 <div id="container"></div>
-``` -->
+```
 
 ```ts
 import { Dot } from '@antv/l7plot';
