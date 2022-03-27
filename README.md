@@ -26,7 +26,7 @@
 </div>
 
 <div align="center">
-  <img src="https://gw.alipayobjects.com/zos/antfincdn/qS5tf5xUMi/0ebcb301-62d5-4e6c-a9e9-b7a24220fa22.png" width="800">
+  <img src="https://user-images.githubusercontent.com/26923747/160286530-aec01c97-a56b-4ea9-9fc6-f245d8f7b871.png" width="800">
 </div>
 
 ## ✨ 特性
