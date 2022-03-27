@@ -30,6 +30,7 @@ new Choropleth('container', {
     lineWidth: 0.6,
     lineOpacity: 1,
   },
+  chinaBorder: false,
   label: {
     visible: true,
     field: 'name',

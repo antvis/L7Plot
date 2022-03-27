@@ -25,6 +25,10 @@
 
 </div>
 
+<div align="center">
+  <img src="https://gw.alipayobjects.com/zos/antfincdn/qS5tf5xUMi/0ebcb301-62d5-4e6c-a9e9-b7a24220fa22.png" width="800">
+</div>
+
 ## ✨ 特性
 
 - 📦 开箱即用：配置式的地理图表，内置多粒度行政数据
@@ -41,12 +45,12 @@ $ npm install @antv/l7plot
 ## 🔨 使用
 
 <div align="center">
-<!-- <img src="https://gw.alipayobjects.com/zos/antfincdn/E9LGyUOfkx/865ff168-a623-40aa-9806-ece6357f18e0.png" width="450" /> -->
+  <img src="https://gw.alipayobjects.com/zos/antfincdn/Yn%24QslMAWP/20220326145659.jpg" width="600" />
 </div>
 
-<!-- ```html
+```html
 <div id="container"></div>
-``` -->
+```
 
 ```ts
 import { Dot } from '@antv/l7plot';
