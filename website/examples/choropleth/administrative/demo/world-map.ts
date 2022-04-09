@@ -9,10 +9,19 @@ new Choropleth('container', {
     pitch: 0,
   },
   source: {
-    data: [],
+    data: [
+      { name: '中华人民共和国', value: 200 },
+      { name: '美国', value: 250 },
+      { name: '俄罗斯', value: 180 },
+      { name: '日本', value: 120 },
+      { name: '加拿大', value: 130 },
+      { name: '澳大利亚', value: 130 },
+      { name: '新加坡', value: 170 },
+      { name: '巴西', value: 80 },
+    ],
     joinBy: {
-      sourceField: 'code',
-      geoField: 'adcode',
+      sourceField: 'name',
+      geoField: 'name',
     },
   },
   viewLevel: {
@@ -21,14 +30,16 @@ new Choropleth('container', {
   },
   autoFit: true,
   color: {
-    field: 'name',
+    field: 'value',
     value: ['#B8E1FF', '#7DAAFF', '#3D76DD', '#0047A5', '#001D70'],
+    scale: { type: 'quantize' },
   },
   style: {
     opacity: 1,
     stroke: '#ccc',
     lineWidth: 0.6,
     lineOpacity: 1,
+    fillBottomColor: '#d8d8d84d',
   },
   chinaBorder: false,
   label: {
