@@ -37,6 +37,7 @@
     "url": "https://github.com/antvis/L7Plot/issues"
   },
   "dependencies": {
+    "@antv/event-emitter": "^0.1.2",
     "@antv/util": "^2.0.14"
   },
   "publishConfig": {
