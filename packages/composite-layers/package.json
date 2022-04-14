@@ -1,5 +1,6 @@
 {
   "name": "@antv/l7-composite-layers",
+  "private": true,
   "version": "0.0.1-alpha.1",
   "description": "Composite layer for @antv/l7",
   "main": "dist/lib/index.js",
