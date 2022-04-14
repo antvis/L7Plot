@@ -120,38 +120,42 @@ export class L7Plot extends Map<L7PlotOptions> {
       this.updateControls();
     } else {
       this.layerGroup = layerGroup;
-      this.onLayersLoaded();
-      layerGroup.addTo(this.scene);
+      if (this.scene['sceneService'].loaded) {
+        this.onSceneLoaded();
+      } else {
+        this.scene.once('loaded', () => {
+          this.onSceneLoaded();
+        });
+      }
     }
   }
 
   /**
-   * 图层加载成功
+   * scene 加载成功回调
    */
-  private onLayersLoaded() {
-    const onLoaded = () => {
-      this.renderPlots();
-      this.initControls();
-      this.loaded = true;
-      this.emit('loaded');
-    };
-    if (this.scene['sceneService'].loaded) {
-      this.sceneLoaded = true;
-      this.layersLoaded && onLoaded();
-    } else {
-      this.scene.once('loaded', () => {
-        this.sceneLoaded = true;
-        this.layersLoaded && onLoaded();
-      });
-    }
+  private onSceneLoaded() {
+    this.sceneLoaded = true;
+
     if (this.layerGroup.isEmpty()) {
-      this.layersLoaded = true;
+      this.onLayersLoaded();
     } else {
       this.layerGroup.once('inited-all', () => {
-        this.layersLoaded = true;
-        this.sceneLoaded && onLoaded();
+        this.onLayersLoaded();
       });
     }
+
+    this.layerGroup.addTo(this.scene);
+  }
+
+  /**
+   * 图层加载成功回调
+   */
+  private onLayersLoaded() {
+    this.layersLoaded = true;
+    this.renderPlots();
+    this.initControls();
+    this.loaded = true;
+    this.emit('loaded');
   }
 
   /**
