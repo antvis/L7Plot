@@ -80,4 +80,4 @@ customContent (title: string, items: TooltipListItem[]) {
 }
 ```
 
-> 更多[常见问题](https://www.yuque.com/antv/qbux5m/fdaew2)
+> 更多[常见问题](https://www.yuque.com/antv/l7/fdaew2)

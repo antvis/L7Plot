@@ -43,16 +43,16 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
       this.scene = this.createScene();
 
       this.registerResources();
-      this.initLayers();
+      this.initSource();
     } else {
       super(container);
     }
   }
 
   /**
-   * 初始化图层
+   * 初始化数据
    */
-  protected initLayers() {
+  protected initSource() {
     this.source = this.createSource();
     this.render();
     this.inited = true;
@@ -142,38 +142,42 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
       // this.scene.render();
     } else {
       this.layerGroup = layerGroup;
-      this.onLayersLoaded();
-      layerGroup.addTo(this.scene);
+      if (this.scene['sceneService'].loaded) {
+        this.onSceneLoaded();
+      } else {
+        this.scene.once('loaded', () => {
+          this.onSceneLoaded();
+        });
+      }
     }
     this.initLayersEvent();
   }
 
   /**
-   * 图表图层加载成功
+   * scene 加载成功回调
    */
-  protected onLayersLoaded() {
-    const onLoaded = () => {
-      this.initComponents();
-      this.loaded = true;
-      this.emit('loaded');
-    };
-    if (this.scene['sceneService'].loaded) {
-      this.sceneLoaded = true;
-      this.layersLoaded && onLoaded();
-    } else {
-      this.scene.once('loaded', () => {
-        this.sceneLoaded = true;
-        this.layersLoaded && onLoaded();
-      });
-    }
+  protected onSceneLoaded() {
+    this.sceneLoaded = true;
+
     if (this.layerGroup.isEmpty()) {
-      this.layersLoaded = true;
+      this.onLayersLoaded();
     } else {
       this.layerGroup.once('inited-all', () => {
-        this.layersLoaded = true;
-        this.sceneLoaded && onLoaded();
+        this.onLayersLoaded();
       });
     }
+
+    this.layerGroup.addTo(this.scene);
+  }
+
+  /**
+   * 图层加载成功回调
+   */
+  protected onLayersLoaded() {
+    this.layersLoaded = true;
+    this.initComponents();
+    this.loaded = true;
+    this.emit('loaded');
   }
 
   /**
@@ -184,7 +188,7 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
     this.scene = scene;
     this.theme = theme ? theme : getTheme('default');
     this.registerResources();
-    this.initLayers();
+    this.initSource();
   }
 
   /**
