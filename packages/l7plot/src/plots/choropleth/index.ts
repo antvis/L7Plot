@@ -74,9 +74,9 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   private drillStacks: DrillStack[] = [];
 
   /**
-   * 初始化图层
+   * 初始化数据
    */
-  protected initLayers() {
+  protected initSource() {
     this.getInitDistrictData().then(() => {
       this.source = this.createSource();
       this.render();
@@ -95,8 +95,13 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     } else {
       const layerGroup = this.createLayers(this.source);
       this.layerGroup = layerGroup;
-      this.onLayersLoaded();
-      layerGroup.addTo(this.scene);
+      if (this.scene['sceneService'].loaded) {
+        this.onSceneLoaded();
+      } else {
+        this.scene.once('loaded', () => {
+          this.onSceneLoaded();
+        });
+      }
       this.initLayersEvent();
     }
     console.timeEnd('l7plot choropleth render time');
