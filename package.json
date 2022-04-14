@@ -29,6 +29,7 @@
     "bundle": "lerna run build:umd --stream --scope=@antv/l7plot",
     "deploy-website": "lerna run deploy --stream --scope=l7plot-website",
     "version": "lerna version",
+    "postversion": "node ./scripts/sync-version",
     "prepublish-package": "yarn build && yarn bundle",
     "publish-package": "lerna publish from-package"
   },
