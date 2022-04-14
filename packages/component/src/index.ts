@@ -1,4 +1,4 @@
-export const version = '0.0.4';
+export { default as version } from './version';
 
 // 类型定义导出
 export * from './types';
