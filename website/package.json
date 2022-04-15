@@ -14,7 +14,7 @@
     "prettier": "prettier -c -w docs examples"
   },
   "dependencies": {
-    "@antv/l7plot": "0.0.11",
+    "@antv/l7plot": "link:../packages/l7plot",
     "antd": "^4.16.13",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"

@@ -28,10 +28,10 @@
     "build-website": "lerna run build --stream --scope=l7plot-website",
     "bundle": "lerna run build:umd --stream --scope=@antv/l7plot",
     "deploy-website": "lerna run deploy --stream --scope=l7plot-website",
-    "version": "lerna version",
-    "postversion": "node ./scripts/sync-version",
-    "prepublish-package": "yarn build && yarn bundle",
-    "publish-package": "lerna publish from-package"
+    "version": "node scripts/sync-version",
+    "prepublishOnly": "yarn build && yarn bundle",
+    "package-version": "lerna version",
+    "package-publish": "lerna publish from-package"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
