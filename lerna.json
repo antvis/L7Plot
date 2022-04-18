@@ -6,9 +6,9 @@
     "version": {
       "message": "chore: publish %s",
       "conventionalCommits": true,
-      "private": true,
+      "private": false,
       "changelog": false,
-      "exact": true
+      "exact": false
     },
     "publish": {
       "registry": "https://registry.npmjs.org"

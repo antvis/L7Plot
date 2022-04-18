@@ -40,7 +40,11 @@
     /* Module Resolution Options */
     "moduleResolution": "node",
     "baseUrl": ".",
-    "paths": {},
+    "paths": {
+      "@antv/l7plot": ["packages/l7plot/src"],
+      "@antv/l7plot-component": ["packages/component/src"],
+      "@antv/l7-composite-layers": ["packages/composite-layers/src"]
+    },
     "rootDirs": [],
     // "types": [],
     "allowSyntheticDefaultImports": true,
@@ -59,5 +63,7 @@
     /* Advanced Options */
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "include": ["packages", "storybook", "website"],
+  "exclude": ["packages/*/dist/**", "coverage"]
 }

@@ -2,12 +2,14 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src"
+    "rootDir": "src",
+    "composite": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"],
   "typedocOptions": {
     "entryPoints": ["src/index.ts"],
     "out": "type-docs"
-  }
+  },
+  "references": [{ "path": "../component" }, { "path": "../composite-layers" }]
 }
