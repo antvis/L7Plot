@@ -10,7 +10,7 @@
     "dist"
   ],
   "scripts": {
-    "dev": "yarn run dev:cjs",
+    "dev": "yarn run clean && yarn run dev:cjs",
     "dev:cjs": "tsc -p tsconfig.json --target ES6 --module CommonJS --outDir dist/lib --watch",
     "lint": "eslint src __tests__ --ext .js,.ts",
     "lint-fix": "eslint src __tests__ --ext .js,.ts --fix",
