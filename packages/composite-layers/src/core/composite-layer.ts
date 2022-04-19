@@ -1,20 +1,26 @@
-import { isEqual, isUndefined, pick, deepMix } from '@antv/util';
+import { isEqual, isUndefined, pick, deepMix, uniqueId } from '@antv/util';
 import Source from '@antv/l7-source';
 import EventEmitter from '@antv/event-emitter';
-import {
-  Scene,
-  ILayer,
-  ILayerConfig,
-  SourceOptions,
-  CompositeLayerOptions,
-  ICompositeLayer,
-  LayerType,
-  LayerBlend,
-} from '../types';
+import { Scene, ILayer, ILayerConfig, SourceOptions, ICompositeLayer, LayerType, LayerBlend } from '../types';
 import { MappingSource } from '../adaptor/source';
 import { LayerEventList } from './constants';
+import { LayerGroup } from './layer-group';
 
 const LayerConfigkeys = ['name', 'zIndex', 'visible', 'minZoom', 'maxZoom', 'pickingBuffer', 'autoFit', 'blend'];
+
+/**
+ * 复合图层的基础配置
+ */
+export interface CompositeLayerOptions {
+  name?: string;
+  zIndex?: number;
+  visible?: boolean;
+  minZoom?: number;
+  maxZoom?: number;
+  pickingBuffer?: number;
+  autoFit?: boolean;
+  blend?: LayerBlend;
+}
 
 export abstract class CompositeLayer<O extends CompositeLayerOptions> extends EventEmitter implements ICompositeLayer {
   /**
@@ -38,24 +44,34 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    */
   protected scene: Scene | undefined;
   /**
-   * layer 实例
+   * 主图层实例
    */
   public abstract readonly layer: ILayer;
   /**
-   * layer 名称
+   * 图层名称
    */
-  public abstract readonly name: string;
+  public readonly name: string;
   /**
-   * layer 类型
+   * 图层类型
    */
   public abstract readonly type: LayerType | string;
   /**
-   * layer 是否具有交互效果，用于 tooltip
+   * 图层是否具有交互效果，用于 tooltip
    */
   public abstract readonly interaction: boolean;
+  /**
+   * 子图层组
+   */
+  protected subLayers: LayerGroup;
 
   constructor(options: O) {
     super();
+    const { name } = options;
+    this.name = name ? name : uniqueId('composite-layer');
+
+    const subLayers = this.createSubLayers();
+    this.subLayers = new LayerGroup(subLayers);
+
     this.options = deepMix({}, this.getDefaultOptions(), options);
     this.lastOptions = this.options;
   }
@@ -67,16 +83,30 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     return {};
   }
 
+  /**
+   * 获取图片配置项
+   */
   public pickLayerConfig<T extends CompositeLayerOptions>(params: T): Partial<ILayerConfig> {
     const config = pick<any>(params, LayerConfigkeys);
     return config;
   }
 
+  /**
+   * 创建子图层
+   */
+  protected abstract createSubLayers(): ILayer[];
+
+  /**
+   * 添加到场景
+   */
   public addTo(scene: Scene) {
     this.scene = scene;
     scene.addLayer(this.layer);
   }
 
+  /**
+   * 从场景移除
+   */
   public remove() {
     if (!this.scene) return;
     this.scene.removeLayer(this.layer);

@@ -59,17 +59,3 @@ export interface ICompositeLayer {
   once(name: string, callback: (...args: any[]) => void): this;
   off(name: string, callback: (...args: any[]) => void): this;
 }
-
-/**
- * 复合图层的基础配置
- */
-export interface CompositeLayerOptions {
-  name?: string;
-  zIndex?: number;
-  visible?: boolean;
-  minZoom?: number;
-  maxZoom?: number;
-  pickingBuffer?: number;
-  autoFit?: boolean;
-  blend?: LayerBlend;
-}

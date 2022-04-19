@@ -66,7 +66,7 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
   }
 
   /**
-   * 增加图层
+   * 添加图层
    */
   public addLayer(layer: ILayer) {
     const layerId = this.getLayerId(layer);
@@ -77,6 +77,15 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
       layer.once('inited', (e) => this.emit('inited-layer', e));
       this.scene.addLayer(layer);
     }
+  }
+
+  /**
+   * 添加多个图层
+   */
+  public addLayers(layers: ILayer[]) {
+    layers.forEach((layer) => {
+      this.addLayer(layer);
+    });
   }
 
   /**

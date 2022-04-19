@@ -1,4 +1,4 @@
-import { uniqueId, clone, isEqual, isUndefined } from '@antv/util';
+import { uniqueId, clone, isEqual, isUndefined, last } from '@antv/util';
 import { PolygonLayer, LineLayer } from '@antv/l7-layers';
 import { CompositeLayer } from '../../core/composite-layer';
 import { getDefaultState, mappingLayer } from './adaptor';
@@ -27,21 +27,23 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
    */
   static LayerOptionsKeys = CompositeLayer.LayerConfigkeys.concat(LAYER_OPTIONS_KEYS);
   /**
-   * 图层名称
-   */
-  public name: string;
-  /**
    * 填充面图层实例
    */
-  public layer: ILayer;
+  public get layer() {
+    return this.subLayers.getLayer('fillLayer') as ILayer;
+  }
   /**
    * 描边图层
    */
-  public strokeLayer: ILayer;
+  public get strokeLayer() {
+    return this.subLayers.getLayer('strokeLayer') as ILayer;
+  }
   /**
    * 高亮描边图层
    */
-  public highlightLayer: ILayer;
+  public get highlightLayer() {
+    return this.subLayers.getLayer('highlightLayer') as ILayer;
+  }
   /**
    * 高亮描边数据
    */
@@ -49,11 +51,15 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   /**
    * 选中填充面图层
    */
-  public selectFillLayer: ILayer;
+  public get selectFillLayer() {
+    return this.subLayers.getLayer('selectFillLayer') as ILayer;
+  }
   /**
    * 选中描边图层
    */
-  public selectStrokeLayer: ILayer;
+  public get selectStrokeLayer() {
+    return this.subLayers.getLayer('selectStrokeLayer') as ILayer;
+  }
   /**
    * 选中数据
    */
@@ -69,35 +75,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
 
   constructor(options: AreaLayerOptions) {
     super(options);
-    const { name, source, visible, minZoom, maxZoom, zIndex = 0 } = this.options;
-    const config = this.pickLayerConfig(this.options);
-    const defaultState = getDefaultState(this.options.state);
-
-    this.name = name ? name : uniqueId(this.type);
-    this.layer = new PolygonLayer({ ...config, name: this.name });
-    this.strokeLayer = new LineLayer({ name: 'strokeLayer', visible, zIndex, minZoom, maxZoom });
-
-    this.highlightLayer = new LineLayer({
-      name: 'highlightLayer',
-      visible: visible && Boolean(defaultState.active.stroke),
-      zIndex: zIndex + 0.1,
-      minZoom,
-      maxZoom,
-    });
-    this.selectFillLayer = new PolygonLayer({
-      name: 'selectFillLayer',
-      visible: visible && Boolean(defaultState.select.fill),
-      zIndex: zIndex + 0.1,
-      minZoom,
-      maxZoom,
-    });
-    this.selectStrokeLayer = new LineLayer({
-      name: 'selectStrokeLayer',
-      visible: visible && Boolean(defaultState.select.stroke),
-      zIndex: zIndex + 0.1,
-      minZoom,
-      maxZoom,
-    });
+    const { source } = this.options;
 
     this.mappingLayer(this.options);
     this.setSource(source);
@@ -109,6 +87,44 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
    */
   public getDefaultOptions(): Partial<AreaLayerOptions> {
     return DEFAULT_OPTIONS;
+  }
+
+  /**
+   * 创建子图层
+   */
+  protected createSubLayers() {
+    const { visible, minZoom, maxZoom, zIndex = 0, state } = this.options;
+    const config = this.pickLayerConfig(this.options);
+    const defaultState = getDefaultState(state);
+
+    const fillLayer = new PolygonLayer({ ...config, name: 'fillLayer' });
+    // TODO: ID
+    const strokeLayer = new LineLayer({ name: 'strokeLayer', visible, zIndex, minZoom, maxZoom });
+    const highlightLayer = new LineLayer({
+      name: 'highlightLayer',
+      visible: visible && Boolean(defaultState.active.stroke),
+      zIndex: zIndex + 0.1,
+      minZoom,
+      maxZoom,
+    });
+    const selectFillLayer = new PolygonLayer({
+      name: 'selectFillLayer',
+      visible: visible && Boolean(defaultState.select.fill),
+      zIndex: zIndex + 0.1,
+      minZoom,
+      maxZoom,
+    });
+    const selectStrokeLayer = new LineLayer({
+      name: 'selectStrokeLayer',
+      visible: visible && Boolean(defaultState.select.stroke),
+      zIndex: zIndex + 0.1,
+      minZoom,
+      maxZoom,
+    });
+
+    const subLayers = [fillLayer, strokeLayer, highlightLayer, selectFillLayer, selectStrokeLayer];
+
+    return subLayers;
   }
 
   private mappingLayer(options: AreaLayerOptions) {

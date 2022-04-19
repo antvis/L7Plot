@@ -1,5 +1,6 @@
 import { PolygonLayerConfig } from '../../types/layer-config';
-import { CompositeLayerOptions, ISourceCFG, Source } from '../../types';
+import { ISourceCFG, Source } from '../../types';
+import { CompositeLayerOptions } from '../../core/composite-layer';
 
 /**
  * 数据配置
