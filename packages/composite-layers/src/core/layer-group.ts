@@ -32,7 +32,7 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
   /**
    * 图层组添加到地图上
    */
-  addTo(scene: Scene) {
+  public addTo(scene: Scene) {
     this.scene = scene;
     let layerIndex = 0;
     const layerLength = this.layerMap.size;
@@ -51,7 +51,7 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
   /**
    * 图层组从地图上移除
    */
-  remove() {
+  public remove() {
     if (this.scene) {
       this.removeAllLayer();
     }
@@ -60,7 +60,7 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
   /**
    * 图层组是否有该图层
    */
-  hasLayer(layer: ILayer): boolean {
+  public hasLayer(layer: ILayer): boolean {
     const layerId = typeof layer === 'string' ? layer : this.getLayerId(layer);
     return this.layerMap.has(layerId);
   }
@@ -169,5 +169,6 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
    */
   public destroy() {
     this.remove();
+    this.off('*');
   }
 }
