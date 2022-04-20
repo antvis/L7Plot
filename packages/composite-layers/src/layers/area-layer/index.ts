@@ -62,6 +62,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
 
   constructor(options: AreaLayerOptions) {
     super(options);
+    this.initSubLayersEvent();
   }
 
   /**
@@ -182,6 +183,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
    * 初始化子图层事件
    */
   protected initSubLayersEvent() {
+    // 初始化主图层交互事件
     this.layer.off('mousemove', this.onHighlighHandle);
     this.layer.off('unmousemove', this.onHighlighHandle);
     this.layer.off('click', this.onSelectHandle);

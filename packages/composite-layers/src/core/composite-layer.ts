@@ -77,7 +77,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     this.adaptorSubLayersAttr();
 
     this.setSubLayersSource(source);
-    this.initSubLayersEvent();
+    // this.initEvent();
   }
 
   /**
@@ -126,7 +126,9 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   /**
    * 初始化子图层相关事件绑定
    */
-  protected abstract initSubLayersEvent(): void;
+  protected initSubLayersEvent(): void {
+    //
+  }
 
   /**
    * 添加到场景
