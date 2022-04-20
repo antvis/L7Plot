@@ -6,7 +6,7 @@ import { MappingSource } from '../adaptor/source';
 import { LayerEventList } from './constants';
 import { LayerGroup } from './layer-group';
 
-const LayerConfigkeys = ['name', 'zIndex', 'visible', 'minZoom', 'maxZoom', 'pickingBuffer', 'autoFit', 'blend'];
+const LayerBaseConfigkeys = ['name', 'zIndex', 'visible', 'minZoom', 'maxZoom', 'pickingBuffer', 'autoFit', 'blend'];
 
 /**
  * 复合图层的基础配置
@@ -20,23 +20,32 @@ export interface CompositeLayerOptions {
   pickingBuffer?: number;
   autoFit?: boolean;
   blend?: LayerBlend;
+  source: any;
 }
 
 export abstract class CompositeLayer<O extends CompositeLayerOptions> extends EventEmitter implements ICompositeLayer {
   /**
-   * 地图图表类型
+   * 复合图层类型
    */
   static LayerType = LayerType;
   /**
-   * 图层属性配置项 Keys
+   * 默认的 options 配置项
    */
-  static LayerConfigkeys = LayerConfigkeys;
+  static DefaultOptions: Partial<CompositeLayerOptions> = {};
   /**
-   * layer 的 schema 配置
+   * 复合图层名称
+   */
+  public readonly name: string;
+  /**
+   * 复合图层类型
+   */
+  public abstract readonly type: LayerType | string;
+  /**
+   * 复合图层的 schema 配置
    */
   public options: O;
   /**
-   * layer 上一次的 schema 配置
+   * 复合图层上一次的 schema 配置
    */
   public lastOptions: O;
   /**
@@ -44,17 +53,9 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    */
   protected scene: Scene | undefined;
   /**
-   * 主图层实例
+   * 主子图层实例
    */
   public abstract readonly layer: ILayer;
-  /**
-   * 图层名称
-   */
-  public readonly name: string;
-  /**
-   * 图层类型
-   */
-  public abstract readonly type: LayerType | string;
   /**
    * 图层是否具有交互效果，用于 tooltip
    */
@@ -66,28 +67,31 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
 
   constructor(options: O) {
     super();
-    const { name } = options;
+    const { name, source } = options;
     this.name = name ? name : uniqueId('composite-layer');
+    this.options = deepMix({}, this.getDefaultOptions(), options);
+    this.lastOptions = this.options;
 
     const subLayers = this.createSubLayers();
     this.subLayers = new LayerGroup(subLayers);
+    this.adaptorSubLayersAttr();
 
-    this.options = deepMix({}, this.getDefaultOptions(), options);
-    this.lastOptions = this.options;
+    this.setSubLayersSource(source);
+    this.initSubLayersEvent();
   }
 
   /**
    * 获取默认配置
    */
-  protected getDefaultOptions(): Partial<O> {
-    return {};
+  public getDefaultOptions(): Partial<CompositeLayerOptions> {
+    return CompositeLayer.DefaultOptions;
   }
 
   /**
-   * 获取图片配置项
+   * 获取子主图层基础配置项
    */
-  public pickLayerConfig<T extends CompositeLayerOptions>(params: T): Partial<ILayerConfig> {
-    const config = pick<any>(params, LayerConfigkeys);
+  protected pickLayerBaseConfig(): Partial<ILayerConfig> {
+    const config = pick<any>(this.options, LayerBaseConfigkeys);
     return config;
   }
 
@@ -97,11 +101,39 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   protected abstract createSubLayers(): ILayer[];
 
   /**
+   * 映射子图层属性
+   */
+  protected abstract adaptorSubLayersAttr(): void;
+
+  /**
+   * 设置子图层数据
+   */
+  protected setSubLayersSource(source: SourceOptions | Source) {
+    if (source instanceof Source) {
+      this.layer.setSource(source);
+    } else {
+      const { data, aggregation, ...option } = source;
+      aggregation && MappingSource.aggregation(option, aggregation);
+      const layerSource = this.layer.getSource();
+      if (layerSource) {
+        this.layer.setData(data, option);
+      } else {
+        this.layer.source(data, option);
+      }
+    }
+  }
+
+  /**
+   * 初始化子图层相关事件绑定
+   */
+  protected abstract initSubLayersEvent(): void;
+
+  /**
    * 添加到场景
    */
   public addTo(scene: Scene) {
     this.scene = scene;
-    scene.addLayer(this.layer);
+    this.subLayers.addTo(scene);
   }
 
   /**
@@ -109,7 +141,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    */
   public remove() {
     if (!this.scene) return;
-    this.scene.removeLayer(this.layer);
+    this.subLayers.remove();
   }
 
   /**
@@ -152,30 +184,17 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   }
 
   public render() {
-    this.layer.renderLayers();
-  }
-
-  protected setSource(source: SourceOptions | Source) {
-    if (source instanceof Source) {
-      this.layer.setSource(source);
-    } else {
-      const { data, aggregation, ...option } = source;
-      aggregation && MappingSource.aggregation(option, aggregation);
-      const layerSource = this.layer.getSource();
-      if (layerSource) {
-        this.layer.setData(data, option);
-      } else {
-        this.layer.source(data, option);
-      }
+    if (this.scene) {
+      this.scene.render();
     }
   }
 
   public changeData(source: SourceOptions | Source) {
-    this.setSource(source);
+    this.setSubLayersSource(source);
   }
 
   public setIndex(zIndex: number) {
-    this.layer.setIndex(zIndex);
+    this.subLayers.setZIndex(zIndex);
   }
 
   public setBlend(blend: LayerBlend) {
@@ -183,19 +202,29 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   }
 
   public setMinZoom(minZoom: number) {
-    this.layer.setMinZoom(minZoom);
+    this.subLayers.getLayers().forEach((layer) => {
+      layer.setMinZoom(minZoom);
+    });
   }
 
   public setMaxZoom(maxZoom: number) {
-    this.layer.setMaxZoom(maxZoom);
+    this.subLayers.getLayers().forEach((layer) => {
+      layer.setMaxZoom(maxZoom);
+    });
   }
 
   public show() {
-    this.layer.inited && this.layer.show();
+    if (!this.layer.inited) return;
+    this.subLayers.getLayers().forEach((layer) => {
+      layer.show();
+    });
   }
 
   public hide() {
-    this.layer.inited && this.layer.hide();
+    if (!this.layer.inited) return;
+    this.subLayers.getLayers().forEach((layer) => {
+      layer.hide();
+    });
   }
 
   public toggleVisible() {
@@ -225,7 +254,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   }
 
   public destroy() {
-    this.layer.destroy();
+    this.subLayers.destroy();
   }
 
   /**

@@ -1,5 +1,5 @@
 import { SourceOptions } from './attr';
-import { ILayer, LayerBlend, Scene } from './common';
+import { ILayer, Scene } from './common';
 
 export interface ILayerGroup {
   name: string;

@@ -1,80 +1,64 @@
 import { isUndefined } from '@antv/util';
-import { MappingLayer } from '../../adaptor/layer';
+import { MappingAttribute } from '../../adaptor/attribute';
 import { ILayer } from '../../types';
-import { AreaLayerActiveOptions, AreaLayerOptions } from './types';
-
-const defaultHighlightColor = '#2f54eb';
-
-const defaultState: { active: Required<AreaLayerActiveOptions>; select: Required<AreaLayerActiveOptions> } = {
-  active: {
-    fill: false,
-    stroke: defaultHighlightColor,
-    lineWidth: 1.5,
-    lineOpacity: 0.8,
-  },
-  select: {
-    fill: false,
-    stroke: defaultHighlightColor,
-    lineWidth: 1.5,
-    lineOpacity: 0.8,
-  },
-};
+import { DEFAULT_STATE } from './constants';
+import { AreaLayerOptions } from './types';
 
 export const getDefaultState = (state?: AreaLayerOptions['state']) => {
   if (isUndefined(state)) {
-    return defaultState;
+    return DEFAULT_STATE;
   }
 
   if (state.active === false) {
-    defaultState.active = Object.assign(defaultState.active, { fill: false, stroke: false });
+    DEFAULT_STATE.active = Object.assign(DEFAULT_STATE.active, { fill: false, stroke: false });
   } else if (typeof state.active === 'object') {
     if (state.active.fill === false) {
-      defaultState.active.fill = false;
+      DEFAULT_STATE.active.fill = false;
     } else if (typeof state.active.fill === 'string') {
-      defaultState.active.fill = state.active.fill;
+      DEFAULT_STATE.active.fill = state.active.fill;
     }
 
     if (state.active.stroke === false) {
-      defaultState.active.stroke = false;
+      DEFAULT_STATE.active.stroke = false;
     } else if (typeof state.active.stroke === 'string') {
-      defaultState.active.stroke = state.active.stroke;
+      DEFAULT_STATE.active.stroke = state.active.stroke;
     }
 
     if (typeof state.active.lineWidth === 'number') {
-      defaultState.active.lineWidth = state.active.lineWidth;
+      DEFAULT_STATE.active.lineWidth = state.active.lineWidth;
     }
     if (typeof state.active.lineOpacity === 'number') {
-      defaultState.active.lineOpacity = state.active.lineOpacity;
+      DEFAULT_STATE.active.lineOpacity = state.active.lineOpacity;
     }
   }
 
   if (state.select === false) {
-    defaultState.select = Object.assign(defaultState.select, { fill: false, stroke: false });
+    DEFAULT_STATE.select = Object.assign(DEFAULT_STATE.select, { fill: false, stroke: false });
   } else if (typeof state.select === 'object') {
     if (state.select.fill === false) {
-      defaultState.select.fill = false;
+      DEFAULT_STATE.select.fill = false;
     } else if (typeof state.select.fill === 'string') {
-      defaultState.select.fill = state.select.fill;
+      DEFAULT_STATE.select.fill = state.select.fill;
     }
 
     if (state.select.stroke === false) {
-      defaultState.select.stroke = false;
+      DEFAULT_STATE.select.stroke = false;
     } else if (typeof state.select.stroke === 'string') {
-      defaultState.select.stroke = state.select.stroke;
+      DEFAULT_STATE.select.stroke = state.select.stroke;
     }
 
     if (typeof state.select.lineWidth === 'number') {
-      defaultState.select.lineWidth = state.select.lineWidth;
+      DEFAULT_STATE.select.lineWidth = state.select.lineWidth;
     }
     if (typeof state.select.lineOpacity === 'number') {
-      defaultState.select.lineOpacity = state.select.lineOpacity;
+      DEFAULT_STATE.select.lineOpacity = state.select.lineOpacity;
     }
   }
 
-  return defaultState;
+  return DEFAULT_STATE;
 };
 
-export function mappingLayer(
+export function mappingLayersAttr(
   layer: ILayer,
   strokeLayer: ILayer,
   highlightLayer: ILayer,
@@ -99,13 +83,13 @@ export function mappingLayer(
    * 映射填充面图层
    */
   // shape
-  MappingLayer.shape(layer, 'fill');
+  MappingAttribute.shape(layer, 'fill');
   // color
-  color && MappingLayer.color(layer, color);
+  color && MappingAttribute.color(layer, color);
   // style
-  fillStyle && MappingLayer.style(layer, fillStyle);
+  fillStyle && MappingAttribute.style(layer, fillStyle);
   // state
-  fillState && MappingLayer.state(layer, fillState);
+  fillState && MappingAttribute.state(layer, fillState);
   // bottomColor
   fillBottomColor && layer.setBottomColor(fillBottomColor);
 
@@ -113,13 +97,13 @@ export function mappingLayer(
    * 描边图层
    */
   // shape
-  MappingLayer.shape(strokeLayer, 'line');
+  MappingAttribute.shape(strokeLayer, 'line');
   // size
-  strokeSize && MappingLayer.size(strokeLayer, strokeSize);
+  strokeSize && MappingAttribute.size(strokeLayer, strokeSize);
   // color
-  strokeColor && MappingLayer.color(strokeLayer, strokeColor);
+  strokeColor && MappingAttribute.color(strokeLayer, strokeColor);
   // style
-  strokeStyle && MappingLayer.style(strokeLayer, strokeStyle);
+  strokeStyle && MappingAttribute.style(strokeLayer, strokeStyle);
 
   /**
    * 高亮图层
@@ -129,13 +113,13 @@ export function mappingLayer(
     const size = defaultState.active.lineWidth || strokeSize;
     const style = { opacity: defaultState.active.lineOpacity };
     // shape
-    MappingLayer.shape(highlightLayer, 'line');
+    MappingAttribute.shape(highlightLayer, 'line');
     // size
-    size && MappingLayer.size(highlightLayer, size);
+    size && MappingAttribute.size(highlightLayer, size);
     // color
-    color && MappingLayer.color(highlightLayer, color);
+    color && MappingAttribute.color(highlightLayer, color);
     // style
-    style && MappingLayer.style(highlightLayer, style);
+    style && MappingAttribute.style(highlightLayer, style);
   }
 
   /**
@@ -144,13 +128,13 @@ export function mappingLayer(
   if (defaultState.select.fill) {
     const color = defaultState.select.fill;
     // shape
-    MappingLayer.shape(selectFillLayer, 'fill');
+    MappingAttribute.shape(selectFillLayer, 'fill');
     // color
-    color && MappingLayer.color(selectFillLayer, color);
+    color && MappingAttribute.color(selectFillLayer, color);
     // style
-    fillStyle && MappingLayer.style(selectFillLayer, fillStyle);
+    fillStyle && MappingAttribute.style(selectFillLayer, fillStyle);
     // state
-    MappingLayer.state(selectFillLayer, { select: false, active: false });
+    MappingAttribute.state(selectFillLayer, { select: false, active: false });
   }
   /**
    * 选中描边图层
@@ -160,12 +144,12 @@ export function mappingLayer(
     const size = defaultState.select.lineWidth || strokeSize;
     const style = { opacity: defaultState.select.lineOpacity };
     // shape
-    MappingLayer.shape(selectStrokeLayer, 'line');
+    MappingAttribute.shape(selectStrokeLayer, 'line');
     // size
-    size && MappingLayer.size(selectStrokeLayer, size);
+    size && MappingAttribute.size(selectStrokeLayer, size);
     // color
-    color && MappingLayer.color(selectStrokeLayer, color);
+    color && MappingAttribute.color(selectStrokeLayer, color);
     // style
-    style && MappingLayer.style(selectStrokeLayer, style);
+    style && MappingAttribute.style(selectStrokeLayer, style);
   }
 }

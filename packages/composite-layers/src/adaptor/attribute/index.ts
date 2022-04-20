@@ -32,7 +32,7 @@ export function getMappingFunction(mappingFields: string[], callback: (data: Rec
   };
 }
 
-export class MappingLayer {
+export class MappingAttribute {
   static shape(layer: ILayer, shape: ShapeAttr<string>) {
     /**
      * shape 的几种情况
@@ -57,7 +57,7 @@ export class MappingLayer {
       }
       // scale
       if (isString(field) && shape.scale) {
-        MappingLayer.scale(layer, field, shape.scale);
+        MappingAttribute.scale(layer, field, shape.scale);
       }
     }
   }
@@ -88,7 +88,7 @@ export class MappingLayer {
       }
       // scale
       if (isString(field) && size.scale) {
-        MappingLayer.scale(layer, field, size.scale);
+        MappingAttribute.scale(layer, field, size.scale);
       }
     }
   }
@@ -117,7 +117,7 @@ export class MappingLayer {
       }
       // scale
       if (isString(field) && color.scale) {
-        MappingLayer.scale(layer, field, color.scale);
+        MappingAttribute.scale(layer, field, color.scale);
       }
     }
   }

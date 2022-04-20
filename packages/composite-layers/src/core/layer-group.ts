@@ -157,8 +157,8 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
    * 根据图层获取图层 ID
    */
   public getLayerId(layer: ILayer) {
-    if (!('id' in layer)) {
-      layer.id = uniqueId('layergroup_layer');
+    if ('name' in layer) {
+      return layer.name;
     }
 
     return layer.id;

@@ -1,21 +1,12 @@
-import { uniqueId, clone, isEqual, isUndefined, last } from '@antv/util';
+import { clone, isEqual, isUndefined } from '@antv/util';
 import { PolygonLayer, LineLayer } from '@antv/l7-layers';
 import { CompositeLayer } from '../../core/composite-layer';
-import { getDefaultState, mappingLayer } from './adaptor';
+import { getDefaultState, mappingLayersAttr } from './adaptor';
 import { AreaLayerOptions, AreaLayerSourceOptions } from './types';
-import { ILayer, MouseEvent, Scene, Source } from '../../types';
+import { ILayer, MouseEvent, Source } from '../../types';
+import { DEFAULT_OPTIONS } from './constants';
 
 export type { AreaLayerOptions };
-
-const DEFAULT_OPTIONS = {
-  visible: true,
-  state: {
-    active: false,
-    select: false,
-  },
-  enabledMultiSelect: false,
-};
-const LAYER_OPTIONS_KEYS = ['color', 'style', 'state', 'enabledMultiSelect'];
 
 export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   /**
@@ -23,11 +14,11 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
    */
   static DefaultOptions = DEFAULT_OPTIONS;
   /**
-   * 图层配置项 Keys
+   * 复合图层类型
    */
-  static LayerOptionsKeys = CompositeLayer.LayerConfigkeys.concat(LAYER_OPTIONS_KEYS);
+  public type = CompositeLayer.LayerType.AreaLayer;
   /**
-   * 填充面图层实例
+   * 主图层 填充面图层实例
    */
   public get layer() {
     return this.subLayers.getLayer('fillLayer') as ILayer;
@@ -65,40 +56,31 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
    */
   private selectData: { feature: any; featureId: number }[] = [];
   /**
-   * 图层类型
-   */
-  public type = CompositeLayer.LayerType.AreaLayer;
-  /**
    * 图层是否具有交互属性
    */
   public interaction = true;
 
   constructor(options: AreaLayerOptions) {
     super(options);
-    const { source } = this.options;
-
-    this.mappingLayer(this.options);
-    this.setSource(source);
-    this.initEvent();
   }
 
   /**
    * 获取默认配置
    */
   public getDefaultOptions(): Partial<AreaLayerOptions> {
-    return DEFAULT_OPTIONS;
+    return AreaLayer.DefaultOptions;
   }
 
   /**
    * 创建子图层
    */
   protected createSubLayers() {
-    const { visible, minZoom, maxZoom, zIndex = 0, state } = this.options;
-    const config = this.pickLayerConfig(this.options);
+    const { state } = this.options;
+    const config = this.pickLayerBaseConfig();
+    const { visible, minZoom, maxZoom, zIndex = 0 } = config;
     const defaultState = getDefaultState(state);
 
     const fillLayer = new PolygonLayer({ ...config, name: 'fillLayer' });
-    // TODO: ID
     const strokeLayer = new LineLayer({ name: 'strokeLayer', visible, zIndex, minZoom, maxZoom });
     const highlightLayer = new LineLayer({
       name: 'highlightLayer',
@@ -127,25 +109,34 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     return subLayers;
   }
 
-  private mappingLayer(options: AreaLayerOptions) {
-    mappingLayer(
+  /**
+   * 映射子图层属性
+   */
+  protected adaptorSubLayersAttr() {
+    mappingLayersAttr(
       this.layer,
       this.strokeLayer,
       this.highlightLayer,
       this.selectFillLayer,
       this.selectStrokeLayer,
-      options
+      this.options
     );
   }
 
-  protected setSource(source: AreaLayerSourceOptions | Source) {
-    super.setSource(source);
+  /**
+   * 设置子图层数据
+   */
+  protected setSubLayersSource(source: AreaLayerSourceOptions | Source) {
+    super.setSubLayersSource(source);
     this.setStrokeLayerSource();
     this.setHighlightLayerSource();
     this.selectFillLayer.source({ type: 'FeatureCollection', features: [] }, { parser: { type: 'geojson' } });
     this.selectStrokeLayer.source({ type: 'FeatureCollection', features: [] }, { parser: { type: 'geojson' } });
   }
 
+  /**
+   * 设置描边子图层数据
+   */
   protected setStrokeLayerSource() {
     const layerSource = this.layer.getSource();
     if (layerSource) {
@@ -156,6 +147,9 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     }
   }
 
+  /**
+   * 设置高亮描边子图层数据
+   */
   protected setHighlightLayerSource(feature?: any, featureId = -999) {
     if (this.highlightLayerData === featureId) {
       return;
@@ -165,6 +159,9 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     this.highlightLayerData = featureId;
   }
 
+  /**
+   * 设置选中描边与填充子图层数据
+   */
   protected setSelectLayerSource(selectData: any[] = []) {
     if (
       this.selectData.length === selectData.length &&
@@ -181,7 +178,10 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     this.selectData = selectData;
   }
 
-  private initEvent() {
+  /**
+   * 初始化子图层事件
+   */
+  protected initSubLayersEvent() {
     this.layer.off('mousemove', this.onHighlighHandle);
     this.layer.off('unmousemove', this.onHighlighHandle);
     this.layer.off('click', this.onSelectHandle);
@@ -199,15 +199,24 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     }
   }
 
+  /**
+   * 图层高亮回调
+   */
   private onHighlighHandle = (event: MouseEvent) => {
     const { feature, featureId } = event;
     this.setHighlightLayerSource(feature, featureId);
   };
 
+  /**
+   * 图层取消高亮回调
+   */
   private onUnhighlighHandle = () => {
     this.setHighlightLayerSource();
   };
 
+  /**
+   * 图层选中回调
+   */
   private onSelectHandle = (event: MouseEvent) => {
     const enabledMultiSelect = this.options.enabledMultiSelect;
     const { feature, featureId } = event;
@@ -234,57 +243,49 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     this.setSelectLayerSource(selectData);
   };
 
-  public addTo(scene: Scene) {
-    super.addTo(scene);
-    scene.addLayer(this.strokeLayer);
-    scene.addLayer(this.highlightLayer);
-    scene.addLayer(this.selectFillLayer);
-    scene.addLayer(this.selectStrokeLayer);
-  }
-
-  public remove() {
-    if (!this.scene) return;
-    super.remove();
-    this.scene.removeLayer(this.strokeLayer);
-    this.scene.removeLayer(this.highlightLayer);
-    this.scene.removeLayer(this.selectFillLayer);
-    this.scene.removeLayer(this.selectStrokeLayer);
-  }
-
+  /**
+   * 更新
+   */
   public update(options: Partial<AreaLayerOptions>) {
     super.update(options);
-    this.mappingLayer(this.options);
+
+    this.adaptorSubLayersAttr();
 
     if (this.options.visible) {
-      if (!isUndefined(options.state) && !isEqual(this.lastOptions.state, this.options.state)) {
-        this.updateHighlightLayer();
-      }
-      const defaultState = getDefaultState(this.options.state);
-      if (defaultState.active.stroke) {
-        this.setHighlightLayerSource();
-      }
-      if (defaultState.select.fill || defaultState.select.stroke) {
-        this.setSelectLayerSource();
-      }
+      this.updateHighlightSubLayers(this.options);
     }
 
-    this.initEvent();
+    this.initSubLayersEvent();
   }
 
-  private updateHighlightLayer() {
+  /**
+   * 更新高亮及选中子图层
+   */
+  private updateHighlightSubLayers(options: Partial<AreaLayerOptions>) {
     const defaultState = getDefaultState(this.options.state);
-    const lasetDefaultState = getDefaultState(this.lastOptions.state);
 
-    if (lasetDefaultState.active.stroke !== defaultState.active.stroke) {
-      defaultState.active.stroke ? this.highlightLayer.show() : this.highlightLayer.hide();
+    // 更新是否开启高亮与选中子图层
+    if (!isUndefined(options.state) && !isEqual(this.lastOptions.state, this.options.state)) {
+      const lasetDefaultState = getDefaultState(this.lastOptions.state);
+      if (lasetDefaultState.active.stroke !== defaultState.active.stroke) {
+        defaultState.active.stroke ? this.highlightLayer.show() : this.highlightLayer.hide();
+      }
+
+      if (lasetDefaultState.select.fill !== defaultState.select.fill) {
+        defaultState.select.fill ? this.selectFillLayer.show() : this.selectFillLayer.hide();
+      }
+
+      if (lasetDefaultState.select.stroke !== defaultState.select.stroke) {
+        defaultState.select.stroke ? this.selectStrokeLayer.show() : this.selectStrokeLayer.hide();
+      }
     }
 
-    if (lasetDefaultState.select.fill !== defaultState.select.fill) {
-      defaultState.select.fill ? this.selectFillLayer.show() : this.selectFillLayer.hide();
+    // 更新之后清除旧数据
+    if (defaultState.active.stroke) {
+      this.setHighlightLayerSource();
     }
-
-    if (lasetDefaultState.select.stroke !== defaultState.select.stroke) {
-      defaultState.select.stroke ? this.selectStrokeLayer.show() : this.selectStrokeLayer.hide();
+    if (defaultState.select.fill || defaultState.select.stroke) {
+      this.setSelectLayerSource();
     }
   }
 
@@ -294,38 +295,6 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     this.highlightLayer.setIndex(zIndex + 0.1);
     this.selectFillLayer.setIndex(zIndex + 0.1);
     this.selectStrokeLayer.setIndex(zIndex + 0.1);
-  }
-
-  public setMinZoom(minZoom: number) {
-    this.layer.setMinZoom(minZoom);
-    this.strokeLayer.setMinZoom(minZoom);
-    this.highlightLayer.setMinZoom(minZoom);
-    this.selectFillLayer.setMinZoom(minZoom);
-    this.selectStrokeLayer.setMinZoom(minZoom);
-  }
-
-  public setMaxZoom(maxZoom: number) {
-    this.layer.setMaxZoom(maxZoom);
-    this.strokeLayer.setMaxZoom(maxZoom);
-    this.highlightLayer.setMaxZoom(maxZoom);
-    this.selectFillLayer.setMaxZoom(maxZoom);
-    this.selectStrokeLayer.setMaxZoom(maxZoom);
-  }
-
-  public show() {
-    if (!this.layer.inited) return;
-    this.layer.show();
-    this.strokeLayer.show();
-    this.selectFillLayer.show();
-    this.selectStrokeLayer.show();
-  }
-
-  public hide() {
-    if (!this.layer.inited) return;
-    this.layer.hide();
-    this.strokeLayer.hide();
-    this.selectFillLayer.hide();
-    this.selectStrokeLayer.hide();
   }
 
   public setActive(id: number) {
