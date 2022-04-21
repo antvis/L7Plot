@@ -24,7 +24,6 @@ export const DEFAULT_STATE: { active: Required<AreaLayerActiveOptions>; select: 
  * 默认配置项
  */
 export const DEFAULT_OPTIONS: Partial<AreaLayerOptions> = {
-  visible: true,
   state: {
     active: false,
     select: false,

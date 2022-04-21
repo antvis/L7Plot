@@ -77,11 +77,11 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
    */
   protected createSubLayers() {
     const { state } = this.options;
-    const config = this.pickLayerBaseConfig();
-    const { visible, minZoom, maxZoom, zIndex = 0 } = config;
+    const baseConfig = this.pickLayerBaseConfig();
+    const { visible, minZoom, maxZoom, zIndex = 0 } = baseConfig;
     const defaultState = getDefaultState(state);
 
-    const fillLayer = new PolygonLayer({ ...config, name: 'fillLayer' });
+    const fillLayer = new PolygonLayer({ ...baseConfig, name: 'fillLayer' });
     const strokeLayer = new LineLayer({ name: 'strokeLayer', visible, zIndex, minZoom, maxZoom });
     const highlightLayer = new LineLayer({
       name: 'highlightLayer',
