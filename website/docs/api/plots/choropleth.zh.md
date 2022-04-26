@@ -131,12 +131,12 @@ const choropleth = new Choropleth(container, options);
 
 是否显示中国国界线，国界线样式 ChinaBoundaryStyle 配置如下：
 
-| 属性     | 描述 | 类型                     | 默认值                                                      | 是否必填 |
-| -------- | ---- | ------------------------ | ----------------------------------------------------------- | -------- |
-| national | 国界 | `LinesLayerStyleOptions` | `{ color: 'red', width: 1, opacity: 1 }`                    | optional |
-| dispute  | 争议 | `LinesLayerStyleOptions` | `{ color: 'red', width: 1, opacity: 1, dashArray: [1, 6] }` | optional |
-| coast    | 海洋 | `LinesLayerStyleOptions` | `{ color: 'blue', width: 1, opacity: 1 }`                   | optional |
-| hkm      | 港澳 | `LinesLayerStyleOptions` | `{ color: 'gray', width: 1, opacity: 1 }`                   | optional |
+| 属性     | 描述 | 类型                     | 默认值                                                           | 是否必填 |
+| -------- | ---- | ------------------------ | ---------------------------------------------------------------- | -------- |
+| national | 国界 | `LinesLayerStyleOptions` | `{ color: 'red', width: 1, opacity: 1 }`                         | optional |
+| dispute  | 争议 | `LinesLayerStyleOptions` | `{ color: 'red', width: 1, opacity: 1, dashArray: [2, 4] }`      | optional |
+| coast    | 海洋 | `LinesLayerStyleOptions` | `{ color: 'blue', width: 0.7, opacity: 0.8 }`                    | optional |
+| hkm      | 港澳 | `LinesLayerStyleOptions` | `{ color: 'gray', width: 0.7, opacity: 0.8, dashArray: [2, 4] }` | optional |
 
 ### `options.`drill
 
