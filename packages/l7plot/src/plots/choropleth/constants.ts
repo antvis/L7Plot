@@ -52,7 +52,7 @@ export const CHINA_BOUNDARY_STYLE = {
     color: 'red',
     width: 1,
     opacity: 0.8,
-    dashArray: [1, 6],
+    dashArray: [2, 4],
   },
   // 海洋
   coast: {
@@ -65,5 +65,6 @@ export const CHINA_BOUNDARY_STYLE = {
     color: 'gray',
     width: 0.7,
     opacity: 0.8,
+    dashArray: [2, 4],
   },
 };

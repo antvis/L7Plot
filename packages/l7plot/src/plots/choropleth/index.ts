@@ -53,6 +53,10 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    */
   public chinaBoundaryLayer: PathLayer | undefined;
   /**
+   * 港澳界图层
+   */
+  public chinaHkmBoundaryLayer: PathLayer | undefined;
+  /**
    * 国界争议图层
    */
   public chinaDisputeBoundaryLayer: PathLayer | undefined;
@@ -223,14 +227,9 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     const layerGroup = new LayerGroup([this.fillAreaLayer]);
 
     if (this.options.chinaBorder) {
-      const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = this.createCountryBoundaryLayer(
-        this.chinaBoundaryData,
-        this.options
-      );
-      this.chinaBoundaryLayer = chinaBoundaryLayer;
-      this.chinaDisputeBoundaryLayer = chinaDisputeBoundaryLayer;
-      layerGroup.addLayer(this.chinaBoundaryLayer);
-      layerGroup.addLayer(this.chinaDisputeBoundaryLayer);
+      const layers = this.createCountryBoundaryLayer(this.chinaBoundaryData, this.options);
+
+      layers.forEach((layer) => layerGroup.addLayer(layer));
     }
 
     if (this.options.label) {
@@ -245,8 +244,14 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    * 创建中国国界线图层
    */
   private createCountryBoundaryLayer(data: FeatureCollection, plotConfig?: ChoroplethOptions) {
-    const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(data, plotConfig);
-    return { chinaBoundaryLayer, chinaDisputeBoundaryLayer };
+    const { chinaBoundaryLayer, chinaHkmBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(
+      data,
+      plotConfig
+    );
+    this.chinaBoundaryLayer = chinaBoundaryLayer;
+    this.chinaHkmBoundaryLayer = chinaHkmBoundaryLayer;
+    this.chinaDisputeBoundaryLayer = chinaDisputeBoundaryLayer;
+    return [chinaBoundaryLayer, chinaHkmBoundaryLayer, chinaDisputeBoundaryLayer];
   }
 
   /**
@@ -296,17 +301,13 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     this.fillAreaLayer.update(fillAreaLayerConfig);
 
     const createCountryBoundaryLayer = () => {
-      const { chinaBoundaryLayer, chinaDisputeBoundaryLayer } = this.createCountryBoundaryLayer(
-        this.chinaBoundaryData,
-        this.options
-      );
-      this.chinaBoundaryLayer = chinaBoundaryLayer;
-      this.chinaDisputeBoundaryLayer = chinaDisputeBoundaryLayer;
-      this.layerGroup.addLayer(this.chinaBoundaryLayer);
-      this.layerGroup.addLayer(this.chinaDisputeBoundaryLayer);
+      const layers = this.createCountryBoundaryLayer(this.chinaBoundaryData, this.options);
+
+      layers.forEach((layer) => this.layerGroup.addLayer(layer));
     };
     const removeCountryBoundaryLayer = () => {
       this.chinaBoundaryLayer && this.layerGroup.removeLayer(this.chinaBoundaryLayer);
+      this.chinaHkmBoundaryLayer && this.layerGroup.removeLayer(this.chinaHkmBoundaryLayer);
       this.chinaDisputeBoundaryLayer && this.layerGroup.removeLayer(this.chinaDisputeBoundaryLayer);
     };
 

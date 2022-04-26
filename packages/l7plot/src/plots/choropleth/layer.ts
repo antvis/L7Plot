@@ -11,9 +11,10 @@ export const createCountryBoundaryLayer = (data: FeatureCollection, plotConfig?:
   const borderStyle: Required<ChinaBoundaryStyle> =
     typeof chinaBorder === 'object' ? deepAssign({}, CHINA_BOUNDARY_STYLE, chinaBorder) : CHINA_BOUNDARY_STYLE;
   const chinaBoundaryFeatures = data.features.filter(({ properties }) =>
-    ['coast', 'hkm', 'national'].includes(properties?.['type'])
+    ['coast', 'national'].includes(properties?.['type'])
   );
   const disputeBoundaryFeatures = data.features.filter(({ properties }) => properties?.['type'] === 'dispute');
+  const hkmBoundaryFeatures = data.features.filter(({ properties }) => properties?.['type'] === 'hkm');
 
   const chinaBoundaryLayer = new PathLayer({
     name: 'chinaBoundaryLayer',
@@ -41,6 +42,24 @@ export const createCountryBoundaryLayer = (data: FeatureCollection, plotConfig?:
       opacity: ['type', (type) => borderStyle[type].opacity],
     },
   });
+  const chinaHkmBoundaryLayer = new PathLayer({
+    name: 'chinaHkmBoundaryLayer',
+    visible,
+    minZoom,
+    maxZoom,
+    zIndex: zIndex + 0.1,
+    source: {
+      data: { type: 'FeatureCollection', features: hkmBoundaryFeatures },
+      parser: { type: 'geojson' },
+    },
+    color: borderStyle.hkm.color,
+    size: borderStyle.hkm.width,
+    style: {
+      opacity: borderStyle.hkm.opacity,
+      lineType: 'dash',
+      dashArray: borderStyle.hkm.dashArray as [number, number],
+    },
+  });
   const chinaDisputeBoundaryLayer = new PathLayer({
     name: 'chinaDisputeBoundaryLayer',
     visible,
@@ -60,5 +79,5 @@ export const createCountryBoundaryLayer = (data: FeatureCollection, plotConfig?:
     },
   });
 
-  return { chinaBoundaryLayer, chinaDisputeBoundaryLayer };
+  return { chinaBoundaryLayer, chinaHkmBoundaryLayer, chinaDisputeBoundaryLayer };
 };
