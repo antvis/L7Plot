@@ -171,6 +171,12 @@ module.exports = {
     showGithubCorner: true, // 是否展示角落的 GitHub 图标
     showAPIDoc: true, // 是否在demo页展示API文档
     showChartResize: true, // 是否在demo页展示图表视图切换
+    docsearchOptions: {
+      versionV3: true,
+      apiKey: '94877923b52fede27834c0e345b19e6d',
+      indexName: 'l7plot-antv',
+      appId: '3RDFA6ITAF',
+    },
     playground: {
       container: '<div id="container" style="position: relative; width: 100%; height: 100vh;" />',
       playgroundDidMount: 'console.log("playgroundDidMount");',
