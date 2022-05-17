@@ -1,8 +1,15 @@
-import { isEqual, isUndefined, pick, deepMix, uniqueId } from '@antv/util';
-import Source from '@antv/l7-source';
+import { pick, deepMix, uniqueId } from '@antv/util';
 import EventEmitter from '@antv/event-emitter';
-import { Scene, ILayer, ILayerConfig, SourceOptions, ICompositeLayer, LayerType, LayerBlend } from '../types';
-import { MappingSource } from '../adaptor/source';
+import {
+  Scene,
+  ILayerConfig,
+  SourceOptions,
+  ICompositeLayer,
+  CompositeLayerType,
+  LayerBlend,
+  ICoreLayer,
+  ISource,
+} from '../types';
 import { LayerEventList } from './constants';
 import { LayerGroup } from './layer-group';
 
@@ -27,11 +34,15 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   /**
    * 复合图层类型
    */
-  static LayerType = LayerType;
+  static LayerType = CompositeLayerType;
   /**
    * 默认的 options 配置项
    */
   static DefaultOptions: Partial<CompositeLayerOptions> = {};
+  /**
+   * 是否是复合图层
+   */
+  public readonly isComposite = true;
   /**
    * 复合图层名称
    */
@@ -39,7 +50,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   /**
    * 复合图层类型
    */
-  public abstract readonly type: LayerType | string;
+  public abstract readonly type: CompositeLayerType | string;
   /**
    * 复合图层的 schema 配置
    */
@@ -55,7 +66,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   /**
    * 主子图层实例
    */
-  public abstract readonly layer: ILayer;
+  protected abstract readonly layer: ICoreLayer;
   /**
    * 图层是否具有交互效果，用于 tooltip
    */
@@ -63,21 +74,17 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   /**
    * 子图层组
    */
-  protected subLayers: LayerGroup;
+  public subLayers: LayerGroup;
 
   constructor(options: O) {
     super();
-    const { name, source } = options;
+    const { name } = options;
     this.name = name ? name : uniqueId('composite-layer');
     this.options = deepMix({}, this.getDefaultOptions(), options);
     this.lastOptions = this.options;
 
     const subLayers = this.createSubLayers();
     this.subLayers = new LayerGroup(subLayers);
-    this.adaptorSubLayersAttr();
-
-    this.setSubLayersSource(source);
-    // this.initEvent();
   }
 
   /**
@@ -98,29 +105,13 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   /**
    * 创建子图层
    */
-  protected abstract createSubLayers(): ILayer[];
-
-  /**
-   * 映射子图层属性
-   */
-  protected abstract adaptorSubLayersAttr(): void;
+  protected abstract createSubLayers(): ICoreLayer[];
 
   /**
    * 设置子图层数据
    */
-  protected setSubLayersSource(source: SourceOptions | Source) {
-    if (source instanceof Source) {
-      this.layer.setSource(source);
-    } else {
-      const { data, aggregation, ...option } = source;
-      aggregation && MappingSource.aggregation(option, aggregation);
-      const layerSource = this.layer.getSource();
-      if (layerSource) {
-        this.layer.setData(data, option);
-      } else {
-        this.layer.source(data, option);
-      }
-    }
+  protected setSubLayersSource(source: SourceOptions | ISource) {
+    this.layer?.changeData(source);
   }
 
   /**
@@ -151,7 +142,6 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    */
   public update(options: Partial<O>) {
     this.updateOption(options);
-    this.updateConfig(options);
   }
 
   /**
@@ -162,36 +152,13 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     this.options = deepMix({}, this.options, options);
   }
 
-  // 更新: 更新图层属性配置
-  public updateConfig(options: Partial<CompositeLayerOptions>) {
-    if (!isUndefined(options.zIndex) && !isEqual(this.lastOptions.zIndex, this.options.zIndex)) {
-      this.setIndex(options.zIndex);
-    }
-
-    if (!isUndefined(options.blend) && !isEqual(this.lastOptions.blend, this.options.blend)) {
-      this.setBlend(options.blend);
-    }
-
-    if (!isUndefined(options.minZoom) && !isEqual(this.lastOptions.minZoom, this.options.minZoom)) {
-      this.setMinZoom(options.minZoom);
-    }
-
-    if (!isUndefined(options.maxZoom) && !isEqual(this.lastOptions.maxZoom, this.options.maxZoom)) {
-      this.setMinZoom(options.maxZoom);
-    }
-
-    if (!isUndefined(options.visible) && !isEqual(this.lastOptions.visible, this.options.visible)) {
-      options.visible ? this.show() : this.hide();
-    }
-  }
-
   public render() {
     if (this.scene) {
       this.scene.render();
     }
   }
 
-  public changeData(source: SourceOptions | Source) {
+  public changeData(source: SourceOptions) {
     this.setSubLayersSource(source);
   }
 
@@ -241,7 +208,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     this.layer.fitBounds(fitBoundsOptions);
   }
 
-  public getlegenditems(type: string): Record<string, any>[] {
+  public getLegendItems(type: string): Record<string, any>[] {
     return this.layer.getLegendItems(type);
   }
 

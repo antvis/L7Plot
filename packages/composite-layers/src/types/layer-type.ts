@@ -1,7 +1,7 @@
 /**
  * 复合图层类型
  */
-export enum LayerType {
+export enum CompositeLayerType {
   TextLayer = 'textLayer',
   DotLayer = 'dotLayer',
   IconLayer = 'iconLayer',

@@ -1,6 +1,6 @@
 import { uniqueId } from '@antv/util';
 import EventEmitter from '@antv/event-emitter';
-import { ILayer, Scene, ILayerGroup } from '../types';
+import { Scene, ILayerGroup, ICoreLayer } from '../types';
 
 export type LayerGroupOptions = {
   name?: string;
@@ -14,13 +14,13 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
   /**
    * 子图层
    */
-  private layerMap = new Map<string, ILayer>();
+  private layerMap = new Map<string, ICoreLayer>();
   /**
    * 地图容器
    */
   private scene: Scene | undefined;
 
-  constructor(layers: ILayer[] = [], option: LayerGroupOptions = {}) {
+  constructor(layers: ICoreLayer[] = [], option: LayerGroupOptions = {}) {
     super();
     this.name = option.name ? option.name : uniqueId('layerGroup');
     for (let index = 0; index < layers.length; index++) {
@@ -44,7 +44,7 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
           this.emit('inited-layers');
         }
       });
-      scene.addLayer(layer);
+      layer.addTo(scene);
     }
   }
 
@@ -60,7 +60,7 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
   /**
    * 图层组是否有该图层
    */
-  public hasLayer(layer: ILayer): boolean {
+  public hasLayer(layer: string | ICoreLayer): boolean {
     const layerId = typeof layer === 'string' ? layer : this.getLayerId(layer);
     return this.layerMap.has(layerId);
   }
@@ -68,21 +68,21 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
   /**
    * 添加图层
    */
-  public addLayer(layer: ILayer) {
+  public addLayer(layer: ICoreLayer) {
     const layerId = this.getLayerId(layer);
 
     this.layerMap.set(layerId, layer);
 
     if (this.scene) {
       layer.once('inited', (e) => this.emit('inited-layer', e));
-      this.scene.addLayer(layer);
+      layer.addTo(this.scene);
     }
   }
 
   /**
    * 添加多个图层
    */
-  public addLayers(layers: ILayer[]) {
+  public addLayers(layers: ICoreLayer[]) {
     layers.forEach((layer) => {
       this.addLayer(layer);
     });
@@ -91,7 +91,7 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
   /**
    * 根据图层 id 或图层实例移除 layer 图层
    */
-  public removeLayer(layer: string | ILayer): boolean {
+  public removeLayer(layer: string | ICoreLayer): boolean {
     const layerId = typeof layer === 'string' ? layer : this.getLayerId(layer);
     const findLayer = this.layerMap.get(layerId);
 
@@ -99,7 +99,7 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
 
     this.layerMap.delete(layerId);
     if (this.scene) {
-      this.scene.removeLayer(findLayer);
+      findLayer.remove();
     }
     return true;
   }
@@ -107,21 +107,21 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
   /**
    * 获取图层组所有的图层
    */
-  public getLayers(): ILayer[] {
+  public getLayers(): ICoreLayer[] {
     return Array.from(this.layerMap.values());
   }
 
   /**
    * 根据图层 ID 获取图层
    */
-  public getLayer(id: string): ILayer | undefined {
+  public getLayer(id: string): ICoreLayer | undefined {
     return this.layerMap.get(id);
   }
 
   /**
    * 根据图层 name 获取图层
    */
-  public getLayerByName(name: string): ILayer | undefined {
+  public getLayerByName(name: string): ICoreLayer | undefined {
     return this.getLayers().find((itemLayer) => itemLayer.name === name);
   }
 
@@ -131,7 +131,7 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
   public removeAllLayer() {
     for (const layer of this.layerMap.values()) {
       if (this.scene) {
-        this.scene.removeLayer(layer);
+        layer.remove();
       }
     }
     this.layerMap.clear();
@@ -156,12 +156,12 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
   /**
    * 根据图层获取图层 ID
    */
-  public getLayerId(layer: ILayer) {
+  public getLayerId(layer: ICoreLayer) {
     if ('name' in layer) {
       return layer.name;
     }
 
-    return layer.id;
+    return layer.layer.id;
   }
 
   /**

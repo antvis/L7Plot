@@ -1,5 +1,6 @@
+import { PolygonLayerOptions } from '../../core-layers/polygon-layer/types';
 import { CompositeLayerOptions } from '../../core/composite-layer';
-import { ISourceCFG, PolygonLayerConfig, Source } from '../../types';
+import { ISourceCFG, ISource } from '../../types';
 
 /**
  * 数据配置
@@ -37,11 +38,11 @@ export type AreaLayerActiveOptions = {
   lineOpacity?: number;
 };
 
-export interface AreaLayerOptions extends Pick<PolygonLayerConfig, 'color'>, CompositeLayerOptions {
+export interface AreaLayerOptions extends Pick<PolygonLayerOptions, 'color'>, CompositeLayerOptions {
   /**
    * 具体的数据
    */
-  source: AreaLayerSourceOptions | Source;
+  source: AreaLayerSourceOptions | ISource;
   /**
    * 图层样式
    */

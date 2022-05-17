@@ -1,5 +1,5 @@
 export * from './common';
 export * from './attr';
-export * from './interface';
+export * from './layer-interface';
 export * from './layer-config';
 export * from './layer-type';

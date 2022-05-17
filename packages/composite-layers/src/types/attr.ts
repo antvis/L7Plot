@@ -58,6 +58,9 @@ export type AnimateAttr = boolean | Partial<IAnimateOption>;
 /** 纹理贴图 */
 export type TextureAttr = string;
 
+/** 比例尺 */
+export type ScaleAttr = Record<string, ScaleConfig>;
+
 /** 数据过滤 */
 export type FilterAttr = {
   field?: string | string[];

@@ -30,3 +30,5 @@ export const DEFAULT_OPTIONS: Partial<AreaLayerOptions> = {
   },
   enabledMultiSelect: false,
 };
+
+export const EMPTY_SOURCE = { data: { type: 'FeatureCollection', features: [] }, parser: { type: 'geojson' } };

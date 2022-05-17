@@ -1,8 +1,8 @@
 import { getLayerStyleAttribute } from '../../../helper/layer';
-import { DotLayer } from '../../../../src/layers/dot-layer';
+import { PointLayer } from '../../../../src/core-layers/point-layer';
 
-describe('dot layer', () => {
-  const layer = new DotLayer({
+describe('point layer', () => {
+  const layer = new PointLayer({
     source: { data: [], parser: { type: 'json', x: 'x', y: 'y' } },
     size: 12,
     color: '#fff',
@@ -12,7 +12,7 @@ describe('dot layer', () => {
   });
 
   it('type', () => {
-    expect(layer.type).toBe('dotLayer');
+    expect(layer.type).toBe('pointLayer');
     expect(layer.layer.type).toBe('PointLayer');
   });
 

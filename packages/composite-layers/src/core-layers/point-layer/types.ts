@@ -1,11 +1,36 @@
-import { ColorAttr, StateAttribute, SizeAttr } from './attr';
-
-/**************************
- * 文字图层
- *************************/
+import { CoreLayerOptions } from '../../core/core-layer';
+import { ShapeAttr } from '../../types';
 
 /**
- * 文字图层 文本相对锚点
+ * 点图层 图层样式
+ */
+export type PointLayerStyleOptions = {
+  opacity?: number;
+  strokeWidth?: number;
+  stroke?: string;
+};
+
+/**
+ * 点图层 图形形状
+ */
+export type PointShape2d =
+  | 'circle'
+  | 'square'
+  | 'hexagon'
+  | 'triangle'
+  | 'pentagon'
+  | 'octogon'
+  | 'hexagram'
+  | 'rhombus'
+  | 'vesica'
+  | 'dot';
+
+export type PointShape3d = 'cylinder' | 'triangleColumn' | 'hexagonColumn' | 'squareColumn';
+
+export type PointShape = PointShape2d | PointShape3d | 'text';
+
+/**
+ * 点图层 文本相对锚点
  */
 export type AnchorType =
   | 'right'
@@ -24,13 +49,9 @@ export type AnchorType =
   | 'center';
 
 /**
- * 文字图层 样式
+ * 点图层 文本样式
  */
 export type PointTextLayerStyleOptions = {
-  /* 字体颜色 */
-  fill?: ColorAttr;
-  /* 字体大小 */
-  fontSize?: SizeAttr;
   /* 透明度 */
   opacity?: number;
   /* 文本相对锚点的位置 */
@@ -60,21 +81,15 @@ export type PointTextLayerStyleOptions = {
 };
 
 /**
- * 文字图层基础配置
+ * 点图层配置
  */
-export interface TextLayerConfig {
-  /** 映射的字段 */
-  field?: string;
-  // TODO: 多字段支持
-  //  fields?: string[];
-  /** 回调函数 */
-  content?: string;
-  // TODO: 多字段 CallBack 支持
-  //  content?: string | ((data: Record<string, string | number>) => string);
-  /** 字体样式 */
-  style?: PointTextLayerStyleOptions;
-  /* 旋转文字 */
-  // rotate?: RotateAttr;
-  /* 交互反馈 */
-  state?: StateAttribute;
+export interface PointLayerOptions extends CoreLayerOptions {
+  /**
+   * 图形形状
+   */
+  shape?: ShapeAttr<PointShape | string>;
+  /**
+   * 图层样式
+   */
+  style?: PointLayerStyleOptions | PointTextLayerStyleOptions;
 }

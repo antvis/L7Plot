@@ -1,9 +1,9 @@
 import {
   ILayer,
   ILayerConfig,
+  ISource,
   ISourceCFG,
   IScale,
-  IScaleOptions,
   ILngLat,
   BlendType,
   IImage,
@@ -12,15 +12,24 @@ import {
   ILegendClassificaItem,
 } from '@antv/l7-core';
 import type { Scene } from '@antv/l7-scene';
-import type Source from '@antv/l7-source';
 
-export { ILayer, ILayerConfig, ISourceCFG, BlendType, IImage, ITransform, ILegendSegmentItem, ILegendClassificaItem };
+export {
+  ILayer,
+  ILayerConfig,
+  ISource,
+  ISourceCFG,
+  BlendType,
+  IImage,
+  ITransform,
+  ILegendSegmentItem,
+  ILegendClassificaItem,
+};
 
-export { Scene, Source };
+export { Scene };
 
+export type LayerBaseConfig = Omit<ILayerConfig, 'size' | 'shape' | 'shape2d' | 'shape3d'>;
 export type ValueOf<T> = T[keyof T];
 export type ScaleConfig = IScale;
-export type ScaleConfigMap = IScaleOptions;
 
 /**
  * 图层混合配置

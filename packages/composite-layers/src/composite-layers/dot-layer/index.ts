@@ -1,8 +1,7 @@
-import { PointLayer } from '@antv/l7-layers';
 import { CompositeLayer } from '../../core/composite-layer';
-import { mappingLayersAttr } from './adaptor';
+import { PointLayer } from '../../core-layers/point-layer';
 import { DotLayerOptions } from './types';
-import { ILayer, Source, SourceOptions } from '../../types';
+import { ICoreLayer, ISource, SourceOptions } from '../../types';
 import { DEFAULT_OPTIONS } from './constants';
 
 export type { DotLayerOptions };
@@ -17,10 +16,16 @@ export class DotLayer<O extends DotLayerOptions = DotLayerOptions> extends Compo
    */
   public type = CompositeLayer.LayerType.DotLayer;
   /**
-   * 主图层 点图层实例
+   * 主图层
    */
-  public get layer() {
-    return this.subLayers.getLayer('pointLayer') as ILayer;
+  protected get layer() {
+    return this.fillLayer;
+  }
+  /**
+   * 填充图层
+   */
+  public get fillLayer() {
+    return this.subLayers.getLayer('fillLayer') as ICoreLayer;
   }
   /**
    * 图层是否具有交互属性
@@ -43,28 +48,41 @@ export class DotLayer<O extends DotLayerOptions = DotLayerOptions> extends Compo
    * 创建子图层
    */
   protected createSubLayers() {
-    // const { state } = this.options;
-    const baseConfig = this.pickLayerBaseConfig();
-    // const { visible, minZoom, maxZoom, zIndex = 0 } = baseConfig;
-
-    const pointLayer = new PointLayer({ ...baseConfig, name: 'pointLayer' });
+    const pointLayer = new PointLayer({ name: 'fillLayer', ...this.getFillLayerOptions() });
 
     const subLayers = [pointLayer];
 
     return subLayers;
   }
 
-  /**
-   * 映射子图层属性
-   */
-  protected adaptorSubLayersAttr() {
-    mappingLayersAttr(this.layer, this.options);
+  private getFillLayerOptions() {
+    const { source, visible, minZoom, maxZoom, zIndex = 0, color, style, ...baseConfig } = this.options;
+
+    // const fillState = {
+    //   active: defaultState.active.fill === false ? false : { color: defaultState.active.fill },
+    //   select: false,
+    // };
+    const fillStyle = { opacity: style?.opacity };
+
+    const options = {
+      ...baseConfig,
+      visible,
+      minZoom,
+      maxZoom,
+      zIndex,
+      source,
+      color,
+      // state: fillState,
+      style: fillStyle,
+    };
+
+    return options;
   }
 
   /**
    * 设置子图层数据
    */
-  protected setSubLayersSource(source: SourceOptions | Source) {
+  protected setSubLayersSource(source: SourceOptions | ISource) {
     super.setSubLayersSource(source);
   }
 
@@ -77,8 +95,6 @@ export class DotLayer<O extends DotLayerOptions = DotLayerOptions> extends Compo
 
   public update(options: Partial<O>) {
     super.update(options);
-
-    this.adaptorSubLayersAttr();
 
     this.initSubLayersEvent();
   }
