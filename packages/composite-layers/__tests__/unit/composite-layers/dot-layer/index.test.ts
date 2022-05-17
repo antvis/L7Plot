@@ -38,11 +38,11 @@ describe('dot layer', () => {
   });
 
   it('style', () => {
-    expect(layer.fillLayer['rawConfig']).toMatchObject({ opacity: 1, strokeWidth: 1, stroke: 'red' });
+    expect(layer.fillLayer.layer['rawConfig']).toMatchObject({ opacity: 1, strokeWidth: 1, stroke: 'red' });
   });
 
   it('state', () => {
-    expect(layer.fillLayer['needUpdateConfig'].enableHighlight).toBeTruthy();
-    expect(layer.fillLayer['needUpdateConfig'].enableSelect).toBeTruthy();
+    expect(layer.fillLayer.layer['needUpdateConfig'].enableHighlight).toBeTruthy();
+    expect(layer.fillLayer.layer['needUpdateConfig'].enableSelect).toBeTruthy();
   });
 });
