@@ -133,10 +133,17 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
   protected abstract createLayer(): ILayer;
 
   /**
+   * 适配属性配置
+   */
+  protected adaptorAttrOptions(options: O): CoreLayerOptions {
+    return options;
+  }
+
+  /**
    * 映射图层属性
    */
   protected adaptorLayerAttr(): void {
-    const { shape, color, size, scale, texture, style, animate, state } = this.options;
+    const { shape, color, size, scale, texture, style, animate, state } = this.adaptorAttrOptions(this.options);
     // mapping shape
     shape && MappingAttribute.shape(this.layer, shape);
     // mapping size

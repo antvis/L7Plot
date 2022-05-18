@@ -6,9 +6,22 @@ describe('dot layer', () => {
     source: { data: [], parser: { type: 'json', x: 'x', y: 'y' } },
     size: 12,
     color: '#fff',
-    shape: 'circle',
-    style: { opacity: 1, strokeWidth: 1, stroke: 'red' },
-    state: { active: true, select: true },
+    // shape: 'circle',
+    style: { opacity: 1, lineWidth: 1, stroke: 'red', lineOpacity: 0.8 },
+    state: {
+      active: {
+        fill: 'red',
+        stroke: 'green',
+        lineWidth: 1.5,
+        lineOpacity: 0.8,
+      },
+      select: {
+        fill: 'red',
+        stroke: 'yellow',
+        lineWidth: 1.5,
+        lineOpacity: 0.8,
+      },
+    },
   });
 
   it('type', () => {
@@ -30,19 +43,46 @@ describe('dot layer', () => {
     });
   });
 
-  it('shape', () => {
-    expect(getLayerStyleAttribute(layer.fillLayer.layer['pendingStyleAttributes'], 'shape')).toEqual({
-      attributeName: 'shape',
-      attributeField: 'circle',
-    });
-  });
+  // it('shape', () => {
+  //   expect(getLayerStyleAttribute(layer.fillLayer.layer['pendingStyleAttributes'], 'shape')).toEqual({
+  //     attributeName: 'shape',
+  //     attributeField: 'circle',
+  //   });
+  // });
 
   it('style', () => {
-    expect(layer.fillLayer.layer['rawConfig']).toMatchObject({ opacity: 1, strokeWidth: 1, stroke: 'red' });
+    expect(layer.fillLayer.layer['rawConfig']).toMatchObject({
+      opacity: 1,
+      strokeWidth: 1,
+      stroke: 'red',
+      strokeOpacity: 0.8,
+    });
   });
 
   it('state', () => {
     expect(layer.fillLayer.layer['needUpdateConfig'].enableHighlight).toBeTruthy();
-    expect(layer.fillLayer.layer['needUpdateConfig'].enableSelect).toBeTruthy();
+    expect(layer.fillLayer.layer['needUpdateConfig'].enableSelect).toBeFalsy();
+
+    expect(getLayerStyleAttribute(layer.highlightStrokeLayer.layer['pendingStyleAttributes'], 'size')).toEqual({
+      attributeName: 'size',
+      attributeField: 12,
+    });
+    expect(layer.highlightStrokeLayer.layer['rawConfig']).toMatchObject({
+      opacity: 0,
+      strokeWidth: 1.5,
+      stroke: 'green',
+      strokeOpacity: 0.8,
+    });
+
+    expect(getLayerStyleAttribute(layer.selectStrokeLayer.layer['pendingStyleAttributes'], 'size')).toEqual({
+      attributeName: 'size',
+      attributeField: 12,
+    });
+    expect(layer.selectStrokeLayer.layer['rawConfig']).toMatchObject({
+      opacity: 0,
+      strokeWidth: 1.5,
+      stroke: 'yellow',
+      strokeOpacity: 0.8,
+    });
   });
 });

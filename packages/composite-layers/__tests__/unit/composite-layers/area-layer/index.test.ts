@@ -8,6 +8,21 @@ describe('area layer', () => {
       field: 'adcode',
       value: ['rgb(239,243,255)', 'rgb(189,215,231)', 'rgb(8,81,156)'],
     },
+    label: {
+      field: 'label',
+      style: {
+        fill: '#fff',
+        opacity: 0.6,
+        fontSize: 12,
+        textAnchor: 'top',
+        textOffset: [0, 20],
+        spacing: 1,
+        padding: [5, 5],
+        stroke: '#ffffff',
+        strokeWidth: 0.3,
+        strokeOpacity: 1.0,
+      },
+    },
     style: {
       opacity: 1,
       stroke: 'rgb(93,112,146)',
@@ -16,11 +31,13 @@ describe('area layer', () => {
     },
     state: {
       active: {
+        fill: 'red',
         stroke: 'green',
         lineWidth: 1.5,
         lineOpacity: 0.8,
       },
       select: {
+        fill: 'red',
         stroke: 'yellow',
         lineWidth: 1.5,
         lineOpacity: 0.8,
@@ -32,9 +49,10 @@ describe('area layer', () => {
     expect(layer.type).toBe('areaLayer');
     expect(layer.fillLayer).toBe('polygonLayer');
     expect(layer.strokeLayer).toBe('lineLayer');
-    expect(layer.highlightLayer).toBe('lineLayer');
+    expect(layer.highlightStrokeLayer).toBe('lineLayer');
     expect(layer.selectFillLayer).toBe('polygonLayer');
     expect(layer.selectStrokeLayer).toBe('lineLayer');
+    expect(layer.labelLayer).toBe('PointLayer');
   });
 
   it('color', () => {
@@ -56,20 +74,51 @@ describe('area layer', () => {
     });
   });
 
+  it('label', () => {
+    expect(getLayerStyleAttribute(layer.labelLayer.layer['pendingStyleAttributes'], 'size')).toEqual({
+      attributeName: 'size',
+      attributeField: 12,
+    });
+    expect(getLayerStyleAttribute(layer.labelLayer.layer['pendingStyleAttributes'], 'color')).toEqual({
+      attributeName: 'color',
+      attributeField: '#fff',
+    });
+    expect(getLayerStyleAttribute(layer.labelLayer.layer['pendingStyleAttributes'], 'shape')).toEqual({
+      attributeName: 'shape',
+      attributeField: 'label',
+      attributeValues: 'text',
+    });
+    expect(layer.labelLayer.layer['rawConfig']).toMatchObject({
+      opacity: 0.6,
+      textAnchor: 'top',
+      textOffset: [0, 20],
+      spacing: 1,
+      padding: [5, 5],
+      stroke: '#ffffff',
+      strokeWidth: 0.3,
+      strokeOpacity: 1.0,
+    });
+  });
+
   it('style', () => {
-    expect(layer.fillLayer['rawConfig']).toMatchObject({ opacity: 1 });
+    expect(layer.fillLayer.layer['rawConfig']).toMatchObject({ opacity: 1 });
+    expect(layer.strokeLayer.layer['rawConfig']).toMatchObject({ color: 'rgb(93,112,146)', size: 0.6, opacity: 1 });
   });
 
   it('state', () => {
-    expect(getLayerStyleAttribute(layer.highlightLayer.layer['pendingStyleAttributes'], 'color')).toEqual({
+    expect(layer.fillLayer.layer['needUpdateConfig'].enableHighlight).toBeTruthy();
+    expect(layer.fillLayer.layer['needUpdateConfig'].enableSelect).toBeFalsy();
+
+    expect(getLayerStyleAttribute(layer.highlightStrokeLayer.layer['pendingStyleAttributes'], 'color')).toEqual({
       attributeName: 'color',
       attributeField: 'green',
     });
-    expect(getLayerStyleAttribute(layer.highlightLayer.layer['pendingStyleAttributes'], 'size')).toEqual({
+    expect(getLayerStyleAttribute(layer.highlightStrokeLayer.layer['pendingStyleAttributes'], 'size')).toEqual({
       attributeName: 'size',
       attributeField: 1.5,
     });
-    expect(layer.highlightLayer['rawConfig']).toMatchObject({ opacity: 0.8 });
+    expect(layer.highlightStrokeLayer.layer['rawConfig']).toMatchObject({ opacity: 0.8 });
+
     expect(getLayerStyleAttribute(layer.selectStrokeLayer.layer['pendingStyleAttributes'], 'color')).toEqual({
       attributeName: 'color',
       attributeField: 'yellow',

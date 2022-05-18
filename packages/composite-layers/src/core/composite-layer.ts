@@ -1,19 +1,8 @@
-import { pick, deepMix, uniqueId } from '@antv/util';
+import { deepMix, uniqueId } from '@antv/util';
 import EventEmitter from '@antv/event-emitter';
-import {
-  Scene,
-  ILayerConfig,
-  SourceOptions,
-  ICompositeLayer,
-  CompositeLayerType,
-  LayerBlend,
-  ICoreLayer,
-  ISource,
-} from '../types';
+import { Scene, SourceOptions, ICompositeLayer, CompositeLayerType, LayerBlend, ICoreLayer, ISource } from '../types';
 import { LayerEventList } from './constants';
 import { LayerGroup } from './layer-group';
-
-const LayerBaseConfigkeys = ['name', 'zIndex', 'visible', 'minZoom', 'maxZoom', 'pickingBuffer', 'autoFit', 'blend'];
 
 /**
  * 复合图层的基础配置
@@ -83,8 +72,8 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     this.options = deepMix({}, this.getDefaultOptions(), options);
     this.lastOptions = this.options;
 
-    const subLayers = this.createSubLayers();
-    this.subLayers = new LayerGroup(subLayers);
+    const layers = this.createSubLayers();
+    this.subLayers = new LayerGroup(layers);
   }
 
   /**
@@ -92,14 +81,6 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    */
   public getDefaultOptions(): Partial<CompositeLayerOptions> {
     return CompositeLayer.DefaultOptions;
-  }
-
-  /**
-   * 获取子主图层基础配置项
-   */
-  protected pickLayerBaseConfig(): Partial<ILayerConfig> {
-    const config = pick<any>(this.options, LayerBaseConfigkeys);
-    return config;
   }
 
   /**
@@ -111,7 +92,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    * 设置子图层数据
    */
   protected setSubLayersSource(source: SourceOptions | ISource) {
-    this.layer?.changeData(source);
+    this.layer.changeData(source);
   }
 
   /**
@@ -151,6 +132,11 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     this.lastOptions = this.options;
     this.options = deepMix({}, this.options, options);
   }
+
+  /**
+   * 更新子图层
+   */
+  protected abstract updateSubLayers(): void;
 
   public render() {
     if (this.scene) {

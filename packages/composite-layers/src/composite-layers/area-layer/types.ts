@@ -1,4 +1,5 @@
 import { PolygonLayerOptions } from '../../core-layers/polygon-layer/types';
+import { TextLayerOptions } from '../../core-layers/text-layer/types';
 import { CompositeLayerOptions } from '../../core/composite-layer';
 import { ISourceCFG, ISource } from '../../types';
 
@@ -43,6 +44,10 @@ export interface AreaLayerOptions extends Pick<PolygonLayerOptions, 'color'>, Co
    * 具体的数据
    */
   source: AreaLayerSourceOptions | ISource;
+  /**
+   * 文本标注
+   */
+  label?: Omit<TextLayerOptions, 'source'>;
   /**
    * 图层样式
    */
