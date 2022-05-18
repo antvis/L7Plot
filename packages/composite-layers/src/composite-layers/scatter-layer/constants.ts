@@ -1,5 +1,10 @@
 import { DotLayerActiveOptions, ScatterLayerOptions } from './types';
 
+/**
+ * 空值 source
+ */
+export const EMPTY_SOURCE = { data: [], parser: { type: 'json', x: 'x', y: 'y' } };
+
 const defaultHighlightColor = '#2f54eb';
 
 /**

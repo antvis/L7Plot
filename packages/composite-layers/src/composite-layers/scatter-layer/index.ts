@@ -5,8 +5,7 @@ import { PointLayer } from '../../core-layers/point-layer';
 import { TextLayer } from '../../core-layers/text-layer';
 import { ICoreLayer, ISource, SourceOptions, MouseEvent } from '../../types';
 import { getDefaultState } from './adaptor';
-import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
-import { EMPTY_SOURCE } from '../area-layer/constants';
+import { DEFAULT_OPTIONS, DEFAULT_STATE, EMPTY_SOURCE } from './constants';
 import { ScatterLayerOptions } from './types';
 
 export type { ScatterLayerOptions };
@@ -104,18 +103,21 @@ export class ScatterLayer extends CompositeLayer<ScatterLayerOptions> {
     // 高亮描边图层
     const highlightStrokeLayer = new PointLayer({
       name: 'highlightStrokeLayer',
+      shape: 'circle',
       ...this.gethigHlightStrokeLayerOptions(),
     });
 
     // 选中填充图层
     const selectFillLayer = new PointLayer({
       name: 'selectFillLayer',
+      shape: 'circle',
       ...this.getSelectFillLayerOptions(),
     });
 
     // 选中描边图层
     const selectStrokeLayer = new PointLayer({
       name: 'selectStrokeLayer',
+      shape: 'circle',
       ...this.getSelectStrokeLayerOptions(),
     });
 
@@ -203,7 +205,7 @@ export class ScatterLayer extends CompositeLayer<ScatterLayerOptions> {
     const fillStyle = { opacity: opacity };
 
     const option = {
-      visible: visible && Boolean(defaultState.select.fillColor),
+      visible: visible && Boolean(color),
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
@@ -228,7 +230,7 @@ export class ScatterLayer extends CompositeLayer<ScatterLayerOptions> {
     };
 
     const option = {
-      visible: visible && Boolean(defaultState.select.fillColor),
+      visible: visible && Boolean(strokeStyle.stroke),
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
@@ -282,8 +284,8 @@ export class ScatterLayer extends CompositeLayer<ScatterLayerOptions> {
     }
     const features = feature ? [feature] : [];
     this.highlightStrokeLayer.changeData({
-      data: { type: 'FeatureCollection', features },
-      parser: { type: 'geojson' },
+      data: features,
+      parser: this.fillLayer.source['parser'],
     });
     this.highlightData = featureId;
   }
@@ -302,8 +304,8 @@ export class ScatterLayer extends CompositeLayer<ScatterLayerOptions> {
       return;
     }
     const features = selectData.map(({ feature }) => feature);
-    this.selectFillLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: { type: 'geojson' } });
-    this.selectStrokeLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: { type: 'geojson' } });
+    this.selectFillLayer.changeData({ data: features, parser: this.fillLayer.source['parser'] });
+    this.selectStrokeLayer.changeData({ data: features, parser: this.fillLayer.source['parser'] });
     this.selectData = selectData;
   }
 

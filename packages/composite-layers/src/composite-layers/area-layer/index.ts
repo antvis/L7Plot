@@ -212,7 +212,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     const size = defaultState.active.lineWidth || lineWidth;
 
     const options = {
-      visible: visible && Boolean(defaultState.active.strokeColor),
+      visible: visible && Boolean(color),
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
@@ -232,7 +232,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     const fillStyle = { opacity: opacity };
 
     const option = {
-      visible: visible && Boolean(defaultState.select.fillColor),
+      visible: visible && Boolean(color),
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
@@ -252,7 +252,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     const size = defaultState.select.lineWidth || lineWidth;
 
     const option = {
-      visible: visible && Boolean(defaultState.select.fillColor),
+      visible: visible && Boolean(color),
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,

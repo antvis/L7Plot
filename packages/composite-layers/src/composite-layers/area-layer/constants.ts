@@ -14,13 +14,13 @@ export const DEFAULT_STATE: { active: Required<AreaLayerActiveOptions>; select: 
   active: {
     fillColor: false,
     strokeColor: defaultHighlightColor,
-    lineWidth: 1.5,
+    lineWidth: 1,
     lineOpacity: 1,
   },
   select: {
     fillColor: false,
     strokeColor: defaultHighlightColor,
-    lineWidth: 1.5,
+    lineWidth: 1,
     lineOpacity: 1,
   },
 };
