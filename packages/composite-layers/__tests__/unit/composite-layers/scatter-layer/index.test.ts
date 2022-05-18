@@ -43,7 +43,7 @@ describe('scatter layer', () => {
   });
 
   it('type', () => {
-    expect(layer.type).toBe('dotLayer');
+    expect(layer.type).toBe('scatterLayer');
     expect(layer.fillLayer.type).toBe('pointLayer');
     expect(layer.highlightStrokeLayer.type).toBe('pointLayer');
     expect(layer.selectFillLayer.type).toBe('pointLayer');

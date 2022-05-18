@@ -18,7 +18,8 @@
     "clean": "rimraf dist",
     "build": "yarn run clean && yarn run build:cjs && yarn run build:esm",
     "build:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib",
-    "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm"
+    "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm",
+    "build:umd": "rollup -c rollup.config.js"
   },
   "keywords": [
     "antv",
