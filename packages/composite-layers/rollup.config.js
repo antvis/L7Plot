@@ -1,6 +1,5 @@
 import typescript from '@rollup/plugin-typescript';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import nodePolyfills from 'rollup-plugin-node-polyfills';
 import commonjs from '@rollup/plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
 import analyze from 'rollup-plugin-analyzer';
@@ -18,7 +17,6 @@ export default {
     },
   ],
   plugins: [
-    nodePolyfills(),
     nodeResolve({ browser: true, preferBuiltins: false }),
     commonjs(),
     typescript(),
