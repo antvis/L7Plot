@@ -1,14 +1,14 @@
 import { isUndefined } from '@antv/util';
 import { DEFAULT_STATE } from './constants';
-import { AreaLayerOptions } from './types';
+import { ScatterLayerOptions } from './types';
 
-export const getDefaultState = (state?: AreaLayerOptions['state']) => {
+export const getDefaultState = (state?: ScatterLayerOptions['state']) => {
   if (isUndefined(state)) {
     return DEFAULT_STATE;
   }
 
   if (state.active === false) {
-    DEFAULT_STATE.active = Object.assign(DEFAULT_STATE.active, { fill: false, stroke: false });
+    DEFAULT_STATE.active = Object.assign(DEFAULT_STATE.active, { fillColor: false, strokeColor: false });
   } else if (typeof state.active === 'object') {
     if (state.active.fillColor === false) {
       DEFAULT_STATE.active.fillColor = false;
@@ -31,7 +31,7 @@ export const getDefaultState = (state?: AreaLayerOptions['state']) => {
   }
 
   if (state.select === false) {
-    DEFAULT_STATE.select = Object.assign(DEFAULT_STATE.select, { fill: false, stroke: false });
+    DEFAULT_STATE.select = Object.assign(DEFAULT_STATE.select, { fillColor: false, strokeColor: false });
   } else if (typeof state.select === 'object') {
     if (state.select.fillColor === false) {
       DEFAULT_STATE.select.fillColor = false;

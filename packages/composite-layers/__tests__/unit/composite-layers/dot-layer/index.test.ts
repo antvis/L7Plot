@@ -1,12 +1,16 @@
 import { getLayerStyleAttribute } from '../../../helper/layer';
-import { DotLayer } from '../../../../src/composite-layers/dot-layer';
+import { ScatterLayer } from '../../../../src/composite-layers/scatter-layer';
 
-describe('dot layer', () => {
-  const layer = new DotLayer({
+describe('scatter layer', () => {
+  const layer = new ScatterLayer({
     source: { data: [], parser: { type: 'json', x: 'x', y: 'y' } },
-    size: 12,
-    color: '#fff',
-    // shape: 'circle',
+    radius: 12,
+    // dotType: 'circle',
+    fillColor: '#fff',
+    opacity: 1,
+    strokeColor: 'red',
+    lineOpacity: 0.8,
+    lineWidth: 1,
     label: {
       field: 'label',
       style: {
@@ -22,17 +26,16 @@ describe('dot layer', () => {
         strokeOpacity: 1.0,
       },
     },
-    style: { opacity: 1, lineWidth: 1, stroke: 'red', lineOpacity: 0.8 },
     state: {
       active: {
-        fill: 'red',
-        stroke: 'green',
+        fillColor: 'red',
+        strokeColor: 'green',
         lineWidth: 1.5,
         lineOpacity: 0.8,
       },
       select: {
-        fill: 'red',
-        stroke: 'yellow',
+        fillColor: 'red',
+        strokeColor: 'yellow',
         lineWidth: 1.5,
         lineOpacity: 0.8,
       },

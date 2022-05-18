@@ -4,10 +4,14 @@ import { AreaLayer } from '../../../../src/composite-layers/area-layer';
 describe('area layer', () => {
   const layer = new AreaLayer({
     source: { data: [] },
-    color: {
+    fillColor: {
       field: 'adcode',
       value: ['rgb(239,243,255)', 'rgb(189,215,231)', 'rgb(8,81,156)'],
     },
+    opacity: 1,
+    strokeColor: 'rgb(93,112,146)',
+    lineWidth: 0.6,
+    lineOpacity: 1,
     label: {
       field: 'label',
       style: {
@@ -23,22 +27,16 @@ describe('area layer', () => {
         strokeOpacity: 1.0,
       },
     },
-    style: {
-      opacity: 1,
-      stroke: 'rgb(93,112,146)',
-      lineWidth: 0.6,
-      lineOpacity: 1,
-    },
     state: {
       active: {
-        fill: 'red',
-        stroke: 'green',
+        fillColor: 'red',
+        strokeColor: 'green',
         lineWidth: 1.5,
         lineOpacity: 0.8,
       },
       select: {
-        fill: 'red',
-        stroke: 'yellow',
+        fillColor: 'red',
+        strokeColor: 'yellow',
         lineWidth: 1.5,
         lineOpacity: 0.8,
       },

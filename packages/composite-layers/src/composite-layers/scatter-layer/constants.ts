@@ -1,4 +1,4 @@
-import { DotLayerActiveOptions, DotLayerOptions } from './types';
+import { DotLayerActiveOptions, ScatterLayerOptions } from './types';
 
 const defaultHighlightColor = '#2f54eb';
 
@@ -7,30 +7,30 @@ const defaultHighlightColor = '#2f54eb';
  */
 export const DEFAULT_STATE: { active: Required<DotLayerActiveOptions>; select: Required<DotLayerActiveOptions> } = {
   active: {
-    fill: false,
-    stroke: defaultHighlightColor,
+    fillColor: false,
+    strokeColor: defaultHighlightColor,
     lineWidth: 1.5,
-    lineOpacity: 0.8,
+    lineOpacity: 1,
   },
   select: {
-    fill: false,
-    stroke: defaultHighlightColor,
+    fillColor: false,
+    strokeColor: defaultHighlightColor,
     lineWidth: 1.5,
-    lineOpacity: 0.8,
+    lineOpacity: 1,
   },
 };
 
 /**
  * 默认配置项
  */
-export const DEFAULT_OPTIONS: Partial<DotLayerOptions> = {
+export const DEFAULT_OPTIONS: Partial<ScatterLayerOptions> = {
   visible: true,
   source: {
     data: [],
     parser: { type: 'json', x: 'x', y: 'y' },
   },
-  size: 12,
-  color: '#5FD3A6',
+  radius: 12,
+  fillColor: '#5FD3A6',
   state: {
     active: false,
     select: false,

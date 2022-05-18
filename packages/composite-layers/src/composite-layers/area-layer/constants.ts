@@ -12,16 +12,16 @@ const defaultHighlightColor = '#2f54eb';
  */
 export const DEFAULT_STATE: { active: Required<AreaLayerActiveOptions>; select: Required<AreaLayerActiveOptions> } = {
   active: {
-    fill: false,
-    stroke: defaultHighlightColor,
+    fillColor: false,
+    strokeColor: defaultHighlightColor,
     lineWidth: 1.5,
-    lineOpacity: 0.8,
+    lineOpacity: 1,
   },
   select: {
-    fill: false,
-    stroke: defaultHighlightColor,
+    fillColor: false,
+    strokeColor: defaultHighlightColor,
     lineWidth: 1.5,
-    lineOpacity: 0.8,
+    lineOpacity: 1,
   },
 };
 

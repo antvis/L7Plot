@@ -106,7 +106,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
       ...this.getFillLayerOptions(),
       source,
     });
-    const fillBottomColor = this.options.style?.fillBottomColor;
+    const fillBottomColor = this.options.fillBottomColor;
     fillBottomColor && fillLayer.layer.setBottomColor(fillBottomColor);
 
     // 描边图层
@@ -148,14 +148,14 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   }
 
   private getFillLayerOptions() {
-    const { visible, minZoom, maxZoom, zIndex = 0, color, style, ...baseConfig } = this.options;
+    const { visible, minZoom, maxZoom, zIndex = 0, fillColor, opacity, ...baseConfig } = this.options;
     const defaultState = this.layerState;
 
     const fillState = {
-      active: defaultState.active.fill === false ? false : { color: defaultState.active.fill },
+      active: defaultState.active.fillColor === false ? false : { color: defaultState.active.fillColor },
       select: false,
     };
-    const fillStyle = { opacity: style?.opacity };
+    const fillStyle = { opacity: opacity };
 
     const options = {
       ...baseConfig,
@@ -163,7 +163,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
       minZoom,
       maxZoom,
       zIndex,
-      color,
+      color: fillColor,
       state: fillState,
       style: fillStyle,
     };
@@ -172,18 +172,31 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   }
 
   private getStrokeLayerOptions() {
-    const { visible, minZoom, maxZoom, zIndex = 0, style } = this.options;
+    const {
+      visible,
+      minZoom,
+      maxZoom,
+      zIndex = 0,
+      opacity,
+      strokeColor,
+      lineWidth,
+      lineOpacity,
+      lineDash,
+      lineType,
+    } = this.options;
 
-    const strokeSize = style?.lineWidth;
-    const strokeColor = style?.stroke;
-    const strokeStyle = { opacity: style?.lineOpacity, dashArray: style?.lineDash, lineType: style?.lineType };
+    const strokeStyle = {
+      opacity: isUndefined(lineOpacity) ? opacity : lineOpacity,
+      dashArray: lineDash,
+      lineType: lineType,
+    };
 
     const options = {
       visible,
       zIndex,
       minZoom,
       maxZoom,
-      size: strokeSize,
+      size: lineWidth,
       color: strokeColor,
       style: strokeStyle,
     };
@@ -192,15 +205,14 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   }
 
   private gethigHlightStrokeLayerOptions() {
-    const { visible, minZoom, maxZoom, zIndex = 0, style } = this.options;
+    const { visible, minZoom, maxZoom, zIndex = 0, lineWidth } = this.options;
     const defaultState = this.layerState;
 
-    const strokeSize = style?.lineWidth;
-    const color = defaultState.active.stroke || undefined;
-    const size = defaultState.active.lineWidth || strokeSize;
+    const color = defaultState.active.strokeColor || undefined;
+    const size = defaultState.active.lineWidth || lineWidth;
 
     const options = {
-      visible: visible && Boolean(defaultState.active.stroke),
+      visible: visible && Boolean(defaultState.active.strokeColor),
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
@@ -214,13 +226,13 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   }
 
   private getSelectFillLayerOptions() {
-    const { visible, minZoom, maxZoom, zIndex = 0, style } = this.options;
+    const { visible, minZoom, maxZoom, zIndex = 0, opacity } = this.options;
     const defaultState = this.layerState;
-    const color = defaultState.select.fill || undefined;
-    const fillStyle = { opacity: style?.opacity };
+    const color = defaultState.select.fillColor || undefined;
+    const fillStyle = { opacity: opacity };
 
     const option = {
-      visible: visible && Boolean(defaultState.select.fill),
+      visible: visible && Boolean(defaultState.select.fillColor),
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
@@ -234,14 +246,13 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   }
 
   private getSelectStrokeLayerOptions() {
-    const { visible, minZoom, maxZoom, zIndex = 0, style } = this.options;
+    const { visible, minZoom, maxZoom, zIndex = 0, lineWidth } = this.options;
     const defaultState = this.layerState;
-    const strokeSize = style?.lineWidth;
-    const color = defaultState.select.stroke || undefined;
-    const size = defaultState.select.lineWidth || strokeSize;
+    const color = defaultState.select.strokeColor || undefined;
+    const size = defaultState.select.lineWidth || lineWidth;
 
     const option = {
-      visible: visible && Boolean(defaultState.select.fill),
+      visible: visible && Boolean(defaultState.select.fillColor),
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
@@ -434,10 +445,10 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
         this.updateHighlightSubLayers();
       }
 
-      if (this.layerState.active.stroke) {
+      if (this.layerState.active.strokeColor) {
         this.setHighlightLayerSource();
       }
-      if (this.layerState.select.fill || this.layerState.select.stroke) {
+      if (this.layerState.select.fillColor || this.layerState.select.strokeColor) {
         this.setSelectLayerSource();
       }
     }
@@ -450,16 +461,16 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     const defaultState = this.layerState;
     const lasetDefaultState = getDefaultState(this.lastOptions.state);
 
-    if (lasetDefaultState.active.stroke !== defaultState.active.stroke) {
-      defaultState.active.stroke ? this.highlightStrokeLayer.show() : this.highlightStrokeLayer.hide();
+    if (lasetDefaultState.active.strokeColor !== defaultState.active.strokeColor) {
+      defaultState.active.strokeColor ? this.highlightStrokeLayer.show() : this.highlightStrokeLayer.hide();
     }
 
-    if (lasetDefaultState.select.fill !== defaultState.select.fill) {
-      defaultState.select.fill ? this.selectFillLayer.show() : this.selectFillLayer.hide();
+    if (lasetDefaultState.select.fillColor !== defaultState.select.fillColor) {
+      defaultState.select.fillColor ? this.selectFillLayer.show() : this.selectFillLayer.hide();
     }
 
-    if (lasetDefaultState.select.stroke !== defaultState.select.stroke) {
-      defaultState.select.stroke ? this.selectStrokeLayer.show() : this.selectStrokeLayer.hide();
+    if (lasetDefaultState.select.strokeColor !== defaultState.select.strokeColor) {
+      defaultState.select.strokeColor ? this.selectStrokeLayer.show() : this.selectStrokeLayer.hide();
     }
   }
 
@@ -479,11 +490,11 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
       throw new Error('Feature non-existent' + field + value);
     }
 
-    if (this.layerState.active.fill) {
+    if (this.layerState.active.fillColor) {
       this.fillLayer.layer.setActive(featureId);
     }
 
-    if (this.layerState.active.stroke) {
+    if (this.layerState.active.strokeColor) {
       const feature = source.getFeatureById(featureId);
       this.setHighlightLayerSource(feature, featureId);
     }
@@ -496,7 +507,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
       throw new Error('Feature non-existent' + field + value);
     }
 
-    if (this.layerState.select.stroke === false || this.layerState.select.fill === false) {
+    if (this.layerState.select.strokeColor === false || this.layerState.select.fillColor === false) {
       return;
     }
 

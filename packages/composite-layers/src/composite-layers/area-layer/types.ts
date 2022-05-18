@@ -10,48 +10,59 @@ export interface AreaLayerSourceOptions extends Pick<ISourceCFG, 'parser' | 'tra
   data: any;
 }
 
-type AreaLayerStyle = {
-  // 填充透明度
-  opacity?: number;
-  // 描边
-  stroke?: string;
-  // 描边的宽度
-  lineWidth?: number;
-  // 描边的类型
-  lineType?: 'solid' | 'dash';
-  // 描边的虚线配置
-  // 第一个值为虚线每个分段的长度，第二个值为分段间隔的距离。lineDash 设为[0,0]的效果为没有描边。
-  lineDash?: [number, number];
-  // 描边透明度
-  lineOpacity?: number;
-  // 填充兜底颜色，用于颜色值映值不存在时
-  fillBottomColor?: false | string;
-};
-
 export type AreaLayerActiveOptions = {
   // 填充颜色
-  fill?: false | string;
+  fillColor?: false | string;
   // 描边颜色
-  stroke?: false | string;
+  strokeColor?: false | string;
   // 描边的宽度
   lineWidth?: number;
   // 描边透明度
   lineOpacity?: number;
 };
 
-export interface AreaLayerOptions extends Pick<PolygonLayerOptions, 'color'>, CompositeLayerOptions {
+export interface AreaLayerOptions extends CompositeLayerOptions {
   /**
    * 具体的数据
    */
   source: AreaLayerSourceOptions | ISource;
   /**
+   * 填充色
+   */
+  fillColor?: PolygonLayerOptions['color'];
+  /**
+   * 填充兜底颜色，用于颜色值映值不存在时
+   */
+  fillBottomColor?: false | string;
+  /**
+   * 填充透明度
+   */
+  opacity?: number;
+  /**
+   * 描边色
+   */
+  strokeColor?: PolygonLayerOptions['color'];
+  /**
+   * 描边线宽
+   */
+  lineWidth?: PolygonLayerOptions['size'];
+  /**
+   * 描边透明度
+   */
+  lineOpacity?: number;
+  /**
+   * 描边的类型
+   */
+  lineType?: 'solid' | 'dash';
+  /**
+   * 描边的虚线配置
+   * 第一个值为虚线每个分段的长度，第二个值为分段间隔的距离。lineDash 设为[0,0]的效果为没有描边。
+   */
+  lineDash?: [number, number];
+  /**
    * 文本标注
    */
   label?: Omit<TextLayerOptions, 'source'>;
-  /**
-   * 图层样式
-   */
-  style?: AreaLayerStyle;
   /**
    * 交互反馈
    */

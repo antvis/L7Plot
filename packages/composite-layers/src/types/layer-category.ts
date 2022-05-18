@@ -2,6 +2,6 @@
  * 复合图层类型
  */
 export enum CompositeLayerType {
-  DotLayer = 'dotLayer',
+  ScatterLayer = 'scatterLayer',
   AreaLayer = 'areaLayer',
 }

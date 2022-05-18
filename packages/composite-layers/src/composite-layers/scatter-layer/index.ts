@@ -7,11 +7,11 @@ import { ICoreLayer, ISource, SourceOptions, MouseEvent } from '../../types';
 import { getDefaultState } from './adaptor';
 import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
 import { EMPTY_SOURCE } from '../area-layer/constants';
-import { DotLayerOptions } from './types';
+import { ScatterLayerOptions } from './types';
 
-export type { DotLayerOptions };
+export type { ScatterLayerOptions };
 
-export class DotLayer extends CompositeLayer<DotLayerOptions> {
+export class ScatterLayer extends CompositeLayer<ScatterLayerOptions> {
   /**
    * 默认配置项
    */
@@ -19,7 +19,7 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
   /**
    * 复合图层类型
    */
-  public type = CompositeLayer.LayerType.DotLayer;
+  public type = CompositeLayer.LayerType.ScatterLayer;
   /**
    * 主图层
    */
@@ -73,7 +73,7 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
    */
   public interaction = true;
 
-  constructor(options: DotLayerOptions) {
+  constructor(options: ScatterLayerOptions) {
     super(options);
     this.initSubLayersEvent();
   }
@@ -81,8 +81,8 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<DotLayerOptions> {
-    return DotLayer.DefaultOptions;
+  public getDefaultOptions(): Partial<ScatterLayerOptions> {
+    return ScatterLayer.DefaultOptions;
   }
 
   /**
@@ -132,18 +132,30 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
   }
 
   private getFillLayerOptions() {
-    const { visible, minZoom, maxZoom, zIndex = 0, color, size, style, ...baseConfig } = this.options;
+    const {
+      visible,
+      minZoom,
+      maxZoom,
+      zIndex = 0,
+      fillColor,
+      radius,
+      opacity,
+      strokeColor,
+      lineOpacity,
+      lineWidth,
+      ...baseConfig
+    } = this.options;
     const defaultState = this.layerState;
 
     const fillState = {
-      active: defaultState.active.fill === false ? false : { color: defaultState.active.fill },
+      active: defaultState.active.fillColor === false ? false : { color: defaultState.active.fillColor },
       select: false,
     };
     const fillStyle = {
-      opacity: style?.opacity,
-      stroke: style?.stroke,
-      strokeOpacity: style?.lineOpacity,
-      strokeWidth: style?.lineWidth,
+      opacity: opacity,
+      stroke: strokeColor,
+      strokeOpacity: isUndefined(lineOpacity) ? opacity : lineOpacity,
+      strokeWidth: lineWidth,
     };
 
     const options = {
@@ -152,8 +164,8 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
       minZoom,
       maxZoom,
       zIndex,
-      color,
-      size,
+      color: fillColor,
+      size: radius,
       state: fillState,
       style: fillStyle,
     };
@@ -162,22 +174,22 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
   }
 
   private gethigHlightStrokeLayerOptions() {
-    const { visible, minZoom, maxZoom, zIndex = 0, size } = this.options;
+    const { visible, minZoom, maxZoom, zIndex = 0, radius } = this.options;
     const defaultState = this.layerState;
     const strokeStyle = {
       opacity: 0,
-      stroke: defaultState.active.stroke || undefined,
+      stroke: defaultState.active.strokeColor || undefined,
       strokeOpacity: defaultState.active.lineOpacity,
       strokeWidth: defaultState.active?.lineWidth,
     };
 
     const options = {
-      visible: visible && Boolean(defaultState.active.stroke),
+      visible: visible && Boolean(defaultState.active.strokeColor),
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
       source: EMPTY_SOURCE,
-      size,
+      size: radius,
       style: strokeStyle,
     };
 
@@ -185,19 +197,19 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
   }
 
   private getSelectFillLayerOptions() {
-    const { visible, minZoom, maxZoom, zIndex = 0, size, style } = this.options;
+    const { visible, minZoom, maxZoom, zIndex = 0, radius, opacity } = this.options;
     const defaultState = this.layerState;
-    const color = defaultState.select.fill || undefined;
-    const fillStyle = { opacity: style?.opacity };
+    const color = defaultState.select.fillColor || undefined;
+    const fillStyle = { opacity: opacity };
 
     const option = {
-      visible: visible && Boolean(defaultState.select.fill),
+      visible: visible && Boolean(defaultState.select.fillColor),
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
       source: EMPTY_SOURCE,
       color,
-      size,
+      size: radius,
       style: fillStyle,
       state: { select: false, active: false },
     };
@@ -206,22 +218,22 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
   }
 
   private getSelectStrokeLayerOptions() {
-    const { visible, minZoom, maxZoom, zIndex = 0, size } = this.options;
+    const { visible, minZoom, maxZoom, zIndex = 0, radius } = this.options;
     const defaultState = this.layerState;
     const strokeStyle = {
       opacity: 0,
-      stroke: defaultState.select.stroke || undefined,
+      stroke: defaultState.select.strokeColor || undefined,
       strokeOpacity: defaultState.select.lineOpacity,
       strokeWidth: defaultState.select.lineWidth,
     };
 
     const option = {
-      visible: visible && Boolean(defaultState.select.fill),
+      visible: visible && Boolean(defaultState.select.fillColor),
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
       source: EMPTY_SOURCE,
-      size,
+      size: radius,
       style: strokeStyle,
     };
 
@@ -368,7 +380,7 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
   /**
    * 更新
    */
-  public update(options: Partial<DotLayerOptions>) {
+  public update(options: Partial<ScatterLayerOptions>) {
     super.update(options);
 
     this.initSubLayersEvent();
@@ -377,7 +389,7 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
   /**
    * 更新: 更新配置
    */
-  public updateOption(options: Partial<DotLayerOptions>) {
+  public updateOption(options: Partial<ScatterLayerOptions>) {
     super.update(options);
     this.layerState = getDefaultState(this.options.state);
   }
@@ -385,7 +397,7 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
   /**
    * 更新子图层
    */
-  protected updateSubLayers(options: Partial<DotLayerOptions>) {
+  protected updateSubLayers(options: Partial<ScatterLayerOptions>) {
     // 映射填充面图层
     this.fillLayer.update(this.getFillLayerOptions());
 
@@ -404,10 +416,10 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
         this.updateHighlightSubLayers();
       }
 
-      if (this.layerState.active.stroke) {
+      if (this.layerState.active.strokeColor) {
         this.setHighlightLayerSource();
       }
-      if (this.layerState.select.fill || this.layerState.select.stroke) {
+      if (this.layerState.select.fillColor || this.layerState.select.strokeColor) {
         this.setSelectLayerSource();
       }
     }
@@ -420,16 +432,16 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
     const defaultState = this.layerState;
     const lasetDefaultState = getDefaultState(this.lastOptions.state);
 
-    if (lasetDefaultState.active.stroke !== defaultState.active.stroke) {
-      defaultState.active.stroke ? this.highlightStrokeLayer.show() : this.highlightStrokeLayer.hide();
+    if (lasetDefaultState.active.strokeColor !== defaultState.active.strokeColor) {
+      defaultState.active.strokeColor ? this.highlightStrokeLayer.show() : this.highlightStrokeLayer.hide();
     }
 
-    if (lasetDefaultState.select.fill !== defaultState.select.fill) {
-      defaultState.select.fill ? this.selectFillLayer.show() : this.selectFillLayer.hide();
+    if (lasetDefaultState.select.fillColor !== defaultState.select.fillColor) {
+      defaultState.select.fillColor ? this.selectFillLayer.show() : this.selectFillLayer.hide();
     }
 
-    if (lasetDefaultState.select.stroke !== defaultState.select.stroke) {
-      defaultState.select.stroke ? this.selectStrokeLayer.show() : this.selectStrokeLayer.hide();
+    if (lasetDefaultState.select.strokeColor !== defaultState.select.strokeColor) {
+      defaultState.select.strokeColor ? this.selectStrokeLayer.show() : this.selectStrokeLayer.hide();
     }
   }
 
@@ -448,11 +460,11 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
       throw new Error('Feature non-existent' + field + value);
     }
 
-    if (this.layerState.active.fill) {
+    if (this.layerState.active.fillColor) {
       this.fillLayer.layer.setActive(featureId);
     }
 
-    if (this.layerState.active.stroke) {
+    if (this.layerState.active.strokeColor) {
       const feature = source.getFeatureById(featureId);
       this.setHighlightLayerSource(feature, featureId);
     }
@@ -465,7 +477,7 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
       throw new Error('Feature non-existent' + field + value);
     }
 
-    if (this.layerState.select.stroke === false || this.layerState.select.fill === false) {
+    if (this.layerState.select.strokeColor === false || this.layerState.select.fillColor === false) {
       return;
     }
 

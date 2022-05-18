@@ -3,41 +3,50 @@ import { TextLayerOptions } from '../../core-layers/text-layer/types';
 import { CompositeLayerOptions } from '../../core/composite-layer';
 import { ISource, SourceOptions } from '../../types';
 
-type DotLayerStyle = {
-  // 填充透明度
-  opacity?: number;
-  // 描边
-  stroke?: string;
-  // 描边的宽度
-  lineWidth?: number;
-  // 描边透明度
-  lineOpacity?: number;
-};
-
 export type DotLayerActiveOptions = {
   // 填充颜色
-  fill?: false | string;
+  fillColor?: false | string;
   // 描边颜色
-  stroke?: false | string;
+  strokeColor?: false | string;
   // 描边的宽度
   lineWidth?: number;
   // 描边透明度
   lineOpacity?: number;
 };
 
-export interface DotLayerOptions extends Pick<PointLayerOptions, 'size' | 'color'>, CompositeLayerOptions {
+export interface ScatterLayerOptions extends CompositeLayerOptions {
   /**
    * 具体的数据
    */
   source: SourceOptions | ISource;
   /**
+   * 点半径
+   */
+  radius?: PointLayerOptions['size'];
+  /**
+   * 填充色
+   */
+  fillColor?: PointLayerOptions['color'];
+  /**
+   * 填充透明度
+   */
+  opacity?: number;
+  /**
+   * 描边线宽
+   */
+  lineWidth?: number;
+  /**
+   * 描边色
+   */
+  strokeColor?: string;
+  /**
+   * 描边透明度
+   */
+  lineOpacity?: number;
+  /**
    * 文本标注
    */
   label?: Omit<TextLayerOptions, 'source'>;
-  /**
-   * 图层样式
-   */
-  style?: DotLayerStyle;
   /**
    * 交互反馈
    */

@@ -30,17 +30,15 @@ class ChinaCitys extends Component {
               type: 'geojson',
             },
           },
-          color: {
+          fillColor: {
             field: 'name',
             value: ['#fee5d9', '#fcae91', '#fb6a4a', '#de2d26', '#a50f15'],
           },
-          style: {
-            opacity: 0.8,
-            stroke: '#fff',
-            lineType: 'dash',
-            lineWidth: 1,
-            lineOpacity: 0.5,
-          },
+          opacity: 0.8,
+          strokeColor: '#fff',
+          lineType: 'dash',
+          lineWidth: 1,
+          lineOpacity: 0.5,
           label: {
             visible: true,
             field: 'name',
@@ -58,7 +56,7 @@ class ChinaCitys extends Component {
           state: {
             active: true,
             select: {
-              stroke: 'yellow',
+              strokeColor: 'yellow',
               lineWidth: 1.5,
               lineOpacity: 0.8,
             },
