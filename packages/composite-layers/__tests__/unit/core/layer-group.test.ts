@@ -24,13 +24,12 @@ describe('layer group', () => {
     expect(layerGroup.getLayer(pointLayer2.layer.id)).toEqual(pointLayer2);
   });
 
-  // eslint-disable-next-line jest/no-commented-out-tests
-  // it('setZIndex', () => {
-  //   layerGroup.setZIndex(3);
-  //   layerGroup.getLayers().forEach((layer) => {
-  //     expect(layer.zIndex).toEqual(3);
-  //   });
-  // });
+  it('setZIndex', () => {
+    layerGroup.setZIndex(3);
+    layerGroup.getLayers().forEach((layer) => {
+      expect(layer.layer.zIndex).toEqual(3);
+    });
+  });
 
   it('removeLayer', () => {
     expect(layerGroup.removeLayer(pointLayer1)).toBeTruthy();

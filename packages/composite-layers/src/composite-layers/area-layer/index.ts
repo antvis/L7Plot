@@ -1,4 +1,5 @@
 import { clone, isEqual, isUndefined } from '@antv/util';
+import Source from '@antv/l7-source';
 import { CompositeLayer } from '../../core/composite-layer';
 import { LineLayer } from '../../core-layers/line-layer';
 import { PolygonLayer } from '../../core-layers/polygon-layer';
@@ -95,11 +96,14 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
    */
   protected createSubLayers() {
     this.layerState = getDefaultState(this.options.state);
+    const sourceOptions = this.options.source;
+    const source = sourceOptions instanceof Source ? sourceOptions : this.createSource(sourceOptions);
 
     // 映射填充面图层
     const fillLayer = new PolygonLayer({
       name: 'fillLayer',
       ...this.getFillLayerOptions(),
+      source,
     });
     const fillBottomColor = this.options.style?.fillBottomColor;
     fillBottomColor && fillLayer.layer.setBottomColor(fillBottomColor);
@@ -108,6 +112,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     const strokeLayer = new LineLayer({
       name: 'strokeLayer',
       ...this.getStrokeLayerOptions(),
+      source,
     });
 
     // 高亮描边图层
@@ -132,6 +137,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     const labelLayer = new TextLayer({
       name: 'labelLayer',
       ...this.getTextLayerOptions(),
+      source,
     });
 
     const subLayers = [fillLayer, strokeLayer, highlightStrokeLayer, selectFillLayer, selectStrokeLayer, labelLayer];
@@ -140,7 +146,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   }
 
   private getFillLayerOptions() {
-    const { source, visible, minZoom, maxZoom, zIndex = 0, color, style, ...baseConfig } = this.options;
+    const { visible, minZoom, maxZoom, zIndex = 0, color, style, ...baseConfig } = this.options;
     const defaultState = this.layerState;
 
     const fillState = {
@@ -155,7 +161,6 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
       minZoom,
       maxZoom,
       zIndex,
-      source,
       color,
       state: fillState,
       style: fillStyle,
@@ -165,7 +170,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   }
 
   private getStrokeLayerOptions() {
-    const { source, visible, minZoom, maxZoom, zIndex = 0, style } = this.options;
+    const { visible, minZoom, maxZoom, zIndex = 0, style } = this.options;
 
     const strokeSize = style?.lineWidth;
     const strokeColor = style?.stroke;
@@ -176,7 +181,6 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
       zIndex,
       minZoom,
       maxZoom,
-      source,
       size: strokeSize,
       color: strokeColor,
       style: strokeStyle,
@@ -249,12 +253,11 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   }
 
   private getTextLayerOptions() {
-    const { source, visible, minZoom, maxZoom, zIndex = 0, label } = this.options;
+    const { visible, minZoom, maxZoom, zIndex = 0, label } = this.options;
     const options = {
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
-      source,
       ...label,
       visible: visible && (label?.visible || Boolean(label)),
     };
@@ -266,25 +269,21 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
    * 设置子图层数据
    */
   protected setSubLayersSource(source: AreaLayerSourceOptions | ISource) {
-    super.setSubLayersSource(source);
-    this.setLabelLayerSource();
-    this.setStrokeLayerSource();
-    this.setHighlightLayerSource();
+    if (source instanceof Source) {
+      this.fillLayer.setSource(source);
+      this.strokeLayer.setSource(source);
+      this.labelLayer.setSource(source);
+    } else {
+      const layerSource = this.fillLayer.source;
+      const { data, ...option } = source;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      layerSource.setData(data, option);
+    }
+
+    this.highlightStrokeLayer.changeData(EMPTY_SOURCE);
     this.selectFillLayer.changeData(EMPTY_SOURCE);
     this.selectStrokeLayer.changeData(EMPTY_SOURCE);
-  }
-
-  /**
-   * 设置描边子图层数据
-   */
-  protected setStrokeLayerSource() {
-    const layerSource = this.fillLayer.source;
-    if (layerSource) {
-      this.strokeLayer.changeData(layerSource);
-    } else {
-      const { data, options } = this.fillLayer.layer.sourceOption;
-      this.strokeLayer.changeData({ data, ...options });
-    }
   }
 
   /**
@@ -319,19 +318,6 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     this.selectFillLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: { type: 'geojson' } });
     this.selectStrokeLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: { type: 'geojson' } });
     this.selectData = selectData;
-  }
-
-  /**
-   * 设置标注子图层数据
-   */
-  protected setLabelLayerSource() {
-    const layerSource = this.fillLayer.source;
-    if (layerSource) {
-      this.strokeLayer.changeData(layerSource);
-    } else {
-      const { data, options } = this.fillLayer.layer.sourceOption;
-      this.labelLayer.changeData({ data, ...options });
-    }
   }
 
   /**
@@ -410,30 +396,21 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   public update(options: Partial<AreaLayerOptions>) {
     super.update(options);
 
-    this.layerState = getDefaultState(this.options.state);
-
-    this.updateSubLayers();
-
-    if (this.options.visible) {
-      if (!isUndefined(options.state) && !isEqual(this.lastOptions.state, this.options.state)) {
-        this.updateHighlightSubLayers();
-      }
-
-      if (this.layerState.active.stroke) {
-        this.setHighlightLayerSource();
-      }
-      if (this.layerState.select.fill || this.layerState.select.stroke) {
-        this.setSelectLayerSource();
-      }
-    }
-
     this.initSubLayersEvent();
+  }
+
+  /**
+   * 更新: 更新配置
+   */
+  public updateOption(options: Partial<AreaLayerOptions>) {
+    super.update(options);
+    this.layerState = getDefaultState(this.options.state);
   }
 
   /**
    * 更新子图层
    */
-  protected updateSubLayers() {
+  protected updateSubLayers(options: Partial<AreaLayerOptions>) {
     // 映射填充面图层
     this.fillLayer.update(this.getFillLayerOptions());
 
@@ -448,6 +425,20 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
 
     // 选中描边图层
     this.selectStrokeLayer.update(this.getSelectStrokeLayerOptions());
+
+    // 重置高亮/选中状态
+    if (this.options.visible) {
+      if (!isUndefined(options.state) && !isEqual(this.lastOptions.state, this.options.state)) {
+        this.updateHighlightSubLayers();
+      }
+
+      if (this.layerState.active.stroke) {
+        this.setHighlightLayerSource();
+      }
+      if (this.layerState.select.fill || this.layerState.select.stroke) {
+        this.setSelectLayerSource();
+      }
+    }
   }
 
   /**

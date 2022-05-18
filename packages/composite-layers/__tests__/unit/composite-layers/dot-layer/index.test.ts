@@ -7,6 +7,21 @@ describe('dot layer', () => {
     size: 12,
     color: '#fff',
     // shape: 'circle',
+    label: {
+      field: 'label',
+      style: {
+        fill: '#fff',
+        opacity: 0.6,
+        fontSize: 12,
+        textAnchor: 'top',
+        textOffset: [0, 20],
+        spacing: 1,
+        padding: [5, 5],
+        stroke: '#ffffff',
+        strokeWidth: 0.3,
+        strokeOpacity: 1.0,
+      },
+    },
     style: { opacity: 1, lineWidth: 1, stroke: 'red', lineOpacity: 0.8 },
     state: {
       active: {
@@ -27,6 +42,10 @@ describe('dot layer', () => {
   it('type', () => {
     expect(layer.type).toBe('dotLayer');
     expect(layer.fillLayer.type).toBe('pointLayer');
+    expect(layer.highlightStrokeLayer).toBe('pointLayer');
+    expect(layer.selectFillLayer).toBe('pointLayer');
+    expect(layer.selectStrokeLayer).toBe('pointLayer');
+    expect(layer.labelLayer).toBe('textLayer');
   });
 
   it('size', () => {
@@ -49,6 +68,32 @@ describe('dot layer', () => {
   //     attributeField: 'circle',
   //   });
   // });
+
+  it('label', () => {
+    expect(getLayerStyleAttribute(layer.labelLayer.layer['pendingStyleAttributes'], 'size')).toEqual({
+      attributeName: 'size',
+      attributeField: 12,
+    });
+    expect(getLayerStyleAttribute(layer.labelLayer.layer['pendingStyleAttributes'], 'color')).toEqual({
+      attributeName: 'color',
+      attributeField: '#fff',
+    });
+    expect(getLayerStyleAttribute(layer.labelLayer.layer['pendingStyleAttributes'], 'shape')).toEqual({
+      attributeName: 'shape',
+      attributeField: 'label',
+      attributeValues: 'text',
+    });
+    expect(layer.labelLayer.layer['rawConfig']).toMatchObject({
+      opacity: 0.6,
+      textAnchor: 'top',
+      textOffset: [0, 20],
+      spacing: 1,
+      padding: [5, 5],
+      stroke: '#ffffff',
+      strokeWidth: 0.3,
+      strokeOpacity: 1.0,
+    });
+  });
 
   it('style', () => {
     expect(layer.fillLayer.layer['rawConfig']).toMatchObject({

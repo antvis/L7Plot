@@ -117,7 +117,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
     this.layer = this.createLayer();
 
     this.adaptorLayerAttr();
-    this.setLayerSource(source);
+    this.setSource(source);
   }
 
   /**
@@ -165,7 +165,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
   /**
    * 设置图层数据
    */
-  protected setLayerSource(source: SourceOptions | ISource) {
+  public setSource(source: SourceOptions | ISource) {
     if (source instanceof Source) {
       this.layer.setSource(source);
     } else {
@@ -242,8 +242,8 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
     }
   }
 
-  public changeData(source: SourceOptions | ISource) {
-    this.setLayerSource(source);
+  public changeData(source: SourceOptions) {
+    this.setSource(source);
   }
 
   public setIndex(zIndex: number) {

@@ -1,6 +1,8 @@
 import { clone, isEqual, isUndefined } from '@antv/util';
+import Source from '@antv/l7-source';
 import { CompositeLayer } from '../../core/composite-layer';
 import { PointLayer } from '../../core-layers/point-layer';
+import { TextLayer } from '../../core-layers/text-layer';
 import { ICoreLayer, ISource, SourceOptions, MouseEvent } from '../../types';
 import { getDefaultState } from './adaptor';
 import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
@@ -57,6 +59,12 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
    */
   private selectData: { feature: any; featureId: number }[] = [];
   /**
+   * 标注文本图层
+   */
+  public get labelLayer() {
+    return this.subLayers.getLayer('labelLayer') as ICoreLayer;
+  }
+  /**
    * 图层交互状态配置
    */
   private layerState = DEFAULT_STATE;
@@ -82,11 +90,14 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
    */
   protected createSubLayers() {
     this.layerState = getDefaultState(this.options.state);
+    const sourceOptions = this.options.source;
+    const source = sourceOptions instanceof Source ? sourceOptions : this.createSource(sourceOptions);
 
     // 映射填充图层
     const fillLayer = new PointLayer({
       name: 'fillLayer',
       ...this.getFillLayerOptions(),
+      source,
     });
 
     // 高亮描边图层
@@ -107,13 +118,20 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
       ...this.getSelectStrokeLayerOptions(),
     });
 
-    const subLayers = [fillLayer, highlightStrokeLayer, selectFillLayer, selectStrokeLayer];
+    // 标注图层
+    const labelLayer = new TextLayer({
+      name: 'labelLayer',
+      ...this.getTextLayerOptions(),
+      source,
+    });
+
+    const subLayers = [fillLayer, highlightStrokeLayer, selectFillLayer, selectStrokeLayer, labelLayer];
 
     return subLayers;
   }
 
   private getFillLayerOptions() {
-    const { source, visible, minZoom, maxZoom, zIndex = 0, color, size, style, ...baseConfig } = this.options;
+    const { visible, minZoom, maxZoom, zIndex = 0, color, size, style, ...baseConfig } = this.options;
     const defaultState = this.layerState;
 
     const fillState = {
@@ -133,7 +151,6 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
       minZoom,
       maxZoom,
       zIndex,
-      source,
       color,
       size,
       state: fillState,
@@ -210,12 +227,35 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
     return option;
   }
 
+  private getTextLayerOptions() {
+    const { visible, minZoom, maxZoom, zIndex = 0, label } = this.options;
+    const options = {
+      zIndex: zIndex + 0.1,
+      minZoom,
+      maxZoom,
+      ...label,
+      visible: visible && (label?.visible || Boolean(label)),
+    };
+
+    return options;
+  }
+
   /**
    * 设置子图层数据
    */
   protected setSubLayersSource(source: SourceOptions | ISource) {
-    super.setSubLayersSource(source);
-    this.setHighlightLayerSource();
+    if (source instanceof Source) {
+      this.fillLayer.setSource(source);
+      this.labelLayer.setSource(source);
+    } else {
+      const layerSource = this.fillLayer.source;
+      const { data, ...option } = source;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      layerSource.setData(data, option);
+    }
+
+    this.highlightStrokeLayer.changeData(EMPTY_SOURCE);
     this.selectFillLayer.changeData(EMPTY_SOURCE);
     this.selectStrokeLayer.changeData(EMPTY_SOURCE);
   }
@@ -330,10 +370,34 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
   public update(options: Partial<DotLayerOptions>) {
     super.update(options);
 
+    this.initSubLayersEvent();
+  }
+
+  /**
+   * 更新: 更新配置
+   */
+  public updateOption(options: Partial<DotLayerOptions>) {
+    super.update(options);
     this.layerState = getDefaultState(this.options.state);
+  }
 
-    this.updateSubLayers();
+  /**
+   * 更新子图层
+   */
+  protected updateSubLayers(options: Partial<DotLayerOptions>) {
+    // 映射填充面图层
+    this.fillLayer.update(this.getFillLayerOptions());
 
+    // 高亮图层
+    this.highlightStrokeLayer.update(this.gethigHlightStrokeLayerOptions());
+
+    // 选中填充图层
+    this.selectFillLayer.update(this.getSelectFillLayerOptions());
+
+    // 选中描边图层
+    this.selectStrokeLayer.update(this.getSelectStrokeLayerOptions());
+
+    // 重置高亮/选中状态
     if (this.options.visible) {
       if (!isUndefined(options.state) && !isEqual(this.lastOptions.state, this.options.state)) {
         this.updateHighlightSubLayers();
@@ -346,25 +410,6 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
         this.setSelectLayerSource();
       }
     }
-
-    this.initSubLayersEvent();
-  }
-
-  /**
-   * 更新子图层
-   */
-  protected updateSubLayers() {
-    // 映射填充面图层
-    this.fillLayer.update(this.getFillLayerOptions());
-
-    // 高亮图层
-    this.highlightStrokeLayer.update(this.gethigHlightStrokeLayerOptions());
-
-    // 选中填充图层
-    this.selectFillLayer.update(this.getSelectFillLayerOptions());
-
-    // 选中描边图层
-    this.selectStrokeLayer.update(this.getSelectStrokeLayerOptions());
   }
 
   /**
@@ -392,6 +437,7 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
     this.highlightStrokeLayer.setIndex(zIndex + 0.1);
     this.selectFillLayer.setIndex(zIndex + 0.1);
     this.selectStrokeLayer.setIndex(zIndex + 0.1);
+    this.labelLayer.setIndex(zIndex + 0.1);
   }
 
   public setActive(field: string, value: number | string) {

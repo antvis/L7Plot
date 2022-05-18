@@ -41,7 +41,8 @@ export interface ICoreLayer {
   update<T>(options: T): void;
   updateOption<T>(options: T): void;
 
-  changeData(data: SourceOptions | ISource): void;
+  changeData(data: SourceOptions): void;
+  setSource(source: ISource): void;
   render(): void;
 
   show(): void;

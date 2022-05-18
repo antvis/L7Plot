@@ -1,5 +1,6 @@
 import { deepMix, uniqueId } from '@antv/util';
 import EventEmitter from '@antv/event-emitter';
+import Source from '@antv/l7-source';
 import { Scene, SourceOptions, ICompositeLayer, CompositeLayerType, LayerBlend, ICoreLayer, ISource } from '../types';
 import { LayerEventList } from './constants';
 import { LayerGroup } from './layer-group';
@@ -84,6 +85,15 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   }
 
   /**
+   * 创建 source 实例
+   */
+  protected createSource(sourceOptions: SourceOptions) {
+    const { data, ...sourceCFG } = sourceOptions;
+    const source = new Source(data, sourceCFG);
+    return source;
+  }
+
+  /**
    * 创建子图层
    */
   protected abstract createSubLayers(): ICoreLayer[];
@@ -123,6 +133,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    */
   public update(options: Partial<O>) {
     this.updateOption(options);
+    this.updateSubLayers(options);
   }
 
   /**
@@ -136,7 +147,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   /**
    * 更新子图层
    */
-  protected abstract updateSubLayers(): void;
+  protected abstract updateSubLayers(options: Partial<O>): void;
 
   public render() {
     if (this.scene) {
