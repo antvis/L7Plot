@@ -7,7 +7,7 @@ import WindField from './WindField';
 import WorldBubbleMap from './WorldBubbleMap';
 import ChinaBubbleMap from './ChinaBubbleMap';
 
-storiesOf('高级图表', module)
+storiesOf('图表/高级图表', module)
   .add('流向图', () => <FlyFlow />)
   .add('航向图', () => <AirFlyFlow />)
   .add('风场图', () => <WindField />)
