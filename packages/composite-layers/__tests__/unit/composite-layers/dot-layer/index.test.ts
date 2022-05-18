@@ -42,10 +42,10 @@ describe('dot layer', () => {
   it('type', () => {
     expect(layer.type).toBe('dotLayer');
     expect(layer.fillLayer.type).toBe('pointLayer');
-    expect(layer.highlightStrokeLayer).toBe('pointLayer');
-    expect(layer.selectFillLayer).toBe('pointLayer');
-    expect(layer.selectStrokeLayer).toBe('pointLayer');
-    expect(layer.labelLayer).toBe('textLayer');
+    expect(layer.highlightStrokeLayer.type).toBe('pointLayer');
+    expect(layer.selectFillLayer.type).toBe('pointLayer');
+    expect(layer.selectStrokeLayer.type).toBe('pointLayer');
+    expect(layer.labelLayer.type).toBe('textLayer');
   });
 
   it('size', () => {
@@ -62,12 +62,12 @@ describe('dot layer', () => {
     });
   });
 
-  // it('shape', () => {
-  //   expect(getLayerStyleAttribute(layer.fillLayer.layer['pendingStyleAttributes'], 'shape')).toEqual({
-  //     attributeName: 'shape',
-  //     attributeField: 'circle',
-  //   });
-  // });
+  it('shape', () => {
+    expect(getLayerStyleAttribute(layer.fillLayer.layer['pendingStyleAttributes'], 'shape')).toEqual({
+      attributeName: 'shape',
+      attributeField: 'circle',
+    });
+  });
 
   it('label', () => {
     expect(getLayerStyleAttribute(layer.labelLayer.layer['pendingStyleAttributes'], 'size')).toEqual({

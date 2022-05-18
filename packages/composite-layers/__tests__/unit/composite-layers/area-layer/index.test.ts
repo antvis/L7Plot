@@ -47,12 +47,12 @@ describe('area layer', () => {
 
   it('type', () => {
     expect(layer.type).toBe('areaLayer');
-    expect(layer.fillLayer).toBe('polygonLayer');
-    expect(layer.strokeLayer).toBe('lineLayer');
-    expect(layer.highlightStrokeLayer).toBe('lineLayer');
-    expect(layer.selectFillLayer).toBe('polygonLayer');
-    expect(layer.selectStrokeLayer).toBe('lineLayer');
-    expect(layer.labelLayer).toBe('textLayer');
+    expect(layer.fillLayer.type).toBe('polygonLayer');
+    expect(layer.strokeLayer.type).toBe('lineLayer');
+    expect(layer.highlightStrokeLayer.type).toBe('lineLayer');
+    expect(layer.selectFillLayer.type).toBe('polygonLayer');
+    expect(layer.selectStrokeLayer.type).toBe('lineLayer');
+    expect(layer.labelLayer.type).toBe('textLayer');
   });
 
   it('color', () => {
@@ -64,10 +64,10 @@ describe('area layer', () => {
   });
 
   it('shape', () => {
-    // expect(getLayerStyleAttribute(layer.fillLayer.layer['pendingStyleAttributes'], 'shape')).toEqual({
-    //   attributeName: 'shape',
-    //   attributeField: 'fill',
-    // });
+    expect(getLayerStyleAttribute(layer.fillLayer.layer['pendingStyleAttributes'], 'shape')).toEqual({
+      attributeName: 'shape',
+      attributeField: 'fill',
+    });
     expect(getLayerStyleAttribute(layer.strokeLayer.layer['pendingStyleAttributes'], 'shape')).toEqual({
       attributeName: 'shape',
       attributeField: 'line',

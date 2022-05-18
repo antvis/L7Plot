@@ -102,6 +102,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     // 映射填充面图层
     const fillLayer = new PolygonLayer({
       name: 'fillLayer',
+      shape: 'fill',
       ...this.getFillLayerOptions(),
       source,
     });
@@ -111,6 +112,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
     // 描边图层
     const strokeLayer = new LineLayer({
       name: 'strokeLayer',
+      shape: 'line',
       ...this.getStrokeLayerOptions(),
       source,
     });

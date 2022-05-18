@@ -161,7 +161,7 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
       return layer.name;
     }
 
-    return layer.layer.id.toString();
+    return layer.layer.id;
   }
 
   /**

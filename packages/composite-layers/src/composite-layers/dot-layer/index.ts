@@ -96,6 +96,7 @@ export class DotLayer extends CompositeLayer<DotLayerOptions> {
     // 映射填充图层
     const fillLayer = new PointLayer({
       name: 'fillLayer',
+      shape: 'circle',
       ...this.getFillLayerOptions(),
       source,
     });
