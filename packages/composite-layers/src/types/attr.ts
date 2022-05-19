@@ -58,33 +58,13 @@ export type AnimateAttr = boolean | Partial<IAnimateOption>;
 /** 纹理贴图 */
 export type TextureAttr = string;
 
+/** 比例尺 */
+export type ScaleAttr = Record<string, ScaleConfig>;
+
 /** 数据过滤 */
 export type FilterAttr = {
   field?: string | string[];
   value: Callback<boolean>;
-};
-
-/** 聚合方法 */
-export type AggregationMethod = 'count' | 'max' | 'min' | 'sum' | 'mean';
-
-/** 网格聚合 */
-export type GridAggregation = {
-  /**
-   * 聚合类型
-   */
-  type?: 'grid' | 'hexagon';
-  /**
-   * 聚合字段
-   */
-  field: string;
-  /**
-   * 网格半径
-   */
-  radius?: number;
-  /**
-   * 聚合方法
-   */
-  method?: AggregationMethod;
 };
 
 /**
@@ -95,5 +75,28 @@ export interface SourceOptions extends ISourceCFG {
   /**
    * 网格聚合
    */
-  aggregation?: GridAggregation;
+  // aggregation?: GridAggregation;
 }
+
+/** 聚合方法 */
+// export type AggregationMethod = 'count' | 'max' | 'min' | 'sum' | 'mean';
+
+/** 网格聚合 */
+// export type GridAggregation = {
+//   /**
+//    * 聚合类型
+//    */
+//   type?: 'grid' | 'hexagon';
+//   /**
+//    * 聚合字段
+//    */
+//   field: string;
+//   /**
+//    * 网格半径
+//    */
+//   radius?: number;
+//   /**
+//    * 聚合方法
+//    */
+//   method?: AggregationMethod;
+// };

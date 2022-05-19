@@ -1,6 +1,5 @@
 {
   "name": "@antv/l7-composite-layers",
-  "private": true,
   "version": "0.0.1-alpha.2",
   "description": "Composite layer for @antv/l7",
   "main": "dist/lib/index.js",
@@ -19,12 +18,13 @@
     "clean": "rimraf dist",
     "build": "yarn run clean && yarn run build:cjs && yarn run build:esm",
     "build:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib",
-    "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm"
+    "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm",
+    "build:umd": "rollup -c rollup.config.js"
   },
   "keywords": [
     "antv",
     "l7",
-    "Composite Layers"
+    "composite layers"
   ],
   "sideEffects": false,
   "author": "yunji",

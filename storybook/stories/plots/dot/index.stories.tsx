@@ -10,7 +10,7 @@ import Animate from './Animate';
 import POI from '../dot/POI';
 import BankOutlets from './BankOutlets';
 
-storiesOf('散点图', module)
+storiesOf('图表/散点图', module)
   .add('气温分布', () => <AirTemperature />)
   .add('气温分布-L7', () => <L7AirTemperature />)
   .add('地震震级', () => <Earthquake />)

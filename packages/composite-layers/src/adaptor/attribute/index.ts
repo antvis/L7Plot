@@ -2,7 +2,6 @@ import { isFunction, isObject, isString, isNumber, isBoolean, isArray } from '@a
 import {
   ILayer,
   ScaleConfig,
-  ScaleConfigMap,
   ColorAttr,
   SizeAttr,
   ShapeAttr,
@@ -11,6 +10,7 @@ import {
   StateAttribute,
   TextureAttr,
   FilterAttr,
+  ScaleAttr,
 } from '../../types';
 
 /**
@@ -122,14 +122,13 @@ export class MappingAttribute {
     }
   }
 
-  static style(layer: ILayer, style: unknown) {
-    style && layer.style(style);
-  }
-
-  static state(layer: ILayer, state: StateAttribute) {
-    const { active, select } = state;
-    active && layer.active(active);
-    select && layer.select(select);
+  static scale(layer: ILayer, field: string | ScaleAttr, cfg?: ScaleConfig) {
+    /**
+     * scale 的几种情况
+     * layer.scale('name', {type: 'cat'});
+     * layer.scale({name: {type: 'cat'}, value: {type: 'linear'}});
+     */
+    layer.scale(field, cfg);
   }
 
   static rotate(layer: ILayer, rotate: RotateAttr) {
@@ -171,15 +170,6 @@ export class MappingAttribute {
     }
   }
 
-  static scale(layer: ILayer, field: string | ScaleConfigMap, cfg: ScaleConfig) {
-    /**
-     * scale 的几种情况
-     * layer.scale('name', {type: 'cat'});
-     * layer.scale({name: {type: 'cat'}, value: {type: 'linear'}});
-     */
-    layer.scale(field, cfg);
-  }
-
   static filter(layer: ILayer, filter: FilterAttr) {
     /**
      * scale 的几种情况
@@ -188,5 +178,15 @@ export class MappingAttribute {
     const field = filter.field ? filter.field : '';
     const mappingFields = isArray(field) ? field : field.split('*');
     layer.filter(mappingFields.join('*'), getMappingFunction(mappingFields, filter.value));
+  }
+
+  static style(layer: ILayer, style: unknown) {
+    style && layer.style(style);
+  }
+
+  static state(layer: ILayer, state: StateAttribute) {
+    const { active, select } = state;
+    active && layer.active(active);
+    select && layer.select(select);
   }
 }

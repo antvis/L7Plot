@@ -6,7 +6,7 @@ import BusRoutes from './BusRoutes';
 import BusLevelRoutes from './BusLevelRoutes';
 import Trail from './Trail';
 
-storiesOf('路径图', module)
+storiesOf('图表/路径图', module)
   .add('北京地铁线', () => <BeijingMetro />)
   .add('北京公交线路', () => <BeijingBusPath />)
   .add('公交路线', () => <BusRoutes />)
