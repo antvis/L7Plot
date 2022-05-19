@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Scene, Mapbox } from '@antv/l7';
 import { ScatterLayer } from '@antv/l7-composite-layers';
-import { Dot } from '@antv/l7plot';
 
 class Earthquake extends Component {
   public scene: Scene | undefined;

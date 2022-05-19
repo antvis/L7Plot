@@ -5,7 +5,6 @@ describe('scatter layer', () => {
   const layer = new ScatterLayer({
     source: { data: [], parser: { type: 'json', x: 'x', y: 'y' } },
     radius: 12,
-    // dotType: 'circle',
     fillColor: '#fff',
     opacity: 1,
     strokeColor: 'red',
