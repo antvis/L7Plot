@@ -1,8 +1,8 @@
 import { isUndefined } from '@antv/util';
 import { DEFAULT_STATE } from './constants';
-import { ScatterLayerOptions } from './types';
+import { BubbleLayerOptions } from './types';
 
-export const getDefaultState = (state?: ScatterLayerOptions['state']) => {
+export const getDefaultState = (state?: BubbleLayerOptions['state']) => {
   if (isUndefined(state)) {
     return DEFAULT_STATE;
   }

@@ -5,13 +5,13 @@ import { LineLayer } from '../../core-layers/line-layer';
 import { PolygonLayer } from '../../core-layers/polygon-layer';
 import { TextLayer } from '../../core-layers/text-layer';
 import { getDefaultState } from './adaptor';
-import { AreaLayerOptions, AreaLayerSourceOptions } from './types';
+import { ChoroplethLayerOptions, ChoroplethLayerSourceOptions } from './types';
 import { ICoreLayer, ISource, MouseEvent } from '../../types';
 import { DEFAULT_OPTIONS, DEFAULT_STATE, EMPTY_SOURCE } from './constants';
 
-export type { AreaLayerOptions };
+export type { ChoroplethLayerOptions };
 
-export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
+export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   /**
    * 默认配置项
    */
@@ -19,7 +19,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   /**
    * 复合图层类型
    */
-  public type = CompositeLayer.LayerType.AreaLayer;
+  public type = CompositeLayer.LayerType.ChoroplethLayer;
   /**
    * 主图层
    */
@@ -79,7 +79,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
    */
   public interaction = true;
 
-  constructor(options: AreaLayerOptions) {
+  constructor(options: ChoroplethLayerOptions) {
     super(options);
     this.initSubLayersEvent();
   }
@@ -87,8 +87,8 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<AreaLayerOptions> {
-    return AreaLayer.DefaultOptions;
+  public getDefaultOptions(): Partial<ChoroplethLayerOptions> {
+    return ChoroplethLayer.DefaultOptions;
   }
 
   /**
@@ -281,7 +281,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   /**
    * 设置子图层数据
    */
-  protected setSubLayersSource(source: AreaLayerSourceOptions | ISource) {
+  protected setSubLayersSource(source: ChoroplethLayerSourceOptions | ISource) {
     if (source instanceof Source) {
       this.fillLayer.setSource(source);
       this.strokeLayer.setSource(source);
@@ -406,7 +406,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   /**
    * 更新
    */
-  public update(options: Partial<AreaLayerOptions>) {
+  public update(options: Partial<ChoroplethLayerOptions>) {
     super.update(options);
 
     this.initSubLayersEvent();
@@ -415,7 +415,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   /**
    * 更新: 更新配置
    */
-  public updateOption(options: Partial<AreaLayerOptions>) {
+  public updateOption(options: Partial<ChoroplethLayerOptions>) {
     super.update(options);
     this.layerState = getDefaultState(this.options.state);
   }
@@ -423,7 +423,7 @@ export class AreaLayer extends CompositeLayer<AreaLayerOptions> {
   /**
    * 更新子图层
    */
-  protected updateSubLayers(options: Partial<AreaLayerOptions>) {
+  protected updateSubLayers(options: Partial<ChoroplethLayerOptions>) {
     // 映射填充面图层
     this.fillLayer.update(this.getFillLayerOptions());
 

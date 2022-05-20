@@ -10,6 +10,7 @@ import { LayerGroup } from './layer-group';
  */
 export interface CompositeLayerOptions {
   name?: string;
+  id?: string;
   zIndex?: number;
   visible?: boolean;
   minZoom?: number;
@@ -37,6 +38,10 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    * 复合图层名称
    */
   public readonly name: string;
+  /**
+   * 图层 ID
+   */
+  public readonly id: string;
   /**
    * 复合图层类型
    */
@@ -68,8 +73,9 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
 
   constructor(options: O) {
     super();
-    const { name } = options;
-    this.name = name ? name : uniqueId('composite-layer');
+    const { id, name } = options;
+    this.id = id ? id : uniqueId('composite-layer');
+    this.name = name ? name : this.id;
     this.options = deepMix({}, this.getDefaultOptions(), options);
     this.lastOptions = this.options;
 

@@ -6,11 +6,11 @@ import { ISourceCFG, ISource } from '../../types';
 /**
  * 数据配置
  */
-export interface AreaLayerSourceOptions extends Pick<ISourceCFG, 'parser' | 'transforms'> {
+export interface ChoroplethLayerSourceOptions extends Pick<ISourceCFG, 'parser' | 'transforms'> {
   data: any;
 }
 
-export type AreaLayerActiveOptions = {
+export type ChoroplethLayerActiveOptions = {
   // 填充颜色
   fillColor?: false | string;
   // 描边颜色
@@ -21,11 +21,11 @@ export type AreaLayerActiveOptions = {
   lineOpacity?: number;
 };
 
-export interface AreaLayerOptions extends CompositeLayerOptions {
+export interface ChoroplethLayerOptions extends CompositeLayerOptions {
   /**
    * 具体的数据
    */
-  source: AreaLayerSourceOptions | ISource;
+  source: ChoroplethLayerSourceOptions | ISource;
   /**
    * 填充色
    */
@@ -67,8 +67,8 @@ export interface AreaLayerOptions extends CompositeLayerOptions {
    * 交互反馈
    */
   state?: {
-    active?: boolean | AreaLayerActiveOptions;
-    select?: boolean | AreaLayerActiveOptions;
+    active?: boolean | ChoroplethLayerActiveOptions;
+    select?: boolean | ChoroplethLayerActiveOptions;
   };
   /**
    * 是否启用多选

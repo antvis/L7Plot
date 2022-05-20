@@ -1,8 +1,8 @@
 import { getLayerStyleAttribute } from '../../../helper/layer';
-import { AreaLayer } from '../../../../src/composite-layers/area-layer';
+import { ChoroplethLayer } from '../../../../src/composite-layers/choropleth-layer';
 
-describe('area layer', () => {
-  const layer = new AreaLayer({
+describe('choropleth layer', () => {
+  const layer = new ChoroplethLayer({
     source: { data: [] },
     fillColor: {
       field: 'adcode',
@@ -44,7 +44,7 @@ describe('area layer', () => {
   });
 
   it('type', () => {
-    expect(layer.type).toBe('areaLayer');
+    expect(layer.type).toBe('choroplethLayer');
     expect(layer.fillLayer.type).toBe('polygonLayer');
     expect(layer.strokeLayer.type).toBe('lineLayer');
     expect(layer.highlightStrokeLayer.type).toBe('lineLayer');

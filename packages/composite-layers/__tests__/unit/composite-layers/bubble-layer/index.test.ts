@@ -1,8 +1,8 @@
 import { getLayerStyleAttribute } from '../../../helper/layer';
-import { ScatterLayer } from '../../../../src/composite-layers/scatter-layer';
+import { BubbleLayer } from '../../../../src/composite-layers/bubble-layer';
 
-describe('scatter layer', () => {
-  const layer = new ScatterLayer({
+describe('bubble layer', () => {
+  const layer = new BubbleLayer({
     source: { data: [], parser: { type: 'json', x: 'x', y: 'y' } },
     radius: 12,
     fillColor: '#fff',
@@ -42,7 +42,7 @@ describe('scatter layer', () => {
   });
 
   it('type', () => {
-    expect(layer.type).toBe('scatterLayer');
+    expect(layer.type).toBe('bubbleLayer');
     expect(layer.fillLayer.type).toBe('pointLayer');
     expect(layer.highlightStrokeLayer.type).toBe('pointLayer');
     expect(layer.selectFillLayer.type).toBe('pointLayer');

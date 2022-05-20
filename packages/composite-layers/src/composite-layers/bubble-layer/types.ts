@@ -3,7 +3,7 @@ import { TextLayerOptions } from '../../core-layers/text-layer/types';
 import { CompositeLayerOptions } from '../../core/composite-layer';
 import { ISource, SourceOptions } from '../../types';
 
-export type DotLayerActiveOptions = {
+export type BubbleLayerActiveOptions = {
   // 填充颜色
   fillColor?: false | string;
   // 描边颜色
@@ -14,7 +14,7 @@ export type DotLayerActiveOptions = {
   lineOpacity?: number;
 };
 
-export interface ScatterLayerOptions extends CompositeLayerOptions {
+export interface BubbleLayerOptions extends CompositeLayerOptions {
   /**
    * 具体的数据
    */
@@ -51,8 +51,8 @@ export interface ScatterLayerOptions extends CompositeLayerOptions {
    * 交互反馈
    */
   state?: {
-    active?: boolean | DotLayerActiveOptions;
-    select?: boolean | DotLayerActiveOptions;
+    active?: boolean | BubbleLayerActiveOptions;
+    select?: boolean | BubbleLayerActiveOptions;
   };
   /**
    * 是否启用多选

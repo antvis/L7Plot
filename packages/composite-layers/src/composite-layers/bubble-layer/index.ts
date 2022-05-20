@@ -6,11 +6,11 @@ import { TextLayer } from '../../core-layers/text-layer';
 import { ICoreLayer, ISource, SourceOptions, MouseEvent } from '../../types';
 import { getDefaultState } from './adaptor';
 import { DEFAULT_OPTIONS, DEFAULT_STATE, EMPTY_SOURCE } from './constants';
-import { ScatterLayerOptions } from './types';
+import { BubbleLayerOptions } from './types';
 
-export type { ScatterLayerOptions };
+export type { BubbleLayerOptions };
 
-export class ScatterLayer extends CompositeLayer<ScatterLayerOptions> {
+export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
   /**
    * 默认配置项
    */
@@ -18,7 +18,7 @@ export class ScatterLayer extends CompositeLayer<ScatterLayerOptions> {
   /**
    * 复合图层类型
    */
-  public type = CompositeLayer.LayerType.ScatterLayer;
+  public type = CompositeLayer.LayerType.BubbleLayer;
   /**
    * 主图层
    */
@@ -72,7 +72,7 @@ export class ScatterLayer extends CompositeLayer<ScatterLayerOptions> {
    */
   public interaction = true;
 
-  constructor(options: ScatterLayerOptions) {
+  constructor(options: BubbleLayerOptions) {
     super(options);
     this.initSubLayersEvent();
   }
@@ -80,8 +80,8 @@ export class ScatterLayer extends CompositeLayer<ScatterLayerOptions> {
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<ScatterLayerOptions> {
-    return ScatterLayer.DefaultOptions;
+  public getDefaultOptions(): Partial<BubbleLayerOptions> {
+    return BubbleLayer.DefaultOptions;
   }
 
   /**
@@ -382,7 +382,7 @@ export class ScatterLayer extends CompositeLayer<ScatterLayerOptions> {
   /**
    * 更新
    */
-  public update(options: Partial<ScatterLayerOptions>) {
+  public update(options: Partial<BubbleLayerOptions>) {
     super.update(options);
 
     this.initSubLayersEvent();
@@ -391,7 +391,7 @@ export class ScatterLayer extends CompositeLayer<ScatterLayerOptions> {
   /**
    * 更新: 更新配置
    */
-  public updateOption(options: Partial<ScatterLayerOptions>) {
+  public updateOption(options: Partial<BubbleLayerOptions>) {
     super.update(options);
     this.layerState = getDefaultState(this.options.state);
   }
@@ -399,7 +399,7 @@ export class ScatterLayer extends CompositeLayer<ScatterLayerOptions> {
   /**
    * 更新子图层
    */
-  protected updateSubLayers(options: Partial<ScatterLayerOptions>) {
+  protected updateSubLayers(options: Partial<BubbleLayerOptions>) {
     // 映射填充面图层
     this.fillLayer.update(this.getFillLayerOptions());
 

@@ -1,4 +1,4 @@
-import { AreaLayerActiveOptions, AreaLayerOptions } from './types';
+import { ChoroplethLayerActiveOptions, ChoroplethLayerOptions } from './types';
 
 /**
  * 空值 source
@@ -10,7 +10,10 @@ const defaultHighlightColor = '#2f54eb';
 /**
  * 默认的全部交互状态配置
  */
-export const DEFAULT_STATE: { active: Required<AreaLayerActiveOptions>; select: Required<AreaLayerActiveOptions> } = {
+export const DEFAULT_STATE: {
+  active: Required<ChoroplethLayerActiveOptions>;
+  select: Required<ChoroplethLayerActiveOptions>;
+} = {
   active: {
     fillColor: false,
     strokeColor: defaultHighlightColor,
@@ -28,7 +31,7 @@ export const DEFAULT_STATE: { active: Required<AreaLayerActiveOptions>; select: 
 /**
  * 默认配置项
  */
-export const DEFAULT_OPTIONS: Partial<AreaLayerOptions> = {
+export const DEFAULT_OPTIONS: Partial<ChoroplethLayerOptions> = {
   visible: true,
   source: EMPTY_SOURCE,
   state: {

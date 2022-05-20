@@ -25,6 +25,10 @@ import { MappingAttribute } from '../adaptor/attribute';
  */
 export interface CoreLayerOptions extends Partial<LayerBaseConfig> {
   /**
+   * 图层 ID
+   */
+  id?: string;
+  /**
    * 数据
    */
   source: SourceOptions | Source;
@@ -76,6 +80,10 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
    */
   public readonly name: string;
   /**
+   * 图层名称
+   */
+  public readonly id: string;
+  /**
    * 图层类型
    */
   public abstract readonly type: string;
@@ -110,8 +118,9 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
 
   constructor(options: O) {
     super();
-    const { name, source } = options;
-    this.name = name ? name : uniqueId('core-layer');
+    const { id, name, source } = options;
+    this.id = id ? id : uniqueId('core-layer');
+    this.name = name ? name : this.id;
     this.options = deepMix({}, this.getDefaultOptions(), options);
     this.lastOptions = this.options;
     this.layer = this.createLayer();

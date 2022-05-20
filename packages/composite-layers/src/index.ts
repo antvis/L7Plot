@@ -20,7 +20,7 @@ export { LineLayer, LineLayerOptions } from './core-layers/line-layer';
 export { PolygonLayer, PolygonLayerOptions } from './core-layers/polygon-layer';
 
 /** 复合图层 **/
-// 散点图层及类型定义 | author by [yunji]](https://github.com/lvisei)
-export { ScatterLayer, ScatterLayerOptions } from './composite-layers/scatter-layer';
+// 气泡图层及类型定义 | author by [yunji]](https://github.com/lvisei)
+export { BubbleLayer, BubbleLayerOptions } from './composite-layers/bubble-layer';
 // 区域图层及类型定义 | author by [yunji]](https://github.com/lvisei)
-export { AreaLayer, AreaLayerOptions } from './composite-layers/area-layer';
+export { ChoroplethLayer, ChoroplethLayerOptions } from './composite-layers/choropleth-layer';

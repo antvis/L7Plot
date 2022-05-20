@@ -30,6 +30,7 @@ export interface ILayerGroup {
  */
 export interface ICoreLayer {
   name: string;
+  id: string;
   type: string;
   layer: ILayer;
   inited: boolean;
@@ -72,6 +73,7 @@ export interface ICoreLayer {
  */
 export interface ICompositeLayer {
   name: string;
+  id: string;
   type: string;
 
   subLayers: ILayerGroup;

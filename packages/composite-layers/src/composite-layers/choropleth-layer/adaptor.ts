@@ -1,8 +1,8 @@
 import { isUndefined } from '@antv/util';
 import { DEFAULT_STATE } from './constants';
-import { AreaLayerOptions } from './types';
+import { ChoroplethLayerOptions } from './types';
 
-export const getDefaultState = (state?: AreaLayerOptions['state']) => {
+export const getDefaultState = (state?: ChoroplethLayerOptions['state']) => {
   if (isUndefined(state)) {
     return DEFAULT_STATE;
   }
