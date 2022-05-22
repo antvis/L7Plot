@@ -40,7 +40,6 @@ class ChinaCitys extends Component {
           lineWidth: 0.6,
           lineOpacity: 1,
           label: {
-            visible: true,
             field: 'name',
             style: {
               fill: '#000',

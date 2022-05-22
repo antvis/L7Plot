@@ -105,9 +105,9 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
 
     // 映射填充面图层
     const fillLayer = new PolygonLayer({
+      ...this.getFillLayerOptions(),
       id: 'fillLayer',
       shape: 'fill',
-      ...this.getFillLayerOptions(),
       source,
     });
     const fillBottomColor = this.options.fillBottomColor;
@@ -115,34 +115,34 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
 
     // 描边图层
     const strokeLayer = new LineLayer({
+      ...this.getStrokeLayerOptions(),
       id: 'strokeLayer',
       shape: 'line',
-      ...this.getStrokeLayerOptions(),
       source,
     });
 
     // 高亮描边图层
     const highlightStrokeLayer = new LineLayer({
-      id: 'highlightStrokeLayer',
       ...this.gethigHlightStrokeLayerOptions(),
+      id: 'highlightStrokeLayer',
     });
 
     // 选中填充图层
     const selectFillLayer = new PolygonLayer({
-      id: 'selectFillLayer',
       ...this.getSelectFillLayerOptions(),
+      id: 'selectFillLayer',
     });
 
     // 选中描边图层
     const selectStrokeLayer = new LineLayer({
-      id: 'selectStrokeLayer',
       ...this.getSelectStrokeLayerOptions(),
+      id: 'selectStrokeLayer',
     });
 
     // 标注图层
     const labelLayer = new TextLayer({
+      ...this.getLabelLayerOptions(),
       id: 'labelLayer',
-      ...this.getTextLayerOptions(),
       source,
     });
 
@@ -272,14 +272,15 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     return option;
   }
 
-  private getTextLayerOptions() {
+  private getLabelLayerOptions() {
     const { visible, minZoom, maxZoom, zIndex = 0, label } = this.options;
+    const labelVisible = visible && Boolean(label) && (isUndefined(label?.visible) || label?.visible);
     const options = {
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
       ...label,
-      visible: visible && (label?.visible || Boolean(label)),
+      visible: labelVisible,
     };
 
     return options;

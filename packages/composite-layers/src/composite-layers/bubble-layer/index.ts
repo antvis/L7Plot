@@ -98,37 +98,37 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
 
     // 映射填充图层
     const fillLayer = new PointLayer({
+      ...this.getFillLayerOptions(),
       id: 'fillLayer',
       shape: 'circle',
-      ...this.getFillLayerOptions(),
       source,
     });
 
     // 高亮描边图层
     const highlightStrokeLayer = new PointLayer({
+      ...this.gethigHlightStrokeLayerOptions(),
       id: 'highlightStrokeLayer',
       shape: 'circle',
-      ...this.gethigHlightStrokeLayerOptions(),
     });
 
     // 选中填充图层
     const selectFillLayer = new PointLayer({
+      ...this.getSelectFillLayerOptions(),
       id: 'selectFillLayer',
       shape: 'circle',
-      ...this.getSelectFillLayerOptions(),
     });
 
     // 选中描边图层
     const selectStrokeLayer = new PointLayer({
+      ...this.getSelectStrokeLayerOptions(),
       id: 'selectStrokeLayer',
       shape: 'circle',
-      ...this.getSelectStrokeLayerOptions(),
     });
 
     // 标注图层
     const labelLayer = new TextLayer({
+      ...this.getLabelLayerOptions(),
       id: 'labelLayer',
-      ...this.getTextLayerOptions(),
       source,
     });
 
@@ -249,14 +249,15 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     return option;
   }
 
-  private getTextLayerOptions() {
+  private getLabelLayerOptions() {
     const { visible, minZoom, maxZoom, zIndex = 0, label } = this.options;
+    const labelVisible = visible && Boolean(label) && (isUndefined(label?.visible) || label?.visible);
     const options = {
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
       ...label,
-      visible: visible && (label?.visible || Boolean(label)),
+      visible: labelVisible,
     };
 
     return options;
