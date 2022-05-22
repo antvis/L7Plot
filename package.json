@@ -28,7 +28,7 @@
     "build-composite-layers": "lerna run build --stream --scope=@antv/l7-composite-layers",
     "build-component": "lerna run build --stream --scope=@antv/l7plot-component",
     "build-website": "lerna run build --stream --scope=l7plot-website",
-    "bundle": "lerna run build:umd --stream --scope=@antv/l7plot",
+    "bundle": "lerna run build:umd --stream --scope=@antv/l7*",
     "deploy-website": "lerna run deploy --stream --scope=l7plot-website",
     "version": "node scripts/sync-version",
     "prepublishOnly": "yarn build && yarn bundle",
