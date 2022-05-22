@@ -1,5 +1,4 @@
 import { clone, isEqual, isUndefined } from '@antv/util';
-import Source from '@antv/l7-source';
 import { CompositeLayer } from '../../core/composite-layer';
 import { PointLayer } from '../../core-layers/point-layer';
 import { TextLayer } from '../../core-layers/text-layer';
@@ -25,6 +24,10 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
   protected get layer() {
     return this.fillLayer;
   }
+  /**
+   * 图层间共享 source 实例
+   */
+  public source!: ISource;
   /**
    * 填充图层
    */
@@ -61,7 +64,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
    * 标注文本图层
    */
   public get labelLayer() {
-    return this.subLayers.getLayer('labelLayer') as ICoreLayer;
+    return this.subLayers.getLayer('labelLayer') as TextLayer;
   }
   /**
    * 图层交互状态配置
@@ -88,13 +91,14 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
    * 创建子图层
    */
   protected createSubLayers() {
-    this.layerState = getDefaultState(this.options.state);
     const sourceOptions = this.options.source;
-    const source = sourceOptions instanceof Source ? sourceOptions : this.createSource(sourceOptions);
+    const source = this.isSourceInstance(sourceOptions) ? sourceOptions : this.createSource(sourceOptions);
+    this.source = source;
+    this.layerState = getDefaultState(this.options.state);
 
     // 映射填充图层
     const fillLayer = new PointLayer({
-      name: 'fillLayer',
+      id: 'fillLayer',
       shape: 'circle',
       ...this.getFillLayerOptions(),
       source,
@@ -102,28 +106,28 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
 
     // 高亮描边图层
     const highlightStrokeLayer = new PointLayer({
-      name: 'highlightStrokeLayer',
+      id: 'highlightStrokeLayer',
       shape: 'circle',
       ...this.gethigHlightStrokeLayerOptions(),
     });
 
     // 选中填充图层
     const selectFillLayer = new PointLayer({
-      name: 'selectFillLayer',
+      id: 'selectFillLayer',
       shape: 'circle',
       ...this.getSelectFillLayerOptions(),
     });
 
     // 选中描边图层
     const selectStrokeLayer = new PointLayer({
-      name: 'selectStrokeLayer',
+      id: 'selectStrokeLayer',
       shape: 'circle',
       ...this.getSelectStrokeLayerOptions(),
     });
 
     // 标注图层
     const labelLayer = new TextLayer({
-      name: 'labelLayer',
+      id: 'labelLayer',
       ...this.getTextLayerOptions(),
       source,
     });
@@ -133,6 +137,9 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     return subLayers;
   }
 
+  /**
+   * 获取填充图层配置项
+   */
   private getFillLayerOptions() {
     const {
       visible,
@@ -259,15 +266,15 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
    * 设置子图层数据
    */
   protected setSubLayersSource(source: SourceOptions | ISource) {
-    if (source instanceof Source) {
+    if (this.isSourceInstance(source)) {
+      this.source = source;
       this.fillLayer.setSource(source);
       this.labelLayer.setSource(source);
     } else {
-      const layerSource = this.fillLayer.source;
       const { data, ...option } = source;
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      layerSource.setData(data, option);
+      this.source.setData(data, option);
     }
 
     this.highlightStrokeLayer.changeData(EMPTY_SOURCE);
@@ -285,7 +292,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     const features = feature ? [feature] : [];
     this.highlightStrokeLayer.changeData({
       data: features,
-      parser: this.fillLayer.source['parser'],
+      parser: this.source['parser'],
     });
     this.highlightData = featureId;
   }
@@ -304,8 +311,8 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
       return;
     }
     const features = selectData.map(({ feature }) => feature);
-    this.selectFillLayer.changeData({ data: features, parser: this.fillLayer.source['parser'] });
-    this.selectStrokeLayer.changeData({ data: features, parser: this.fillLayer.source['parser'] });
+    this.selectFillLayer.changeData({ data: features, parser: this.source['parser'] });
+    this.selectStrokeLayer.changeData({ data: features, parser: this.source['parser'] });
     this.selectData = selectData;
   }
 
@@ -447,6 +454,9 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     }
   }
 
+  /**
+   * 设置图层 zIndex
+   */
   public setIndex(zIndex: number) {
     this.fillLayer.setIndex(zIndex);
     this.highlightStrokeLayer.setIndex(zIndex + 0.1);
@@ -455,6 +465,9 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     this.labelLayer.setIndex(zIndex + 0.1);
   }
 
+  /**
+   * 设置图层高亮状态
+   */
   public setActive(field: string, value: number | string) {
     const source = this.fillLayer.source;
     const featureId = source.getFeatureId(field, value);
@@ -472,6 +485,9 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     }
   }
 
+  /**
+   * 设置图层选中状态
+   */
   public setSelect(field: string, value: number | string) {
     const source = this.fillLayer.source;
     const featureId = source.getFeatureId(field, value);
@@ -487,6 +503,9 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     this.handleSelectData(featureId, feature);
   }
 
+  /**
+   * 图层框选数据
+   */
   public boxSelect(bounds: [number, number, number, number], callback: (...args: any[]) => void) {
     this.fillLayer.boxSelect(bounds, callback);
   }

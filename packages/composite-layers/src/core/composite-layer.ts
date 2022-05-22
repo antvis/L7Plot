@@ -91,12 +91,22 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   }
 
   /**
-   * 创建 source 实例
+   * 创建 source 工具方法
    */
   protected createSource(sourceOptions: SourceOptions) {
     const { data, ...sourceCFG } = sourceOptions;
     const source = new Source(data, sourceCFG);
     return source;
+  }
+
+  /**
+   * 判断 source 是否是实例工具方法
+   */
+  protected isSourceInstance(source: SourceOptions | ISource): source is ISource {
+    if (source instanceof Source) {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -161,30 +171,49 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     }
   }
 
-  public changeData(source: SourceOptions) {
+  /**
+   * 更新数据
+   * 支持 source 配置项与 source 实例更新
+   */
+  public changeData(source: SourceOptions | ISource) {
     this.setSubLayersSource(source);
   }
 
+  /**
+   * 设置图层 zIndex
+   */
   public setIndex(zIndex: number) {
     this.subLayers.setZIndex(zIndex);
   }
 
+  /**
+   * 设置图层 blend
+   */
   public setBlend(blend: LayerBlend) {
     this.layer.setBlend(blend);
   }
 
+  /**
+   * 设置图层 minZoom
+   */
   public setMinZoom(minZoom: number) {
     this.subLayers.getLayers().forEach((layer) => {
       layer.setMinZoom(minZoom);
     });
   }
 
+  /**
+   * 设置图层 maxZoom
+   */
   public setMaxZoom(maxZoom: number) {
     this.subLayers.getLayers().forEach((layer) => {
       layer.setMaxZoom(maxZoom);
     });
   }
 
+  /**
+   * 显示图层
+   */
   public show() {
     if (!this.layer.inited) return;
     this.subLayers.getLayers().forEach((layer) => {
@@ -192,6 +221,9 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     });
   }
 
+  /**
+   * 隐藏图层
+   */
   public hide() {
     if (!this.layer.inited) return;
     this.subLayers.getLayers().forEach((layer) => {
@@ -199,22 +231,37 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     });
   }
 
+  /**
+   * 切换图层显隐状态
+   */
   public toggleVisible() {
     this.isVisible() ? this.hide() : this.show();
   }
 
+  /**
+   * 图层是否可见
+   */
   public isVisible() {
     return this.layer.inited ? this.layer.isVisible() : this.options.visible;
   }
 
+  /**
+   * 定位到当前图层数据范围
+   */
   public fitBounds(fitBoundsOptions?: unknown) {
     this.layer.fitBounds(fitBoundsOptions);
   }
 
+  /**
+   * 获取图例数据
+   */
   public getLegendItems(type: string): Record<string, any>[] {
     return this.layer.getLegendItems(type);
   }
 
+  /**
+   * 获取颜色图例数据
+   */
   public getColorLegendItems(): Record<string, any>[] {
     const colorLegendItems = this.layer.getLegendItems('color');
     if (Array.isArray(colorLegendItems) && colorLegendItems.length !== 0) {
@@ -225,6 +272,9 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     return [];
   }
 
+  /**
+   * 摧毁
+   */
   public destroy() {
     this.subLayers.destroy();
   }

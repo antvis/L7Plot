@@ -37,6 +37,7 @@ export const DEFAULT_OPTIONS: Partial<BubbleLayerOptions> = {
   },
   radius: 12,
   fillColor: '#5FD3A6',
+  lineWidth: 1,
   state: {
     active: false,
     select: false,

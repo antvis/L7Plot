@@ -1,5 +1,4 @@
 import { clone, isEqual, isUndefined } from '@antv/util';
-import Source from '@antv/l7-source';
 import { CompositeLayer } from '../../core/composite-layer';
 import { LineLayer } from '../../core-layers/line-layer';
 import { PolygonLayer } from '../../core-layers/polygon-layer';
@@ -26,6 +25,10 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   protected get layer() {
     return this.fillLayer;
   }
+  /**
+   * 图层间共享 source 实例
+   */
+  public source!: ISource;
   /**
    * 填充面图层
    */
@@ -68,7 +71,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
    * 标注文本图层
    */
   public get labelLayer() {
-    return this.subLayers.getLayer('labelLayer') as ICoreLayer;
+    return this.subLayers.getLayer('labelLayer') as TextLayer;
   }
   /**
    * 图层交互状态配置
@@ -95,13 +98,14 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
    * 创建子图层
    */
   protected createSubLayers() {
-    this.layerState = getDefaultState(this.options.state);
     const sourceOptions = this.options.source;
-    const source = sourceOptions instanceof Source ? sourceOptions : this.createSource(sourceOptions);
+    const source = this.isSourceInstance(sourceOptions) ? sourceOptions : this.createSource(sourceOptions);
+    this.source = source;
+    this.layerState = getDefaultState(this.options.state);
 
     // 映射填充面图层
     const fillLayer = new PolygonLayer({
-      name: 'fillLayer',
+      id: 'fillLayer',
       shape: 'fill',
       ...this.getFillLayerOptions(),
       source,
@@ -111,7 +115,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
 
     // 描边图层
     const strokeLayer = new LineLayer({
-      name: 'strokeLayer',
+      id: 'strokeLayer',
       shape: 'line',
       ...this.getStrokeLayerOptions(),
       source,
@@ -119,25 +123,25 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
 
     // 高亮描边图层
     const highlightStrokeLayer = new LineLayer({
-      name: 'highlightStrokeLayer',
+      id: 'highlightStrokeLayer',
       ...this.gethigHlightStrokeLayerOptions(),
     });
 
     // 选中填充图层
     const selectFillLayer = new PolygonLayer({
-      name: 'selectFillLayer',
+      id: 'selectFillLayer',
       ...this.getSelectFillLayerOptions(),
     });
 
     // 选中描边图层
     const selectStrokeLayer = new LineLayer({
-      name: 'selectStrokeLayer',
+      id: 'selectStrokeLayer',
       ...this.getSelectStrokeLayerOptions(),
     });
 
     // 标注图层
     const labelLayer = new TextLayer({
-      name: 'labelLayer',
+      id: 'labelLayer',
       ...this.getTextLayerOptions(),
       source,
     });
@@ -147,6 +151,9 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     return subLayers;
   }
 
+  /**
+   * 获取填充图层配置项
+   */
   private getFillLayerOptions() {
     const { visible, minZoom, maxZoom, zIndex = 0, fillColor, opacity, ...baseConfig } = this.options;
     const defaultState = this.layerState;
@@ -282,16 +289,16 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
    * 设置子图层数据
    */
   protected setSubLayersSource(source: ChoroplethLayerSourceOptions | ISource) {
-    if (source instanceof Source) {
+    if (this.isSourceInstance(source)) {
+      this.source = source;
       this.fillLayer.setSource(source);
       this.strokeLayer.setSource(source);
       this.labelLayer.setSource(source);
     } else {
-      const layerSource = this.fillLayer.source;
       const { data, ...option } = source;
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      layerSource.setData(data, option);
+      this.source.setData(data, option);
     }
 
     this.highlightStrokeLayer.changeData(EMPTY_SOURCE);
@@ -309,7 +316,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     const features = feature ? [feature] : [];
     this.highlightStrokeLayer.changeData({
       data: { type: 'FeatureCollection', features },
-      parser: { type: 'geojson' },
+      parser: this.source['parser'],
     });
     this.highlightData = featureId;
   }
@@ -328,8 +335,8 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       return;
     }
     const features = selectData.map(({ feature }) => feature);
-    this.selectFillLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: { type: 'geojson' } });
-    this.selectStrokeLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: { type: 'geojson' } });
+    this.selectFillLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: this.source['parser'] });
+    this.selectStrokeLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: this.source['parser'] });
     this.selectData = selectData;
   }
 
@@ -378,6 +385,9 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     this.handleSelectData(featureId, feature);
   };
 
+  /**
+   * 处理选择数据私有方法
+   */
   private handleSelectData(featureId: number, feature: any) {
     const enabledMultiSelect = this.options.enabledMultiSelect;
     let selectData = clone(this.selectData);
@@ -474,6 +484,9 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     }
   }
 
+  /**
+   * 设置图层 zIndex
+   */
   public setIndex(zIndex: number) {
     this.fillLayer.setIndex(zIndex);
     this.strokeLayer.setIndex(zIndex);
@@ -483,6 +496,9 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     this.labelLayer.setIndex(zIndex + 0.1);
   }
 
+  /**
+   * 设置图层高亮状态
+   */
   public setActive(field: string, value: number | string) {
     const source = this.fillLayer.source;
     const featureId = source.getFeatureId(field, value);
@@ -500,6 +516,9 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     }
   }
 
+  /**
+   * 设置图层选中状态
+   */
   public setSelect(field: string, value: number | string) {
     const source = this.fillLayer.source;
     const featureId = source.getFeatureId(field, value);
@@ -516,6 +535,9 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     // TODO: L7 method pickFeature(id|{x,y})
   }
 
+  /**
+   * 图层框选数据
+   */
   public boxSelect(bounds: [number, number, number, number], callback: (...args: any[]) => void) {
     this.fillLayer.boxSelect(bounds, callback);
   }

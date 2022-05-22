@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Scene, Mapbox } from '@antv/l7';
-import { AreaLayer } from '@antv/l7-composite-layers';
+import { ChoroplethLayer } from '@antv/l7-composite-layers';
 
 class ChinaCitys extends Component {
   public scene: Scene | undefined;
@@ -23,7 +23,7 @@ class ChinaCitys extends Component {
     fetch('https://gw.alipayobjects.com/os/bmw-prod/707cd4be-8ffe-4778-b863-3335eefd5fd5.json')
       .then((response) => response.json())
       .then((data) => {
-        const areaLayer = new AreaLayer({
+        const choroplethLayer = new ChoroplethLayer({
           source: {
             data: data,
             parser: {
@@ -35,22 +35,21 @@ class ChinaCitys extends Component {
             value: ['#fee5d9', '#fcae91', '#fb6a4a', '#de2d26', '#a50f15'],
           },
           opacity: 0.8,
-          strokeColor: '#c0c0c0',
+          strokeColor: '#ccc',
           lineType: 'solid',
-          lineWidth: 0.81,
-          lineOpacity: 0.5,
+          lineWidth: 0.6,
+          lineOpacity: 1,
           label: {
             visible: true,
             field: 'name',
             style: {
-              fill: '#fff',
+              fill: '#000',
               opacity: 0.8,
-              fontSize: 12,
-              textAnchor: 'center', // 文本相对锚点的位置 center|left|right|top|bottom|top-left
-              spacing: 1, // 字符间距
-              padding: [15, 15], // 文本包围盒 padding [水平，垂直]，影响碰撞检测结果，避免相邻文本靠的太近
-              stroke: '#ffffff', // 描边颜色
-              strokeWidth: 0.3, // 描边宽度
+              fontSize: 10,
+              stroke: '#fff',
+              strokeWidth: 2,
+              textAllowOverlap: false,
+              padding: [5, 5],
             },
           },
           state: {
@@ -66,7 +65,7 @@ class ChinaCitys extends Component {
           enabledMultiSelect: true,
         });
 
-        this.scene && areaLayer.addTo(this.scene);
+        this.scene && choroplethLayer.addTo(this.scene);
       });
   }
 

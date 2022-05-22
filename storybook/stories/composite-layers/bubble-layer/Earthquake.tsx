@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Scene, Mapbox } from '@antv/l7';
-import { ScatterLayer } from '@antv/l7-composite-layers';
+import { BubbleLayer } from '@antv/l7-composite-layers';
 
 class Earthquake extends Component {
   public scene: Scene | undefined;
@@ -23,7 +23,7 @@ class Earthquake extends Component {
     const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/m5r7MFHt8U/wenchuandizhenshuju.json');
     const { data } = await response.json();
 
-    const scatterLayer = new ScatterLayer({
+    const bubbleLayer = new BubbleLayer({
       autoFit: true,
       source: {
         data: data,
@@ -56,14 +56,14 @@ class Earthquake extends Component {
         visible: true,
         field: 'mag',
         style: {
-          fill: 'red',
-          opacity: 1,
+          fill: '#000',
+          opacity: 0.8,
           fontSize: 14,
           textAnchor: 'top', // 文本相对锚点的位置 center|left|right|top|bottom|top-left
           spacing: 1, // 字符间距
           padding: [15, 15], // 文本包围盒 padding [水平，垂直]，影响碰撞检测结果，避免相邻文本靠的太近
-          stroke: '#ffffff', // 描边颜色
-          strokeWidth: 0.3, // 描边宽度
+          stroke: '#fff', // 描边颜色
+          strokeWidth: 2, // 描边宽度
           textOffset: [0, 20],
         },
       },
@@ -80,7 +80,7 @@ class Earthquake extends Component {
       enabledMultiSelect: true,
     });
 
-    this.scene && scatterLayer.addTo(this.scene);
+    this.scene && bubbleLayer.addTo(this.scene);
   }
 
   componentDidMount() {

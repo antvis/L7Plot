@@ -34,6 +34,7 @@ export const DEFAULT_STATE: {
 export const DEFAULT_OPTIONS: Partial<ChoroplethLayerOptions> = {
   visible: true,
   source: EMPTY_SOURCE,
+  lineWidth: 1,
   state: {
     active: false,
     select: false,

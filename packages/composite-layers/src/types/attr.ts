@@ -72,31 +72,4 @@ export type FilterAttr = {
  */
 export interface SourceOptions extends ISourceCFG {
   data: any;
-  /**
-   * 网格聚合
-   */
-  // aggregation?: GridAggregation;
 }
-
-/** 聚合方法 */
-// export type AggregationMethod = 'count' | 'max' | 'min' | 'sum' | 'mean';
-
-/** 网格聚合 */
-// export type GridAggregation = {
-//   /**
-//    * 聚合类型
-//    */
-//   type?: 'grid' | 'hexagon';
-//   /**
-//    * 聚合字段
-//    */
-//   field: string;
-//   /**
-//    * 网格半径
-//    */
-//   radius?: number;
-//   /**
-//    * 聚合方法
-//    */
-//   method?: AggregationMethod;
-// };

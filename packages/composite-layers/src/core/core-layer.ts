@@ -173,6 +173,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
 
   /**
    * 设置图层数据
+   * 支持 source 配置项与 source 实例更新
    */
   public setSource(source: SourceOptions | ISource) {
     if (source instanceof Source) {
@@ -251,52 +252,89 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
     }
   }
 
+  /**
+   * 更新数据
+   * 支持 source 配置项
+   */
   public changeData(source: SourceOptions) {
     this.setSource(source);
   }
 
+  /**
+   * 设置图层 zIndex
+   */
   public setIndex(zIndex: number) {
     this.layer.setIndex(zIndex);
   }
 
+  /**
+   * 设置图层 blend
+   */
   public setBlend(blend: LayerBlend) {
     this.layer.setBlend(blend);
   }
 
+  /**
+   * 设置图层 minZoom
+   */
   public setMinZoom(minZoom: number) {
     this.layer.setMinZoom(minZoom);
   }
 
+  /**
+   * 设置图层 maxZoom
+   */
   public setMaxZoom(maxZoom: number) {
     this.layer.setMaxZoom(maxZoom);
   }
 
+  /**
+   * 显示图层
+   */
   public show() {
     if (!this.layer.inited) return;
     this.layer.show();
   }
 
+  /**
+   * 隐藏图层
+   */
   public hide() {
     if (!this.layer.inited) return;
     this.layer.hide();
   }
 
+  /**
+   * 切换图层显隐状态
+   */
   public toggleVisible() {
     this.isVisible() ? this.hide() : this.show();
   }
 
+  /**
+   * 图层是否可见
+   */
   public isVisible() {
     return this.layer.inited ? this.layer.isVisible() : this.options.visible || false;
   }
 
+  /**
+   * 图层框选数据
+   */
   public boxSelect(bounds: [number, number, number, number], callback: (...args: any[]) => void) {
     this.layer.boxSelect(bounds, callback);
   }
 
+  /**
+   * 定位到当前图层数据范围
+   */
   public fitBounds(fitBoundsOptions?: unknown) {
     this.layer.fitBounds(fitBoundsOptions);
   }
 
+  /**
+   * 获取图例数据
+   */
   public getLegendItems(type: string): Record<string, any>[] {
     return this.layer.getLegendItems(type);
   }
@@ -337,6 +375,9 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
     return this;
   }
 
+  /**
+   * 摧毁
+   */
   public destroy() {
     this.layer.destroy();
   }

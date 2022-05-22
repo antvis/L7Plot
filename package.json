@@ -23,7 +23,7 @@
     "test": "jest",
     "test-live": "DEBUG_MODE=1 jest --watch __tests__/unit",
     "test-cover": "jest --coverage",
-    "build": "lerna run build --stream --scope=@antv/l7plot*",
+    "build": "lerna run build --stream --scope=@antv/l7*",
     "build-l7lot": "lerna run build --stream --scope=@antv/l7plot",
     "build-composite-layers": "lerna run build --stream --scope=@antv/l7-composite-layers",
     "build-component": "lerna run build --stream --scope=@antv/l7plot-component",
