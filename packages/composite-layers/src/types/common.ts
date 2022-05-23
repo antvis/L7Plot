@@ -1,9 +1,9 @@
 import {
   ILayer,
   ILayerConfig,
+  ISource,
   ISourceCFG,
   IScale,
-  IScaleOptions,
   ILngLat,
   BlendType,
   IImage,
@@ -11,15 +11,30 @@ import {
   ILegendSegmentItem,
   ILegendClassificaItem,
 } from '@antv/l7-core';
-import { Scene } from '@antv/l7-scene';
+import type { Scene } from '@antv/l7-scene';
 
-export { ILayer, ILayerConfig, ISourceCFG, BlendType, IImage, ITransform, ILegendSegmentItem, ILegendClassificaItem };
+export {
+  ILayer,
+  ILayerConfig,
+  ISource,
+  ISourceCFG,
+  BlendType,
+  IImage,
+  ITransform,
+  ILegendSegmentItem,
+  ILegendClassificaItem,
+};
 
-export type { Scene };
+export { Scene };
 
-export type ScaleConfig = IScale;
-export type ScaleConfigMap = IScaleOptions;
+export type LayerBaseConfig = Omit<ILayerConfig, 'size' | 'shape' | 'shape2d' | 'shape3d'>;
 export type ValueOf<T> = T[keyof T];
+export type ScaleConfig = IScale;
+
+/**
+ * 图层混合配置
+ */
+export type LayerBlend = keyof typeof BlendType;
 
 export interface Event {
   // 事件类型
