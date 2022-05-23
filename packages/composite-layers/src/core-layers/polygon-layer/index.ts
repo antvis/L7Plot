@@ -3,8 +3,6 @@ import { CoreLayer } from '../../core/core-layer';
 import { ILayer } from '../../types';
 import { PolygonLayerOptions } from './types';
 
-export type { PolygonLayerOptions };
-
 /**
  * 面图层
  * 对应 L7 的 PolygonLayer

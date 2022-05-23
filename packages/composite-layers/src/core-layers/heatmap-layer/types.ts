@@ -46,20 +46,6 @@ export type HeatmapShape3d = 'cylinder' | 'squareColumn' | 'hexagonColumn' | 'tr
 export type HeatmapShape = 'heatmap' | 'heatmap3D' | HeatmapShape2d | HeatmapShape3d;
 
 /**
- * 热力图层基础配置
- */
-export interface HeatmapLayerConfig {
-  /**
-   * 图形形状
-   */
-  shape?: HeatmapShape;
-  /**
-   * 图层样式
-   */
-  style?: HeatmapLayerStyleOptions | GridHeatmapLayerStyleOptions;
-}
-
-/**
  * 线图层配置
  */
 export interface HeatmapLayerOptions extends CoreLayerOptions {

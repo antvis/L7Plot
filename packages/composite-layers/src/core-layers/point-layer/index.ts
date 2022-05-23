@@ -3,8 +3,6 @@ import { CoreLayer } from '../../core/core-layer';
 import { ILayer } from '../../types';
 import { PointLayerOptions } from './types';
 
-export type { PointLayerOptions };
-
 /**
  * 点图层
  * 对应 L7 的 PointLayer

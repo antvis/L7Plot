@@ -7,8 +7,6 @@ import { getDefaultState } from './adaptor';
 import { DEFAULT_OPTIONS, DEFAULT_STATE, EMPTY_SOURCE } from './constants';
 import { BubbleLayerOptions } from './types';
 
-export type { BubbleLayerOptions };
-
 export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
   /**
    * 默认配置项
@@ -273,8 +271,6 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
       this.labelLayer.setSource(source);
     } else {
       const { data, ...option } = source;
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       this.source.setData(data, option);
     }
 
@@ -293,7 +289,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     const features = feature ? [feature] : [];
     this.highlightStrokeLayer.changeData({
       data: features,
-      parser: this.source['parser'],
+      parser: this.source.parser,
     });
     this.highlightData = featureId;
   }
@@ -312,8 +308,8 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
       return;
     }
     const features = selectData.map(({ feature }) => feature);
-    this.selectFillLayer.changeData({ data: features, parser: this.source['parser'] });
-    this.selectStrokeLayer.changeData({ data: features, parser: this.source['parser'] });
+    this.selectFillLayer.changeData({ data: features, parser: this.source.parser });
+    this.selectStrokeLayer.changeData({ data: features, parser: this.source.parser });
     this.selectData = selectData;
   }
 

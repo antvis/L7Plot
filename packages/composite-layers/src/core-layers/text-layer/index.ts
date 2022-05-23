@@ -3,8 +3,6 @@ import { CoreLayer } from '../../core/core-layer';
 import { ILayer } from '../../types';
 import { TextLayerOptions } from './types';
 
-export type { TextLayerOptions };
-
 /**
  * 文本图层
  * 对应 L7 的 PointLayer

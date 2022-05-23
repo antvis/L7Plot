@@ -3,8 +3,6 @@ import { CoreLayer } from '../../core/core-layer';
 import { ILayer } from '../../types';
 import { LineLayerOptions } from './types';
 
-export type { LineLayerOptions };
-
 /**
  * 线图层
  * 对应 L7 的 LineLayer

@@ -3,8 +3,6 @@ import { CoreLayer } from '../../core/core-layer';
 import { ILayer } from '../../types';
 import { HeatmapLayerOptions } from './types';
 
-export type { HeatmapLayerOptions };
-
 /**
  * 热力图层
  * 对应 L7 的 HeatmapLayer

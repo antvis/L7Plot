@@ -7,36 +7,51 @@ export type Callback<T> = (data: Record<string, any>) => T | T[];
 export type ColorsAttr = string | string[];
 
 export type StyleAttribute<T> = {
+  /** 映射字段 */
   field?: string | string[];
+  /** 映射值 */
   value?: T | T[] | Callback<T>;
 };
 
 export type ColorStyleAttribute = {
+  /** 映射字段 */
   field?: string | string[];
+  /** 映射值 */
   value?: string | string[] | Callback<string>;
+  /** scale 配置项 */
   scale?: ScaleConfig;
 };
 
 export type SizeStyleAttribute = {
+  /** 映射字段 */
   field?: string;
+  /** 映射值 */
   value?: number | number[] | Callback<number | number[]>;
+  /** scale 配置项 */
   scale?: ScaleConfig;
 };
 
 export type ShapeStyleAttribute<T> = {
+  /** 映射字段 */
   field?: string | string[];
+  /** 映射值 */
   value?: T | T[] | Callback<T>;
+  /** scale 配置项 */
   scale?: ScaleConfig;
 };
 
 export type RotateStyleAttribute = {
+  /** 映射字段 */
   field?: string;
+  /** 映射值 */
   value?: number | number[] | Callback<number>;
 };
 
 /** 图形交互反馈 */
 export type StateAttribute = {
+  /** 高亮交互 */
   active?: boolean | IActiveOption;
+  /** 选中交互 */
   select?: boolean | IActiveOption;
 };
 
@@ -63,7 +78,9 @@ export type ScaleAttr = Record<string, ScaleConfig>;
 
 /** 数据过滤 */
 export type FilterAttr = {
+  /** 映射字段 */
   field?: string | string[];
+  /** 映射值 */
   value: Callback<boolean>;
 };
 
@@ -71,5 +88,6 @@ export type FilterAttr = {
  * 数据配置
  */
 export interface SourceOptions extends ISourceCFG {
+  /** 数据 */
   data: any;
 }
