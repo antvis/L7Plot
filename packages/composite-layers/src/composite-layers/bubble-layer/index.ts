@@ -7,8 +7,6 @@ import { getDefaultState } from './adaptor';
 import { DEFAULT_OPTIONS, DEFAULT_STATE, EMPTY_SOURCE } from './constants';
 import { BubbleLayerOptions } from './types';
 
-export type { BubbleLayerOptions };
-
 export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
   /**
    * 默认配置项

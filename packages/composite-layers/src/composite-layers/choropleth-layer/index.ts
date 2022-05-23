@@ -8,8 +8,6 @@ import { ChoroplethLayerOptions, ChoroplethLayerSourceOptions } from './types';
 import { ICoreLayer, ISource, MouseEvent } from '../../types';
 import { DEFAULT_OPTIONS, DEFAULT_STATE, EMPTY_SOURCE } from './constants';
 
-export type { ChoroplethLayerOptions };
-
 export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   /**
    * 默认配置项
