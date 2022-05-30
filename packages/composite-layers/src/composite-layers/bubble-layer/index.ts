@@ -4,7 +4,8 @@ import { PointLayer } from '../../core-layers/point-layer';
 import { TextLayer } from '../../core-layers/text-layer';
 import { ICoreLayer, ISource, SourceOptions, MouseEvent } from '../../types';
 import { getDefaultState } from './adaptor';
-import { DEFAULT_OPTIONS, DEFAULT_STATE, EMPTY_SOURCE } from './constants';
+import { EMPTY_JSON_SOURCE } from '../common/constants';
+import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
 import { BubbleLayerOptions } from './types';
 
 export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
@@ -89,9 +90,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
    * 创建子图层
    */
   protected createSubLayers() {
-    const sourceOptions = this.options.source;
-    const source = this.isSourceInstance(sourceOptions) ? sourceOptions : this.createSource(sourceOptions);
-    this.source = source;
+    const source = this.source;
     this.layerState = getDefaultState(this.options.state);
 
     // 映射填充图层
@@ -195,7 +194,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
-      source: EMPTY_SOURCE,
+      source: EMPTY_JSON_SOURCE,
       size: radius,
       style: strokeStyle,
     };
@@ -214,7 +213,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
-      source: EMPTY_SOURCE,
+      source: EMPTY_JSON_SOURCE,
       color,
       size: radius,
       style: fillStyle,
@@ -239,7 +238,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
-      source: EMPTY_SOURCE,
+      source: EMPTY_JSON_SOURCE,
       size: radius,
       style: strokeStyle,
     };
@@ -274,9 +273,9 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
       this.source.setData(data, option);
     }
 
-    this.highlightStrokeLayer.changeData(EMPTY_SOURCE);
-    this.selectFillLayer.changeData(EMPTY_SOURCE);
-    this.selectStrokeLayer.changeData(EMPTY_SOURCE);
+    this.highlightStrokeLayer.changeData(EMPTY_JSON_SOURCE);
+    this.selectFillLayer.changeData(EMPTY_JSON_SOURCE);
+    this.selectStrokeLayer.changeData(EMPTY_JSON_SOURCE);
   }
 
   /**

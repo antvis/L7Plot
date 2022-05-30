@@ -6,7 +6,8 @@ import { TextLayer } from '../../core-layers/text-layer';
 import { getDefaultState } from './adaptor';
 import { ChoroplethLayerOptions, ChoroplethLayerSourceOptions } from './types';
 import { ICoreLayer, ISource, MouseEvent } from '../../types';
-import { DEFAULT_OPTIONS, DEFAULT_STATE, EMPTY_SOURCE } from './constants';
+import { EMPTY_GEOJSON_SOURCE } from '../common/constants';
+import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
 
 export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   /**
@@ -23,10 +24,6 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   protected get layer() {
     return this.fillLayer;
   }
-  /**
-   * 图层间共享 source 实例
-   */
-  public source!: ISource;
   /**
    * 填充面图层
    */
@@ -96,9 +93,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
    * 创建子图层
    */
   protected createSubLayers() {
-    const sourceOptions = this.options.source;
-    const source = this.isSourceInstance(sourceOptions) ? sourceOptions : this.createSource(sourceOptions);
-    this.source = source;
+    const source = this.source;
     this.layerState = getDefaultState(this.options.state);
 
     // 映射填充面图层
@@ -221,7 +216,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
-      source: EMPTY_SOURCE,
+      source: EMPTY_GEOJSON_SOURCE,
       size: size,
       color: color,
       style: { opacity: defaultState.active.lineOpacity },
@@ -241,7 +236,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
-      source: EMPTY_SOURCE,
+      source: EMPTY_GEOJSON_SOURCE,
       color,
       style: fillStyle,
       state: { select: false, active: false },
@@ -261,7 +256,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
-      source: EMPTY_SOURCE,
+      source: EMPTY_GEOJSON_SOURCE,
       size,
       color,
       style: { opacity: defaultState.select.lineOpacity },
@@ -298,9 +293,9 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       this.source.setData(data, option);
     }
 
-    this.highlightStrokeLayer.changeData(EMPTY_SOURCE);
-    this.selectFillLayer.changeData(EMPTY_SOURCE);
-    this.selectStrokeLayer.changeData(EMPTY_SOURCE);
+    this.highlightStrokeLayer.changeData(EMPTY_GEOJSON_SOURCE);
+    this.selectFillLayer.changeData(EMPTY_GEOJSON_SOURCE);
+    this.selectStrokeLayer.changeData(EMPTY_GEOJSON_SOURCE);
   }
 
   /**

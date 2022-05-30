@@ -79,6 +79,12 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    * 图层是否具有交互效果，用于 tooltip
    */
   public abstract readonly interaction: boolean;
+
+  /**
+   * 图层间共享 source 实例
+   */
+  public source!: ISource;
+
   /**
    * 子图层组
    */
@@ -91,7 +97,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     this.name = name ? name : this.id;
     this.options = deepMix({}, this.getDefaultOptions(), options);
     this.lastOptions = this.options;
-
+    this.source = this.createSource();
     const layers = this.createSubLayers();
     this.subLayers = new LayerGroup(layers);
   }
@@ -106,9 +112,11 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   /**
    * 创建 source 工具方法
    */
-  protected createSource(sourceOptions: SourceOptions) {
+  protected createSource() {
+    const sourceOptions = this.options.source;
+
     const { data, ...sourceCFG } = sourceOptions;
-    const source = new Source(data, sourceCFG);
+    const source = this.isSourceInstance(sourceOptions) ? sourceOptions : new Source(data, sourceCFG);
     return source;
   }
 
