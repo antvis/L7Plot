@@ -8,8 +8,6 @@ import { ChoroplethLayerOptions, ChoroplethLayerSourceOptions } from './types';
 import { ICoreLayer, ISource, MouseEvent } from '../../types';
 import { DEFAULT_OPTIONS, DEFAULT_STATE, EMPTY_SOURCE } from './constants';
 
-export type { ChoroplethLayerOptions };
-
 export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   /**
    * 默认配置项
@@ -297,8 +295,6 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       this.labelLayer.setSource(source);
     } else {
       const { data, ...option } = source;
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       this.source.setData(data, option);
     }
 
@@ -317,7 +313,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     const features = feature ? [feature] : [];
     this.highlightStrokeLayer.changeData({
       data: { type: 'FeatureCollection', features },
-      parser: this.source['parser'],
+      parser: this.source.parser,
     });
     this.highlightData = featureId;
   }
@@ -336,8 +332,8 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       return;
     }
     const features = selectData.map(({ feature }) => feature);
-    this.selectFillLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: this.source['parser'] });
-    this.selectStrokeLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: this.source['parser'] });
+    this.selectFillLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: this.source.parser });
+    this.selectStrokeLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: this.source.parser });
     this.selectData = selectData;
   }
 

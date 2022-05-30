@@ -9,15 +9,28 @@ import { LayerGroup } from './layer-group';
  * 复合图层的基础配置
  */
 export interface CompositeLayerOptions {
+  /** 图层名称 */
   name?: string;
+  /** 图层 ID */
   id?: string;
+  /** 图层 zIndex */
   zIndex?: number;
+  /** 图层是否可见 */
   visible?: boolean;
+  /** 图层最小可见层级 */
   minZoom?: number;
+  /** 图层最大可见层级 */
   maxZoom?: number;
+  /**
+   * 图层拾取缓存配置，
+   * 如 1px 宽度的线鼠标很难拾取到, 通过设置该参数可扩大拾取的范围
+   * */
   pickingBuffer?: number;
+  /** 图层初始化完成之后，地图是否自动缩放到图层范围 */
   autoFit?: boolean;
+  /** 图层元素混合效果 */
   blend?: LayerBlend;
+  /** 数据源 */
   source: any;
 }
 

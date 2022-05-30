@@ -7,17 +7,18 @@ import { ISourceCFG, ISource } from '../../types';
  * 数据配置
  */
 export interface ChoroplethLayerSourceOptions extends Pick<ISourceCFG, 'parser' | 'transforms'> {
+  /** 数据 */
   data: any;
 }
 
 export type ChoroplethLayerActiveOptions = {
-  // 填充颜色
+  /** 填充颜色 */
   fillColor?: false | string;
-  // 描边颜色
+  /** 描边颜色 */
   strokeColor?: false | string;
-  // 描边的宽度
+  /** 描边的宽度 */
   lineWidth?: number;
-  // 描边透明度
+  /** 描边透明度 */
   lineOpacity?: number;
 };
 
@@ -67,7 +68,9 @@ export interface ChoroplethLayerOptions extends CompositeLayerOptions {
    * 交互反馈
    */
   state?: {
+    /** 高亮交互 */
     active?: boolean | ChoroplethLayerActiveOptions;
+    /** 选中交互 */
     select?: boolean | ChoroplethLayerActiveOptions;
   };
   /**
