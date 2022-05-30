@@ -31,3 +31,7 @@ export * from './composite-layers/bubble-layer/types';
 // 区域图层及类型定义 | author by [yunji]](https://github.com/lvisei)
 export { ChoroplethLayer } from './composite-layers/choropleth-layer';
 export * from './composite-layers/choropleth-layer/types';
+
+// 客流走向图层及类型定义 | author by [yanxiong](https://github.com/heiyexing)
+export { TrafficFlowLayer } from './composite-layers/traffic-flow-layer';
+export * from './composite-layers/traffic-flow-layer/types';
