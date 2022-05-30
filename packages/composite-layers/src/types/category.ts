@@ -4,4 +4,5 @@
 export enum CompositeLayerType {
   BubbleLayer = 'bubbleLayer',
   ChoroplethLayer = 'choroplethLayer',
+  TrafficFlowLayer = 'trafficFlowLayer',
 }

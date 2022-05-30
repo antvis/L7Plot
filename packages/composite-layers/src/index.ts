@@ -24,3 +24,5 @@ export { PolygonLayer, PolygonLayerOptions } from './core-layers/polygon-layer';
 export { BubbleLayer, BubbleLayerOptions } from './composite-layers/bubble-layer';
 // 区域图层及类型定义 | author by [yunji]](https://github.com/lvisei)
 export { ChoroplethLayer, ChoroplethLayerOptions } from './composite-layers/choropleth-layer';
+// 客流走向聚合图层及类型定义 | author by [yanxiong]](https://github.com/heiyexing)
+export { TrafficFlowLayer, TrafficFlowLayerOptions } from './composite-layers/traffic-flow-layer';

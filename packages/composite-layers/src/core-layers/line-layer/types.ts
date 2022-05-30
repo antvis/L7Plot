@@ -42,6 +42,8 @@ export type LinesLayerStyleOptions = {
   iconStep?: number;
   // 纹理混合方式
   textureBlend?: string;
+
+  [key: string]: any;
 };
 
 /**
