@@ -423,7 +423,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
    * 更新: 更新配置
    */
   public updateOption(options: Partial<ChoroplethLayerOptions>) {
-    super.update(options);
+    super.updateOption(options);
     this.layerState = getDefaultState(this.options.state);
   }
 
