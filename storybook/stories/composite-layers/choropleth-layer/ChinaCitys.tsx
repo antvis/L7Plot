@@ -4,6 +4,7 @@ import { ChoroplethLayer } from '@antv/l7-composite-layers';
 
 class ChinaCitys extends Component {
   public scene: Scene | undefined;
+  public choroplethLayer: ChoroplethLayer | undefined;
 
   constructor(props) {
     super(props);
@@ -14,7 +15,7 @@ class ChinaCitys extends Component {
       id: 'container',
       map: new Mapbox({
         pitch: 0,
-        style: 'dark',
+        style: 'light',
         zoom: 3,
         center: [120.19660949707033, 30.234747338474293],
       }),
@@ -23,7 +24,7 @@ class ChinaCitys extends Component {
     fetch('https://gw.alipayobjects.com/os/bmw-prod/707cd4be-8ffe-4778-b863-3335eefd5fd5.json')
       .then((response) => response.json())
       .then((data) => {
-        const choroplethLayer = new ChoroplethLayer({
+        this.choroplethLayer = new ChoroplethLayer({
           source: {
             data: data,
             parser: {
@@ -64,7 +65,7 @@ class ChinaCitys extends Component {
           enabledMultiSelect: true,
         });
 
-        this.scene && choroplethLayer.addTo(this.scene);
+        this.scene && this.choroplethLayer.addTo(this.scene);
       });
   }
 
@@ -75,6 +76,12 @@ class ChinaCitys extends Component {
   componentWillUnmount() {
     this.scene && this.scene.destroy();
   }
+
+  update = () => {
+    if (this.scene) {
+      this.choroplethLayer?.update({ fillColor: 'rgb(239,243,255)', autoFit: true, strokeColor: 'blue' });
+    }
+  };
 
   render() {
     return (
@@ -87,7 +94,13 @@ class ChinaCitys extends Component {
           right: 0,
           bottom: 0,
         }}
-      ></div>
+      >
+        <div style={{ position: 'absolute', left: '10px', zIndex: 1 }}>
+          <button type="button" onClick={this.update} style={{ marginTop: 8 }}>
+            update
+          </button>
+        </div>
+      </div>
     );
   }
 }
