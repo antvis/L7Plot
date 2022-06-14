@@ -88,6 +88,14 @@ module.exports = {
         order: 5,
       },
       {
+        slug: 'api/composite-layers',
+        title: {
+          zh: '复合图层 - CompositeLayers',
+          en: 'CompositeLayers',
+        },
+        order: 5,
+      },
+      {
         slug: 'api/advanced-plots',
         title: {
           zh: '高级图表 - Advanced Plot',
