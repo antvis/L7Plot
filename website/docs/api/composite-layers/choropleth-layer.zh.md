@@ -108,7 +108,7 @@ order: 6
 
 ### `options.`label
 
-`PointTextLayerStyleOptions` optional
+`TextLayerOptions` optional
 
 标签标注。
 
@@ -126,7 +126,7 @@ order: 6
 
 #### `label.`style
 
-标签样式详细配置见 [PointTextLayerStyleOptions](/zh/docs/api/composite-layers/text-layer#code-classlanguage-textoptionscodestyle)。
+标签样式详细配置见 [TextLayerStyleOptions](/zh/docs/api/composite-layers/text-layer#code-classlanguage-textoptionscodestyle)。
 
 `markdown:docs/common/composite-layers/choropleth-layer/state.zh.md`
 

@@ -1,6 +1,6 @@
-`PointTextLayerStyleOptions` optional
+`TextLayerStyleOptions` optional
 
-字体样式，PointTextLayerStyleOptions 配置如下：
+字体样式，TextLayerStyleOptions 配置如下：
 
 | 属性             | 描述                                                                      | 类型        | 默认值     | 是否必填 |
 | ---------------- | ------------------------------------------------------------------------- | ----------- | ---------- | -------- |
