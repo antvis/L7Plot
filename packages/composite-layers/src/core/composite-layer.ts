@@ -33,7 +33,9 @@ export interface CompositeLayerOptions {
   /** 数据源 */
   source: any;
 }
-
+export enum CompositeEventEnum {
+  ONADD = 'onadd',
+}
 export abstract class CompositeLayer<O extends CompositeLayerOptions> extends EventEmitter implements ICompositeLayer {
   /**
    * 复合图层类型
@@ -155,6 +157,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   public addTo(scene: Scene) {
     this.scene = scene;
     this.subLayers.addTo(scene);
+    this.emit(CompositeEventEnum.ONADD);
   }
 
   /**

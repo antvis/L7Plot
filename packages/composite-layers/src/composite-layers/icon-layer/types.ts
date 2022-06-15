@@ -1,5 +1,5 @@
 import { ISourceCFG, ISource } from '../../types';
-import { TextLayerOptions } from '../../core-layers/text-layer/types';
+import { TextLayerStyleOptions, TextLayerOptions } from '../../core-layers/text-layer/types';
 import { PointLayerOptions } from '../../core-layers/point-layer/types';
 import { CompositeLayerOptions } from '../../core/composite-layer';
 /**
@@ -14,7 +14,7 @@ export type IconLayerActiveOptions = {
   /**图标大小 */
   radius?: number;
   /**图标颜色 */
-  color: string;
+  color?: string;
   /**图标透明度 */
   opacity?: number;
 };
@@ -24,12 +24,6 @@ export interface IconLayerOptions extends CompositeLayerOptions {
    * 具体的数据
    */
   source: IconLayerSourceOptions | ISource;
-  /**
-   * 图标资源
-   */
-  iconAtlas: {
-    [key: string]: string;
-  };
   /**
    * 填充兜底颜色，用于颜色值映值不存在时
    */
@@ -43,9 +37,15 @@ export interface IconLayerOptions extends CompositeLayerOptions {
    */
   icon?: PointLayerOptions['shape'];
   /**
+   * 颜色
+   */
+  color?: PointLayerOptions['color'];
+  /**
    * 描边线宽
    */
   radius?: PointLayerOptions['size'];
+
+  iconStyle?: TextLayerStyleOptions;
 
   /**
    * 文本标注
@@ -64,4 +64,27 @@ export interface IconLayerOptions extends CompositeLayerOptions {
    * 是否启用多选
    */
   enabledMultiSelect?: boolean;
+}
+
+export interface IconImageLayerOptions extends IconLayerOptions {
+  /**
+   * 图标资源
+   */
+  iconAtlas: {
+    [key: string]: string;
+  };
+}
+
+export interface IconFontLayerOptions extends IconLayerOptions {
+  /**
+   * 图标资源
+   */
+  iconAtlas: {
+    fontPath: string;
+    fontFamily: string;
+    iconFonts: Array<[string, string]>;
+  };
+  /**
+   * 文本标注
+   */
 }
