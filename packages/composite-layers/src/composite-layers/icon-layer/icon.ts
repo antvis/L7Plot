@@ -1,12 +1,12 @@
-import { CompositeLayer, CompositeEventEnum } from '../../core/composite-layer';
-import { BubbleLayer } from '../bubble-layer';
+import { CompositeLayer } from '../../core/composite-layer';
 import { TextLayer } from '../../core-layers/text-layer';
 import { PointLayer } from '../../core-layers/point-layer';
 import { LabelService } from '../common/service/label';
 import { IconLayerOptions } from './types';
 import { getDefaultState } from './adaptor';
-import { DEFAULT_OPTIONS, DEFAULT_STATE, EMPTY_SOURCE } from './constants';
+import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
 import { ICoreLayer, ISource, MouseEvent } from '../../types';
+
 export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLayer<T> {
   /**
    * 默认配置项
@@ -29,10 +29,6 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
   protected get layer() {
     return this.iconLayer;
   }
-  /**
-   * 图层间共享 source 实例
-   */
-  public source!: ISource;
   /**
    * 填充面图层
    */

@@ -24,10 +24,6 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     return this.fillLayer;
   }
   /**
-   * 图层间共享 source 实例
-   */
-  public source!: ISource;
-  /**
    * 填充图层
    */
   public get fillLayer() {

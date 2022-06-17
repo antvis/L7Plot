@@ -2,7 +2,7 @@ import { deepMix, uniqueId } from '@antv/util';
 import EventEmitter from '@antv/event-emitter';
 import Source from '@antv/l7-source';
 import { Scene, SourceOptions, ICompositeLayer, CompositeLayerType, LayerBlend, ICoreLayer, ISource } from '../types';
-import { LayerEventList } from './constants';
+import { CompositeLayerEvent, LayerEventList } from './constants';
 import { LayerGroup } from './layer-group';
 
 /**
@@ -33,9 +33,7 @@ export interface CompositeLayerOptions {
   /** 数据源 */
   source: any;
 }
-export enum CompositeEventEnum {
-  ONADD = 'onadd',
-}
+
 export abstract class CompositeLayer<O extends CompositeLayerOptions> extends EventEmitter implements ICompositeLayer {
   /**
    * 复合图层类型
@@ -81,7 +79,6 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    * 图层是否具有交互效果，用于 tooltip
    */
   public abstract readonly interaction: boolean;
-
   /**
    * 图层间共享 source 实例
    */
@@ -112,7 +109,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   }
 
   /**
-   * 创建 source 工具方法
+   * 创建图层间共享 source 方法
    */
   protected createSource() {
     const sourceOptions = this.options.source;
@@ -157,7 +154,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   public addTo(scene: Scene) {
     this.scene = scene;
     this.subLayers.addTo(scene);
-    this.emit(CompositeEventEnum.ONADD);
+    this.emit(CompositeLayerEvent.ADD);
   }
 
   /**
@@ -166,6 +163,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   public remove() {
     if (!this.scene) return;
     this.subLayers.remove();
+    this.emit(CompositeLayerEvent.REMOVE);
   }
 
   /**
