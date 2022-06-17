@@ -16,6 +16,7 @@ export class PointLayer extends CoreLayer<PointLayerOptions> {
   protected createLayer(): ILayer {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { source, shape, size, ...config } = this.options;
+
     const layer = new L7PointLayer(config);
 
     return layer;
