@@ -16,6 +16,10 @@
 
 ```js
 {
+  source: {
+    data: [{ c: 'red', t: 20, n: 'chengdu' }],
+    // ...
+  },
   color: { field: 'c', }
 }
 ```

@@ -80,7 +80,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
    */
   public readonly name: string;
   /**
-   * 图层名称
+   * 图层 ID
    */
   public readonly id: string;
   /**

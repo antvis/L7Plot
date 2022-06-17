@@ -19,7 +19,7 @@ export enum LineStyleType {
 /**
  * 线图层 图层样式
  */
-export type LinesLayerStyleOptions = {
+export type LineLayerStyleOptions = {
   // 透明度
   opacity?: number | [string, (data: any) => number] | [string, [number, number]];
   // 线类型
@@ -55,5 +55,5 @@ export interface LineLayerOptions extends CoreLayerOptions {
   /**
    * 图层样式
    */
-  style?: LinesLayerStyleOptions;
+  style?: LineLayerStyleOptions;
 }

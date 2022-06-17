@@ -395,7 +395,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
    * 更新: 更新配置
    */
   public updateOption(options: Partial<BubbleLayerOptions>) {
-    super.update(options);
+    super.updateOption(options);
     this.layerState = getDefaultState(this.options.state);
   }
 
