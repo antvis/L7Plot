@@ -2,6 +2,7 @@ import { ISourceCFG, ISource } from '../../types';
 import { TextLayerStyleOptions, TextLayerOptions } from '../../core-layers/text-layer/types';
 import { PointLayerOptions } from '../../core-layers/point-layer/types';
 import { CompositeLayerOptions } from '../../core/composite-layer';
+
 /**
  * 数据配置
  */
@@ -9,6 +10,7 @@ export interface IconLayerSourceOptions extends Pick<ISourceCFG, 'parser' | 'tra
   /** 图标数据 */
   data: any;
 }
+
 export type IconLayerActiveOptions = {
   enable?: boolean;
   /**图标大小 */

@@ -4,7 +4,6 @@ export const LayerEventList: string[] = [
   'add',
   'remove',
   'dataUpdate',
-
   // 鼠标事件
   // 单击事件
   'click',
@@ -23,3 +22,8 @@ export const LayerEventList: string[] = [
   'uncontextmenu',
   'unpick',
 ];
+
+export enum CompositeLayerEvent {
+  ADD = 'add',
+  REMOVE = 'remove',
+}
