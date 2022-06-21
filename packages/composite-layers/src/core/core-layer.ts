@@ -1,5 +1,5 @@
 import EventEmitter from '@antv/event-emitter';
-import { deepMix, isEqual, isUndefined, uniqueId } from '@antv/util';
+import { deepMix, isEqual, isUndefined, uniqueId, omit } from '@antv/util';
 import {
   ICoreLayer,
   ILayer,
@@ -134,6 +134,24 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
    */
   public getDefaultOptions(): Partial<CoreLayerOptions> {
     return CoreLayer.DefaultOptions;
+  }
+
+  /**
+   * 获取创建图层配置项
+   */
+  protected getLayerConfig(): Partial<LayerBaseConfig> {
+    const config = omit<any>(this.options, [
+      'source',
+      'shape',
+      'color',
+      'size',
+      'scale',
+      'texture',
+      'style',
+      'animate',
+      'state',
+    ]);
+    return config;
   }
 
   /**
