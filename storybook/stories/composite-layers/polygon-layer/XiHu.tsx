@@ -492,7 +492,7 @@ const data = {
 
 class XiHu extends Component {
   public scene: Scene | undefined;
-  public choroplethLayer: PolygonLayer | undefined;
+  public polygonLayer: PolygonLayer | undefined;
 
   constructor(props) {
     super(props);
@@ -509,7 +509,8 @@ class XiHu extends Component {
       }),
     });
 
-    this.choroplethLayer = new PolygonLayer({
+    this.polygonLayer = new PolygonLayer({
+      visible: true,
       source: {
         data: data,
       },
@@ -521,7 +522,7 @@ class XiHu extends Component {
       },
     });
 
-    this.scene && this.choroplethLayer.addTo(this.scene);
+    this.scene && this.polygonLayer.addTo(this.scene);
   }
 
   componentDidMount() {
@@ -531,6 +532,12 @@ class XiHu extends Component {
   componentWillUnmount() {
     this.scene && this.scene.destroy();
   }
+
+  update = () => {
+    if (this.scene) {
+      this.polygonLayer?.update({ visible: false });
+    }
+  };
 
   render() {
     return (
@@ -544,7 +551,11 @@ class XiHu extends Component {
           bottom: 0,
         }}
       >
-        <div style={{ position: 'absolute', left: '10px', zIndex: 1 }}></div>
+        <div style={{ position: 'absolute', left: '10px', zIndex: 1 }}>
+          <button type="button" onClick={this.update} style={{ marginTop: 8 }}>
+            update
+          </button>
+        </div>
       </div>
     );
   }

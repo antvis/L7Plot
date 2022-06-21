@@ -416,6 +416,9 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     // 选中描边图层
     this.selectStrokeLayer.update(this.getSelectStrokeLayerOptions());
 
+    // 标注图层
+    this.labelLayer.update(this.getLabelLayerOptions());
+
     // 重置高亮/选中状态
     if (this.options.visible) {
       if (!isUndefined(options.state) && !isEqual(this.lastOptions.state, this.options.state)) {

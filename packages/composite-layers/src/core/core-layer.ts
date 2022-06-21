@@ -230,7 +230,9 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
     this.updateOption(options);
     this.updateConfig(options);
 
-    this.adaptorLayerAttr();
+    if (isUndefined(this.options.visible) || this.options.visible) {
+      this.adaptorLayerAttr();
+    }
   }
 
   /**
