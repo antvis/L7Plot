@@ -1,6 +1,6 @@
 {
   "name": "@antv/l7plot-component",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Components for L7Plot",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
