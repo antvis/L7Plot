@@ -306,10 +306,9 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       return;
     }
     const features = feature ? [feature] : [];
-    this.highlightStrokeLayer.changeData({
-      data: { type: 'FeatureCollection', features },
-      parser: this.source.parser,
-    });
+    const parser = this.source.parser;
+    const data = parser.type === 'geojson' ? { type: 'FeatureCollection', features } : features;
+    this.highlightStrokeLayer.changeData({ data, parser });
     this.highlightData = featureId;
   }
 
@@ -327,8 +326,10 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       return;
     }
     const features = selectData.map(({ feature }) => feature);
-    this.selectFillLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: this.source.parser });
-    this.selectStrokeLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: this.source.parser });
+    const parser = this.source.parser;
+    const data = parser.type === 'geojson' ? { type: 'FeatureCollection', features } : features;
+    this.selectFillLayer.changeData({ data, parser });
+    this.selectStrokeLayer.changeData({ data, parser });
     this.selectData = selectData;
   }
 
@@ -440,6 +441,9 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
 
     // 选中描边图层
     this.selectStrokeLayer.update(this.getSelectStrokeLayerOptions());
+
+    // 标注图层
+    this.labelLayer.update(this.getLabelLayerOptions());
 
     // 重置高亮/选中状态
     if (this.options.visible) {

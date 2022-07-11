@@ -25,6 +25,7 @@ class ChinaCitys extends Component {
       .then((response) => response.json())
       .then((data) => {
         this.choroplethLayer = new ChoroplethLayer({
+          visible: true,
           source: {
             data: data,
             parser: {
@@ -42,6 +43,7 @@ class ChinaCitys extends Component {
           lineOpacity: 1,
           label: {
             field: 'name',
+            visible: true,
             style: {
               fill: '#000',
               opacity: 0.8,
