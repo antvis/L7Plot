@@ -1,10 +1,5 @@
-import { DEFAULT_HIGHLIGHT_COLOR } from '../common/constants';
+import { DEFAULT_HIGHLIGHT_COLOR, EMPTY_GEOJSON_SOURCE } from '../common/constants';
 import { ChoroplethLayerActiveOptions, ChoroplethLayerOptions } from './types';
-
-/**
- * 空值 source
- */
-export const EMPTY_SOURCE = { data: { type: 'FeatureCollection', features: [] }, parser: { type: 'geojson' } };
 
 /**
  * 默认的全部交互状态配置
@@ -32,7 +27,7 @@ export const DEFAULT_STATE: {
  */
 export const DEFAULT_OPTIONS: Partial<ChoroplethLayerOptions> = {
   visible: true,
-  source: EMPTY_SOURCE,
+  source: EMPTY_GEOJSON_SOURCE,
   lineWidth: 1,
   state: {
     active: false,

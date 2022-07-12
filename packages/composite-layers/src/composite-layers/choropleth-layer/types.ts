@@ -1,7 +1,7 @@
 import { PolygonLayerOptions } from '../../core-layers/polygon-layer/types';
-import { TextLayerOptions } from '../../core-layers/text-layer/types';
 import { CompositeLayerOptions } from '../../core/composite-layer';
 import { ISourceCFG, ISource } from '../../types';
+import { LabelOptions } from '../common/types';
 
 /**
  * 数据配置
@@ -63,7 +63,7 @@ export interface ChoroplethLayerOptions extends CompositeLayerOptions {
   /**
    * 文本标注
    */
-  label?: Omit<TextLayerOptions, 'source'>;
+  label?: LabelOptions;
   /**
    * 交互反馈
    */

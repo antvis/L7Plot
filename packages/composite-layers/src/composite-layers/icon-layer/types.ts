@@ -1,7 +1,8 @@
 import { ISourceCFG, ISource } from '../../types';
-import { TextLayerStyleOptions, TextLayerOptions } from '../../core-layers/text-layer/types';
+import { TextLayerStyleOptions } from '../../core-layers/text-layer/types';
 import { PointLayerOptions } from '../../core-layers/point-layer/types';
 import { CompositeLayerOptions } from '../../core/composite-layer';
+import { LabelOptions } from '../common/types';
 
 /**
  * 数据配置
@@ -35,7 +36,7 @@ export interface IconLayerOptions extends CompositeLayerOptions {
    */
   opacity?: number;
   /**
-   * 描边色
+   * 图标名
    */
   icon?: PointLayerOptions['shape'];
   /**
@@ -43,16 +44,17 @@ export interface IconLayerOptions extends CompositeLayerOptions {
    */
   color?: PointLayerOptions['color'];
   /**
-   * 描边线宽
+   * 图标大小
    */
   radius?: PointLayerOptions['size'];
-
+  /**
+   * 图标样式
+   */
   iconStyle?: TextLayerStyleOptions;
-
   /**
    * 文本标注
    */
-  label?: Omit<TextLayerOptions, 'source'>;
+  label?: LabelOptions;
   /**
    * 交互反馈
    */

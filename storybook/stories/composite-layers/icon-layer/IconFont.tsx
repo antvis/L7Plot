@@ -66,7 +66,6 @@ class IconFont extends Component {
               textAnchor: 'center', // 文本相对锚点的位置 center|left|right|top|bottom|top-left
               textOffset: [-10, 10], // 文本相对锚点的偏移量 [水平, 垂直]
               fontFamily: 'iconfont',
-              iconfont: true,
               textAllowOverlap: true,
             },
             color: 'red',

@@ -1,4 +1,4 @@
-import { DEFAULT_HIGHLIGHT_COLOR } from '../common/constants';
+import { DEFAULT_HIGHLIGHT_COLOR, EMPTY_JSON_SOURCE } from '../common/constants';
 import { BubbleLayerActiveOptions, BubbleLayerOptions } from './types';
 
 /**
@@ -25,10 +25,7 @@ export const DEFAULT_STATE: { active: Required<BubbleLayerActiveOptions>; select
  */
 export const DEFAULT_OPTIONS: Partial<BubbleLayerOptions> = {
   visible: true,
-  source: {
-    data: [],
-    parser: { type: 'json', x: 'x', y: 'y' },
-  },
+  source: EMPTY_JSON_SOURCE,
   radius: 12,
   fillColor: '#5FD3A6',
   lineWidth: 1,

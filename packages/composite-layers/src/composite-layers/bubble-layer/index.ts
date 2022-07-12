@@ -7,6 +7,7 @@ import { getDefaultState } from './adaptor';
 import { EMPTY_JSON_SOURCE } from '../common/constants';
 import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
 import { BubbleLayerOptions } from './types';
+import { getLabelLayerOptions } from '../common/label-layer';
 
 export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
   /**
@@ -120,7 +121,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
 
     // 标注图层
     const labelLayer = new TextLayer({
-      ...this.getLabelLayerOptions(),
+      ...getLabelLayerOptions<BubbleLayerOptions>(this.options),
       id: 'labelLayer',
       source,
     });
@@ -240,20 +241,6 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     };
 
     return option;
-  }
-
-  private getLabelLayerOptions() {
-    const { visible, minZoom, maxZoom, zIndex = 0, label } = this.options;
-    const labelVisible = visible && Boolean(label) && (isUndefined(label?.visible) || label?.visible);
-    const options = {
-      zIndex: zIndex + 0.1,
-      minZoom,
-      maxZoom,
-      ...label,
-      visible: labelVisible,
-    };
-
-    return options;
   }
 
   /**
@@ -413,7 +400,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     this.selectStrokeLayer.update(this.getSelectStrokeLayerOptions());
 
     // 标注图层
-    this.labelLayer.update(this.getLabelLayerOptions());
+    this.labelLayer.update(getLabelLayerOptions<BubbleLayerOptions>(this.options));
 
     // 重置高亮/选中状态
     if (this.options.visible) {
