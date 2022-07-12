@@ -1,11 +1,11 @@
 import { CompositeLayer } from '../../core/composite-layer';
 import { TextLayer } from '../../core-layers/text-layer';
 import { PointLayer } from '../../core-layers/point-layer';
-import { LabelService } from '../common/service/label';
 import { IconLayerOptions } from './types';
 import { getDefaultState } from './adaptor';
 import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
-import { ICoreLayer, ISource, MouseEvent } from '../../types';
+import { ICoreLayer } from '../../types';
+import { getLabelLayerOptions } from '../common/label-layer';
 
 export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLayer<T> {
   /**
@@ -20,9 +20,6 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
    * 复合图层类型
    */
   public type = CompositeLayer.LayerType.IconImageLayer;
-
-  protected labelService!: LabelService;
-
   /**
    * 主图层
    */
@@ -41,26 +38,20 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
   public get labelLayer() {
     return this.subLayers.getLayer('labelLayer') as TextLayer;
   }
-
-  constructor(options: T) {
-    super(options);
-    this.initSubLayersEvent();
-    // this.initAssets();
-  }
-
   /**
    * 图层是否具有交互属性
    */
   public interaction = true;
 
+  constructor(options: T) {
+    super(options);
+    // this.initSubLayersEvent();
+  }
+
   /**
    * 创建子图层
    */
   protected abstract initAssets(): void;
-
-  protected initService() {
-    this.labelService = new LabelService(this);
-  }
 
   /**
    * 获取填充图层配置项
@@ -108,7 +99,6 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
   protected createSubLayers(): ICoreLayer[] {
     const source = this.source;
     this.initAssets();
-    this.initService();
     this.layerState = getDefaultState(this.options.state);
     console.log(this.getFillLayerOptions());
     // 映射填充图层
@@ -117,13 +107,18 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
       id: 'fillLayer',
       source,
     });
-    const labelLayer = this.labelService.createLayer();
+    const labelLayer = new TextLayer({
+      ...getLabelLayerOptions<T>(this.options),
+      id: 'labelLayer',
+      source,
+    });
     const subLayers = [fillLayer, labelLayer];
 
     return subLayers;
   }
-  protected updateSubLayers(options: T): void {
+
+  protected updateSubLayers(options: T) {
     this.iconLayer.update(this.getFillLayerOptions());
-    this?.labelService.updateLayer();
+    this.labelLayer.update(getLabelLayerOptions<T>(this.options));
   }
 }

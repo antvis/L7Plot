@@ -14,8 +14,7 @@ export class LineLayer extends CoreLayer<LineLayerOptions> {
    * 创建图层
    */
   protected createLayer(): ILayer {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { source, shape, size, ...config } = this.options;
+    const config = this.getLayerConfig();
     const layer = new L7LineLayer(config);
 
     return layer;

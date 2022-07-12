@@ -7,6 +7,7 @@ import { getDefaultState } from './adaptor';
 import { EMPTY_JSON_SOURCE } from '../common/constants';
 import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
 import { BubbleLayerOptions } from './types';
+import { getLabelLayerOptions } from '../common/label-layer';
 
 export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
   /**
@@ -120,7 +121,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
 
     // 标注图层
     const labelLayer = new TextLayer({
-      ...this.getLabelLayerOptions(),
+      ...getLabelLayerOptions<BubbleLayerOptions>(this.options),
       id: 'labelLayer',
       source,
     });
@@ -242,20 +243,6 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     return option;
   }
 
-  private getLabelLayerOptions() {
-    const { visible, minZoom, maxZoom, zIndex = 0, label } = this.options;
-    const labelVisible = visible && Boolean(label) && (isUndefined(label?.visible) || label?.visible);
-    const options = {
-      zIndex: zIndex + 0.1,
-      minZoom,
-      maxZoom,
-      ...label,
-      visible: labelVisible,
-    };
-
-    return options;
-  }
-
   /**
    * 设置子图层数据
    */
@@ -282,10 +269,9 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
       return;
     }
     const features = feature ? [feature] : [];
-    this.highlightStrokeLayer.changeData({
-      data: features,
-      parser: this.source.parser,
-    });
+    const parser = this.source.parser;
+    const data = parser.type === 'geojson' ? { type: 'FeatureCollection', features } : features;
+    this.highlightStrokeLayer.changeData({ data, parser });
     this.highlightData = featureId;
   }
 
@@ -303,8 +289,10 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
       return;
     }
     const features = selectData.map(({ feature }) => feature);
-    this.selectFillLayer.changeData({ data: features, parser: this.source.parser });
-    this.selectStrokeLayer.changeData({ data: features, parser: this.source.parser });
+    const parser = this.source.parser;
+    const data = parser.type === 'geojson' ? { type: 'FeatureCollection', features } : features;
+    this.selectFillLayer.changeData({ data, parser });
+    this.selectStrokeLayer.changeData({ data, parser });
     this.selectData = selectData;
   }
 
@@ -410,6 +398,9 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
 
     // 选中描边图层
     this.selectStrokeLayer.update(this.getSelectStrokeLayerOptions());
+
+    // 标注图层
+    this.labelLayer.update(getLabelLayerOptions<BubbleLayerOptions>(this.options));
 
     // 重置高亮/选中状态
     if (this.options.visible) {
