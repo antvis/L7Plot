@@ -31,3 +31,6 @@ export * from './composite-layers/bubble-layer/types';
 // 区域图层及类型定义 | author by [yunji]](https://github.com/lvisei)
 export { ChoroplethLayer } from './composite-layers/choropleth-layer';
 export * from './composite-layers/choropleth-layer/types';
+// 标注图层及类型定义 | author by [lzxue]](https://github.com/lzxue)
+export { IconFontLayer, IconImageLayer } from './composite-layers/icon-layer';
+export * from './composite-layers/icon-layer/types';

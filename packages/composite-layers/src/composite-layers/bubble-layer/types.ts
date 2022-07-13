@@ -1,7 +1,7 @@
 import { PointLayerOptions } from '../../core-layers/point-layer/types';
-import { TextLayerOptions } from '../../core-layers/text-layer/types';
 import { CompositeLayerOptions } from '../../core/composite-layer';
 import { ISource, SourceOptions } from '../../types';
+import { LabelOptions } from '../common/types';
 
 export type BubbleLayerActiveOptions = {
   /** 填充颜色 */
@@ -46,7 +46,7 @@ export interface BubbleLayerOptions extends CompositeLayerOptions {
   /**
    * 文本标注
    */
-  label?: Omit<TextLayerOptions, 'source'>;
+  label?: LabelOptions;
   /**
    * 交互反馈
    */
