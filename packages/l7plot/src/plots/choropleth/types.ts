@@ -122,12 +122,28 @@ export type Drill = {
   ) => void;
 };
 
+/**
+ * 业务自定义获取geo data 数据 参数类型
+ */
+ export interface CustomFetchGeoDataParams {
+  url: string;
+  level: string;
+  adcode: string | number;
+  granularity: string;
+  extension: string;
+}
+
 /** 行政区域图的配置类型定义 */
 export interface ChoroplethOptions extends PlotOptions, AreaLayerOptions {
   /**
    * 行政地理数据地址
    */
   geoArea?: string | GeoArea;
+
+  /**
+   * 自定义获取行政地理数据接口
+   */
+  customFetchGeoData?: (params: CustomFetchGeoDataParams) => Promise<any>;
 
   /**
    * 具体的数据
