@@ -417,15 +417,9 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     if (cacheArea) return cacheArea;
     const { url, type, extension } = getGeoAreaConfig(this.options.geoArea);
 
-    let data;
+    let data: any;
     if (this.options.customFetchGeoData) {
-      data = await this.options.customFetchGeoData({
-        url,
-        level,
-        adcode,
-        granularity,
-        extension,
-      });
+      data = await this.options.customFetchGeoData({ url, level, adcode, granularity, extension });
     } else {
       const response = await fetch(`${url}/${level}/${fileName}.${extension}`);
       data = await response.json();

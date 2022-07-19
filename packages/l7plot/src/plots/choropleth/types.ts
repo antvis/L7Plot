@@ -125,13 +125,13 @@ export type Drill = {
 /**
  * 业务自定义获取geo data 数据 参数类型
  */
- export interface CustomFetchGeoDataParams {
+export type CustomFetchGeoDataParams = {
   url: string;
   level: string;
   adcode: string | number;
   granularity: string;
   extension: string;
-}
+};
 
 /** 行政区域图的配置类型定义 */
 export interface ChoroplethOptions extends PlotOptions, AreaLayerOptions {
