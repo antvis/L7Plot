@@ -1,6 +1,6 @@
 {
   "name": "@antv/l7plot",
-  "version": "0.0.13",
+  "version": "0.1.0",
   "description": "Geospatial Visualization Chart Library",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
@@ -47,7 +47,7 @@
   "dependencies": {
     "@antv/event-emitter": "^0.1.2",
     "@antv/l7": "^2.9.14",
-    "@antv/l7plot-component": "^0.0.7",
+    "@antv/l7plot-component": "^0.0.8",
     "@antv/util": "^2.0.13",
     "lodash-es": "^4.17.21",
     "topojson-client": "^3.1.0"
