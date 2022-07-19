@@ -222,7 +222,7 @@ DrillStepConfig 配置如下：
 
 `(params: CustomFetchGeoDataParams) => Promise<any>` optional
 
-业务自定义获取 geo 数据方法。
+自定义获取 geo 数据方法。
 
 ## 二、属性
 
