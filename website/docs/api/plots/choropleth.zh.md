@@ -218,6 +218,12 @@ DrillStepConfig 配置如下：
 
 `markdown:docs/common/attribute/components.zh.md`
 
+### `options.`customFetchGeoData
+
+`(params: CustomFetchGeoDataParams) => Promise<any>` optional
+
+自定义获取 geo 数据方法。
+
 ## 二、属性
 
 继承 [Plot 属性](/zh/docs/api/plot-api#二、属性)。

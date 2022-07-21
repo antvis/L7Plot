@@ -1,9 +1,10 @@
 {
   "name": "@antv/l7plot",
-  "version": "0.0.11",
+  "version": "0.1.0",
   "description": "Geospatial Visualization Chart Library",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
+  "module": "dist/esm/index.js",
   "unpkg": "dist/umd/l7plot.min.js",
   "files": [
     "dist"
@@ -16,7 +17,7 @@
     "prettier": "prettier src __tests__ -c -w",
     "typedoc": "typedoc",
     "clean": "rimraf dist",
-    "build": "yarn run clean && yarn run build:cjs",
+    "build": "yarn run clean && yarn run build:cjs && yarn run build:esm",
     "build:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib",
     "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm",
     "build:umd": "rollup -c rollup.config.js"
@@ -45,14 +46,14 @@
   },
   "dependencies": {
     "@antv/event-emitter": "^0.1.2",
-    "@antv/l7": "^2.7.22",
-    "@antv/l7plot-component": "0.0.5",
+    "@antv/l7": "^2.9.14",
+    "@antv/l7plot-component": "^0.0.8",
     "@antv/util": "^2.0.13",
     "lodash-es": "^4.17.21",
     "topojson-client": "^3.1.0"
   },
   "peerDependencies": {
-    "@antv/l7": "^2.7.22"
+    "@antv/l7": "^2.9.14"
   },
   "publishConfig": {
     "access": "public"

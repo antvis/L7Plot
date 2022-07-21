@@ -6,7 +6,9 @@ import { TextLayer } from '../../core-layers/text-layer';
 import { getDefaultState } from './adaptor';
 import { ChoroplethLayerOptions, ChoroplethLayerSourceOptions } from './types';
 import { ICoreLayer, ISource, MouseEvent } from '../../types';
-import { DEFAULT_OPTIONS, DEFAULT_STATE, EMPTY_SOURCE } from './constants';
+import { EMPTY_GEOJSON_SOURCE } from '../common/constants';
+import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
+import { getLabelLayerOptions } from '../common/label-layer';
 
 export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   /**
@@ -23,10 +25,6 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   protected get layer() {
     return this.fillLayer;
   }
-  /**
-   * 图层间共享 source 实例
-   */
-  public source!: ISource;
   /**
    * 填充面图层
    */
@@ -96,9 +94,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
    * 创建子图层
    */
   protected createSubLayers() {
-    const sourceOptions = this.options.source;
-    const source = this.isSourceInstance(sourceOptions) ? sourceOptions : this.createSource(sourceOptions);
-    this.source = source;
+    const source = this.source;
     this.layerState = getDefaultState(this.options.state);
 
     // 映射填充面图层
@@ -139,7 +135,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
 
     // 标注图层
     const labelLayer = new TextLayer({
-      ...this.getLabelLayerOptions(),
+      ...getLabelLayerOptions<ChoroplethLayerOptions>(this.options),
       id: 'labelLayer',
       source,
     });
@@ -221,7 +217,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
-      source: EMPTY_SOURCE,
+      source: EMPTY_GEOJSON_SOURCE,
       size: size,
       color: color,
       style: { opacity: defaultState.active.lineOpacity },
@@ -241,7 +237,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
-      source: EMPTY_SOURCE,
+      source: EMPTY_GEOJSON_SOURCE,
       color,
       style: fillStyle,
       state: { select: false, active: false },
@@ -261,27 +257,13 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       zIndex: zIndex + 0.1,
       minZoom,
       maxZoom,
-      source: EMPTY_SOURCE,
+      source: EMPTY_GEOJSON_SOURCE,
       size,
       color,
       style: { opacity: defaultState.select.lineOpacity },
     };
 
     return option;
-  }
-
-  private getLabelLayerOptions() {
-    const { visible, minZoom, maxZoom, zIndex = 0, label } = this.options;
-    const labelVisible = visible && Boolean(label) && (isUndefined(label?.visible) || label?.visible);
-    const options = {
-      zIndex: zIndex + 0.1,
-      minZoom,
-      maxZoom,
-      ...label,
-      visible: labelVisible,
-    };
-
-    return options;
   }
 
   /**
@@ -298,9 +280,9 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       this.source.setData(data, option);
     }
 
-    this.highlightStrokeLayer.changeData(EMPTY_SOURCE);
-    this.selectFillLayer.changeData(EMPTY_SOURCE);
-    this.selectStrokeLayer.changeData(EMPTY_SOURCE);
+    this.highlightStrokeLayer.changeData(EMPTY_GEOJSON_SOURCE);
+    this.selectFillLayer.changeData(EMPTY_GEOJSON_SOURCE);
+    this.selectStrokeLayer.changeData(EMPTY_GEOJSON_SOURCE);
   }
 
   /**
@@ -311,10 +293,9 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       return;
     }
     const features = feature ? [feature] : [];
-    this.highlightStrokeLayer.changeData({
-      data: { type: 'FeatureCollection', features },
-      parser: this.source.parser,
-    });
+    const parser = this.source.parser;
+    const data = parser.type === 'geojson' ? { type: 'FeatureCollection', features } : features;
+    this.highlightStrokeLayer.changeData({ data, parser });
     this.highlightData = featureId;
   }
 
@@ -332,8 +313,10 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       return;
     }
     const features = selectData.map(({ feature }) => feature);
-    this.selectFillLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: this.source.parser });
-    this.selectStrokeLayer.changeData({ data: { type: 'FeatureCollection', features }, parser: this.source.parser });
+    const parser = this.source.parser;
+    const data = parser.type === 'geojson' ? { type: 'FeatureCollection', features } : features;
+    this.selectFillLayer.changeData({ data, parser });
+    this.selectStrokeLayer.changeData({ data, parser });
     this.selectData = selectData;
   }
 
@@ -423,7 +406,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
    * 更新: 更新配置
    */
   public updateOption(options: Partial<ChoroplethLayerOptions>) {
-    super.update(options);
+    super.updateOption(options);
     this.layerState = getDefaultState(this.options.state);
   }
 
@@ -445,6 +428,9 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
 
     // 选中描边图层
     this.selectStrokeLayer.update(this.getSelectStrokeLayerOptions());
+
+    // 标注图层
+    this.labelLayer.update(getLabelLayerOptions<ChoroplethLayerOptions>(this.options));
 
     // 重置高亮/选中状态
     if (this.options.visible) {

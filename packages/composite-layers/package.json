@@ -1,6 +1,6 @@
 {
   "name": "@antv/l7-composite-layers",
-  "version": "0.0.1-alpha.5",
+  "version": "0.1.0-alpha.2",
   "description": "Composite layer for @antv/l7",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
@@ -48,7 +48,7 @@
     "kdbush": "^3.0.0"
   },
   "peerDependencies": {
-    "@antv/l7": "^2.7.22"
+    "@antv/l7": "^2.9.14"
   },
   "publishConfig": {
     "access": "public"

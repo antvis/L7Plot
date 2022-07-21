@@ -2,7 +2,7 @@ import { deepMix, uniqueId } from '@antv/util';
 import EventEmitter from '@antv/event-emitter';
 import Source from '@antv/l7-source';
 import { Scene, SourceOptions, ICompositeLayer, CompositeLayerType, LayerBlend, ICoreLayer, ISource } from '../types';
-import { LayerEventList } from './constants';
+import { CompositeLayerEvent, LayerEventList } from './constants';
 import { LayerGroup } from './layer-group';
 
 /**
@@ -80,6 +80,11 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    */
   public abstract readonly interaction: boolean;
   /**
+   * 图层间共享 source 实例
+   */
+  public source!: ISource;
+
+  /**
    * 子图层组
    */
   public subLayers: LayerGroup;
@@ -91,7 +96,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     this.name = name ? name : this.id;
     this.options = deepMix({}, this.getDefaultOptions(), options);
     this.lastOptions = this.options;
-
+    this.source = this.createSource();
     const layers = this.createSubLayers();
     this.subLayers = new LayerGroup(layers);
   }
@@ -104,11 +109,13 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   }
 
   /**
-   * 创建 source 工具方法
+   * 创建图层间共享 source 方法
    */
-  protected createSource(sourceOptions: SourceOptions) {
+  protected createSource() {
+    const sourceOptions = this.options.source;
+
     const { data, ...sourceCFG } = sourceOptions;
-    const source = new Source(data, sourceCFG);
+    const source = this.isSourceInstance(sourceOptions) ? sourceOptions : new Source(data, sourceCFG);
     return source;
   }
 
@@ -147,6 +154,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   public addTo(scene: Scene) {
     this.scene = scene;
     this.subLayers.addTo(scene);
+    this.emit(CompositeLayerEvent.ADD);
   }
 
   /**
@@ -155,6 +163,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   public remove() {
     if (!this.scene) return;
     this.subLayers.remove();
+    this.emit(CompositeLayerEvent.REMOVE);
   }
 
   /**

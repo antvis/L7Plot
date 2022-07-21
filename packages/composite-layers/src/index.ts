@@ -35,3 +35,7 @@ export * from './composite-layers/choropleth-layer/types';
 // 客流走向图层及类型定义 | author by [yanxiong](https://github.com/heiyexing)
 export { TrafficFlowLayer } from './composite-layers/traffic-flow-layer';
 export * from './composite-layers/traffic-flow-layer/types';
+
+// 标注图层及类型定义 | author by [lzxue]](https://github.com/lzxue)
+export { IconFontLayer, IconImageLayer } from './composite-layers/icon-layer';
+export * from './composite-layers/icon-layer/types';
