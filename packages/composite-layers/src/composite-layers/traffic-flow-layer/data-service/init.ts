@@ -153,10 +153,10 @@ export function initOriginData(data: any[], fieldGetterOptions: FieldGetter): Lo
         createFlowItem(
           {
             id: id ? id : createUuid(),
+            childIds: [],
             isCluster: false,
             originData: [item],
             weight,
-            childIds: [],
           },
           fromLocation,
           toLocation

@@ -20,7 +20,7 @@ export interface TrafficFlowLayerOptions<DataType = any> extends CompositeLayerO
   /**
    * 聚合点图层其他配置
    */
-  pointConfig?: Partial<PointLayerOptions>;
+  pointConfig?: Omit<Partial<PointLayerOptions>, 'size' | 'color'>;
 
   /**
    * 聚合线图层颜色配置
@@ -35,7 +35,7 @@ export interface TrafficFlowLayerOptions<DataType = any> extends CompositeLayerO
   /**
    * 聚合线图层其他配置
    */
-  lineConfig?: Partial<LineLayerOptions>;
+  lineConfig?: Omit<Partial<LineLayerOptions>, 'size' | 'color'>;
 
   /**
    * 聚合相关配置
@@ -55,9 +55,9 @@ export interface TrafficFlowLayerOptions<DataType = any> extends CompositeLayerO
   };
 
   /**
-   * 当前层级的绘制物 > hideLimit 时，会隐藏起终点均不在屏幕内的聚合点及其对应的聚合线
+   * 当前层级的绘制物 > overflowHideLimit 时，会隐藏起终点均不在屏幕内的聚合点及其对应的聚合线
    */
-  hideLimit: number;
+  overflowHideLimit: number;
 }
 
 /**

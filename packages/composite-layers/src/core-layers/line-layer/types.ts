@@ -6,7 +6,7 @@ import { ShapeAttr } from '../../types';
  */
 export type ArcLineShape = 'arc' | 'arc3d' | 'greatcircle';
 
-export type LineShape = 'line' | ArcLineShape;
+export type LineShape = 'line' | 'halfLine' | ArcLineShape;
 
 /**
  * 线图层 线类型

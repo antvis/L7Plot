@@ -97,7 +97,10 @@ export class DataService {
     const targetLevel = this.locationFlowLevels.find((item) => item.zoom === zoom)!;
     const { locations, locationTree, flows } = targetLevel;
     const locationIndexes = targetLevel.locationTree.range(lng2X(lng1), lat2Y(lat2), lng2X(lng2), lat2Y(lat1));
-    if (locationIndexes.length === locations.length || locations.length + flows.length < this.options.hideLimit) {
+    if (
+      locationIndexes.length === locations.length ||
+      locations.length + flows.length < this.options.overflowHideLimit
+    ) {
       displayLocations = locations;
       displayFlows = flows;
     } else if (locationIndexes.length > 0) {
@@ -111,6 +114,48 @@ export class DataService {
       ...targetLevel,
       displayFlows,
       displayLocations,
+    };
+  }
+
+  getTargetOriginData(id: string, zoom: number, type: 'location' | 'flow'): LocationItem | FlowItem | null {
+    const targetLevelIndex = this.locationFlowLevels.findIndex((item) => item.zoom === zoom);
+    if (targetLevelIndex < 0) {
+      return null;
+    }
+    const { locationMap, flowMap } = this.locationFlowLevels[targetLevelIndex]!;
+    const map = type === 'location' ? locationMap : flowMap;
+    // const map =
+    const targetItem = map.get(id);
+    if (!targetItem) {
+      return null;
+    }
+    const originData: any[] = targetItem.isCluster ? [] : [...targetItem.originData];
+    if (targetItem.isCluster) {
+      const clusterIds: string[] = [...(targetItem.childIds ?? [])];
+      let levelIndex = targetLevelIndex;
+      while (clusterIds.length && levelIndex >= 0) {
+        const { locationMap, flowMap } = this.locationFlowLevels[levelIndex]!;
+        const map = type === 'location' ? locationMap : flowMap;
+        for (let index = 0; index < clusterIds.length; index++) {
+          const id = clusterIds[index];
+          const target = map.get(id);
+          if (target) {
+            clusterIds.splice(index, 1);
+            index--;
+            if (target.isCluster) {
+              clusterIds.push(...(target.childIds ?? []));
+            } else {
+              originData.push(...target.originData);
+            }
+          }
+        }
+        levelIndex--;
+      }
+    }
+
+    return {
+      ...targetItem,
+      originData: Array.from(new Set(originData)),
     };
   }
 }

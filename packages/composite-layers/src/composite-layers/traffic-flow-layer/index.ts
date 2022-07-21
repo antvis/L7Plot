@@ -2,11 +2,13 @@ import { CompositeLayer } from '../../core/composite-layer';
 import { BBox, DataServiceOptions, TrafficFlowLayerOptions } from './types';
 import { DEFAULT_OPTIONS, FLOW_LAYER_ID, LOCATION_LAYER_ID } from './constants';
 import { ICoreLayer } from '../../types';
-import { PointLayer, PointLayerOptions } from '../../core-layers/point-layer';
-import { LineLayer, LineLayerOptions } from '../../core-layers/line-layer';
+import { PointLayer } from '../../core-layers/point-layer';
+import { LineLayer } from '../../core-layers/line-layer';
 import { DataService } from './data-service';
 import { Scene } from '@antv/l7-scene';
-import { debounce } from '@antv/util';
+import { debounce } from 'lodash-es';
+import { LineLayerOptions } from '../../core-layers/line-layer/types';
+import { PointLayerOptions } from '../../core-layers/point-layer/types';
 
 export type { TrafficFlowLayerOptions };
 
@@ -31,6 +33,11 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
    * @protected
    */
   protected dataService: DataService;
+
+  /**
+   * 当前展示哪一层级下的数据
+   */
+  protected matchZoom = 0;
 
   constructor(options: TrafficFlowLayerOptions) {
     super(options);
@@ -80,7 +87,7 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
     const flowLayer = new LineLayer({
       ...this.getFlowLayerOptions(),
       id: FLOW_LAYER_ID,
-      shape: 'line',
+      shape: 'halfLine',
       source: { data: [] },
     });
 
@@ -116,7 +123,8 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
    * @private
    */
   private getDataServiceOptions(): DataServiceOptions<DataType> {
-    const { pointColor, pointSize, lineColor, lineSize, fieldGetter, cluster, source, hideLimit } = this.options;
+    const { pointColor, pointSize, lineColor, lineSize, fieldGetter, cluster, source, overflowHideLimit } =
+      this.options;
     return {
       cluster,
       location: {
@@ -128,7 +136,7 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
         size: lineSize,
       },
       fieldGetter,
-      hideLimit,
+      overflowHideLimit,
       data: source.data,
     };
   }
@@ -142,11 +150,11 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
       if (!this.scene) {
         return;
       }
+      this.matchZoom = this.dataService.getMatchZoom(this.scene.getZoom());
       const { displayFlows, displayLocations, locationStyle, flowStyle } = this.dataService.getZoomData(
         this.scene.getBounds().flat() as BBox,
-        this.dataService.getMatchZoom(this.scene.getZoom())
+        this.matchZoom
       );
-
       this.updateSubLayers({
         pointConfig: {
           ...locationStyle,
@@ -175,7 +183,7 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
       });
     },
     50,
-    false
+    {}
   );
 
   /**
@@ -191,12 +199,19 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
         this.locationLayer.changeData(pointConfig.source);
       }
     }
-
     if (lineConfig) {
       this.flowLayer.update(lineConfig);
       if (lineConfig.source) {
         this.flowLayer.changeData(lineConfig.source);
       }
     }
+  }
+
+  public getLocationData(id: string) {
+    return this.dataService.getTargetOriginData(id, this.matchZoom, 'location');
+  }
+
+  public getFlowData(id: string) {
+    return this.dataService.getTargetOriginData(id, this.matchZoom, 'flow');
   }
 }

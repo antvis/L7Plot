@@ -14,11 +14,11 @@ export const DEFAULT_OPTIONS: Partial<TrafficFlowLayerOptions> = {
   lineColor: DEFAULT_COLOR_1,
   lineSize: [1, 10],
   lineConfig: {
-    shape: 'line',
+    shape: 'halfLine',
   },
   cluster: DEFAULT_CLUSTER_OPTIONS,
   fieldGetter: DEFAULT_FIELD_GETTER_OPTIONS,
-  hideLimit: 5000,
+  overflowHideLimit: 5000,
 };
 
 /**

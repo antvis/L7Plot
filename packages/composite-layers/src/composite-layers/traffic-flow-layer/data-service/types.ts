@@ -58,7 +58,13 @@ export interface HCAClusterOptions extends BaseClusterOptions {
   clusterLevel: number;
 }
 
-export type ClusterOptions = BaseClusterOptions | HCAClusterOptions;
+export interface H3ClusterOptions extends BaseClusterOptions {
+  clusterType: 'H3';
+  // 聚合力度
+  clusterLevel: number;
+}
+
+export type ClusterOptions = BaseClusterOptions | HCAClusterOptions | H3ClusterOptions;
 
 export type FieldGetter<DataType = any> = {
   fromLng: Getter<DataType, number>;
@@ -77,7 +83,7 @@ export interface DataServiceOptions<DataType = any> {
   flow: ClusterStyle;
   data: any[];
   fieldGetter: FieldGetter<DataType>;
-  hideLimit: number;
+  overflowHideLimit: number;
 }
 
 /**
@@ -109,7 +115,7 @@ export type FlowItem<DataType = any> = {
   toLat: number; // 终点维度
   weight: number; // 权重
   isCluster?: boolean; // 是否为聚合线路
-  childIds?: string[]; // 作为聚合线路被创建时，被聚合的子线路id数组
+  childIds: string[]; // 作为聚合线路被创建时，被聚合的子线路id数组
   originData: DataType[]; // 原始数据Item
 };
 
@@ -119,6 +125,7 @@ export type LocationFlow<DataType = any> = {
 };
 
 export type LocationMap = Map<string, LocationItem>;
+export type FlowMap = Map<string, FlowItem>;
 
 export type LocationLevel = {
   locations: LocationItem[];
@@ -130,6 +137,7 @@ export type LocationLevel = {
 export type FlowLevel = {
   zoom: number;
   flows: FlowItem[];
+  flowMap: FlowMap;
 };
 
 export type StyleLevel = {

@@ -47,8 +47,8 @@ export function getStyleLevels(itemLevels: (LocationLevel | FlowLevel)[], cluste
         color: {
           field: 'weight',
           value: ({ weight }) => {
-            // console.log(`%c ${colorScaleMethod(weight)}`, `color: ${colorScaleMethod(weight)}`);
-            return colorScaleMethod(weight);
+            const color = colorScaleMethod(weight);
+            return color;
           },
         },
       });

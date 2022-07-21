@@ -1,4 +1,4 @@
-import { FlowItem, FlowLevel, LocationLevel, LocationMap } from '../types';
+import { FlowItem, FlowLevel, FlowMap, LocationLevel, LocationMap } from '../types';
 import { createUuid } from '../utils';
 import { createFlowItem } from '../init';
 
@@ -19,16 +19,18 @@ export function getFlowLevels(flows: FlowItem[], locationLevels: LocationLevel[]
     {
       zoom: oldZoom,
       flows: oldFlows,
+      flowMap: new Map(oldFlows.map((flow) => [flow.id, flow])),
     },
   ];
 
   for (let index = 1; index < locationLevels.length; index++) {
     const { zoom: newZoom, locationMap: newLocationMap } = locationLevels[index];
-    const newFlows = getFlows(oldFlows, oldLocationMap, newLocationMap, newZoom);
+    const { flows: newFlows, flowMap: newFlowMap } = getFlows(oldFlows, oldLocationMap, newLocationMap, newZoom);
 
     flowLevels.push({
       zoom: newZoom,
       flows: newFlows,
+      flowMap: newFlowMap,
     });
 
     oldFlows = newFlows;
@@ -48,7 +50,7 @@ export function getFlowLevels(flows: FlowItem[], locationLevels: LocationLevel[]
 export function getFlows(oldFlows: FlowItem[], oldLocationMap: LocationMap, newLocationMap: LocationMap, zoom: number) {
   const newFLows: FlowItem[] = [];
   // 用于存储相同起终点的flows，如果每条flows长度 > 1，则需要聚合
-  const flowsMap = new Map<string, FlowItem[]>();
+  const positionFlowMap = new Map<string, FlowItem[]>();
   for (const flow of oldFlows) {
     let newFlow = flow;
     const { fromId, toId } = newFlow;
@@ -78,10 +80,10 @@ export function getFlows(oldFlows: FlowItem[], oldLocationMap: LocationMap, newL
         }
       }
       if (fromLocation && toLocation) {
+        // const hasLocationChange = fromId !== fromLocation.id || toId !== toLocation.id;
         newFlow = createFlowItem(
           {
             ...flow,
-            id: createUuid(),
           },
           fromLocation,
           toLocation
@@ -90,29 +92,35 @@ export function getFlows(oldFlows: FlowItem[], oldLocationMap: LocationMap, newL
     }
     if (newFlow.fromId !== newFlow.toId) {
       const key = `${newFlow.fromId},${newFlow.toId}`;
-      flowsMap.set(key, (flowsMap.get(key) ?? []).concat(newFlow));
+      positionFlowMap.set(key, (positionFlowMap.get(key) ?? []).concat(newFlow));
     }
   }
-  flowsMap.forEach((flowList) => {
+  const newFlowMap: FlowMap = new Map();
+  positionFlowMap.forEach((flowList) => {
     // 当起终点相同的flows长度 > 1时，则需要进行线路聚合。
     if (flowList.length > 1) {
       const { fromId, toId, fromLat, toLat, fromLng, toLng } = flowList[0];
-      newFLows.push(
-        createFlowItem(
-          {
-            id: createUuid(),
-            isCluster: true,
-            originData: [],
-            weight: flowList.map((link) => link.weight).reduce((a, b) => a + b, 0),
-            childIds: flowList.map((flow) => flow.id),
-          },
-          { id: fromId, lng: fromLng, lat: fromLat },
-          { id: toId, lng: toLng, lat: toLat }
-        )
+      const clusterFlow = createFlowItem(
+        {
+          childIds: flowList.map((flow) => flow.id),
+          id: createUuid(),
+          isCluster: true,
+          originData: [],
+          weight: flowList.map((link) => link.weight).reduce((a, b) => a + b, 0),
+        },
+        { id: fromId, lng: fromLng, lat: fromLat },
+        { id: toId, lng: toLng, lat: toLat }
       );
+      newFLows.push(clusterFlow);
+      newFlowMap.set(clusterFlow.id, clusterFlow);
     } else if (flowList[0]) {
-      newFLows.push(flowList[0]);
+      const firstChildFlow = flowList[0]!;
+      newFLows.push(firstChildFlow);
+      newFlowMap.set(firstChildFlow.id, firstChildFlow);
     }
   });
-  return newFLows.sort((a, b) => a.weight - b.weight);
+  return {
+    flows: newFLows.sort((a, b) => a.weight - b.weight),
+    flowMap: newFlowMap,
+  };
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Scene, GaodeMapV2 } from '@antv/l7';
-import { TrafficFlowLayer } from '@antv/l7-composite-layers';
+import { FlowItem, LocationItem, TrafficFlowLayer } from '@antv/l7-composite-layers';
 
 class OdData extends Component {
   public scene: Scene | undefined;
@@ -27,10 +27,10 @@ class OdData extends Component {
       const data = await response.json();
 
       const trafficFlowLayer = new TrafficFlowLayer({
-        hideLimit: 5000,
+        overflowHideLimit: 5000,
         pointColor: {
           scaleType: 'linear',
-          value: ['#045275', '#f7feae'],
+          value: ['rgb(0,69,105)', '#f7feae'],
         },
         pointSize: {
           scaleType: 'linear',
@@ -45,15 +45,15 @@ class OdData extends Component {
         },
         lineColor: {
           scaleType: 'linear',
-          value: ['#045275', '#f7feae'],
+          value: ['rgba(0,69,105,0.4)', '#f7feae'],
         },
         lineSize: {
           scaleType: 'linear',
           value: [2, 8],
         },
         lineConfig: {
+          shape: 'halfLine',
           style: {
-            opacity: 0.6,
             arrow: {
               enable: true,
               arrowWidth: 3,
@@ -65,7 +65,7 @@ class OdData extends Component {
         cluster: {
           clusterType: 'HCA',
           zoomStep: 1,
-          clusterLevel: 10,
+          clusterLevel: 20,
         },
         fieldGetter: {
           fromLng: 'f_lon',
@@ -75,10 +75,22 @@ class OdData extends Component {
           weight: 'weight',
         },
         source: {
+          // data,
           data,
+          // data: data.slice(0, 100),
         },
       });
       this.scene && trafficFlowLayer.addTo(this.scene);
+
+      trafficFlowLayer.locationLayer.on('click', (e: any) => {
+        const { id } = e.feature as LocationItem;
+        console.log(trafficFlowLayer.getLocationData(id));
+      });
+
+      trafficFlowLayer.flowLayer.on('click', (e) => {
+        const { id } = e.feature as FlowItem;
+        console.log(trafficFlowLayer.getFlowData(id));
+      });
     });
   }
 
@@ -100,6 +112,7 @@ class OdData extends Component {
           left: 0,
           right: 0,
           bottom: 0,
+          overflow: 'hidden',
         }}
       ></div>
     );
