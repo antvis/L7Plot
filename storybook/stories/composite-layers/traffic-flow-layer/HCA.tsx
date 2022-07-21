@@ -82,15 +82,15 @@ class OdData extends Component {
       });
       this.scene && trafficFlowLayer.addTo(this.scene);
 
-      trafficFlowLayer.locationLayer.on('click', (e: any) => {
-        const { id } = e.feature as LocationItem;
-        console.log(trafficFlowLayer.getLocationData(id));
-      });
-
-      trafficFlowLayer.flowLayer.on('click', (e) => {
-        const { id } = e.feature as FlowItem;
-        console.log(trafficFlowLayer.getFlowData(id));
-      });
+      // trafficFlowLayer.locationLayer.on('click', (e: any) => {
+      //   const { id } = e.feature as LocationItem;
+      //   console.log(trafficFlowLayer.getLocationData(id));
+      // });
+      //
+      // trafficFlowLayer.flowLayer.on('click', (e) => {
+      //   const { id } = e.feature as FlowItem;
+      //   console.log(trafficFlowLayer.getFlowData(id));
+      // });
     });
   }
 
