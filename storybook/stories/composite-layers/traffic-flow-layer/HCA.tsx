@@ -27,7 +27,7 @@ class OdData extends Component {
       const data = await response.json();
 
       const trafficFlowLayer = new TrafficFlowLayer({
-        overflowHideLimit: 5000,
+        overflowLimit: 5000,
         pointColor: {
           scaleType: 'linear',
           value: ['rgb(0,69,105)', '#f7feae'],

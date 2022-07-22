@@ -97,10 +97,7 @@ export class DataService {
     const targetLevel = this.locationFlowLevels.find((item) => item.zoom === zoom)!;
     const { locations, locationTree, flows } = targetLevel;
     const locationIndexes = targetLevel.locationTree.range(lng2X(lng1), lat2Y(lat2), lng2X(lng2), lat2Y(lat1));
-    if (
-      locationIndexes.length === locations.length ||
-      locations.length + flows.length < this.options.overflowHideLimit
-    ) {
+    if (locationIndexes.length === locations.length || locations.length + flows.length < this.options.overflowLimit) {
       displayLocations = locations;
       displayFlows = flows;
     } else if (locationIndexes.length > 0) {

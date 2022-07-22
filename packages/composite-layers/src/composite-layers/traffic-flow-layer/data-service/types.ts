@@ -83,7 +83,7 @@ export interface DataServiceOptions<DataType = any> {
   flow: ClusterStyle;
   data: any[];
   fieldGetter: FieldGetter<DataType>;
-  overflowHideLimit: number;
+  overflowLimit: number;
 }
 
 /**

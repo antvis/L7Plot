@@ -8,6 +8,23 @@ import { ClusterColor, ClusterSize, FieldGetter, ClusterOptions } from './data-s
  */
 export interface TrafficFlowLayerOptions<DataType = any> extends CompositeLayerOptions {
   /**
+   * 传入OD数据数据
+   */
+  source: {
+    data: DataType[];
+  };
+
+  /**
+   * 聚合点图层其他配置
+   */
+  pointConfig?: Partial<PointLayerOptions>;
+
+  /**
+   * 聚合线图层其他配置
+   */
+  lineConfig?: Partial<LineLayerOptions>;
+
+  /**
    * 聚合点图层颜色配置
    */
   pointColor: ClusterColor;
@@ -16,11 +33,6 @@ export interface TrafficFlowLayerOptions<DataType = any> extends CompositeLayerO
    * 聚合点图层大小配置
    */
   pointSize: ClusterSize;
-
-  /**
-   * 聚合点图层其他配置
-   */
-  pointConfig?: Omit<Partial<PointLayerOptions>, 'size' | 'color'>;
 
   /**
    * 聚合线图层颜色配置
@@ -33,11 +45,6 @@ export interface TrafficFlowLayerOptions<DataType = any> extends CompositeLayerO
   lineSize: ClusterSize;
 
   /**
-   * 聚合线图层其他配置
-   */
-  lineConfig?: Omit<Partial<LineLayerOptions>, 'size' | 'color'>;
-
-  /**
    * 聚合相关配置
    */
   cluster: ClusterOptions;
@@ -48,16 +55,9 @@ export interface TrafficFlowLayerOptions<DataType = any> extends CompositeLayerO
   fieldGetter: FieldGetter<DataType>;
 
   /**
-   * 传入OD数据数据
+   * 当前层级的绘制物 > overflowLimit 时，会隐藏起终点均不在屏幕内的聚合点及其对应的聚合线
    */
-  source: {
-    data: DataType[];
-  };
-
-  /**
-   * 当前层级的绘制物 > overflowHideLimit 时，会隐藏起终点均不在屏幕内的聚合点及其对应的聚合线
-   */
-  overflowHideLimit: number;
+  overflowLimit: number;
 }
 
 /**

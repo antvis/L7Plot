@@ -123,8 +123,7 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
    * @private
    */
   private getDataServiceOptions(): DataServiceOptions<DataType> {
-    const { pointColor, pointSize, lineColor, lineSize, fieldGetter, cluster, source, overflowHideLimit } =
-      this.options;
+    const { pointColor, pointSize, lineColor, lineSize, fieldGetter, cluster, source, overflowLimit } = this.options;
     return {
       cluster,
       location: {
@@ -136,7 +135,7 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
         size: lineSize,
       },
       fieldGetter,
-      overflowHideLimit,
+      overflowLimit,
       data: source.data,
     };
   }

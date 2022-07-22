@@ -18,7 +18,7 @@ export const DEFAULT_OPTIONS: Partial<TrafficFlowLayerOptions> = {
   },
   cluster: DEFAULT_CLUSTER_OPTIONS,
   fieldGetter: DEFAULT_FIELD_GETTER_OPTIONS,
-  overflowHideLimit: 5000,
+  overflowLimit: 5000,
 };
 
 /**
