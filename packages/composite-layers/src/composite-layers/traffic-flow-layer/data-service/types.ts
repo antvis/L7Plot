@@ -31,8 +31,8 @@ export type ClusterSize =
 
 // 聚合点线样式层级数据
 export type ClusterStyle = {
-  color: ClusterColor;
-  size: ClusterSize;
+  color?: ClusterColor;
+  size?: ClusterSize;
 };
 
 // 地图相关配置
@@ -79,8 +79,8 @@ export type FieldGetter<DataType = any> = {
 
 export interface DataServiceOptions<DataType = any> {
   cluster: ClusterOptions;
-  location: ClusterStyle;
-  flow: ClusterStyle;
+  locationStyle: ClusterStyle;
+  flowStyle: ClusterStyle;
   data: any[];
   fieldGetter: FieldGetter<DataType>;
   overflowLimit: number;
@@ -141,8 +141,8 @@ export type FlowLevel = {
 };
 
 export type StyleLevel = {
-  size: SizeAttr;
-  color: ColorAttr;
+  size?: SizeAttr;
+  color?: ColorAttr;
   zoom: number;
 };
 

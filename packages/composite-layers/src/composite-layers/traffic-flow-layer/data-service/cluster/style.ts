@@ -23,8 +23,9 @@ function getScaleMethod<T extends ClusterColor | ClusterSize>(config: T) {
 export function getStyleLevels(itemLevels: (LocationLevel | FlowLevel)[], clusterStyle: ClusterStyle): StyleLevel[] {
   const styleLevels: StyleLevel[] = [];
   const { size, color } = clusterStyle;
-  const { scaleType: sizeScaleType, value: sizeValue } = getScaleMethod<ClusterSize>(size);
-  const { scaleType: colorScaleType, value: colorValue } = getScaleMethod(color);
+  if (!size && !color) {
+    return [];
+  }
   itemLevels.forEach((itemLevel) => {
     const list: (LocationItem | FlowItem)[] =
       (itemLevel as LocationLevel).locations ?? (itemLevel as FlowLevel).flows ?? [];
@@ -32,32 +33,30 @@ export function getStyleLevels(itemLevels: (LocationLevel | FlowLevel)[], cluste
       const weightList = Array.from(new Set(list.map((item) => item.weight)));
       const minWeight = Math.min(...weightList);
       const maxWeight = Math.max(...weightList);
-      const sizeScaleMethod = SCALE_TYPE_MAP[sizeScaleType]().domain([minWeight, maxWeight]).range(sizeValue);
-      const colorScaleMethod = SCALE_TYPE_MAP[colorScaleType]().domain([minWeight, maxWeight]).range(colorValue);
-
-      styleLevels.push({
+      const newStyleLevel: StyleLevel = {
         zoom: itemLevel.zoom,
-        size: {
+      };
+      if (size) {
+        const { scaleType: sizeScaleType, value: sizeValue } = getScaleMethod<ClusterSize>(size);
+        const sizeScaleMethod = SCALE_TYPE_MAP[sizeScaleType]().domain([minWeight, maxWeight]).range(sizeValue);
+        newStyleLevel.size = {
           field: 'weight',
           value: ({ weight }) => {
-            // console.log(weight);
             return sizeScaleMethod(weight);
           },
-        },
-        color: {
+        };
+      }
+      if (color) {
+        const { scaleType: colorScaleType, value: colorValue } = getScaleMethod<ClusterColor>(color);
+        const colorScaleMethod = SCALE_TYPE_MAP[colorScaleType]().domain([minWeight, maxWeight]).range(colorValue);
+        newStyleLevel.color = {
           field: 'weight',
           value: ({ weight }) => {
-            const color = colorScaleMethod(weight);
-            return color;
+            return colorScaleMethod(weight);
           },
-        },
-      });
-    } else {
-      styleLevels.push({
-        zoom: itemLevel.zoom,
-        size: 0,
-        color: 'rgba(0,0,0,0)',
-      });
+        };
+      }
+      styleLevels.push(newStyleLevel);
     }
   });
 

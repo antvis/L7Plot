@@ -1,24 +1,22 @@
-import { DEFAULT_CLUSTER_OPTIONS, DEFAULT_COLOR_1, DEFAULT_FIELD_GETTER_OPTIONS } from './data-service/constants';
+import { DEFAULT_CLUSTER_OPTIONS, DEFAULT_FIELD_GETTER_OPTIONS } from './data-service/constants';
 import { TrafficFlowLayerOptions } from './types';
+
+export const DEFAULT_OVERFLOW_LIMIT = 5000;
 
 /**
  * 默认配置项
  */
 export const DEFAULT_OPTIONS: Partial<TrafficFlowLayerOptions> = {
   visible: true,
-  pointColor: DEFAULT_COLOR_1,
-  pointSize: [5, 30],
   pointConfig: {
     shape: 'circle',
   },
-  lineColor: DEFAULT_COLOR_1,
-  lineSize: [1, 10],
   lineConfig: {
     shape: 'halfLine',
   },
   cluster: DEFAULT_CLUSTER_OPTIONS,
   fieldGetter: DEFAULT_FIELD_GETTER_OPTIONS,
-  overflowLimit: 5000,
+  overflowLimit: DEFAULT_OVERFLOW_LIMIT,
 };
 
 /**

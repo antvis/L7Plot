@@ -27,7 +27,6 @@ class OdData extends Component {
       const data = await response.json();
 
       const trafficFlowLayer = new TrafficFlowLayer({
-        overflowLimit: 5000,
         pointColor: {
           scaleType: 'linear',
           value: ['rgb(0,69,105)', '#f7feae'],
@@ -75,22 +74,21 @@ class OdData extends Component {
           weight: 'weight',
         },
         source: {
-          // data,
           data,
           // data: data.slice(0, 100),
         },
       });
       this.scene && trafficFlowLayer.addTo(this.scene);
 
-      // trafficFlowLayer.locationLayer.on('click', (e: any) => {
-      //   const { id } = e.feature as LocationItem;
-      //   console.log(trafficFlowLayer.getLocationData(id));
-      // });
-      //
-      // trafficFlowLayer.flowLayer.on('click', (e) => {
-      //   const { id } = e.feature as FlowItem;
-      //   console.log(trafficFlowLayer.getFlowData(id));
-      // });
+      trafficFlowLayer.locationLayer.on('click', (e: any) => {
+        const { id } = e.feature as LocationItem;
+        console.log(trafficFlowLayer.getLocationData(id));
+      });
+
+      trafficFlowLayer.flowLayer.on('click', (e) => {
+        const { id } = e.feature as FlowItem;
+        console.log(trafficFlowLayer.getFlowData(id));
+      });
     });
   }
 

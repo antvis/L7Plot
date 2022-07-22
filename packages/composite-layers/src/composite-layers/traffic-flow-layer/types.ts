@@ -27,22 +27,22 @@ export interface TrafficFlowLayerOptions<DataType = any> extends CompositeLayerO
   /**
    * 聚合点图层颜色配置
    */
-  pointColor: ClusterColor;
+  pointColor?: ClusterColor;
 
   /**
    * 聚合点图层大小配置
    */
-  pointSize: ClusterSize;
+  pointSize?: ClusterSize;
 
   /**
    * 聚合线图层颜色配置
    */
-  lineColor: ClusterColor;
+  lineColor?: ClusterColor;
 
   /**
    * 聚合线图层大小配置
    */
-  lineSize: ClusterSize;
+  lineSize?: ClusterSize;
 
   /**
    * 聚合相关配置
@@ -57,7 +57,7 @@ export interface TrafficFlowLayerOptions<DataType = any> extends CompositeLayerO
   /**
    * 当前层级的绘制物 > overflowLimit 时，会隐藏起终点均不在屏幕内的聚合点及其对应的聚合线
    */
-  overflowLimit: number;
+  overflowLimit?: number;
 }
 
 /**

@@ -1,6 +1,6 @@
 import { CompositeLayer } from '../../core/composite-layer';
 import { BBox, DataServiceOptions, TrafficFlowLayerOptions } from './types';
-import { DEFAULT_OPTIONS, FLOW_LAYER_ID, LOCATION_LAYER_ID } from './constants';
+import { DEFAULT_OPTIONS, DEFAULT_OVERFLOW_LIMIT, FLOW_LAYER_ID, LOCATION_LAYER_ID } from './constants';
 import { ICoreLayer } from '../../types';
 import { PointLayer } from '../../core-layers/point-layer';
 import { LineLayer } from '../../core-layers/line-layer';
@@ -58,6 +58,13 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
   }
 
   /**
+   * 获取默认配置
+   */
+  public getDefaultOptions(): Partial<TrafficFlowLayerOptions> {
+    return TrafficFlowLayer.DefaultOptions;
+  }
+
+  /**
    * 在图层被scene添加时，需要获取其最大最小缩放比并将其设置进map中。
    * @param scene
    */
@@ -96,9 +103,9 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
 
   /**
    * 获取点图层配置
-   * @private
+   * @protected
    */
-  private getLocationLayerOptions(): PointLayerOptions {
+  protected getLocationLayerOptions(): PointLayerOptions {
     return {
       source: {
         data: [],
@@ -110,9 +117,9 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
 
   /**
    * 获取线图层配置
-   * @private
+   * @protected
    */
-  private getFlowLayerOptions(): Partial<LineLayerOptions> {
+  protected getFlowLayerOptions(): Partial<LineLayerOptions> {
     return {
       ...this.options.lineConfig,
     };
@@ -120,22 +127,22 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
 
   /**
    * 获取数据中心DataProvider构造器参数
-   * @private
+   * @protected
    */
-  private getDataServiceOptions(): DataServiceOptions<DataType> {
+  protected getDataServiceOptions(): DataServiceOptions<DataType> {
     const { pointColor, pointSize, lineColor, lineSize, fieldGetter, cluster, source, overflowLimit } = this.options;
     return {
       cluster,
-      location: {
+      locationStyle: {
         color: pointColor,
         size: pointSize,
       },
-      flow: {
+      flowStyle: {
         color: lineColor,
         size: lineSize,
       },
       fieldGetter,
-      overflowLimit,
+      overflowLimit: overflowLimit ?? DEFAULT_OVERFLOW_LIMIT,
       data: source.data,
     };
   }

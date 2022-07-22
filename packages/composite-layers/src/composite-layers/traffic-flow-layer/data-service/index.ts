@@ -45,7 +45,7 @@ export class DataService {
       return;
     }
     const { locations, flows } = this.originData;
-    const { cluster, location, flow } = this.options;
+    const { cluster, locationStyle, flowStyle } = this.options;
 
     // console.time('locationLevels');
     const locationLevels = getLocationLevels(locations, cluster, this.mapStatus);
@@ -55,9 +55,9 @@ export class DataService {
     const flowLevels = getFlowLevels(flows, locationLevels);
     // console.timeEnd('flowLevels');
 
-    const locationStyleLevels = getStyleLevels(locationLevels, location);
+    const locationStyleLevels = getStyleLevels(locationLevels, locationStyle);
     // console.log('--------');
-    const flowStyleLevels = getStyleLevels(flowLevels, flow);
+    const flowStyleLevels = getStyleLevels(flowLevels, flowStyle);
 
     const locationFlowLevels: LocationFlowLevel[] = [];
 
