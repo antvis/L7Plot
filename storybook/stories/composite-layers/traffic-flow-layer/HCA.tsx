@@ -27,40 +27,6 @@ class OdData extends Component {
       const data = await response.json();
 
       const trafficFlowLayer = new TrafficFlowLayer({
-        pointColor: {
-          scaleType: 'linear',
-          value: ['rgb(0,69,105)', '#f7feae'],
-        },
-        pointSize: {
-          scaleType: 'linear',
-          value: [5, 20],
-        },
-        pointConfig: {
-          style: {
-            stroke: '#fff',
-            strokeWidth: 1,
-            opacity: 1,
-          },
-        },
-        lineColor: {
-          scaleType: 'linear',
-          value: ['rgba(0,69,105,0.4)', '#f7feae'],
-        },
-        lineSize: {
-          scaleType: 'linear',
-          value: [2, 8],
-        },
-        lineConfig: {
-          shape: 'halfLine',
-          style: {
-            arrow: {
-              enable: true,
-              arrowWidth: 3,
-              arrowHeight: 2,
-              tailWidth: 1,
-            },
-          },
-        },
         cluster: {
           clusterType: 'HCA',
           zoomStep: 1,
@@ -80,15 +46,15 @@ class OdData extends Component {
       });
       this.scene && trafficFlowLayer.addTo(this.scene);
 
-      trafficFlowLayer.locationLayer.on('click', (e: any) => {
-        const { id } = e.feature as LocationItem;
-        console.log(trafficFlowLayer.getLocationData(id));
-      });
-
-      trafficFlowLayer.flowLayer.on('click', (e) => {
-        const { id } = e.feature as FlowItem;
-        console.log(trafficFlowLayer.getFlowData(id));
-      });
+      // trafficFlowLayer.locationLayer.on('click', (e: any) => {
+      //   const { id } = e.feature as LocationItem;
+      //   console.log(trafficFlowLayer.getLocationData(id));
+      // });
+      //
+      // trafficFlowLayer.flowLayer.on('click', (e) => {
+      //   const { id } = e.feature as FlowItem;
+      //   console.log(trafficFlowLayer.getFlowData(id));
+      // });
     });
   }
 

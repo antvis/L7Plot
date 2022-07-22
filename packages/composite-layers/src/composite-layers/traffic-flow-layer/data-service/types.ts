@@ -10,29 +10,10 @@ export type Getter<DataType = any, ValueType = any> =
 // 屏幕展示范围经纬度
 export type BBox = [number, number, number, number];
 
-// 值映射类型
-export type ScaleType = 'linear' | 'log' | 'pow' | 'quantile' | 'quantize' | 'sqrt';
-
-// 聚合点/线颜色配置，如果直接传值默认scaleType为线性
-export type ClusterColor =
-  | [string, string]
-  | {
-      scaleType: ScaleType;
-      value: [string, string];
-    };
-
-// 聚合点/线大小配置，如果直接传值默认scaleType为线性
-export type ClusterSize =
-  | [number, number]
-  | {
-      scaleType: ScaleType;
-      value: [number, number];
-    };
-
 // 聚合点线样式层级数据
 export type ClusterStyle = {
-  color?: ClusterColor;
-  size?: ClusterSize;
+  color?: ColorAttr;
+  size?: SizeAttr;
 };
 
 // 地图相关配置

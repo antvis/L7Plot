@@ -1,7 +1,7 @@
 import { CompositeLayerOptions } from '../../core/composite-layer';
 import { PointLayerOptions } from '../../core-layers/point-layer/types';
 import { LineLayerOptions } from '../../core-layers/line-layer/types';
-import { ClusterColor, ClusterSize, FieldGetter, ClusterOptions } from './data-service/types';
+import { FieldGetter, ClusterOptions } from './data-service/types';
 
 /**
  * TrafficFlowLayer的配置定义
@@ -23,26 +23,6 @@ export interface TrafficFlowLayerOptions<DataType = any> extends CompositeLayerO
    * 聚合线图层其他配置
    */
   lineConfig?: Partial<LineLayerOptions>;
-
-  /**
-   * 聚合点图层颜色配置
-   */
-  pointColor?: ClusterColor;
-
-  /**
-   * 聚合点图层大小配置
-   */
-  pointSize?: ClusterSize;
-
-  /**
-   * 聚合线图层颜色配置
-   */
-  lineColor?: ClusterColor;
-
-  /**
-   * 聚合线图层大小配置
-   */
-  lineSize?: ClusterSize;
 
   /**
    * 聚合相关配置

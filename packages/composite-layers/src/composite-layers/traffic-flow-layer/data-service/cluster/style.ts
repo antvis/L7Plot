@@ -1,29 +1,22 @@
-import {
-  ClusterColor,
-  ClusterSize,
-  ClusterStyle,
-  FlowItem,
-  FlowLevel,
-  LocationItem,
-  LocationLevel,
-  ScaleType,
-  StyleLevel,
-} from '../types';
-import { SCALE_TYPE_MAP } from '../constants';
+import { ClusterStyle, FlowItem, FlowLevel, LocationItem, LocationLevel, StyleLevel } from '../types';
+import { SizeAttr, ColorAttr, SizeStyleAttribute, ColorStyleAttribute } from '../../../../types';
 
-function getScaleMethod<T extends ClusterColor | ClusterSize>(config: T) {
-  const scaleType: ScaleType = Array.isArray(config) ? 'linear' : config.scaleType;
-  const value = Array.isArray(config) ? config : config.value;
-  return {
-    scaleType,
-    value,
-  };
+/**
+ * 判断 size 或者 color 配置是否为基于字段类型的
+ * @param config
+ */
+function isFieldAttr(config: SizeAttr | ColorAttr | undefined) {
+  if (!config || !(config instanceof Object) || Array.isArray(config) || config instanceof Function) {
+    return false;
+  }
+  return true;
 }
 
 export function getStyleLevels(itemLevels: (LocationLevel | FlowLevel)[], clusterStyle: ClusterStyle): StyleLevel[] {
   const styleLevels: StyleLevel[] = [];
-  const { size, color } = clusterStyle;
-  if (!size && !color) {
+  const isSizeFieldAttr = isFieldAttr(clusterStyle.size);
+  const isColorFieldAttr = isFieldAttr(clusterStyle.color);
+  if (!isSizeFieldAttr && !isColorFieldAttr) {
     return [];
   }
   itemLevels.forEach((itemLevel) => {
@@ -36,23 +29,25 @@ export function getStyleLevels(itemLevels: (LocationLevel | FlowLevel)[], cluste
       const newStyleLevel: StyleLevel = {
         zoom: itemLevel.zoom,
       };
-      if (size) {
-        const { scaleType: sizeScaleType, value: sizeValue } = getScaleMethod<ClusterSize>(size);
-        const sizeScaleMethod = SCALE_TYPE_MAP[sizeScaleType]().domain([minWeight, maxWeight]).range(sizeValue);
+      if (isSizeFieldAttr) {
+        const size = clusterStyle.size as SizeStyleAttribute;
         newStyleLevel.size = {
-          field: 'weight',
-          value: ({ weight }) => {
-            return sizeScaleMethod(weight);
+          ...size,
+          scale: {
+            type: 'linear',
+            domain: [minWeight, maxWeight],
+            ...size.scale,
           },
         };
       }
-      if (color) {
-        const { scaleType: colorScaleType, value: colorValue } = getScaleMethod<ClusterColor>(color);
-        const colorScaleMethod = SCALE_TYPE_MAP[colorScaleType]().domain([minWeight, maxWeight]).range(colorValue);
+      if (isColorFieldAttr) {
+        const color = clusterStyle.color as ColorStyleAttribute;
         newStyleLevel.color = {
-          field: 'weight',
-          value: ({ weight }) => {
-            return colorScaleMethod(weight);
+          ...color,
+          scale: {
+            type: 'linear',
+            domain: [minWeight, maxWeight],
+            ...color.scale,
           },
         };
       }

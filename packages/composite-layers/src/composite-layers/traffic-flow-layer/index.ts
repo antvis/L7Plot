@@ -1,5 +1,5 @@
 import { CompositeLayer } from '../../core/composite-layer';
-import { BBox, DataServiceOptions, TrafficFlowLayerOptions } from './types';
+import { BBox, ClusterStyle, DataServiceOptions, TrafficFlowLayerOptions } from './types';
 import { DEFAULT_OPTIONS, DEFAULT_OVERFLOW_LIMIT, FLOW_LAYER_ID, LOCATION_LAYER_ID } from './constants';
 import { ICoreLayer } from '../../types';
 import { PointLayer } from '../../core-layers/point-layer';
@@ -130,17 +130,20 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
    * @protected
    */
   protected getDataServiceOptions(): DataServiceOptions<DataType> {
-    const { pointColor, pointSize, lineColor, lineSize, fieldGetter, cluster, source, overflowLimit } = this.options;
+    const { pointConfig, lineConfig, fieldGetter, cluster, source, overflowLimit } = this.options;
+    const locationStyle: ClusterStyle = {
+      size: pointConfig?.size,
+      color: pointConfig?.color,
+    };
+    const flowStyle: ClusterStyle = {
+      size: lineConfig?.size,
+      color: lineConfig?.color,
+    };
+
     return {
       cluster,
-      locationStyle: {
-        color: pointColor,
-        size: pointSize,
-      },
-      flowStyle: {
-        color: lineColor,
-        size: lineSize,
-      },
+      locationStyle,
+      flowStyle,
       fieldGetter,
       overflowLimit: overflowLimit ?? DEFAULT_OVERFLOW_LIMIT,
       data: source.data,
