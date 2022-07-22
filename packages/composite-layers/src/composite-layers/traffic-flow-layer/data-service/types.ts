@@ -58,13 +58,13 @@ export interface HCAClusterOptions extends BaseClusterOptions {
   clusterLevel: number;
 }
 
-export interface H3ClusterOptions extends BaseClusterOptions {
-  clusterType: 'H3';
-  // 聚合力度
-  clusterLevel: number;
-}
+// export interface H3ClusterOptions extends BaseClusterOptions {
+//   clusterType: 'H3';
+//   // 聚合力度
+//   clusterLevel: number;
+// }
 
-export type ClusterOptions = BaseClusterOptions | HCAClusterOptions | H3ClusterOptions;
+export type ClusterOptions = BaseClusterOptions | HCAClusterOptions;
 
 export type FieldGetter<DataType = any> = {
   fromLng: Getter<DataType, number>;
