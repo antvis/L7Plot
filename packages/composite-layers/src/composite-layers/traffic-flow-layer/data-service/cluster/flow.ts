@@ -1,4 +1,4 @@
-import { FlowItem, FlowLevel, FlowMap, LocationLevel, LocationMap } from '../types';
+import { ClusterOptions, FlowItem, FlowLevel, FlowMap, LocationLevel, LocationMap } from '../types';
 import { createUuid } from '../utils';
 import { createFlowItem } from '../init';
 
@@ -7,25 +7,38 @@ import { createFlowItem } from '../init';
  * @param flows
  * @param locationLevels
  */
-export function getFlowLevels(flows: FlowItem[], locationLevels: LocationLevel[]): FlowLevel[] {
+export function getFlowLevels(
+  flows: FlowItem[],
+  locationLevels: LocationLevel[],
+  clusterOptions: ClusterOptions
+): FlowLevel[] {
   if (!locationLevels.length || !flows.length) {
     return [];
   }
-  let oldZoom = locationLevels[0].zoom;
-  let oldLocationMap = locationLevels[0].locationMap;
-  let oldFlows = [...flows];
+  const originLocationMap = locationLevels[0].locationMap;
+  const originZoom = locationLevels[0].zoom;
+  const originFlows = [...flows];
+
+  let previousZoom = originZoom;
+  let previousLocationMap = originLocationMap;
+  let previousFlows = originFlows;
   // 存储最高缩放比下的原始数据
   const flowLevels: FlowLevel[] = [
     {
-      zoom: oldZoom,
-      flows: oldFlows,
-      flowMap: new Map(oldFlows.map((flow) => [flow.id, flow])),
+      zoom: previousZoom,
+      flows: previousFlows,
+      flowMap: new Map(previousFlows.map((flow) => [flow.id, flow])),
     },
   ];
-
+  const isHCA = clusterOptions.clusterType === 'HCA';
   for (let index = 1; index < locationLevels.length; index++) {
     const { zoom: newZoom, locationMap: newLocationMap } = locationLevels[index];
-    const { flows: newFlows, flowMap: newFlowMap } = getFlows(oldFlows, oldLocationMap, newLocationMap, newZoom);
+    const { flows: newFlows, flowMap: newFlowMap } = getFlows(
+      isHCA ? previousFlows : originFlows,
+      isHCA ? previousLocationMap : originLocationMap,
+      newLocationMap,
+      newZoom
+    );
 
     flowLevels.push({
       zoom: newZoom,
@@ -33,9 +46,9 @@ export function getFlowLevels(flows: FlowItem[], locationLevels: LocationLevel[]
       flowMap: newFlowMap,
     });
 
-    oldFlows = newFlows;
-    oldZoom = newZoom;
-    oldLocationMap = newLocationMap;
+    previousFlows = newFlows;
+    previousZoom = newZoom;
+    previousLocationMap = newLocationMap;
   }
   return flowLevels;
 }
@@ -51,6 +64,7 @@ export function getFlows(oldFlows: FlowItem[], oldLocationMap: LocationMap, newL
   const newFLows: FlowItem[] = [];
   // 用于存储相同起终点的flows，如果每条flows长度 > 1，则需要聚合
   const positionFlowMap = new Map<string, FlowItem[]>();
+  // console.log(oldFlows);
   for (const flow of oldFlows) {
     let newFlow = flow;
     const { fromId, toId } = newFlow;
@@ -63,20 +77,19 @@ export function getFlows(oldFlows: FlowItem[], oldLocationMap: LocationMap, newL
       // 如果起点id不在当前层级的locations中，则说明起点发生了聚合，就从上一层级的locations中尝试获取起点对象
       if (!fromLocation) {
         const preFromLocation = oldLocationMap.get(fromId);
-
         // 根据上一层级的locations的clusterId指向当前层级的聚合后的结点
-        const clusterFromLocation =
-          (preFromLocation?.clusterId && newLocationMap.get(preFromLocation?.clusterId)) || undefined;
-        if (clusterFromLocation) {
-          fromLocation = clusterFromLocation;
+        const clusterFromLocationId =
+          preFromLocation?.parentIds?.find((parentId) => newLocationMap.get(parentId)) ?? undefined;
+        if (clusterFromLocationId) {
+          fromLocation = newLocationMap.get(clusterFromLocationId);
         }
       }
       if (!toLocation) {
         const preToLocation = oldLocationMap.get(toId);
-        const clusterToLocation =
-          (preToLocation?.clusterId && newLocationMap.get(preToLocation?.clusterId)) || undefined;
-        if (clusterToLocation) {
-          toLocation = clusterToLocation;
+        const clusterToLocationId =
+          preToLocation?.parentIds?.find((parentId) => newLocationMap.get(parentId)) ?? undefined;
+        if (clusterToLocationId) {
+          toLocation = newLocationMap.get(clusterToLocationId);
         }
       }
       if (fromLocation && toLocation) {

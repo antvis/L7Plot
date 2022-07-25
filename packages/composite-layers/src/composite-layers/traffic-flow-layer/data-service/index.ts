@@ -52,7 +52,7 @@ export class DataService {
     // console.timeEnd('locationLevels');
 
     // console.time('flowLevels');
-    const flowLevels = getFlowLevels(flows, locationLevels);
+    const flowLevels = getFlowLevels(flows, locationLevels, cluster);
     // console.timeEnd('flowLevels');
 
     const locationStyleLevels = getStyleLevels(locationLevels, locationLayerStyle);
@@ -63,10 +63,10 @@ export class DataService {
 
     for (const index in locationLevels) {
       locationFlowLevels.push({
-        ...locationLevels[index],
-        ...flowLevels[index],
-        locationStyle: locationStyleLevels[index],
-        flowStyle: flowStyleLevels[index],
+        ...(locationLevels[index] ?? {}),
+        ...(flowLevels[index] ?? {}),
+        locationStyle: locationStyleLevels[index] ?? {},
+        flowStyle: flowStyleLevels[index] ?? {},
       });
     }
     this.locationFlowLevels = locationFlowLevels;

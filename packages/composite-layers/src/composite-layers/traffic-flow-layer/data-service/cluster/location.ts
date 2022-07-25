@@ -1,6 +1,7 @@
-import { ClusterOptions, HCAClusterOptions, LocationItem, LocationLevel, MapStatus } from '../types';
+import { ClusterOptions, H3ClusterOptions, HCAClusterOptions, LocationItem, LocationLevel, MapStatus } from '../types';
 import { getLocationLevelsByHCA } from './hca';
 import KDBush from 'kdbush';
+import { getLocationLevelsByH3 } from './h3';
 
 /**
  * 生成kdbush搜索树
@@ -38,6 +39,9 @@ export function getLocationLevels(
   // 使用HCA算法
   if (clusterType === 'HCA') {
     return getLocationLevelsByHCA(locations, clusterOptions as HCAClusterOptions, mapStatus);
+  }
+  if (clusterType === 'H3') {
+    return getLocationLevelsByH3(locations, clusterOptions as H3ClusterOptions, mapStatus);
   }
   // 其他内置算法可在此扩展
   console.error('无匹配聚合算法');

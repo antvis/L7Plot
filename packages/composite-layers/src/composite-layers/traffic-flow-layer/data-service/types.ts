@@ -27,7 +27,7 @@ export interface BaseClusterOptions {
   // 缩放比遍历间隔单位，默认为1
   zoomStep: number;
   // 聚合类型，默认使用HCA
-  clusterType: string;
+  clusterType?: string | 'H3' | 'HCA';
   // 自定义聚合方法
   clusterMethod?: (locations: LocationItem[], options: BaseClusterOptions, mapStatus: MapStatus) => LocationLevel[];
 }
@@ -39,13 +39,13 @@ export interface HCAClusterOptions extends BaseClusterOptions {
   clusterLevel: number;
 }
 
-// export interface H3ClusterOptions extends BaseClusterOptions {
-//   clusterType: 'H3';
-//   // 聚合力度
-//   clusterLevel: number;
-// }
+export interface H3ClusterOptions extends BaseClusterOptions {
+  clusterType: 'H3';
+  // 聚合力度
+  h3Range: [number, number];
+}
 
-export type ClusterOptions = BaseClusterOptions | HCAClusterOptions;
+export type ClusterOptions = BaseClusterOptions | HCAClusterOptions | H3ClusterOptions;
 
 export type FieldGetter<DataType = any> = {
   fromLng: Getter<DataType, number>;
@@ -77,7 +77,7 @@ export type LocationItem<DataType = any> = {
   x: number; // 经度映射到二维坐标系中[0, 1]区间的值，用于聚类计算
   y: number; // 维度映射到二维坐标系中[0, 1]区间的值，用于聚类计算
   weight: number; // 权重，等于改点相关客流线的入度和出度的总和
-  clusterId?: string; // 被聚合后，聚合结点（或者说父节点）的id
+  parentIds?: string[]; // 被聚合后，聚合结点（或者说父节点）的id
   isCluster?: boolean; // 是否为聚合节点
   childIds: string[]; // 作为聚合点被创建时，被聚合的子节点id数组
   originData: DataType[]; // 原始数据Item

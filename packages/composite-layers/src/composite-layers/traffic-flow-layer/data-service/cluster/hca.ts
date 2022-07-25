@@ -99,7 +99,7 @@ function getLocationsByHCA(
       let weightY = location.y * weight;
       const childIds: string[] = [location.id];
       // const originData: any[] = [...location.originData];
-      const clusterId = createUuid();
+      const parentId = createUuid();
       for (const innerIndex of innerIndexes) {
         const innerLocation = tree.points[innerIndex];
         if (doneIdSet.has(innerLocation.id)) {
@@ -109,19 +109,19 @@ function getLocationsByHCA(
         weight += innerLocation.weight;
         weightX += innerLocation.weight * innerLocation.x;
         weightY += innerLocation.weight * innerLocation.y;
-        innerLocation.clusterId = clusterId;
+        innerLocation.parentIds = [parentId];
         childIds.push(innerLocation.id);
         // originData.push(...innerLocation.originData);
       }
       // 仅当cluster子节点数量大于1时才升级了新Cluster
       // 防止圆内的其他结点都是已经被聚合过的
       if (childIds.length > 1) {
-        location.clusterId = clusterId;
+        location.parentIds = [parentId];
         const newLocation = createLocationItem({
           x: weightX / weight,
           y: weightY / weight,
           childIds,
-          id: clusterId,
+          id: parentId,
           weight,
           isCluster: true,
           originData: [],
