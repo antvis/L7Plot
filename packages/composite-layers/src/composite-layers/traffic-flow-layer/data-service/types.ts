@@ -60,8 +60,8 @@ export type FieldGetter<DataType = any> = {
 
 export interface DataServiceOptions<DataType = any> {
   cluster: ClusterOptions;
-  locationStyle: ClusterStyle;
-  flowStyle: ClusterStyle;
+  locationLayerStyle: ClusterStyle;
+  flowLayerStyle: ClusterStyle;
   data: any[];
   fieldGetter: FieldGetter<DataType>;
   overflowLimit: number;

@@ -11,7 +11,7 @@ export const DEFAULT_OPTIONS: Partial<TrafficFlowLayerOptions> = {
   pointConfig: {
     color: {
       field: 'weight',
-      value: ['rgb(0,69,105)', '#f7feae'],
+      value: ['rgb(0, 69, 105)', '#f7feae'],
     },
     size: {
       field: 'weight',
@@ -27,7 +27,7 @@ export const DEFAULT_OPTIONS: Partial<TrafficFlowLayerOptions> = {
   lineConfig: {
     color: {
       field: 'weight',
-      value: ['rgba(0,69,105,0.4)', '#f7feae'],
+      value: ['rgba(0, 69, 105, 0.4)', '#f7feae'],
     },
     size: {
       field: 'weight',

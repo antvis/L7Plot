@@ -142,8 +142,8 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
 
     return {
       cluster,
-      locationStyle,
-      flowStyle,
+      locationLayerStyle: locationStyle,
+      flowLayerStyle: flowStyle,
       fieldGetter,
       overflowLimit: overflowLimit ?? DEFAULT_OVERFLOW_LIMIT,
       data: source.data,

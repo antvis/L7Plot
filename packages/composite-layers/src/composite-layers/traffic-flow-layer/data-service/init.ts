@@ -80,9 +80,9 @@ export function initOriginData(data: any[], fieldGetterOptions: FieldGetter): Lo
     fromLat: fromLatGetter,
     toLng: toLngGetter,
     toLat: toLatGetter,
+    weight: weightGetter,
     fromId: fromIdGetter,
     toId: toIdGetter,
-    weight: weightGetter,
     id: idGetter,
   } = {
     ...DEFAULT_FIELD_GETTER_OPTIONS,
