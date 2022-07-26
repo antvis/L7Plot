@@ -9,6 +9,7 @@ import { Scene } from '@antv/l7-scene';
 import { debounce } from 'lodash-es';
 import { LineLayerOptions } from '../../core-layers/line-layer/types';
 import { PointLayerOptions } from '../../core-layers/point-layer/types';
+import { DataServiceEvent } from './data-service/constants';
 
 export type { TrafficFlowLayerOptions };
 
@@ -160,6 +161,10 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
         return;
       }
       this.matchZoom = this.dataService.getMatchZoom(this.scene.getZoom());
+      if (this.matchZoom < 0) {
+        this.dataService.once(DataServiceEvent.Init, this.onMapChange);
+        return;
+      }
       const { displayFlows, displayLocations, locationStyle, flowStyle } = this.dataService.getZoomData(
         this.scene.getBounds().flat() as BBox,
         this.matchZoom

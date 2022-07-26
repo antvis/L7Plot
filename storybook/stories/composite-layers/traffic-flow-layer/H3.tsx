@@ -25,7 +25,6 @@ class OdData extends Component {
         'https://gw.alipayobjects.com/os/bmw-prod/f4f3e99a-1d6c-4ab0-b08f-ec730c576b62.json'
       );
       const data = await response.json();
-
       const trafficFlowLayer = new TrafficFlowLayer({
         cluster: {
           clusterType: 'H3',

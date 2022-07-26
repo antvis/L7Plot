@@ -11,8 +11,10 @@ import {
 import { initOriginData } from './init';
 import { getLocationLevels, getFlowLevels, getStyleLevels } from './cluster';
 import { lat2Y, lng2X } from './utils';
+import EventEmitter from '@antv/event-emitter';
+import { DataServiceEvent } from './constants';
 
-export class DataService {
+export class DataService extends EventEmitter {
   private originData: LocationFlow = {
     locations: [],
     flows: [],
@@ -25,6 +27,7 @@ export class DataService {
   private locationFlowLevels: LocationFlowLevel[] = [];
 
   constructor(options: DataServiceOptions) {
+    super();
     const { locations, flows } = initOriginData(options.data, options.fieldGetter);
     this.originData = {
       locations,
@@ -40,20 +43,16 @@ export class DataService {
     }
   }
 
-  updateLevels() {
+  async updateLevels() {
     if (!this.mapStatus) {
       return;
     }
     const { locations, flows } = this.originData;
     const { cluster, locationLayerStyle, flowLayerStyle } = this.options;
 
-    // console.time('locationLevels');
     const locationLevels = getLocationLevels(locations, cluster, this.mapStatus);
-    // console.timeEnd('locationLevels');
 
-    // console.time('flowLevels');
-    const flowLevels = getFlowLevels(flows, locationLevels, cluster);
-    // console.timeEnd('flowLevels');
+    const flowLevels = await getFlowLevels(flows, locationLevels, cluster);
 
     const locationStyleLevels = getStyleLevels(locationLevels, locationLayerStyle);
     // console.log('--------');
@@ -70,6 +69,7 @@ export class DataService {
       });
     }
     this.locationFlowLevels = locationFlowLevels;
+    this.emit(DataServiceEvent.Init);
   }
 
   /**
@@ -78,8 +78,11 @@ export class DataService {
    */
   getMatchZoom(currentZoom: number) {
     const locationFlowLevels = this.locationFlowLevels;
-    if (currentZoom > locationFlowLevels[0].zoom) {
-      return locationFlowLevels[0].zoom;
+    if (!locationFlowLevels.length) {
+      return -1;
+    }
+    if (currentZoom > locationFlowLevels[0]?.zoom) {
+      return locationFlowLevels[0]?.zoom;
     }
     for (let i = 1; i < locationFlowLevels.length; i++) {
       const zoom1 = locationFlowLevels[i - 1].zoom;

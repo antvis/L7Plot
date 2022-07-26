@@ -23,3 +23,7 @@ export const DEFAULT_FIELD_GETTER_OPTIONS: FieldGetter = {
   toLat: 'toLat',
   weight: 'weight',
 };
+
+export enum DataServiceEvent {
+  Init = 'Init',
+}
