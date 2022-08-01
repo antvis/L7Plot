@@ -41,6 +41,9 @@
     "@antv/event-emitter": "^0.1.2",
     "@antv/util": "^2.0.14"
   },
+  "devDependencies": {
+    "@antv/l7": "^2.9.14"
+  },
   "peerDependencies": {
     "@antv/l7": "^2.9.14"
   },
