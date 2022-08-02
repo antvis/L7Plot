@@ -13,15 +13,14 @@ function getFlows(oldFlows: FlowItem[], oldLocationMap: LocationMap, newLocation
     fromLocation: Pick<LocationItem, 'id' | 'lng' | 'lat'>,
     toLocation: Pick<LocationItem, 'id' | 'lng' | 'lat'>
   ): FlowItem {
-    return {
-      ...config,
+    return Object.assign({}, config, {
       fromId: fromLocation.id,
       fromLng: fromLocation.lng,
       fromLat: fromLocation.lat,
       toId: toLocation.id,
       toLng: toLocation.lng,
       toLat: toLocation.lat,
-    };
+    });
   }
 
   function createUuid() {
@@ -66,13 +65,7 @@ function getFlows(oldFlows: FlowItem[], oldLocationMap: LocationMap, newLocation
       }
       if (fromLocation && toLocation) {
         // const hasLocationChange = fromId !== fromLocation.id || toId !== toLocation.id;
-        newFlow = createFlowItem(
-          {
-            ...flow,
-          },
-          fromLocation,
-          toLocation
-        );
+        newFlow = createFlowItem(flow, fromLocation, toLocation);
       }
     }
     if (newFlow.fromId !== newFlow.toId) {
