@@ -12,6 +12,7 @@ module.exports = {
   testMatch: ['**/__tests__/**/*.+(spec|test).[jt]s'],
   moduleNameMapper: {
     '^lodash-es$': 'lodash',
+    '^workly/index': 'workly',
   },
   testTimeout: 5000 * 4,
   coverageThreshold: {

@@ -1,5 +1,5 @@
 import { ClusterOptions, FlowItem, FlowLevel, FlowMap, LocationItem, LocationLevel, LocationMap } from '../types';
-import * as workly from 'workly/dist/workly.m.js';
+import { proxy as worklyProxy } from 'workly/index';
 
 /**
  * 获取当前缩放比zoom下对应的flows
@@ -132,7 +132,7 @@ export async function getFlowLevels(
       flowMap: new Map(previousFlows.map((flow) => [flow.id, flow])),
     },
   ];
-  const getFlowsSync = workly.proxy(getFlows);
+  const getFlowsSync = worklyProxy(getFlows);
   const isHCA = clusterOptions.clusterType === 'HCA';
   for (let index = 1; index < locationLevels.length; index++) {
     const { zoom: newZoom, locationMap: newLocationMap } = locationLevels[index];
