@@ -71,24 +71,24 @@ describe('traffic flow layer', () => {
     expect(tree.points.length).toBe(3);
   });
 
-  it('hca cluster', async () => {
-    const hcaDataService = new DataService({
-      data: mockData,
-      fieldGetter: mockDataFieldGetter,
-      cluster: {
-        clusterType: 'HCA',
-        zoomStep: 1,
-      },
-      locationLayerStyle: {},
-      flowLayerStyle: {},
-      overflowLimit: 10000,
-    });
-    await hcaDataService.setMapStatus({
-      minZoom: 1,
-      maxZoom: 15,
-    });
-    expect(hcaDataService.getLocationFlowLevels().length).toBeGreaterThan(0);
-  });
+  // it('hca cluster', async () => {
+  //   const hcaDataService = new DataService({
+  //     data: mockData,
+  //     fieldGetter: mockDataFieldGetter,
+  //     cluster: {
+  //       clusterType: 'HCA',
+  //       zoomStep: 1,
+  //     },
+  //     locationLayerStyle: {},
+  //     flowLayerStyle: {},
+  //     overflowLimit: 10000,
+  //   });
+  //   await hcaDataService.setMapStatus({
+  //     minZoom: 1,
+  //     maxZoom: 15,
+  //   });
+  //   expect(hcaDataService.getLocationFlowLevels().length).toBeGreaterThan(0);
+  // });
 
   it('hca location cluster', () => {
     const locationLevels = getLocationLevels(
@@ -121,24 +121,24 @@ describe('traffic flow layer', () => {
     expect(locationLevels.length).toBeGreaterThan(0);
   });
 
-  it('flows', async () => {
-    const locationLevels = getLocationLevels(
-      mockLocations,
-      {
-        clusterType: 'HCA',
-        zoomStep: 1,
-      },
-      {
-        minZoom: 1,
-        maxZoom: 15,
-      }
-    );
-    const flowLevels = await getFlowLevels(mockFlows, locationLevels, {
-      clusterType: 'HCA',
-      zoomStep: 1,
-    });
-    expect(flowLevels.length).toBe(locationLevels.length);
-  });
+  // it('flows', async () => {
+  //   const locationLevels = getLocationLevels(
+  //     mockLocations,
+  //     {
+  //       clusterType: 'HCA',
+  //       zoomStep: 1,
+  //     },
+  //     {
+  //       minZoom: 1,
+  //       maxZoom: 15,
+  //     }
+  //   );
+  //   const flowLevels = await getFlowLevels(mockFlows, locationLevels, {
+  //     clusterType: 'HCA',
+  //     zoomStep: 1,
+  //   });
+  //   expect(flowLevels.length).toBe(locationLevels.length);
+  // });
 
   it('style', () => {
     const locationLevels = getLocationLevels(
