@@ -1,5 +1,4 @@
-import { mockDataFieldGetter, mockData, mockLocations, mockFlows } from './mock';
-import { DataService } from '../../../../src/composite-layers/traffic-flow-layer/data-service';
+import { mockDataFieldGetter, mockData, mockLocations } from './mock';
 import {
   createUuid,
   lat2Y,
@@ -11,7 +10,6 @@ import { ClusterStyle, TrafficFlowLayer } from '@antv/l7-composite-layers';
 import { DataServiceEvent } from '../../../../src/composite-layers/traffic-flow-layer/data-service/constants';
 import { initOriginData } from '../../../../src/composite-layers/traffic-flow-layer/data-service/init';
 import {
-  getFlowLevels,
   getLocationLevels,
   getSearchTree,
   getStyleLevels,
