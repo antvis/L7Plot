@@ -36,10 +36,26 @@ export class DataService extends EventEmitter {
     this.options = options;
   }
 
-  setMapStatus(newMapStatus: MapStatus) {
+  getLocationFlowLevels() {
+    return this.locationFlowLevels;
+  }
+
+  getOptions() {
+    return this.options;
+  }
+
+  getMpStatus() {
+    return this.mapStatus;
+  }
+
+  getOriginData() {
+    return this.originData;
+  }
+
+  async setMapStatus(newMapStatus: MapStatus) {
     this.mapStatus = newMapStatus;
     if (newMapStatus) {
-      this.updateLevels();
+      await this.updateLevels();
     }
   }
 

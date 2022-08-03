@@ -65,6 +65,10 @@ export class TrafficFlowLayer<DataType = any> extends CompositeLayer<TrafficFlow
     return TrafficFlowLayer.DefaultOptions;
   }
 
+  public getDataService() {
+    return this.dataService;
+  }
+
   /**
    * 在图层被scene添加时，需要获取其最大最小缩放比并将其设置进map中。
    * @param scene
