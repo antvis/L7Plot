@@ -230,9 +230,19 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
     this.updateOption(options);
     this.updateConfig(options);
 
+    // 停止渲染，避免属性更新与数据更新造成多次内部调用 scene render
+    this.scene?.setEnableRender(false);
+
     if (isUndefined(this.options.visible) || this.options.visible) {
       this.adaptorLayerAttr();
     }
+
+    if (options.source && !isEqual(options.source, this.lastOptions.source)) {
+      this.setSource(options.source);
+    }
+
+    this.scene?.setEnableRender(true);
+    this.render();
   }
 
   /**

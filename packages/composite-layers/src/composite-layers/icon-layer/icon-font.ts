@@ -1,7 +1,6 @@
 import { IconFontLayerOptions } from './types';
 import { DEFAULT_OPTIONS } from './constants';
 import { IconLayer } from './icon';
-import { CompositeLayerEvent } from '../../core/constants';
 
 export class IconFontLayer extends IconLayer<IconFontLayerOptions> {
   /**
@@ -13,13 +12,7 @@ export class IconFontLayer extends IconLayer<IconFontLayerOptions> {
    * 初始化资源
    */
   protected initAssets() {
-    if (this.scene) {
-      this.loadIconAtlas();
-    } else {
-      this.once(CompositeLayerEvent.ADD, () => {
-        this.loadIconAtlas();
-      });
-    }
+    this.loadIconAtlas();
   }
 
   /**
