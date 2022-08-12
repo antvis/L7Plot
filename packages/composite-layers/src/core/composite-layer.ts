@@ -171,6 +171,10 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    */
   public update(options: Partial<O>) {
     this.updateOption(options);
+    // 数据更新
+    if (options.source && options.source !== this.lastOptions.source) {
+      this.changeData(options.source);
+    }
     this.updateSubLayers(options);
   }
 

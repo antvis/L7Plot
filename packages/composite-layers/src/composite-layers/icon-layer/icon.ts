@@ -4,8 +4,9 @@ import { PointLayer } from '../../core-layers/point-layer';
 import { IconLayerOptions } from './types';
 import { getDefaultState } from './adaptor';
 import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
-import { ICoreLayer } from '../../types';
+import { ICoreLayer, Scene } from '../../types';
 import { getLabelLayerOptions } from '../common/label-layer';
+import { CompositeLayerEvent } from '../../core/constants';
 
 export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLayer<T> {
   /**
@@ -27,7 +28,7 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
     return this.iconLayer;
   }
   /**
-   * 填充面图层
+   * 图标图层
    */
   protected get iconLayer() {
     return this.subLayers.getLayer('iconLayer') as ICoreLayer;
@@ -54,9 +55,19 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
   protected abstract initAssets(): void;
 
   /**
-   * 获取填充图层配置项
+   * 添加到场景
    */
-  private getFillLayerOptions() {
+  public addTo(scene: Scene) {
+    this.scene = scene;
+    this.initAssets();
+    this.subLayers.addTo(scene);
+    this.emit(CompositeLayerEvent.ADD);
+  }
+
+  /**
+   * 获取图标图层配置项
+   */
+  private getIconLayerOptions() {
     const {
       visible,
       minZoom,
@@ -98,13 +109,12 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
 
   protected createSubLayers(): ICoreLayer[] {
     const source = this.source;
-    this.initAssets();
     this.layerState = getDefaultState(this.options.state);
-    console.log(this.getFillLayerOptions());
-    // 映射填充图层
-    const fillLayer = new PointLayer({
-      ...this.getFillLayerOptions(),
-      id: 'fillLayer',
+
+    // 映射图标图层
+    const iconLayer = new PointLayer({
+      ...this.getIconLayerOptions(),
+      id: 'iconLayer',
       source,
     });
     const labelLayer = new TextLayer({
@@ -112,13 +122,13 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
       id: 'labelLayer',
       source,
     });
-    const subLayers = [fillLayer, labelLayer];
+    const subLayers = [iconLayer, labelLayer];
 
     return subLayers;
   }
 
   protected updateSubLayers(options: T) {
-    this.iconLayer.update(this.getFillLayerOptions());
+    this.iconLayer.update(this.getIconLayerOptions());
     this.labelLayer.update(getLabelLayerOptions<T>(this.options));
   }
 }

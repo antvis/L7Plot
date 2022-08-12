@@ -535,7 +535,7 @@ class XiHu extends Component {
 
   update = () => {
     if (this.scene) {
-      this.polygonLayer?.update({ visible: false });
+      this.polygonLayer?.toggleVisible();
     }
   };
 
@@ -553,7 +553,7 @@ class XiHu extends Component {
       >
         <div style={{ position: 'absolute', left: '10px', zIndex: 1 }}>
           <button type="button" onClick={this.update} style={{ marginTop: 8 }}>
-            update
+            显隐
           </button>
         </div>
       </div>
