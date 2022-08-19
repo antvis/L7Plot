@@ -271,6 +271,13 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     const features = feature ? [feature] : [];
     const parser = this.source.parser;
     const data = parser.type === 'geojson' ? { type: 'FeatureCollection', features } : features;
+
+    // if (!Array.isArray(this.options.radius) && typeof this.options.radius === 'object' && this.options.radius.field) {
+    //   const scale = this.fillLayer.layer.getScale(this.options.radius.field);
+    //   console.log('this.options.radius.field): ', this.options.radius.field);
+    //   console.log('scale: ', scale);
+    // }
+
     this.highlightStrokeLayer.changeData({ data, parser });
     this.highlightData = featureId;
   }
