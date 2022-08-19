@@ -37,7 +37,7 @@ const choropleth = new Choropleth(container, options);
 | url  | 数据地址 | `string`                |              | required |
 | type | 数据类型 | `'geojson'｜'topojson'` | `'topojson'` | required |
 
-行政地理数据地址默认值为 `Choropleth.GeoAreaUrl`, 不定时以更新其中版本号方式更新数据。
+行政地理数据地址默认值为 `Choropleth.GeoAreaUrl`, 不定时以更新其中版本号方式更新数据，如需内网部署或自定义数据可下载 [choropleth data](https://www.jsdelivr.com/package/npm/static-geo-atlas?path=geo-data%2Fchoropleth-data)。
 
 ```js
 {
