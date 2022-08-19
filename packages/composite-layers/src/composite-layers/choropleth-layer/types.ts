@@ -75,6 +75,8 @@ export interface ChoroplethLayerOptions extends CompositeLayerOptions {
   };
   /**
    * 是否启用多选
+   * 文档暂时不透出，后面改多选和单选并存交互
+   * https://github.com/antvis/L7Plot/issues/176
    */
   enabledMultiSelect?: boolean;
 }

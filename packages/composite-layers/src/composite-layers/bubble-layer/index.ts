@@ -309,7 +309,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
   protected initSubLayersEvent() {
     // 初始化主图层交互事件
     this.fillLayer.off('mousemove', this.onHighlighHandle);
-    this.fillLayer.off('unmousemove', this.onHighlighHandle);
+    this.fillLayer.off('mouseout', this.onHighlighHandle);
     this.fillLayer.off('click', this.onSelectHandle);
     this.selectData = [];
     this.highlightData = null;
@@ -317,7 +317,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     // active
     if (this.options.state.active) {
       this.fillLayer.on('mousemove', this.onHighlighHandle);
-      this.fillLayer.on('unmousemove', this.onUnhighlighHandle);
+      this.fillLayer.on('mouseout', this.onUnhighlighHandle);
     }
     // select
     if (this.options.state.select) {
