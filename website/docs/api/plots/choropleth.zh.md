@@ -67,7 +67,7 @@ const choropleth = new Choropleth(container, options);
 | geoField    | 地理数据字段                               | `'adcode'｜'name'`  | `'adcode'` | optional |
 | geoData     | 地理数据，设置则覆盖当前层级的行政地址数据 | `FeatureCollection` |            | optional |
 
-业务数据与地理数据关联主要有以下两种方式。行政名称与编码映射关系详见[行政名称表格](https://www.yuque.com/antv/qbux5m/wrxc8h#yyIb)与[行政名称数据](https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-data/area-list.json)。
+业务数据与地理数据关联主要有以下两种方式。行政名称与编码映射关系详见[行政名称表格](https://www.yuque.com/antv/l7/wrxc8h#yyIb)与[行政名称数据](https://cdn.jsdelivr.net/npm/static-geo-atlas@0.0.2/geo-data/administrative-data/area-list.json)。
 
 1. 根据行政编码匹配渲染
 
