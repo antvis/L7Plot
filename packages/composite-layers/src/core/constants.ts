@@ -1,8 +1,7 @@
-export const LayerEventList: string[] = [
+export const OriginLayerEventList: string[] = [
   // 图层事件
   'inited',
-  // 'add',
-  // 'remove',
+  // 代理掉的事件 'add', 'remove',
   'dataUpdate',
   // 鼠标事件
   // 单击事件
@@ -23,7 +22,14 @@ export const LayerEventList: string[] = [
   'unpick',
 ];
 
+export enum CoreLayerEvent {
+  CREATED = 'created',
+  ADD = 'add',
+  REMOVE = 'remove',
+}
+
 export enum CompositeLayerEvent {
+  CREATED = 'created',
   ADD = 'add',
   REMOVE = 'remove',
 }

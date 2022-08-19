@@ -2,7 +2,7 @@ import { deepMix, uniqueId } from '@antv/util';
 import EventEmitter from '@antv/event-emitter';
 import Source from '@antv/l7-source';
 import { Scene, SourceOptions, ICompositeLayer, CompositeLayerType, LayerBlend, ICoreLayer, ISource } from '../types';
-import { CompositeLayerEvent, LayerEventList } from './constants';
+import { CompositeLayerEvent, OriginLayerEventList } from './constants';
 import { LayerGroup } from './layer-group';
 
 /**
@@ -99,6 +99,8 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     this.source = this.createSource();
     const layers = this.createSubLayers();
     this.subLayers = new LayerGroup(layers);
+
+    this.emit(CompositeLayerEvent.CREATED);
   }
 
   /**
@@ -172,7 +174,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   public update(options: Partial<O>) {
     this.updateOption(options);
     // 数据更新
-    if (options.source && options.source !== this.lastOptions.source) {
+    if (options.source) {
       this.changeData(options.source);
     }
     this.updateSubLayers(options);
@@ -202,6 +204,9 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    * 支持 source 配置项与 source 实例更新
    */
   public changeData(source: SourceOptions | ISource) {
+    if (source.data === this.lastOptions.source.data) {
+      return;
+    }
     this.setSubLayersSource(source);
   }
 
@@ -309,7 +314,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    * 事件代理: 绑定事件
    */
   public on(name: string, callback: (...args: any[]) => void) {
-    if (LayerEventList.indexOf(name) !== -1) {
+    if (OriginLayerEventList.indexOf(name) !== -1) {
       this.layer.on(name, callback);
     } else {
       super.on(name, callback);
@@ -321,7 +326,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    * 事件代理: 绑定一次事件
    */
   public once(name: string, callback: (...args: any[]) => void) {
-    if (LayerEventList.indexOf(name) !== -1) {
+    if (OriginLayerEventList.indexOf(name) !== -1) {
       this.layer.once(name, callback);
     } else {
       super.once(name, callback);
@@ -333,7 +338,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    * 事件代理: 解绑事件
    */
   public off(name: string, callback: (...args: any[]) => void) {
-    if (LayerEventList.indexOf(name) !== -1) {
+    if (OriginLayerEventList.indexOf(name) !== -1) {
       this.layer.off(name, callback);
     } else {
       super.off(name, callback);

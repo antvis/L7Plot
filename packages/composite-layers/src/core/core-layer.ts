@@ -17,7 +17,7 @@ import {
   ISource,
 } from '../types';
 import Source from '@antv/l7-source';
-import { LayerEventList } from './constants';
+import { CoreLayerEvent, OriginLayerEventList } from './constants';
 import { MappingAttribute } from '../adaptor/attribute';
 
 /**
@@ -127,6 +127,8 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
 
     this.adaptorLayerAttr();
     this.setSource(source);
+
+    this.emit(CoreLayerEvent.CREATED);
   }
 
   /**
@@ -213,6 +215,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
   public addTo(scene: Scene) {
     this.scene = scene;
     scene.addLayer(this.layer);
+    this.emit(CoreLayerEvent.ADD);
   }
 
   /**
@@ -221,6 +224,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
   public remove() {
     if (!this.scene) return;
     this.scene.removeLayer(this.layer);
+    this.emit(CoreLayerEvent.REMOVE);
   }
 
   /**
@@ -237,8 +241,8 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
       this.adaptorLayerAttr();
     }
 
-    if (options.source && !isEqual(options.source, this.lastOptions.source)) {
-      this.setSource(options.source);
+    if (options.source) {
+      this.changeData(options.source);
     }
 
     this.scene?.setEnableRender(true);
@@ -287,6 +291,9 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
    * 支持 source 配置项
    */
   public changeData(source: SourceOptions) {
+    if (source.data === this.lastOptions.source.data) {
+      return;
+    }
     this.setSource(source);
   }
 
@@ -373,7 +380,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
    * 事件代理: 绑定事件
    */
   public on(name: string, callback: (...args: any[]) => void) {
-    if (LayerEventList.indexOf(name) !== -1) {
+    if (OriginLayerEventList.indexOf(name) !== -1) {
       this.layer.on(name, callback);
     } else {
       super.on(name, callback);
@@ -385,7 +392,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
    * 事件代理: 绑定一次事件
    */
   public once(name: string, callback: (...args: any[]) => void) {
-    if (LayerEventList.indexOf(name) !== -1) {
+    if (OriginLayerEventList.indexOf(name) !== -1) {
       this.layer.once(name, callback);
     } else {
       super.once(name, callback);
@@ -397,7 +404,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
    * 事件代理: 解绑事件
    */
   public off(name: string, callback: (...args: any[]) => void) {
-    if (LayerEventList.indexOf(name) !== -1) {
+    if (OriginLayerEventList.indexOf(name) !== -1) {
       this.layer.off(name, callback);
     } else {
       super.off(name, callback);

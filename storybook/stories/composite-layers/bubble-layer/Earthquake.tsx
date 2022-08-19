@@ -47,9 +47,13 @@ class Earthquake extends Component {
       },
       strokeColor: '#c0c0c0',
       lineWidth: 1,
+      // radius: {
+      //   field: 'mag',
+      //   value: ({ mag }) => (mag - 4.3) * 10,
+      // },
       radius: {
         field: 'mag',
-        value: ({ mag }) => (mag - 4.3) * 10,
+        value: [10, 40],
       },
       opacity: 0.8,
       label: {

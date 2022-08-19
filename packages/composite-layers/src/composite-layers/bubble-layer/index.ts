@@ -271,6 +271,13 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     const features = feature ? [feature] : [];
     const parser = this.source.parser;
     const data = parser.type === 'geojson' ? { type: 'FeatureCollection', features } : features;
+
+    // if (!Array.isArray(this.options.radius) && typeof this.options.radius === 'object' && this.options.radius.field) {
+    //   const scale = this.fillLayer.layer.getScale(this.options.radius.field);
+    //   console.log('this.options.radius.field): ', this.options.radius.field);
+    //   console.log('scale: ', scale);
+    // }
+
     this.highlightStrokeLayer.changeData({ data, parser });
     this.highlightData = featureId;
   }
@@ -302,7 +309,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
   protected initSubLayersEvent() {
     // 初始化主图层交互事件
     this.fillLayer.off('mousemove', this.onHighlighHandle);
-    this.fillLayer.off('unmousemove', this.onHighlighHandle);
+    this.fillLayer.off('mouseout', this.onHighlighHandle);
     this.fillLayer.off('click', this.onSelectHandle);
     this.selectData = [];
     this.highlightData = null;
@@ -310,7 +317,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     // active
     if (this.options.state.active) {
       this.fillLayer.on('mousemove', this.onHighlighHandle);
-      this.fillLayer.on('unmousemove', this.onUnhighlighHandle);
+      this.fillLayer.on('mouseout', this.onUnhighlighHandle);
     }
     // select
     if (this.options.state.select) {

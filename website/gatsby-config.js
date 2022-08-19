@@ -181,7 +181,7 @@ module.exports = {
     showChartResize: true, // 是否在demo页展示图表视图切换
     docsearchOptions: {
       versionV3: true,
-      apiKey: '94877923b52fede27834c0e345b19e6d',
+      apiKey: '614478b3f9fabe8e68f5d6a65b48054b',
       indexName: 'l7plot-antv',
       appId: '3RDFA6ITAF',
     },
