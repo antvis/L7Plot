@@ -1,3 +1,4 @@
+import { omit } from '@antv/util';
 import { CompositeLayer } from '../../core/composite-layer';
 import { TextLayer } from '../../core-layers/text-layer';
 import { PointLayer } from '../../core-layers/point-layer';
@@ -79,7 +80,7 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
       color,
       iconStyle,
       ...baseConfig
-    } = this.options;
+    } = omit(this.options, ['source']);
     const defaultState = this.layerState;
 
     const fillState = {

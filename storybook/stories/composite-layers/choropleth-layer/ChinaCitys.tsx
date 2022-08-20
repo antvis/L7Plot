@@ -26,6 +26,7 @@ class ChinaCitys extends Component {
       .then((data) => {
         this.choroplethLayer = new ChoroplethLayer({
           visible: true,
+          autoFit: true,
           source: {
             data: data,
             parser: {
@@ -81,7 +82,7 @@ class ChinaCitys extends Component {
 
   update = () => {
     if (this.scene) {
-      this.choroplethLayer?.update({ fillColor: 'rgb(239,243,255)', autoFit: true, strokeColor: 'blue' });
+      this.choroplethLayer?.update({ fillColor: 'rgb(239,243,255)', strokeColor: 'blue' });
     }
   };
 

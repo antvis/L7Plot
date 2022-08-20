@@ -1,6 +1,7 @@
-import { deepMix, uniqueId } from '@antv/util';
+import { uniqueId } from '@antv/util';
 import EventEmitter from '@antv/event-emitter';
 import Source from '@antv/l7-source';
+import { deepMergeLayerOptions, isSourceChanged } from '../utils';
 import { Scene, SourceOptions, ICompositeLayer, CompositeLayerType, LayerBlend, ICoreLayer, ISource } from '../types';
 import { CompositeLayerEvent, OriginLayerEventList } from './constants';
 import { LayerGroup } from './layer-group';
@@ -31,7 +32,10 @@ export interface CompositeLayerOptions {
   /** 图层元素混合效果 */
   blend?: LayerBlend;
   /** 数据源 */
-  source: any;
+  source: {
+    /** 数据 */
+    data: any;
+  };
 }
 
 export abstract class CompositeLayer<O extends CompositeLayerOptions> extends EventEmitter implements ICompositeLayer {
@@ -94,7 +98,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     const { id, name } = options;
     this.id = id ? id : uniqueId('composite-layer');
     this.name = name ? name : this.id;
-    this.options = deepMix({}, this.getDefaultOptions(), options);
+    this.options = deepMergeLayerOptions<O>(this.getDefaultOptions() as O, options);
     this.lastOptions = this.options;
     this.source = this.createSource();
     const layers = this.createSubLayers();
@@ -138,6 +142,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
 
   /**
    * 设置子图层数据
+   *支持 source 配置项与 source 实例更新
    */
   protected setSubLayersSource(source: SourceOptions | ISource) {
     this.layer.changeData(source);
@@ -173,10 +178,13 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    */
   public update(options: Partial<O>) {
     this.updateOption(options);
+
     // 数据更新
-    if (options.source) {
+    if (options.source && isSourceChanged(options.source, this.lastOptions.source)) {
       this.changeData(options.source);
     }
+
+    // 图层更新
     this.updateSubLayers(options);
   }
 
@@ -185,7 +193,8 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    */
   public updateOption(options: Partial<O>) {
     this.lastOptions = this.options;
-    this.options = deepMix({}, this.options, options);
+
+    this.options = deepMergeLayerOptions<O>(this.options, options);
   }
 
   /**
@@ -201,12 +210,8 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
 
   /**
    * 更新数据
-   * 支持 source 配置项与 source 实例更新
    */
-  public changeData(source: SourceOptions | ISource) {
-    if (source.data === this.lastOptions.source.data) {
-      return;
-    }
+  public changeData(source: SourceOptions) {
     this.setSubLayersSource(source);
   }
 

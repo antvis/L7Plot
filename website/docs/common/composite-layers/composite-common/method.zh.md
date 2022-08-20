@@ -24,7 +24,7 @@ layer.update(options: Partial<LayerOptions>);
 
 ### changeData
 
-更新数据源。
+更新数据。
 
 ```js
 layer.changeData(source: SourceOptions);

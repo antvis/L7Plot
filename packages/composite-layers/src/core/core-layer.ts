@@ -1,5 +1,7 @@
+import Source from '@antv/l7-source';
 import EventEmitter from '@antv/event-emitter';
-import { deepMix, isEqual, isUndefined, uniqueId, omit } from '@antv/util';
+import { isEqual, isUndefined, uniqueId, omit } from '@antv/util';
+import { deepMergeLayerOptions, isSourceChanged } from '../utils';
 import {
   ICoreLayer,
   ILayer,
@@ -16,7 +18,6 @@ import {
   TextureAttr,
   ISource,
 } from '../types';
-import Source from '@antv/l7-source';
 import { CoreLayerEvent, OriginLayerEventList } from './constants';
 import { MappingAttribute } from '../adaptor/attribute';
 
@@ -121,7 +122,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
     const { id, name, source } = options;
     this.id = id ? id : uniqueId('core-layer');
     this.name = name ? name : this.id;
-    this.options = deepMix({}, this.getDefaultOptions(), options);
+    this.options = deepMergeLayerOptions<O>(this.getDefaultOptions() as O, options);
     this.lastOptions = this.options;
     this.layer = this.createLayer();
 
@@ -241,7 +242,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
       this.adaptorLayerAttr();
     }
 
-    if (options.source) {
+    if (options.source && isSourceChanged(options.source, this.lastOptions.source)) {
       this.changeData(options.source);
     }
 
@@ -254,7 +255,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
    */
   public updateOption(options: Partial<O>) {
     this.lastOptions = this.options;
-    this.options = deepMix({}, this.options, options);
+    this.options = deepMergeLayerOptions<O>(this.options, options);
   }
 
   // 更新: 更新图层属性配置
@@ -291,9 +292,6 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
    * 支持 source 配置项
    */
   public changeData(source: SourceOptions) {
-    if (source.data === this.lastOptions.source.data) {
-      return;
-    }
     this.setSource(source);
   }
 
