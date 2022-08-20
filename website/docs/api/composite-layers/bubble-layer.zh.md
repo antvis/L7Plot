@@ -15,7 +15,7 @@ order: 5
 
 ### `options.`radius
 
-`number|object|Function` optional
+`number|SizeStyleAttribute|Function` optional
 
 气泡半径大小
 
@@ -72,7 +72,7 @@ order: 5
 
 ### `options.`fillColor
 
-`string|object|Function` optional default: `'#5FD3A6'`
+`string|ColorStyleAttribute|Function` optional default: `'#5FD3A6'`
 
 填充颜色。
 

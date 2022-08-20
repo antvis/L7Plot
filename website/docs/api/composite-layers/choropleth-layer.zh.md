@@ -15,7 +15,7 @@ order: 6
 
 ### `options.`fillColor
 
-`string|object|Function` optional default: `'#5FD3A6'`
+`string|ColorStyleAttribute|Function` optional default: `'#5FD3A6'`
 
 填充颜色。
 
