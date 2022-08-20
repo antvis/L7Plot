@@ -1,4 +1,4 @@
-import { clone, isEqual, isUndefined } from '@antv/util';
+import { clone, isEqual, isUndefined, omit } from '@antv/util';
 import { CompositeLayer } from '../../core/composite-layer';
 import { PointLayer } from '../../core-layers/point-layer';
 import { TextLayer } from '../../core-layers/text-layer';
@@ -147,7 +147,8 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
       lineOpacity,
       lineWidth,
       ...baseConfig
-    } = this.options;
+    } = omit(this.options, ['source']);
+    // omit source 目前是图层共享 source，避免更新时透传 source 数据
     const defaultState = this.layerState;
 
     const fillState = {

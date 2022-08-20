@@ -1,4 +1,4 @@
-import { clone, isEqual, isUndefined } from '@antv/util';
+import { clone, isEqual, isUndefined, omit } from '@antv/util';
 import { CompositeLayer } from '../../core/composite-layer';
 import { LineLayer } from '../../core-layers/line-layer';
 import { PolygonLayer } from '../../core-layers/polygon-layer';
@@ -149,7 +149,8 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
    * 获取填充图层配置项
    */
   private getFillLayerOptions() {
-    const { visible, minZoom, maxZoom, zIndex = 0, fillColor, opacity, ...baseConfig } = this.options;
+    // omit source 目前是图层共享 source，避免更新时透传 source 数据
+    const { visible, minZoom, maxZoom, zIndex = 0, fillColor, opacity, ...baseConfig } = omit(this.options, ['source']);
     const defaultState = this.layerState;
 
     const fillState = {
