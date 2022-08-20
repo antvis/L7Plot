@@ -16,23 +16,27 @@ export type BubbleLayerActiveOptions = {
 
 export interface BubbleLayerOptions extends CompositeLayerOptions {
   /**
-   * 具体的数据
+   * 数据配置
    */
   source: SourceOptions | ISource;
   /**
    * 点半径
+   * @default 12
    */
   radius?: PointLayerOptions['size'];
   /**
    * 填充色
+   * @default '#5FD3A6'
    */
   fillColor?: PointLayerOptions['color'];
   /**
    * 填充透明度
+   * @default 1
    */
   opacity?: number;
   /**
    * 描边线宽
+   * @default 1
    */
   lineWidth?: number;
   /**
@@ -41,6 +45,7 @@ export interface BubbleLayerOptions extends CompositeLayerOptions {
   strokeColor?: string;
   /**
    * 描边透明度
+   * @default 1
    */
   lineOpacity?: number;
   /**
@@ -51,13 +56,21 @@ export interface BubbleLayerOptions extends CompositeLayerOptions {
    * 交互反馈
    */
   state?: {
-    /** 高亮交互 */
+    /**
+     * 高亮交互
+     * @default false
+     */
     active?: boolean | BubbleLayerActiveOptions;
-    /** 选中交互 */
+    /** 选中交互
+     * @default false
+     */
     select?: boolean | BubbleLayerActiveOptions;
   };
+  // 文档暂时不透出，后面改多选和单选并存交互
+  // https://github.com/antvis/L7Plot/issues/176
   /**
    * 是否启用多选
+   * @default false
    */
   enabledMultiSelect?: boolean;
 }

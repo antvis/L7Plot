@@ -16,7 +16,10 @@ export interface CompositeLayerOptions {
   id?: string;
   /** 图层 zIndex */
   zIndex?: number;
-  /** 图层是否可见 */
+  /**
+   * 图层是否可见
+   * @default true
+   */
   visible?: boolean;
   /** 图层最小可见层级 */
   minZoom?: number;
@@ -25,13 +28,20 @@ export interface CompositeLayerOptions {
   /**
    * 图层拾取缓存配置，
    * 如 1px 宽度的线鼠标很难拾取到, 通过设置该参数可扩大拾取的范围
+   * @default 0
    * */
   pickingBuffer?: number;
-  /** 图层初始化完成之后，地图是否自动缩放到图层范围 */
+  /**
+   * 图层加载成功后是否自动定位到图层数据可见范围，注意开启后图层数据发生更新时，地图也会自动缩放到图层的数据边界范围
+   * @default false
+   */
   autoFit?: boolean;
-  /** 图层元素混合效果 */
+  /**
+   * 图层元素混合效果
+   * @default 'normal'
+   * */
   blend?: LayerBlend;
-  /** 数据源 */
+  /** 数据配置 */
   source: {
     /** 数据 */
     data: any;

@@ -242,11 +242,13 @@ BubbleLayerActiveOptions 配置如下：
 }
 ```
 
-### `options.`enabledMultiSelect
+<!-- 多选文档暂时不透出，后面改多选和单选并存交互 -->
+
+<!-- ### `options.`enabledMultiSelect
 
 `boolean` optional default: `false`
 
-是否启用多选。
+是否启用多选。 -->
 
 ## 二、属性
 
@@ -283,3 +285,10 @@ layer.boxSelect(bounds: [number, number, number, number], callback: (...args: an
 ## 四、事件
 
 `markdown:docs/common/composite-layers/composite-common/event.zh.md`
+
+#### 选择事件
+
+| 事件名   | 类型         | 描述                         |
+| -------- | ------------ | ---------------------------- |
+| select   | 选择事件     | 鼠标点击选中图层要素事件     |
+| unselect | 取消选择事件 | 鼠标点击取消选中图层要素事件 |
