@@ -1,6 +1,6 @@
 ### `options.`size
 
-`number|object|Function` optional
+`number|SizeStyleAttribute|Function` optional
 
 元素大小。
 

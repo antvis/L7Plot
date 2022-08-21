@@ -1,6 +1,6 @@
 ### `options.`shape
 
-`string|Function|object` optional default: `'circle'`
+`string|ShapeStyleAttribute|Function` optional default: `'circle'`
 
 元素形状，内置以下形状：
 

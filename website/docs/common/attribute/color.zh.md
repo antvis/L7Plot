@@ -1,6 +1,6 @@
 ### `options.`color
 
-`string|object|Function` optional default: `'#5FD3A6'`
+`string|ColorStyleAttribute|Function` optional default: `'#5FD3A6'`
 
 元素颜色。
 

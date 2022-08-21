@@ -24,7 +24,7 @@ export type IconLayerActiveOptions = {
 
 export interface IconLayerOptions extends CompositeLayerOptions {
   /**
-   * 具体的数据
+   * 数据配置
    */
   source: IconLayerSourceOptions | ISource;
   /**
@@ -33,6 +33,7 @@ export interface IconLayerOptions extends CompositeLayerOptions {
   fillBottomColor?: false | string;
   /**
    * 填充透明度
+   * @default 1
    */
   opacity?: number;
   /**
@@ -45,6 +46,7 @@ export interface IconLayerOptions extends CompositeLayerOptions {
   color?: PointLayerOptions['color'];
   /**
    * 图标大小
+   * @default 12
    */
   radius?: PointLayerOptions['size'];
   /**
@@ -59,13 +61,22 @@ export interface IconLayerOptions extends CompositeLayerOptions {
    * 交互反馈
    */
   state?: {
-    /** 高亮交互 */
+    /**
+     * 高亮交互
+     * @default false
+     */
     active?: boolean | IconLayerActiveOptions;
-    /** 选中交互 */
+    /**
+     * 选中交互
+     * @default false
+     */
     select?: boolean | IconLayerActiveOptions;
   };
+  // 文档暂时不透出，后面改多选和单选并存交互
+  // https://github.com/antvis/L7Plot/issues/176
   /**
    * 是否启用多选
+   * @default false
    */
   enabledMultiSelect?: boolean;
 }

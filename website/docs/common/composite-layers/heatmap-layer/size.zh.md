@@ -1,6 +1,6 @@
 ### `options.`size
 
-`number|object|Function` optional
+`number|SizeStyleAttribute|Function` optional
 
 当 shape 为普通热力（heatmap、heatmap3D）时，size 代表热力大小，配置如下：
 
