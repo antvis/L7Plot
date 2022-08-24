@@ -147,7 +147,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
       lineOpacity,
       lineWidth,
       ...baseConfig
-    } = omit(this.options, ['source']);
+    } = omit<any>(this.options, ['source']) as Omit<BubbleLayerOptions, 'source'>;
     // omit source 目前是图层共享 source，避免更新时透传 source 数据
     const defaultState = this.layerState;
 

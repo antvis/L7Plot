@@ -150,7 +150,15 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
    */
   private getFillLayerOptions() {
     // omit source 目前是图层共享 source，避免更新时透传 source 数据
-    const { visible, minZoom, maxZoom, zIndex = 0, fillColor, opacity, ...baseConfig } = omit(this.options, ['source']);
+    const {
+      visible,
+      minZoom,
+      maxZoom,
+      zIndex = 0,
+      fillColor,
+      opacity,
+      ...baseConfig
+    } = omit<any>(this.options, ['source']) as Omit<ChoroplethLayerOptions, 'source'>;
     const defaultState = this.layerState;
 
     const fillState = {
