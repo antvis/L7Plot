@@ -39,8 +39,8 @@ export interface ICoreLayer {
   addTo(scene: Scene): void;
   remove(): void;
 
-  update<T>(options: T): void;
-  updateOption<T>(options: T): void;
+  update(options: unknown): void;
+  updateOption(options: unknown): void;
 
   changeData(data: SourceOptions): void;
   setSource(source: ISource): void;
@@ -81,8 +81,8 @@ export interface ICompositeLayer {
   addTo(scene: Scene): void;
   remove(): void;
 
-  update<T>(options: T): void;
-  updateOption<T>(options: T): void;
+  update(options: unknown): void;
+  updateOption(options: unknown): void;
 
   changeData(data: SourceOptions): void;
   render(): void;
