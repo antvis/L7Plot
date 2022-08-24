@@ -1,16 +1,13 @@
 import { clone, isEqual, isUndefined, omit } from '@antv/util';
 import { CompositeLayer } from '../../core/composite-layer';
 import { LineLayer } from '../../core-layers/line-layer';
-import { PolygonLayer } from '../../core-layers/polygon-layer';
-import { TextLayer } from '../../core-layers/text-layer';
 import { getDefaultState } from './adaptor';
-import { ChoroplethLayerOptions, ChoroplethLayerSourceOptions } from './types';
+import { PathLayerOptions, PathLayerSourceOptions } from './types';
 import { ICoreLayer, ISource, MouseEvent } from '../../types';
 import { EMPTY_GEOJSON_SOURCE } from '../common/constants';
 import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
-import { getLabelLayerOptions } from '../common/label-layer';
 
-export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
+export class PathLayer extends CompositeLayer<PathLayerOptions> {
   /**
    * 默认配置项
    */
@@ -18,7 +15,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   /**
    * 复合图层类型
    */
-  public type = CompositeLayer.LayerType.ChoroplethLayer;
+  public type = CompositeLayer.LayerType.PathLayer;
   /**
    * 主图层
    */
@@ -63,12 +60,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
    * 选中数据
    */
   private selectData: { feature: any; featureId: number }[] = [];
-  /**
-   * 标注文本图层
-   */
-  public get labelLayer() {
-    return this.subLayers.getLayer('labelLayer') as TextLayer;
-  }
+
   /**
    * 图层交互状态配置
    */
@@ -78,7 +70,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
    */
   public interaction = true;
 
-  constructor(options: ChoroplethLayerOptions) {
+  constructor(options: PathLayerOptions) {
     super(options);
     this.initSubLayersEvent();
   }
@@ -86,8 +78,8 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   /**
    * 获取默认配置
    */
-  public getDefaultOptions(): Partial<ChoroplethLayerOptions> {
-    return ChoroplethLayer.DefaultOptions;
+  public getDefaultOptions(): Partial<PathLayerOptions> {
+    return PathLayer.DefaultOptions;
   }
 
   /**
@@ -98,10 +90,10 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     this.layerState = getDefaultState(this.options.state);
 
     // 映射填充面图层
-    const fillLayer = new PolygonLayer({
+    const fillLayer = new LineLayer({
       ...this.getFillLayerOptions(),
       id: 'fillLayer',
-      shape: 'fill',
+      shape: 'line',
       source,
     });
     const fillBottomColor = this.options.fillBottomColor;
@@ -122,7 +114,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     });
 
     // 选中填充图层
-    const selectFillLayer = new PolygonLayer({
+    const selectFillLayer = new LineLayer({
       ...this.getSelectFillLayerOptions(),
       id: 'selectFillLayer',
     });
@@ -133,14 +125,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       id: 'selectStrokeLayer',
     });
 
-    // 标注图层
-    const labelLayer = new TextLayer({
-      ...getLabelLayerOptions<ChoroplethLayerOptions>(this.options),
-      id: 'labelLayer',
-      source,
-    });
-
-    const subLayers = [fillLayer, strokeLayer, highlightStrokeLayer, selectFillLayer, selectStrokeLayer, labelLayer];
+    const subLayers = [fillLayer, strokeLayer, highlightStrokeLayer, selectFillLayer, selectStrokeLayer];
 
     return subLayers as ICoreLayer[];
   }
@@ -158,7 +143,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       fillColor,
       opacity,
       ...baseConfig
-    } = omit(this.options, ['source']) as Omit<ChoroplethLayerOptions, 'source'>;
+    } = omit(this.options, ['source']) as Omit<PathLayerOptions, 'source'>;
     const defaultState = this.layerState;
 
     const fillState = {
@@ -278,12 +263,11 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   /**
    * 设置子图层数据
    */
-  protected setSubLayersSource(source: ChoroplethLayerSourceOptions | ISource) {
+  protected setSubLayersSource(source: PathLayerSourceOptions | ISource) {
     if (this.isSourceInstance(source)) {
       this.source = source;
       this.fillLayer.setSource(source);
       this.strokeLayer.setSource(source);
-      this.labelLayer.setSource(source);
     } else {
       const { data, ...option } = source;
       this.source.setData(data, option);
@@ -405,7 +389,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   /**
    * 更新
    */
-  public update(options: Partial<ChoroplethLayerOptions>) {
+  public update(options: Partial<PathLayerOptions>) {
     super.update(options);
 
     this.initSubLayersEvent();
@@ -414,7 +398,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   /**
    * 更新: 更新配置
    */
-  public updateOption(options: Partial<ChoroplethLayerOptions>) {
+  public updateOption(options: Partial<PathLayerOptions>) {
     super.updateOption(options);
     this.layerState = getDefaultState(this.options.state);
   }
@@ -422,7 +406,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   /**
    * 更新子图层
    */
-  protected updateSubLayers(options: Partial<ChoroplethLayerOptions>) {
+  protected updateSubLayers(options: Partial<PathLayerOptions>) {
     // 映射填充面图层
     this.fillLayer.update(this.getFillLayerOptions());
 
@@ -437,9 +421,6 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
 
     // 选中描边图层
     this.selectStrokeLayer.update(this.getSelectStrokeLayerOptions());
-
-    // 标注图层
-    this.labelLayer.update(getLabelLayerOptions<ChoroplethLayerOptions>(this.options));
 
     // 重置高亮/选中状态
     if (this.options.visible) {
@@ -485,7 +466,6 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     this.highlightStrokeLayer.setIndex(zIndex + 0.1);
     this.selectFillLayer.setIndex(zIndex + 0.1);
     this.selectStrokeLayer.setIndex(zIndex + 0.1);
-    this.labelLayer.setIndex(zIndex + 0.1);
   }
 
   /**
