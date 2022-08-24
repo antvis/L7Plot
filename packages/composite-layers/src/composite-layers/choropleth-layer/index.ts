@@ -158,7 +158,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       fillColor,
       opacity,
       ...baseConfig
-    } = omit(this.options, ['source']) as Omit<ChoroplethLayerOptions, 'source'>;
+    } = omit<any>(this.options, ['source']) as Omit<ChoroplethLayerOptions, 'source'>;
     const defaultState = this.layerState;
 
     const fillState = {

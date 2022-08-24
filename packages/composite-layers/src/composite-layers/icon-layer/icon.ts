@@ -80,7 +80,7 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
       color,
       iconStyle,
       ...baseConfig
-    } = omit(this.options, ['source']);
+    } = omit<any>(this.options, ['source']) as Omit<T, 'source'>;
     const defaultState = this.layerState;
 
     const fillState = {
