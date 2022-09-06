@@ -1,6 +1,6 @@
 import { Area } from '@antv/l7plot';
 
-fetch('https://gw.alipayobjects.com/os/bmw-prod/707cd4be-8ffe-4778-b863-3335eefd5fd5.json')
+fetch('https://gw.alipayobjects.com/os/antfincdn/EIXm%24lEPD%24/europe.geo.json')
   .then((response) => response.json())
   .then((data) => {
     new Area('container', {
@@ -19,13 +19,13 @@ fetch('https://gw.alipayobjects.com/os/bmw-prod/707cd4be-8ffe-4778-b863-3335eefd
       },
       autoFit: true,
       color: {
-        field: 'code',
-        value: ['#fee5d9', '#fcae91', '#fb6a4a', '#de2d26', '#a50f15'],
+        field: 'pop_est',
+        value: ['rgb(239,243,255)', 'rgb(189,215,231)', 'rgb(107,174,214)', 'rgb(49,130,189)', 'rgb(8,81,156)'],
         scale: { type: 'quantile' },
       },
       style: {
         opacity: 1,
-        stroke: '#fff',
+        stroke: 'rgb(93,112,146)',
         lineWidth: 0.6,
         lineOpacity: 1,
       },
@@ -42,11 +42,11 @@ fetch('https://gw.alipayobjects.com/os/bmw-prod/707cd4be-8ffe-4778-b863-3335eefd
           stroke: '#fff',
           strokeWidth: 1.5,
           textAllowOverlap: false,
-          padding: [8, 8],
+          padding: [5, 5],
         },
       },
       tooltip: {
-        items: ['name', 'code'],
+        items: ['name', 'name_zh', 'pop_est'],
       },
       zoom: {
         position: 'bottomright',

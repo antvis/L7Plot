@@ -1,6 +1,6 @@
 import { Area } from '@antv/l7plot';
 
-fetch('https://gw.alipayobjects.com/os/bmw-prod/d6da7ac1-8b4f-4a55-93ea-e81aa08f0cf3.json')
+fetch('https://gw.alipayobjects.com/os/basement_prod/d36ad90e-3902-4742-b8a2-d93f7e5dafa2.json')
   .then((response) => response.json())
   .then((data) => {
     new Area('container', {
@@ -19,13 +19,13 @@ fetch('https://gw.alipayobjects.com/os/bmw-prod/d6da7ac1-8b4f-4a55-93ea-e81aa08f
       },
       autoFit: true,
       color: {
-        field: 'adcode',
-        value: ['rgb(239,243,255)', 'rgb(189,215,231)', 'rgb(107,174,214)', 'rgb(49,130,189)', 'rgb(8,81,156)'],
+        field: 'density',
+        value: ['#fee5d9', '#fcae91', '#fb6a4a', '#de2d26', '#a50f15'],
         scale: { type: 'quantile' },
       },
       style: {
         opacity: 1,
-        stroke: 'rgb(93,112,146)',
+        stroke: '#fff',
         lineWidth: 0.6,
         lineOpacity: 1,
       },
@@ -42,11 +42,11 @@ fetch('https://gw.alipayobjects.com/os/bmw-prod/d6da7ac1-8b4f-4a55-93ea-e81aa08f
           stroke: '#fff',
           strokeWidth: 1.5,
           textAllowOverlap: false,
-          padding: [5, 5],
+          padding: [8, 8],
         },
       },
       tooltip: {
-        items: ['name', 'adcode'],
+        items: ['name', 'density'],
       },
       zoom: {
         position: 'bottomright',

@@ -38,7 +38,7 @@ fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-dat
             lineWidth: 0.6,
             lineOpacity: 0.8,
           },
-          chinaBorder: false,
+          chinaBorder: true,
           label: {
             visible: true,
             field: 'name',
