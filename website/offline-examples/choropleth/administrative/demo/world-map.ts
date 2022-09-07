@@ -41,7 +41,7 @@ new Choropleth('container', {
     lineOpacity: 1,
     fillBottomColor: '#d8d8d84d',
   },
-  chinaBorder: false,
+  chinaBorder: true,
   label: {
     visible: true,
     field: 'name',
