@@ -5,7 +5,7 @@ fetch('https://gw.alipayobjects.com/os/antfincdn/S2Pb%26549sG/20210723023614.jso
   .then((data) => {
     new Heatmap('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'dark',
         zoom: 11.7,
         center: [120.19660949707033, 30.234747338474293],

@@ -11,7 +11,7 @@ Promise.all([
 ]).then(([world, dotData, flydata]) => {
   new L7Plot('container', {
     map: {
-      type: 'mapbox',
+      type: 'amap',
       style: 'dark',
       pitch: 35,
       center: [3.438, 40.16797],

@@ -5,7 +5,7 @@ fetch('https://gw.alipayobjects.com/os/bmw-prod/7455fead-1dc0-458d-b91a-fb4cf99e
   .then((data) => {
     new L7Plot('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'dark',
         center: [60, 40.7128],
         zoom: 2,

@@ -5,7 +5,7 @@ fetch('https://gw.alipayobjects.com/os/antfincdn/EIXm%24lEPD%24/europe.geo.json'
   .then((data) => {
     new Area('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'blank',
         center: [120.19382669582967, 30.258134],
         zoom: 3,

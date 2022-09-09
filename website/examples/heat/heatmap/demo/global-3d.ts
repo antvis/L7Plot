@@ -5,7 +5,7 @@ fetch('https://gw.alipayobjects.com/os/basement_prod/d3564b06-670f-46ea-8edb-842
   .then((data) => {
     new Heatmap('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'dark',
         center: [127.5671666579043, 7.445038892195569],
         zoom: 2.632456779444394,

@@ -2,7 +2,7 @@ import { Choropleth } from '@antv/l7plot';
 
 new Choropleth('container', {
   map: {
-    type: 'mapbox',
+    type: 'amap',
     style: 'blank',
     center: [120.19382669582967, 30.258134],
     zoom: 3,

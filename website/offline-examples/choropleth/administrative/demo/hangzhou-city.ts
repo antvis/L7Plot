@@ -8,7 +8,7 @@ fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-dat
       .map((item) => Object.assign({}, item, { value: Math.random() * 5000 }));
     new Choropleth('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'blank',
         center: [120.19382669582967, 30.258134],
         zoom: 3,

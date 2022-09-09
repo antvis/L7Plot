@@ -5,7 +5,7 @@ fetch('https://gw.alipayobjects.com/os/antfincdn/Ml2DwikvFC/20210726100731.json'
   .then((data) => {
     new Hexbin('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'dark',
         pitch: 43,
         center: [120.13383079335335, 29.9],
