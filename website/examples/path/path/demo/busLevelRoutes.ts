@@ -6,7 +6,7 @@ fetch('https://gw.alipayobjects.com/os/basement_prod/ee07641d-5490-4768-9826-258
     new Path('container', {
       theme: 'dark',
       map: {
-        type: 'mapbox',
+        type: 'amap',
         center: [116.3956, 39.9392],
         pitch: 45,
         zoom: 10,

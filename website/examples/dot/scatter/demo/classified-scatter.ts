@@ -5,7 +5,7 @@ fetch('https://gw.alipayobjects.com/os/basement_prod/6c4bb5f2-850b-419d-afc4-e46
   .then((data) => {
     new Dot('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'dark',
         center: [-121.24357, 37.58264],
         pitch: 0,

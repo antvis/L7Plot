@@ -5,7 +5,7 @@ fetch('https://gw.alipayobjects.com/os/antfincdn/aBQAMIpvPL/qingdao_500m.csv')
   .then((data) => {
     new Grid('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'dark',
         pitch: 0,
         zoom: 8.6,

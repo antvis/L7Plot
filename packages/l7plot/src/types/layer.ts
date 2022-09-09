@@ -278,18 +278,18 @@ export interface PolygonLayerConfig extends Partial<PlotLayerOptions> {
 /**
  * L7Plot 内置图层的基类接口
  */
-export interface IPlotLayer {
+export interface IPlotLayer<T extends PlotLayerOptions = PlotLayerOptions> {
   name: string;
   type: string;
   layer: ILayer;
   interaction: boolean;
   options: PlotLayerOptions;
 
-  pickLayerConfig<T extends PlotLayerOptions>(params: T): Partial<ILayerConfig>;
+  pickLayerConfig(params: T): Partial<ILayerConfig>;
   addTo(scene: Scene): void;
   remove(scene: Scene): void;
-  update<T>(options: T): void;
-  updateOption<T>(options: T): void;
+  update(options: Partial<T>): void;
+  updateOption(options: Partial<T>): void;
   changeData(source: SourceOptions | Source): void;
   render(): void;
   show(): void;

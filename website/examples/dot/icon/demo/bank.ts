@@ -17,7 +17,7 @@ fetch('https://gw.alipayobjects.com/os/antfincdn/h%26vOn55UIF/yinhangwangdian.js
   .then((data) => {
     new Dot('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'dark',
         center: [116.473168, 39.993015],
         zoom: 15,

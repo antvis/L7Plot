@@ -5,7 +5,7 @@ fetch('https://gw.alipayobjects.com/os/antfincdn/SIybYh6xr1/arc.json')
   .then((data) => {
     new Flow('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'dark',
         center: [116.3956, 39.9392],
         pitch: 45,
