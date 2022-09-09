@@ -9,7 +9,7 @@ import { deepAssign } from '../../utils';
 
 const LayerConfigkeys = ['name', 'zIndex', 'visible', 'minZoom', 'maxZoom', 'pickingBuffer', 'autoFit', 'blend'];
 
-export abstract class PlotLayer<O extends PlotLayerOptions> extends EventEmitter implements IPlotLayer {
+export abstract class PlotLayer<O extends PlotLayerOptions> extends EventEmitter implements IPlotLayer<O> {
   /**
    * 地图图表类型
    */
