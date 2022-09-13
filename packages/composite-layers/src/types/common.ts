@@ -27,7 +27,10 @@ export {
 
 export { Scene };
 
-export type LayerBaseConfig = Omit<ILayerConfig, 'size' | 'shape' | 'shape2d' | 'shape3d' | 'colors'>;
+export type LayerBaseConfig = Omit<
+  ILayerConfig,
+  'size' | 'shape' | 'shape2d' | 'shape3d' | 'colors' | 'onHover' | 'onClick'
+>;
 export type ValueOf<T> = T[keyof T];
 export type ScaleConfig = IScale;
 

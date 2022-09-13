@@ -6,6 +6,7 @@ export const OriginLayerEventList: string[] = [
   // 鼠标事件
   // 单击事件
   'click',
+  'dblclick',
   'unclick',
   // 右键事件
   'contextmenu',
