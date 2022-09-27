@@ -41,11 +41,7 @@ class IconImage extends Component {
             icon1: 'https://gw.alipayobjects.com/zos/basement_prod/604b5e7f-309e-40db-b95b-4fac746c5153.svg',
             icon2: 'https://gw.alipayobjects.com/zos/basement_prod/7aa1f460-9f9f-499f-afdf-13424aa26bbf.svg',
           },
-          icon: {
-            field: 'name',
-            value: ['icon1', 'icon2'],
-          },
-
+          icon: 'icon1',
           radius: {
             field: 'unit_price',
             value: [1, 20],
@@ -53,12 +49,17 @@ class IconImage extends Component {
           opacity: 1,
           label: {
             field: 'name',
+            state: {
+              active: {
+                color: 'blue',
+              },
+            },
             style: {
-              fill: '#fff',
+              fill: '#f00',
               opacity: 0.6,
               fontSize: 12,
               textAnchor: 'top',
-              textOffset: [0, 20],
+              textOffset: [0, -40],
               spacing: 1,
               padding: [5, 5],
               stroke: '#ffffff',
@@ -67,13 +68,11 @@ class IconImage extends Component {
             },
           },
           state: {
-            active: {
-              radius: 20,
-              opacity: 1,
-            },
+            active: false,
             select: {
-              radius: 20,
+              radius: 10,
               opacity: 1,
+              icon: 'icon2',
             },
           },
         });

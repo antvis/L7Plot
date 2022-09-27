@@ -67,11 +67,13 @@ class IconFont extends Component {
               textOffset: [-10, 10], // 文本相对锚点的偏移量 [水平, 垂直]
               fontFamily: 'iconfont',
               textAllowOverlap: true,
+              iconfont: true,
             },
-            color: 'red',
+            color: 'blue',
             radius: 40,
             opacity: 1,
             label: {
+              visible: false,
               field: 'weather',
               style: {
                 fill: '#fff',
@@ -88,8 +90,7 @@ class IconFont extends Component {
             },
             state: {
               active: {
-                radius: 20,
-                opacity: 1,
+                color: 'red',
               },
               select: {
                 radius: 20,

@@ -1,6 +1,7 @@
 import { ISourceCFG, ISource } from '../../types';
-import { TextLayerStyleOptions } from '../../core-layers/text-layer/types';
+import { PointLayerStyleOptions } from '../../core-layers/point-layer/types';
 import { PointLayerOptions } from '../../core-layers/point-layer/types';
+import { TextLayerStyleOptions } from '../../core-layers/text-layer/types';
 import { CompositeLayerOptions } from '../../core/composite-layer';
 import { LabelOptions } from '../common/types';
 
@@ -20,6 +21,8 @@ export type IconLayerActiveOptions = {
   color?: string;
   /**图标透明度 */
   opacity?: number;
+
+  icon?: PointLayerOptions['shape'];
 };
 
 export interface IconLayerOptions extends CompositeLayerOptions {
@@ -52,7 +55,7 @@ export interface IconLayerOptions extends CompositeLayerOptions {
   /**
    * 图标样式
    */
-  iconStyle?: TextLayerStyleOptions;
+  iconStyle?: PointLayerStyleOptions;
   /**
    * 文本标注
    */
@@ -65,7 +68,12 @@ export interface IconLayerOptions extends CompositeLayerOptions {
      * 高亮交互
      * @default false
      */
-    active?: boolean | IconLayerActiveOptions;
+    active?:
+      | boolean
+      | {
+          color: string;
+          enable?: boolean;
+        };
     /**
      * 选中交互
      * @default false
@@ -88,6 +96,7 @@ export interface IconImageLayerOptions extends IconLayerOptions {
   iconAtlas: {
     [key: string]: string;
   };
+  iconStyle?: PointLayerStyleOptions;
 }
 
 export interface IconFontLayerOptions extends IconLayerOptions {
@@ -99,6 +108,8 @@ export interface IconFontLayerOptions extends IconLayerOptions {
     fontFamily: string;
     iconFonts: Array<[string, string]>;
   };
+  iconStyle?: TextLayerStyleOptions;
+
   /**
    * 文本标注
    */

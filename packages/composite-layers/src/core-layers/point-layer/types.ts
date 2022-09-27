@@ -78,6 +78,8 @@ export type PointTextLayerStyleOptions = {
   fontWeight?: string;
   /* 是否换行 */
   textAllowOverlap?: boolean;
+
+  iconfont?: true;
 };
 
 /**
