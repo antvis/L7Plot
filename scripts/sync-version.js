@@ -1,3 +1,4 @@
+const { exec } = require('child_process');
 const fs = require('fs-extra');
 const path = require('path');
 
@@ -15,4 +16,16 @@ packageNameList.forEach((packageName) => {
 `,
     'utf8'
   );
+});
+
+exec('git add .', (error, stdout, stderr) => {
+  if (error) {
+    console.log(`sync version error: ${error.message}`);
+    return;
+  }
+  if (stderr) {
+    console.log(`sync version stderr: ${stderr}`);
+    return;
+  }
+  console.log(`sync version success.`);
 });
