@@ -20,8 +20,11 @@ export * from './core-layers/heatmap-layer/types';
 // 线图层及类型定义 | author by [yunji]](https://github.com/lvisei)
 export { LineLayer } from './core-layers/line-layer';
 
-// 栅格图层及定义 ｜ author by [shihui](https://github.com/yiiiiiiqianyao)
+// 栅格图层类型及定义 ｜ author by [shihui](https://github.com/yiiiiiiqianyao)
 export { RasterLayer } from './core-layers/raster-layer';
+
+// 图片图层类型及定义 ｜ author by [shihui](https://github.com/yiiiiiiqianyao)
+export { ImageLayer } from './core-layers/image-layer';
 
 export * from './core-layers/line-layer/types';
 // 面图层及类型定义 | author by [yunji]](https://github.com/lvisei)
