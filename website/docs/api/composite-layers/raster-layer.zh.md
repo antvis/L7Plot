@@ -17,8 +17,6 @@ new RasterLayer(options: RasterLayerOptions)
 
 `markdown:docs/common/composite-layers/raster-layer/source.zh.md`
 
-`markdown:docs/common/composite-layers/raster-layer/shape.zh.md`
-
 `markdown:docs/common/attribute/color.zh.md`
 
 `markdown:docs/common/attribute/size.zh.md`

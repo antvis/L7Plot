@@ -28,9 +28,9 @@ const tiffdata = await getTiffData();
 ```js
 {
   source: {
-    tiffdata.data: Unit8Array,
-    {
-      parser: {
+    tiffdata.data,
+      {
+        parser: {
           type: 'raster',
           width: tiffdata.width,
           height: tiffdata.height,
@@ -38,7 +38,7 @@ const tiffdata = await getTiffData();
           max: 80,
           extent: [73.482190241, 3.82501784112, 135.106618732, 57.6300459963],
         },
-    }
+      };
   }
 }
 ```

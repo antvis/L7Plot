@@ -42,7 +42,8 @@
     "@antv/util": "^2.0.14"
   },
   "devDependencies": {
-    "@antv/l7": "^2.9.14"
+    "@antv/l7": "^2.9.14",
+    "geotiff": "1.0.0-beta.10"
   },
   "peerDependencies": {
     "@antv/l7": "^2.9.14"
