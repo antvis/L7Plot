@@ -5,7 +5,7 @@ fetch('https://gw.alipayobjects.com/os/antfincdn/g5hIthhKlr/quanguoshixianweizhi
   .then(({ list }) => {
     new Dot('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'dark',
         zoom: 5,
         center: [107.4976, 32.1697],

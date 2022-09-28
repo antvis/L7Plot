@@ -1,11 +1,11 @@
 import { Area } from '@antv/l7plot';
 
-fetch('https://gw.alipayobjects.com/os/bmw-prod/707cd4be-8ffe-4778-b863-3335eefd5fd5.json')
+fetch('https://gw.alipayobjects.com/os/basement_prod/d36ad90e-3902-4742-b8a2-d93f7e5dafa2.json')
   .then((response) => response.json())
   .then((data) => {
     new Area('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'blank',
         center: [120.19382669582967, 30.258134],
         zoom: 3,
@@ -19,7 +19,7 @@ fetch('https://gw.alipayobjects.com/os/bmw-prod/707cd4be-8ffe-4778-b863-3335eefd
       },
       autoFit: true,
       color: {
-        field: 'code',
+        field: 'density',
         value: ['#fee5d9', '#fcae91', '#fb6a4a', '#de2d26', '#a50f15'],
         scale: { type: 'quantile' },
       },
@@ -46,7 +46,7 @@ fetch('https://gw.alipayobjects.com/os/bmw-prod/707cd4be-8ffe-4778-b863-3335eefd
         },
       },
       tooltip: {
-        items: ['name', 'code'],
+        items: ['name', 'density'],
       },
       zoom: {
         position: 'bottomright',

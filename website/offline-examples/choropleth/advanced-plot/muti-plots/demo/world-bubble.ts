@@ -4,12 +4,12 @@ fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-dat
   .then((response) => response.json())
   .then((list) => {
     const data = list
-      .filter(({ level }) => level === 'province')
+      .filter(({ level }) => level === 'country')
       .map((item) => Object.assign({}, item, { value: Math.random() * 5000 }));
 
     new L7Plot('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'blank',
         center: [120.19382669582967, 30.258134],
         zoom: 3,
@@ -27,17 +27,18 @@ fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-dat
             },
           },
           viewLevel: {
-            level: 'country',
-            adcode: '100000',
+            level: 'world',
+            adcode: 'all',
           },
           autoFit: true,
           color: '#ccc',
           style: {
             opacity: 1,
-            stroke: '#F2F7F7',
+            stroke: '#bdbdbd',
             lineWidth: 0.6,
             lineOpacity: 0.8,
           },
+          chinaBorder: true,
           label: {
             visible: true,
             field: 'name',
@@ -45,11 +46,11 @@ fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-dat
               fill: '#000',
               opacity: 0.8,
               fontSize: 10,
-              stroke: '#f0f0f0',
+              stroke: '#fff',
               strokeWidth: 2,
               textAllowOverlap: false,
               padding: [5, 5],
-              textOffset: [0, 40],
+              textOffset: [0, 60],
             },
           },
         },
@@ -60,11 +61,12 @@ fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-dat
             data: data,
             parser: { type: 'json', x: 'lng', y: 'lat' },
           },
-          color: '#1AA9FF',
-          size: {
+          color: {
             field: 'value',
-            value: ({ value }) => value / 200,
+            value: ['#feedde', '#fdd0a2', '#fdae6b', '#fd8d3c', '#e6550d', '#a63603'],
+            scale: { type: 'quantile' },
           },
+          size: 15,
           style: {
             opacity: 1,
             stroke: '#fff',

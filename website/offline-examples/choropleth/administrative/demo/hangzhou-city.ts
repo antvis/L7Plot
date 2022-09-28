@@ -4,12 +4,11 @@ fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-dat
   .then((response) => response.json())
   .then((list) => {
     const data = list
-      .filter(({ level, parent }) => level === 'city' && parent === 330000)
+      .filter(({ level, parent }) => level === 'district' && parent === 330100)
       .map((item) => Object.assign({}, item, { value: Math.random() * 5000 }));
-
     new Choropleth('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'blank',
         center: [120.19382669582967, 30.258134],
         zoom: 3,
@@ -23,8 +22,8 @@ fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-dat
         },
       },
       viewLevel: {
-        level: 'province',
-        adcode: 330000,
+        level: 'city',
+        adcode: 330100,
       },
       autoFit: true,
       color: {
@@ -37,16 +36,6 @@ fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-dat
         stroke: '#ccc',
         lineWidth: 0.6,
         lineOpacity: 1,
-      },
-      chinaBorder: {
-        // 国界
-        national: { color: '#ccc', width: 1, opacity: 1 },
-        // 争议
-        dispute: { color: '#ccc', width: 1, opacity: 0.8, dashArray: [2, 2] },
-        // 海洋
-        coast: { color: '#ccc', width: 0.7, opacity: 0.8 },
-        // 港澳
-        hkm: { color: 'gray', width: 0.7, opacity: 0.8 },
       },
       label: {
         visible: true,

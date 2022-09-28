@@ -4,11 +4,20 @@ fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-dat
   .then((response) => response.json())
   .then((list) => {
     const data = list
-      .filter(({ level, parent }) => level === 'district' && parent === 330100)
+      .filter(({ level }) => level === 'province')
       .map((item) => Object.assign({}, item, { value: Math.random() * 5000 }));
+
+    const cityData = list
+      .filter(({ level }) => level === 'city')
+      .map((item) => Object.assign({}, item, { value: Math.random() * 2000 }));
+
+    const districtData = list
+      .filter(({ level }) => level === 'district')
+      .map((item) => Object.assign({}, item, { value: Math.random() * 1000 }));
+
     new Choropleth('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'blank',
         center: [120.19382669582967, 30.258134],
         zoom: 3,
@@ -22,10 +31,30 @@ fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-dat
         },
       },
       viewLevel: {
-        level: 'city',
-        adcode: 330100,
+        level: 'country',
+        adcode: 100000,
       },
       autoFit: true,
+      drill: {
+        steps: ['province', 'city'],
+        triggerUp: 'unclick',
+        triggerDown: 'click',
+        onDown: (from, to, callback) => {
+          const { level, granularity } = to;
+          if (granularity === 'city') {
+            callback({
+              source: { data: cityData, joinBy: { sourceField: 'adcode' } },
+            });
+          } else if (granularity === 'district') {
+            callback({
+              source: { data: districtData, joinBy: { sourceField: 'adcode' } },
+            });
+          }
+        },
+        onUp: (from, to, callback) => {
+          callback();
+        },
+      },
       color: {
         field: 'value',
         value: ['#B8E1FF', '#7DAAFF', '#3D76DD', '#0047A5', '#001D70'],

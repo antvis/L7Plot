@@ -2,7 +2,7 @@ import { Choropleth } from '@antv/l7plot';
 
 new Choropleth('container', {
   map: {
-    type: 'mapbox',
+    type: 'amap',
     style: 'blank',
     center: [120.19382669582967, 30.258134],
     zoom: 3,
@@ -41,7 +41,7 @@ new Choropleth('container', {
     lineOpacity: 1,
     fillBottomColor: '#d8d8d84d',
   },
-  chinaBorder: false,
+  chinaBorder: true,
   label: {
     visible: true,
     field: 'name',

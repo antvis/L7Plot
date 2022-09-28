@@ -6,7 +6,7 @@ fetch('https://gw.alipayobjects.com/os/antfincdn/1atwIMvcMo/beijinggongjiaoluxia
     new Path('container', {
       theme: 'dark',
       map: {
-        type: 'mapbox',
+        type: 'amap',
         center: [116.3956, 39.9392],
         pitch: 0,
         zoom: 10,

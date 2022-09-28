@@ -1,11 +1,11 @@
 import { Area } from '@antv/l7plot';
 
-fetch('https://gw.alipayobjects.com/os/bmw-prod/d6da7ac1-8b4f-4a55-93ea-e81aa08f0cf3.json')
+fetch('https://gw.alipayobjects.com/os/antfincdn/EIXm%24lEPD%24/europe.geo.json')
   .then((response) => response.json())
   .then((data) => {
     new Area('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'blank',
         center: [120.19382669582967, 30.258134],
         zoom: 3,
@@ -19,7 +19,7 @@ fetch('https://gw.alipayobjects.com/os/bmw-prod/d6da7ac1-8b4f-4a55-93ea-e81aa08f
       },
       autoFit: true,
       color: {
-        field: 'adcode',
+        field: 'pop_est',
         value: ['rgb(239,243,255)', 'rgb(189,215,231)', 'rgb(107,174,214)', 'rgb(49,130,189)', 'rgb(8,81,156)'],
         scale: { type: 'quantile' },
       },
@@ -46,7 +46,7 @@ fetch('https://gw.alipayobjects.com/os/bmw-prod/d6da7ac1-8b4f-4a55-93ea-e81aa08f
         },
       },
       tooltip: {
-        items: ['name', 'adcode'],
+        items: ['name', 'name_zh', 'pop_est'],
       },
       zoom: {
         position: 'bottomright',

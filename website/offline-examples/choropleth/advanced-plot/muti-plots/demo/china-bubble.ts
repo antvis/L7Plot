@@ -4,12 +4,12 @@ fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-dat
   .then((response) => response.json())
   .then((list) => {
     const data = list
-      .filter(({ level }) => level === 'country')
+      .filter(({ level }) => level === 'province')
       .map((item) => Object.assign({}, item, { value: Math.random() * 5000 }));
 
     new L7Plot('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'blank',
         center: [120.19382669582967, 30.258134],
         zoom: 3,
@@ -27,18 +27,17 @@ fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-dat
             },
           },
           viewLevel: {
-            level: 'world',
-            adcode: 'all',
+            level: 'country',
+            adcode: '100000',
           },
           autoFit: true,
           color: '#ccc',
           style: {
             opacity: 1,
-            stroke: '#bdbdbd',
+            stroke: '#F2F7F7',
             lineWidth: 0.6,
             lineOpacity: 0.8,
           },
-          chinaBorder: false,
           label: {
             visible: true,
             field: 'name',
@@ -46,11 +45,11 @@ fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-dat
               fill: '#000',
               opacity: 0.8,
               fontSize: 10,
-              stroke: '#fff',
+              stroke: '#f0f0f0',
               strokeWidth: 2,
               textAllowOverlap: false,
               padding: [5, 5],
-              textOffset: [0, 60],
+              textOffset: [0, 40],
             },
           },
         },
@@ -61,12 +60,11 @@ fetch(`https://gw.alipayobjects.com/os/alisis/geo-data-v0.1.2/administrative-dat
             data: data,
             parser: { type: 'json', x: 'lng', y: 'lat' },
           },
-          color: {
+          color: '#1AA9FF',
+          size: {
             field: 'value',
-            value: ['#feedde', '#fdd0a2', '#fdae6b', '#fd8d3c', '#e6550d', '#a63603'],
-            scale: { type: 'quantile' },
+            value: ({ value }) => value / 200,
           },
-          size: 15,
           style: {
             opacity: 1,
             stroke: '#fff',
