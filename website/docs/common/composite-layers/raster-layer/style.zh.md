@@ -11,9 +11,9 @@ RasterLayerStyleOptions 配置如下：
 | noDataValue | 默认空数据                   | `number`           | `-9999999` | optional |
 | clampLow    | 是否显示数值小于定义域的内容 | `number`           | `true`     | optional |
 | clampHigh   | 是否显示数值大于定义域的内容 | `number`           | `true`     | optional |
-| rampColors  | 值域色带                     | `RampColors`       |            | required |
+| rampColors  | 值域色带                     | `IColorRamp`       |            | required |
 
-值域色带，RampColors 配置如下：
+值域色带，IColorRamp 配置如下：
 
 | 属性      | 描述       | 类型       | 默认值 | 是否必填 |
 | --------- | ---------- | ---------- | ------ | -------- |
