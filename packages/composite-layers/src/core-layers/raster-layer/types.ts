@@ -12,15 +12,6 @@ export interface IColorRamp {
   weights?: number[];
 }
 
-export interface IImagedata {
-  /* 数据 */
-  data: Uint8ClampedArray;
-  /* 数据宽度 */
-  width: number;
-  /* 数据高度 */
-  height: number;
-}
-
 export type RasterLayerStyleOptions = {
   /* 透明度 */
   opacity?: number;

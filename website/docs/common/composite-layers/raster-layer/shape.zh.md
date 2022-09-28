@@ -1,3 +1,3 @@
 ### `options.`shape
 
-`string` optional default: `'fill'`
+`string` optional default: `'raster'`

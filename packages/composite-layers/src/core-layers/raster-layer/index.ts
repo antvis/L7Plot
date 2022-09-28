@@ -4,8 +4,8 @@ import { ILayer } from '../../types';
 import { RasterLayerOptions } from './types';
 
 /**
- * 点图层
- * 对应 L7 的 PointLayer
+ * 栅格图层
+ * 对应 L7 的 RasterLayer
  **/
 export class RasterLayer extends CoreLayer<RasterLayerOptions> {
   public type = 'rasterLayer';
