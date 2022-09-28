@@ -1,8 +1,6 @@
 import { CoreLayerOptions } from '../../core/core-layer';
 import { ShapeAttr } from '../../types';
 
-export type RasterShape = 'raster';
-
 export interface IColorRamp {
   /* 值域色带位置分布 */
   positions: number[];
@@ -31,7 +29,7 @@ export interface RasterLayerOptions extends CoreLayerOptions {
   /**
    * 图形形状
    */
-  shape?: ShapeAttr<RasterShape | string>;
+  shape?: ShapeAttr<'raster'>;
   /**
    * 图层样式
    */
