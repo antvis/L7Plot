@@ -48,6 +48,7 @@
     "@antv/l7": "^2.9.14"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

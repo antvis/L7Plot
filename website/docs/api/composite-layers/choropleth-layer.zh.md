@@ -142,6 +142,10 @@ order: 6
 
 `markdown:docs/common/composite-layers/composite-common/attribute.zh.md`
 
+## 三、方法
+
+`markdown:docs/common/composite-layers/composite-common/method.zh.md`
+
 ### setActive
 
 设置图层高亮状态。
@@ -165,10 +169,6 @@ layer.setSelect(field: string, value: number | string);
 ```js
 layer.boxSelect(bounds: [number, number, number, number], callback: (...args: any[]) => void);
 ```
-
-## 三、方法
-
-`markdown:docs/common/composite-layers/composite-common/method.zh.md`
 
 ## 四、事件
 

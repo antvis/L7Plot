@@ -9,9 +9,9 @@
 | intensity  | 全局热力权重       | `number`     | `3`    | optional |
 | radius     | 热力半径，单位像素 | `number`     | `20`   | optional |
 | opacity    | 透明度             | `number`     | `1`    | optional |
-| rampColors | 热力色带           | `RampColors` |        | optional |
+| rampColors | 热力色带           | `IColorRamp` |        | optional |
 
-热力色带，RampColors 配置如下：
+热力色带，IColorRamp 配置如下：
 
 | 属性      | 描述       | 类型       | 默认值 | 是否必填 |
 | --------- | ---------- | ---------- | ------ | -------- |
