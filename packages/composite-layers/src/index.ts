@@ -41,6 +41,3 @@ export * from './composite-layers/choropleth-layer/types';
 // 标注图层及类型定义 | author by [lzxue]](https://github.com/lzxue)
 export { IconFontLayer, IconImageLayer } from './composite-layers/icon-layer';
 export * from './composite-layers/icon-layer/types';
-// 路线图层 PathLayer
-export { PathLayer } from './composite-layers/path-layer';
-export * from './composite-layers/path-layer/types';

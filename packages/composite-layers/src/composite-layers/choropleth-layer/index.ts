@@ -142,7 +142,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
 
     const subLayers = [fillLayer, strokeLayer, highlightStrokeLayer, selectFillLayer, selectStrokeLayer, labelLayer];
 
-    return subLayers as ICoreLayer[];
+    return subLayers;
   }
 
   /**
