@@ -43,10 +43,13 @@ export interface IconLayerOptions extends CompositeLayerOptions {
    * 图标名
    */
   icon?: PointLayerOptions['shape'];
+
   /**
-   * 颜色
+   * 图标颜色
+   * @default 12
    */
-  color?: PointLayerOptions['color'];
+  fillColor?: PointLayerOptions['color'];
+
   /**
    * 图标大小
    * @default 12
@@ -97,6 +100,11 @@ export interface IconImageLayerOptions extends IconLayerOptions {
     [key: string]: string;
   };
   iconStyle?: PointLayerStyleOptions;
+
+  /**
+   * 颜色
+   */
+  fillColor?: PointLayerOptions['color'];
 }
 
 export interface IconFontLayerOptions extends IconLayerOptions {

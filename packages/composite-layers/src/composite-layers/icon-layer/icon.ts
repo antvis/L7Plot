@@ -97,7 +97,7 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
       radius,
       opacity,
       icon,
-      color,
+      fillColor,
       iconStyle,
       ...baseConfig
     } = omit<any>(this.options, ['source']) as Omit<T, 'source'>;
@@ -109,7 +109,6 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
       opacity: opacity,
       ...iconStyle,
     };
-
     const options = {
       ...baseConfig,
       visible,
@@ -119,7 +118,7 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
       shape: icon,
       size: radius,
       state: fillState,
-      color,
+      color: fillColor,
       style: fillStyle,
     };
 
@@ -184,7 +183,6 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
   protected createSubLayers(): ICoreLayer[] {
     const source = this.source;
     this.layerState = getDefaultState(this.options.state);
-
     // 映射图标图层
     const iconLayer = new PointLayer({
       ...this.getIconLayerOptions(),

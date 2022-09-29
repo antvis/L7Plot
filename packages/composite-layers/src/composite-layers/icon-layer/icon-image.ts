@@ -26,4 +26,15 @@ export class IconImageLayer extends IconLayer<IconImageLayerOptions> {
       scene?.addImage(icon, iconAtlas[icon]);
     });
   }
+  /**
+   * 增加iconAtlas
+   * @param iconAtlas
+   */
+  public addIconAtlas(iconAtlas: { [key: string]: string }[]) {
+    const scene = this.scene;
+
+    Object.keys(iconAtlas).forEach((icon: string) => {
+      scene?.addImage(icon, iconAtlas[icon]);
+    });
+  }
 }

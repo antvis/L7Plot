@@ -44,9 +44,6 @@ class IconFont extends Component {
                 y: 'lat',
               },
             },
-            // color:{
-            //   value:'red',
-            // },
             iconAtlas: {
               fontFamily: 'iconfont',
               fontPath: '//at.alicdn.com/t/font_2534097_ao9soua2obv.woff2?t=1622021146076',
@@ -58,6 +55,7 @@ class IconFont extends Component {
                 ['cloud', '&#xe8da;'],
               ],
             },
+            fillColor: 'red',
             icon: {
               field: 'iconType',
               value: 'text',
@@ -69,18 +67,17 @@ class IconFont extends Component {
               textAllowOverlap: true,
               iconfont: true,
             },
-            color: 'blue',
             radius: 40,
             opacity: 1,
             label: {
-              visible: false,
+              visible: true,
               field: 'weather',
               style: {
                 fill: '#fff',
                 opacity: 0.6,
                 fontSize: 12,
                 textAnchor: 'top',
-                textOffset: [0, 20],
+                textOffset: [0, 40],
                 spacing: 1,
                 padding: [5, 5],
                 stroke: '#ffffff',
@@ -92,10 +89,7 @@ class IconFont extends Component {
               active: {
                 color: 'red',
               },
-              select: {
-                radius: 20,
-                opacity: 1,
-              },
+              select: false,
             },
           });
           this.scene && iconLayer.addTo(this.scene);

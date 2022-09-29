@@ -12,14 +12,24 @@ export class IconFontLayer extends IconLayer<IconFontLayerOptions> {
    * 初始化资源
    */
   protected initAssets() {
-    this.loadIconAtlas();
+    this.loadIconFontAtlas();
   }
 
   /**
    * load 图片资源
    */
-  protected loadIconAtlas() {
+  protected loadIconFontAtlas() {
     const { fontFamily, fontPath, iconFonts } = this.options.iconAtlas;
+    const scene = this.scene;
+    scene?.addFontFace(fontFamily, fontPath);
+    scene?.addIconFonts(iconFonts);
+  }
+
+  /**
+   * load 图片资源
+   */
+  protected addIconFontAtlas(iconAtlas: IconFontLayerOptions['iconAtlas']) {
+    const { fontFamily, fontPath, iconFonts } = iconAtlas;
     const scene = this.scene;
     scene?.addFontFace(fontFamily, fontPath);
     scene?.addIconFonts(iconFonts);

@@ -1,0 +1,16 @@
+{
+  "title": {
+    "zh": "分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "image.ts",
+      "title": {
+        "zh": "图片标注",
+        "en": "icon image"
+      },
+      "screenshot": "https://gw.alipayobjects.com/mdn/rms_816329/afts/img/A*Z2rJS6ri3akAAAAAAAAAAAAAARQnAQ"
+    }
+  ]
+}
