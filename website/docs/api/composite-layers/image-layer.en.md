@@ -1,6 +1,6 @@
 ---
 title: ImageLayer
-order: 2
+order: 6
 ---
 
 `markdown:docs/api/composite-layers/image-layer.zh.md`

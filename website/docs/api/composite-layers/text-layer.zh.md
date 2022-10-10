@@ -1,6 +1,6 @@
 ---
 title: 文本图层 - TextLayer
-order: 3
+order: 4
 ---
 
 <tag color="blue" text="Core Layer">Core Layer</tag>

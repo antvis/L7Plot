@@ -1,6 +1,6 @@
 ---
 title: 面图层 - PolygonLayer
-order: 1
+order: 3
 ---
 
 <tag color="blue" text="Core Layer">Core Layer</tag>

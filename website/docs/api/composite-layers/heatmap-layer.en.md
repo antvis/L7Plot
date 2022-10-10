@@ -1,6 +1,6 @@
 ---
 title: HeatmapLayer
-order: 4
+order: 5
 ---
 
 `markdown:docs/api/composite-layers/heatmap-layer.zh.md`

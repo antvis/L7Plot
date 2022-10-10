@@ -1,6 +1,6 @@
 ---
 title: 热力图层 - HeatmapLayer
-order: 4
+order: 5
 ---
 
 <tag color="blue" text="Core Layer">Core Layer</tag>

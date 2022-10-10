@@ -10,7 +10,7 @@ export interface IColorRamp {
   weights?: number[];
 }
 
-export type RasterLayerStyleOptions = {
+export type RasterDataTileLayerStyleOptions = {
   /* 透明度 */
   opacity?: number;
   /* 定义域 */
@@ -25,6 +25,11 @@ export type RasterLayerStyleOptions = {
   rampColors: IColorRamp;
 };
 
+export type RasterImageTileLayerStyleOptions = {
+  /* 透明度 */
+  opacity?: number;
+};
+
 export interface RasterLayerOptions extends CoreLayerOptions {
   /**
    * 图形形状
@@ -33,5 +38,5 @@ export interface RasterLayerOptions extends CoreLayerOptions {
   /**
    * 图层样式
    */
-  style?: RasterLayerStyleOptions;
+  style?: RasterDataTileLayerStyleOptions | RasterImageTileLayerStyleOptions;
 }

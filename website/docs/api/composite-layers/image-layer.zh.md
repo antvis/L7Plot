@@ -1,6 +1,6 @@
 ---
 title: 图片图层 - ImageLayer
-order: 2
+order: 6
 ---
 
 <tag color="blue" text="Core Layer">Core Layer</tag>

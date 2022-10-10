@@ -1,8 +1,22 @@
 ### `options.`style
 
-`RasterLayerStyleOptions` optional
+`RasterImageTileLayerStyleOptions|RasterDataTileLayerStyleOptions` optional
 
-RasterLayerStyleOptions 配置如下：
+栅格图层的图片栅格瓦片样式, `RasterImageTileLayerStyleOptions` 配置如下：
+
+| 属性    | 描述   | 类型     | 默认值 | 是否必填 |
+| ------- | ------ | -------- | ------ | -------- |
+| opacity | 透明度 | `number` | `1`    | optional |
+
+```js
+{
+  style: {
+    opacity: 0.8,
+  }
+}
+```
+
+栅格图层的数据栅格瓦片样式, `RasterDataTileLayerStyleOptions` 配置如下：
 
 | 属性        | 描述                         | 类型               | 默认值     | 是否必填 |
 | ----------- | ---------------------------- | ------------------ | ---------- | -------- |
@@ -23,7 +37,19 @@ RasterLayerStyleOptions 配置如下：
 ```js
 {
   style: {
-    opacity: 1,
+    opacity: 0.8,
+    domain: [0, 2000],
+      rampColors: {
+        colors: [
+          '#FF4818',
+          '#F7B74A',
+          '#FFF598',
+          '#91EABC',
+          '#2EA9A1',
+          '#206C7C',
+        ].reverse(),
+        positions: [0, 0.2, 0.4, 0.6, 0.8, 1.0],
+      },
   }
 }
 ```
