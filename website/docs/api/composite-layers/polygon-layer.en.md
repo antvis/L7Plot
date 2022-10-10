@@ -1,6 +1,6 @@
 ---
 title: PolygonLayer
-order: 2
+order: 3
 ---
 
 `markdown:docs/api/composite-layers/polygon-layer.zh.md`

@@ -1,6 +1,6 @@
 ---
 title: 气泡图层 - BubbleLayer
-order: 5
+order: 8
 ---
 
 <tag color="cyan" text="Composite Layer">Composite Layer</tag>

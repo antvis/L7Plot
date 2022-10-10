@@ -1,6 +1,6 @@
 ---
 title: 区域图层 - ChoroplethLayer
-order: 6
+order: 9
 ---
 
 <tag color="cyan" text="Composite Layer">Composite Layer</tag>

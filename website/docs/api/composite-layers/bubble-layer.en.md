@@ -1,6 +1,6 @@
 ---
 title: BubbleLayer
-order: 5
+order: 8
 ---
 
 `markdown:docs/api/composite-layers/bubble-layer.zh.md`
