@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Scene, GaodeMapV2 } from '@antv/l7';
+import { Scene, GaodeMap } from '@antv/l7';
 import { IconFontLayer } from '@antv/l7-composite-layers';
 
 class IconFont extends Component {
@@ -12,7 +12,7 @@ class IconFont extends Component {
   async initMap() {
     this.scene = new Scene({
       id: 'container',
-      map: new GaodeMapV2({
+      map: new GaodeMap({
         pitch: 0,
         style: 'dark',
         zoom: 3,

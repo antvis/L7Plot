@@ -5,8 +5,17 @@ import { ShapeAttr } from '../../types';
  * 点图层 图层样式
  */
 export type PointLayerStyleOptions = {
+  /**
+   * 透明度
+   */
   opacity?: number;
+  /**
+   * 描边宽度
+   */
   strokeWidth?: number;
+  /**
+   * 描边颜色
+   */
   stroke?: string;
 };
 
@@ -78,7 +87,7 @@ export type PointTextLayerStyleOptions = {
   fontWeight?: string;
   /* 是否换行 */
   textAllowOverlap?: boolean;
-
+  /* 是否为 iconfont*/
   iconfont?: true;
 };
 

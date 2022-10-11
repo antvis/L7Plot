@@ -49,7 +49,10 @@ describe('register', () => {
       },
     });
 
-    expect(dotMap.scene['sceneService'].loadFont).toBeTruthy();
+    expect(dotMap.type).toEqual('dot');
+    // dotMap.scene['sceneService'].on('fontloaded', (e) => {
+    //   expect(e.fontFamily).toBe(111)
+    // })
 
     setTimeout(() => dotMap.destroy(), 0);
   });

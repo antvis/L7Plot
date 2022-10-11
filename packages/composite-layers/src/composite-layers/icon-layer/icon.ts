@@ -183,6 +183,7 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
   protected createSubLayers(): ICoreLayer[] {
     const source = this.source;
     this.layerState = getDefaultState(this.options.state);
+    console.log(source);
     // 映射图标图层
     const iconLayer = new PointLayer({
       ...this.getIconLayerOptions(),
@@ -191,26 +192,27 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
     });
 
     // 选中效果
-    const selectLayer = new PointLayer({
-      id: 'selectIconLayer',
-      ...this.getHighLightLayerOptions(),
-    });
+    // const selectLayer = new PointLayer({
+    //   id: 'selectIconLayer',
+    //   ...this.getHighLightLayerOptions(),
+    // });
 
-    // 文本标注
-    const labelLayer = new TextLayer({
-      ...getLabelLayerOptions<IconLayerOptions>(this.options),
-      id: 'labelLayer',
-      source,
-    });
+    // // 文本标注
+    // const labelLayer = new TextLayer({
+    //   ...getLabelLayerOptions<IconLayerOptions>(this.options),
+    //   id: 'labelLayer',
+    //   source,
+    // });
+    const subLayers = [iconLayer];
 
-    const subLayers = [iconLayer, labelLayer, selectLayer];
+    // const subLayers = [iconLayer, labelLayer, selectLayer];
 
     return subLayers;
   }
 
   protected updateSubLayers() {
     this.iconLayer.update(this.getIconLayerOptions());
-    this.iconLabelLayer.update(getLabelLayerOptions<IconLayerOptions>(this.options));
+    // this.iconLabelLayer.update(getLabelLayerOptions<IconLayerOptions>(this.options));
   }
 
   /**
@@ -241,7 +243,7 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
     if (this.isSourceInstance(source)) {
       this.source = source;
       this.iconLayer.setSource(source);
-      this.iconLabelLayer.setSource(source);
+      // this.iconLabelLayer.setSource(source);
     } else {
       const { data, ...option } = source;
       this.source.setData(data, option);

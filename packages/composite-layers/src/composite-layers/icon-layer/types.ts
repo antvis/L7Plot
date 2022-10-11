@@ -99,6 +99,9 @@ export interface IconImageLayerOptions extends IconLayerOptions {
   iconAtlas: {
     [key: string]: string;
   };
+  /**
+   * 图标样式
+   */
   iconStyle?: PointLayerStyleOptions;
 
   /**
@@ -112,8 +115,17 @@ export interface IconFontLayerOptions extends IconLayerOptions {
    * 图标资源
    */
   iconAtlas: {
+    /**
+     * 字体文件路径 JS
+     */
     fontPath: string;
+    /**
+     * 字体类型
+     */
     fontFamily: string;
+    /**
+     * 文字名称与字体code映射
+     */
     iconFonts: Array<[string, string]>;
   };
   iconStyle?: TextLayerStyleOptions;
