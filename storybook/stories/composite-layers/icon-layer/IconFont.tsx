@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Scene, GaodeMapV2 } from '@antv/l7';
+import { Scene, GaodeMap } from '@antv/l7';
 import { IconFontLayer } from '@antv/l7-composite-layers';
 
 class IconFont extends Component {
@@ -12,7 +12,7 @@ class IconFont extends Component {
   async initMap() {
     this.scene = new Scene({
       id: 'container',
-      map: new GaodeMapV2({
+      map: new GaodeMap({
         pitch: 0,
         style: 'dark',
         zoom: 3,
@@ -33,6 +33,7 @@ class IconFont extends Component {
       fetch('https://gw.alipayobjects.com/os/bmw-prod/9eb3f1b5-0c3b-49b2-8221-191d4ba8aa5e.json')
         .then((response) => response.json())
         .then((data) => {
+          console.log('data: ', data);
           const iconLayer = new IconFontLayer({
             id: 'iconImageLayer1',
             autoFit: true,
@@ -44,9 +45,6 @@ class IconFont extends Component {
                 y: 'lat',
               },
             },
-            // color:{
-            //   value:'red',
-            // },
             iconAtlas: {
               fontFamily: 'iconfont',
               fontPath: '//at.alicdn.com/t/font_2534097_ao9soua2obv.woff2?t=1622021146076',
@@ -58,6 +56,7 @@ class IconFont extends Component {
                 ['cloud', '&#xe8da;'],
               ],
             },
+            fillColor: 'red',
             icon: {
               field: 'iconType',
               value: 'text',
@@ -67,18 +66,19 @@ class IconFont extends Component {
               textOffset: [-10, 10], // 文本相对锚点的偏移量 [水平, 垂直]
               fontFamily: 'iconfont',
               textAllowOverlap: true,
+              iconfont: true,
             },
-            color: 'red',
             radius: 40,
             opacity: 1,
             label: {
+              visible: true,
               field: 'weather',
               style: {
                 fill: '#fff',
-                opacity: 0.6,
-                fontSize: 12,
+                opacity: 0.8,
+                fontSize: 14,
                 textAnchor: 'top',
-                textOffset: [0, 20],
+                textOffset: [0, 40],
                 spacing: 1,
                 padding: [5, 5],
                 stroke: '#ffffff',
@@ -88,13 +88,9 @@ class IconFont extends Component {
             },
             state: {
               active: {
-                radius: 20,
-                opacity: 1,
+                color: 'red',
               },
-              select: {
-                radius: 20,
-                opacity: 1,
-              },
+              select: false,
             },
           });
           this.scene && iconLayer.addTo(this.scene);

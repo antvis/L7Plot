@@ -1,7 +1,9 @@
-import { isUndefined } from '@antv/util';
 import { DEFAULT_STATE } from './constants';
-import { IconLayerOptions, IconLayerActiveOptions } from './types';
+import { IconLayerOptions } from './types';
 
 export const getDefaultState = (state?: IconLayerOptions['state']) => {
-  return DEFAULT_STATE;
+  return {
+    ...DEFAULT_STATE,
+    ...state,
+  };
 };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Scene, Mapbox } from '@antv/l7';
+import { Scene, GaodeMap } from '@antv/l7';
 import { BubbleLayer } from '@antv/l7-composite-layers';
 
 class Earthquake extends Component {
@@ -12,7 +12,7 @@ class Earthquake extends Component {
   async initMap() {
     this.scene = new Scene({
       id: 'container',
-      map: new Mapbox({
+      map: new GaodeMap({
         pitch: 0,
         style: 'dark',
         center: [103.447303, 31.753574],

@@ -1,19 +1,16 @@
-import { IconLayerOptions, IconLayerActiveOptions } from './types';
+import { IconLayerOptions } from './types';
 import { DEFAULT_HIGHLIGHT_COLOR, EMPTY_JSON_SOURCE } from '../common/constants';
 
 /**
  * 默认的全部交互状态配置
  */
-export const DEFAULT_STATE: { active: Required<IconLayerActiveOptions>; select: Required<IconLayerActiveOptions> } = {
+export const DEFAULT_STATE: IconLayerOptions['state'] = {
   active: {
     enable: false,
-    radius: 10,
     color: DEFAULT_HIGHLIGHT_COLOR,
-    opacity: 1,
   },
   select: {
     enable: false,
-    color: DEFAULT_HIGHLIGHT_COLOR,
     radius: 10,
     opacity: 1,
   },
