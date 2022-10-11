@@ -1,4 +1,4 @@
-import { ImageLayer as L7ImageLayer } from '@antv/l7-layers';
+import { ImageLayer as L7ImageLayer } from '@antv/l7';
 import { CoreLayer } from '../../core/core-layer';
 import { ILayer } from '../../types';
 import { ImageLayerOptions } from './types';

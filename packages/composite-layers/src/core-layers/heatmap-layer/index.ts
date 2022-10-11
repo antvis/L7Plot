@@ -1,4 +1,4 @@
-import { HeatmapLayer as L7HeatmapLayer } from '@antv/l7-layers';
+import { HeatmapLayer as L7HeatmapLayer } from '@antv/l7';
 import { CoreLayer } from '../../core/core-layer';
 import { ILayer } from '../../types';
 import { HeatmapLayerOptions } from './types';

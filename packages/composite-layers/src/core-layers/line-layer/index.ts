@@ -1,4 +1,4 @@
-import { LineLayer as L7LineLayer } from '@antv/l7-layers';
+import { LineLayer as L7LineLayer } from '@antv/l7';
 import { CoreLayer } from '../../core/core-layer';
 import { ILayer } from '../../types';
 import { LineLayerOptions } from './types';

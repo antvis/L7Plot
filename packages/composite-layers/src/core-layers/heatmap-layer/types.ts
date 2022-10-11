@@ -1,4 +1,4 @@
-import { IColorRamp } from '@antv/l7-utils';
+import type { IColorRamp } from '@antv/l7';
 import { CoreLayerOptions } from '../../core/core-layer';
 
 /**

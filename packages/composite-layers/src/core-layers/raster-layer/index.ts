@@ -1,4 +1,4 @@
-import { RasterLayer as L7RasterLayer } from '@antv/l7-layers';
+import { RasterLayer as L7RasterLayer } from '@antv/l7';
 import { CoreLayer } from '../../core/core-layer';
 import { ILayer } from '../../types';
 import { RasterLayerOptions } from './types';
