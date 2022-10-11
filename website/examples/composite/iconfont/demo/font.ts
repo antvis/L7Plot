@@ -1,4 +1,4 @@
-import { Scene, GaodeMapV2 } from '@antv/l7';
+import { Scene, GaodeMap } from '@antv/l7';
 import { IconFontLayer } from '@antv/l7-composite-layers';
 
 fetch('https://gw.alipayobjects.com/os/bmw-prod/9eb3f1b5-0c3b-49b2-8221-191d4ba8aa5e.json')
@@ -6,7 +6,7 @@ fetch('https://gw.alipayobjects.com/os/bmw-prod/9eb3f1b5-0c3b-49b2-8221-191d4ba8
   .then((data) => {
     const scene = new Scene({
       id: 'container',
-      map: new GaodeMapV2({
+      map: new GaodeMap({
         pitch: 0,
         style: 'dark',
         zoom: 3,
