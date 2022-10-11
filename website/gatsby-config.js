@@ -166,7 +166,7 @@ module.exports = {
         icon: 'other',
         title: {
           zh: '复合图层',
-          en: 'CompositeLayer',
+          en: 'compositeLayer',
         },
       },
       {

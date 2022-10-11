@@ -33,6 +33,7 @@ class IconFont extends Component {
       fetch('https://gw.alipayobjects.com/os/bmw-prod/9eb3f1b5-0c3b-49b2-8221-191d4ba8aa5e.json')
         .then((response) => response.json())
         .then((data) => {
+          console.log('data: ', data);
           const iconLayer = new IconFontLayer({
             id: 'iconImageLayer1',
             autoFit: true,
@@ -74,8 +75,8 @@ class IconFont extends Component {
               field: 'weather',
               style: {
                 fill: '#fff',
-                opacity: 0.6,
-                fontSize: 12,
+                opacity: 0.8,
+                fontSize: 14,
                 textAnchor: 'top',
                 textOffset: [0, 40],
                 spacing: 1,

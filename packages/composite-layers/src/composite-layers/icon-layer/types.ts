@@ -128,9 +128,8 @@ export interface IconFontLayerOptions extends IconLayerOptions {
      */
     iconFonts: Array<[string, string]>;
   };
-  iconStyle?: TextLayerStyleOptions;
-
   /**
-   * 文本标注
+   * 图标样式
    */
+  iconStyle?: TextLayerStyleOptions;
 }

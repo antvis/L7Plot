@@ -23,12 +23,11 @@ class IconImage extends Component {
       fetch('https://gw.alipayobjects.com/os/basement_prod/893d1d5f-11d9-45f3-8322-ee9140d288ae.json')
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           const iconLayer = new IconImageLayer({
             id: 'iconImageLayer1',
             autoFit: true,
             source: {
-              data: data.slice(0, 1),
+              data: data,
               parser: {
                 type: 'json',
                 x: 'longitude',

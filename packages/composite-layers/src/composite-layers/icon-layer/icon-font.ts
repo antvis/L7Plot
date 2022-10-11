@@ -3,13 +3,22 @@ import { Scene } from '../../types';
 import { DEFAULT_OPTIONS } from './constants';
 import { IconLayer } from './icon';
 import { CompositeLayerEvent } from '../../core/constants';
+import { CompositeLayer } from '../../core/composite-layer';
 
 export class IconFontLayer extends IconLayer<IconFontLayerOptions> {
-  private fontLoaded = true;
   /**
    * 默认配置项
    */
   static DefaultOptions = DEFAULT_OPTIONS;
+  /**
+   * 复合图层类型
+   */
+  public type = CompositeLayer.LayerType.IconFontLayer;
+  /**
+   * 字体是否加载完成
+   */
+  private fontLoaded = true;
+
   /**
    * 添加到场景
    */
