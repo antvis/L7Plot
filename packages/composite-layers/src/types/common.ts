@@ -1,31 +1,31 @@
 import type {
+  Scene,
   ILayer,
   ILayerConfig,
   ISource,
   ISourceCFG,
   IScale,
   ILngLat,
-  BlendType,
   IImage,
   ITransform,
   ILegendSegmentItem,
   ILegendClassificaItem,
 } from '@antv/l7';
-import type { Scene } from '@antv/l7';
+import { BlendType } from '@antv/l7';
 
 export type {
   ILayer,
   ILayerConfig,
   ISource,
   ISourceCFG,
-  BlendType,
   IImage,
   ITransform,
   ILegendSegmentItem,
   ILegendClassificaItem,
+  Scene,
 };
 
-export type { Scene };
+export { BlendType };
 
 export type LayerBaseConfig = Omit<
   ILayerConfig,
