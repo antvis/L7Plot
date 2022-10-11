@@ -70,7 +70,7 @@ order: 5
 }
 ```
 
-### `options.` icon
+### `options.`icon
 
 #### `icon.`field
 

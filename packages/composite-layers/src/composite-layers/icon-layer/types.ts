@@ -46,7 +46,7 @@ export interface IconLayerOptions extends CompositeLayerOptions {
 
   /**
    * 图标颜色
-   * @default 12
+   * @default null
    */
   fillColor?: PointLayerOptions['color'];
 
