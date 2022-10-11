@@ -1,6 +1,6 @@
 import { uniqueId } from '@antv/util';
 import EventEmitter from '@antv/event-emitter';
-import Source from '@antv/l7-source';
+import { Source } from '@antv/l7';
 import { deepMergeLayerOptions, isSourceChanged } from '../utils';
 import { Scene, SourceOptions, ICompositeLayer, CompositeLayerType, LayerBlend, ICoreLayer, ISource } from '../types';
 import { CompositeLayerEvent, OriginLayerEventList } from './constants';

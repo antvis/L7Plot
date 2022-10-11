@@ -1,4 +1,4 @@
-import { PolygonLayer as L7PolygonLayer } from '@antv/l7-layers';
+import { PolygonLayer as L7PolygonLayer } from '@antv/l7';
 import { CoreLayer } from '../../core/core-layer';
 import { ILayer } from '../../types';
 import { PolygonLayerOptions } from './types';

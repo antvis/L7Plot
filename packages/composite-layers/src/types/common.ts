@@ -1,4 +1,4 @@
-import {
+import type {
   ILayer,
   ILayerConfig,
   ISource,
@@ -10,10 +10,10 @@ import {
   ITransform,
   ILegendSegmentItem,
   ILegendClassificaItem,
-} from '@antv/l7-core';
-import type { Scene } from '@antv/l7-scene';
+} from '@antv/l7';
+import type { Scene } from '@antv/l7';
 
-export {
+export type {
   ILayer,
   ILayerConfig,
   ISource,
@@ -25,7 +25,7 @@ export {
   ILegendClassificaItem,
 };
 
-export { Scene };
+export type { Scene };
 
 export type LayerBaseConfig = Omit<
   ILayerConfig,

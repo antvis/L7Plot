@@ -1,4 +1,4 @@
-import Source from '@antv/l7-source';
+import { Source } from '@antv/l7';
 import EventEmitter from '@antv/event-emitter';
 import { isEqual, isUndefined, uniqueId, omit } from '@antv/util';
 import { deepMergeLayerOptions, isSourceChanged } from '../utils';
