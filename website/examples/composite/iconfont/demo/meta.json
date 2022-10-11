@@ -1,0 +1,16 @@
+{
+  "title": {
+    "zh": "分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "font.ts",
+      "title": {
+        "zh": "字体标注",
+        "en": "icon font"
+      },
+      "screenshot": "https://gw.alipayobjects.com/mdn/rms_816329/afts/img/A*-h7LT4wcutAAAAAAAAAAAAAAARQnAQ"
+    }
+  ]
+}

@@ -100,7 +100,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
 
     // 高亮描边图层
     const highlightStrokeLayer = new PointLayer({
-      ...this.gethigHlightStrokeLayerOptions(),
+      ...this.getHighlightStrokeLayerOptions(),
       id: 'highlightStrokeLayer',
       shape: 'circle',
     });
@@ -177,7 +177,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     return options;
   }
 
-  private gethigHlightStrokeLayerOptions() {
+  private getHighlightStrokeLayerOptions() {
     const { visible, minZoom, maxZoom, zIndex = 0, radius } = this.options;
     const defaultState = this.layerState;
     const strokeStyle = {
@@ -399,7 +399,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     this.fillLayer.update(this.getFillLayerOptions());
 
     // 高亮图层
-    this.highlightStrokeLayer.update(this.gethigHlightStrokeLayerOptions());
+    this.highlightStrokeLayer.update(this.getHighlightStrokeLayerOptions());
 
     // 选中填充图层
     this.selectFillLayer.update(this.getSelectFillLayerOptions());

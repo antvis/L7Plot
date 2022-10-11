@@ -22,7 +22,7 @@ class POI extends Component {
 
     const iconMap = new Dot('container', {
       map: {
-        type: 'mapbox',
+        type: 'amap',
         style: 'dark',
         center: [121.409765, 31.256735],
         zoom: 14.5,

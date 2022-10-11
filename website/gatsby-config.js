@@ -162,6 +162,14 @@ module.exports = {
         },
       },
       {
+        slug: 'composite',
+        icon: 'other',
+        title: {
+          zh: '复合图层',
+          en: 'compositeLayer',
+        },
+      },
+      {
         slug: 'advanced-plot',
         icon: 'other',
         title: {

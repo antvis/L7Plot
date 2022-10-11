@@ -117,7 +117,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
 
     // 高亮描边图层
     const highlightStrokeLayer = new LineLayer({
-      ...this.gethigHlightStrokeLayerOptions(),
+      ...this.getHighlightStrokeLayerOptions(),
       id: 'highlightStrokeLayer',
     });
 
@@ -214,7 +214,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     return options;
   }
 
-  private gethigHlightStrokeLayerOptions() {
+  private getHighlightStrokeLayerOptions() {
     const { visible, minZoom, maxZoom, zIndex = 0, lineWidth } = this.options;
     const defaultState = this.layerState;
 
@@ -430,7 +430,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     this.strokeLayer.update(this.getStrokeLayerOptions());
 
     // 高亮图层
-    this.highlightStrokeLayer.update(this.gethigHlightStrokeLayerOptions());
+    this.highlightStrokeLayer.update(this.getHighlightStrokeLayerOptions());
 
     // 选中填充图层
     this.selectFillLayer.update(this.getSelectFillLayerOptions());

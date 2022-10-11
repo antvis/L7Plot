@@ -1,6 +1,7 @@
 import { ISourceCFG, ISource } from '../../types';
-import { TextLayerStyleOptions } from '../../core-layers/text-layer/types';
+import { PointLayerStyleOptions } from '../../core-layers/point-layer/types';
 import { PointLayerOptions } from '../../core-layers/point-layer/types';
+import { TextLayerStyleOptions } from '../../core-layers/text-layer/types';
 import { CompositeLayerOptions } from '../../core/composite-layer';
 import { LabelOptions } from '../common/types';
 
@@ -20,6 +21,8 @@ export type IconLayerActiveOptions = {
   color?: string;
   /**图标透明度 */
   opacity?: number;
+
+  icon?: PointLayerOptions['shape'];
 };
 
 export interface IconLayerOptions extends CompositeLayerOptions {
@@ -40,10 +43,13 @@ export interface IconLayerOptions extends CompositeLayerOptions {
    * 图标名
    */
   icon?: PointLayerOptions['shape'];
+
   /**
-   * 颜色
+   * 图标颜色
+   * @default null
    */
-  color?: PointLayerOptions['color'];
+  fillColor?: PointLayerOptions['color'];
+
   /**
    * 图标大小
    * @default 12
@@ -52,7 +58,7 @@ export interface IconLayerOptions extends CompositeLayerOptions {
   /**
    * 图标样式
    */
-  iconStyle?: TextLayerStyleOptions;
+  iconStyle?: PointLayerStyleOptions;
   /**
    * 文本标注
    */
@@ -65,7 +71,12 @@ export interface IconLayerOptions extends CompositeLayerOptions {
      * 高亮交互
      * @default false
      */
-    active?: boolean | IconLayerActiveOptions;
+    active?:
+      | boolean
+      | {
+          color: string;
+          enable?: boolean;
+        };
     /**
      * 选中交互
      * @default false
@@ -88,6 +99,15 @@ export interface IconImageLayerOptions extends IconLayerOptions {
   iconAtlas: {
     [key: string]: string;
   };
+  /**
+   * 图标样式
+   */
+  iconStyle?: PointLayerStyleOptions;
+
+  /**
+   * 颜色
+   */
+  fillColor?: PointLayerOptions['color'];
 }
 
 export interface IconFontLayerOptions extends IconLayerOptions {
@@ -95,11 +115,21 @@ export interface IconFontLayerOptions extends IconLayerOptions {
    * 图标资源
    */
   iconAtlas: {
+    /**
+     * 字体文件路径 JS
+     */
     fontPath: string;
+    /**
+     * 字体类型
+     */
     fontFamily: string;
+    /**
+     * 文字名称与字体code映射
+     */
     iconFonts: Array<[string, string]>;
   };
   /**
-   * 文本标注
+   * 图标样式
    */
+  iconStyle?: TextLayerStyleOptions;
 }
