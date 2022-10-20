@@ -3,6 +3,10 @@ export const OriginLayerEventList: string[] = [
   'inited',
   // 代理掉的事件 'add', 'remove',
   'dataUpdate',
+  // 数据映射更新，图例更新事件
+  'legend',
+  'legend:color',
+  'legend:size',
   // 鼠标事件
   // 单击事件
   'click',
