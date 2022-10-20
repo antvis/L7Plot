@@ -102,6 +102,14 @@ layer.isVisible() : boolean;
 layer.fitBounds(fitBoundsOptions?: Bounds);
 ```
 
+### getLegend
+
+获取图例。
+
+```js
+layer.getLegend(name: string): ILegend;
+```
+
 ### getLegendItems
 
 获取图例数据。

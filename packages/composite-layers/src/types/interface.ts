@@ -1,5 +1,5 @@
 import { SourceOptions } from './attr';
-import { ILayer, LayerBlend, Scene, ISource } from './common';
+import { ILayer, LayerBlend, Scene, ISource, ILegend } from './common';
 
 export interface ILayerGroup {
   name: string;
@@ -59,6 +59,7 @@ export interface ICoreLayer {
   boxSelect(bounds: [number, number, number, number], callback: (...args: any[]) => void): void;
 
   fitBounds(fitBoundsOptions?: unknown): void;
+  getLegend(name: string): ILegend;
   getLegendItems(type: string): Record<string, any>[];
 
   destroy(): void;
@@ -97,6 +98,7 @@ export interface ICompositeLayer {
   setBlend(blend: LayerBlend): void;
 
   fitBounds(fitBoundsOptions?: unknown): void;
+  getLegend(name: string): ILegend;
   getLegendItems(type: string): Record<string, any>[];
   getColorLegendItems(): Record<string, any>[];
 
