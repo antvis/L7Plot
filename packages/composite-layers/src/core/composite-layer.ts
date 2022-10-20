@@ -1,6 +1,6 @@
 import { uniqueId } from '@antv/util';
 import EventEmitter from '@antv/event-emitter';
-import { Source } from '@antv/l7';
+import { ILegend, Source } from '@antv/l7';
 import { deepMergeLayerOptions, isSourceChanged } from '../utils';
 import { Scene, SourceOptions, ICompositeLayer, CompositeLayerType, LayerBlend, ICoreLayer, ISource } from '../types';
 import { CompositeLayerEvent, OriginLayerEventList } from './constants';
@@ -296,6 +296,13 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    */
   public fitBounds(fitBoundsOptions?: unknown) {
     this.layer.fitBounds(fitBoundsOptions);
+  }
+
+  /**
+   * 获取图例
+   */
+  public getLegend(name: string): ILegend {
+    return this.layer.getLegend(name);
   }
 
   /**

@@ -10,6 +10,7 @@ import type {
   ITransform,
   ILegendSegmentItem,
   ILegendClassificaItem,
+  ILegend,
 } from '@antv/l7';
 import { BlendType } from '@antv/l7';
 
@@ -22,6 +23,7 @@ export type {
   ITransform,
   ILegendSegmentItem,
   ILegendClassificaItem,
+  ILegend,
   Scene,
 };
 

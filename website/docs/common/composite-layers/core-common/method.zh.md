@@ -110,6 +110,14 @@ layer.fitBounds(fitBoundsOptions?: Bounds);
 layer.boxSelect(bounds: [number, number, number, number], callback: (...args: any[]) => void);
 ```
 
+### getLegend
+
+获取图例。
+
+```js
+layer.getLegend(name: string): ILegend;
+```
+
 ### getLegendItems
 
 获取图例数据。

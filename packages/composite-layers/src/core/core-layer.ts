@@ -17,6 +17,7 @@ import {
   StateAttribute,
   TextureAttr,
   ISource,
+  ILegend,
 } from '../types';
 import { CoreLayerEvent, OriginLayerEventList } from './constants';
 import { MappingAttribute } from '../adaptor/attribute';
@@ -365,6 +366,13 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
    */
   public fitBounds(fitBoundsOptions?: unknown) {
     this.layer.fitBounds(fitBoundsOptions);
+  }
+
+  /**
+   * 获取图例
+   */
+  public getLegend(name: string): ILegend {
+    return this.layer.getLegend(name);
   }
 
   /**
