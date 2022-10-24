@@ -21,7 +21,7 @@ export type IconLayerActiveOptions = {
   color?: string;
   /**图标透明度 */
   opacity?: number;
-
+  /**高亮图标名 */
   icon?: PointLayerOptions['shape'];
 };
 

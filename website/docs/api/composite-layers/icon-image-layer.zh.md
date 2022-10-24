@@ -1,6 +1,6 @@
 ---
 title: 图片标注图层 - IconImageLayer
-order: 5
+order: 11
 ---
 
 <tag color="cyan" text="Composite Layer">Composite Layer</tag>
@@ -70,7 +70,15 @@ order: 5
 }
 ```
 
-### `options.` icon
+### `options.`icon
+
+`string|ShapeStyleAttribute|Function` optional
+
+映射图片标注。
+
+```js
+{ icon: 'icon1', }
+```
 
 #### `icon.`field
 
@@ -102,13 +110,13 @@ icon scale 通常使用枚举类型 cat scale
 {
   icon: {
     field: 'name',
-    value: ['icon1','icon',],
+    value: ['icon1', 'icon',],
     scale: { type: 'cat' },
   }
 }
 ```
 
-### iconStyle
+### `options.`iconStyle
 
 #### `iconStyle.`opacity
 
@@ -146,7 +154,13 @@ icon scale 通常使用枚举类型 cat scale
 
 #### `state.`active
 
-`boolean｜BubbleLayerActiveOptions` optional default: `false`
+`StateAttribute` optional
+
+元素交互反馈效果。
+
+#### `state.`active
+
+`boolean｜Pick<IconLayerActiveOptions, 'enable' | 'color'>` optional default: `false`
 
 标签 mousehover 高亮效果，开启 mousehover 元素高亮效果：
 
@@ -156,19 +170,17 @@ icon scale 通常使用枚举类型 cat scale
 }
 ```
 
+开启 mousehover 元素高亮效果并自定义设置高亮颜色：
+
 ```js
 {
-  state: { active: {
-    color:'red'
-  }, }
+  state: { active: { color: 'red', enable: true }, }
 }
 ```
 
-开启 mousehover 元素高亮效果并自定义设置高亮颜色：
-
 #### `state.`select
 
-`boolean｜BubbleLayerActiveOptions` optional default: `false`
+`boolean｜IconLayerActiveOptions` optional default: `false`
 
 元素 mouseclick 选中高亮效果，开启 mouseclick 元素高亮效果：
 
@@ -183,13 +195,20 @@ icon scale 通常使用枚举类型 cat scale
 ```js
 {
   state: {
-    select: {
-      radius:10,
-      opacity:1,
-    }
+    select: { radius: 10, opacity: 1,}
   }
 }
 ```
+
+IconLayerActiveOptions 配置如下：
+
+| 属性    | 描述       | 类型        | 默认值    | 是否必填 |
+| ------- | ---------- | ----------- | --------- | -------- |
+| enable  | 是否开启   | `boolean`   | `false`   | optional |
+| icon    | 高亮图标名 | `ShapeAttr` |           | optional |
+| radius  | 图标大小   | `number`    | `10`      | optional |
+| color   | 图标颜色   | `string`    | `#2f54eb` | optional |
+| opacity | 图标透明度 | `number`    | `1`       | optional |
 
 <!-- 多选文档暂时不透出，后面改多选和单选并存交互 -->
 
