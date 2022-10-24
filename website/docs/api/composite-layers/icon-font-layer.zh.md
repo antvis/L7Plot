@@ -1,6 +1,6 @@
 ---
 title: 字体标注图层 - IconFontLayer
-order: 5
+order: 10
 ---
 
 <tag color="cyan" text="Composite Layer">Composite Layer</tag>
@@ -72,6 +72,14 @@ order: 5
 
 ### `options.`icon
 
+`string|ShapeStyleAttribute|Function` optional
+
+映射字体图标。
+
+```js
+{ icon: { field: 'n', value: 'text', }, }
+```
+
 #### `icon.`field
 
 `string` optional
@@ -102,17 +110,15 @@ icon scale 通常使用枚举类型 cat scale
 {
   icon: {
     field: 'name',
-    value: ['icon1','icon',],
+    value: ['icon1', 'icon'],
     scale: { type: 'cat' },
   }
 }
 ```
 
-### iconStyle
+### `options.`iconStyle
 
 标注样式和文字标注一致
-
-`TextLayerOptions` optional
 
 `markdown:docs/common/composite-layers/text-layer/style.zh.md`
 
@@ -146,15 +152,27 @@ icon scale 通常使用枚举类型 cat scale
 
 #### `state.`active
 
-`boolean｜BubbleLayerActiveOptions` optional default: `false`
+`boolean｜Pick<IconLayerActiveOptions, 'enable' | 'color'>` optional default: `false`
 
 标签 mousehover 高亮效果，开启 mousehover 元素高亮效果：
 
+```js
+{
+  state: { active: true, }
+}
+```
+
 开启 mousehover 元素高亮效果并自定义设置高亮颜色：
+
+```js
+{
+  state: { active: { color: 'red', enable: true }, }
+}
+```
 
 #### `state.`select
 
-`boolean｜BubbleLayerActiveOptions` optional default: `false`
+`boolean｜IconLayerActiveOptions` optional default: `false`
 
 元素 mouseclick 选中高亮效果，开启 mouseclick 元素高亮效果：
 
@@ -169,13 +187,20 @@ icon scale 通常使用枚举类型 cat scale
 ```js
 {
   state: {
-    select: {
-      radius:10,
-      opacity:1,
-    }
+    select: { radius: 10, opacity: 1,}
   }
 }
 ```
+
+IconLayerActiveOptions 配置如下：
+
+| 属性    | 描述       | 类型        | 默认值    | 是否必填 |
+| ------- | ---------- | ----------- | --------- | -------- |
+| enable  | 是否开启   | `boolean`   | `false`   | optional |
+| icon    | 高亮图标名 | `ShapeAttr` |           | optional |
+| radius  | 图标大小   | `number`    | `10`      | optional |
+| color   | 图标颜色   | `string`    | `#2f54eb` | optional |
+| opacity | 图标透明度 | `number`    | `1`       | optional |
 
 <!-- 多选文档暂时不透出，后面改多选和单选并存交互 -->
 
