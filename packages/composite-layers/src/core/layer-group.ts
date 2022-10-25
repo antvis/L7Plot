@@ -53,7 +53,7 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
    */
   public remove() {
     if (this.scene) {
-      this.removeAllLayer();
+      this.getLayers().forEach((layer) => layer.remove());
     }
   }
 
