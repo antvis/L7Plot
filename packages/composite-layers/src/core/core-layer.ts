@@ -351,7 +351,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
    * 图层是否可见
    */
   public isVisible() {
-    return this.layer.inited ? this.layer.isVisible() : this.options.visible || false;
+    return this.layer.inited ? this.layer.isVisible() : isUndefined(this.options.visible) ? true : this.options.visible;
   }
 
   /**

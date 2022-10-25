@@ -91,6 +91,7 @@ export interface ICompositeLayer {
   show(): void;
   hide(): void;
   toggleVisible(): void;
+  isVisible(): boolean;
 
   setIndex(zIndex: number): void;
   setMinZoom(minZoom: number): void;
