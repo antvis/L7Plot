@@ -1,4 +1,4 @@
-import { uniqueId } from '@antv/util';
+import { isUndefined, uniqueId } from '@antv/util';
 import EventEmitter from '@antv/event-emitter';
 import { ILegend, Source } from '@antv/l7';
 import { deepMergeLayerOptions, isSourceChanged } from '../utils';
@@ -288,7 +288,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    * 图层是否可见
    */
   public isVisible() {
-    return this.layer.inited ? this.layer.isVisible() : this.options.visible;
+    return this.layer.inited ? this.layer.isVisible() : isUndefined(this.options.visible) ? true : this.options.visible;
   }
 
   /**
