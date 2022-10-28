@@ -29,6 +29,7 @@ export interface ILayerGroup {
  * 核心图层的基类接口
  */
 export interface ICoreLayer {
+  options: Record<string, any>;
   name: string;
   id: string;
   type: string;
@@ -73,6 +74,7 @@ export interface ICoreLayer {
  * 复合图层的基类接口
  */
 export interface ICompositeLayer {
+  options: Record<string, any>;
   name: string;
   id: string;
   type: string;
