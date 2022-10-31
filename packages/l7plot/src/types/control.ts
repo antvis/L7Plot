@@ -27,6 +27,7 @@ export type ScaleControlOptions = {
 /**
  * LayerMenuControl
  */
+// TODO: 类型更新
 export type LayerMenuControlOptions = {
   position?: PositionName;
   collapsed?: boolean;

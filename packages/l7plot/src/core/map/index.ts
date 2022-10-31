@@ -1,6 +1,6 @@
 import { Scene } from '@antv/l7-scene';
 import { Mapbox, GaodeMap } from '@antv/l7-maps';
-import { Scale, Layers, Zoom } from '@antv/l7-component';
+import { Scale, Zoom } from '@antv/l7-component';
 import EventEmitter from '@antv/event-emitter';
 import { isObject, isBoolean, isUndefined, isEqual } from '@antv/util';
 import { Tooltip } from '../../component/tooltip';
@@ -88,7 +88,7 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
   /**
    * layerMenu 图层列表 Control
    */
-  public layerMenuControl: Layers | undefined;
+  // public layerMenuControl: Layers | undefined;
   /**
    * legend 图例 Control
    */
@@ -530,26 +530,26 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
    * 添加 layerMenu 控件
    */
   public addLayerMenuControl(options: LayerMenuControlOptions) {
-    if (this.layerMenuControl) {
-      return;
-    }
+    // if (this.layerMenuControl) {
+    //   return;
+    // }
     const baseLayers = {};
     const overlayers = {};
     this.layerGroup.getLayers().forEach(({ name, layer }) => {
       overlayers[name] = layer;
     });
-    this.layerMenuControl = new Layers(Object.assign({}, options, { baseLayers, overlayers }));
-    this.scene.addControl(this.layerMenuControl);
+    // this.layerMenuControl = new Layers(Object.assign({}, options, { baseLayers, overlayers }));
+    // this.scene.addControl(this.layerMenuControl);
   }
 
   /**
    * 更新 layerMenu 控件
    */
   public updateLayerMenuControl(options: LayerMenuControlOptions) {
-    if (!this.layerMenuControl) {
-      this.addLayerMenuControl(options);
-      return;
-    }
+    // if (!this.layerMenuControl) {
+    //   this.addLayerMenuControl(options);
+    //   return;
+    // }
     this.removeLayerMenuControl();
     this.addLayerMenuControl(options);
   }
@@ -558,10 +558,10 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
    * 移除 layerMenu 控件
    */
   public removeLayerMenuControl() {
-    if (this.layerMenuControl) {
-      this.layerMenuControl.remove();
-      this.layerMenuControl = undefined;
-    }
+    // if (this.layerMenuControl) {
+    //   this.layerMenuControl.remove();
+    //   this.layerMenuControl = undefined;
+    // }
   }
 
   /**

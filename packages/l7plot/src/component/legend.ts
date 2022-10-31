@@ -1,4 +1,4 @@
-import { IControlOption } from '@antv/l7-core';
+import { IControlOption } from '@antv/l7';
 import { Control } from '@antv/l7-component';
 import { CategoryLegendOptions, ContinueLegendOptions, CategoryLegend, ContinueLegend } from '@antv/l7plot-component';
 
