@@ -264,8 +264,8 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
   /**
    * 事件代理: 绑定事件
    */
-  public on(name: string, callback: (...args: any[]) => void) {
-    this.proxyEventHander('on', name, callback);
+  public on(name: string, callback: (...args: any[]) => void, realOnce?: boolean) {
+    this.proxyEventHander('on', name, callback, realOnce);
     return this;
   }
 
@@ -288,7 +288,12 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
   /**
    * 事件代理: 事件处理
    */
-  private proxyEventHander(type: 'on' | 'off' | 'once', name: string, callback: (...args: any[]) => void) {
+  private proxyEventHander(
+    type: 'on' | 'off' | 'once',
+    name: string,
+    callback: (...args: any[]) => void,
+    realOnce?: boolean
+  ) {
     const sceneEvent = SceneEventList.find((event) => event.adaptation === name);
     if (sceneEvent) {
       this.scene[type](sceneEvent.original, callback);
@@ -303,7 +308,7 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
         throw new Error(`No event name "${name}"`);
       }
     } else {
-      super[type](name, callback);
+      super[type](name, callback, realOnce);
     }
   }
 
