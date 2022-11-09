@@ -274,7 +274,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
     }
 
     if (!isUndefined(options.maxZoom) && !isEqual(this.lastOptions.maxZoom, this.options.maxZoom)) {
-      this.setMinZoom(options.maxZoom);
+      this.setMaxZoom(options.maxZoom);
     }
 
     if (!isUndefined(options.visible) && !isEqual(this.lastOptions.visible, this.options.visible)) {
