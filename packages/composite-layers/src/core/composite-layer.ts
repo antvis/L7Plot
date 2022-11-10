@@ -90,14 +90,9 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    */
   protected abstract readonly layer: ICoreLayer;
   /**
-   * 图层是否具有交互效果，用于 tooltip
-   */
-  public abstract readonly interaction: boolean;
-  /**
    * 图层间共享 source 实例
    */
   public source!: ISource;
-
   /**
    * 子图层组
    */
@@ -323,6 +318,16 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     }
 
     return [];
+  }
+
+  /**
+   * 获取带有交互的子图层
+   * 一般用于是否启用 tooltip，图层事件绑定
+   */
+  public getInteractionSubLayers(): ICoreLayer[] {
+    const layers = this.subLayers.getLayers().filter((layer) => layer.interaction === true);
+
+    return layers;
   }
 
   /**
