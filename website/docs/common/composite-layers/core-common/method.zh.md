@@ -30,6 +30,14 @@ layer.update(options: Partial<LayerOptions>);
 layer.changeData(source: SourceOptions);
 ```
 
+### getSource
+
+获取图层 source 实例。
+
+```js
+layer.getSource(): ISource;
+```
+
 ### setIndex
 
 设置图层层叠值。

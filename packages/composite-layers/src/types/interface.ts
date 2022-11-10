@@ -45,6 +45,7 @@ export interface ICoreLayer {
 
   changeData(data: SourceOptions): void;
   setSource(source: ISource): void;
+  getSource(): ISource;
   render(): void;
 
   show(): void;

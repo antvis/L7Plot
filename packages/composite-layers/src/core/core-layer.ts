@@ -212,6 +212,13 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
   }
 
   /**
+   * 获取图层 source 实例
+   */
+  public getSource(): ISource {
+    return this.source;
+  }
+
+  /**
    * 添加到场景
    */
   public addTo(scene: Scene) {
