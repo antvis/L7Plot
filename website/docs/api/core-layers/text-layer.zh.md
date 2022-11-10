@@ -13,9 +13,9 @@ new TextLayer(options: TextLayerOptions)
 
 ## 一、配置
 
-`markdown:docs/common/composite-layers/core-common/options.zh.md`
+`markdown:docs/common/core-layers/core-common/options.zh.md`
 
-`markdown:docs/common/composite-layers/point-layer/source.zh.md`
+`markdown:docs/common/core-layers/point-layer/source.zh.md`
 
 ### `options.`field
 
@@ -25,18 +25,18 @@ new TextLayer(options: TextLayerOptions)
 
 ### `options.`style
 
-`markdown:docs/common/composite-layers/text-layer/style.zh.md`
+`markdown:docs/common/core-layers/text-layer/style.zh.md`
 
 `markdown:docs/common/attribute/state.zh.md`
 
 ## 二、属性
 
-`markdown:docs/common/composite-layers/core-common/attribute.zh.md`
+`markdown:docs/common/core-layers/core-common/attribute.zh.md`
 
 ## 三、方法
 
-`markdown:docs/common/composite-layers/core-common/method.zh.md`
+`markdown:docs/common/core-layers/core-common/method.zh.md`
 
 ## 四、事件
 
-`markdown:docs/common/composite-layers/core-common/event.zh.md`
+`markdown:docs/common/core-layers/core-common/event.zh.md`

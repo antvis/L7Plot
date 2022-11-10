@@ -66,18 +66,18 @@ new ImageLayer(options: ImageLayerOptions)
 - subtractive：相减模式
 - max：最大值
 
-`markdown:docs/common/composite-layers/image-layer/source.zh.md`
+`markdown:docs/common/core-layers/image-layer/source.zh.md`
 
-`markdown:docs/common/composite-layers/image-layer/style.zh.md`
+`markdown:docs/common/core-layers/image-layer/style.zh.md`
 
 ## 二、属性
 
-`markdown:docs/common/composite-layers/core-common/attribute.zh.md`
+`markdown:docs/common/core-layers/core-common/attribute.zh.md`
 
 ## 三、方法
 
-`markdown:docs/common/composite-layers/core-common/method.zh.md`
+`markdown:docs/common/core-layers/core-common/method.zh.md`
 
 ## 四、事件
 
-`markdown:docs/common/composite-layers/core-common/event.zh.md`
+`markdown:docs/common/core-layers/core-common/event.zh.md`

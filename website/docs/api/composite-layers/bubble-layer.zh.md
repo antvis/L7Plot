@@ -1,6 +1,6 @@
 ---
 title: 气泡图层 - BubbleLayer
-order: 8
+order: 0
 ---
 
 <tag color="cyan" text="Composite Layer">Composite Layer</tag>
@@ -11,7 +11,7 @@ order: 8
 
 `markdown:docs/common/composite-layers/composite-common/options.zh.md`
 
-`markdown:docs/common/composite-layers/point-layer/source.zh.md`
+`markdown:docs/common/core-layers/point-layer/source.zh.md`
 
 ### `options.`radius
 
@@ -171,7 +171,7 @@ order: 8
 
 #### `label.`style
 
-标签样式详细配置见 [TextLayerStyleOptions](/zh/docs/api/composite-layers/text-layer#code-classlanguage-textoptionscodestyle)。
+标签样式详细配置见 [TextLayerStyleOptions](/zh/docs/api/core-layers/text-layer#code-classlanguage-textoptionscodestyle)。
 
 ### `options.`state
 

@@ -1,6 +1,6 @@
 ---
 title: 区域图层 - ChoroplethLayer
-order: 9
+order: 1
 ---
 
 <tag color="cyan" text="Composite Layer">Composite Layer</tag>
@@ -11,7 +11,7 @@ order: 9
 
 `markdown:docs/common/composite-layers/composite-common/options.zh.md`
 
-`markdown:docs/common/composite-layers/polygon-layer/source.zh.md`
+`markdown:docs/common/core-layers/polygon-layer/source.zh.md`
 
 ### `options.`fillColor
 
@@ -126,7 +126,7 @@ order: 9
 
 #### `label.`style
 
-标签样式详细配置见 [TextLayerStyleOptions](/zh/docs/api/composite-layers/text-layer#code-classlanguage-textoptionscodestyle)。
+标签样式详细配置见 [TextLayerStyleOptions](/zh/docs/api/core-layers/text-layer#code-classlanguage-textoptionscodestyle)。
 
 `markdown:docs/common/composite-layers/choropleth-layer/state.zh.md`
 
