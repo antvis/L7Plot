@@ -118,6 +118,14 @@ layer.getLegend(name: string): ILegend;
 layer.getLegendItems(type: string): Record<string, any>[];
 ```
 
+### getInteractionSubLayers
+
+获取带有交互的子图层，一般用于是否启用 tooltip，图层事件绑定。
+
+```js
+layer.getInteractionSubLayers(): ICoreLayer[];
+```
+
 ### destroy
 
 摧毁。
