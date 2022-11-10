@@ -13,28 +13,28 @@ new PolygonLayer(options: PolygonLayerOptions)
 
 ## 一、配置
 
-`markdown:docs/common/composite-layers/core-common/options.zh.md`
+`markdown:docs/common/base-layers/base-common/options.zh.md`
 
-`markdown:docs/common/composite-layers/polygon-layer/source.zh.md`
+`markdown:docs/common/base-layers/polygon-layer/source.zh.md`
 
-`markdown:docs/common/composite-layers/polygon-layer/shape.zh.md`
+`markdown:docs/common/base-layers/polygon-layer/shape.zh.md`
 
 `markdown:docs/common/attribute/color.zh.md`
 
 `markdown:docs/common/attribute/size.zh.md`
 
-`markdown:docs/common/composite-layers/polygon-layer/style.zh.md`
+`markdown:docs/common/base-layers/polygon-layer/style.zh.md`
 
 `markdown:docs/common/attribute/state.zh.md`
 
 ## 二、属性
 
-`markdown:docs/common/composite-layers/core-common/attribute.zh.md`
+`markdown:docs/common/base-layers/base-common/attribute.zh.md`
 
 ## 三、方法
 
-`markdown:docs/common/composite-layers/core-common/method.zh.md`
+`markdown:docs/common/base-layers/base-common/method.zh.md`
 
 ## 四、事件
 
-`markdown:docs/common/composite-layers/core-common/event.zh.md`
+`markdown:docs/common/base-layers/base-common/event.zh.md`

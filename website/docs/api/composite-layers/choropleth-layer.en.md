@@ -1,6 +1,6 @@
 ---
 title: ChoroplethLayer
-order: 9
+order: 1
 ---
 
 `markdown:docs/api/composite-layers/choropleth-layer.zh.md`
