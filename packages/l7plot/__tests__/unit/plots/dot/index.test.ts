@@ -83,7 +83,7 @@ describe('point', () => {
     });
 
     return new Promise<void>((resolve, reject) => {
-      dotMap.on('loaded', () => {
+      dotMap.on('add-legend', () => {
         try {
           expect(dotMap.legendControl).toBeDefined();
           resolve();

@@ -448,6 +448,7 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
     if (legend) {
       setTimeout(() => {
         this.addLegendControl(legend);
+        this.emit('add-legend');
       }, 1000);
     }
   }
