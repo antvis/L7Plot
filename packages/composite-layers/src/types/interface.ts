@@ -33,6 +33,7 @@ export interface ICoreLayer {
   name: string;
   id: string;
   type: string;
+  interaction: boolean;
   layer: ILayer;
   inited: boolean;
   source: ISource;
@@ -45,6 +46,7 @@ export interface ICoreLayer {
 
   changeData(data: SourceOptions): void;
   setSource(source: ISource): void;
+  getSource(): ISource;
   render(): void;
 
   show(): void;
@@ -104,6 +106,8 @@ export interface ICompositeLayer {
   getLegend(name: string): ILegend;
   getLegendItems(type: string): Record<string, any>[];
   getColorLegendItems(): Record<string, any>[];
+
+  getInteractionSubLayers(): ICoreLayer[];
 
   destroy(): void;
 

@@ -66,6 +66,10 @@ export interface CoreLayerOptions extends Partial<LayerBaseConfig> {
    * 交互反馈
    */
   state?: StateAttribute;
+  /**
+   * 图层是否具有交互效果，用于复合图层 tooltip 是否启用
+   */
+  interaction?: boolean;
 }
 
 export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter implements ICoreLayer {
@@ -89,6 +93,10 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
    * 图层类型
    */
   public abstract readonly type: string;
+  /**
+   * 图层是否具有交互效果，用于复合图层 tooltip 是否启用
+   */
+  public interaction: boolean;
   /**
    * 图层 schema 配置
    */
@@ -120,9 +128,10 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
 
   constructor(options: O) {
     super();
-    const { id, name, source } = options;
+    const { id, name, source, interaction = false } = options;
     this.id = id ? id : uniqueId('core-layer');
     this.name = name ? name : this.id;
+    this.interaction = interaction;
     this.options = deepMergeLayerOptions<O>(this.getDefaultOptions() as O, options);
     this.lastOptions = this.options;
     this.layer = this.createLayer();
@@ -209,6 +218,13 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
         this.layer.source(data, option);
       }
     }
+  }
+
+  /**
+   * 获取图层 source 实例
+   */
+  public getSource(): ISource {
+    return this.source;
   }
 
   /**

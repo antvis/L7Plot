@@ -52,11 +52,6 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
     return this.subLayers.getLayer('selectIconLayer') as ICoreLayer;
   }
 
-  /**
-   * 图层是否具有交互属性
-   */
-  public interaction = true;
-
   constructor(options: T) {
     super(options);
     this.initSubLayersEvent();
@@ -187,6 +182,7 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
       ...this.getIconLayerOptions(),
       id: 'iconLayer',
       source,
+      interaction: true,
     });
     // 选中效果
     const selectLayer = new PointLayer({

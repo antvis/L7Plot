@@ -66,10 +66,6 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
    * 图层交互状态配置
    */
   private layerState = DEFAULT_STATE;
-  /**
-   * 图层是否具有交互属性
-   */
-  public interaction = true;
 
   constructor(options: BubbleLayerOptions) {
     super(options);
@@ -96,6 +92,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
       id: 'fillLayer',
       shape: 'circle',
       source,
+      interaction: true,
     });
 
     // 高亮描边图层
