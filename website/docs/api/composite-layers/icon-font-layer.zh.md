@@ -11,7 +11,7 @@ order: 2
 
 `markdown:docs/common/composite-layers/composite-common/options.zh.md`
 
-`markdown:docs/common/core-layers/point-layer/source.zh.md`
+`markdown:docs/common/base-layers/point-layer/source.zh.md`
 
 ### `options.`radius
 
@@ -120,7 +120,7 @@ icon scale 通常使用枚举类型 cat scale
 
 标注样式和文字标注一致
 
-`markdown:docs/common/core-layers/text-layer/style.zh.md`
+`markdown:docs/common/base-layers/text-layer/style.zh.md`
 
 ### `options.`label
 
@@ -142,7 +142,7 @@ icon scale 通常使用枚举类型 cat scale
 
 #### `label.`style
 
-标签样式详细配置见 [TextLayerStyleOptions](/zh/docs/api/core-layers/text-layer#code-classlanguage-textoptionscodestyle)。
+标签样式详细配置见 [TextLayerStyleOptions](/zh/docs/api/base-layers/text-layer#code-classlanguage-textoptionscodestyle)。
 
 ### `options.`state
 

@@ -11,7 +11,7 @@ order: 0
 
 `markdown:docs/common/composite-layers/composite-common/options.zh.md`
 
-`markdown:docs/common/core-layers/point-layer/source.zh.md`
+`markdown:docs/common/base-layers/point-layer/source.zh.md`
 
 ### `options.`radius
 
@@ -171,7 +171,7 @@ order: 0
 
 #### `label.`style
 
-标签样式详细配置见 [TextLayerStyleOptions](/zh/docs/api/core-layers/text-layer#code-classlanguage-textoptionscodestyle)。
+标签样式详细配置见 [TextLayerStyleOptions](/zh/docs/api/base-layers/text-layer#code-classlanguage-textoptionscodestyle)。
 
 ### `options.`state
 

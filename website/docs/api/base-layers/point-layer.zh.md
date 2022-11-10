@@ -13,30 +13,30 @@ new PointLayer(options: PointLayerOptions)
 
 ## 一、配置
 
-`markdown:docs/common/core-layers/core-common/options.zh.md`
+`markdown:docs/common/base-layers/base-common/options.zh.md`
 
-`markdown:docs/common/core-layers/point-layer/source.zh.md`
+`markdown:docs/common/base-layers/point-layer/source.zh.md`
 
-`markdown:docs/common/core-layers/point-layer/shape.zh.md`
+`markdown:docs/common/base-layers/point-layer/shape.zh.md`
 
 `markdown:docs/common/attribute/color.zh.md`
 
 `markdown:docs/common/attribute/size.zh.md`
 
-`markdown:docs/common/core-layers/point-layer/style.zh.md`
+`markdown:docs/common/base-layers/point-layer/style.zh.md`
 
 `markdown:docs/common/attribute/state.zh.md`
 
-`markdown:docs/common/core-layers/point-layer/animate.zh.md`
+`markdown:docs/common/base-layers/point-layer/animate.zh.md`
 
 ## 二、属性
 
-`markdown:docs/common/core-layers/core-common/attribute.zh.md`
+`markdown:docs/common/base-layers/base-common/attribute.zh.md`
 
 ## 三、方法
 
-`markdown:docs/common/core-layers/core-common/method.zh.md`
+`markdown:docs/common/base-layers/base-common/method.zh.md`
 
 ## 四、事件
 
-`markdown:docs/common/core-layers/core-common/event.zh.md`
+`markdown:docs/common/base-layers/base-common/event.zh.md`

@@ -11,7 +11,7 @@ order: 1
 
 `markdown:docs/common/composite-layers/composite-common/options.zh.md`
 
-`markdown:docs/common/core-layers/polygon-layer/source.zh.md`
+`markdown:docs/common/base-layers/polygon-layer/source.zh.md`
 
 ### `options.`fillColor
 
@@ -126,7 +126,7 @@ order: 1
 
 #### `label.`style
 
-标签样式详细配置见 [TextLayerStyleOptions](/zh/docs/api/core-layers/text-layer#code-classlanguage-textoptionscodestyle)。
+标签样式详细配置见 [TextLayerStyleOptions](/zh/docs/api/base-layers/text-layer#code-classlanguage-textoptionscodestyle)。
 
 `markdown:docs/common/composite-layers/choropleth-layer/state.zh.md`
 

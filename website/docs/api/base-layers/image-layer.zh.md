@@ -1,14 +1,14 @@
 ---
-title: 栅格图层 - RasterLayer
-order: 7
+title: 图片图层 - ImageLayer
+order: 6
 ---
 
 <tag color="blue" text="Core Layer">Core Layer</tag>
 
-`RasterLayer` 是基于 [L7-RasterLayer](https://l7.antv.vision/zh/docs/api/raster/raster_layer) 封装的配置式 API。
+`ImageLayer` 是基于 [L7-ImageLayer](https://l7.antv.vision/zh/docs/api/imageLayer/imagelayer) 封装的配置式 API。
 
 ```ts
-new RasterLayer(options: RasterLayerOptions)
+new ImageLayer(options: ImageLayerOptions)
 ```
 
 ## 一、配置
@@ -66,18 +66,18 @@ new RasterLayer(options: RasterLayerOptions)
 - subtractive：相减模式
 - max：最大值
 
-`markdown:docs/common/core-layers/raster-layer/source.zh.md`
+`markdown:docs/common/base-layers/image-layer/source.zh.md`
 
-`markdown:docs/common/core-layers/raster-layer/style.zh.md`
+`markdown:docs/common/base-layers/image-layer/style.zh.md`
 
 ## 二、属性
 
-`markdown:docs/common/core-layers/core-common/attribute.zh.md`
+`markdown:docs/common/base-layers/base-common/attribute.zh.md`
 
 ## 三、方法
 
-`markdown:docs/common/core-layers/core-common/method.zh.md`
+`markdown:docs/common/base-layers/base-common/method.zh.md`
 
 ## 四、事件
 
-`markdown:docs/common/core-layers/core-common/event.zh.md`
+`markdown:docs/common/base-layers/base-common/event.zh.md`
