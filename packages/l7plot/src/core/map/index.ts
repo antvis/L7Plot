@@ -443,7 +443,14 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
     scale && this.addScaleControl(scale);
     zoom && this.addZoomControl(zoom);
     layerMenu && this.addLayerMenuControl(layerMenu);
-    legend && this.addLegendControl(legend);
+
+    // TDOO: 图层生命周期修改为异步后，获取图例数据 getLegendOptions 不能正常获取，需要后续提供相关生命周期事件
+    if (legend) {
+      setTimeout(() => {
+        this.addLegendControl(legend);
+        this.emit('add-legend');
+      }, 1000);
+    }
   }
 
   /**

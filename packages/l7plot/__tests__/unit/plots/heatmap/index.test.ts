@@ -74,7 +74,7 @@ describe('heatmap', () => {
     });
 
     return new Promise<void>((resolve, reject) => {
-      heatmap.on('loaded', () => {
+      heatmap.on('add-legend', () => {
         try {
           expect(heatmap.legendControl).toBeDefined();
           resolve();
