@@ -1,5 +1,4 @@
-import { Scene } from '@antv/l7-scene';
-import { Marker } from '@antv/l7-component';
+import { Scene, Marker } from '@antv/l7';
 import EventEmitter from '@antv/event-emitter';
 import { isString, isEqual } from '@antv/util';
 import {
@@ -8,16 +7,8 @@ import {
   TooltipListItem,
 } from '@antv/l7plot-component';
 import { get as getValueByPath } from 'lodash-es';
-import {
-  IPlotLayer,
-  ILngLat,
-  TooltipAnchorType,
-  Event,
-  TooltipOptions,
-  MouseEvent,
-  TooltipItem,
-  TooltipEvent,
-} from '../types';
+import type { IPlotLayer, ILngLat, Event, TooltipOptions, MouseEvent, TooltipItem, TooltipEvent } from '../types';
+import { TooltipAnchorType } from '../types';
 import { deepAssign } from '../utils';
 
 const TRIGGER_LIST = ['mousemove', 'click'];

@@ -1,4 +1,4 @@
-import { IAnimateOption, IActiveOption } from '@antv/l7-core';
+import type { IAnimateOption, IActiveOption } from '@antv/l7';
 import { ScaleConfig } from './common';
 
 export type Callback<T> = (data: Record<string, any>) => T | T[];

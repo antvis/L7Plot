@@ -1,5 +1,5 @@
 import { uniqueId } from '@antv/util';
-import { PointLayer } from '@antv/l7-layers';
+import { PointLayer } from '@antv/l7';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { TextLayerConfig } from '../../types/layer';
 import { mappingLayer } from './adaptor';

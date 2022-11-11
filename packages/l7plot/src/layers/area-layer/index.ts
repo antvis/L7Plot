@@ -1,5 +1,5 @@
 import { uniqueId, clone, isEqual, isUndefined } from '@antv/util';
-import { PolygonLayer, LineLayer } from '@antv/l7-layers';
+import { PolygonLayer, LineLayer } from '@antv/l7';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { getDefaultState, mappingLayer } from './adaptor';
 import { AreaLayerOptions, AreaLayerSourceOptions } from './types';

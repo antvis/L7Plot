@@ -194,7 +194,7 @@ plot.getScene() : Scene;
 获取图表的 map 实例。
 
 ```js
-plot.getMap() : MapboxInstance | AMapInstance;
+plot.getMap() : MapInstance | MapboxInstance | AMapInstance;
 ```
 
 ### addLayer

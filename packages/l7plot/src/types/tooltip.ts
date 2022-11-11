@@ -1,5 +1,5 @@
 import { TooltipListItem, TooltipCustomContent } from '@antv/l7plot-component';
-import { anchorType as TooltipAnchorType } from '@antv/l7-utils';
+import { anchorType as TooltipAnchorType } from '@antv/l7';
 import { ILngLat, Event } from './common';
 
 export type TooltipItem = {

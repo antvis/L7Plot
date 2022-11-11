@@ -1,4 +1,4 @@
-import { PositionName } from '@antv/l7-core';
+import type { PositionName } from '@antv/l7';
 import {
   CategoryLegendCustomContent,
   CategoryLegendListItem,

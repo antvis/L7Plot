@@ -1,7 +1,9 @@
+import { Source } from '@antv/l7';
 import { Map } from '../map';
 import { deepAssign } from '../../utils';
 import { TextLayer } from '../../layers/text-layer';
-import { PlotType, PlotOptions, LabelOptions, Source, SourceOptions, Scene, PlotLayerOptions } from '../../types';
+import { PlotType } from '../../types';
+import type { PlotOptions, LabelOptions, SourceOptions, Scene, PlotLayerOptions } from '../../types';
 import { LayerGroup } from '../layer/layer-group';
 import { MappingSource } from '../../adaptor/source';
 import { isEqual } from '@antv/util';

@@ -1,5 +1,5 @@
 import { isEqual, isUndefined, pick } from '@antv/util';
-import Source from '@antv/l7-source';
+import { Source } from '@antv/l7';
 import EventEmitter from '@antv/event-emitter';
 import { LayerType, IPlotLayer, PlotLayerOptions, LayerBlend } from '../../types/layer';
 import { Scene, ILayer, ILayerConfig, SourceOptions } from '../../types';

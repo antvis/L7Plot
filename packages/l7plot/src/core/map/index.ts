@@ -1,14 +1,13 @@
-import { Scene } from '@antv/l7-scene';
-import { Mapbox, GaodeMap } from '@antv/l7-maps';
-import { Scale, Zoom } from '@antv/l7-component';
+import { Scene, Mapbox, GaodeMap, GaodeMapV2, Map as L7Map, Scale, Zoom } from '@antv/l7';
 import EventEmitter from '@antv/event-emitter';
 import { isObject, isBoolean, isUndefined, isEqual } from '@antv/util';
 import { Tooltip } from '../../component/tooltip';
 import { Legend, LegendItem } from '../../component/legend';
 import { deepAssign } from '../../utils';
-import {
-  BaseMapType,
+import { BaseMapType } from '../../types';
+import type {
   MapOptions,
+  MapInstance,
   AMapInstance,
   MapboxInstance,
   ZoomControlOptions,
@@ -147,7 +146,13 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
     const { type, ...config } = mapConfig;
     const options = Object.assign({ style: this.theme['mapStyle'] }, config);
 
-    return type === BaseMapType.Amap ? new GaodeMap(options) : new Mapbox(options);
+    return type === BaseMapType.Amap
+      ? new GaodeMap(options)
+      : type === BaseMapType.AmapV2
+      ? new GaodeMapV2(options)
+      : type === BaseMapType.Mapbox
+      ? new Mapbox(options)
+      : new L7Map(options);
   }
 
   /**
@@ -322,11 +327,15 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
   /**
    * 获取 map 实例
    */
-  public getMap(): MapboxInstance | AMapInstance | unknown {
+  public getMap(): MapboxInstance | AMapInstance | MapInstance | unknown {
     if (this.options.map?.type === BaseMapType.Amap) {
+      return this.scene.map as AMapInstance;
+    } else if (this.options.map?.type === BaseMapType.AmapV2) {
       return this.scene.map as AMapInstance;
     } else if (this.options.map?.type === BaseMapType.Mapbox) {
       return this.scene.map as MapboxInstance;
+    } else if (this.options.map?.type === BaseMapType.Map) {
+      return this.scene.map as MapInstance;
     } else {
       return this.scene.map;
     }

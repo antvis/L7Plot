@@ -1,24 +1,25 @@
-import { Map as MapboxglMap } from 'mapbox-gl';
-import { IAMapInstance, IMapboxInstance } from '@antv/l7-maps/typings';
-import { IStatusOptions, PositionName, ISourceCFG, MapStyle } from '@antv/l7-core';
-import Source from '@antv/l7-source';
-import { TooltipOptions } from './tooltip';
-import { LegendOptions } from './legend';
-import { LayerMenuControlOptions, ScaleControlOptions, ZoomControlOptions } from './control';
-import { GridAggregation } from './attr';
+import type { Map as MapboxglMap } from 'mapbox-gl';
+import type { Map, IStatusOptions, PositionName, ISourceCFG, MapStyle, Source } from '@antv/l7';
+import type { IAMapInstance, IMapboxInstance } from '@antv/l7-maps/typings';
+import type { TooltipOptions } from './tooltip';
+import type { LegendOptions } from './legend';
+import type { LayerMenuControlOptions, ScaleControlOptions, ZoomControlOptions } from './control';
+import type { GridAggregation } from './attr';
 
-export { MapboxglMap, Source };
+export type { MapboxglMap, Source };
 
 export type StatusOptions = IStatusOptions;
+export type MapInstance = Map;
 export type AMapInstance = AMap.Map & IAMapInstance;
 export type MapboxInstance = MapboxglMap & IMapboxInstance;
-export type MapInstance = AMapInstance | MapboxInstance;
 
 /**
  * 底图类型
  */
 export enum BaseMapType {
+  Map = 'map',
   Amap = 'amap',
+  AmapV2 = 'amapv2',
   Mapbox = 'mapbox',
 }
 
@@ -29,7 +30,7 @@ export type MapConfig = {
   /**
    * 底图类型
    */
-  type?: 'amap' | 'mapbox';
+  type?: 'map' | 'amap' | 'amapv2' | 'mapbox';
   /**
    * 地图
    */
