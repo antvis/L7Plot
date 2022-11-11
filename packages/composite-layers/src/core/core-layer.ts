@@ -401,11 +401,11 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
   /**
    * 事件代理: 绑定事件
    */
-  public on(name: string, callback: (...args: any[]) => void) {
+  public on(name: string, callback: (...args: any[]) => void, once?: boolean) {
     if (OriginLayerEventList.indexOf(name) !== -1) {
       this.layer.on(name, callback);
     } else {
-      super.on(name, callback);
+      super.on(name, callback, once);
     }
     return this;
   }

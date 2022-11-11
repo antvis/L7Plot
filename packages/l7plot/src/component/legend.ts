@@ -1,5 +1,5 @@
-import { IControlOption } from '@antv/l7';
-import { Control } from '@antv/l7-component';
+import type { IControlOption } from '@antv/l7';
+import { Control } from '@antv/l7';
 import { CategoryLegendOptions, ContinueLegendOptions, CategoryLegend, ContinueLegend } from '@antv/l7plot-component';
 
 export type LegendItem =
