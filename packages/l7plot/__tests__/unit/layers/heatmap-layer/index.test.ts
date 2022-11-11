@@ -1,6 +1,6 @@
+import { Source } from '@antv/l7';
 import { getLayerStyleAttribute } from '../../../helper/layer';
 import { HeatmapLayer } from '../../../../src/layers/heatmap-layer';
-import { Source } from '../../../../src/types';
 
 describe('heatmap layer', () => {
   const layer = new HeatmapLayer({

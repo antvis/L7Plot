@@ -1,6 +1,6 @@
+import { Source } from '@antv/l7';
 import { getLayerStyleAttribute } from '../../../helper/layer';
 import { ColumnLayer } from '../../../../src/layers/column-layer';
-import { Source } from '../../../../src/types';
 
 describe('column layer', () => {
   const layer = new ColumnLayer({

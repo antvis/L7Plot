@@ -1,6 +1,6 @@
+import { Source } from '@antv/l7';
 import { getLayerStyleAttribute } from '../../../helper/layer';
 import { TextLayer } from '../../../../src/layers/text-layer';
-import { Source } from '../../../../src/types';
 
 describe('text layer', () => {
   const layer = new TextLayer({
