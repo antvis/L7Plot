@@ -1,6 +1,6 @@
-import { PositionType, PositionName } from '@antv/l7-core';
+import type { PositionType, PositionName } from '@antv/l7';
 
-export { PositionType, PositionName };
+export type { PositionType, PositionName };
 
 /**
  * ZoomControl

@@ -1,3 +1,4 @@
+import { Source } from '@antv/l7';
 import { pick, isEqual } from '@antv/util';
 import { Plot } from '../../core/plot';
 import { deepAssign } from '../../utils';
@@ -15,7 +16,7 @@ import { GEO_DATA_URL, GEO_AREA_URL, DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS }
 import { AreaLayer } from '../../layers/area-layer';
 import { PathLayer } from '../../layers/path-layer';
 import { TextLayer } from '../../layers/text-layer';
-import { LabelOptions, LegendOptions, MouseEvent, Source } from '../../types';
+import type { LabelOptions, LegendOptions, MouseEvent } from '../../types';
 import { LayerGroup } from '../../core/layer/layer-group';
 import { createCountryBoundaryLayer } from './layer';
 import { getCacheArea, registerCacheArea } from './cache';

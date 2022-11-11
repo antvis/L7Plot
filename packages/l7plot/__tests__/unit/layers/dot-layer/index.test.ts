@@ -1,6 +1,6 @@
+import { Source } from '@antv/l7';
 import { getLayerStyleAttribute } from '../../../helper/layer';
 import { DotLayer } from '../../../../src/layers/dot-layer';
-import { Source } from '../../../../src/types';
 
 describe('dot layer', () => {
   const layer = new DotLayer({

@@ -1,4 +1,4 @@
-import { IColorRamp } from '@antv/l7-utils';
+import type { IColorRamp } from '@antv/l7';
 import { BlendType, ILayer, ILayerConfig, Scene } from './common';
 import { LabelOptions } from './label';
 import { AnimateAttr, ColorAttr, StateAttribute, ShapeAttr, SizeAttr, TextureAttr } from './attr';

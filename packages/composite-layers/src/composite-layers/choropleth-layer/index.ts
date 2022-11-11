@@ -199,7 +199,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     };
 
     const options = {
-      visible,
+      visible: visible && Boolean(lineWidth) && Boolean(strokeColor),
       zIndex,
       minZoom,
       maxZoom,

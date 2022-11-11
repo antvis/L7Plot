@@ -26,17 +26,14 @@ export interface ILayerGroup {
 }
 
 /**
- * 核心图层的基类接口
+ * 图层的基础接口
  */
-export interface ICoreLayer {
+interface IBaseLayer {
   options: Record<string, any>;
   name: string;
   id: string;
   type: string;
-  interaction: boolean;
-  layer: ILayer;
-  inited: boolean;
-  source: ISource;
+  isComposite: boolean;
 
   addTo(scene: Scene): void;
   remove(): void;
@@ -45,8 +42,6 @@ export interface ICoreLayer {
   updateOption(options: unknown): void;
 
   changeData(data: SourceOptions): void;
-  setSource(source: ISource): void;
-  getSource(): ISource;
   render(): void;
 
   show(): void;
@@ -59,59 +54,40 @@ export interface ICoreLayer {
   setMaxZoom(maxZoom: number): void;
   setBlend(blend: LayerBlend): void;
 
-  boxSelect(bounds: [number, number, number, number], callback: (...args: any[]) => void): void;
-
   fitBounds(fitBoundsOptions?: unknown): void;
   getLegend(name: string): ILegend;
   getLegendItems(type: string): Record<string, any>[];
 
   destroy(): void;
 
-  on(name: string, callback: (...args: any[]) => void): this;
+  on(name: string, callback: (...args: any[]) => void, once?: boolean): this;
   once(name: string, callback: (...args: any[]) => void): this;
   off(name: string, callback: (...args: any[]) => void): this;
 }
 
 /**
+ * 核心图层的基类接口
+ */
+export interface ICoreLayer extends IBaseLayer {
+  interaction: boolean;
+
+  layer: ILayer;
+  inited: boolean;
+  source: ISource;
+
+  setSource(source: ISource): void;
+  getSource(): ISource;
+
+  boxSelect(bounds: [number, number, number, number], callback: (...args: any[]) => void): void;
+}
+
+/**
  * 复合图层的基类接口
  */
-export interface ICompositeLayer {
-  options: Record<string, any>;
-  name: string;
-  id: string;
-  type: string;
-
+export interface ICompositeLayer extends IBaseLayer {
   subLayers: ILayerGroup;
 
-  addTo(scene: Scene): void;
-  remove(): void;
-
-  update(options: unknown): void;
-  updateOption(options: unknown): void;
-
-  changeData(data: SourceOptions): void;
-  render(): void;
-
-  show(): void;
-  hide(): void;
-  toggleVisible(): void;
-  isVisible(): boolean;
-
-  setIndex(zIndex: number): void;
-  setMinZoom(minZoom: number): void;
-  setMaxZoom(maxZoom: number): void;
-  setBlend(blend: LayerBlend): void;
-
-  fitBounds(fitBoundsOptions?: unknown): void;
-  getLegend(name: string): ILegend;
-  getLegendItems(type: string): Record<string, any>[];
   getColorLegendItems(): Record<string, any>[];
 
   getInteractionSubLayers(): ICoreLayer[];
-
-  destroy(): void;
-
-  on(name: string, callback: (...args: any[]) => void): this;
-  once(name: string, callback: (...args: any[]) => void): this;
-  off(name: string, callback: (...args: any[]) => void): this;
 }

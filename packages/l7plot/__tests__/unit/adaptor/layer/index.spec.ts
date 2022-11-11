@@ -1,6 +1,6 @@
+import { Source } from '@antv/l7';
 import { getLayerStyleAttribute } from '../../../helper/layer';
 import { DotLayer } from '../../../../src/layers/dot-layer';
-import { Source } from '../../../../src/types';
 import { DotLayerOptions } from '../../../../src/layers/dot-layer';
 import { LinesLayer, LinesLayerOptions } from '../../../../src/layers/lines-layer';
 

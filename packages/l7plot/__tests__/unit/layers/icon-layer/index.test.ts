@@ -1,6 +1,6 @@
+import { Source } from '@antv/l7';
 import { getLayerStyleAttribute } from '../../../helper/layer';
 import { IconLayer } from '../../../../src/layers/icon-layer';
-import { Source } from '../../../../src/types';
 import { registerImages } from '../../../../src';
 
 describe('icon layer', () => {

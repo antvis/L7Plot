@@ -1,5 +1,5 @@
 import { uniqueId } from '@antv/util';
-import { LineLayer } from '@antv/l7-layers';
+import { LineLayer } from '@antv/l7';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { mappingLayer } from './adaptor';
 import { LinesLayerOptions } from './types';

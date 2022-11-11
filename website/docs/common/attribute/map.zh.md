@@ -8,9 +8,11 @@
 
 `string` optional default: `'amap'`
 
-地图底图类型，支持以下两种类型：
+地图底图类型，支持以下类型：
 
+- map: L7 官方地图
 - amap: 高德地图
+- amapv2: 高德 V2 地图
 - mapbox: Mapbox 地图
 
 地图底图类型不同时，`map` 下面的有的配置项不相同，比如 `maxZoom`，AMap 最大缩放等级 18，Mapbox 最大缩放等级 20。除此之外还有，底图的交互状态配置，`zoomEnable`、`dragEnable`等。各配置项可详见各官网：高德地图 [配置项](https://lbs.amap.com/api/javascript-api/reference/map)；Mapbox 地图 [配置项](https://docs.mapbox.com/mapbox-gl-js/api/map/#map-parameters)。
@@ -45,8 +47,9 @@
 
 初始缩放层级，底图可缩放层级分布为：
 
-- Mapbox （0-24）
-- 高德 （2-19）
+- Mapbox（0-24）
+- 高德（0-20）
+- 高德 V2（0-30）
 
 #### `map.`minZoom
 
@@ -58,7 +61,7 @@
 
 `number` optional default: `20`
 
-地图最大缩放等级，AMap 最大缩放等级 18，Mapbox 最大缩放等级 20。
+地图最大缩放等级，AMap 最大缩放等级 20，Mapbox 最大缩放等级 24。
 
 #### `map.`style
 

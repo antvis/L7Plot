@@ -1,5 +1,5 @@
 import { uniqueId } from '@antv/util';
-import { HeatmapLayer as Heatmap } from '@antv/l7-layers';
+import { HeatmapLayer as Heatmap } from '@antv/l7';
 import { PlotLayer } from '../../core/layer/plot-layer';
 import { mappingLayer } from './adaptor';
 import { GridLayerOptions } from './types';

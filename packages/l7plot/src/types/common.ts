@@ -1,4 +1,5 @@
-import {
+import type {
+  Scene,
   ILayer,
   ILayerConfig,
   ISourceCFG,
@@ -12,10 +13,10 @@ import {
   IStatusOptions,
   ILegendSegmentItem,
   ILegendClassificaItem,
-} from '@antv/l7-core';
-import { Scene } from '@antv/l7-scene';
+} from '@antv/l7';
 
-export {
+export type {
+  Scene,
   ILayer,
   ILayerConfig,
   ISourceCFG,
@@ -27,8 +28,6 @@ export {
   ILegendSegmentItem,
   ILegendClassificaItem,
 };
-
-export type { Scene };
 
 export type ScaleConfig = IScale;
 export type ScaleConfigMap = IScaleOptions;
