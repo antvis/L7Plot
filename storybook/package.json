@@ -13,7 +13,7 @@
     "prettier": "prettier stories -c -w"
   },
   "dependencies": {
-    "@antv/l7": "^2.9.14",
+    "@antv/l7": "^2.10.6",
     "@antv/l7plot": "link:../packages/l7plot",
     "@antv/l7-composite-layers": "link:../packages/composite-layers",
     "antd": "^4.16.13",
