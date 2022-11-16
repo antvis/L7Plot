@@ -4,7 +4,6 @@ import { ImageLayer } from '@antv/l7-composite-layers';
 
 class Demo extends Component {
   public scene: Scene | undefined;
-  public raster: RasterLayer | undefined;
 
   constructor(props) {
     super(props);
