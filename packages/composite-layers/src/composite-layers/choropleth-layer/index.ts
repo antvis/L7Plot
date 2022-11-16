@@ -9,6 +9,7 @@ import { ICoreLayer, ISource, MouseEvent } from '../../types';
 import { EMPTY_GEOJSON_SOURCE } from '../common/constants';
 import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
 import { getLabelLayerOptions } from '../common/label-layer';
+import { isGestureMultiSelect } from '../common/multi-select';
 
 export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   /**
@@ -374,13 +375,14 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   /**
    * 处理选择数据私有方法
    */
-  private handleSelectData(featureId: number, feature: any) {
-    const enabledMultiSelect = this.options.enabledMultiSelect;
+  private handleSelectData(featureId: number, feature: any, isSelfMultiSelect?: boolean) {
+    const { enabledMultiSelect, triggerMultiSelectKey } = this.options;
+    const isMultiSelect = isGestureMultiSelect(enabledMultiSelect, triggerMultiSelectKey) || isSelfMultiSelect;
     let selectData = clone(this.selectData);
     const index = selectData.findIndex((item) => item.featureId === featureId);
 
     if (index === -1) {
-      if (enabledMultiSelect) {
+      if (isMultiSelect) {
         selectData.push({ feature, featureId });
       } else {
         selectData = [{ feature, featureId }];
@@ -388,7 +390,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       this.emit('select', feature, clone(selectData));
     } else {
       const unselectFeature = selectData[index];
-      if (enabledMultiSelect) {
+      if (isMultiSelect) {
         selectData.splice(index, 1);
       } else {
         selectData = [];
@@ -492,7 +494,8 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     const source = this.fillLayer.source;
     const featureId = source.getFeatureId(field, value);
     if (isUndefined(featureId)) {
-      throw new Error('Feature non-existent' + field + value);
+      console.warn(`Feature non-existent by field: ${field},value: ${value}`);
+      return;
     }
 
     if (this.layerState.active.fillColor) {
@@ -512,15 +515,16 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     const source = this.fillLayer.source;
     const featureId = source.getFeatureId(field, value);
     if (isUndefined(featureId)) {
-      throw new Error('Feature non-existent' + field + value);
+      console.warn(`Feature non-existent by field: ${field},value: ${value}`);
+      return;
     }
 
-    if (this.layerState.select.strokeColor === false || this.layerState.select.fillColor === false) {
+    if (this.layerState.select.strokeColor === false && this.layerState.select.fillColor === false) {
       return;
     }
 
     const feature = source.getFeatureById(featureId);
-    this.handleSelectData(featureId, feature);
+    this.handleSelectData(featureId, feature, true);
     // TODO: L7 method pickFeature(id|{x,y})
   }
 

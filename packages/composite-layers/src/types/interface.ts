@@ -58,6 +58,8 @@ interface IBaseLayer {
   getLegend(name: string): ILegend;
   getLegendItems(type: string): Record<string, any>[];
 
+  boxSelect(bounds: [number, number, number, number], callback: (...args: any[]) => void): void;
+
   destroy(): void;
 
   on(name: string, callback: (...args: any[]) => void, once?: boolean): this;
@@ -77,8 +79,6 @@ export interface ICoreLayer extends IBaseLayer {
 
   setSource(source: ISource): void;
   getSource(): ISource;
-
-  boxSelect(bounds: [number, number, number, number], callback: (...args: any[]) => void): void;
 }
 
 /**

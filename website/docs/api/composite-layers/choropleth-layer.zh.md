@@ -130,13 +130,17 @@ order: 1
 
 `markdown:docs/common/composite-layers/choropleth-layer/state.zh.md`
 
-<!-- 多选文档暂时不透出，后面改多选和单选并存交互 -->
-
-<!-- ### `options.`enabledMultiSelect
+### `options.`enabledMultiSelect
 
 `boolean` optional default: `false`
 
-是否启用多选。 -->
+是否启用多选，开启后默认按 "Shift" 快捷键使用。
+
+### `options.`triggerMultiSelectKey
+
+`KeyboardEventKey` optional default: `"Shift"`
+
+触发多选的快捷键，快捷键为 [KeyboardEventKey](https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent/key) 类型，当为 `undefined` 时不需要快捷键触发多选。
 
 ## 二、属性
 

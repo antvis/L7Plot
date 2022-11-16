@@ -287,6 +287,13 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   }
 
   /**
+   * 图层框选数据
+   */
+  public boxSelect(bounds: [number, number, number, number], callback: (...args: any[]) => void) {
+    this.layer.boxSelect(bounds, callback);
+  }
+
+  /**
    * 定位到当前图层数据范围
    */
   public fitBounds(fitBoundsOptions?: unknown) {

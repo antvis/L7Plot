@@ -102,6 +102,14 @@ layer.isVisible() : boolean;
 layer.fitBounds(fitBoundsOptions?: Bounds);
 ```
 
+### boxSelect
+
+图层框选数据，bounds 是框选的方框左上角和右下角相对于地图左上角的像素坐标，callback 回调的参数是选中的 feature 对象数组。
+
+```js
+layer.boxSelect(bounds: [number, number, number, number], callback: (...args: any[]) => void);
+```
+
 ### getLegend
 
 获取图例。
