@@ -42,10 +42,10 @@
     "@antv/util": "^2.0.14"
   },
   "devDependencies": {
-    "@antv/l7": "^2.9.37"
+    "@antv/l7": "^2.10.6"
   },
   "peerDependencies": {
-    "@antv/l7": "^2.9.37"
+    "@antv/l7": "^2.10.6"
   },
   "publishConfig": {
     "access": "public",

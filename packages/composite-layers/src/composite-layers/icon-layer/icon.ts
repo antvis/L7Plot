@@ -9,6 +9,7 @@ import { ICoreLayer, Scene, MouseEvent, BlendType, ISource } from '../../types';
 import { getLabelLayerOptions } from '../common/label-layer';
 import { CompositeLayerEvent } from '../../core/constants';
 import { EMPTY_JSON_SOURCE } from '../common/constants';
+import { isGestureMultiSelect } from '../common/multi-select';
 
 export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLayer<T> {
   /**
@@ -149,13 +150,14 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
     this.handleSelectData(featureId, feature);
   };
 
-  private handleSelectData(featureId: number, feature: any) {
-    const enabledMultiSelect = this.options.enabledMultiSelect;
+  private handleSelectData(featureId: number, feature: any, isSelfMultiSelect?: boolean) {
+    const { enabledMultiSelect, triggerMultiSelectKey } = this.options;
+    const isMultiSelect = isGestureMultiSelect(enabledMultiSelect, triggerMultiSelectKey) || isSelfMultiSelect;
     let selectData = clone(this.selectData);
     const index = selectData.findIndex((item) => item.featureId === featureId);
 
     if (index === -1) {
-      if (enabledMultiSelect) {
+      if (isMultiSelect) {
         selectData.push({ feature, featureId });
       } else {
         selectData = [{ feature, featureId }];
@@ -163,7 +165,7 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
       this.emit('select', feature, clone(selectData));
     } else {
       const unselectFeature = selectData[index];
-      if (enabledMultiSelect) {
+      if (isMultiSelect) {
         selectData.splice(index, 1);
       } else {
         selectData = [];
@@ -274,7 +276,8 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
     const source = this.iconLayer.source;
     const featureId = source.getFeatureId(field, value);
     if (isUndefined(featureId)) {
-      throw new Error('Feature non-existent' + field + value);
+      console.warn(`Feature non-existent by field: ${field},value: ${value}`);
+      return;
     }
     this.iconLayer.layer.setActive(featureId);
   }
@@ -295,7 +298,8 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
     const source = this.iconLayer.source;
     const featureId = source.getFeatureId(field, value);
     if (isUndefined(featureId)) {
-      throw new Error('Feature non-existent' + field + value);
+      console.warn(`Feature non-existent by field: ${field},value: ${value}`);
+      return;
     }
 
     if (this.layerState?.select && (this.layerState?.select as IconLayerActiveOptions).enable !== false) {
@@ -303,7 +307,7 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
     }
 
     const feature = source.getFeatureById(featureId);
-    this.handleSelectData(featureId, feature);
+    this.handleSelectData(featureId, feature, true);
     // TODO: L7 method pickFeature(id|{x,y})
   }
 

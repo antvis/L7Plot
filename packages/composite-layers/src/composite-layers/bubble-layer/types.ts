@@ -66,11 +66,14 @@ export interface BubbleLayerOptions extends CompositeLayerOptions {
      */
     select?: boolean | BubbleLayerActiveOptions;
   };
-  // 文档暂时不透出，后面改多选和单选并存交互
-  // https://github.com/antvis/L7Plot/issues/176
   /**
-   * 是否启用多选
+   * 是否启用多选，开启后默认按 "Shift" 快捷键使用
    * @default false
    */
   enabledMultiSelect?: boolean;
+  /**
+   * 触发多选的快捷键
+   * @default "Shift"
+   */
+  triggerMultiSelectKey?: KeyboardEvent['key'];
 }

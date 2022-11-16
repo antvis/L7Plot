@@ -31,4 +31,5 @@ export const DEFAULT_OPTIONS: Partial<IconLayerOptions> = {
     select: false,
   },
   enabledMultiSelect: false,
+  triggerMultiSelectKey: 'Shift',
 };

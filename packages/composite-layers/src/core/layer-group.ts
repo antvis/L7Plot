@@ -157,15 +157,7 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
    * 根据图层获取图层 ID
    */
   public getLayerId(layer: ICoreLayer) {
-    if ('id' in layer) {
-      return layer.id;
-    }
-
-    if ('name' in layer) {
-      return layer.name;
-    }
-
-    return layer.layer.id;
+    return layer.id;
   }
 
   /**

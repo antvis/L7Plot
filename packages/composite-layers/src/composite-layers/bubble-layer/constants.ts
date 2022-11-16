@@ -34,4 +34,5 @@ export const DEFAULT_OPTIONS: Partial<BubbleLayerOptions> = {
     select: false,
   },
   enabledMultiSelect: false,
+  triggerMultiSelectKey: 'Shift',
 };

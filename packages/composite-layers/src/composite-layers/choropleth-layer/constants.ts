@@ -34,4 +34,5 @@ export const DEFAULT_OPTIONS: Partial<ChoroplethLayerOptions> = {
     select: false,
   },
   enabledMultiSelect: false,
+  triggerMultiSelectKey: 'Shift',
 };

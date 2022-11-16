@@ -1,5 +1,7 @@
 import { deepMix, isEqual } from '@antv/util';
 
+export * from './keypress';
+
 /**
  * 深克隆图层配置项
  */
