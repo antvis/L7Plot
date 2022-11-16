@@ -28,6 +28,9 @@ layer.off(eventName: string, callback: (...args) => void);
 | add          | 生命周期事件 | 图层添加到场景 scene 事件      |
 | remove       | 生命周期事件 | 图层移除时事件                 |
 | dataUpdate   | 生命周期事件 | 图层数据源更新事件             |
+| show         | 生命周期事件 | 图层显示事件                   |
+| hide         | 生命周期事件 | 图层隐藏事件                   |
+| destroy      | 生命周期事件 | 图层摧毁事件                   |
 | legend       | 生命周期事件 | 数据映射更新，图例更新事件     |
 | legend:color | 生命周期事件 | 数据映射更新，颜色图例更新事件 |
 | legend:size  | 生命周期事件 | 数据映射更新，大小图例更新事件 |
@@ -39,6 +42,7 @@ layer.off(eventName: string, callback: (...args) => void);
 | click         | 左键事件 | 左键点击图层事件   |
 | unclick       | 左键事件 | 图层外左键点击事件 |
 | dblclick      | 双击事件 | 双击图层事件       |
+| undblclick    | 双击事件 | 图层外双击事件     |
 | contextmenu   | 右键事件 | 右键点击图层事件   |
 | uncontextmenu | 右键事件 | 图层外点击右键事件 |
 

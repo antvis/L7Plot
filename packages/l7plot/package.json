@@ -40,7 +40,7 @@
     "url": "https://github.com/antvis/L7Plot/issues"
   },
   "devDependencies": {
-    "@antv/l7": "^2.9.37",
+    "@antv/l7": "^2.10.6",
     "@types/geojson": "^7946.0.8",
     "@types/lodash-es": "^4.17.4",
     "@types/topojson-client": "^3.1.0"
@@ -53,7 +53,7 @@
     "topojson-client": "^3.1.0"
   },
   "peerDependencies": {
-    "@antv/l7": "^2.9.37"
+    "@antv/l7": "^2.10.6"
   },
   "publishConfig": {
     "access": "public",

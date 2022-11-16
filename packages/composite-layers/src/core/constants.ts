@@ -1,8 +1,13 @@
-export const OriginLayerEventList: string[] = [
+import type { LayerEventType } from '@antv/l7';
+
+export const OriginLayerEventList: LayerEventType[] = [
   // 图层事件
   'inited',
   // 代理掉的事件 'add', 'remove',
+  'show',
+  'hide',
   'dataUpdate',
+  'destroy',
   // 数据映射更新，图例更新事件
   'legend',
   'legend:color',
@@ -12,11 +17,13 @@ export const OriginLayerEventList: string[] = [
   'click',
   'dblclick',
   'unclick',
+  'undblclick',
   // 右键事件
   'contextmenu',
   'uncontextmenu',
   // mouse 事件
   'mouseenter',
+  'unmouseenter',
   'mousemove',
   'unmousemove',
   'mouseout',
