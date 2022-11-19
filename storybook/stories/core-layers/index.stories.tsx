@@ -1,11 +1,13 @@
 import { storiesOf } from '@storybook/react';
 
+import PointLayer from './PointLayer';
 import Raster from './RasterLayer';
 import Image from './ImageLayer';
 import PolygonLayer from './PolygonLayer';
 import LineLayer from './LineLayer';
 import L7LineLayer from './L7LineLayer';
 
+storiesOf('核心图层/Point', module).add('Point', () => <PointLayer />);
 storiesOf('核心图层/Raster', module).add('raster', () => <Raster />);
 storiesOf('核心图层/Image', module).add('image', () => <Image />);
 storiesOf('核心图层/Polygon', module).add('西湖区', () => <PolygonLayer />);
