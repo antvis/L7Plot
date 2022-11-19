@@ -32,10 +32,7 @@ export interface ChoroplethLayerOptions extends CompositeLayerOptions {
    * @default '#5FD3A6'
    */
   fillColor?: PolygonLayerOptions['color'];
-  /**
-   * 填充兜底颜色，用于颜色值映值不存在时
-   */
-  fillBottomColor?: false | string;
+
   /**
    * 填充透明度
    * @default 1

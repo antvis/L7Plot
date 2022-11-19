@@ -102,8 +102,6 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       source,
       interaction: true,
     });
-    const fillBottomColor = this.options.fillBottomColor;
-    fillBottomColor && fillLayer.layer.setBottomColor(fillBottomColor);
 
     // 描边图层
     const strokeLayer = new LineLayer({

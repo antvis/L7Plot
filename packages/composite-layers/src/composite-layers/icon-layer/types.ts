@@ -30,10 +30,7 @@ export interface IconLayerOptions extends CompositeLayerOptions {
    * 数据配置
    */
   source: IconLayerSourceOptions | ISource;
-  /**
-   * 填充兜底颜色，用于颜色值映值不存在时
-   */
-  fillBottomColor?: false | string;
+
   /**
    * 填充透明度
    * @default 1

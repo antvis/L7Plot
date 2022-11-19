@@ -39,7 +39,6 @@ new Choropleth('container', {
     stroke: '#ccc',
     lineWidth: 0.6,
     lineOpacity: 1,
-    fillBottomColor: '#d8d8d84d',
   },
   chinaBorder: true,
   label: {

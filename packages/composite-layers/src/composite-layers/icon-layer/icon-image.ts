@@ -1,6 +1,8 @@
 import { IconImageLayerOptions } from './types';
 import { DEFAULT_OPTIONS } from './constants';
 import { IconLayer } from './icon';
+import { Scene } from '../../types';
+import { CompositeLayerEvent } from '../../core/constants';
 import { CompositeLayer } from '../../core/composite-layer';
 
 export class IconImageLayer extends IconLayer<IconImageLayerOptions> {
@@ -14,21 +16,33 @@ export class IconImageLayer extends IconLayer<IconImageLayerOptions> {
   public type = CompositeLayer.LayerType.IconImageLayer;
 
   /**
+   * 添加到场景
+   */
+  public addTo(scene: Scene) {
+    this.scene = scene;
+    this.initAssets().then(() => {
+      this.subLayers.addTo(scene);
+      this.emit(CompositeLayerEvent.ADD);
+    });
+  }
+
+  /**
    * 初始化资源
    */
-  protected initAssets() {
-    this.loadIconAtlas();
+  protected async initAssets() {
+    await this.loadIconAtlas();
   }
 
   /**
    * load 图片资源
    */
-  protected loadIconAtlas() {
+  protected async loadIconAtlas() {
     const iconAtlas = this.options.iconAtlas;
     const scene = this.scene;
-
-    Object.keys(iconAtlas).forEach((icon: string) => {
-      scene?.addImage(icon, iconAtlas[icon]);
-    });
+    await Promise.all(
+      Object.keys(iconAtlas).map(async (icon: string) => {
+        await scene?.addImage(icon, iconAtlas[icon]);
+      })
+    );
   }
 }
