@@ -60,7 +60,6 @@ class ChinaMap extends Component {
         lineDash: [1, 10],
         lineWidth: 0.6,
         lineOpacity: 0.8,
-        fillBottomColor: 'rgba(0, 0, 0, 0.2)',
       },
       label: {
         visible: false,
