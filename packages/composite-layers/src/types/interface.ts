@@ -38,7 +38,7 @@ interface IBaseLayer {
   addTo(scene: Scene): void;
   remove(): void;
 
-  update(options: unknown): void;
+  update(options: unknown, autoRender?: boolean): void;
   updateOption(options: unknown): void;
 
   changeData(data: SourceOptions): void;

@@ -503,7 +503,7 @@ params:
 ```js
 import { registerImage } from '@antv/l7plot';
 
-registerImage('01', 'https://l7plot.antv.vision/xxx.svg');
+registerImage('01', 'https://l7plot.antv.antgroup.com/xxx.svg');
 ```
 
 #### registerImages(images)
@@ -519,7 +519,7 @@ params:
 ```js
 import { registerImages } from '@antv/l7plot';
 
-const images = [{ id: '01', image: 'https://l7plot.antv.vision/xxx.svg' }];
+const images = [{ id: '01', image: 'https://l7plot.antv.antgroup.com/xxx.svg' }];
 registerImages(images);
 ```
 
@@ -537,7 +537,7 @@ params:
 ```js
 import { registerFontFace } from '@antv/l7plot';
 
-registerFontFace('iconfont', 'https://l7plot.antv.vision/xxx.woff2');
+registerFontFace('iconfont', 'https://l7plot.antv.antgroup.com/xxx.woff2');
 ```
 
 ### 注册 iconfont 映射

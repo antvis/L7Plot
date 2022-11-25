@@ -10,7 +10,7 @@ module.exports = {
   siteMetadata: {
     title: 'L7Plot',
     description: 'Geospatial Visualization Chart Library',
-    siteUrl: 'https://l7plot.antv.vision',
+    siteUrl: 'https://l7plot.antv.antgroup.com',
     githubUrl: 'https://github.com/antvis/L7Plot',
     navs: [
       {

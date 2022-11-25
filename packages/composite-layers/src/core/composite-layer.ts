@@ -181,8 +181,13 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
   /**
    * 更新
    */
-  public update(options: Partial<O>) {
+  public update(options: Partial<O>, autoRender = true) {
     this.updateOption(options);
+
+    // 停止渲染，避免属性更新与数据更新造成多次内部调用 scene render => renderLayers
+    if (autoRender) {
+      this.scene?.setEnableRender(false);
+    }
 
     // 数据更新
     if (options.source && isSourceChanged(options.source, this.lastOptions.source)) {
@@ -191,6 +196,11 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
 
     // 图层更新
     this.updateSubLayers(options);
+
+    if (autoRender) {
+      this.scene?.setEnableRender(true);
+      this.render();
+    }
   }
 
   /**
