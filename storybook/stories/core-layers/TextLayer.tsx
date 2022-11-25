@@ -65,7 +65,14 @@ class Demo extends Component {
 
   update = () => {
     if (this.scene) {
-      this.textLayer?.update({ field: '', visible: false });
+      this.textLayer?.update({
+        minZoom: 10,
+        maxZoom: 11,
+        style: {
+          textAnchor: 'bottom', // 文本相对锚点的位置 center|left|right|top|bottom|top-left
+          textOffset: [10, 40],
+        },
+      });
     }
   };
 
