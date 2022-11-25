@@ -4,7 +4,7 @@ const path = require('path');
 
 const packageDirPath = path.join(__dirname, '..', 'packages');
 
-const packageNameList = fs.readdirSync(packageDirPath);
+const packageNameList = fs.readdirSync(packageDirPath).filter((item) => item !== '.DS_Store');
 
 packageNameList.forEach((packageName) => {
   const packagePath = path.join(packageDirPath, packageName);
