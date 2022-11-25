@@ -17,10 +17,10 @@
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/antvis/l7plot.svg)](http://isitmaintained.com/project/antvis/l7plot 'Average time to resolve an issue')
 
 <p align="center">
-  <a href="https://l7plot.antv.vision/en">Website</a> •
-  <a href="https://l7plot.antv.vision/en/docs/manual/quick-start">Quick Start</a> •
-  <a href="https://l7plot.antv.vision/zh/docs/api/plot-api">API</a> •
-  <a href="https://l7plot.antv.vision/zh/examples/gallery">Example</a>
+  <a href="https://l7plot.antv.antgroup.com/en">Website</a> •
+  <a href="https://l7plot.antv.antgroup.com/en/docs/manual/quick-start">Quick Start</a> •
+  <a href="https://l7plot.antv.antgroup.com/zh/docs/api/plot-api">API</a> •
+  <a href="https://l7plot.antv.antgroup.com/zh/examples/gallery">Example</a>
 </p>
 
 </div>
