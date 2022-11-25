@@ -395,19 +395,19 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
    */
   protected updateSubLayers(options: Partial<BubbleLayerOptions>) {
     // 映射填充面图层
-    this.fillLayer.update(this.getFillLayerOptions());
+    this.fillLayer.update(this.getFillLayerOptions(), false);
 
     // 高亮图层
-    this.highlightStrokeLayer.update(this.getHighlightStrokeLayerOptions());
+    this.highlightStrokeLayer.update(this.getHighlightStrokeLayerOptions(), false);
 
     // 选中填充图层
-    this.selectFillLayer.update(this.getSelectFillLayerOptions());
+    this.selectFillLayer.update(this.getSelectFillLayerOptions(), false);
 
     // 选中描边图层
-    this.selectStrokeLayer.update(this.getSelectStrokeLayerOptions());
+    this.selectStrokeLayer.update(this.getSelectStrokeLayerOptions(), false);
 
     // 标注图层
-    this.labelLayer.update(getLabelLayerOptions<BubbleLayerOptions>(this.options));
+    this.labelLayer.update(getLabelLayerOptions<BubbleLayerOptions>(this.options), false);
 
     // 重置高亮/选中状态
     if (this.options.visible) {

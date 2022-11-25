@@ -203,8 +203,8 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
   }
 
   protected updateSubLayers() {
-    this.iconLayer.update(this.getIconLayerOptions());
-    this.iconLabelLayer.update(getLabelLayerOptions<IconLayerOptions>(this.options));
+    this.iconLayer.update(this.getIconLayerOptions(), false);
+    this.iconLabelLayer.update(getLabelLayerOptions<IconLayerOptions>(this.options), false);
   }
 
   /**

@@ -248,12 +248,14 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
   /**
    * 更新
    */
-  public update(options: Partial<O>) {
+  public update(options: Partial<O>, autoRender = true) {
     this.updateOption(options);
     this.updateConfig(options);
 
-    // 停止渲染，避免属性更新与数据更新造成多次内部调用 scene render
-    this.scene?.setEnableRender(false);
+    // 停止渲染，避免属性更新与数据更新造成多次内部调用 scene render => renderLayers
+    if (autoRender) {
+      this.scene?.setEnableRender(false);
+    }
 
     if (isUndefined(this.options.visible) || this.options.visible) {
       this.adaptorLayerAttr();
@@ -263,8 +265,10 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
       this.changeData(options.source);
     }
 
-    this.scene?.setEnableRender(true);
-    this.render();
+    if (autoRender) {
+      this.scene?.setEnableRender(true);
+      this.render();
+    }
   }
 
   /**

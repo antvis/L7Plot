@@ -4,6 +4,7 @@ import { BubbleLayer } from '@antv/l7-composite-layers';
 
 class Earthquake extends Component {
   public scene: Scene | undefined;
+  public bubbleLayer: BubbleLayer | undefined;
 
   constructor(props) {
     super(props);
@@ -23,7 +24,7 @@ class Earthquake extends Component {
     const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/m5r7MFHt8U/wenchuandizhenshuju.json');
     const { data } = await response.json();
 
-    const bubbleLayer = new BubbleLayer({
+    this.bubbleLayer = new BubbleLayer({
       autoFit: true,
       source: {
         data: data,
@@ -84,7 +85,11 @@ class Earthquake extends Component {
       enabledMultiSelect: true,
     });
 
-    this.scene && bubbleLayer.addTo(this.scene);
+    this.scene && this.bubbleLayer.addTo(this.scene);
+
+    // setTimeout(() => {
+    //   this.update();
+    // }, 1000 * 3);
   }
 
   componentDidMount() {
@@ -94,6 +99,57 @@ class Earthquake extends Component {
   componentWillUnmount() {
     this.scene && this.scene.destroy();
   }
+
+  update = () => {
+    if (this.scene) {
+      this.bubbleLayer?.update({
+        fillColor: {
+          field: 'mag',
+          value: ({ mag }) => {
+            if (mag > 7) {
+              return '#82cf9c';
+            } else if (mag <= 7 && mag >= 5.5) {
+              return '#10b3b0';
+            } else {
+              return '#2033ab';
+            }
+          },
+        },
+        strokeColor: '#c0c0c0',
+        lineWidth: 1,
+        radius: {
+          field: 'mag',
+          value: [10, 40],
+        },
+        opacity: 0.8,
+        label: {
+          visible: false,
+          field: '',
+          style: {
+            fill: '#000',
+            opacity: 0.8,
+            fontSize: 14,
+            textAnchor: 'top', // 文本相对锚点的位置 center|left|right|top|bottom|top-left
+            spacing: 1, // 字符间距
+            padding: [15, 15], // 文本包围盒 padding [水平，垂直]，影响碰撞检测结果，避免相邻文本靠的太近
+            stroke: '#fff', // 描边颜色
+            strokeWidth: 2, // 描边宽度
+            textOffset: [0, 20],
+          },
+        },
+        state: {
+          active: {
+            strokeColor: 'blue',
+            lineWidth: 2,
+          },
+          select: {
+            strokeColor: 'yellow',
+            lineWidth: 3,
+          },
+        },
+      });
+    }
+  };
 
   render() {
     return (
@@ -106,7 +162,13 @@ class Earthquake extends Component {
           right: 0,
           bottom: 0,
         }}
-      ></div>
+      >
+        <div style={{ position: 'absolute', left: '10px', zIndex: 1 }}>
+          <button type="button" onClick={this.update} style={{ marginTop: 8 }}>
+            显隐
+          </button>
+        </div>
+      </div>
     );
   }
 }
