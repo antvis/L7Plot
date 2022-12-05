@@ -3,7 +3,7 @@ import EventEmitter from '@antv/event-emitter';
 import { ILegend, Source } from '@antv/l7';
 import { deepMergeLayerOptions, isSourceChanged } from '../utils';
 import { Scene, SourceOptions, ICompositeLayer, CompositeLayerType, LayerBlend, ICoreLayer, ISource } from '../types';
-import { CompositeLayerEvent, OriginLayerEventList } from './constants';
+import { CompositeLayerEvent, LayerGroupEvent, OriginLayerEventList } from './constants';
 import { LayerGroup } from './layer-group';
 
 /**
@@ -109,7 +109,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     const layers = this.createSubLayers();
     this.subLayers = new LayerGroup(layers);
 
-    this.emit(CompositeLayerEvent.CREATED);
+    this.emit(CompositeLayerEvent.CREATED, this);
   }
 
   /**
@@ -165,8 +165,11 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    */
   public addTo(scene: Scene) {
     this.scene = scene;
+    this.subLayers.once(LayerGroupEvent.INITED_LAYERS, () => {
+      this.emit(CompositeLayerEvent.INITED, this);
+      this.emit(CompositeLayerEvent.ADD, this);
+    });
     this.subLayers.addTo(scene);
-    this.emit(CompositeLayerEvent.ADD);
   }
 
   /**
@@ -267,9 +270,9 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    */
   public show() {
     if (!this.layer.inited) return;
-    this.subLayers.getLayers().forEach((layer) => {
-      layer.show();
-    });
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    this.update({ visible: false });
   }
 
   /**

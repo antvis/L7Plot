@@ -2,8 +2,7 @@ import type { LayerEventType } from '@antv/l7';
 
 export const OriginLayerEventList: LayerEventType[] = [
   // 图层事件
-  'inited',
-  // 代理掉的事件 'add', 'remove',
+  // 代理掉的事件 'inited', 'add', 'remove',
   'show',
   'hide',
   'dataUpdate',
@@ -30,18 +29,24 @@ export const OriginLayerEventList: LayerEventType[] = [
   'mouseup',
   'unmouseup',
   'mousedown',
-  'uncontextmenu',
   'unpick',
 ];
 
 export enum CoreLayerEvent {
   CREATED = 'created',
+  INITED = 'inited',
   ADD = 'add',
   REMOVE = 'remove',
 }
 
 export enum CompositeLayerEvent {
   CREATED = 'created',
+  INITED = 'inited',
   ADD = 'add',
   REMOVE = 'remove',
+}
+
+export enum LayerGroupEvent {
+  INITED_LAYER = 'inited-layer',
+  INITED_LAYERS = 'inited-layers',
 }
