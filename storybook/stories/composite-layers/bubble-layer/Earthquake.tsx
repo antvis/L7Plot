@@ -74,11 +74,11 @@ class Earthquake extends Component {
       },
       state: {
         active: {
-          strokeColor: 'blue',
+          strokeColor: 'yellow',
           lineWidth: 2,
         },
         select: {
-          strokeColor: 'yellow',
+          strokeColor: 'red',
           lineWidth: 3,
         },
       },
@@ -86,10 +86,6 @@ class Earthquake extends Component {
     });
 
     this.scene && this.bubbleLayer.addTo(this.scene);
-
-    // setTimeout(() => {
-    //   this.update();
-    // }, 1000 * 3);
   }
 
   componentDidMount() {
@@ -103,50 +99,7 @@ class Earthquake extends Component {
   update = () => {
     if (this.scene) {
       this.bubbleLayer?.update({
-        fillColor: {
-          field: 'mag',
-          value: ({ mag }) => {
-            if (mag > 7) {
-              return '#82cf9c';
-            } else if (mag <= 7 && mag >= 5.5) {
-              return '#10b3b0';
-            } else {
-              return '#2033ab';
-            }
-          },
-        },
-        strokeColor: '#c0c0c0',
-        lineWidth: 1,
-        radius: {
-          field: 'mag',
-          value: [10, 40],
-        },
-        opacity: 0.8,
-        label: {
-          visible: false,
-          field: '',
-          style: {
-            fill: '#000',
-            opacity: 0.8,
-            fontSize: 14,
-            textAnchor: 'top', // 文本相对锚点的位置 center|left|right|top|bottom|top-left
-            spacing: 1, // 字符间距
-            padding: [15, 15], // 文本包围盒 padding [水平，垂直]，影响碰撞检测结果，避免相邻文本靠的太近
-            stroke: '#fff', // 描边颜色
-            strokeWidth: 2, // 描边宽度
-            textOffset: [0, 20],
-          },
-        },
-        state: {
-          active: {
-            strokeColor: 'blue',
-            lineWidth: 2,
-          },
-          select: {
-            strokeColor: 'yellow',
-            lineWidth: 3,
-          },
-        },
+        visible: false,
       });
     }
   };
