@@ -1,6 +1,7 @@
 import { uniqueId } from '@antv/util';
 import EventEmitter from '@antv/event-emitter';
 import { Scene, ILayerGroup, ICoreLayer } from '../types';
+import { LayerGroupEvent } from './constants';
 
 export type LayerGroupOptions = {
   name?: string;
@@ -39,9 +40,9 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
     for (const layer of this.layerMap.values()) {
       layer.once('inited', (e) => {
         layerIndex++;
-        this.emit('inited-layer', e);
+        this.emit(LayerGroupEvent.INITED_LAYER, e);
         if (layerIndex === layerLength) {
-          this.emit('inited-layers');
+          this.emit(LayerGroupEvent.INITED_LAYERS);
         }
       });
       layer.addTo(scene);
@@ -74,7 +75,7 @@ export class LayerGroup extends EventEmitter implements ILayerGroup {
     this.layerMap.set(layerId, layer);
 
     if (this.scene) {
-      layer.once('inited', (e) => this.emit('inited-layer', e));
+      layer.once('inited', (e) => this.emit(LayerGroupEvent.INITED_LAYER, e));
       layer.addTo(this.scene);
     }
   }

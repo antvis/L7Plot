@@ -1,4 +1,4 @@
-import { Scene, Mapbox, GaodeMap, GaodeMapV2, Map as L7Map, Scale, Zoom } from '@antv/l7';
+import { Scene, Mapbox, GaodeMap, GaodeMapV1, GaodeMapV2, Map as L7Map, Scale, Zoom } from '@antv/l7';
 import EventEmitter from '@antv/event-emitter';
 import { isObject, isBoolean, isUndefined, isEqual } from '@antv/util';
 import { Tooltip } from '../../component/tooltip';
@@ -148,6 +148,8 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
 
     return type === BaseMapType.Amap
       ? new GaodeMap(options)
+      : type === BaseMapType.AmapV1
+      ? new GaodeMapV1(options)
       : type === BaseMapType.AmapV2
       ? new GaodeMapV2(options)
       : type === BaseMapType.Mapbox
@@ -453,12 +455,9 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
     zoom && this.addZoomControl(zoom);
     layerMenu && this.addLayerMenuControl(layerMenu);
 
-    // TDOO: 图层生命周期修改为异步后，获取图例数据 getLegendOptions 不能正常获取，需要后续提供相关生命周期事件
     if (legend) {
-      setTimeout(() => {
-        this.addLegendControl(legend);
-        this.emit('add-legend');
-      }, 1000);
+      this.addLegendControl(legend);
+      this.emit('add-legend');
     }
   }
 

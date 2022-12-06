@@ -19,6 +19,7 @@ export type MapboxInstance = MapboxglMap & IMapboxInstance;
 export enum BaseMapType {
   Map = 'map',
   Amap = 'amap',
+  AmapV1 = 'amapv1',
   AmapV2 = 'amapv2',
   Mapbox = 'mapbox',
 }
@@ -30,7 +31,7 @@ export type MapConfig = {
   /**
    * 底图类型
    */
-  type?: 'map' | 'amap' | 'amapv2' | 'mapbox';
+  type?: 'map' | 'amap' | 'amapv1' | 'amapv2' | 'mapbox';
   /**
    * 地图
    */

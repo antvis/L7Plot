@@ -139,7 +139,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
     this.adaptorLayerAttr();
     this.setSource(source);
 
-    this.emit(CoreLayerEvent.CREATED);
+    this.emit(CoreLayerEvent.CREATED, this);
   }
 
   /**
@@ -232,8 +232,13 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
    */
   public addTo(scene: Scene) {
     this.scene = scene;
+    this.layer.once(CoreLayerEvent.INITED, () => {
+      this.emit(CoreLayerEvent.INITED, this);
+    });
+    this.layer.once(CoreLayerEvent.ADD, () => {
+      this.emit(CoreLayerEvent.ADD, this);
+    });
     scene.addLayer(this.layer);
-    this.emit(CoreLayerEvent.ADD);
   }
 
   /**

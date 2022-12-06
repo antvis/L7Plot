@@ -5,7 +5,7 @@
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
   "module": "dist/esm/index.js",
-  "unpkg": "dist/umd/index.js",
+  "unpkg": "dist/umd/l7-composite-layers.min.js",
   "files": [
     "dist"
   ],
@@ -42,10 +42,10 @@
     "@antv/util": "^2.0.14"
   },
   "devDependencies": {
-    "@antv/l7": "^2.10.15"
+    "@antv/l7": "^2.11.5"
   },
   "peerDependencies": {
-    "@antv/l7": "^2.10.15"
+    "@antv/l7": "^2.11.5"
   },
   "publishConfig": {
     "access": "public",

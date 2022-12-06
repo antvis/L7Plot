@@ -271,13 +271,16 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     const parser = this.source.parser;
     const data = parser.type === 'geojson' ? { type: 'FeatureCollection', features } : features;
 
-    // if (!Array.isArray(this.options.radius) && typeof this.options.radius === 'object' && this.options.radius.field) {
-    //   const scale = this.fillLayer.layer.getScale(this.options.radius.field);
-    //   console.log('this.options.radius.field): ', this.options.radius.field);
-    //   console.log('scale: ', scale);
-    // }
+    if (features.length) {
+      // 获取映射后的 size 大小，避免 fillLayer 的 size 不是常量的情况
+      const encodedData = this.fillLayer.layer.getEncodedData();
+      const encodedFeature = encodedData.find((item) => item.id === featureId);
+      const featureSize = encodedFeature?.size;
+      this.highlightStrokeLayer.update({ size: featureSize, source: { data, parser } });
+    } else {
+      this.highlightStrokeLayer.changeData({ data, parser });
+    }
 
-    this.highlightStrokeLayer.changeData({ data, parser });
     this.highlightData = featureId;
   }
 
@@ -294,11 +297,51 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     ) {
       return;
     }
-    const features = selectData.map(({ feature }) => feature);
+
     const parser = this.source.parser;
-    const data = parser.type === 'geojson' ? { type: 'FeatureCollection', features } : features;
-    this.selectFillLayer.changeData({ data, parser });
-    this.selectStrokeLayer.changeData({ data, parser });
+
+    if (selectData.length) {
+      const featureSizeKey = '_Feature_Size_';
+      // 获取映射后的 size 大小，避免 fillLayer 的 size 不是常量的情况
+      const encodedData = this.fillLayer.layer.getEncodedData();
+      let data: Record<string, any>[] | Record<string, any>;
+
+      if (parser.type === 'geojson') {
+        data = {
+          type: 'FeatureCollection',
+          features: selectData.map(({ feature, featureId }) => ({
+            ...feature,
+            properties: {
+              ...feature.properties,
+              [featureSizeKey]: encodedData.find((item) => item.id === featureId)?.size,
+            },
+          })),
+        };
+      } else {
+        data = selectData.map(({ feature, featureId }) => ({
+          ...feature,
+          [featureSizeKey]: encodedData.find((item) => item.id === featureId)?.size,
+        }));
+      }
+
+      const sizeAttr = {
+        field: featureSizeKey,
+        value: (obj: Record<string, any>) => obj[featureSizeKey],
+      };
+      this.selectFillLayer.update({
+        size: sizeAttr,
+        source: { data, parser },
+      });
+      this.selectStrokeLayer.update({
+        size: sizeAttr,
+        source: { data, parser },
+      });
+    } else {
+      const data = parser.type === 'geojson' ? { type: 'FeatureCollection', features: [] } : [];
+      this.selectFillLayer.changeData({ data, parser });
+      this.selectStrokeLayer.changeData({ data, parser });
+    }
+
     this.selectData = selectData;
   }
 
