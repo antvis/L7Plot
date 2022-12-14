@@ -24,6 +24,8 @@ class Earthquake extends Component {
     const response = await fetch('https://gw.alipayobjects.com/os/antfincdn/m5r7MFHt8U/wenchuandizhenshuju.json');
     const { data } = await response.json();
 
+    data.forEach((item) => (item.color = '#' + ((Math.random() * 0xffffff) << 0).toString(16)));
+
     this.bubbleLayer = new BubbleLayer({
       autoFit: true,
       source: {
@@ -34,17 +36,21 @@ class Earthquake extends Component {
           y: 'lat',
         },
       },
+      // fillColor: {
+      //   field: 'mag',
+      //   value: ({ mag }) => {
+      //     if (mag > 7) {
+      //       return '#82cf9c';
+      //     } else if (mag <= 7 && mag >= 5.5) {
+      //       return '#10b3b0';
+      //     } else {
+      //       return '#2033ab';
+      //     }
+      //   },
+      // },
       fillColor: {
-        field: 'mag',
-        value: ({ mag }) => {
-          if (mag > 7) {
-            return '#82cf9c';
-          } else if (mag <= 7 && mag >= 5.5) {
-            return '#10b3b0';
-          } else {
-            return '#2033ab';
-          }
-        },
+        field: 'color',
+        scale: { type: 'cat' },
       },
       strokeColor: '#c0c0c0',
       lineWidth: 1,
