@@ -272,7 +272,7 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
     if (!this.layer.inited) return;
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
-    this.update({ visible: false });
+    this.update({ visible: true });
   }
 
   /**
@@ -280,9 +280,9 @@ export abstract class CompositeLayer<O extends CompositeLayerOptions> extends Ev
    */
   public hide() {
     if (!this.layer.inited) return;
-    this.subLayers.getLayers().forEach((layer) => {
-      layer.hide();
-    });
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    this.update({ visible: false });
   }
 
   /**
