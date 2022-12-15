@@ -39,7 +39,7 @@
 ## 📦 安装
 
 ```bash
-$ npm install @antv/l7plot
+$ npm install @antv/l7 @antv/l7plot
 ```
 
 ## 🔨 使用
