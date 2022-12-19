@@ -36,6 +36,6 @@ export const DEFAULT_OPTIONS: Partial<ChoroplethLayerOptions> = {
   enabledMultiSelect: false,
   triggerMultiSelectKey: 'Shift',
   label:{
-    autoCompute: false
+    position: false
   }
 };

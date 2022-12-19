@@ -11,6 +11,6 @@ export type LabelCoord = {
    * coordinates 指定坐标
    * @default false
    */
-  autoCompute?: { x: string, y: string } | { coordinates: string } | boolean,
+   position?: { x: string, y: string } | { coordinates: string } | boolean,
 }
 export type LabelOptions = Omit<TextLayerOptions, 'source'> & LabelCoord;

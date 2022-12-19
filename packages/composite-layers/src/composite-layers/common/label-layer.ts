@@ -29,31 +29,31 @@ export const getLabelLayerOptions = <T extends WrapLayerOptions>(options: T) => 
  */
 
 export const autoLabelCoordinates = <L extends WrapLayerOptions['label']>(source: ISource, coord: L) => {
-  const autoCompute = coord?.autoCompute
-  if (!autoCompute) {
+  const position = coord?.position
+  if (!position) {
     return source
   }
   return {
     data: source['originData']
       .map((properties) => {
-        if (autoCompute['coordinates']) {
+        if (position['coordinates']) {
           return Object.assign(
             {}, properties,
-            { centroid: properties[autoCompute['coordinates']] }
+            { centroid: properties[position['coordinates']] }
           )
         }
-        if (autoCompute['x'] && autoCompute['y']) {
+        if (position['x'] && position['y']) {
           return Object.assign(
             {}, properties,
-            { x: properties[autoCompute['x']], y: properties[autoCompute['y']] }
+            { x: properties[position['x']], y: properties[position['y']] }
           )
         }
       })
       .filter(({ centroid }) => centroid),
     parser: {
       type: 'json',
-      ...(autoCompute['coordinates'] ? { coordinates: "centroid" } : {}),
-      ...(autoCompute['x'] && autoCompute['y'] ? {x: autoCompute['x'],y: autoCompute['y']}: {} )
+      ...(position['coordinates'] ? { coordinates: 'centroid' } : {}),
+      ...(position['x'] && position['y'] ? { x: 'x', y: 'y' } : {})
     },
     transforms: source.transforms,
   }
