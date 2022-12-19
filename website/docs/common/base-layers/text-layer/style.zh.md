@@ -16,7 +16,7 @@
 | textAnchor       | 文本相对锚点的位置                                                        | `string`    | `'center'` | optional |
 | textOffset       | 文本相对锚点的偏移量                                                      | `number[]`  | `[0, 0]`   | optional |
 | spacing          | 字符间距                                                                  | `number`    | `0`        | optional |
-| padding          | 文本包围盒 padding （水平，垂直），影响碰撞检测结果，避免相邻文本靠的太近 | `number[]`  | `[4, 4]`   | optional |
+| padding          | 文本包围盒 padding （水平，垂直），影响碰撞检测结果，避免相邻文本靠的太近 | `number[]`  | `[0, 0]`   | optional |
 
 textAnchor 文本相对锚点的位置，支持以下相对锚点的位置：
 
