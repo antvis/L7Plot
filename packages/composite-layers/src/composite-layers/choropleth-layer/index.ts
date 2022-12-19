@@ -8,7 +8,7 @@ import { ChoroplethLayerOptions, ChoroplethLayerSourceOptions } from './types';
 import { ICoreLayer, ISource, MouseEvent } from '../../types';
 import { EMPTY_GEOJSON_SOURCE } from '../common/constants';
 import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
-import { getLabelLayerOptions } from '../common/label-layer';
+import { getLabelLayerOptions,autoLabelCoordinates } from '../common/label-layer';
 import { isGestureMultiSelect } from '../common/multi-select';
 
 export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
@@ -133,7 +133,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     const labelLayer = new TextLayer({
       ...getLabelLayerOptions<ChoroplethLayerOptions>(this.options),
       id: 'labelLayer',
-      source,
+      source: autoLabelCoordinates(source,this.options.label),
     });
 
     const subLayers = [fillLayer, strokeLayer, highlightStrokeLayer, selectFillLayer, selectStrokeLayer, labelLayer];
