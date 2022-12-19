@@ -1,7 +1,7 @@
 import { ISource } from '@antv/l7';
 import { isUndefined } from '@antv/util';
 import { CompositeLayerOptions } from '../../core/composite-layer';
-import { LabelOptions, LabelCoord } from './types';
+import { LabelOptions } from './types';
 
 interface WrapLayerOptions extends CompositeLayerOptions {
   label?: LabelOptions;
@@ -29,32 +29,26 @@ export const getLabelLayerOptions = <T extends WrapLayerOptions>(options: T) => 
  */
 
 export const autoLabelCoordinates = <L extends WrapLayerOptions['label']>(source: ISource, coord: L) => {
-  const position = coord?.position
+  const position = coord?.position;
   if (!position) {
-    return source
+    return source;
   }
   return {
     data: source['originData']
       .map((properties) => {
         if (position['coordinates']) {
-          return Object.assign(
-            {}, properties,
-            { centroid: properties[position['coordinates']] }
-          )
+          return Object.assign({}, properties, { centroid: properties[position['coordinates']] });
         }
         if (position['x'] && position['y']) {
-          return Object.assign(
-            {}, properties,
-            { x: properties[position['x']], y: properties[position['y']] }
-          )
+          return Object.assign({}, properties, { x: properties[position['x']], y: properties[position['y']] });
         }
       })
       .filter(({ centroid }) => centroid),
     parser: {
       type: 'json',
       ...(position['coordinates'] ? { coordinates: 'centroid' } : {}),
-      ...(position['x'] && position['y'] ? { x: 'x', y: 'y' } : {})
+      ...(position['x'] && position['y'] ? { x: 'x', y: 'y' } : {}),
     },
     transforms: source.transforms,
-  }
-}
+  };
+};
