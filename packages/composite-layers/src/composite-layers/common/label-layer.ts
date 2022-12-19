@@ -52,7 +52,7 @@ export const autoLabelCoordinates = <L extends WrapLayerOptions['label']>(source
       .filter(({ centroid }) => centroid),
     parser: {
       type: 'json',
-      ...(autoCompute['coordinates'] ? { coordinates: autoCompute['coordinates'] } : {}),
+      ...(autoCompute['coordinates'] ? { coordinates: "centroid" } : {}),
       ...(autoCompute['x'] && autoCompute['y'] ? {x: autoCompute['x'],y: autoCompute['y']}: {} )
     },
     transforms: source.transforms,
