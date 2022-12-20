@@ -26,7 +26,6 @@ describe('choropleth layer', () => {
         strokeWidth: 0.3,
         strokeOpacity: 1.0,
       },
-      position: false,
     },
     state: {
       active: {

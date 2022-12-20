@@ -22,6 +22,16 @@ export type ChoroplethLayerActiveOptions = {
   lineOpacity?: number;
 };
 
+export interface LabelCoord {
+  /**
+   * 文本标注点位，默认不需要设置，点位为几何中心点。
+   * 指定经纬度字段时: { x: string, y: string }
+   * 指定数组坐标字段时: { coordinates: string }
+   * @default false
+   */
+  position?: { x: string; y: string } | { coordinates: string } | false;
+}
+
 export interface ChoroplethLayerOptions extends CompositeLayerOptions {
   /**
    * 数据配置
@@ -65,7 +75,7 @@ export interface ChoroplethLayerOptions extends CompositeLayerOptions {
   /**
    * 文本标注
    */
-  label?: LabelOptions;
+  label?: LabelOptions & LabelCoord;
   /**
    * 交互反馈
    */

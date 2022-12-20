@@ -1,8 +1,9 @@
-import { LabelOptions } from '../common/types';
+import { LabelCoord } from './types';
 import { ISource } from '@antv/l7';
+import { SourceOptions } from '../../types/attr';
 
 interface WrapLayerOptions {
-  label?: LabelOptions;
+  label?: LabelCoord;
 }
 
 /**
@@ -10,14 +11,15 @@ interface WrapLayerOptions {
  * 当自定义坐标字断时,只需要指定解析字段即可
  */
 
-export const autoLabelCoordinates = (source: ISource, coord: WrapLayerOptions['label']) => {
+export const parserLabeSourceData = (source: ISource, coord: WrapLayerOptions['label']): SourceOptions => {
+  console.log('coordcoord', coord);
+
   const position = coord?.position;
   const type = source.parser.type;
   const transforms = source.transforms;
   if (!position) {
     return source;
   }
-
   const originData = source['originData'];
   const newSource = { data: originData, transforms };
   if (position['coordinates']) {
@@ -29,5 +31,5 @@ export const autoLabelCoordinates = (source: ISource, coord: WrapLayerOptions['l
     const y = position['y'];
     newSource['parser'] = { type, x, y };
   }
-  return newSource as ISource;
+  return newSource;
 };
