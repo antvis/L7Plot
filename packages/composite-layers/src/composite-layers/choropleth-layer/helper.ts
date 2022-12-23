@@ -1,35 +1,59 @@
-import { LabelCoord } from './types';
-import { ISource } from '@antv/l7';
+import { ChoroplethLayerOptions, LabelPosition } from './types';
 import { SourceOptions } from '../../types/attr';
-
-interface WrapLayerOptions {
-  label?: LabelCoord;
-}
+import { ISource } from '../../types/common';
+import { isBoolean, isUndefined } from '@antv/util';
+import { getLabelLayerOptions as getLabelOptions } from '../common/label-layer';
 
 /**
- * 自动计算标注图层坐标
- * 当自定义坐标字断时,只需要指定解析字段即可
+ * 是否开启自定义标注图层坐标字段
  */
+export const isLabelPosition = (
+  position: LabelPosition['position']
+): position is { x: string; y: string } | { coordinates: string } => {
+  if (isUndefined(position) || isBoolean(position)) return false;
 
-export const parserLabeSourceData = (source: ISource, coord: WrapLayerOptions['label']): SourceOptions => {
-  console.log('coordcoord', coord);
+  if (isUndefined(position['coordinates']) || (isUndefined(position['x']) && isUndefined(position['y']))) {
+    return false;
+  }
 
-  const position = coord?.position;
-  const type = source.parser.type;
-  const transforms = source.transforms;
-  if (!position) {
+  return true;
+};
+
+/**
+ * 开启自定义标注图层坐标字段，解析标注图层 source
+ */
+export const parserLabeSourceData = (
+  source: ISource,
+  labelOptions: ChoroplethLayerOptions['label']
+): ISource | SourceOptions => {
+  const position = labelOptions?.position;
+  if (!isLabelPosition(position)) {
     return source;
   }
+
+  const type = source.parser.type;
+  const transforms = source.transforms;
   const originData = source['originData'];
-  const newSource = { data: originData, transforms };
+  const sourceOptions = { data: originData, transforms };
+
   if (position['coordinates']) {
     const coord = position['coordinates'];
-    newSource['parser'] = { type, coordinates: coord };
-  }
-  if (position['x'] && position['y']) {
+    sourceOptions['parser'] = { type, coordinates: coord };
+  } else if (position['x'] && position['y']) {
     const x = position['x'];
     const y = position['y'];
-    newSource['parser'] = { type, x, y };
+    sourceOptions['parser'] = { type, x, y };
   }
-  return newSource;
+
+  return sourceOptions;
+};
+
+/**
+ * 获取标注图层配置项
+ */
+export const getLabelLayerOptions = (options: ChoroplethLayerOptions, source: ISource) => {
+  return {
+    ...getLabelOptions<ChoroplethLayerOptions>(options),
+    source: parserLabeSourceData(source, options.label),
+  };
 };
