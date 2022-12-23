@@ -1,5 +1,5 @@
 import { Source } from '@antv/l7';
-import { deepMix, isEqual, isObject, isObjectLike } from '@antv/util';
+import { deepMix, isEqual } from '@antv/util';
 
 export * from './keypress';
 
@@ -9,10 +9,16 @@ export * from './keypress';
 export const deepMergeLayerOptions = <O extends { source: any }>(options: Partial<O>, srcOptions: Partial<O>): O => {
   const { source, ...restOptions } = options;
   const { source: srcSource, ...restSrcOptions } = srcOptions;
+  const target = { ...deepMix(restOptions, restSrcOptions) };
 
   // source 是实例的情况
-  const targetSource = (srcSource as any) instanceof Source ? srcSource : { ...source, ...srcSource };
-  const target = { ...deepMix(restOptions, restSrcOptions), source: targetSource };
+  if ((srcSource as any) instanceof Source) {
+    target.source = srcSource;
+  } else if ((source as any) instanceof Source) {
+    target.source = source;
+  } else {
+    target.source = { ...source, ...srcSource };
+  }
 
   return target;
 };
