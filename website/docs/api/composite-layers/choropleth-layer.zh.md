@@ -118,6 +118,12 @@ order: 1
 
 标签值映射关联字段。
 
+#### `label.`position
+
+`LabelPosition['position']` optional default: `false`
+
+文本标注点位，默认不需要设置，点位为几何中心点。指定经纬度字段时: `{ x: string, y: string }`；指定数组坐标字段时: `{ coordinates: string }`；指定 geometry 字段时: `{ geometry: string }`。
+
 #### `label.`visible
 
 `boolean` optional default: `true`

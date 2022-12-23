@@ -1,3 +1,4 @@
+import { IParserCfg } from '@antv/l7';
 import { PolygonLayerOptions } from '../../core-layers/polygon-layer/types';
 import { CompositeLayerOptions } from '../../core/composite-layer';
 import { ISourceCFG, ISource } from '../../types';
@@ -25,11 +26,12 @@ export type ChoroplethLayerActiveOptions = {
 export type LabelPosition = {
   /**
    * 文本标注点位，默认不需要设置，点位为几何中心点。
-   * 指定经纬度字段时: { x: string, y: string }
-   * 指定数组坐标字段时: { coordinates: string }
+   * 指定经纬度字段时: { x: string, y: string };
+   * 指定数组坐标字段时: { coordinates: string };
+   * 指定 geometry 字段时: { geometry: string };
    * @default false
    */
-  position?: { x: string; y: string } | { coordinates: string } | false;
+  position?: Pick<IParserCfg, 'x' | 'y' | 'coordinates' | 'geometry'> | false;
 };
 
 export interface ChoroplethLayerOptions extends CompositeLayerOptions {

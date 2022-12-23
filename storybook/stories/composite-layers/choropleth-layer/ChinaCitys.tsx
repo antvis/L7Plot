@@ -21,7 +21,9 @@ class ChinaCitys extends Component {
       }),
     });
 
-    fetch('https://gw.alipayobjects.com/os/bmw-prod/707cd4be-8ffe-4778-b863-3335eefd5fd5.json')
+    fetch(
+      'https://mdn.alipayobjects.com/afts/file/A*363rRoqmEu0AAAAAAAAAAAAADrd2AQ/12.20 各城市首轮感染高峰期预测.json'
+    )
       .then((response) => response.json())
       .then((data) => {
         this.choroplethLayer = new ChoroplethLayer({
@@ -30,7 +32,8 @@ class ChinaCitys extends Component {
           source: {
             data: data,
             parser: {
-              type: 'geojson',
+              type: 'json',
+              geometry: 'geometry',
             },
           },
           fillColor: {
@@ -45,6 +48,9 @@ class ChinaCitys extends Component {
           label: {
             field: 'name',
             visible: true,
+            position: {
+              coordinates: 'centroid',
+            },
             style: {
               fill: '#000',
               opacity: 0.8,
@@ -82,7 +88,13 @@ class ChinaCitys extends Component {
 
   update = () => {
     if (this.scene) {
-      this.choroplethLayer?.update({ fillColor: 'rgb(239,243,255)', strokeColor: 'blue' });
+      this.choroplethLayer?.update({
+        fillColor: 'rgb(239,243,255)',
+        strokeColor: 'blue',
+        label: {
+          position: false,
+        },
+      });
     }
   };
 

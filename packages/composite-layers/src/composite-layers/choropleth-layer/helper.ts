@@ -1,3 +1,4 @@
+import { IParserCfg } from '@antv/l7';
 import { ChoroplethLayerOptions, LabelPosition } from './types';
 import { SourceOptions } from '../../types/attr';
 import { ISource } from '../../types/common';
@@ -9,10 +10,14 @@ import { getLabelLayerOptions as getLabelOptions } from '../common/label-layer';
  */
 export const isLabelPosition = (
   position: LabelPosition['position']
-): position is { x: string; y: string } | { coordinates: string } => {
+): position is Pick<IParserCfg, 'x' | 'y' | 'coordinates' | 'geometry'> => {
   if (isUndefined(position) || isBoolean(position)) return false;
 
-  if (isUndefined(position['coordinates']) || (isUndefined(position['x']) && isUndefined(position['y']))) {
+  if (
+    isUndefined(position['coordinates']) &&
+    (isUndefined(position['x']) || isUndefined(position['y'])) &&
+    isUndefined(position['geometry'])
+  ) {
     return false;
   }
 
@@ -31,18 +36,22 @@ export const parserLabeSourceData = (
     return source;
   }
 
+  // TODO: type 为 json 有效，为 geojson 会自动计算中心点，指定坐标字段无效
   const type = source.parser.type;
   const transforms = source.transforms;
   const originData = source['originData'];
   const sourceOptions = { data: originData, transforms };
 
   if (position['coordinates']) {
-    const coord = position['coordinates'];
-    sourceOptions['parser'] = { type, coordinates: coord };
+    const coordinates = position['coordinates'];
+    sourceOptions['parser'] = { type, coordinates };
   } else if (position['x'] && position['y']) {
     const x = position['x'];
     const y = position['y'];
     sourceOptions['parser'] = { type, x, y };
+  } else if (position['geometry']) {
+    const geometry = position['geometry'];
+    sourceOptions['parser'] = { type, geometry };
   }
 
   return sourceOptions;
