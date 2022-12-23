@@ -136,7 +136,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
     this.lastOptions = this.options;
     this.layer = this.createLayer();
 
-    this.adaptorLayerAttr();
+    this.adaptorLayerAttr(false);
     this.setSource(source);
 
     this.emit(CoreLayerEvent.CREATED, this);
@@ -182,24 +182,20 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
   /**
    * 映射图层属性
    */
-  protected adaptorLayerAttr(): void {
-    const { shape, color, size, scale, texture, style, animate, state } = this.adaptorAttrOptions(this.options);
-    // mapping shape
-    shape && MappingAttribute.shape(this.layer, shape);
-    // mapping size
-    size && MappingAttribute.size(this.layer, size);
-    // mapping color
-    color && MappingAttribute.color(this.layer, color);
-    // mapping scale
-    scale && MappingAttribute.scale(this.layer, scale);
-    // mapping texture
-    texture && MappingAttribute.texture(this.layer, texture);
-    // mapping style
-    style && MappingAttribute.style(this.layer, style);
-    // mapping animate
-    animate && MappingAttribute.animate(this.layer, animate);
-    // mapping state
-    state && MappingAttribute.state(this.layer, state);
+  protected adaptorLayerAttr(isDiff = true): void {
+    const attrKeys = ['shape', 'color', 'size', 'scale', 'texture', 'style', 'animate', 'state'];
+    const currentAttrs = this.adaptorAttrOptions(this.options);
+    const lastAttrs = this.adaptorAttrOptions(this.lastOptions);
+
+    for (let index = 0; index < attrKeys.length; index++) {
+      const attrKey = attrKeys[index];
+      const attrValue = currentAttrs[attrKey];
+      const lastAttrValue = lastAttrs[attrKey];
+      // 当属性不为空与值不相等时，更新属性映射，（不做 diff 时，不做 equal 判断
+      if (!isUndefined(attrValue) && (!isDiff || !isEqual(attrValue, lastAttrValue))) {
+        MappingAttribute[attrKey](this.layer, attrValue);
+      }
+    }
   }
 
   /**
