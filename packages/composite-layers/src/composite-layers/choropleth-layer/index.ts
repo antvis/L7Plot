@@ -8,8 +8,8 @@ import { ChoroplethLayerOptions, ChoroplethLayerSourceOptions } from './types';
 import { ICoreLayer, ISource, MouseEvent } from '../../types';
 import { EMPTY_GEOJSON_SOURCE } from '../common/constants';
 import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
-import { getLabelLayerOptions } from '../common/label-layer';
 import { isGestureMultiSelect } from '../common/multi-select';
+import { getLabelLayerOptions, isLabelPosition, parserLabeSourceData } from './helper';
 
 export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   /**
@@ -131,9 +131,8 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
 
     // 标注图层
     const labelLayer = new TextLayer({
-      ...getLabelLayerOptions<ChoroplethLayerOptions>(this.options),
+      ...getLabelLayerOptions(this.options, source),
       id: 'labelLayer',
-      source,
     });
 
     const subLayers = [fillLayer, strokeLayer, highlightStrokeLayer, selectFillLayer, selectStrokeLayer, labelLayer];
@@ -283,6 +282,12 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     } else {
       const { data, ...option } = source;
       this.source.setData(data, option);
+
+      // 自定义标注图层 position 时，source 不是共享的 Source 实例
+      if (isLabelPosition(this.options.label?.position)) {
+        const labelSource = parserLabeSourceData(this.source, this.options.label);
+        this.labelLayer.changeData(labelSource);
+      }
     }
 
     this.highlightStrokeLayer.changeData(EMPTY_GEOJSON_SOURCE);
@@ -436,7 +441,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     this.selectStrokeLayer.update(this.getSelectStrokeLayerOptions(), false);
 
     // 标注图层
-    this.labelLayer.update(getLabelLayerOptions<ChoroplethLayerOptions>(this.options), false);
+    this.labelLayer.update(getLabelLayerOptions(this.options, this.source), false);
 
     // 重置高亮/选中状态
     if (this.options.visible) {

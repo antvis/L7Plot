@@ -118,6 +118,16 @@ order: 1
 
 标签值映射关联字段。
 
+#### `label.`position
+
+`LabelPosition` optional default: `false`
+
+文本标注点位，默认为几何中心点。当数据 source 为 JSON 类型时，支持根据字段映射标注点位：
+
+- 指定经纬度字段时: `{ x: string, y: string }`
+- 指定数组坐标字段时: `{ coordinates: string }`
+- 指定 geometry 字段时: `{ geometry: string }`
+
 #### `label.`visible
 
 `boolean` optional default: `true`

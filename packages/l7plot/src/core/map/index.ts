@@ -658,7 +658,7 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
   /**
    * 导出地图图片
    */
-  public exportPng(type?: 'png' | 'jpg'): string {
+  public exportPng(type?: 'png' | 'jpg'): Promise<string> {
     return this.scene.exportPng(type);
   }
 
