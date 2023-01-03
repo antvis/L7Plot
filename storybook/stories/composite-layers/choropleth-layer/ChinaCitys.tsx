@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Scene, Mapbox } from '@antv/l7';
+import { Scene, GaodeMap } from '@antv/l7';
 import { ChoroplethLayer } from '@antv/l7-composite-layers';
 
 class ChinaCitys extends Component {
@@ -13,9 +13,9 @@ class ChinaCitys extends Component {
   async initMap() {
     this.scene = new Scene({
       id: 'container',
-      map: new Mapbox({
+      map: new GaodeMap({
         pitch: 0,
-        style: 'light',
+        style: 'dark',
         zoom: 3,
         center: [120.19660949707033, 30.234747338474293],
       }),
@@ -89,7 +89,6 @@ class ChinaCitys extends Component {
   update = () => {
     if (this.scene) {
       this.choroplethLayer?.update({
-        fillColor: 'rgb(239,243,255)',
         strokeColor: 'blue',
         source: {
           data: [

@@ -29,7 +29,7 @@ export const deepMergeLayerOptions = <O extends { source: any }>(options: Partia
 export const isSourceChanged = <S extends { data: any } = { data: any }>(source: S, currentSource: S) => {
   // source 是实例的情况
   if (source instanceof Source && currentSource instanceof Source) {
-    return source === currentSource;
+    return source !== currentSource;
   }
 
   const { data, ...restOptions } = source;

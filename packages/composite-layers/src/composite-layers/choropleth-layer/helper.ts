@@ -9,7 +9,7 @@ import { getLabelLayerOptions as getLabelOptions } from '../common/label-layer';
  * 是否开启自定义标注图层坐标字段
  */
 export const isLabelPosition = (
-  position: LabelPosition['position']
+  position?: LabelPosition
 ): position is Pick<IParserCfg, 'x' | 'y' | 'coordinates' | 'geometry'> => {
   if (isUndefined(position) || isBoolean(position)) return false;
 
