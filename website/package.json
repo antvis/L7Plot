@@ -5,12 +5,9 @@
   "license": "MIT",
   "author": "yunji",
   "scripts": {
-    "dev": "yarn run clean && yarn run develop",
-    "develop": "gatsby develop -H 0.0.0.0 -p 8900 --open",
-    "build": "yarn run clean && gatsby build --prefix-paths",
-    "deploy": "yarn run build && gh-pages -d public",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
+    "dev": "dumi dev",
+    "build": "dumi build",
+    "deploy": "yarn run build && gh-pages -d dist",
     "prettier": "prettier -c -w docs examples"
   },
   "dependencies": {
@@ -21,11 +18,10 @@
   },
   "devDependencies": {
     "geotiff": "^2.0.7",
-    "@antv/gatsby-theme-antv": "^1.1.18-beta.0",
+    "@antv/dumi-theme-antv": "^0.3.4",
+    "dumi": "^2.0.18",
     "@types/react": "^16.14.8",
     "@types/react-dom": "^16.9.13",
-    "gatsby": "^2.32.13",
-    "gh-pages": "^3.2.1",
-    "postcss": "^8.3.6"
+    "gh-pages": "^3.2.1"
   }
 }
