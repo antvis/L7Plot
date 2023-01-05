@@ -1,41 +1,41 @@
 {
   "name": "@antv/l7-composite-layers",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "description": "Composite layer for @antv/l7",
-  "main": "dist/lib/index.js",
-  "types": "dist/lib/index.d.ts",
-  "module": "dist/esm/index.js",
-  "unpkg": "dist/umd/l7-composite-layers.min.js",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "dev": "yarn run clean && yarn run dev:cjs",
-    "dev:cjs": "tsc -p tsconfig.json --target ES6 --module CommonJS --outDir dist/lib --watch",
-    "lint": "eslint src __tests__ --ext .js,.ts",
-    "lint-fix": "eslint src __tests__ --ext .js,.ts --fix",
-    "prettier": "prettier src __tests__ -c -w",
-    "clean": "rimraf dist",
-    "build": "yarn run clean && yarn run build:cjs && yarn run build:esm",
-    "build:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib",
-    "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm",
-    "build:umd": "rollup -c rollup.config.js"
-  },
   "keywords": [
     "antv",
     "l7",
     "composite layers"
   ],
-  "sideEffects": false,
-  "author": "yunji",
-  "license": "MIT",
   "homepage": "https://github.com/antvis/L7Plot/packages/composite-layers",
+  "bugs": {
+    "url": "https://github.com/antvis/L7Plot/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/antvis/L7Plot.git"
   },
-  "bugs": {
-    "url": "https://github.com/antvis/L7Plot/issues"
+  "license": "MIT",
+  "author": "yunji",
+  "sideEffects": false,
+  "main": "dist/lib/index.js",
+  "unpkg": "dist/umd/l7-composite-layers.min.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/lib/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "yarn run clean && yarn run build:cjs && yarn run build:esm",
+    "build:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib",
+    "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm",
+    "build:umd": "rollup -c rollup.config.js",
+    "clean": "rimraf dist",
+    "dev": "yarn run clean && yarn run dev:cjs",
+    "dev:cjs": "tsc -p tsconfig.json --target ES6 --module CommonJS --outDir dist/lib --watch",
+    "lint": "eslint src __tests__ --ext .js,.ts",
+    "lint-fix": "eslint src __tests__ --ext .js,.ts --fix",
+    "prettier": "prettier src __tests__ -c -w"
   },
   "dependencies": {
     "@antv/event-emitter": "^0.1.2",
