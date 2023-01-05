@@ -9,7 +9,7 @@ export * from './keypress';
 export const deepMergeLayerOptions = <O extends { source: any }>(options: Partial<O>, srcOptions: Partial<O>): O => {
   const { source, ...restOptions } = options;
   const { source: srcSource, ...restSrcOptions } = srcOptions;
-  const target = { ...deepMix(restOptions, restSrcOptions) };
+  const target = { ...deepMix({}, restOptions, restSrcOptions) };
 
   // source 是实例的情况
   if ((srcSource as any) instanceof Source) {
