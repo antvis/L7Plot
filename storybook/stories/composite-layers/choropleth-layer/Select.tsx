@@ -77,21 +77,23 @@ class Demo extends Component {
           enabledMultiSelect: true,
         });
 
-        this.scene?.on('selectend', (bbox) => {
-          console.log('bbox: ', bbox);
-          // const min = this.scene?.lngLatToContainer([bbox[0], bbox[1]]);
-          // const max = this.scene?.lngLatToContainer([bbox[2], bbox[3]]);
-          // const pixelBbox = [min?.x, min?.y, max?.x, max?.y] as unknown as [number, number, number, number];
-          // console.log('pixelBbox: ', pixelBbox);
+        this.scene?.on('selectend', (bbox, startEvent, endEvent) => {
+          const pixelBbox = [startEvent.x, startEvent.y, endEvent.x, endEvent.y] as unknown as [
+            number,
+            number,
+            number,
+            number
+          ];
+          console.log('pixelBbox: ', pixelBbox);
 
-          // this.choroplethLayer?.boxSelect(bbox, (features: Record<string, any>[]) => {
-          //   console.log('features: ', features);
-          //   features.forEach((item) => {
-          //     if (item['properties']?.name) {
-          //       this.choroplethLayer?.setSelect('name', item['properties']?.name);
-          //     }
-          //   });
-          // });
+          this.choroplethLayer?.boxSelect(pixelBbox, (features: Record<string, any>[]) => {
+            console.log('features: ', features);
+            // features.forEach((item) => {
+            //   if (item['properties']?.name) {
+            //     this.choroplethLayer?.setSelect('name', item['properties']?.name);
+            //   }
+            // });
+          });
 
           // this.choroplethLayer?.setSelect('name', 'Washington');
           // this.choroplethLayer?.setSelect('name', 'Oregon');
