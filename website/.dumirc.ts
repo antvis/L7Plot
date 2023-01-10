@@ -1,35 +1,131 @@
 import { defineConfig } from 'dumi';
-import { repository, version } from './package.json';
 
 export default defineConfig({
+  title: 'L7Plot',
+  favicons: ['https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*7svFR6wkPMoAAAAAAAAAAAAADmJ7AQ/original'], // 网站 favicon
+  metas: [
+    // 自定义 meta 标签
+    { name: 'keywords', content: 'L7Plot' },
+    { name: 'description', content: 'L7Plot 地理空间可视化图表库' },
+  ],
   locales: [
     { id: 'zh', name: '中文' },
     { id: 'en', name: 'English' },
   ],
-
   themeConfig: {
-    /** !!!!!!!!!!!!!!!!!!!!!!! */
-    /** 这里是具体的配置内容 */
-    /** 1. 把 gatsby.config.ts 的 cp 到这里 */
-    /** 2. 参考 G2Plot 增加 detail、news、features、cases、companies 等配置 */
-    /** !!!!!!!!!!!!!!!!!!!!!!! */
-  },
-  links: [],
-  scripts: [],
-
-  plugins: [
-    {
-      resolve: '@antv/gatsby-theme-antv',
-      options: {
-        GATrackingId: `G-S7EDKPDSL6`,
-      },
-    },
-  ],
-  siteMetadata: {
     title: 'L7Plot',
     description: 'Geospatial Visualization Chart Library',
-    siteUrl: 'https://l7plot.antv.vision',
+    defaultLanguage: 'zh', // 默认语言
+    isAntVSite: false, // 是否是 AntV 的大官网
+    siteUrl: 'https://l7plot.antv.antgroup.com',
     githubUrl: 'https://github.com/antvis/L7Plot',
+    showSearch: true, // 是否显示搜索框
+    showGithubCorner: true, // 是否显示头部的 GitHub icon
+    showGithubStars: false, // 是否显示 GitHub star 数量
+    showAntVProductsCard: true, // 是否显示 AntV 产品汇总的卡片
+    showLanguageSwitcher: true, // 是否显示官网语言切换
+    showWxQrcode: true, // 是否显示头部菜单的微信公众号
+    showChartResize: true, // 是否在 demo 页展示图表视图切换
+    showAPIDoc: true, // 是否在 demo 页展示API文档
+    // 头部搜索框配置
+    docsearchOptions: {
+      versionV3: true,
+      apiKey: '614478b3f9fabe8e68f5d6a65b48054b',
+      indexName: 'l7plot-antv',
+      appId: '3RDFA6ITAF',
+    },
+    internalSite: {
+      url: 'https://l7plot.antv.antgroup.com',
+      name: { zh: '国内镜像', en: 'China Mirror' },
+    },
+    /** 首页配置 开始 */
+    detail: {
+      title: {
+        zh: 'L7Plot 地理空间可视化图表库',
+        en: 'L7Plot: Geospatial Visualization Chart',
+      },
+      description: {
+        zh: 'L7Plot 是简单易用、图表丰富、支持定制的地理空间数据可视化地理图表库。',
+        en: 'L7Plot is easy to use, rich charts, support customized geospatial charts Library.',
+      },
+      image: 'https://gw.alipayobjects.com/mdn/antv_site/afts/img/A*o40BRo-ANLoAAAAAAAAAAABkARQnAQ',
+      buttons: [
+        {
+          text: {
+            zh: '图表示例',
+            en: 'Examples',
+          },
+          link: `/examples/gallery`,
+          type: 'primary',
+        },
+        {
+          text: {
+            zh: '开始使用',
+            en: 'Getting Started',
+          },
+          link: `/manual/introduction`,
+        },
+      ],
+    },
+    news: [
+      {
+        type: {
+          zh: '论坛',
+          en: 'Forum',
+        },
+        title: {
+          zh: '远方 · 远芳 AntV 2022 年度发布',
+          en: 'Yuanyuan · Yuanfang AntV 2022 Annual Release',
+        },
+        date: '2022.11.22',
+        link: 'https://www.yuque.com/antv/blog/1122_6',
+      },
+      {
+        type: {
+          zh: '发布',
+          en: 'Publish',
+        },
+        title: {
+          zh: 'LocationInsight 开放',
+          en: 'LocationInsight Open',
+        },
+        date: '2022.11.22',
+        link: 'https://www.yuque.com/antv/htpfbw/gp1cyxq3ckm4xany',
+      },
+    ],
+    features: [],
+    cases: [],
+    companies: [],
+    ecosystems: [
+      {
+        name: {
+          zh: 'LarkMap',
+          en: 'L7 For React',
+        },
+        url: 'https://larkmap.antv.antgroup.com/',
+      },
+      {
+        name: {
+          zh: 'L7Plot',
+          en: 'L7Plot',
+        },
+        url: 'https://l7plot.antv.antgroup.com/',
+      },
+      {
+        name: {
+          zh: 'L7Draw',
+          en: 'L7Draw',
+        },
+        url: 'http://antv.vision/L7Draw/',
+      },
+      {
+        name: {
+          zh: 'LocationInsight',
+          en: 'LocationInsight',
+        },
+        url: 'https://li.antv.antgroup.com/#/home',
+      },
+    ],
     navs: [
       {
         slug: 'docs/manual',
@@ -204,21 +300,7 @@ export default defineConfig({
         },
       },
     ],
-    galleryMenuCloseAll: false, // 是否默认收起 gallery 页面所有 menu
-    showSearch: true, // 是否展示搜索框
-    showChinaMirror: true, // 是否展示国内镜像链接
-    showAntVProductsCard: true, // 是否展示 AntV 系列产品的卡片链接
-    showLanguageSwitcher: true, // 用于定义是否展示语言切换
-    showGithubStar: false, // 是否展示 Github Star
-    showGithubCorner: true, // 是否展示角落的 GitHub 图标
-    showAPIDoc: true, // 是否在demo页展示API文档
-    showChartResize: true, // 是否在demo页展示图表视图切换
-    docsearchOptions: {
-      versionV3: true,
-      apiKey: '614478b3f9fabe8e68f5d6a65b48054b',
-      indexName: 'l7plot-antv',
-      appId: '3RDFA6ITAF',
-    },
+    /** 首页配置 结束 */
     playground: {
       container: '<div id="container" style="position: relative; width: 100%; height: 100vh;" />',
       playgroundDidMount: 'console.log("playgroundDidMount");',
@@ -231,6 +313,20 @@ export default defineConfig({
       // markdown 文档中的 playground 若干设置
       splitPaneMainSize: '50%',
     },
-    redirects: [],
+    announcement: {
+      zh: '',
+      en: '',
+    },
   },
+  analytics: {
+    // Google Analytics code, will be enabled after configuration
+    ga: 'G-S7EDKPDSL6',
+  },
+  mfsu: false,
+  alias: {
+    // 根据自己项目结构书写绝对路径
+    '@': __dirname,
+  },
+  links: [],
+  scripts: [],
 });
