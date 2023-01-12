@@ -3,7 +3,7 @@ title: 图片标注图层 - IconImageLayer
 order: 3
 ---
 
-<tag color="cyan" text="Composite Layer">Composite Layer</tag>
+<Badge type="info" color="cyan" text="Composite Layer">Composite Layer</Bdage>
 
 `IconImageLayer` 用于图标标注，支持自定义高亮，标注、框选。
 

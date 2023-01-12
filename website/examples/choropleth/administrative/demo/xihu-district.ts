@@ -3,30 +3,21 @@ import { Choropleth } from '@antv/l7plot';
 new Choropleth('container', {
   map: {
     type: 'amap',
-    style: 'blank',
+    // style: 'blank',
     center: [120.19382669582967, 30.258134],
     zoom: 3,
     pitch: 0,
   },
   source: {
-    data: [
-      { name: '中华人民共和国', value: 200 },
-      { name: '美国', value: 250 },
-      { name: '俄罗斯', value: 180 },
-      { name: '日本', value: 120 },
-      { name: '加拿大', value: 130 },
-      { name: '澳大利亚', value: 130 },
-      { name: '新加坡', value: 170 },
-      { name: '巴西', value: 80 },
-    ],
+    data: [{ adcode: 330106, value: 200 }],
     joinBy: {
-      sourceField: 'name',
-      geoField: 'name',
+      sourceField: 'adcode',
+      geoField: 'adcode',
     },
   },
   viewLevel: {
-    level: 'world',
-    adcode: 'all',
+    level: 'district',
+    adcode: 330106,
   },
   autoFit: true,
   color: {
@@ -40,7 +31,6 @@ new Choropleth('container', {
     lineWidth: 0.6,
     lineOpacity: 1,
   },
-  chinaBorder: true,
   label: {
     visible: true,
     field: 'name',
@@ -55,12 +45,7 @@ new Choropleth('container', {
     },
   },
   state: {
-    active: true,
-    select: {
-      stroke: 'black',
-      lineWidth: 1.5,
-      lineOpacity: 0.8,
-    },
+    active: { stroke: 'black', lineWidth: 1 },
   },
   tooltip: {
     items: ['name', 'adcode', 'value'],

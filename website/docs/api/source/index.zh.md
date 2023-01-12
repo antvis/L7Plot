@@ -32,7 +32,7 @@ order: 1
 
 支持以下数据类型：
 
-- <tag color="cyan" text="CSV">CSV</tag>
+- <Badge type="info" color="cyan" text="CSV">CSV</Bdage>
 
 ```js
 {
@@ -44,7 +44,7 @@ order: 1
 }
 ```
 
-- <tag color="green" text="JSON">JSON</tag>
+- <Badge type="info" color="green" text="JSON">JSON</Bdage>
 
 ```js
 {
@@ -55,7 +55,7 @@ order: 1
 }
 ```
 
-- <tag color="blue" text="GEOJSON">GEOJSON</tag>
+- <Badge type="success" text="GEOJSON">GEOJSON</Bdage>
 
 ```js
 {

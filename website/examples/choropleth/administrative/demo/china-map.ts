@@ -176,7 +176,7 @@ const ProvinceData = [
 new Choropleth('container', {
   map: {
     type: 'amap',
-    style: 'blank',
+    // style: 'blank',
     center: [120.19382669582967, 30.258134],
     zoom: 3,
     pitch: 0,

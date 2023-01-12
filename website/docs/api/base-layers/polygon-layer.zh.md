@@ -3,7 +3,7 @@ title: 面图层 - PolygonLayer
 order: 3
 ---
 
-<tag color="blue" text="Core Layer">Core Layer</tag>
+<Badge type="success" text="Core Layer">Core Layer</Bdage>
 
 `PolygonLayer` 是基于 [L7-PolygonLayer](https://l7.antv.vision/zh/docs/api/polygon_layer/polygonlayer) 封装的配置式 API。
 

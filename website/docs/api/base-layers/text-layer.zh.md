@@ -3,7 +3,7 @@ title: 文本图层 - TextLayer
 order: 4
 ---
 
-<tag color="blue" text="Core Layer">Core Layer</tag>
+<Badge type="success" text="Core Layer">Core Layer</Bdage>
 
 `TextLayer` 是基于 [L7-PointLayer](https://l7.antv.vision/zh/docs/api/point_layer/pointlayer) 封装的配置式文本图层 API。
 

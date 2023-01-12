@@ -3,7 +3,7 @@ title: 字体标注图层 - IconFontLayer
 order: 2
 ---
 
-<tag color="cyan" text="Composite Layer">Composite Layer</tag>
+<Badge type="info" color="cyan" text="Composite Layer">Composite Layer</Bdage>
 
 `IconFontLayer` 字体 iconfont 标注图层。
 

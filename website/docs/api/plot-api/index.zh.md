@@ -67,7 +67,7 @@ constructor(container: string | HTMLDivElement, options: PlotOptions)
 
 `bool` optional default: `false`
 
-图层完成初始化之后，地图是否自动缩放到图层的数据边界范围，注意 <tag color="red" text="开启"></tag>后图表数据发生更新时，地图也会自动缩放到图层的数据边界范围。
+图层完成初始化之后，地图是否自动缩放到图层的数据边界范围，注意开启后图表数据发生更新时，地图也会自动缩放到图层的数据边界范围。
 
 ### `options.`theme
 

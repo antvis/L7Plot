@@ -3,7 +3,7 @@ title: 点图层 - PointLayer
 order: 0
 ---
 
-<tag color="blue" text="Core Layer">Core Layer</tag>
+<Badge type="success" text="Core Layer">Core Layer</Bdage>
 
 `PointLayer` 是基于 [L7-PointLayer](https://l7.antv.vision/zh/docs/api/point_layer/pointlayer) 封装的配置式 API。
 

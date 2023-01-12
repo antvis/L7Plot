@@ -3,7 +3,7 @@ title: 区域图层 - ChoroplethLayer
 order: 1
 ---
 
-<tag color="cyan" text="Composite Layer">Composite Layer</tag>
+<Badge type="info" color="cyan" text="Composite Layer">Composite Layer</Bdage>
 
 `ChoroplethLayer` 用于面数据图层展示，支持描边、文本标注、多选等功能。
 

@@ -152,23 +152,24 @@ export default defineConfig({
         order: 0,
       },
     ],
+    // 文档目录的信息
     docs: [
-      {
-        slug: 'api/plot-api',
-        title: {
-          zh: '图表 - Plot',
-          en: 'Plot',
-        },
-        order: 0,
-      },
-      {
-        slug: 'api/source',
-        title: {
-          zh: '数据 - Source',
-          en: 'Source',
-        },
-        order: 1,
-      },
+      // {
+      //   slug: 'api/plot-api',
+      //   title: {
+      //     zh: '图表 - Plot',
+      //     en: 'Plot',
+      //   },
+      //   order: 0,
+      // },
+      // {
+      //   slug: 'api/source',
+      //   title: {
+      //     zh: '数据 - Source',
+      //     en: 'Source',
+      //   },
+      //   order: 1,
+      // },
       {
         slug: 'api/plots',
         title: {
@@ -185,14 +186,14 @@ export default defineConfig({
         },
         order: 3,
       },
-      {
-        slug: 'api/theme',
-        title: {
-          zh: '主题',
-          en: '主题 - Theme',
-        },
-        order: 4,
-      },
+      // {
+      //   slug: 'api/theme',
+      //   title: {
+      //     zh: '主题',
+      //     en: '主题 - Theme',
+      //   },
+      //   order: 4,
+      // },
       {
         slug: 'api/layers',
         title: {
@@ -217,14 +218,14 @@ export default defineConfig({
         },
         order: 7,
       },
-      {
-        slug: 'api/advanced-plots',
-        title: {
-          zh: '高级图表 - Advanced Plot',
-          en: 'Advanced Plot',
-        },
-        order: 8,
-      },
+      // {
+      //   slug: 'api/advanced-plots',
+      //   title: {
+      //     zh: '高级图表 - Advanced Plot',
+      //     en: 'Advanced Plot',
+      //   },
+      //   order: 8,
+      // },
     ],
     examples: [
       {
@@ -302,7 +303,6 @@ export default defineConfig({
     ],
     /** 首页配置 结束 */
     playground: {
-      container: '<div id="container" style="position: relative; width: 100%; height: 100vh;" />',
       playgroundDidMount: 'console.log("playgroundDidMount");',
       playgroundWillUnmount: 'console.log("playgroundWillUnmount");',
       devDependencies: {
@@ -328,5 +328,5 @@ export default defineConfig({
     '@': __dirname,
   },
   links: [],
-  scripts: [],
+  scripts: ['https://webapi.amap.com/maps?v=2.0&key=ff533602d57df6f8ab3b0fea226ae52f'],
 });

@@ -3,7 +3,7 @@ title: 气泡图层 - BubbleLayer
 order: 0
 ---
 
-<tag color="cyan" text="Composite Layer">Composite Layer</tag>
+<Badge type="info" color="cyan" text="Composite Layer">Composite Layer</Bdage>
 
 `BubbleLayer` 用于点数据图层展示，支持描边、文本标注、多选等功能。
 

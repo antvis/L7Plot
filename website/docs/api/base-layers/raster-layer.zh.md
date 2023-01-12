@@ -3,7 +3,7 @@ title: 栅格图层 - RasterLayer
 order: 7
 ---
 
-<tag color="blue" text="Core Layer">Core Layer</tag>
+<Badge type="success" text="Core Layer">Core Layer</Bdage>
 
 `RasterLayer` 是基于 [L7-RasterLayer](https://l7.antv.vision/zh/docs/api/raster/raster_layer) 封装的配置式 API。
 
@@ -53,7 +53,7 @@ new RasterLayer(options: RasterLayerOptions)
 
 `boolean` optional default: `false`
 
-图层加载成功后是否自动定位到图层数据可见范围，注意 <tag color="red" text="开启"></tag>后图层数据发生更新时，地图也会自动缩放到图层的数据边界范围。
+图层加载成功后是否自动定位到图层数据可见范围，注意开启后图层数据发生更新时，地图也会自动缩放到图层的数据边界范围。
 
 ### `options.`blend
 
