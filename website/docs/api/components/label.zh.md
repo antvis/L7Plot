@@ -17,7 +17,7 @@ order: 3
 
 ## `label.`style
 
-`markdown:docs/common/layers/text-layer/style.zh.md`
+<embed src="@/docs/common/layers/text-layer/style.zh.md"></embed>
 
 ## `label.`state
 

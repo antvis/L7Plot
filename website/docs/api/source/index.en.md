@@ -3,4 +3,4 @@ title: Data Source
 order: 1
 ---
 
-`markdown:docs/api/source/index.zh.md`
+<embed src="@/docs/api/source/index.zh.md"></embed>

@@ -41,7 +41,7 @@ DOM 容器自定义 className 。
 
 自定义 legend 样式。
 
-<tag color="green" text="分类图例">分类图例</tag> CSS 样式自定义：
+分类图例 CSS 样式自定义：
 
 ```ts
 {
@@ -56,7 +56,7 @@ DOM 容器自定义 className 。
 }
 ```
 
-<tag color="cyan" text="连续图例">连续图例</tag> CSS 样式自定义：
+连续图例 CSS 样式自定义：
 
 ```ts
 {
@@ -74,7 +74,7 @@ DOM 容器自定义 className 。
 
 `CategoryLegendListItem[]` optional
 
-适用于 <tag color="green" text="分类图例">分类图例</tag>，自定义配置图例项的内容。_CategoryLegendListItem_ 配置如下：
+适用于分类图例，自定义配置图例项的内容。_CategoryLegendListItem_ 配置如下：
 
 | 参数名 | 类型   | 是否必选 | 默认值 | 描述             |
 | ------ | ------ | -------- | ------ | ---------------- |
@@ -86,19 +86,19 @@ DOM 容器自定义 className 。
 
 `number` optional
 
-适用于 <tag color="cyan" text="连续图例">连续图例</tag>，范围的最小值。
+适用于连续图例，范围的最小值。
 
 ## `legend.`max
 
 `number` optional
 
-适用于 <tag color="cyan" text="连续图例">连续图例</tag>，范围的最大值。
+适用于连续图例，范围的最大值。
 
 ## `legend.`colors
 
 `string[]` optional
 
-适用于 <tag color="cyan" text="连续图例">连续图例</tag>，自定义色带。
+适用于连续图例，自定义色带。
 
 ## `legend.`customContent
 
@@ -107,7 +107,7 @@ DOM 容器自定义 className 。
 - 分类图例 _CategoryLegendCustomContent_: `(title: string, items: ILegendListItem[]) => stringHTML | HTMLElement`
 - 连续图例 _ContinueLegendCustomContent_: `(title: string, min: number, max: number, colors: string[]) => stringHTML | HTMLElement`
 
-自定义 legend 内容，注意 <tag color="red" text="stringHTML | HTMLElemenct"></tag> 是 [HTMLElement](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement) 或拼接好的 HTML 字符串，不是纯文本类型。
+自定义 legend 内容，注意是 `stringHTML | HTMLElemenct` [HTMLElement](https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLElement) 或拼接好的 HTML 字符串，不是纯文本类型。
 
 ```js
 customContent (title: string, items: ILegendListItem[]) {

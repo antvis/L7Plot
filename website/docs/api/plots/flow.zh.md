@@ -41,19 +41,19 @@ const flowMap = new Flow(container, options);
 }
 ```
 
-`markdown:docs/common/layers/arc-layer/shape.zh.md`
+<embed src="@/docs/common/layers/arc-layer/shape.zh.md"></embed>
 
-`markdown:docs/common/attribute/color.zh.md`
+<embed src="@/docs/common/attribute/color.zh.md"></embed>
 
-`markdown:docs/common/layers/arc-layer/size.zh.md`
+<embed src="@/docs/common/layers/arc-layer/size.zh.md"></embed>
 
-`markdown:docs/common/layers/arc-layer/style.zh.md`
+<embed src="@/docs/common/layers/arc-layer/style.zh.md"></embed>
 
-`markdown:docs/common/attribute/radiation.zh.md`
+<embed src="@/docs/common/attribute/radiation.zh.md"></embed>
 
-`markdown:docs/common/layers/lines-layer/animate.zh.md`
+<embed src="@/docs/common/layers/lines-layer/animate.zh.md"></embed>
 
-`markdown:docs/common/attribute/components.zh.md`
+<embed src="@/docs/common/attribute/components.zh.md"></embed>
 
 ## 二、属性
 

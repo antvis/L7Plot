@@ -5,4 +5,4 @@ redirect_from:
   - /en/docs/manual
 ---
 
-`markdown:docs/manual/introduction/index.zh.md`
+<embed src="@/docs/manual/introduction/index.zh.md"></embed>

@@ -3,7 +3,7 @@ title: 图片图层 - ImageLayer
 order: 6
 ---
 
-<tag color="blue" text="Core Layer">Core Layer</tag>
+<Badge type="success" text="Core Layer">Core Layer</Bdage>
 
 `ImageLayer` 是基于 [L7-ImageLayer](https://l7.antv.vision/zh/docs/api/imageLayer/imagelayer) 封装的配置式 API。
 
@@ -53,7 +53,7 @@ new ImageLayer(options: ImageLayerOptions)
 
 `boolean` optional default: `false`
 
-图层加载成功后是否自动定位到图层数据可见范围，注意 <tag color="red" text="开启"></tag>后图层数据发生更新时，地图也会自动缩放到图层的数据边界范围。
+图层加载成功后是否自动定位到图层数据可见范围，注意开启后图层数据发生更新时，地图也会自动缩放到图层的数据边界范围。
 
 ### `options.`blend
 
@@ -66,18 +66,18 @@ new ImageLayer(options: ImageLayerOptions)
 - subtractive：相减模式
 - max：最大值
 
-`markdown:docs/common/base-layers/image-layer/source.zh.md`
+<embed src="@/docs/common/base-layers/image-layer/source.zh.md"></embed>
 
-`markdown:docs/common/base-layers/image-layer/style.zh.md`
+<embed src="@/docs/common/base-layers/image-layer/style.zh.md"></embed>
 
 ## 二、属性
 
-`markdown:docs/common/base-layers/base-common/attribute.zh.md`
+<embed src="@/docs/common/base-layers/base-common/attribute.zh.md"></embed>
 
 ## 三、方法
 
-`markdown:docs/common/base-layers/base-common/method.zh.md`
+<embed src="@/docs/common/base-layers/base-common/method.zh.md"></embed>
 
 ## 四、事件
 
-`markdown:docs/common/base-layers/base-common/event.zh.md`
+<embed src="@/docs/common/base-layers/base-common/event.zh.md"></embed>

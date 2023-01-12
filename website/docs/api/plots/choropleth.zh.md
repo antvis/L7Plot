@@ -119,11 +119,11 @@ const choropleth = new Choropleth(container, options);
 }
 ```
 
-`markdown:docs/common/attribute/color.zh.md`
+<embed src="@/docs/common/attribute/color.zh.md"></embed>
 
-`markdown:docs/common/layers/area-layer/style.zh.md`
+<embed src="@/docs/common/layers/area-layer/style.zh.md"></embed>
 
-`markdown:docs/common/layers/area-layer/state.zh.md`
+<embed src="@/docs/common/layers/area-layer/state.zh.md"></embed>
 
 ### `options.`chinaBorder
 
@@ -216,7 +216,7 @@ DrillStepConfig 配置如下：
 }
 ```
 
-`markdown:docs/common/attribute/components.zh.md`
+<embed src="@/docs/common/attribute/components.zh.md"></embed>
 
 ### `options.`customFetchGeoData
 

@@ -26,13 +26,13 @@ const path = new Path(container, options);
 
 路径图的所有配置项，继承自 [Plot options](/zh/docs/api/plot-api#options)。
 
-`markdown:docs/common/layers/path-layer/source.zh.md`
+<embed src="@/docs/common/layers/path-layer/source.zh.md"></embed>
 
-`markdown:docs/common/attribute/color.zh.md`
+<embed src="@/docs/common/attribute/color.zh.md"></embed>
 
-`markdown:docs/common/layers/path-layer/size.zh.md`
+<embed src="@/docs/common/layers/path-layer/size.zh.md"></embed>
 
-`markdown:docs/common/layers/path-layer/style.zh.md`
+<embed src="@/docs/common/layers/path-layer/style.zh.md"></embed>
 
 ### `options.`tooltip
 

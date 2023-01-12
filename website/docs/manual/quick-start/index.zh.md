@@ -50,7 +50,7 @@ const data = [
 
 **3. 创建图表**
 
-<playground path='dot/bobble/demo/earthquake-level.ts'></playground>
+<Playground path='dot/bobble/demo/earthquake-level.ts'></playground>
 
 你也可以进入 [L7Plot 图表示例](/zh/examples/gallery)页面查看更多例子。
 

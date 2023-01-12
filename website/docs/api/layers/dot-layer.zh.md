@@ -7,19 +7,19 @@ order: 1
 
 ## 一、配置
 
-`markdown:docs/common/layers/dot-layer/source.zh.md`
+<embed src="@/docs/common/layers/dot-layer/source.zh.md"></embed>
 
-`markdown:docs/common/layers/dot-layer/shape.zh.md`
+<embed src="@/docs/common/layers/dot-layer/shape.zh.md"></embed>
 
-`markdown:docs/common/attribute/color.zh.md`
+<embed src="@/docs/common/attribute/color.zh.md"></embed>
 
-`markdown:docs/common/layers/dot-layer/size.zh.md`
+<embed src="@/docs/common/layers/dot-layer/size.zh.md"></embed>
 
-`markdown:docs/common/layers/dot-layer/style.zh.md`
+<embed src="@/docs/common/layers/dot-layer/style.zh.md"></embed>
 
-`markdown:docs/common/attribute/state.zh.md`
+<embed src="@/docs/common/attribute/state.zh.md"></embed>
 
-`markdown:docs/common/layers/dot-layer/animate.zh.md`
+<embed src="@/docs/common/layers/dot-layer/animate.zh.md"></embed>
 
 ## 二、属性
 

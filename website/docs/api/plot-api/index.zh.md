@@ -37,7 +37,7 @@ constructor(container: string | HTMLDivElement, options: PlotOptions)
 
 设置图表容器高度。
 
-`markdown:docs/common/attribute/map.zh.md`
+<embed src="@/docs/common/attribute/map.zh.md"></embed>
 
 ### `options.`antialias
 
@@ -67,7 +67,7 @@ constructor(container: string | HTMLDivElement, options: PlotOptions)
 
 `bool` optional default: `false`
 
-图层完成初始化之后，地图是否自动缩放到图层的数据边界范围，注意 <tag color="red" text="开启"></tag>后图表数据发生更新时，地图也会自动缩放到图层的数据边界范围。
+图层完成初始化之后，地图是否自动缩放到图层的数据边界范围，注意开启后图表数据发生更新时，地图也会自动缩放到图层的数据边界范围。
 
 ### `options.`theme
 
@@ -75,7 +75,7 @@ constructor(container: string | HTMLDivElement, options: PlotOptions)
 
 图表主题，详见 [Theme](/zh/docs/api/theme)。
 
-`markdown:docs/common/attribute/components.zh.md`
+<embed src="@/docs/common/attribute/components.zh.md"></embed>
 
 ## 二、属性
 
