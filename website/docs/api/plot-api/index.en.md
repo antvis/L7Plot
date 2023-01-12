@@ -5,4 +5,4 @@ redirect_from:
   - /en/docs/api
 ---
 
-`markdown:docs/api/plot-api/index.zh.md`
+<embed src="@/docs/api/plot-api/index.zh.md"></embed>

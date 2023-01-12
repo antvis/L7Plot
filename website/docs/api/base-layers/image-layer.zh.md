@@ -66,18 +66,18 @@ new ImageLayer(options: ImageLayerOptions)
 - subtractive：相减模式
 - max：最大值
 
-`markdown:docs/common/base-layers/image-layer/source.zh.md`
+<embed src="@/docs/common/base-layers/image-layer/source.zh.md"></embed>
 
-`markdown:docs/common/base-layers/image-layer/style.zh.md`
+<embed src="@/docs/common/base-layers/image-layer/style.zh.md"></embed>
 
 ## 二、属性
 
-`markdown:docs/common/base-layers/base-common/attribute.zh.md`
+<embed src="@/docs/common/base-layers/base-common/attribute.zh.md"></embed>
 
 ## 三、方法
 
-`markdown:docs/common/base-layers/base-common/method.zh.md`
+<embed src="@/docs/common/base-layers/base-common/method.zh.md"></embed>
 
 ## 四、事件
 
-`markdown:docs/common/base-layers/base-common/event.zh.md`
+<embed src="@/docs/common/base-layers/base-common/event.zh.md"></embed>

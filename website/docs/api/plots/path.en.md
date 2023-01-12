@@ -3,4 +3,4 @@ title: Path
 order: 6
 ---
 
-`markdown:docs/api/plots/path.zh.md`
+<embed src="@/docs/api/plots/path.zh.md"></embed>

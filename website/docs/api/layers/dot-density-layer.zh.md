@@ -7,7 +7,7 @@ order: 2
 
 ## 一、配置
 
-`markdown:docs/common/layers/dot-layer/source.zh.md`
+<embed src="@/docs/common/layers/dot-layer/source.zh.md"></embed>
 
 ### `options.`size
 
@@ -15,11 +15,11 @@ order: 2
 
 圆点大小。
 
-`markdown:docs/common/attribute/color.zh.md`
+<embed src="@/docs/common/attribute/color.zh.md"></embed>
 
-`markdown:docs/common/layers/dot-layer/style.zh.md`
+<embed src="@/docs/common/layers/dot-layer/style.zh.md"></embed>
 
-`markdown:docs/common/attribute/state.zh.md`
+<embed src="@/docs/common/attribute/state.zh.md"></embed>
 
 ## 二、属性
 

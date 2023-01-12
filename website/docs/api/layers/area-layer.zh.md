@@ -7,11 +7,11 @@ order: 8
 
 ## 一、配置
 
-`markdown:docs/common/layers/area-layer/source.zh.md`
+<embed src="@/docs/common/layers/area-layer/source.zh.md"></embed>
 
-`markdown:docs/common/attribute/color.zh.md`
+<embed src="@/docs/common/attribute/color.zh.md"></embed>
 
-`markdown:docs/common/layers/area-layer/style.zh.md`
+<embed src="@/docs/common/layers/area-layer/style.zh.md"></embed>
 
 ### `options.`enabledMultiSelect
 
@@ -19,7 +19,7 @@ order: 8
 
 是否启用多选。
 
-`markdown:docs/common/layers/area-layer/state.zh.md`
+<embed src="@/docs/common/layers/area-layer/state.zh.md"></embed>
 
 ## 二、属性
 

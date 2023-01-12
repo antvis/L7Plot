@@ -37,7 +37,7 @@ constructor(container: string | HTMLDivElement, options: PlotOptions)
 
 设置图表容器高度。
 
-`markdown:docs/common/attribute/map.zh.md`
+<embed src="@/docs/common/attribute/map.zh.md"></embed>
 
 ### `options.`antialias
 
@@ -75,7 +75,7 @@ constructor(container: string | HTMLDivElement, options: PlotOptions)
 
 图表主题，详见 [Theme](/zh/docs/api/theme)。
 
-`markdown:docs/common/attribute/components.zh.md`
+<embed src="@/docs/common/attribute/components.zh.md"></embed>
 
 ## 二、属性
 

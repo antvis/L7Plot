@@ -3,4 +3,4 @@ title: Legend
 order: 0
 ---
 
-`markdown:docs/api/components/legend.zh.md`
+<embed src="@/docs/api/components/legend.zh.md"></embed>

@@ -3,4 +3,4 @@ title: Scale
 order: 2
 ---
 
-`markdown:docs/api/components/scale.zh.md`
+<embed src="@/docs/api/components/scale.zh.md"></embed>

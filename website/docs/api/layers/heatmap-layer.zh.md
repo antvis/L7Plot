@@ -7,13 +7,13 @@ order: 3
 
 ## 一、配置
 
-`markdown:docs/common/layers/dot-layer/source.zh.md`
+<embed src="@/docs/common/layers/dot-layer/source.zh.md"></embed>
 
-`markdown:docs/common/layers/heatmap-layer/shape.zh.md`
+<embed src="@/docs/common/layers/heatmap-layer/shape.zh.md"></embed>
 
-`markdown:docs/common/layers/heatmap-layer/size.zh.md`
+<embed src="@/docs/common/layers/heatmap-layer/size.zh.md"></embed>
 
-`markdown:docs/common/layers/heatmap-layer/style.zh.md`
+<embed src="@/docs/common/layers/heatmap-layer/style.zh.md"></embed>
 
 ## 二、属性
 

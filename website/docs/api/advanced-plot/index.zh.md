@@ -37,7 +37,7 @@ constructor(container: string | HTMLDivElement, options: L7PlotOptions)
 
 设置容器高度。
 
-`markdown:docs/common/attribute/map.zh.md`
+<embed src="@/docs/common/attribute/map.zh.md"></embed>
 
 ### `options.`antialias
 

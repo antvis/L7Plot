@@ -1,1 +1,1 @@
-`markdown:docs/api/plots/path.en.md`
+<embed src="@/docs/api/plots/path.en.md"></embed>

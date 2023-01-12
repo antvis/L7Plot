@@ -1,1 +1,1 @@
-`markdown:docs/api/plots/choropleth.en.md`
+<embed src="@/docs/api/plots/choropleth.en.md"></embed>

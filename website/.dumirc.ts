@@ -90,7 +90,7 @@ export default defineConfig({
           en: 'LocationInsight Open',
         },
         date: '2022.11.22',
-        link: 'https://www.yuque.com/antv/htpfbw/gp1cyxq3ckm4xany',
+        link: 'https://locationinsight.antv.antgroup.com/#/home',
       },
     ],
     features: [],
@@ -99,17 +99,10 @@ export default defineConfig({
     ecosystems: [
       {
         name: {
-          zh: 'LarkMap',
-          en: 'L7 For React',
+          zh: 'L7',
+          en: 'L7',
         },
-        url: 'https://larkmap.antv.antgroup.com/',
-      },
-      {
-        name: {
-          zh: 'L7Plot',
-          en: 'L7Plot',
-        },
-        url: 'https://l7plot.antv.antgroup.com/',
+        url: 'https://l7.antv.antgroup.com/',
       },
       {
         name: {
@@ -120,10 +113,17 @@ export default defineConfig({
       },
       {
         name: {
+          zh: 'LarkMap',
+          en: 'L7 For React',
+        },
+        url: 'https://larkmap.antv.antgroup.com/',
+      },
+      {
+        name: {
           zh: 'LocationInsight',
           en: 'LocationInsight',
         },
-        url: 'https://li.antv.antgroup.com/#/home',
+        url: 'https://locationinsight.antv.antgroup.com/#/home',
       },
     ],
     navs: [

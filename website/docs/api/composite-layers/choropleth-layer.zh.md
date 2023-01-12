@@ -9,9 +9,9 @@ order: 1
 
 ## 一、配置
 
-`markdown:docs/common/composite-layers/composite-common/options.zh.md`
+<embed src="@/docs/common/composite-layers/composite-common/options.zh.md"></embed>
 
-`markdown:docs/common/base-layers/polygon-layer/source.zh.md`
+<embed src="@/docs/common/base-layers/polygon-layer/source.zh.md"></embed>
 
 ### `options.`fillColor
 
@@ -58,7 +58,7 @@ order: 1
 
 #### `fillColor.`scale
 
-`markdown:docs/common/attribute/scale.zh.md`
+<embed src="@/docs/common/attribute/scale.zh.md"></embed>
 
 ```js
 {
@@ -138,7 +138,7 @@ order: 1
 
 标签样式详细配置见 [TextLayerStyleOptions](/zh/docs/api/base-layers/text-layer#code-classlanguage-textoptionscodestyle)。
 
-`markdown:docs/common/composite-layers/choropleth-layer/state.zh.md`
+<embed src="@/docs/common/composite-layers/choropleth-layer/state.zh.md"></embed>
 
 ### `options.`enabledMultiSelect
 
@@ -154,11 +154,11 @@ order: 1
 
 ## 二、属性
 
-`markdown:docs/common/composite-layers/composite-common/attribute.zh.md`
+<embed src="@/docs/common/composite-layers/composite-common/attribute.zh.md"></embed>
 
 ## 三、方法
 
-`markdown:docs/common/composite-layers/composite-common/method.zh.md`
+<embed src="@/docs/common/composite-layers/composite-common/method.zh.md"></embed>
 
 ### setActive
 
@@ -186,7 +186,7 @@ layer.boxSelect(bounds: [number, number, number, number], callback: (...args: an
 
 ## 四、事件
 
-`markdown:docs/common/composite-layers/composite-common/event.zh.md`
+<embed src="@/docs/common/composite-layers/composite-common/event.zh.md"></embed>
 
 #### 选择事件
 

@@ -7,9 +7,9 @@ order: 9
 
 ## 一、配置
 
-`markdown:docs/common/layers/area-layer/source.zh.md`
+<embed src="@/docs/common/layers/area-layer/source.zh.md"></embed>
 
-`markdown:docs/common/attribute/color.zh.md`
+<embed src="@/docs/common/attribute/color.zh.md"></embed>
 
 ### `options.`size
 
@@ -52,7 +52,7 @@ order: 9
 
 #### `size.`scale
 
-`markdown:docs/common/attribute/scale.zh.md`
+<embed src="@/docs/common/attribute/scale.zh.md"></embed>
 
 ```js
 {
@@ -82,7 +82,7 @@ order: 9
 }
 ```
 
-`markdown:docs/common/attribute/state.zh.md`
+<embed src="@/docs/common/attribute/state.zh.md"></embed>
 
 ## 二、属性
 

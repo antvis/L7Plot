@@ -3,4 +3,4 @@ title: GridLayer
 order: 4
 ---
 
-`markdown:docs/api/layers/grid-layer.zh.md`
+<embed src="@/docs/api/layers/grid-layer.zh.md"></embed>

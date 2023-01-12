@@ -9,9 +9,9 @@ order: 0
 
 ## 一、配置
 
-`markdown:docs/common/composite-layers/composite-common/options.zh.md`
+<embed src="@/docs/common/composite-layers/composite-common/options.zh.md"></embed>
 
-`markdown:docs/common/base-layers/point-layer/source.zh.md`
+<embed src="@/docs/common/base-layers/point-layer/source.zh.md"></embed>
 
 ### `options.`radius
 
@@ -58,7 +58,7 @@ order: 0
 
 #### `radius.`scale
 
-`markdown:docs/common/attribute/scale.zh.md`
+<embed src="@/docs/common/attribute/scale.zh.md"></embed>
 
 ```js
 {
@@ -115,7 +115,7 @@ order: 0
 
 #### `fillColor.`scale
 
-`markdown:docs/common/attribute/scale.zh.md`
+<embed src="@/docs/common/attribute/scale.zh.md"></embed>
 
 ```js
 {
@@ -256,11 +256,11 @@ BubbleLayerActiveOptions 配置如下：
 
 ## 二、属性
 
-`markdown:docs/common/composite-layers/composite-common/attribute.zh.md`
+<embed src="@/docs/common/composite-layers/composite-common/attribute.zh.md"></embed>
 
 ## 三、方法
 
-`markdown:docs/common/composite-layers/composite-common/method.zh.md`
+<embed src="@/docs/common/composite-layers/composite-common/method.zh.md"></embed>
 
 ### setActive
 
@@ -288,7 +288,7 @@ layer.boxSelect(bounds: [number, number, number, number], callback: (...args: an
 
 ## 四、事件
 
-`markdown:docs/common/composite-layers/composite-common/event.zh.md`
+<embed src="@/docs/common/composite-layers/composite-common/event.zh.md"></embed>
 
 #### 选择事件
 

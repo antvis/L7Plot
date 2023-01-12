@@ -9,9 +9,9 @@ order: 2
 
 ## 一、配置
 
-`markdown:docs/common/composite-layers/composite-common/options.zh.md`
+<embed src="@/docs/common/composite-layers/composite-common/options.zh.md"></embed>
 
-`markdown:docs/common/base-layers/point-layer/source.zh.md`
+<embed src="@/docs/common/base-layers/point-layer/source.zh.md"></embed>
 
 ### `options.`radius
 
@@ -58,7 +58,7 @@ order: 2
 
 #### `radius.`scale
 
-`markdown:docs/common/attribute/scale.zh.md`
+<embed src="@/docs/common/attribute/scale.zh.md"></embed>
 
 ```js
 {
@@ -104,7 +104,7 @@ order: 2
 
 icon scale 通常使用枚举类型 cat scale
 
-`markdown:docs/common/attribute/scale.zh.md`
+<embed src="@/docs/common/attribute/scale.zh.md"></embed>
 
 ```js
 {
@@ -120,7 +120,7 @@ icon scale 通常使用枚举类型 cat scale
 
 标注样式和文字标注一致
 
-`markdown:docs/common/base-layers/text-layer/style.zh.md`
+<embed src="@/docs/common/base-layers/text-layer/style.zh.md"></embed>
 
 ### `options.`label
 
@@ -216,11 +216,11 @@ IconLayerActiveOptions 配置如下：
 
 ## 二、属性
 
-`markdown:docs/common/composite-layers/composite-common/attribute.zh.md`
+<embed src="@/docs/common/composite-layers/composite-common/attribute.zh.md"></embed>
 
 ## 三、方法
 
-`markdown:docs/common/composite-layers/composite-common/method.zh.md`
+<embed src="@/docs/common/composite-layers/composite-common/method.zh.md"></embed>
 
 ### setActive
 
@@ -257,7 +257,7 @@ layer.addIconAtlas(iconAtlas: { [key: string]: string }[])
 
 ## 四、事件
 
-`markdown:docs/common/composite-layers/composite-common/event.zh.md`
+<embed src="@/docs/common/composite-layers/composite-common/event.zh.md"></embed>
 
 #### 选择事件
 

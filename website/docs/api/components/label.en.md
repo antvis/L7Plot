@@ -3,4 +3,4 @@ title: Label
 order: 3
 ---
 
-`markdown:docs/api/components/label.zh.md`
+<embed src="@/docs/api/components/label.zh.md"></embed>

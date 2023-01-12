@@ -3,4 +3,4 @@ title: Grid
 order: 4
 ---
 
-`markdown:docs/api/plots/grid.zh.md`
+<embed src="@/docs/api/plots/grid.zh.md"></embed>

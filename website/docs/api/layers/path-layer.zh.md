@@ -7,13 +7,13 @@ order: 6
 
 ## 一、配置
 
-`markdown:docs/common/layers/path-layer/source.zh.md`
+<embed src="@/docs/common/layers/path-layer/source.zh.md"></embed>
 
-`markdown:docs/common/attribute/color.zh.md`
+<embed src="@/docs/common/attribute/color.zh.md"></embed>
 
-`markdown:docs/common/layers/path-layer/size.zh.md`
+<embed src="@/docs/common/layers/path-layer/size.zh.md"></embed>
 
-`markdown:docs/common/layers/path-layer/style.zh.md`
+<embed src="@/docs/common/layers/path-layer/style.zh.md"></embed>
 
 ## 二、属性
 

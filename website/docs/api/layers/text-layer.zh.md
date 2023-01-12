@@ -30,9 +30,9 @@ order: 1
 
 ### `options.`style
 
-`markdown:docs/common/layers/text-layer/style.zh.md`
+<embed src="@/docs/common/layers/text-layer/style.zh.md"></embed>
 
-`markdown:docs/common/attribute/state.zh.md`
+<embed src="@/docs/common/attribute/state.zh.md"></embed>
 
 ## 二、属性
 

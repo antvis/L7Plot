@@ -26,17 +26,17 @@ const gridMap = new GridMap(container, options);
 
 蜂窝地图的所有配置项，继承自 [Plot options](/zh/docs/api/plot-api#options)。
 
-`markdown:docs/common/layers/grid-layer/source.zh.md`
+<embed src="@/docs/common/layers/grid-layer/source.zh.md"></embed>
 
-`markdown:docs/common/layers/grid-layer/shape.zh.md`
+<embed src="@/docs/common/layers/grid-layer/shape.zh.md"></embed>
 
-`markdown:docs/common/attribute/color.zh.md`
+<embed src="@/docs/common/attribute/color.zh.md"></embed>
 
-`markdown:docs/common/layers/grid-layer/size.zh.md`
+<embed src="@/docs/common/layers/grid-layer/size.zh.md"></embed>
 
-`markdown:docs/common/layers/grid-layer/style.zh.md`
+<embed src="@/docs/common/layers/grid-layer/style.zh.md"></embed>
 
-`markdown:docs/common/attribute/components.zh.md`
+<embed src="@/docs/common/attribute/components.zh.md"></embed>
 
 ## 二、属性
 

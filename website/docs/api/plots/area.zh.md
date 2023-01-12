@@ -26,11 +26,11 @@ const area = new Area(container, options);
 
 区域图的所有配置项，继承自 [Plot options](/zh/docs/api/plot-api#options)。
 
-`markdown:docs/common/layers/area-layer/source.zh.md`
+<embed src="@/docs/common/layers/area-layer/source.zh.md"></embed>
 
-`markdown:docs/common/attribute/color.zh.md`
+<embed src="@/docs/common/attribute/color.zh.md"></embed>
 
-`markdown:docs/common/layers/area-layer/style.zh.md`
+<embed src="@/docs/common/layers/area-layer/style.zh.md"></embed>
 
 ### `options.`enabledMultiSelect
 
@@ -38,9 +38,9 @@ const area = new Area(container, options);
 
 是否启用多选。
 
-`markdown:docs/common/layers/area-layer/state.zh.md`
+<embed src="@/docs/common/layers/area-layer/state.zh.md"></embed>
 
-`markdown:docs/common/attribute/components.zh.md`
+<embed src="@/docs/common/attribute/components.zh.md"></embed>
 
 ## 二、属性
 

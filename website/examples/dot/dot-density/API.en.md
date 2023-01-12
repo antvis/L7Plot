@@ -1,1 +1,1 @@
-`markdown:docs/api/plots/dot-density.en.md`
+<embed src="@/docs/api/plots/dot-density.en.md"></embed>

@@ -3,4 +3,4 @@ title: Heatmap
 order: 3
 ---
 
-`markdown:docs/api/plots/heatmap.zh.md`
+<embed src="@/docs/api/plots/heatmap.zh.md"></embed>

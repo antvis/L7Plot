@@ -43,7 +43,7 @@
 
 #### `size.`scale
 
-`markdown:docs/common/attribute/scale.zh.md`
+<embed src="@/docs/common/attribute/scale.zh.md"></embed>
 
 ```js
 {
