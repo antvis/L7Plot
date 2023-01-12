@@ -1,5 +1,7 @@
 import { defineConfig } from 'dumi';
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 export default defineConfig({
   title: 'L7Plot',
   favicons: ['https://mdn.alipayobjects.com/huamei_qa8qxu/afts/img/A*7svFR6wkPMoAAAAAAAAAAAAADmJ7AQ/original'], // 网站 favicon
@@ -329,4 +331,6 @@ export default defineConfig({
   },
   links: [],
   scripts: ['https://webapi.amap.com/maps?v=2.0&key=ff533602d57df6f8ab3b0fea226ae52f'],
+  // 同步 gh-page CNAME 文件
+  copy: isProduction ? ['docs/CNAME'] : [],
 });
