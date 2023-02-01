@@ -277,7 +277,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
       const data = this.source['originData'].features
         .map(({ properties }) => properties)
         .filter(({ centroid }) => centroid);
-      textLayer.layer.setData(data);
+      textLayer.layer.setData(data, { transforms: source.transforms });
     };
 
     source.on('update', updateCallback);
