@@ -1,49 +1,43 @@
 {
   "name": "@antv/l7plot",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Geospatial Visualization Chart Library",
-  "main": "dist/lib/index.js",
-  "types": "dist/lib/index.d.ts",
-  "module": "dist/esm/index.js",
-  "unpkg": "dist/umd/l7plot.min.js",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "dev": "yarn run dev:cjs",
-    "dev:cjs": "tsc -p tsconfig.json --target ES6 --module CommonJS --outDir dist/lib --watch",
-    "lint": "eslint src __tests__ --ext .js,.ts",
-    "lint-fix": "eslint src __tests__ --ext .js,.ts --fix",
-    "prettier": "prettier src __tests__ -c -w",
-    "typedoc": "typedoc",
-    "clean": "rimraf dist",
-    "build": "yarn run clean && yarn run build:cjs && yarn run build:esm",
-    "build:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib",
-    "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm",
-    "build:umd": "rollup -c rollup.config.js"
-  },
   "keywords": [
     "antv",
     "chart",
     "l7",
     "plot"
   ],
-  "sideEffects": false,
-  "author": "yunji",
-  "license": "MIT",
   "homepage": "https://github.com/antvis/L7Plot#readme",
+  "bugs": {
+    "url": "https://github.com/antvis/L7Plot/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/antvis/L7Plot.git"
   },
-  "bugs": {
-    "url": "https://github.com/antvis/L7Plot/issues"
-  },
-  "devDependencies": {
-    "@antv/l7": "^2.11.5",
-    "@types/geojson": "^7946.0.8",
-    "@types/lodash-es": "^4.17.4",
-    "@types/topojson-client": "^3.1.0"
+  "license": "MIT",
+  "author": "yunji",
+  "sideEffects": false,
+  "main": "dist/lib/index.js",
+  "unpkg": "dist/umd/l7plot.min.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/lib/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "yarn run clean && yarn run build:cjs && yarn run build:esm",
+    "build:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib",
+    "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm",
+    "build:umd": "rollup -c rollup.config.js",
+    "clean": "rimraf dist",
+    "dev": "yarn run dev:cjs",
+    "dev:cjs": "tsc -p tsconfig.json --target ES6 --module CommonJS --outDir dist/lib --watch",
+    "lint": "eslint src __tests__ --ext .js,.ts",
+    "lint-fix": "eslint src __tests__ --ext .js,.ts --fix",
+    "prettier": "prettier src __tests__ -c -w",
+    "typedoc": "typedoc"
   },
   "dependencies": {
     "@antv/event-emitter": "^0.1.2",
@@ -51,6 +45,12 @@
     "@antv/util": "^2.0.13",
     "lodash-es": "^4.17.21",
     "topojson-client": "^3.1.0"
+  },
+  "devDependencies": {
+    "@antv/l7": "^2.11.5",
+    "@types/geojson": "^7946.0.8",
+    "@types/lodash-es": "^4.17.4",
+    "@types/topojson-client": "^3.1.0"
   },
   "peerDependencies": {
     "@antv/l7": "^2.11.5"
