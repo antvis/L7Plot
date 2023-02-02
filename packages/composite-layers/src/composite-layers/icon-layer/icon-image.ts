@@ -1,9 +1,9 @@
-import { IconImageLayerOptions } from './types';
+import { CompositeLayer } from '../../core/composite-layer';
+import { CompositeLayerEvent, LayerGroupEvent } from '../../core/constants';
+import { Scene } from '../../types';
 import { DEFAULT_OPTIONS } from './constants';
 import { IconLayer } from './icon';
-import { Scene } from '../../types';
-import { CompositeLayerEvent } from '../../core/constants';
-import { CompositeLayer } from '../../core/composite-layer';
+import { IconImageLayerOptions } from './types';
 
 export class IconImageLayer extends IconLayer<IconImageLayerOptions> {
   /**
@@ -21,8 +21,11 @@ export class IconImageLayer extends IconLayer<IconImageLayerOptions> {
   public addTo(scene: Scene) {
     this.scene = scene;
     this.initAssets().then(() => {
+      this.subLayers.once(LayerGroupEvent.INITED_LAYERS, () => {
+        this.emit(CompositeLayerEvent.INITED, this);
+        this.emit(CompositeLayerEvent.ADD, this);
+      });
       this.subLayers.addTo(scene);
-      this.emit(CompositeLayerEvent.ADD);
     });
   }
 

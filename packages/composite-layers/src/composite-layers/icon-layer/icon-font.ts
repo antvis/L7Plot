@@ -1,9 +1,9 @@
-import { IconFontLayerOptions } from './types';
+import { CompositeLayer } from '../../core/composite-layer';
+import { CompositeLayerEvent, LayerGroupEvent } from '../../core/constants';
 import { Scene } from '../../types';
 import { DEFAULT_OPTIONS } from './constants';
 import { IconLayer } from './icon';
-import { CompositeLayerEvent } from '../../core/constants';
-import { CompositeLayer } from '../../core/composite-layer';
+import { IconFontLayerOptions } from './types';
 
 export class IconFontLayer extends IconLayer<IconFontLayerOptions> {
   /**
@@ -25,13 +25,18 @@ export class IconFontLayer extends IconLayer<IconFontLayerOptions> {
   public addTo(scene: Scene) {
     this.scene = scene;
     this.initAssets();
-    if (this.fontLoaded) {
+    const callback = () => {
+      this.subLayers.once(LayerGroupEvent.INITED_LAYERS, () => {
+        this.emit(CompositeLayerEvent.INITED, this);
+        this.emit(CompositeLayerEvent.ADD, this);
+      });
       this.subLayers.addTo(scene);
-      this.emit(CompositeLayerEvent.ADD);
+    };
+    if (this.fontLoaded) {
+      callback();
     } else {
       this.on('fontloaded', () => {
-        this.subLayers.addTo(scene);
-        this.emit(CompositeLayerEvent.ADD);
+        callback();
       });
     }
   }

@@ -1,26 +1,26 @@
-import { Source } from '@antv/l7';
 import EventEmitter from '@antv/event-emitter';
-import { isEqual, isUndefined, uniqueId, omit } from '@antv/util';
-import { deepMergeLayerOptions, isSourceChanged } from '../utils';
+import { Source } from '@antv/l7';
+import { isEqual, isUndefined, omit, uniqueId } from '@antv/util';
+import { MappingAttribute } from '../adaptor/attribute';
 import {
+  AnimateAttr,
+  ColorAttr,
   ICoreLayer,
   ILayer,
-  LayerBlend,
+  ILegend,
+  ISource,
   LayerBaseConfig,
-  Scene,
-  SourceOptions,
-  ShapeAttr,
-  ColorAttr,
-  SizeAttr,
+  LayerBlend,
   ScaleAttr,
-  AnimateAttr,
+  Scene,
+  ShapeAttr,
+  SizeAttr,
+  SourceOptions,
   StateAttribute,
   TextureAttr,
-  ISource,
-  ILegend,
 } from '../types';
+import { deepMergeLayerOptions, isSourceChanged } from '../utils';
 import { CoreLayerEvent, OriginLayerEventList } from './constants';
-import { MappingAttribute } from '../adaptor/attribute';
 
 /**
  * 核心图层的基础配置

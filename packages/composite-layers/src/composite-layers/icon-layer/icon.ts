@@ -1,15 +1,15 @@
-import { omit, clone, isEqual, isUndefined } from '@antv/util';
-import { CompositeLayer } from '../../core/composite-layer';
-import { TextLayer } from '../../core-layers/text-layer';
+import { clone, isEqual, isUndefined, omit } from '@antv/util';
 import { PointLayer } from '../../core-layers/point-layer';
-import { IconLayerOptions, IconLayerActiveOptions, IconLayerSourceOptions } from './types';
+import { TextLayer } from '../../core-layers/text-layer';
+import { CompositeLayer } from '../../core/composite-layer';
+import { CompositeLayerEvent } from '../../core/constants';
+import { BlendType, ICoreLayer, ISource, MouseEvent, Scene } from '../../types';
+import { EMPTY_JSON_SOURCE } from '../common/constants';
+import { getLabelLayerOptions } from '../common/label-layer';
+import { isGestureMultiSelect } from '../common/multi-select';
 import { getDefaultState } from './adaptor';
 import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
-import { ICoreLayer, Scene, MouseEvent, BlendType, ISource } from '../../types';
-import { getLabelLayerOptions } from '../common/label-layer';
-import { CompositeLayerEvent } from '../../core/constants';
-import { EMPTY_JSON_SOURCE } from '../common/constants';
-import { isGestureMultiSelect } from '../common/multi-select';
+import { IconLayerActiveOptions, IconLayerOptions, IconLayerSourceOptions } from './types';
 
 export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLayer<T> {
   /**
