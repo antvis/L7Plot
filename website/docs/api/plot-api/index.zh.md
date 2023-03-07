@@ -274,7 +274,7 @@ plot.fitBounds(bound: Bounds);
 设置地图交互操作状态，可用来关闭地图的一些交互操作，缩放、平移、旋转等。
 
 ```js
-plot.setMapStatus(status: MapStatusOptions);
+plot.setMapStatus(status: Partial<MapStatusOptions>);
 ```
 
 ### setBgColor
