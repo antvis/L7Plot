@@ -1,30 +1,30 @@
-import { Scene, Mapbox, GaodeMap, GaodeMapV1, GaodeMapV2, Map as L7Map, Scale, Zoom } from '@antv/l7';
 import EventEmitter from '@antv/event-emitter';
-import { isObject, isBoolean, isUndefined, isEqual } from '@antv/util';
-import { Tooltip } from '../../component/tooltip';
+import { GaodeMap, GaodeMapV1, GaodeMapV2, Map as L7Map, Mapbox, Scale, Scene, Zoom } from '@antv/l7';
+import { isBoolean, isEqual, isObject, isUndefined } from '@antv/util';
 import { Legend, LegendItem } from '../../component/legend';
-import { deepAssign } from '../../utils';
-import { BaseMapType } from '../../types';
+import { Tooltip } from '../../component/tooltip';
+import { getTheme } from '../../theme';
+import { createTheme } from '../../theme/util';
 import type {
-  MapOptions,
-  MapInstance,
   AMapInstance,
-  MapboxInstance,
-  ZoomControlOptions,
-  LayerMenuControlOptions,
-  ScaleControlOptions,
-  LegendOptions,
+  Bounds,
   Event,
   IPlotLayer,
-  UpdateMapConfig,
-  Bounds,
+  LayerMenuControlOptions,
+  LegendOptions,
+  MapboxInstance,
+  MapInstance,
+  MapOptions,
   MapStatusOptions,
+  ScaleControlOptions,
+  UpdateMapConfig,
+  ZoomControlOptions,
 } from '../../types';
+import { BaseMapType } from '../../types';
+import { deepAssign } from '../../utils';
 import { LayerGroup } from '../layer/layer-group';
 import { LayerEventList, MapEventList, SceneEventList } from './constants';
 import { FONT_FACE_CACHE, ICON_FONT_CACHE, IMAGES_CACHE } from './register';
-import { getTheme } from '../../theme';
-import { createTheme } from '../../theme/util';
 
 const DEFAULT_OPTIONS: Partial<MapOptions> = {
   map: { type: BaseMapType.Amap },
@@ -419,7 +419,7 @@ export abstract class Map<O extends MapOptions> extends EventEmitter {
    * 设置地图状态
    * 可用来关闭地图的一些交互操作
    */
-  public setMapStatus(status: MapStatusOptions) {
+  public setMapStatus(status: Partial<MapStatusOptions>) {
     this.scene.setMapStatus(status);
   }
 
