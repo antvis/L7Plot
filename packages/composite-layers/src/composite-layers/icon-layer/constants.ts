@@ -30,6 +30,7 @@ export const DEFAULT_OPTIONS: Partial<IconLayerOptions> = {
     active: false,
     select: false,
   },
+  blend: 'normal',
   enabledMultiSelect: false,
   triggerMultiSelectKey: 'Shift',
 };
