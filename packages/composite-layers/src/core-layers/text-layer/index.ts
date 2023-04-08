@@ -24,7 +24,7 @@ export class TextLayer extends CoreLayer<TextLayerOptions> {
    * 适配属性配置
    */
   protected adaptorAttrOptions(options: TextLayerOptions) {
-    const { field, style = {} } = this.options;
+    const { field, style = {} } = options;
     const { fill: color, fontSize: size } = style || {};
     const shape = { field, value: 'text' };
 
