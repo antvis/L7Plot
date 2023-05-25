@@ -1,8 +1,8 @@
 import type { IColorRamp } from '@antv/l7';
+import { AnimateAttr, ColorAttr, ShapeAttr, SizeAttr, StateAttribute, TextureAttr } from './attr';
 import { BlendType, ILayer, ILayerConfig, Scene } from './common';
 import { LabelOptions } from './label';
-import { AnimateAttr, ColorAttr, StateAttribute, ShapeAttr, SizeAttr, TextureAttr } from './attr';
-import { SourceOptions, Source } from './map';
+import { Source, SourceOptions } from './map';
 
 /**
  * 图层混合配置
@@ -30,6 +30,7 @@ export type PointLayerStyleOptions = {
   opacity?: number;
   strokeWidth?: number;
   stroke?: string;
+  unit?: string;
 };
 
 /**
