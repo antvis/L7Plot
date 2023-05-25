@@ -1,26 +1,26 @@
 import { Source } from '@antv/l7';
-import { pick, isEqual } from '@antv/util';
+import { isEqual, pick } from '@antv/util';
+import { LayerGroup } from '../../core/layer/layer-group';
 import { Plot } from '../../core/plot';
-import { deepAssign } from '../../utils';
-import {
-  ChoroplethOptions,
-  DrillStep,
-  ChoroplethSourceOptions,
-  Drill,
-  DrillStack,
-  ViewLevel,
-  DrillStepConfig,
-  FeatureCollection,
-} from './types';
-import { GEO_DATA_URL, GEO_AREA_URL, DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS } from './constants';
 import { AreaLayer } from '../../layers/area-layer';
 import { PathLayer } from '../../layers/path-layer';
 import { TextLayer } from '../../layers/text-layer';
 import type { LabelOptions, LegendOptions, MouseEvent } from '../../types';
-import { LayerGroup } from '../../core/layer/layer-group';
-import { createCountryBoundaryLayer } from './layer';
+import { deepAssign } from '../../utils';
 import { getCacheArea, registerCacheArea } from './cache';
+import { DEFAULT_AREA_GRANULARITY, DEFAULT_OPTIONS, GEO_AREA_URL, GEO_DATA_URL } from './constants';
 import { getDrillStepDefaultConfig, getGeoAreaConfig, isEqualDrillSteps, topojson2geojson } from './helper';
+import { createCountryBoundaryLayer } from './layer';
+import {
+  ChoroplethOptions,
+  ChoroplethSourceOptions,
+  Drill,
+  DrillStack,
+  DrillStep,
+  DrillStepConfig,
+  FeatureCollection,
+  ViewLevel,
+} from './types';
 
 export type { ChoroplethOptions };
 
@@ -538,9 +538,21 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    * 向下钻取方法
    */
   public drillDown(view: ViewLevel, config: DrillStepConfig = {}) {
+    const from = this.drillStacks.slice(-1)[0];
+    const { level, adcode, granularity } = view;
+
+    const downParams = {
+      from: { level: from.level, adcode: from.adcode, granularity: from.granularity },
+      to: { level, adcode, granularity },
+    };
+
     // TODO: remove view
     this.changeView(view, config).then((drillData) => {
       drillData && this.drillStacks.push(drillData);
+      if (drillData) {
+        this.drillStacks.push(drillData);
+        this.emit('drilldown', downParams);
+      }
     });
   }
 
