@@ -6,7 +6,7 @@ import { ShapeAttr } from '../../types';
  */
 export type ArcLineShape = 'arc' | 'arc3d' | 'greatcircle';
 
-export type LineShape = 'line' | ArcLineShape;
+export type LineShape = 'line' | 'halfLine' | ArcLineShape;
 
 /**
  * 线图层 线类型
@@ -42,6 +42,10 @@ export type LineLayerStyleOptions = {
   iconStep?: number;
   // 纹理混合方式
   textureBlend?: string;
+  // 边框颜色
+  borderColor?: string;
+  // 边框宽度
+  borderWidth?: number;
 };
 
 /**

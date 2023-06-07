@@ -1,0 +1,16 @@
+{
+  "title": {
+    "zh": "分类",
+    "en": "Category"
+  },
+  "demos": [
+    {
+      "filename": "base.js",
+      "title": {
+        "zh": "客流聚合",
+        "en": "TrafficFlow"
+      },
+      "screenshot": "https://mdn.alipayobjects.com/huamei_iy7sau/afts/img/A*YWGOS6oNsboAAAAAAAAAAAAADruNAQ/original"
+    }
+  ]
+}

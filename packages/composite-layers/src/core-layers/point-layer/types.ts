@@ -8,7 +8,7 @@ export type PointLayerStyleOptions = {
   /**
    * 透明度
    */
-  opacity?: number;
+  opacity?: number | [string, (data: any) => number] | [string, [number, number]];
   /**
    * 描边宽度
    */
@@ -62,7 +62,7 @@ export type AnchorType =
  */
 export type PointTextLayerStyleOptions = {
   /* 透明度 */
-  opacity?: number;
+  opacity?: number | [string, (data: any) => number] | [string, [number, number]];
   /* 文本相对锚点的位置 */
   textAnchor?: AnchorType;
   /* 文本相对锚点的偏移量 */
