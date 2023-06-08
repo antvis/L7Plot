@@ -573,7 +573,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
         } else {
           this.drillStacks.pop();
         }
-        this.emit('drillup', upParams);
+        this.emit('drillup', { nativeEvent: true, ...upParams });
       }
     });
   }
