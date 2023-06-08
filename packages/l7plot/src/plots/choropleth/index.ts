@@ -548,10 +548,9 @@ export class Choropleth extends Plot<ChoroplethOptions> {
 
     // TODO: remove view
     this.changeView(view, config).then((drillData) => {
-      drillData && this.drillStacks.push(drillData);
       if (drillData) {
         this.drillStacks.push(drillData);
-        this.emit('drilldown', downParams);
+        this.emit('drilldown', { nativeEvent: true, ...downParams });
       }
     });
   }
