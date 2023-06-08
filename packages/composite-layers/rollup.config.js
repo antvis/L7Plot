@@ -1,10 +1,9 @@
-import commonjs from '@rollup/plugin-commonjs';
-import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
-import analyze from 'rollup-plugin-analyzer';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
+import analyze from 'rollup-plugin-analyzer';
 import { terser } from 'rollup-plugin-terser';
-import visualizer from 'rollup-plugin-visualizer';
 
 export default {
   input: 'src/index.ts',
@@ -30,8 +29,5 @@ export default {
       limit: 10,
     }),
     filesize(),
-    visualizer({
-      filename: 'dist/umd/stats.html',
-    }),
   ],
 };
