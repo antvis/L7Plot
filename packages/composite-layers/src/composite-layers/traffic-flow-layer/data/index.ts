@@ -1,6 +1,6 @@
 import EventEmitter from '@antv/event-emitter';
 import { createSelector } from 'reselect';
-import { TrafficFlowDataProviderState, TrafficFlowSource } from '../types';
+import { ClusterState, TrafficFlowDataProviderState, TrafficFlowSource } from '../types';
 import { buildIndex } from './build-index';
 import { clusterFlows, clusterLocations } from './cluster';
 import { transformSource } from './transform';
@@ -11,12 +11,12 @@ export class DataProvider extends EventEmitter {
   public getMapZoom = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.mapStatus.zoom;
   public getMapBounds = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.mapStatus.bounds;
   public getClusterType = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.clusterType;
-  public getExtent = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.extent;
-  public getNodeSize = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.nodeSize;
-  public getRadius = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.radius;
+  public getExtent = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.clusterExtent;
+  public getNodeSize = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.clusterNodeSize;
+  public getRadius = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.clusterRadius;
   public getMinZoom = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.minZoom;
   public getMaxZoom = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.maxZoom;
-  public getZoomStep = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.zoomStep;
+  public getZoomStep = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.clusterZoomStep;
   public getMaxTopFlowNum = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.maxTopFlowNum;
 
   /**
@@ -37,8 +37,16 @@ export class DataProvider extends EventEmitter {
     this.getMinZoom,
     this.getMaxZoom,
     this.getZoomStep,
-    (clusterType, extent, nodeSize, radius, minZoom, maxZoom, zoomStep) => {
-      return { clusterType, extent, nodeSize, radius, minZoom, maxZoom, zoomStep };
+    function (
+      clusterType,
+      clusterExtent,
+      clusterNodeSize,
+      clusterRadius,
+      minZoom,
+      maxZoom,
+      clusterZoomStep
+    ): ClusterState {
+      return { clusterType, clusterExtent, clusterNodeSize, clusterRadius, minZoom, maxZoom, clusterZoomStep };
     }
   );
 

@@ -6,13 +6,13 @@ export type ClusterOptions = {
   // 客流点聚合类型
   clusterType: 'HCA';
   // zoom 计算步长
-  zoomStep: number;
+  clusterZoomStep: number;
   // 聚合点像素尺寸
-  nodeSize: number;
+  clusterNodeSize: number;
   // 聚合半径
-  radius: number;
+  clusterRadius: number;
   // 聚合力度
-  extent: number;
+  clusterExtent: number;
 };
 
 export type DisplayOptions = {
@@ -121,21 +121,19 @@ export interface TrafficFlowLayerOptions
     Partial<DisplayOptions> {
   source: TrafficFlowSource;
 
-  locationColor?: PointLayerOptions['color'];
+  color?: PointLayerOptions['color'];
 
-  locationSize?: PointLayerOptions['size'];
+  radius?: PointLayerOptions['size'];
 
-  locationStyle?: PointLayerOptions['style'];
+  style?: PointLayerOptions['style'];
 
-  flowColor?: LineLayerOptions['color'];
+  lineColor?: LineLayerOptions['color'];
 
-  flowSize?: LineLayerOptions['size'];
+  lineSize?: LineLayerOptions['size'];
 
-  flowStyle?: LineLayerOptions['style'];
+  lineStyle?: LineLayerOptions['style'];
   // 是否启用根据权重映射半透明值
-  fadeEnabled?: boolean;
+  fadeOpacityEnabled?: boolean;
   // 半透明的权重
-  fadeAmount?: number;
-
-  opacity?: number;
+  fadeOpacityAmount?: number;
 }

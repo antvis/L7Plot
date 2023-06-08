@@ -52,18 +52,20 @@ scene.on('loaded', async () => {
     });
 
     const initialOptions = {
-      fadeEnabled: true,
-      fadeAmount: 0,
+      fadeOpacityEnabled: true,
+      fadeOpacityAmount: 0,
       maxTopFlowNum: 5000,
       flowColor1: '#2a5674',
       flowColor2: '#d1eeea',
+      visible: true,
     };
 
-    gui.add(initialOptions, 'fadeEnabled');
-    gui.add(initialOptions, 'fadeAmount', 1, 100, 1);
+    gui.add(initialOptions, 'fadeOpacityEnabled');
+    gui.add(initialOptions, 'fadeOpacityAmount', 1, 100, 1);
     gui.add(initialOptions, 'maxTopFlowNum', 1, 10000, 1);
     gui.addColor(initialOptions, 'flowColor1');
     gui.addColor(initialOptions, 'flowColor2');
+    gui.add(initialOptions, 'visible');
 
     gui.onChange(({ object: { flowColor1, flowColor2, ...options } }) => {
       options.flowColor = {

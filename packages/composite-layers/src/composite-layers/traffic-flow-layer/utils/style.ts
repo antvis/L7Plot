@@ -56,7 +56,7 @@ export function getColorAttribute(colorAttr: ColorAttr, weightRange: [number, nu
 export function getOpacityColorAttribute(
   colorAttr: ColorAttr,
   weightRange: [number, number],
-  fadeAmount: number
+  fadeOpacityAmount: number
 ): ColorAttr {
   if (colorAttr instanceof Object && !(colorAttr instanceof Function) && !Array.isArray(colorAttr)) {
     const { field, value } = colorAttr;
@@ -66,7 +66,7 @@ export function getOpacityColorAttribute(
         ...colorAttr,
         value: (attr: any) => {
           const color = d3Color.rgb(value(attr) as string);
-          color.opacity = scaleFunc(attr.weight) / (100 / (100 - fadeAmount));
+          color.opacity = scaleFunc(attr.weight) / (100 / (100 - fadeOpacityAmount));
           return color.formatRgb();
         },
       };

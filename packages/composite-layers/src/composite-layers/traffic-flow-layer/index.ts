@@ -93,18 +93,18 @@ export class TrafficFlowLayer extends CompositeLayer<TrafficFlowLayerOptions> {
     }
     const locationData = this.dataProvider.getFilterLocations(this.options.source, this.dataProviderState);
     const locationWeightRange = this.dataProvider.getLocationWeightRange(this.options.source, this.dataProviderState);
-    const locationSize = getSizeAttribute(this.options.locationSize!, locationWeightRange);
-    const locationColor = getColorAttribute(this.options.locationColor!, locationWeightRange);
+    const locationSize = getSizeAttribute(this.options.radius!, locationWeightRange);
+    const locationColor = getColorAttribute(this.options.color!, locationWeightRange);
     const flowData = this.dataProvider.getFilterFlows(this.options.source, this.dataProviderState);
     const flowWeightRange = this.dataProvider.getFlowWeightRange(this.options.source, this.dataProviderState);
     const filterFlowWeightRange = this.dataProvider.getFilterFlowWeightRange(
       this.options.source,
       this.dataProviderState
     );
-    const flowSize = getSizeAttribute(this.options.flowSize!, flowWeightRange);
-    let flowColor = getColorAttribute(this.options.flowColor!, flowWeightRange);
-    if (this.options.fadeEnabled) {
-      flowColor = getOpacityColorAttribute(flowColor, filterFlowWeightRange, this.options.fadeAmount!);
+    const flowSize = getSizeAttribute(this.options.lineSize!, flowWeightRange);
+    let flowColor = getColorAttribute(this.options.lineColor!, flowWeightRange);
+    if (this.options.fadeOpacityEnabled) {
+      flowColor = getOpacityColorAttribute(flowColor, filterFlowWeightRange, this.options.fadeOpacityAmount!);
     }
     this.locationLayer.update(
       merge({}, this.getLocationLayerOptions(), {
@@ -185,7 +185,7 @@ export class TrafficFlowLayer extends CompositeLayer<TrafficFlowLayerOptions> {
   }
 
   protected getLocationLayerOptions(): PointLayerOptions {
-    const { minZoom, maxZoom, zIndex, opacity, locationStyle } = this.options;
+    const { minZoom, maxZoom, zIndex, visible, blend, pickingBuffer, style = {} } = this.options;
     return {
       source: {
         data: [],
@@ -194,17 +194,19 @@ export class TrafficFlowLayer extends CompositeLayer<TrafficFlowLayerOptions> {
       minZoom,
       maxZoom,
       zIndex,
+      visible,
+      blend,
+      pickingBuffer,
       style: {
         stroke: '#000',
         strokeWidth: 1,
-        ...(locationStyle ?? {}),
-        opacity,
+        ...style,
       },
     };
   }
 
   protected getFlowLayerOptions(): LineLayerOptions {
-    const { minZoom, maxZoom, zIndex, opacity, flowStyle } = this.options;
+    const { minZoom, maxZoom, zIndex, visible, blend, pickingBuffer, lineStyle = {} } = this.options;
     return {
       source: {
         data: [],
@@ -213,11 +215,13 @@ export class TrafficFlowLayer extends CompositeLayer<TrafficFlowLayerOptions> {
       minZoom,
       maxZoom,
       zIndex,
+      visible,
+      blend,
+      pickingBuffer,
       style: {
         borderColor: '#000',
         borderWidth: 1,
-        ...(flowStyle ?? {}),
-        opacity,
+        ...lineStyle,
       },
     };
   }

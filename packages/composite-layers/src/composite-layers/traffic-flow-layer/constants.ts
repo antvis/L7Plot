@@ -13,24 +13,24 @@ export const DEFAULT_OPTIONS: TrafficFlowLayerOptions = {
     },
   },
   clusterType: 'HCA',
-  zoomStep: 1,
-  nodeSize: 64,
-  radius: 40,
-  extent: 512,
+  clusterZoomStep: 1,
+  clusterNodeSize: 64,
+  clusterRadius: 40,
+  clusterExtent: 512,
   maxTopFlowNum: 5000,
-  locationColor: '#fff',
-  locationSize: {
+  color: '#fff',
+  radius: {
     field: 'weight',
     value: [1, 16],
   },
-  flowColor: {
+  lineColor: {
     field: 'weight',
     value: ['#2a5674', '#d1eeea'],
   },
-  flowSize: {
+  lineSize: {
     field: 'weight',
     value: [1, 16],
   },
-  fadeEnabled: true,
-  fadeAmount: 0,
+  fadeOpacityEnabled: true,
+  fadeOpacityAmount: 0,
 };
