@@ -1,6 +1,6 @@
-import { TrafficFlowLayerOptions } from './types';
+import { FlowLayerOptions } from './types';
 
-export const DEFAULT_OPTIONS: TrafficFlowLayerOptions = {
+export const DEFAULT_OPTIONS: FlowLayerOptions = {
   source: {
     data: [],
     parser: {

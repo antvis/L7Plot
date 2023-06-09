@@ -8,13 +8,13 @@ import { CompositeLayer } from '../../core/composite-layer';
 import { ICoreLayer, Scene } from '../../types';
 import { DEFAULT_OPTIONS } from './constants';
 import { DataProvider } from './data';
-import { MapStatus, TrafficFlowDataProviderState, TrafficFlowLayerOptions } from './types';
+import { FlowDataProviderState, FlowLayerOptions, MapStatus } from './types';
 import { getColorAttribute, getOpacityColorAttribute, getSizeAttribute } from './utils';
 
-export class TrafficFlowLayer extends CompositeLayer<TrafficFlowLayerOptions> {
-  constructor(options: TrafficFlowLayerOptions) {
+export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
+  constructor(options: FlowLayerOptions) {
     super({
-      ...TrafficFlowLayer.DefaultOptions,
+      ...FlowLayer.DefaultOptions,
       ...options,
     });
     this.dataProvider = new DataProvider();
@@ -27,7 +27,7 @@ export class TrafficFlowLayer extends CompositeLayer<TrafficFlowLayerOptions> {
   /**
    * 复合图层类型
    */
-  public type = CompositeLayer.LayerType.TrafficFlowLayer;
+  public type = CompositeLayer.LayerType.FlowLayer;
 
   /**
    * 数据计算中心
@@ -37,17 +37,17 @@ export class TrafficFlowLayer extends CompositeLayer<TrafficFlowLayerOptions> {
   /**
    * 数据计算中心状态管理
    */
-  protected dataProviderState!: TrafficFlowDataProviderState;
+  protected dataProviderState!: FlowDataProviderState;
 
   protected get layer() {
     return this.flowLayer;
   }
 
-  protected get locationLayer() {
+  public get locationLayer() {
     return this.subLayers.getLayer('locationLayer')!;
   }
 
-  protected get flowLayer() {
+  public get flowLayer() {
     return this.subLayers.getLayer('flowLayer')!;
   }
 
@@ -81,7 +81,7 @@ export class TrafficFlowLayer extends CompositeLayer<TrafficFlowLayerOptions> {
     this.scene?.off('mapmove', this.onMapChange);
   }
 
-  public update(options: Partial<TrafficFlowLayerOptions>) {
+  public update(options: Partial<FlowLayerOptions>) {
     super.update(options);
     this.updateClusterState();
   }
@@ -137,8 +137,6 @@ export class TrafficFlowLayer extends CompositeLayer<TrafficFlowLayerOptions> {
         color: flowColor,
       })
     );
-
-    console.log(this.flowLayer.options);
   }
 
   protected onMapChange = debounce(
@@ -161,7 +159,7 @@ export class TrafficFlowLayer extends CompositeLayer<TrafficFlowLayerOptions> {
     const minZoom = scene.getMinZoom();
 
     this.dataProviderState = {
-      ...(this.options as Required<TrafficFlowLayerOptions>),
+      ...(this.options as Required<FlowLayerOptions>),
       mapStatus: this.updateMapStatus(),
       maxZoom,
       minZoom,

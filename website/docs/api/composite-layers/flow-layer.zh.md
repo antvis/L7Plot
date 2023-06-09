@@ -1,11 +1,11 @@
 ---
-title: 客流聚合图层 - TrafficFlowLayer
+title: 客流聚合图层 - FlowLayer
 order: 4
 ---
 
 <Badge type="info" color="cyan" text="Composite Layer">Composite Layer</Bdage>
 
-`TrafficFlowLayer` 用于大数据量下，在地图不同层级下聚合展示客流的走向和权值信息。
+`FlowLayer` 用于大数据量下，在地图不同层级下聚合展示客流的走向和权值信息。
 
 ## 一、配置
 

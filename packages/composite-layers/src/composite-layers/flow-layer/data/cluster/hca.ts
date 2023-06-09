@@ -1,5 +1,5 @@
 import KDBush from 'kdbush';
-import { ClusterLevel, ClusterLocation, ClusterLocationKDBush, ClusterState, TrafficLocation } from '../../types';
+import { ClusterLevel, ClusterLocation, ClusterLocationKDBush, ClusterState, OriginLocation } from '../../types';
 import { getLocationId } from '../../utils';
 import { latY, lngX, xLng, yLat } from '../transform';
 
@@ -103,7 +103,7 @@ function getNextClusters(
  * @param state
  * @returns
  */
-export function clusterByHCA(locations: TrafficLocation[], state: ClusterState) {
+export function clusterByHCA(locations: OriginLocation[], state: ClusterState) {
   const { minZoom, maxZoom, clusterZoomStep, clusterNodeSize } = state;
   const trees: (ClusterLocationKDBush | undefined)[] = [];
   let clusters: ClusterLocation[] = locations

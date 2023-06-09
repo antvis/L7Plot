@@ -45,7 +45,7 @@ export type ClusterLevel = {
   zoom: number;
 };
 
-export type TrafficLocation = {
+export type OriginLocation = {
   // 客流点 id
   id: string;
   // 经度
@@ -56,7 +56,7 @@ export type TrafficLocation = {
   weight: number;
 };
 
-export type TrafficFlow = {
+export type OriginFlow = {
   // 客流线 id
   id: string;
   // 起点 id
@@ -67,7 +67,7 @@ export type TrafficFlow = {
   weight: number;
 };
 
-export type ClusterLocation = TrafficLocation & {
+export type ClusterLocation = OriginLocation & {
   // 客流点在 tree 中的 x
   x: number;
   // 客流点在 tree 中的 y
@@ -80,7 +80,7 @@ export type ClusterLocation = TrafficLocation & {
   childIds?: string[];
 };
 
-export type ClusterFlow = TrafficFlow & {
+export type ClusterFlow = OriginFlow & {
   // 起/终点的经/纬度
   fromLng: number;
   fromLat: number;
@@ -88,19 +88,19 @@ export type ClusterFlow = TrafficFlow & {
   toLat: number;
 };
 
-export type OriginTrafficData = {
-  locations: TrafficLocation[];
-  flows: TrafficFlow[];
+export type OriginData = {
+  locations: OriginLocation[];
+  flows: OriginFlow[];
 };
 
-export type TrafficFlowDataProviderState = ClusterOptions &
+export type FlowDataProviderState = ClusterOptions &
   DisplayOptions & {
     maxZoom: number;
     minZoom: number;
     mapStatus: MapStatus;
   };
 
-export type TrafficFlowParser = {
+export type FlowParser = {
   type: 'json';
   x: string;
   y: string;
@@ -109,17 +109,14 @@ export type TrafficFlowParser = {
   weight: string;
 };
 
-export type TrafficFlowSource = {
+export type FlowSource = {
   data: any[];
 
-  parser: TrafficFlowParser;
+  parser: FlowParser;
 };
 
-export interface TrafficFlowLayerOptions
-  extends CompositeLayerOptions,
-    Partial<ClusterOptions>,
-    Partial<DisplayOptions> {
-  source: TrafficFlowSource;
+export interface FlowLayerOptions extends CompositeLayerOptions, Partial<ClusterOptions>, Partial<DisplayOptions> {
+  source: FlowSource;
 
   color?: PointLayerOptions['color'];
 

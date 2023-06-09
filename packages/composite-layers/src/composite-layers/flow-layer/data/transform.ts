@@ -1,5 +1,5 @@
 import { get } from '@antv/util';
-import { OriginTrafficData, TrafficFlow, TrafficFlowSource, TrafficLocation } from '../types';
+import { FlowSource, OriginData, OriginFlow, OriginLocation } from '../types';
 import { getFlowId, getLocationId } from '../utils/id';
 
 export function xLng(x: number) {
@@ -22,9 +22,9 @@ export function latY(lat: number) {
   return y < 0 ? 0 : y > 1 ? 1 : y;
 }
 
-export function transformSource(source: TrafficFlowSource): OriginTrafficData {
-  const locationMap: Map<string, TrafficLocation> = new Map();
-  const flows: TrafficFlow[] = [];
+export function transformSource(source: FlowSource): OriginData {
+  const locationMap: Map<string, OriginLocation> = new Map();
+  const flows: OriginFlow[] = [];
   const { data, parser } = source;
   const { type, x: xField, y: yField, x1: x1Field, y1: y1Field, weight: weightField } = parser;
 
@@ -61,7 +61,7 @@ export function transformSource(source: TrafficFlowSource): OriginTrafficData {
       });
     });
   } else {
-    console.error('TrafficFlowLayer 的 source 输入有误，请检查 source 传参');
+    console.error('FlowLayer 的 source 输入有误，请检查 source 传参');
   }
 
   return {

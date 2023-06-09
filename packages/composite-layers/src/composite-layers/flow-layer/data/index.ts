@@ -1,28 +1,28 @@
 import EventEmitter from '@antv/event-emitter';
 import { createSelector } from 'reselect';
-import { ClusterState, TrafficFlowDataProviderState, TrafficFlowSource } from '../types';
+import { ClusterState, FlowDataProviderState, FlowSource } from '../types';
 import { buildIndex } from './build-index';
 import { clusterFlows, clusterLocations } from './cluster';
 import { transformSource } from './transform';
 
 export class DataProvider extends EventEmitter {
-  public getSourceData = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => source.data;
-  public getSourceParser = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => source.parser;
-  public getMapZoom = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.mapStatus.zoom;
-  public getMapBounds = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.mapStatus.bounds;
-  public getClusterType = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.clusterType;
-  public getExtent = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.clusterExtent;
-  public getNodeSize = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.clusterNodeSize;
-  public getRadius = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.clusterRadius;
-  public getMinZoom = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.minZoom;
-  public getMaxZoom = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.maxZoom;
-  public getZoomStep = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.clusterZoomStep;
-  public getMaxTopFlowNum = (source: TrafficFlowSource, config: TrafficFlowDataProviderState) => config.maxTopFlowNum;
+  public getSourceData = (source: FlowSource, config: FlowDataProviderState) => source.data;
+  public getSourceParser = (source: FlowSource, config: FlowDataProviderState) => source.parser;
+  public getMapZoom = (source: FlowSource, config: FlowDataProviderState) => config.mapStatus.zoom;
+  public getMapBounds = (source: FlowSource, config: FlowDataProviderState) => config.mapStatus.bounds;
+  public getClusterType = (source: FlowSource, config: FlowDataProviderState) => config.clusterType;
+  public getExtent = (source: FlowSource, config: FlowDataProviderState) => config.clusterExtent;
+  public getNodeSize = (source: FlowSource, config: FlowDataProviderState) => config.clusterNodeSize;
+  public getRadius = (source: FlowSource, config: FlowDataProviderState) => config.clusterRadius;
+  public getMinZoom = (source: FlowSource, config: FlowDataProviderState) => config.minZoom;
+  public getMaxZoom = (source: FlowSource, config: FlowDataProviderState) => config.maxZoom;
+  public getZoomStep = (source: FlowSource, config: FlowDataProviderState) => config.clusterZoomStep;
+  public getMaxTopFlowNum = (source: FlowSource, config: FlowDataProviderState) => config.maxTopFlowNum;
 
   /**
    * 将 source 转换成最底层的客流点/线数据
    */
-  public getTrafficOriginData = createSelector(this.getSourceData, this.getSourceParser, (data, parser) => {
+  public getOriginData = createSelector(this.getSourceData, this.getSourceParser, (data, parser) => {
     return transformSource({ data, parser });
   });
 
@@ -54,7 +54,7 @@ export class DataProvider extends EventEmitter {
    * 获取各个层级下的聚合点数组
    */
   public getClusterLevels = createSelector(
-    this.getTrafficOriginData,
+    this.getOriginData,
     this.getClusterOptions,
     ({ locations }, clusterOptions) => {
       return clusterLocations(locations, clusterOptions);
@@ -98,7 +98,7 @@ export class DataProvider extends EventEmitter {
    */
   public getAggregatedFlows = createSelector(
     this.getClusterIndex,
-    this.getTrafficOriginData,
+    this.getOriginData,
     this.getMapZoom,
     (clusterIndex, { flows: originFlows }, zoom) => {
       return clusterFlows(originFlows, clusterIndex, zoom);

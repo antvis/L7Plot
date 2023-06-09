@@ -1,4 +1,4 @@
-import { ClusterFlow, TrafficFlow } from '../../types';
+import { ClusterFlow, OriginFlow } from '../../types';
 import { buildIndex } from '../build-index';
 
 /**
@@ -9,7 +9,7 @@ import { buildIndex } from '../build-index';
  * @returns
  */
 export function clusterFlows(
-  originFlows: TrafficFlow[],
+  originFlows: OriginFlow[],
   clusterIndex: ReturnType<typeof buildIndex>,
   zoom: number
 ): ClusterFlow[] {

@@ -6,5 +6,5 @@ export enum CompositeLayerType {
   ChoroplethLayer = 'choroplethLayer',
   IconImageLayer = 'iconImageLayer',
   IconFontLayer = 'iconFontLayer',
-  TrafficFlowLayer = 'TrafficFlowLayer',
+  FlowLayer = 'flowLayer',
 }
