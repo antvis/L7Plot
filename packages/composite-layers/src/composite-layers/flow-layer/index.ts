@@ -32,12 +32,12 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
   /**
    * 数据计算中心
    */
-  protected dataProvider = new DataProvider();
+  public dataProvider = new DataProvider();
 
   /**
    * 数据计算中心状态管理
    */
-  protected dataProviderState!: FlowDataProviderState;
+  public dataProviderState!: FlowDataProviderState;
 
   protected get layer() {
     return this.flowLayer;
