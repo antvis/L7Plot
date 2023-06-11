@@ -1,5 +1,4 @@
-import { merge } from 'lodash';
-import { debounce } from 'lodash-es';
+import { debounce, merge } from 'lodash-es';
 import { LineLayer } from '../../core-layers/line-layer';
 import { LineLayerOptions } from '../../core-layers/line-layer/types';
 import { PointLayer } from '../../core-layers/point-layer';

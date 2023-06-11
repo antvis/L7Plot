@@ -7,7 +7,7 @@ export { ChoroplethLayer } from './composite-layers/choropleth-layer';
 export * from './composite-layers/choropleth-layer/types';
 // 客流聚合图层及类型定义 | author by [heiyexing]](https://github.com/heiyexing)
 export { FlowLayer } from './composite-layers/flow-layer';
-export * from './composite-layers/flow-layer/types';
+export { FlowLayerOptions } from './composite-layers/flow-layer/types';
 // 标注图层及类型定义 | author by [lzxue]](https://github.com/lzxue)
 export { IconFontLayer, IconImageLayer } from './composite-layers/icon-layer';
 export * from './composite-layers/icon-layer/types';

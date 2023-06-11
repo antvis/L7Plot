@@ -3,85 +3,139 @@ import { PointLayerOptions } from '../../../core-layers/point-layer/types';
 import { CompositeLayerOptions } from '../../../core/composite-layer';
 
 export type ClusterOptions = {
-  // 客流点聚合类型
+  /**
+   * 客流点聚合类型
+   */
   clusterType: 'HCA';
-  // zoom 计算步长
+  /**
+   * zoom 计算步长
+   */
   clusterZoomStep: number;
-  // 聚合点像素尺寸
+  /**
+   * 聚合点像素尺寸
+   */
   clusterNodeSize: number;
-  // 聚合半径
+  /**
+   * 聚合半径
+   */
   clusterRadius: number;
-  // 聚合力度
+  /**
+   * 聚合力度
+   */
   clusterExtent: number;
 };
 
 export type DisplayOptions = {
-  // 最大展示的客流线条数
+  /**
+   * 最大展示的客流线条数
+   */
   maxTopFlowNum: number;
 };
 
 export type ClusterState = ClusterOptions & {
-  // Scene 设置的最小 zoom
+  /**
+   * Scene 设置的最小 zoom
+   */
   minZoom: number;
-  // Scene 设置的最大 zoom
+  /**
+   * Scene 设置的最大 zoom
+   */
   maxZoom: number;
 };
 
 export type MapStatus = {
-  // 当前地图所在 Scene
+  /**
+   * 当前地图所在 Scene
+   */
   zoom: number;
-  // 当前地图所展示的区域 bbox
+  /**
+   * 当前地图所展示的区域 bbox
+   */
   bounds: [number, number, number, number];
 };
 
 export type ClusterLocationKDBush = KDBush<ClusterLocation>;
 
 export type ClusterLevel = {
-  // 所在层级下的聚合点
+  /**
+   * 所在层级下的聚合点
+   */
   locations: ClusterLocation[];
-  // 所在层级下聚合点的查询树
+  /**
+   * 所在层级下聚合点的查询树
+   */
   locationTree: ClusterLocationKDBush;
-  // 所在层级数值
+  /**
+   * 所在层级数值
+   */
   zoom: number;
 };
 
 export type OriginLocation = {
-  // 客流点 id
+  /**
+   * 客流点 id
+   */
   id: string;
-  // 经度
+  /**
+   * 经度
+   */
   lng: number;
-  // 维度
+  /**
+   * 维度
+   */
   lat: number;
-  // 权重
+  /**
+   * 权重
+   */
   weight: number;
 };
 
 export type OriginFlow = {
-  // 客流线 id
+  /**
+   * 客流线 id
+   */
   id: string;
-  // 起点 id
+  /**
+   * 起点 id
+   */
   fromId: string;
-  // 终点 id
+  /**
+   * 终点 id
+   */
   toId: string;
-  // 权重
+  /**
+   * 权重
+   */
   weight: number;
 };
 
 export type ClusterLocation = OriginLocation & {
-  // 客流点在 tree 中的 x
+  /**
+   * 客流点在 tree 中的 x
+   */
   x: number;
-  // 客流点在 tree 中的 y
+  /**
+   * 客流点在 tree 中的 y
+   */
   y: number;
-  // 客流点最后出现的 zoom
+  /**
+   * 客流点最后出现的 zoom
+   */
   zoom: number;
-  // 当前节点的父节点
+  /**
+   * 当前节点的父节点
+   */
   parentId?: string;
-  // 当前聚合节点的子节点
+  /**
+   * 当前聚合节点的子节点
+   */
   childIds?: string[];
 };
 
 export type ClusterFlow = OriginFlow & {
-  // 起/终点的经/纬度
+  /**
+   * 起/终点的经/纬度
+   */
   fromLng: number;
   fromLat: number;
   toLng: number;
@@ -129,8 +183,12 @@ export interface FlowLayerOptions extends CompositeLayerOptions, Partial<Cluster
   lineSize?: LineLayerOptions['size'];
 
   lineStyle?: LineLayerOptions['style'];
-  // 是否启用根据权重映射半透明值
+  /**
+   * 是否启用根据权重映射半透明值
+   */
   fadeOpacityEnabled?: boolean;
-  // 半透明的权重
+  /**
+   * 半透明的权重
+   */
   fadeOpacityAmount?: number;
 }
