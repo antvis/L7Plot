@@ -164,7 +164,7 @@ export type FlowParser = {
 };
 
 export type FlowSource = {
-  data: any[];
+  data: Record<string, any>[];
 
   parser: FlowParser;
 };
