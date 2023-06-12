@@ -241,7 +241,7 @@ order: 4
 
 `string|LineColorStyleAttribute|Function` optional default: `'#5FD3A6'`
 
-客流点填充颜色。
+客流线填充颜色。
 
 ```js
 {
