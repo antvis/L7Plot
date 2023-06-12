@@ -49,10 +49,20 @@ const dataProviderState: FlowDataProviderState = {
   minZoom: 0,
 };
 
+const layerOptions = {
+  source: flowSource,
+  color: {
+    field: 'weight',
+    value: ['#f00', '#0f0'],
+  },
+  radius: {
+    field: 'weight',
+    value: [1, 20],
+  },
+};
+
 describe('flow layer', () => {
-  const layer = new FlowLayer({
-    source: flowSource,
-  });
+  const layer = new FlowLayer(layerOptions);
 
   const dataProvider = new DataProvider();
 
@@ -63,6 +73,7 @@ describe('flow layer', () => {
 
   it('data', () => {
     expect(dataProvider.getClusterLevels(flowSource, dataProviderState).length).toBe(10);
+    expect(dataProvider.getFilterLocations(flowSource, dataProviderState).length).toBe(7);
     expect(dataProvider.getFilterFlows(flowSource, dataProviderState).length).toBe(4);
   });
 });
