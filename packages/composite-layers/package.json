@@ -54,8 +54,7 @@
     "@types/d3-color": "^3.1.0",
     "@types/d3-scale": "^3.0.0",
     "@types/kdbush": "^3.0.2",
-    "@types/lodash-es": "^4.17.7",
-    "babel-jest": "^29.5.0"
+    "@types/lodash-es": "^4.17.7"
   },
   "peerDependencies": {
     "@antv/l7": "^2.11.5"
