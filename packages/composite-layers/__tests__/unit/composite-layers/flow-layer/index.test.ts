@@ -1,6 +1,6 @@
 import { FlowLayer } from '../../../../src/composite-layers/flow-layer';
 import { DataProvider } from '../../../../src/composite-layers/flow-layer/data';
-import { FlowDataProviderState, FlowSource } from '../../../../src/composite-layers/flow-layer/types';
+import { FlowDataProviderState, FlowLayerOptions, FlowSource } from '../../../../src/composite-layers/flow-layer/types';
 
 const flowSource: FlowSource = {
   data: [
@@ -49,16 +49,22 @@ const dataProviderState: FlowDataProviderState = {
   minZoom: 0,
 };
 
-const layerOptions = {
+const layerOptions: FlowLayerOptions = {
   source: flowSource,
-  color: {
+  circleColor: {
     field: 'weight',
     value: ['#f00', '#0f0'],
   },
-  radius: {
+  circleRadius: {
     field: 'weight',
     value: [1, 20],
   },
+  circleOpacity: 0.5,
+  circleStrokeWidth: 2,
+  circleStrokeColor: '#f00',
+  lineWidth: 3,
+  lineColor: '#00f',
+  lineOpacity: 0.7,
 };
 
 describe('flow layer', () => {
@@ -75,5 +81,15 @@ describe('flow layer', () => {
     expect(dataProvider.getClusterLevels(flowSource, dataProviderState).length).toBe(10);
     expect(dataProvider.getFilterLocations(flowSource, dataProviderState).length).toBe(7);
     expect(dataProvider.getFilterFlows(flowSource, dataProviderState).length).toBe(4);
+  });
+
+  it('style', () => {
+    expect(layer.circleLayer.options['style'].opacity).toBe(0.5);
+    expect(layer.circleLayer.options['style'].strokeWidth).toBe(2);
+    expect(layer.circleLayer.options['style'].stroke).toBe('#f00');
+
+    expect(layer.lineLayer.options['style'].opacity).toBe(0.7);
+    expect(layer.lineLayer.options['color']).toBe('#00f');
+    expect(layer.lineLayer.options['size']).toBe(3);
   });
 });

@@ -141,6 +141,8 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
       visible,
       blend,
       pickingBuffer,
+      circleColor,
+      circleRadius,
       circleStrokeColor: stroke,
       circleStrokeWidth: strokeWidth,
       circleOpacity: opacity,
@@ -149,6 +151,8 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
       source: {
         data: [],
       },
+      color: circleColor,
+      size: circleRadius,
       shape: 'circle',
       minZoom,
       maxZoom,
@@ -185,11 +189,23 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
   }
 
   protected getLineLayerOptions(): LineLayerOptions {
-    const { minZoom, maxZoom, zIndex, visible, blend, pickingBuffer, lineOpacity: opacity } = this.options;
+    const {
+      minZoom,
+      maxZoom,
+      zIndex,
+      visible,
+      blend,
+      pickingBuffer,
+      lineColor,
+      lineWidth,
+      lineOpacity: opacity,
+    } = this.options;
     let options: LineLayerOptions = {
       source: {
         data: [],
       },
+      color: lineColor,
+      size: lineWidth,
       shape: 'halfLine',
       minZoom,
       maxZoom,
