@@ -513,6 +513,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     const from = this.drillStacks[lastIndex];
     const to = this.drillStacks[lastIndex - 1];
     const upParams = {
+      nativeEvent: true,
       from: { level: from.level, adcode: from.adcode, granularity: from.granularity },
       to: { level: to.level, adcode: to.adcode, granularity: to.granularity },
     };
@@ -562,6 +563,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
 
     const from = this.drillStacks[this.drillStacks.length - 1];
     const upParams = {
+      nativeEvent: false,
       from: { level: from.level, adcode: from.adcode, granularity: from.granularity },
       to: { level: view.level, adcode: view.adcode, granularity: view.granularity },
     };
@@ -573,7 +575,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
         } else {
           this.drillStacks.pop();
         }
-        this.emit('drillup', { nativeEvent: true, ...upParams });
+        this.emit('drillup', upParams);
       }
     });
   }
