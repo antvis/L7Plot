@@ -477,6 +477,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     const { level, granularity = DEFAULT_AREA_GRANULARITY[level], ...drillConfig } = this.drillSteps[depth];
 
     const downParams = {
+      nativeEvent: true,
       from: { level: from.level, adcode: from.adcode, granularity: from.granularity },
       to: { level, adcode, granularity, properties },
     };
@@ -539,9 +540,20 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    * 向下钻取方法
    */
   public drillDown(view: ViewLevel, config: DrillStepConfig = {}) {
+    const from = this.drillStacks.slice(-1)[0];
+    const { level, adcode, granularity } = view;
+    const downParams = {
+      nativeEvent: false,
+      from: { level: from.level, adcode: from.adcode, granularity: from.granularity },
+      to: { level, adcode, granularity },
+    };
+
     // TODO: remove view
     this.changeView(view, config).then((drillData) => {
-      drillData && this.drillStacks.push(drillData);
+      if (drillData) {
+        this.drillStacks.push(drillData);
+        this.emit('drilldown', downParams);
+      }
     });
   }
 
