@@ -18,16 +18,18 @@ export const DEFAULT_OPTIONS: FlowLayerOptions = {
   clusterRadius: 40,
   clusterExtent: 512,
   maxTopFlowNum: 5000,
-  color: '#fff',
-  radius: {
+  circleColor: '#fff',
+  circleRadius: {
     field: 'weight',
     value: [1, 16],
   },
+  circleStrokeColor: '#000',
+  circleStrokeWidth: 1,
   lineColor: {
     field: 'weight',
     value: ['#2a5674', '#d1eeea'],
   },
-  lineSize: {
+  lineWidth: {
     field: 'weight',
     value: [1, 16],
   },

@@ -3,7 +3,7 @@ title: 客流聚合图层 - FlowLayer
 order: 4
 ---
 
-<Badge type="info" color="cyan" text="Composite Layer">Composite Layer</Bdage>
+<Badge type="info" circleColor="cyan" text="Composite Layer">Composite Layer</Bdage>
 
 `FlowLayer` 用于大数据量下，在地图不同层级下聚合展示客流的走向和权值信息。
 
@@ -42,19 +42,19 @@ order: 4
 }
 ```
 
-### `options.`radius
+### `options.`circleRadius
 
-`number|SizeStyleAttribute|Function` optional
+`number|SizeStyleAttribute|Function` optional default: `{ field: 'weight', value: [1, 16] }`
 
 客流点半径大小
 
 ```js
 {
-  radius: 12;
+  circleRadius: 12;
 }
 ```
 
-#### `radius.`field
+#### `circleRadius.`field
 
 `string` optional
 
@@ -62,14 +62,14 @@ order: 4
 
 ```js
 {
-  radius: {
+  circleRadius: {
     field: 'weight',
     value: [1, 16]
   }
 }
 ```
 
-#### `radius.`value
+#### `circleRadius.`value
 
 `number|number[]|Function` optional
 
@@ -77,7 +77,7 @@ order: 4
 
 ```js
 {
-  radius: {
+  circleRadius: {
     field: 'weight',
     value: ({ weight }) => {
       return t > 20 ? 15 : 12
@@ -86,13 +86,13 @@ order: 4
 }
 ```
 
-#### `radius.`scale
+#### `circleRadius.`scale
 
 <embed src="@/docs/common/attribute/scale.zh.md"></embed>
 
 ```js
 {
-  radius: {
+  circleRadius: {
     field: 'weight',
     value: [12, 15],
     scale: { type: 'quantile' },
@@ -100,19 +100,19 @@ order: 4
 }
 ```
 
-### `options.`color
+### `options.`circleColor
 
-`string|ColorStyleAttribute|Function` optional default: `'#5FD3A6'`
+`string|ColorStyleAttribute|Function` optional default: `'#fff'`
 
 客流点填充颜色。
 
 ```js
 {
-  color: 'red';
+  circleColor: 'red';
 }
 ```
 
-#### `color.`field
+#### `circleColor.`field
 
 `string` optional
 
@@ -120,13 +120,13 @@ order: 4
 
 ```js
 {
-  color: {
+  circleColor: {
     field: 'weight';
   }
 }
 ```
 
-#### `color.`value
+#### `circleColor.`value
 
 `string|string[]|Function` optional
 
@@ -134,7 +134,7 @@ order: 4
 
 ```js
 {
-  color: {
+  circleColor: {
     field: 'weight',
     value: ({ weight }) => {
       return weight > 20 ? 'red': 'blue'
@@ -143,13 +143,13 @@ order: 4
 }
 ```
 
-#### `color.`scale
+#### `circleColor.`scale
 
 <embed src="@/docs/common/attribute/scale.zh.md"></embed>
 
 ```js
 {
-  color: {
+  circleColor: {
     field: 'weight',
     value: ['#B8E1FF', '#001D70'],
     scale: { type: 'linear' }
@@ -157,7 +157,41 @@ order: 4
 }
 ```
 
-<embed src="@/docs/common/base-layers/point-layer/style.zh.md"></embed>
+### `options.`circleOpacity
+
+`number|[string, (data: any) => number]` optional
+
+客流点透明度
+
+```js
+{
+  circleOpacity: 0.5;
+}
+```
+
+### `options.`circleStrokeColor
+
+`string` optional default: `'#000'`
+
+客流点透明度
+
+```js
+{
+  circleStrokeColor: '#000';
+}
+```
+
+### `options.`circleStrokeWidth
+
+`number` optional default: `1`
+
+客流点透明度
+
+```js
+{
+  circleStrokeWidth: 1;
+}
+```
 
 ### `options.`lineWidth
 
@@ -294,29 +328,15 @@ order: 4
 }
 ```
 
-### options.lineStyle
+### `options.`lineOpacity
 
-`LineLayerStyleOptions` optional
+`number` optional
 
-客流线样式，LineLayerStyleOptions 配置如下：
-
-| 属性        | 描述                   | 类型               | 默认值  | 是否必填 |
-| ----------- | ---------------------- | ------------------ | ------- | -------- |
-| opacity     | 透明度                 | `number`           | `1`     | optional |
-| lineType    | 线类型，支持实线与虚线 | `‘solid’｜'dash'`  | ‘solid’ | optional |
-| dashArray   | 虚线间隔               | `[number, number]` |         | optional |
-| sourceColor | 渐变起点颜色           | `string`           |         | optional |
-| targetColor | 渐变终点颜色           | `string`           |         | optional |
-
-> dashArray: 虚线间隔，第一个值为虚线每个分段的长度，第二个值为分段间隔的距离。dashArray 设为 `[0,0]` 的效果为没有虚线。
+客流点透明度
 
 ```js
 {
-  style: {
-    opacity: 0.8,
-    lineType: 'dash',
-    dashArray: [2, 2],
-  }
+  lineOpacity: 0.5;
 }
 ```
 

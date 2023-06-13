@@ -1,5 +1,5 @@
-import { LineLayerOptions } from '../../../core-layers/line-layer/types';
-import { PointLayerOptions } from '../../../core-layers/point-layer/types';
+import { LineLayerOptions, LineLayerStyleOptions } from '../../../core-layers/line-layer/types';
+import { PointLayerOptions, PointLayerStyleOptions } from '../../../core-layers/point-layer/types';
 import { CompositeLayerOptions } from '../../../core/composite-layer';
 
 export type ClusterOptions = {
@@ -170,19 +170,56 @@ export type FlowSource = {
 };
 
 export interface FlowLayerOptions extends CompositeLayerOptions, Partial<ClusterOptions>, Partial<DisplayOptions> {
+  /**
+   * 客流数据 Source
+   */
   source: FlowSource;
 
-  color?: PointLayerOptions['color'];
+  /**
+   * 客流点填充颜色
+   * @default '#fff'
+   */
+  circleColor?: PointLayerOptions['color'];
 
-  radius?: PointLayerOptions['size'];
+  /**
+   * 客流点大小
+   * @default { field: 'weight', value: [1, 16] }
+   */
+  circleRadius?: PointLayerOptions['size'];
 
-  style?: PointLayerOptions['style'];
+  /**
+   * 客流点透明度
+   */
+  circleOpacity?: PointLayerStyleOptions['opacity'];
 
+  /**
+   * 客流点边框颜色
+   * @default '#000'
+   */
+  circleStrokeColor?: PointLayerStyleOptions['stroke'];
+
+  /**
+   * 客流点边框宽度
+   * @default 1
+   */
+  circleStrokeWidth?: PointLayerStyleOptions['strokeWidth'];
+
+  /**
+   * 客流线填充颜色
+   * @default { field: 'weight', value: ['#2a5674', '#d1eeea'] }
+   */
   lineColor?: LineLayerOptions['color'];
 
-  lineSize?: LineLayerOptions['size'];
+  /**
+   * 客流线宽度
+   * @default { field: 'weight', value: [1, 16] }
+   */
+  lineWidth?: LineLayerOptions['size'];
 
-  lineStyle?: LineLayerOptions['style'];
+  /**
+   * 客流透明度
+   */
+  lineOpacity?: LineLayerStyleOptions['opacity'];
   /**
    * 是否启用根据权重映射半透明值
    */

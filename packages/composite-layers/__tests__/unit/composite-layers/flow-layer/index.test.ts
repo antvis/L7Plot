@@ -67,8 +67,8 @@ describe('flow layer', () => {
   const dataProvider = new DataProvider();
 
   it('layer', () => {
-    expect(layer.locationLayer.type).toBe('pointLayer');
-    expect(layer.flowLayer.type).toBe('lineLayer');
+    expect(layer.circleLayer.type).toBe('pointLayer');
+    expect(layer.lineLayer.type).toBe('lineLayer');
   });
 
   it('data', () => {

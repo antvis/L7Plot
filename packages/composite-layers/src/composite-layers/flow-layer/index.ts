@@ -17,7 +17,6 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
       ...options,
     });
     this.dataProvider = new DataProvider();
-    this.updateClusterState();
   }
   /**
    * 默认配置项
@@ -31,7 +30,7 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
   /**
    * 数据计算中心
    */
-  public dataProvider = new DataProvider();
+  public dataProvider: DataProvider | undefined;
 
   /**
    * 数据计算中心状态管理
@@ -39,39 +38,40 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
   public dataProviderState!: FlowDataProviderState;
 
   protected get layer() {
-    return this.flowLayer;
+    return this.lineLayer;
   }
 
-  public get locationLayer() {
-    return this.subLayers.getLayer('locationLayer')!;
+  public get circleLayer() {
+    return this.subLayers.getLayer('circleLayer')!;
   }
 
-  public get flowLayer() {
-    return this.subLayers.getLayer('flowLayer')!;
+  public get lineLayer() {
+    return this.subLayers.getLayer('lineLayer')!;
   }
 
   protected createSubLayers(): ICoreLayer[] {
     const locationLayer = new PointLayer({
-      ...this.getLocationLayerOptions(),
-      id: 'locationLayer',
-      name: 'locationLayer',
+      ...this.getCircleLayerOptions(),
+      id: 'circleLayer',
+      name: 'circleLayer',
     });
 
     const flowLayer = new LineLayer({
-      ...this.getFlowLayerOptions(),
-      id: 'flowLayer',
-      name: 'flowLayer',
+      ...this.getLineLayerOptions(),
+      id: 'lineLayer',
+      name: 'lineLayer',
     });
 
     return [flowLayer, locationLayer];
   }
 
   public addTo(scene: Scene) {
+    this.scene = scene;
+    this.updateClusterState();
+    this.updateSubLayers();
     super.addTo(scene);
     this.scene?.on('zoomchange', this.onMapChange);
     this.scene?.on('mapmove', this.onMapChange);
-    this.updateClusterState();
-    this.updateSubLayers();
   }
 
   public remove() {
@@ -86,56 +86,8 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
   }
 
   protected updateSubLayers() {
-    const scene = this.scene;
-    if (!scene) {
-      return;
-    }
-    const locationData = this.dataProvider.getFilterLocations(this.options.source, this.dataProviderState);
-    const locationWeightRange = this.dataProvider.getLocationWeightRange(this.options.source, this.dataProviderState);
-    const locationSize = getSizeAttribute(this.options.radius!, locationWeightRange);
-    const locationColor = getColorAttribute(this.options.color!, locationWeightRange);
-    const flowData = this.dataProvider.getFilterFlows(this.options.source, this.dataProviderState);
-    const flowWeightRange = this.dataProvider.getFlowWeightRange(this.options.source, this.dataProviderState);
-    const filterFlowWeightRange = this.dataProvider.getFilterFlowWeightRange(
-      this.options.source,
-      this.dataProviderState
-    );
-    const flowSize = getSizeAttribute(this.options.lineSize!, flowWeightRange);
-    let flowColor = getColorAttribute(this.options.lineColor!, flowWeightRange);
-    if (this.options.fadeOpacityEnabled) {
-      flowColor = getOpacityColorAttribute(flowColor, filterFlowWeightRange, this.options.fadeOpacityAmount!);
-    }
-    this.locationLayer.update(
-      merge({}, this.getLocationLayerOptions(), {
-        source: {
-          data: locationData,
-          parser: {
-            type: 'json',
-            x: 'lng',
-            y: 'lat',
-          },
-        },
-        size: locationSize,
-        color: locationColor,
-      })
-    );
-
-    this.flowLayer.update(
-      merge({}, this.getFlowLayerOptions(), {
-        source: {
-          data: flowData,
-          parser: {
-            type: 'json',
-            x: 'fromLng',
-            y: 'fromLat',
-            x1: 'toLng',
-            y1: 'toLat',
-          },
-        },
-        size: flowSize,
-        color: flowColor,
-      })
-    );
+    this.circleLayer.update(this.getCircleLayerOptions());
+    this.lineLayer.update(this.getLineLayerOptions());
   }
 
   protected onMapChange = debounce(
@@ -181,9 +133,19 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
     return mapStatus;
   }
 
-  protected getLocationLayerOptions(): PointLayerOptions {
-    const { minZoom, maxZoom, zIndex, visible, blend, pickingBuffer, style = {} } = this.options;
-    return {
+  protected getCircleLayerOptions(): PointLayerOptions {
+    const {
+      minZoom,
+      maxZoom,
+      zIndex,
+      visible,
+      blend,
+      pickingBuffer,
+      circleStrokeColor: stroke,
+      circleStrokeWidth: strokeWidth,
+      circleOpacity: opacity,
+    } = this.options;
+    let options: PointLayerOptions = {
       source: {
         data: [],
       },
@@ -195,16 +157,36 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
       blend,
       pickingBuffer,
       style: {
-        stroke: '#000',
-        strokeWidth: 1,
-        ...style,
+        stroke,
+        strokeWidth,
+        opacity,
       },
     };
+    if (this.dataProvider && this.scene) {
+      const locationData = this.dataProvider.getFilterLocations(this.options.source, this.dataProviderState);
+      const locationWeightRange = this.dataProvider.getLocationWeightRange(this.options.source, this.dataProviderState);
+      const locationSize = getSizeAttribute(this.options.circleRadius!, locationWeightRange);
+      const locationColor = getColorAttribute(this.options.circleColor!, locationWeightRange);
+      options = merge(options, {
+        source: {
+          data: locationData,
+          parser: {
+            type: 'json',
+            x: 'lng',
+            y: 'lat',
+          },
+        },
+        size: locationSize,
+        color: locationColor,
+      });
+    }
+
+    return options;
   }
 
-  protected getFlowLayerOptions(): LineLayerOptions {
-    const { minZoom, maxZoom, zIndex, visible, blend, pickingBuffer, lineStyle = {} } = this.options;
-    return {
+  protected getLineLayerOptions(): LineLayerOptions {
+    const { minZoom, maxZoom, zIndex, visible, blend, pickingBuffer, lineOpacity: opacity } = this.options;
+    let options: LineLayerOptions = {
       source: {
         data: [],
       },
@@ -218,8 +200,36 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
       style: {
         borderColor: '#000',
         borderWidth: 1,
-        ...lineStyle,
+        opacity,
       },
     };
+    if (this.dataProvider && this.scene) {
+      const flowData = this.dataProvider.getFilterFlows(this.options.source, this.dataProviderState);
+      const flowWeightRange = this.dataProvider.getFlowWeightRange(this.options.source, this.dataProviderState);
+      const filterFlowWeightRange = this.dataProvider.getFilterFlowWeightRange(
+        this.options.source,
+        this.dataProviderState
+      );
+      const flowSize = getSizeAttribute(this.options.lineWidth!, flowWeightRange);
+      let flowColor = getColorAttribute(this.options.lineColor!, flowWeightRange);
+      if (this.options.fadeOpacityEnabled) {
+        flowColor = getOpacityColorAttribute(flowColor, filterFlowWeightRange, this.options.fadeOpacityAmount!);
+      }
+      options = merge(options, {
+        source: {
+          data: flowData,
+          parser: {
+            type: 'json',
+            x: 'fromLng',
+            y: 'fromLat',
+            x1: 'toLng',
+            y1: 'toLat',
+          },
+        },
+        size: flowSize,
+        color: flowColor,
+      });
+    }
+    return options;
   }
 }

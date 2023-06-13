@@ -67,7 +67,7 @@ scene.on('loaded', async () => {
   gui.add(initialOptions, 'visible');
 
   gui.onChange(({ object: { flowColor1, flowColor2, ...options } }) => {
-    options.flowColor = {
+    options.lineColor = {
       field: 'weight',
       value: [flowColor1, flowColor2],
     };
