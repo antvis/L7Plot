@@ -11,13 +11,6 @@ import { FlowDataProviderState, FlowLayerOptions, MapStatus } from './types';
 import { getColorAttribute, getOpacityColorAttribute, getSizeAttribute } from './utils';
 
 export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
-  constructor(options: FlowLayerOptions) {
-    super({
-      ...FlowLayer.DefaultOptions,
-      ...options,
-    });
-    this.dataProvider = new DataProvider();
-  }
   /**
    * 默认配置项
    */
@@ -30,7 +23,7 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
   /**
    * 数据计算中心
    */
-  public dataProvider: DataProvider | undefined;
+  public dataProvider = new DataProvider();
 
   /**
    * 数据计算中心状态管理
@@ -47,6 +40,13 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
 
   public get lineLayer() {
     return this.subLayers.getLayer('lineLayer')!;
+  }
+
+  /**
+   * 获取默认配置
+   */
+  public getDefaultOptions(): Partial<FlowLayerOptions> {
+    return FlowLayer.DefaultOptions;
   }
 
   protected createSubLayers(): ICoreLayer[] {
