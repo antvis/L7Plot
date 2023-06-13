@@ -67,7 +67,6 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
 
   public addTo(scene: Scene) {
     this.scene = scene;
-    this.updateClusterState();
     this.updateSubLayers();
     super.addTo(scene);
     this.scene?.on('zoomchange', this.onMapChange);
@@ -80,19 +79,14 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
     this.scene?.off('mapmove', this.onMapChange);
   }
 
-  public update(options: Partial<FlowLayerOptions>) {
-    super.update(options);
-    this.updateClusterState();
-  }
-
   protected updateSubLayers() {
+    this.updateClusterState();
     this.circleLayer.update(this.getCircleLayerOptions());
     this.lineLayer.update(this.getLineLayerOptions());
   }
 
   protected onMapChange = debounce(
     () => {
-      this.updateMapStatus();
       this.updateSubLayers();
     },
     100,
@@ -111,26 +105,13 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
 
     this.dataProviderState = {
       ...(this.options as Required<FlowLayerOptions>),
-      mapStatus: this.updateMapStatus(),
+      mapStatus: {
+        zoom: scene.getZoom(),
+        bounds: scene.getBounds().flat() as MapStatus['bounds'],
+      },
       maxZoom,
       minZoom,
     };
-  }
-
-  protected updateMapStatus() {
-    const scene = this.scene;
-    if (!scene) {
-      return this.dataProviderState.mapStatus;
-    }
-    const mapStatus: MapStatus = {
-      zoom: scene.getZoom(),
-      bounds: scene.getBounds().flat() as MapStatus['bounds'],
-    };
-    this.dataProviderState = {
-      ...this.dataProviderState,
-      mapStatus,
-    };
-    return mapStatus;
   }
 
   protected getCircleLayerOptions(): PointLayerOptions {
