@@ -333,4 +333,7 @@ export default defineConfig({
   scripts: ['https://webapi.amap.com/maps?v=2.0&key=ff533602d57df6f8ab3b0fea226ae52f'],
   // 同步 gh-page CNAME 文件
   copy: isProduction ? ['docs/CNAME'] : [],
+  styles: [
+    `.lil-gui { position: absolute; top: 16px; right: 16px; z-index: 1000000; }`
+  ]
 });

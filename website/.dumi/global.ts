@@ -9,5 +9,6 @@ if (window) {
   (window as any).react = require('react');
   (window as any).reactDom = require('react-dom');
   (window as any).antd = require('antd');
+  (window as any).lilGui = require('lil-gui');
   require('antd/lib/cascader/style/css');
 }
