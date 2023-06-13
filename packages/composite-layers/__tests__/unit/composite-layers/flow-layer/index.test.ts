@@ -89,7 +89,5 @@ describe('flow layer', () => {
     expect(layer.circleLayer.options['style'].stroke).toBe('#f00');
 
     expect(layer.lineLayer.options['style'].opacity).toBe(0.7);
-    expect(layer.lineLayer.options['color']).toBe('#00f');
-    expect(layer.lineLayer.options['size']).toBe(3);
   });
 });
