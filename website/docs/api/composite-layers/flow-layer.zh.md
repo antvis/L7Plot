@@ -173,7 +173,7 @@ order: 4
 
 `string` optional default: `'#000'`
 
-客流点透明度
+客流点边框颜色
 
 ```js
 {
@@ -185,7 +185,7 @@ order: 4
 
 `number` optional default: `1`
 
-客流点透明度
+客流点边框宽度
 
 ```js
 {
