@@ -1,5 +1,5 @@
 import { ScaleTypes } from '@antv/l7';
-import * as d3Color from 'd3-color';
+import Color from 'color';
 import * as d3Scale from 'd3-scale';
 import { ColorAttr, SizeAttr } from '../../../types';
 
@@ -65,9 +65,10 @@ export function getOpacityColorAttribute(
       return {
         ...colorAttr,
         value: (attr: any) => {
-          const color = d3Color.rgb(value(attr) as string);
-          color.opacity = scaleFunc(attr.weight) / (100 / (100 - fadeOpacityAmount));
-          return color.formatRgb();
+          // const color = d3Color.rgb(value(attr) as string);
+          const color = Color(value(attr) as string);
+          const opacity = scaleFunc(attr.weight) / (100 / (100 - fadeOpacityAmount));
+          return color.alpha(opacity).rgb().toString();
         },
       };
     }
