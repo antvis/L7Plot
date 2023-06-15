@@ -1,13 +1,13 @@
-import path from 'path';
-import typescript from '@rollup/plugin-typescript';
-import nodeResolve from '@rollup/plugin-node-resolve';
-import nodePolyfills from 'rollup-plugin-node-polyfills';
-import commonjs from '@rollup/plugin-commonjs';
-import filesize from 'rollup-plugin-filesize';
-import analyze from 'rollup-plugin-analyzer';
 import alias from '@rollup/plugin-alias';
+import commonjs from '@rollup/plugin-commonjs';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
+import path from 'path';
+import analyze from 'rollup-plugin-analyzer';
+import filesize from 'rollup-plugin-filesize';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
 import { terser } from 'rollup-plugin-terser';
-// import { visualizer } from 'rollup-plugin-visualizer';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 const projectRootDir = path.resolve(__dirname, '..', '..');
 
@@ -40,8 +40,8 @@ export default {
       limit: 10,
     }),
     filesize(),
-    // visualizer({
-    //   filename: 'dist/umd/stats.html',
-    // }),
+    visualizer({
+      filename: 'dist/umd/stats.html',
+    }),
   ],
 };
