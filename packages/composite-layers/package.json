@@ -39,8 +39,8 @@
   },
   "dependencies": {
     "@antv/event-emitter": "^0.1.2",
+    "@antv/scale": "^0.4.12",
     "@antv/util": "^2.0.14",
-    "color": "^4.2.3",
     "d3-scale": "^3.0.0",
     "kdbush": "^3.0.0",
     "lodash-es": "^4.17.21",
@@ -49,9 +49,6 @@
   "devDependencies": {
     "@antv/l7": "^2.11.5",
     "@babel/core": "^7.22.5",
-    "@types/color": "^3.0.3",
-    "@types/d3-color": "^3.1.0",
-    "@types/d3-scale": "^3.0.0",
     "@types/kdbush": "^3.0.2",
     "@types/lodash-es": "^4.17.7"
   },

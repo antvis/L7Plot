@@ -1,4 +1,4 @@
-import { debounce, merge } from 'lodash-es';
+import { debounce } from 'lodash-es';
 import { LineLayer } from '../../core-layers/line-layer';
 import { LineLayerOptions } from '../../core-layers/line-layer/types';
 import { PointLayer } from '../../core-layers/point-layer';
@@ -126,9 +126,14 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
       circleStrokeWidth: strokeWidth,
       circleOpacity: opacity,
     } = this.options;
-    let options: PointLayerOptions = {
+    const options: PointLayerOptions = {
       source: {
         data: [],
+        parser: {
+          type: 'json',
+          x: 'lng',
+          y: 'lat',
+        },
       },
       shape: 'circle',
       minZoom,
@@ -144,22 +149,10 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
       },
     };
     if (this.dataProvider && this.scene) {
-      const locationData = this.dataProvider.getFilterLocations(this.options.source, this.dataProviderState);
       const locationWeightRange = this.dataProvider.getLocationWeightRange(this.options.source, this.dataProviderState);
-      const locationSize = getSizeAttribute(this.options.circleRadius!, locationWeightRange);
-      const locationColor = getColorAttribute(this.options.circleColor!, locationWeightRange);
-      options = merge(options, {
-        source: {
-          data: locationData,
-          parser: {
-            type: 'json',
-            x: 'lng',
-            y: 'lat',
-          },
-        },
-        size: locationSize,
-        color: locationColor,
-      });
+      options.source.data = this.dataProvider.getFilterLocations(this.options.source, this.dataProviderState);
+      options.size = getSizeAttribute(this.options.circleRadius!, locationWeightRange);
+      options.color = getColorAttribute(this.options.circleColor!, locationWeightRange);
     }
 
     return options;
@@ -167,9 +160,16 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
 
   protected getLineLayerOptions(): LineLayerOptions {
     const { minZoom, maxZoom, zIndex, visible, blend, pickingBuffer, lineOpacity: opacity } = this.options;
-    let options: LineLayerOptions = {
+    const options: LineLayerOptions = {
       source: {
         data: [],
+        parser: {
+          type: 'json',
+          x: 'fromLng',
+          y: 'fromLat',
+          x1: 'toLng',
+          y1: 'toLat',
+        },
       },
       shape: 'halfLine',
       minZoom,
@@ -185,31 +185,17 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
       },
     };
     if (this.dataProvider && this.scene) {
-      const flowData = this.dataProvider.getFilterFlows(this.options.source, this.dataProviderState);
       const flowWeightRange = this.dataProvider.getFlowWeightRange(this.options.source, this.dataProviderState);
       const filterFlowWeightRange = this.dataProvider.getFilterFlowWeightRange(
         this.options.source,
         this.dataProviderState
       );
-      const flowSize = getSizeAttribute(this.options.lineWidth!, flowWeightRange);
-      let flowColor = getColorAttribute(this.options.lineColor!, flowWeightRange);
-      if (this.options.fadeOpacityEnabled) {
-        flowColor = getOpacityColorAttribute(flowColor, filterFlowWeightRange, this.options.fadeOpacityAmount!);
+      if (this.options.fadeOpacityEnabled && options.style) {
+        options.style.opacity = getOpacityColorAttribute(filterFlowWeightRange, this.options.fadeOpacityAmount!);
       }
-      options = merge(options, {
-        source: {
-          data: flowData,
-          parser: {
-            type: 'json',
-            x: 'fromLng',
-            y: 'fromLat',
-            x1: 'toLng',
-            y1: 'toLat',
-          },
-        },
-        size: flowSize,
-        color: flowColor,
-      });
+      options.source.data = this.dataProvider.getFilterFlows(this.options.source, this.dataProviderState);
+      options.size = getSizeAttribute(this.options.lineWidth!, flowWeightRange);
+      options.color = getColorAttribute(this.options.lineColor!, flowWeightRange);
     }
     return options;
   }
