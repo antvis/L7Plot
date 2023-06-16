@@ -7,7 +7,7 @@ import analyze from 'rollup-plugin-analyzer';
 import filesize from 'rollup-plugin-filesize';
 import nodePolyfills from 'rollup-plugin-node-polyfills';
 import { terser } from 'rollup-plugin-terser';
-import { visualizer } from 'rollup-plugin-visualizer';
+// import { visualizer } from 'rollup-plugin-visualizer';
 
 const projectRootDir = path.resolve(__dirname, '..', '..');
 
@@ -40,8 +40,8 @@ export default {
       limit: 10,
     }),
     filesize(),
-    visualizer({
-      filename: 'dist/umd/stats.html',
-    }),
+    // visualizer({
+    //   filename: 'dist/umd/stats.html',
+    // }),
   ],
 };
