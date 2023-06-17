@@ -4,6 +4,7 @@ import { LineLayerOptions } from '../../core-layers/line-layer/types';
 import { PointLayer } from '../../core-layers/point-layer';
 import { PointLayerOptions } from '../../core-layers/point-layer/types';
 import { CompositeLayer } from '../../core/composite-layer';
+import { OriginLayerEventList } from '../../core/constants';
 import { ICoreLayer, Scene } from '../../types';
 import { DEFAULT_OPTIONS } from './constants';
 import { DataProvider } from './data';
@@ -198,5 +199,46 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
       options.color = getColorAttribute(this.options.lineColor!, flowWeightRange);
     }
     return options;
+  }
+  /**
+   * 事件代理: 绑定事件
+   */
+  public on(name: string, callback: (...args: any[]) => void, once?: boolean) {
+    if (OriginLayerEventList.indexOf(name) !== -1) {
+      this.subLayers.getLayers().forEach((layer) => {
+        layer.on(name, callback);
+      });
+    } else {
+      super.on(name, callback, once);
+    }
+    return this;
+  }
+
+  /**
+   * 事件代理: 绑定一次事件
+   */
+  public once(name: string, callback: (...args: any[]) => void) {
+    if (OriginLayerEventList.indexOf(name) !== -1) {
+      this.subLayers.getLayers().forEach((layer) => {
+        layer.once(name, callback);
+      });
+    } else {
+      super.once(name, callback);
+    }
+    return this;
+  }
+
+  /**
+   * 事件代理: 解绑事件
+   */
+  public off(name: string, callback: (...args: any[]) => void) {
+    if (OriginLayerEventList.indexOf(name) !== -1) {
+      this.subLayers.getLayers().forEach((layer) => {
+        layer.off(name, callback);
+      });
+    } else {
+      super.off(name, callback);
+    }
+    return this;
   }
 }

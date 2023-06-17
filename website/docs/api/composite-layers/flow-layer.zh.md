@@ -359,3 +359,7 @@ order: 4
 ## 三、方法
 
 <embed src="@/docs/common/composite-layers/composite-common/method.zh.md"></embed>
+
+## 四、事件
+
+<embed src="@/docs/common/composite-layers/composite-common/event.zh.md"></embed>
