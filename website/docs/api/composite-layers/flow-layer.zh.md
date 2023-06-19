@@ -363,3 +363,14 @@ order: 4
 ## 四、事件
 
 <embed src="@/docs/common/composite-layers/composite-common/event.zh.md"></embed>
+
+内置图层名称分别为：
+
+- circleLayer 客流点图层
+- lineLayer 客流线图层
+
+事件绑定示例
+
+```ts
+flowLayer.on('circleLayer:click', (e: MouseEvent) => void);
+```

@@ -29,6 +29,9 @@ scene.on('loaded', async () => {
       },
     },
   });
+
+  flowLayer.on('locationLayer:click', (e) => console.log('location layer click', e));
+  flowLayer.on('flowLayer:click', (e) => console.log('flow layer click', e));
   scene && flowLayer.addTo(scene);
 
   const layerPopup = new LayerPopup({
