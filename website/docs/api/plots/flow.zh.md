@@ -85,5 +85,5 @@ const flowMap = new Flow(container, options);
 - labelLayer
 
 ```js
-pathMap.on('flowLayer:mousemove', (e: MouseEvent) => void);
+pathMap.on('circleLayer:mousemove', (e: MouseEvent) => void);
 ```

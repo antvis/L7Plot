@@ -51,24 +51,24 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
   }
 
   protected createSubLayers(): ICoreLayer[] {
-    const locationLayer = new PointLayer({
+    const circleLayer = new PointLayer({
       ...this.getCircleLayerOptions(),
       id: 'circleLayer',
       name: 'circleLayer',
     });
 
-    const flowLayer = new LineLayer({
+    const lineLayer = new LineLayer({
       ...this.getLineLayerOptions(),
       id: 'lineLayer',
       name: 'lineLayer',
     });
 
     OriginMouseLayerEventList.forEach((eventName) => {
-      locationLayer.on(eventName, (e) => this.emit(`locationLayer:${eventName}`, e));
-      flowLayer.on(eventName, (e) => this.emit(`flowLayer:${eventName}`, e));
+      circleLayer.on(eventName, (e) => this.emit(`circleLayer:${eventName}`, e));
+      lineLayer.on(eventName, (e) => this.emit(`lineLayer:${eventName}`, e));
     });
 
-    return [flowLayer, locationLayer];
+    return [lineLayer, circleLayer];
   }
 
   public addTo(scene: Scene) {
