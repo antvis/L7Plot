@@ -364,7 +364,7 @@ order: 4
 
 <embed src="@/docs/common/composite-layers/composite-common/event.zh.md"></embed>
 
-内置图层名称分别为：
+内置子图层名称分别为：
 
 - circleLayer 客流点图层
 - lineLayer 客流线图层

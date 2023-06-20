@@ -30,8 +30,8 @@ scene.on('loaded', async () => {
     },
   });
 
-  flowLayer.on('circleLayer:click', (e) => console.log('location layer click', e));
-  flowLayer.on('lineLayer:click', (e) => console.log('flow layer click', e));
+  flowLayer.on('circleLayer:click', (e) => console.log('circle layer click', e));
+  flowLayer.on('lineLayer:click', (e) => console.log('line layer click', e));
   scene && flowLayer.addTo(scene);
 
   const layerPopup = new LayerPopup({
