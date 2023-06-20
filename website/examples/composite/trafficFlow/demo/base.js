@@ -16,7 +16,7 @@ scene.on('loaded', async () => {
   const response = await fetch('https://gw.alipayobjects.com/os/bmw-prod/f4f3e99a-1d6c-4ab0-b08f-ec730c576b62.json');
   const data = await response.json();
 
-  const trafficFlowLayer = new FlowLayer({
+  const flowLayer = new FlowLayer({
     source: {
       data,
       parser: {
@@ -29,16 +29,19 @@ scene.on('loaded', async () => {
       },
     },
   });
-  scene && trafficFlowLayer.addTo(scene);
+
+  flowLayer.on('circleLayer:click', (e) => console.log('circle layer click', e));
+  flowLayer.on('lineLayer:click', (e) => console.log('line layer click', e));
+  scene && flowLayer.addTo(scene);
 
   const layerPopup = new LayerPopup({
     items: [
       {
-        layer: 'locationLayer',
+        layer: 'circleLayer',
         fields: ['id', 'weight'],
       },
       {
-        layer: 'flowLayer',
+        layer: 'lineLayer',
         fields: ['id', 'weight'],
       },
     ],
@@ -71,6 +74,6 @@ scene.on('loaded', async () => {
       field: 'weight',
       value: [flowColor1, flowColor2],
     };
-    trafficFlowLayer.update(options);
+    flowLayer.update(options);
   });
 });

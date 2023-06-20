@@ -1,16 +1,6 @@
 import type { LayerEventType } from '@antv/l7';
 
-export const OriginLayerEventList: LayerEventType[] = [
-  // 图层事件
-  // 代理掉的事件 'inited', 'add', 'remove',
-  'show',
-  'hide',
-  'dataUpdate',
-  'destroy',
-  // 数据映射更新，图例更新事件
-  'legend',
-  'legend:color',
-  'legend:size',
+export const OriginMouseLayerEventList: LayerEventType[] = [
   // 鼠标事件
   // 单击事件
   'click',
@@ -30,6 +20,21 @@ export const OriginLayerEventList: LayerEventType[] = [
   'unmouseup',
   'mousedown',
   'unpick',
+];
+
+export const OriginLayerEventList: LayerEventType[] = [
+  // 图层事件
+  // 代理掉的事件 'inited', 'add', 'remove',
+  'show',
+  'hide',
+  'dataUpdate',
+  'destroy',
+  // 数据映射更新，图例更新事件
+  'legend',
+  'legend:color',
+  'legend:size',
+
+  ...OriginMouseLayerEventList,
 ];
 
 export enum CoreLayerEvent {
