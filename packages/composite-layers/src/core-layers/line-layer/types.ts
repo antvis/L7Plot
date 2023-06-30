@@ -1,12 +1,12 @@
 import { CoreLayerOptions } from '../../core/core-layer';
-import { ShapeAttr } from '../../types';
+import { ShapeAttr, StyleAttr } from '../../types';
 
 /**
  * 线图层 图形形状
  */
 export type ArcLineShape = 'arc' | 'arc3d' | 'greatcircle';
 
-export type LineShape = 'line' | 'halfLine' | ArcLineShape;
+export type LineShape = 'line' | 'flowline' | ArcLineShape;
 
 /**
  * 线图层 线类型
@@ -21,7 +21,7 @@ export enum LineStyleType {
  */
 export type LineLayerStyleOptions = {
   // 透明度
-  opacity?: number | [string, (data: any) => number] | [string, [number, number]];
+  opacity?: StyleAttr<number>;
   // 线类型
   lineType?: keyof typeof LineStyleType;
   // 虚线间隔
@@ -43,9 +43,15 @@ export type LineLayerStyleOptions = {
   // 纹理混合方式
   textureBlend?: string;
   // 边框颜色
-  borderColor?: string;
+  stroke?: StyleAttr<string>;
   // 边框宽度
-  borderWidth?: number;
+  strokeWidth?: StyleAttr<number>;
+  // 边框透明度
+  strokeOpacity?: number;
+  // 线间隙
+  gapWidth?: StyleAttr<number>;
+  // 线头尾偏移量
+  offsets?: StyleAttr<[number, number]>;
 };
 
 /**

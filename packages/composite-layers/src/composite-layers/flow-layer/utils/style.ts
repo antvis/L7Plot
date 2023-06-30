@@ -1,7 +1,9 @@
 import { ScaleTypes } from '@antv/l7';
 import { Log } from '@antv/scale';
 import { LineLayerStyleOptions } from '../../../core-layers/line-layer/types';
+import { PointLayer } from '../../../core-layers/point-layer';
 import { ColorAttr, SizeAttr } from '../../../types';
+import { buildIndex } from '../data/build-index';
 
 const DefaultScaleType = ScaleTypes.LINEAR;
 
@@ -16,7 +18,6 @@ export function getSizeAttribute(sizeAttr: SizeAttr, weightRange: [number, numbe
           field: 'size',
           type: scaleType,
           domain: weightRange,
-          range: value,
         },
       };
     }
@@ -35,7 +36,6 @@ export function getColorAttribute(colorAttr: ColorAttr, weightRange: [number, nu
           field: 'color',
           type: scaleType,
           domain: weightRange,
-          range: value,
         },
       };
     }
@@ -52,10 +52,32 @@ export function getOpacityColorAttribute(
     range: [0, 1],
   });
   const ratio = (1 - fadeOpacityAmount / 100) * 1.5;
-  return [
-    'weight',
-    (weight: any) => {
+  return {
+    field: 'weight',
+    value: (weight: any) => {
       return scaleFunc.map(weight) * ratio;
     },
-  ];
+  };
+}
+
+export function getLineOffsetsAttribute(
+  clusterIndex: ReturnType<typeof buildIndex>,
+  circleLayer: PointLayer
+): LineLayerStyleOptions['offsets'] {
+  const circleLayerSizeAttribute = circleLayer.options.size;
+  if (typeof circleLayerSizeAttribute === 'number') {
+    return [circleLayerSizeAttribute, circleLayerSizeAttribute];
+  } else {
+    const sizeScale = circleLayer?.layer?.getScale('size');
+    return {
+      field: 'fromId*toId',
+      value: (fromId, toId) => {
+        const fromCluster = clusterIndex.clusterIdMap.get(fromId);
+        const toCluster = clusterIndex.clusterIdMap.get(toId);
+        const fromOffset = fromCluster ? sizeScale(fromCluster.weight) : 0;
+        const toOffset = toCluster ? sizeScale(toCluster.weight) : 0;
+        return [fromOffset, toOffset] as [number, number];
+      },
+    };
+  }
 }

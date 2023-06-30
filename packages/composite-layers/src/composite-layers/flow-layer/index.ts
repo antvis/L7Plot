@@ -6,10 +6,10 @@ import { PointLayerOptions } from '../../core-layers/point-layer/types';
 import { CompositeLayer } from '../../core/composite-layer';
 import { OriginMouseLayerEventList } from '../../core/constants';
 import { ICoreLayer, Scene } from '../../types';
-import { DEFAULT_OPTIONS } from './constants';
+import { DEFAULT_OPTIONS, EMPTY_CIRCLE_LAYER_SOURCE, EMPTY_LINE_LAYER_SOURCE } from './constants';
 import { DataProvider } from './data';
 import { FlowDataProviderState, FlowLayerOptions, MapStatus } from './types';
-import { getColorAttribute, getOpacityColorAttribute, getSizeAttribute } from './utils';
+import { getColorAttribute, getLineOffsetsAttribute, getOpacityColorAttribute, getSizeAttribute } from './utils';
 
 export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
   /**
@@ -32,15 +32,15 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
   public dataProviderState!: FlowDataProviderState;
 
   protected get layer() {
-    return this.lineLayer;
+    return this.lineLayer!;
   }
 
   public get circleLayer() {
-    return this.subLayers.getLayer('circleLayer')!;
+    return this.subLayers?.getLayer('circleLayer');
   }
 
   public get lineLayer() {
-    return this.subLayers.getLayer('lineLayer')!;
+    return this.subLayers?.getLayer('lineLayer');
   }
 
   /**
@@ -52,15 +52,15 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
 
   protected createSubLayers(): ICoreLayer[] {
     const circleLayer = new PointLayer({
-      ...this.getCircleLayerOptions(),
       id: 'circleLayer',
       name: 'circleLayer',
+      source: EMPTY_CIRCLE_LAYER_SOURCE,
     });
 
     const lineLayer = new LineLayer({
-      ...this.getLineLayerOptions(),
       id: 'lineLayer',
       name: 'lineLayer',
+      source: EMPTY_LINE_LAYER_SOURCE,
     });
 
     OriginMouseLayerEventList.forEach((eventName) => {
@@ -87,8 +87,11 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
 
   protected updateSubLayers() {
     this.updateClusterState();
-    this.circleLayer.update(this.getCircleLayerOptions());
-    this.lineLayer.update(this.getLineLayerOptions());
+    this.circleLayer?.update(this.getCircleLayerOptions());
+    // 保证 lineLayer 获取到的 scale 方法是最新的
+    requestAnimationFrame(() => {
+      this.lineLayer?.update(this.getLineLayerOptions());
+    });
   }
 
   protected onMapChange = debounce(
@@ -165,7 +168,20 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
   }
 
   protected getLineLayerOptions(): LineLayerOptions {
-    const { minZoom, maxZoom, zIndex, visible, blend, pickingBuffer, lineOpacity: opacity } = this.options;
+    const {
+      minZoom,
+      maxZoom,
+      zIndex,
+      visible,
+      blend,
+      pickingBuffer,
+      lineOpacity,
+      lineWidth,
+      lineColor,
+      lineStroke,
+      lineStrokeOpacity,
+      lineStrokeWidth,
+    } = this.options;
     const options: LineLayerOptions = {
       source: {
         data: [],
@@ -177,7 +193,7 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
           y1: 'toLat',
         },
       },
-      shape: 'halfLine',
+      shape: 'flowline',
       minZoom,
       maxZoom,
       zIndex,
@@ -185,9 +201,11 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
       blend,
       pickingBuffer,
       style: {
-        borderColor: '#000',
-        borderWidth: 1,
-        opacity,
+        gapWidth: lineStrokeWidth,
+        stroke: lineStroke,
+        strokeWidth: lineStrokeWidth,
+        strokeOpacity: lineStrokeOpacity,
+        opacity: lineOpacity,
       },
     };
     if (this.dataProvider && this.scene) {
@@ -196,13 +214,21 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
         this.options.source,
         this.dataProviderState
       );
+
+      options.source.data = this.dataProvider.getFilterFlows(this.options.source, this.dataProviderState);
+      options.size = getSizeAttribute(lineWidth!, flowWeightRange);
+      options.color = getColorAttribute(lineColor!, flowWeightRange);
+
       if (this.options.fadeOpacityEnabled && options.style) {
         options.style.opacity = getOpacityColorAttribute(filterFlowWeightRange, this.options.fadeOpacityAmount!);
       }
-      options.source.data = this.dataProvider.getFilterFlows(this.options.source, this.dataProviderState);
-      options.size = getSizeAttribute(this.options.lineWidth!, flowWeightRange);
-      options.color = getColorAttribute(this.options.lineColor!, flowWeightRange);
+
+      if (this.circleLayer && options.style) {
+        const clusterIndex = this.dataProvider.getClusterIndex(this.options.source, this.dataProviderState);
+        options.style.offsets = getLineOffsetsAttribute(clusterIndex, this.circleLayer as PointLayer);
+      }
     }
+
     return options;
   }
 }

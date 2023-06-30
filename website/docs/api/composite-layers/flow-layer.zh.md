@@ -301,7 +301,7 @@ order: 4
 
 `string|string[]|Function` optional
 
-客流点填充颜色值映射值。
+客流线填充颜色值映射值。
 
 ```js
 {
@@ -332,11 +332,47 @@ order: 4
 
 `number` optional
 
-客流点透明度
+客流线透明度
 
 ```js
 {
   lineOpacity: 0.5;
+}
+```
+
+### `options.`lineStroke
+
+`string` optional default: `'#000'`
+
+客流线边框颜色
+
+```js
+{
+  lineStroke: '#000';
+}
+```
+
+### `options.`lineStrokeWidth
+
+`number` optional default: `1`
+
+客流线边框宽度
+
+```js
+{
+  lineStrokeWidth: 1;
+}
+```
+
+### `options.`lineStrokeOpacity
+
+`number` optional
+
+客流线边框透明度
+
+```js
+{
+  lineStrokeOpacity: 1;
 }
 ```
 

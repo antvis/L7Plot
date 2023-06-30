@@ -1,5 +1,5 @@
 import { CoreLayerOptions } from '../../core/core-layer';
-import { ShapeAttr } from '../../types';
+import { ShapeAttr, StyleAttr } from '../../types';
 
 /**
  * 点图层 图层样式
@@ -8,7 +8,7 @@ export type PointLayerStyleOptions = {
   /**
    * 透明度
    */
-  opacity?: number | [string, (data: any) => number] | [string, [number, number]];
+  opacity?: StyleAttr<number>;
   /**
    * 描边宽度
    */
@@ -62,7 +62,7 @@ export type AnchorType =
  */
 export type PointTextLayerStyleOptions = {
   /* 透明度 */
-  opacity?: number | [string, (data: any) => number] | [string, [number, number]];
+  opacity?: StyleAttr<number>;
   /* 文本相对锚点的位置 */
   textAnchor?: AnchorType;
   /* 文本相对锚点的偏移量 */
