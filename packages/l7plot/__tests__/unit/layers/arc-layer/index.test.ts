@@ -1,5 +1,5 @@
-import { getLayerStyleAttribute } from '../../../helper/layer';
 import { ArcLayer } from '../../../../src/layers/arc-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('arc layer', () => {
   const layer = new ArcLayer({
@@ -37,7 +37,7 @@ describe('arc layer', () => {
   });
 
   it('style', () => {
-    expect(layer.layer['rawConfig']).toMatchObject({ opacity: 1 });
+    expect(layer.layer['needUpdateConfig']).toMatchObject({ opacity: 1 });
   });
 
   it('state', () => {
