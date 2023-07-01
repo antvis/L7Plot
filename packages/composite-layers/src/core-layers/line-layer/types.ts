@@ -1,5 +1,5 @@
 import { CoreLayerOptions } from '../../core/core-layer';
-import { ShapeAttr, StyleAttr } from '../../types';
+import { OptionStyleAttribute, ShapeAttr } from '../../types';
 
 /**
  * 线图层 图形形状
@@ -21,7 +21,7 @@ export enum LineStyleType {
  */
 export type LineLayerStyleOptions = {
   // 透明度
-  opacity?: StyleAttr<number>;
+  opacity?: OptionStyleAttribute<number>;
   // 线类型
   lineType?: keyof typeof LineStyleType;
   // 虚线间隔
@@ -43,15 +43,15 @@ export type LineLayerStyleOptions = {
   // 纹理混合方式
   textureBlend?: string;
   // 边框颜色
-  stroke?: StyleAttr<string>;
+  stroke?: OptionStyleAttribute<string>;
   // 边框宽度
-  strokeWidth?: StyleAttr<number>;
+  strokeWidth?: OptionStyleAttribute<number>;
   // 边框透明度
   strokeOpacity?: number;
   // 线间隙
-  gapWidth?: StyleAttr<number>;
+  gapWidth?: OptionStyleAttribute<number>;
   // 线头尾偏移量
-  offsets?: StyleAttr<[number, number]>;
+  offsets?: OptionStyleAttribute<[number, number]>;
 };
 
 /**

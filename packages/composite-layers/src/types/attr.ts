@@ -85,7 +85,7 @@ export type FilterAttr = {
 };
 
 /** Style 中的配置项 */
-export type StyleAttr<T> =
+export type OptionStyleAttribute<T> =
   | T
   | {
       field: string;
