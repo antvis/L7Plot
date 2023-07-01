@@ -1,5 +1,5 @@
-import { getLayerStyleAttribute } from '../../../helper/layer';
 import { LinesLayer } from '../../../../src/layers/lines-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('lines layer', () => {
   const layer = new LinesLayer({
@@ -38,7 +38,7 @@ describe('lines layer', () => {
   });
 
   it('style', () => {
-    expect(layer.layer['rawConfig']).toMatchObject({ opacity: 1, lineType: 'dash' });
+    expect(layer.layer['needUpdateConfig']).toMatchObject({ opacity: 1, lineType: 'dash' });
   });
 
   it('state', () => {

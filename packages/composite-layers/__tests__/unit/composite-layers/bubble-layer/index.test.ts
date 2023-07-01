@@ -1,5 +1,5 @@
-import { getLayerStyleAttribute } from '../../../helper/layer';
 import { BubbleLayer } from '../../../../src/composite-layers/bubble-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('bubble layer', () => {
   const layer = new BubbleLayer({
@@ -85,7 +85,7 @@ describe('bubble layer', () => {
       attributeField: 'label',
       attributeValues: 'text',
     });
-    expect(layer.labelLayer.layer['rawConfig']).toMatchObject({
+    expect(layer.labelLayer.layer['needUpdateConfig']).toMatchObject({
       opacity: 0.6,
       textAnchor: 'top',
       textOffset: [0, 20],
@@ -98,7 +98,7 @@ describe('bubble layer', () => {
   });
 
   it('style', () => {
-    expect(layer.fillLayer.layer['rawConfig']).toMatchObject({
+    expect(layer.fillLayer.layer['needUpdateConfig']).toMatchObject({
       opacity: 1,
       strokeWidth: 1,
       stroke: 'red',
@@ -114,7 +114,7 @@ describe('bubble layer', () => {
       attributeName: 'size',
       attributeField: 12,
     });
-    expect(layer.highlightStrokeLayer.layer['rawConfig']).toMatchObject({
+    expect(layer.highlightStrokeLayer.layer['needUpdateConfig']).toMatchObject({
       opacity: 0,
       strokeWidth: 1.5,
       stroke: 'green',
@@ -125,7 +125,7 @@ describe('bubble layer', () => {
       attributeName: 'size',
       attributeField: 12,
     });
-    expect(layer.selectStrokeLayer.layer['rawConfig']).toMatchObject({
+    expect(layer.selectStrokeLayer.layer['needUpdateConfig']).toMatchObject({
       opacity: 0,
       strokeWidth: 1.5,
       stroke: 'yellow',

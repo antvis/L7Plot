@@ -1,8 +1,7 @@
 import { Source } from '@antv/l7';
-import { getLayerStyleAttribute } from '../../../helper/layer';
-import { DotLayer } from '../../../../src/layers/dot-layer';
-import { DotLayerOptions } from '../../../../src/layers/dot-layer';
+import { DotLayer, DotLayerOptions } from '../../../../src/layers/dot-layer';
 import { LinesLayer, LinesLayerOptions } from '../../../../src/layers/lines-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('mapping layer', () => {
   const source = new Source([], { parser: { type: 'json', x: 'x', y: 'y' } });
@@ -132,7 +131,7 @@ describe('mapping layer', () => {
 
     expect(plotLayer.layer.type).toBe('PointLayer');
 
-    expect(plotLayer.layer['rawConfig']).toMatchObject({ opacity: 1, strokeWidth: 1, stroke: 'red' });
+    expect(plotLayer.layer['needUpdateConfig']).toMatchObject({ opacity: 1, strokeWidth: 1, stroke: 'red' });
   });
 
   it('mapping state', () => {

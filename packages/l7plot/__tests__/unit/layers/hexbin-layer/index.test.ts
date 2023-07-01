@@ -1,5 +1,5 @@
-import { getLayerStyleAttribute } from '../../../helper/layer';
 import { HexbinLayer } from '../../../../src/layers/hexbin-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('hexagon layer', () => {
   const layer = new HexbinLayer({
@@ -56,7 +56,7 @@ describe('hexagon layer', () => {
   });
 
   it('style', () => {
-    expect(layer.layer['rawConfig']).toMatchObject({
+    expect(layer.layer['needUpdateConfig']).toMatchObject({
       coverage: 0.8,
       angle: 0,
       opacity: 1.0,

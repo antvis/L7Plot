@@ -1,7 +1,7 @@
 import { Source } from '@antv/l7';
-import { getLayerStyleAttribute } from '../../../helper/layer';
-import { IconLayer } from '../../../../src/layers/icon-layer';
 import { registerImages } from '../../../../src';
+import { IconLayer } from '../../../../src/layers/icon-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('icon layer', () => {
   const images = [
@@ -45,7 +45,7 @@ describe('icon layer', () => {
   });
 
   it('style', () => {
-    expect(layer.layer['rawConfig']).toMatchObject({ opacity: 1, strokeWidth: 1, stroke: 'red' });
+    expect(layer.layer['needUpdateConfig']).toMatchObject({ opacity: 1, strokeWidth: 1, stroke: 'red' });
   });
 
   it('state', () => {

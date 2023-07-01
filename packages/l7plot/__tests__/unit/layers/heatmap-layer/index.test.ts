@@ -1,6 +1,6 @@
 import { Source } from '@antv/l7';
-import { getLayerStyleAttribute } from '../../../helper/layer';
 import { HeatmapLayer } from '../../../../src/layers/heatmap-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('heatmap layer', () => {
   const layer = new HeatmapLayer({
@@ -46,7 +46,7 @@ describe('heatmap layer', () => {
   });
 
   it('style', () => {
-    expect(layer.layer['rawConfig']).toMatchObject({
+    expect(layer.layer['needUpdateConfig']).toMatchObject({
       intensity: 3,
       radius: 20,
       opacity: 1,
