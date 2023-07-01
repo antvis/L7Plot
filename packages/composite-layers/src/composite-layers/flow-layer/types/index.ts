@@ -217,9 +217,25 @@ export interface FlowLayerOptions extends CompositeLayerOptions, Partial<Cluster
   lineWidth?: LineLayerOptions['size'];
 
   /**
-   * 客流透明度
+   * 客流线透明度
    */
   lineOpacity?: LineLayerStyleOptions['opacity'];
+
+  /**
+   * 客流线边框颜色
+   */
+  lineStroke?: LineLayerStyleOptions['stroke'];
+
+  /**
+   * 客流线边框宽度
+   */
+  lineStrokeWidth?: LineLayerStyleOptions['strokeWidth'];
+
+  /**
+   * 客流线边框宽度
+   */
+  lineStrokeOpacity?: LineLayerStyleOptions['strokeOpacity'];
+
   /**
    * 是否启用根据权重映射半透明值
    */

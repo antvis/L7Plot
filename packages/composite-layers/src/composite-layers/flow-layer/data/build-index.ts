@@ -100,6 +100,7 @@ export function buildIndex(clusterLevels: ClusterLevel[]) {
 
   return {
     zoomList,
+    clusterIdMap,
     getAppropriateLevel,
     getMapLocations,
     getLocationIdsFromCluster,

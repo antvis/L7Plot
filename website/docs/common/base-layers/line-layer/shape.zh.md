@@ -4,7 +4,7 @@
 
 除直线外还支持 2D 与 3D 弧线及大圆航线：
 
-- halfLine
+- flowline
 - arc
 - arc3d
 - greatcircle

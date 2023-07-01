@@ -1,4 +1,26 @@
+import { LineLayerOptions } from '../../core-layers/line-layer/types';
+import { PointLayerOptions } from '../../core-layers/point-layer/types';
 import { FlowLayerOptions } from './types';
+
+export const EMPTY_CIRCLE_LAYER_SOURCE: PointLayerOptions['source'] = {
+  data: [],
+  parser: {
+    type: 'json',
+    x: 'lng',
+    y: 'lat',
+  },
+};
+
+export const EMPTY_LINE_LAYER_SOURCE: LineLayerOptions['source'] = {
+  data: [],
+  parser: {
+    type: 'json',
+    x: 'fromLng',
+    y: 'fromLat',
+    x1: 'toLng',
+    y1: 'toLat',
+  },
+};
 
 export const DEFAULT_OPTIONS: FlowLayerOptions = {
   source: {
@@ -33,6 +55,8 @@ export const DEFAULT_OPTIONS: FlowLayerOptions = {
     field: 'weight',
     value: [1, 16],
   },
+  lineStroke: '#000',
+  lineStrokeWidth: 1,
   fadeOpacityEnabled: true,
   fadeOpacityAmount: 0,
 };

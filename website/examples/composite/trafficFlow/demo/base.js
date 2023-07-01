@@ -59,6 +59,9 @@ scene.on('loaded', async () => {
     maxTopFlowNum: 5000,
     flowColor1: '#2a5674',
     flowColor2: '#d1eeea',
+    lineStroke: '#000',
+    lineStrokeWidth: 1,
+    lineStrokeOpacity: 1,
     visible: true,
   };
 
@@ -68,6 +71,9 @@ scene.on('loaded', async () => {
   gui.addColor(initialOptions, 'flowColor1');
   gui.addColor(initialOptions, 'flowColor2');
   gui.add(initialOptions, 'visible');
+  gui.addColor(initialOptions, 'lineStroke');
+  gui.add(initialOptions, 'lineStrokeWidth', 1, 10, 1);
+  gui.add(initialOptions, 'lineStrokeOpacity', 0, 1, 0.01);
 
   gui.onChange(({ object: { flowColor1, flowColor2, ...options } }) => {
     options.lineColor = {

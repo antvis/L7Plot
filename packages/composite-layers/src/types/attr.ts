@@ -1,5 +1,5 @@
-import type { IAnimateOption, IActiveOption } from '@antv/l7';
-import { ScaleConfig, ISourceCFG } from './common';
+import type { IActiveOption, IAnimateOption } from '@antv/l7';
+import { ISourceCFG, ScaleConfig } from './common';
 
 export type Callback<T> = (data: Record<string, any>) => T | T[];
 
@@ -83,6 +83,15 @@ export type FilterAttr = {
   /** 映射值 */
   value: Callback<boolean>;
 };
+
+/** Style 中的配置项 */
+export type OptionStyleAttribute<T> =
+  | T
+  | {
+      field: string;
+      value: T[] | ((...params: any[]) => T);
+    }
+  | [string, T[] | ((...params: any[]) => T)];
 
 /**
  * 数据配置

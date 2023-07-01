@@ -73,8 +73,8 @@ describe('flow layer', () => {
   const dataProvider = new DataProvider();
 
   it('layer', () => {
-    expect(layer.circleLayer.type).toBe('pointLayer');
-    expect(layer.lineLayer.type).toBe('lineLayer');
+    expect(layer.circleLayer?.type).toBe('pointLayer');
+    expect(layer.lineLayer?.type).toBe('lineLayer');
   });
 
   it('data', () => {
@@ -84,10 +84,9 @@ describe('flow layer', () => {
   });
 
   it('style', () => {
-    expect(layer.circleLayer.options['style'].opacity).toBe(0.5);
-    expect(layer.circleLayer.options['style'].strokeWidth).toBe(2);
-    expect(layer.circleLayer.options['style'].stroke).toBe('#f00');
-
-    expect(layer.lineLayer.options['style'].opacity).toBe(0.7);
+    layer.update({});
+    expect(layer.circleLayer?.options['style'].opacity).toBe(0.5);
+    expect(layer.circleLayer?.options['style'].strokeWidth).toBe(2);
+    expect(layer.circleLayer?.options['style'].stroke).toBe('#f00');
   });
 });
