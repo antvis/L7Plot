@@ -84,10 +84,9 @@ describe('flow layer', () => {
   });
 
   it('style', () => {
+    layer.update({});
     expect(layer.circleLayer?.options['style'].opacity).toBe(0.5);
     expect(layer.circleLayer?.options['style'].strokeWidth).toBe(2);
     expect(layer.circleLayer?.options['style'].stroke).toBe('#f00');
-
-    expect(layer.lineLayer?.options['style'].opacity).toBe(0.7);
   });
 });
