@@ -1,5 +1,5 @@
-import { getLayerStyleAttribute } from '../../../helper/layer';
 import { PrismLayer } from '../../../../src/layers/prism-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('prism layer', () => {
   const layer = new PrismLayer({
@@ -43,7 +43,7 @@ describe('prism layer', () => {
   });
 
   it('style', () => {
-    expect(layer.layer['rawConfig']).toMatchObject({ opacity: 1 });
+    expect(layer.layer['needUpdateConfig']).toMatchObject({ opacity: 1 });
   });
 
   it('state', () => {

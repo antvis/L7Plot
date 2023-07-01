@@ -1,6 +1,6 @@
 import { Source } from '@antv/l7';
-import { getLayerStyleAttribute } from '../../../helper/layer';
 import { DotLayer } from '../../../../src/layers/dot-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('dot layer', () => {
   const layer = new DotLayer({
@@ -39,7 +39,7 @@ describe('dot layer', () => {
   });
 
   it('style', () => {
-    expect(layer.layer['rawConfig']).toMatchObject({ opacity: 1, strokeWidth: 1, stroke: 'red' });
+    expect(layer.layer['needUpdateConfig']).toMatchObject({ opacity: 1, strokeWidth: 1, stroke: 'red' });
   });
 
   it('state', () => {

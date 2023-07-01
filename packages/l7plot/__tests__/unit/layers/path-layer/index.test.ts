@@ -1,5 +1,5 @@
-import { getLayerStyleAttribute } from '../../../helper/layer';
 import { PathLayer } from '../../../../src/layers/path-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('path layer', () => {
   const layer = new PathLayer({
@@ -37,7 +37,7 @@ describe('path layer', () => {
   });
 
   it('style', () => {
-    expect(layer.layer['rawConfig']).toMatchObject({ opacity: 1, lineType: 'dash' });
+    expect(layer.layer['needUpdateConfig']).toMatchObject({ opacity: 1, lineType: 'dash' });
   });
 
   it('state', () => {

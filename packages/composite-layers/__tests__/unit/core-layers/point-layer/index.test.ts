@@ -1,5 +1,5 @@
-import { getLayerStyleAttribute } from '../../../helper/layer';
 import { PointLayer } from '../../../../src/core-layers/point-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('point layer', () => {
   const layer = new PointLayer({
@@ -38,7 +38,7 @@ describe('point layer', () => {
   });
 
   it('style', () => {
-    expect(layer.layer['rawConfig']).toMatchObject({ opacity: 1, strokeWidth: 1, stroke: 'red' });
+    expect(layer.layer['needUpdateConfig']).toMatchObject({ opacity: 1, strokeWidth: 1, stroke: 'red' });
   });
 
   it('state', () => {

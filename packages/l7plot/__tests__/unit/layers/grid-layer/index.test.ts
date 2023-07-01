@@ -1,5 +1,5 @@
-import { getLayerStyleAttribute } from '../../../helper/layer';
 import { GridLayer } from '../../../../src/layers/grid-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('grid layer', () => {
   const layer = new GridLayer({
@@ -57,7 +57,7 @@ describe('grid layer', () => {
   });
 
   it('style', () => {
-    expect(layer.layer['rawConfig']).toMatchObject({
+    expect(layer.layer['needUpdateConfig']).toMatchObject({
       coverage: 0.8,
       angle: 0,
       opacity: 1.0,

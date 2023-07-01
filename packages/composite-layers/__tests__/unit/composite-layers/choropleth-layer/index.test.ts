@@ -1,5 +1,5 @@
-import { getLayerStyleAttribute } from '../../../helper/layer';
 import { ChoroplethLayer } from '../../../../src/composite-layers/choropleth-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('choropleth layer', () => {
   const layer = new ChoroplethLayer({
@@ -86,7 +86,7 @@ describe('choropleth layer', () => {
       attributeField: 'label',
       attributeValues: 'text',
     });
-    expect(layer.labelLayer.layer['rawConfig']).toMatchObject({
+    expect(layer.labelLayer.layer['needUpdateConfig']).toMatchObject({
       opacity: 0.6,
       textAnchor: 'top',
       textOffset: [0, 20],
@@ -99,9 +99,9 @@ describe('choropleth layer', () => {
   });
 
   it('style', () => {
-    expect(layer.fillLayer.layer['rawConfig']).toMatchObject({ opacity: 1 });
+    expect(layer.fillLayer.layer['needUpdateConfig']).toMatchObject({ opacity: 1 });
 
-    expect(layer.strokeLayer.layer['rawConfig']).toMatchObject({ opacity: 1 });
+    expect(layer.strokeLayer.layer['needUpdateConfig']).toMatchObject({ opacity: 1 });
     expect(getLayerStyleAttribute(layer.strokeLayer.layer['pendingStyleAttributes'], 'color')).toEqual({
       attributeName: 'color',
       attributeField: 'rgb(93,112,146)',
@@ -124,7 +124,7 @@ describe('choropleth layer', () => {
       attributeName: 'size',
       attributeField: 1.5,
     });
-    expect(layer.highlightStrokeLayer.layer['rawConfig']).toMatchObject({ opacity: 0.8 });
+    expect(layer.highlightStrokeLayer.layer['needUpdateConfig']).toMatchObject({ opacity: 0.8 });
 
     expect(getLayerStyleAttribute(layer.selectStrokeLayer.layer['pendingStyleAttributes'], 'color')).toEqual({
       attributeName: 'color',
@@ -134,6 +134,6 @@ describe('choropleth layer', () => {
       attributeName: 'size',
       attributeField: 1.5,
     });
-    expect(layer.selectStrokeLayer.layer['rawConfig']).toMatchObject({ opacity: 0.8 });
+    expect(layer.selectStrokeLayer.layer['needUpdateConfig']).toMatchObject({ opacity: 0.8 });
   });
 });

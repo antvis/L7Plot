@@ -1,5 +1,5 @@
-import { getLayerStyleAttribute } from '../../../helper/layer';
 import { AreaLayer } from '../../../../src/layers/area-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('area layer', () => {
   const layer = new AreaLayer({
@@ -57,7 +57,7 @@ describe('area layer', () => {
   });
 
   it('style', () => {
-    expect(layer.layer['rawConfig']).toMatchObject({ opacity: 1 });
+    expect(layer.layer['needUpdateConfig']).toMatchObject({ opacity: 1 });
   });
 
   it('state', () => {
@@ -69,7 +69,7 @@ describe('area layer', () => {
       attributeName: 'size',
       attributeField: 1.5,
     });
-    expect(layer.highlightLayer['rawConfig']).toMatchObject({ opacity: 0.8 });
+    expect(layer.highlightLayer['needUpdateConfig']).toMatchObject({ opacity: 0.8 });
     expect(getLayerStyleAttribute(layer.selectStrokeLayer['pendingStyleAttributes'], 'color')).toEqual({
       attributeName: 'color',
       attributeField: 'yellow',
@@ -78,6 +78,6 @@ describe('area layer', () => {
       attributeName: 'size',
       attributeField: 1.5,
     });
-    expect(layer.selectStrokeLayer['rawConfig']).toMatchObject({ opacity: 0.8 });
+    expect(layer.selectStrokeLayer['needUpdateConfig']).toMatchObject({ opacity: 0.8 });
   });
 });

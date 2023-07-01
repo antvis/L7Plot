@@ -1,5 +1,5 @@
-import { getLayerStyleAttribute } from '../../../helper/layer';
 import { PolygonLayer } from '../../../../src/core-layers/polygon-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('polygon layer', () => {
   const layer = new PolygonLayer({
@@ -42,7 +42,7 @@ describe('polygon layer', () => {
   });
 
   it('style', () => {
-    expect(layer.layer['rawConfig']).toMatchObject({ opacity: 1 });
+    expect(layer.layer['needUpdateConfig']).toMatchObject({ opacity: 1 });
   });
 
   it('state', () => {

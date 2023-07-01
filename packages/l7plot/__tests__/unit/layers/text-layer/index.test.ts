@@ -1,6 +1,6 @@
 import { Source } from '@antv/l7';
-import { getLayerStyleAttribute } from '../../../helper/layer';
 import { TextLayer } from '../../../../src/layers/text-layer';
+import { getLayerStyleAttribute } from '../../../helper/layer';
 
 describe('text layer', () => {
   const layer = new TextLayer({
@@ -49,7 +49,7 @@ describe('text layer', () => {
   });
 
   it('style', () => {
-    expect(layer.layer['rawConfig']).toMatchObject({
+    expect(layer.layer['needUpdateConfig']).toMatchObject({
       opacity: 0.6,
       textAnchor: 'top',
       textOffset: [0, 20],
