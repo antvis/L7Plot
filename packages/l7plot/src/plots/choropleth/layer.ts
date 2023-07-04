@@ -1,7 +1,7 @@
-import { deepAssign } from '../../utils';
-import { ChinaBoundaryStyle, ChoroplethOptions, FeatureCollection } from './types';
 import { PathLayer } from '../../layers/path-layer';
+import { deepAssign } from '../../utils';
 import { CHINA_BOUNDARY_STYLE } from './constants';
+import { ChinaBoundaryStyle, ChoroplethOptions, FeatureCollection } from './types';
 
 /**
  * 创建中国国界线图层
@@ -39,7 +39,9 @@ export const createCountryBoundaryLayer = (data: FeatureCollection, plotConfig?:
       },
     },
     style: {
-      opacity: ['type', (type) => borderStyle[type].opacity],
+      // opacity: ['type', (type) => borderStyle[type].opacity],
+      // 下线 L7 暂时不支持根据字段映射样式
+      opacity: borderStyle.national.opacity,
     },
   });
   const chinaHkmBoundaryLayer = new PathLayer({
