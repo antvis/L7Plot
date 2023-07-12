@@ -3,6 +3,8 @@ import { LineLayer } from '../../core-layers/line-layer';
 import { LineLayerOptions } from '../../core-layers/line-layer/types';
 import { PointLayer } from '../../core-layers/point-layer';
 import { PointLayerOptions } from '../../core-layers/point-layer/types';
+import { TextLayer } from '../../core-layers/text-layer';
+import { TextLayerOptions } from '../../core-layers/text-layer/types';
 import { CompositeLayer } from '../../core/composite-layer';
 import { OriginMouseLayerEventList } from '../../core/constants';
 import { ICoreLayer, Scene } from '../../types';
@@ -43,6 +45,10 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
     return this.subLayers?.getLayer('lineLayer');
   }
 
+  public get locationNameLayer() {
+    return this.subLayers?.getLayer('locationNameLayer');
+  }
+
   /**
    * 获取默认配置
    */
@@ -63,12 +69,18 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
       source: EMPTY_LINE_LAYER_SOURCE,
     });
 
+    const locationNameLayer = new TextLayer({
+      id: 'locationNameLayer',
+      name: 'locationNameLayer',
+      source: EMPTY_CIRCLE_LAYER_SOURCE,
+    });
+
     OriginMouseLayerEventList.forEach((eventName) => {
       circleLayer.on(eventName, (e) => this.emit(`circleLayer:${eventName}`, e));
       lineLayer.on(eventName, (e) => this.emit(`lineLayer:${eventName}`, e));
     });
 
-    return [lineLayer, circleLayer];
+    return [lineLayer, circleLayer, locationNameLayer];
   }
 
   public addTo(scene: Scene) {
@@ -85,24 +97,27 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
     this.scene?.off('mapmove', this.onMapChange);
   }
 
-  protected updateSubLayers() {
-    this.updateClusterState();
-    this.circleLayer?.update(this.getCircleLayerOptions());
-    // 保证 lineLayer 获取到的 scale 方法是最新的
-    requestAnimationFrame(() => {
-      this.lineLayer?.update(this.getLineLayerOptions());
-    });
-  }
-
-  protected onMapChange = debounce(
+  protected updateSubLayers = debounce(
     () => {
-      this.updateSubLayers();
+      this.updateClusterState();
+      this.circleLayer?.update(this.getCircleLayerOptions());
+      this.getLocationNameLayerOptions().then((options) => {
+        this.locationNameLayer?.update(options);
+      });
+      // 保证 lineLayer 获取到的 scale 方法是最新的
+      requestAnimationFrame(() => {
+        this.lineLayer?.update(this.getLineLayerOptions());
+      });
     },
-    100,
+    400,
     {
-      maxWait: 500,
+      maxWait: 400,
     }
   );
+
+  protected onMapChange = () => {
+    this.updateSubLayers();
+  };
 
   protected updateClusterState() {
     const scene = this.scene;
@@ -228,6 +243,66 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
         options.style.offsets = getLineOffsetsAttribute(clusterIndex, this.circleLayer as PointLayer);
       }
     }
+
+    return options;
+  }
+
+  protected async getLocationNameLayerOptions(): Promise<TextLayerOptions> {
+    const {
+      minZoom,
+      maxZoom,
+      zIndex,
+      visible,
+      blend,
+      pickingBuffer,
+      showLocationName,
+      getClusterLocationName,
+      locationNameColor: fill,
+      locationNameSize: fontSize,
+      locationNameStroke: stroke,
+      locationNameStrokeWidth: strokeWidth,
+      locationNameStrokeOpacity: strokeOpacity,
+      locationNameOffset: textOffset,
+    } = this.options;
+
+    const originSource = Object.assign(
+      {},
+      showLocationName ? this.circleLayer?.options['source'] ?? EMPTY_CIRCLE_LAYER_SOURCE : EMPTY_CIRCLE_LAYER_SOURCE
+    );
+
+    if (getClusterLocationName) {
+      originSource.data = await Promise.all(
+        originSource.data.map(async (location, locationIndex) => {
+          if (!location.name) {
+            try {
+              location.name = await getClusterLocationName(location, locationIndex);
+            } catch (e) {
+              location.name = '';
+            }
+          }
+          return location;
+        })
+      );
+    }
+
+    const options: TextLayerOptions = {
+      source: originSource,
+      field: 'name',
+      minZoom,
+      maxZoom,
+      zIndex,
+      visible,
+      blend,
+      pickingBuffer,
+      style: {
+        fill,
+        fontSize,
+        stroke,
+        strokeOpacity,
+        strokeWidth,
+        textOffset,
+      },
+    };
 
     return options;
   }

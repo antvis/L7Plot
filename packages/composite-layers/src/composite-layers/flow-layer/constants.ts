@@ -59,4 +59,9 @@ export const DEFAULT_OPTIONS: FlowLayerOptions = {
   lineStrokeWidth: 1,
   fadeOpacityEnabled: true,
   fadeOpacityAmount: 0,
+  showLocationName: false,
+  locationNameSize: 12,
+  locationNameColor: '#fff',
+  locationNameStroke: '#000',
+  locationNameStrokeWidth: 1,
 };
