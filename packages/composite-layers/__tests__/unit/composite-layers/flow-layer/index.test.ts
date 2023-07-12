@@ -62,9 +62,9 @@ const layerOptions: FlowLayerOptions = {
   circleOpacity: 0.5,
   circleStrokeWidth: 2,
   circleStrokeColor: '#f00',
-  lineWidth: 3,
-  lineColor: '#00f',
   lineOpacity: 0.7,
+  locationNameColor: '#0f0',
+  locationNameSize: 12,
 };
 
 describe('flow layer', () => {
@@ -83,10 +83,20 @@ describe('flow layer', () => {
     expect(dataProvider.getFilterFlows(flowSource, dataProviderState).length).toBe(4);
   });
 
-  it('style', () => {
+  it('circle style', () => {
     layer.update({});
     expect(layer.circleLayer?.options['style'].opacity).toBe(0.5);
     expect(layer.circleLayer?.options['style'].strokeWidth).toBe(2);
     expect(layer.circleLayer?.options['style'].stroke).toBe('#f00');
+  });
+
+  test('line style', () => {
+    layer.update({});
+    return new Promise((done) => {
+      requestAnimationFrame(() => {
+        expect(layer.lineLayer?.options['style'].opacity).toBe(0.7);
+        done(void 0);
+      });
+    });
   });
 });
