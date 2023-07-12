@@ -97,27 +97,27 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
     this.scene?.off('mapmove', this.onMapChange);
   }
 
-  protected updateSubLayers = debounce(
+  protected updateSubLayers() {
+    this.updateClusterState();
+    this.circleLayer?.update(this.getCircleLayerOptions());
+    this.getLocationNameLayerOptions().then((options) => {
+      this.locationNameLayer?.update(options);
+    });
+    // 保证 lineLayer 获取到的 scale 方法是最新的
+    requestAnimationFrame(() => {
+      this.lineLayer?.update(this.getLineLayerOptions());
+    });
+  }
+
+  protected onMapChange = debounce(
     () => {
-      this.updateClusterState();
-      this.circleLayer?.update(this.getCircleLayerOptions());
-      this.getLocationNameLayerOptions().then((options) => {
-        this.locationNameLayer?.update(options);
-      });
-      // 保证 lineLayer 获取到的 scale 方法是最新的
-      requestAnimationFrame(() => {
-        this.lineLayer?.update(this.getLineLayerOptions());
-      });
+      this.updateSubLayers();
     },
     400,
     {
       maxWait: 400,
     }
   );
-
-  protected onMapChange = () => {
-    this.updateSubLayers();
-  };
 
   protected updateClusterState() {
     const scene = this.scene;
