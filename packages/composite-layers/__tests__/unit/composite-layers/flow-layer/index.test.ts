@@ -1,6 +1,11 @@
 import { FlowLayer } from '../../../../src/composite-layers/flow-layer';
 import { DataProvider } from '../../../../src/composite-layers/flow-layer/data';
 import { FlowDataProviderState, FlowLayerOptions, FlowSource } from '../../../../src/composite-layers/flow-layer/types';
+import {
+  DefaultScaleType,
+  getColorAttribute,
+  getSizeAttribute,
+} from '../../../../src/composite-layers/flow-layer/utils';
 
 const flowSource: FlowSource = {
   data: [
@@ -97,6 +102,30 @@ describe('flow layer', () => {
         expect(layer.lineLayer?.options['style'].opacity).toBe(0.7);
         done(void 0);
       });
+    });
+  });
+
+  test('unit style', () => {
+    expect(getSizeAttribute(10, [0, 100])).toEqual(10);
+    expect(getSizeAttribute({ field: 'weight', value: [0, 10] }, [0, 100])).toEqual({
+      field: 'weight',
+      value: [0, 10],
+      scale: {
+        field: 'size',
+        type: DefaultScaleType,
+        domain: [0, 100],
+      },
+    });
+
+    expect(getColorAttribute('#f00', [0, 100])).toEqual('#f00');
+    expect(getColorAttribute({ field: 'weight', value: ['#f00', '#0f0'] }, [0, 100])).toEqual({
+      field: 'weight',
+      value: ['#f00', '#0f0'],
+      scale: {
+        field: 'color',
+        type: DefaultScaleType,
+        domain: [0, 100],
+      },
     });
   });
 });

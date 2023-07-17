@@ -5,7 +5,7 @@ import { PointLayer } from '../../../core-layers/point-layer';
 import { ColorAttr, SizeAttr } from '../../../types';
 import { buildIndex } from '../data/build-index';
 
-const DefaultScaleType = ScaleTypes.LINEAR;
+export const DefaultScaleType = ScaleTypes.LINEAR;
 
 export function getSizeAttribute(sizeAttr: SizeAttr, weightRange: [number, number]): SizeAttr {
   if (sizeAttr instanceof Object && !(sizeAttr instanceof Function) && !Array.isArray(sizeAttr)) {
