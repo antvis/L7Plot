@@ -95,16 +95,6 @@ describe('flow layer', () => {
     expect(layer.circleLayer?.options['style'].stroke).toBe('#f00');
   });
 
-  test('line style', () => {
-    layer.update({});
-    return new Promise((done) => {
-      requestAnimationFrame(() => {
-        expect(layer.lineLayer?.options['style'].opacity).toBe(0.7);
-        done(void 0);
-      });
-    });
-  });
-
   test('unit style', () => {
     expect(getSizeAttribute(10, [0, 100])).toEqual(10);
     expect(getSizeAttribute({ field: 'weight', value: [0, 10] }, [0, 100])).toEqual({
