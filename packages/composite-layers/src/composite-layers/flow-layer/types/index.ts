@@ -179,6 +179,33 @@ export type FlowSource = {
   parser: FlowParser;
 };
 
+export type FLowLayerActiveOptions = {
+  /**
+   * 当客流点呗激活时，是否自动高亮该其关联的客流线
+   */
+  enableCircleSpread?: boolean;
+  /**
+   * 当客流线呗激活时，是否自动高亮该其关联的客流点
+   */
+  enableLineSpread?: boolean;
+  /**
+   * 客流点颜色
+   */
+  circleColor?: PointLayerOptions['color'];
+  /**
+   * 客流点边框颜色
+   */
+  circleStrokeColor?: PointLayerStyleOptions['stroke'];
+  /**
+   * 客流线填充颜色
+   */
+  lineColor?: LineLayerOptions['color'];
+  /**
+   * 客流线边框颜色
+   */
+  lineStroke?: LineLayerStyleOptions['stroke'];
+};
+
 export interface FlowLayerOptions extends CompositeLayerOptions, Partial<ClusterOptions>, Partial<DisplayOptions> {
   /**
    * 客流数据 Source
@@ -294,4 +321,20 @@ export interface FlowLayerOptions extends CompositeLayerOptions, Partial<Cluster
    * 点名称字体偏移
    */
   locationNameOffset?: TextLayerStyleOptions['textOffset'];
+
+  /**
+   * 交互反馈
+   */
+  state?: {
+    /**
+     * 高亮交互
+     * @default false
+     */
+    active?: boolean | FLowLayerActiveOptions;
+    /**
+     * 选中交互
+     * @default false
+     */
+    select?: boolean | FLowLayerActiveOptions;
+  };
 }
