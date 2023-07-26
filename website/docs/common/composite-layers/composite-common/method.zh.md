@@ -118,6 +118,62 @@ layer.boxSelect(bounds: [number, number, number, number], callback: (...args: an
 layer.getLegend(name: string): ILegend;
 ```
 
+### state
+
+交互反馈。
+
+#### `active`
+
+`boolean | FLowLayerActiveOptions` optional default: `false`
+高亮交互
+
+```js
+{
+  state: {
+    active: false;
+  }
+}
+```
+
+```js
+{
+  state:{
+    active:{
+      enableCircleSpread: true,
+      enableLineSpread: true,
+      circleColor: '#2f54eb',
+      circleStrokeColor: '#2f54eb',
+      lineColor: '#2f54eb',
+      lineStroke: '#2f54eb';
+    }
+  }
+}
+```
+
+#### FLowLayerActiveOptions 配置如下：
+
+| 属性               | 描述                         | 类型                                       | 默认值  | 是否必填 |
+| ------------------ | ---------------------------- | ------------------------------------------ | ------- | -------- |
+| enableCircleSpread | 是否自动高亮该其关联的客流线 | `boolean`                                  | `false` | optional |
+| enableLineSpread   | 是否自动高亮该其关联的客流点 | `boolean`                                  | `false` | optional |
+| circleColor        | 客流点颜色                   | `string｜PointLayerOptions['color'] `      | `-`     | optional |
+| circleStrokeColor  | 客流点边框颜色               | `string｜PointLayerStyleOptions['stroke']` | `-`     | optional |
+| lineColor          | 客流线填充颜色               | `string｜LineLayerOptions['color']`        | `-`     | optional |
+| lineStroke         | 客流线边框颜色               | `string｜LineLayerStyleOptions['stroke']`  | `-`     | optional |
+
+#### `select`
+
+`boolean | FLowLayerActiveOptions` optional default: `false`
+选中交互
+
+```js
+{
+  state: {
+    select: false;
+  }
+}
+```
+
 ### getLegendItems
 
 获取图例数据。
