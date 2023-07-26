@@ -563,7 +563,7 @@ order: 4
 }
 ```
 
-### state
+### `options.`state
 
 交互反馈。
 
