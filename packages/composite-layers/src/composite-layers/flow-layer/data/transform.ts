@@ -26,9 +26,18 @@ export function transformSource(source: FlowSource): OriginData {
   const locationMap: Map<string, OriginLocation> = new Map();
   const flows: OriginFlow[] = [];
   const { data, parser } = source;
-  const { type, x: xField, y: yField, x1: x1Field, y1: y1Field, weight: weightField } = parser;
+  const {
+    type,
+    x: xField,
+    y: yField,
+    x1: x1Field,
+    y1: y1Field,
+    weight: weightField,
+    name: nameField,
+    name1: name1Field,
+  } = parser;
 
-  const makeSureLocation = (lng: number, lat: number, weight: number) => {
+  const makeSureLocation = ({ lng, lat, weight, name }: Omit<OriginLocation, 'id'>) => {
     const id = `${lng}-${lat}`;
     let location = locationMap.get(id);
     if (!location) {
@@ -37,6 +46,7 @@ export function transformSource(source: FlowSource): OriginData {
         lng: lng,
         lat: lat,
         weight,
+        name,
       };
       locationMap.set(id, location);
     }
@@ -50,9 +60,11 @@ export function transformSource(source: FlowSource): OriginData {
       const lng2 = +get(item, x1Field, 0);
       const lat2 = +get(item, y1Field, 0);
       const weight = +get(item, weightField, 0);
+      const name1 = nameField && get(item, nameField, undefined);
+      const name2 = name1Field && get(item, name1Field, undefined);
 
-      const location1 = makeSureLocation(lng1, lat1, weight);
-      const location2 = makeSureLocation(lng2, lat2, weight);
+      const location1 = makeSureLocation({ lng: lng1, lat: lat1, weight, name: name1 });
+      const location2 = makeSureLocation({ lng: lng2, lat: lat2, weight, name: name2 });
       flows.push({
         id: getFlowId(),
         fromId: location1.id,

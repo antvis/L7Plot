@@ -1,6 +1,11 @@
 import { FlowLayer } from '../../../../src/composite-layers/flow-layer';
 import { DataProvider } from '../../../../src/composite-layers/flow-layer/data';
 import { FlowDataProviderState, FlowLayerOptions, FlowSource } from '../../../../src/composite-layers/flow-layer/types';
+import {
+  DefaultScaleType,
+  getColorAttribute,
+  getSizeAttribute,
+} from '../../../../src/composite-layers/flow-layer/utils';
 
 const flowSource: FlowSource = {
   data: [
@@ -62,9 +67,9 @@ const layerOptions: FlowLayerOptions = {
   circleOpacity: 0.5,
   circleStrokeWidth: 2,
   circleStrokeColor: '#f00',
-  lineWidth: 3,
-  lineColor: '#00f',
   lineOpacity: 0.7,
+  locationNameColor: '#0f0',
+  locationNameSize: 12,
 };
 
 describe('flow layer', () => {
@@ -83,10 +88,34 @@ describe('flow layer', () => {
     expect(dataProvider.getFilterFlows(flowSource, dataProviderState).length).toBe(4);
   });
 
-  it('style', () => {
+  it('circle style', () => {
     layer.update({});
     expect(layer.circleLayer?.options['style'].opacity).toBe(0.5);
     expect(layer.circleLayer?.options['style'].strokeWidth).toBe(2);
     expect(layer.circleLayer?.options['style'].stroke).toBe('#f00');
+  });
+
+  test('unit style', () => {
+    expect(getSizeAttribute(10, [0, 100])).toEqual(10);
+    expect(getSizeAttribute({ field: 'weight', value: [0, 10] }, [0, 100])).toEqual({
+      field: 'weight',
+      value: [0, 10],
+      scale: {
+        field: 'size',
+        type: DefaultScaleType,
+        domain: [0, 100],
+      },
+    });
+
+    expect(getColorAttribute('#f00', [0, 100])).toEqual('#f00');
+    expect(getColorAttribute({ field: 'weight', value: ['#f00', '#0f0'] }, [0, 100])).toEqual({
+      field: 'weight',
+      value: ['#f00', '#0f0'],
+      scale: {
+        field: 'color',
+        type: DefaultScaleType,
+        domain: [0, 100],
+      },
+    });
   });
 });

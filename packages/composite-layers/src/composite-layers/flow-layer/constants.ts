@@ -1,6 +1,6 @@
 import { LineLayerOptions } from '../../core-layers/line-layer/types';
 import { PointLayerOptions } from '../../core-layers/point-layer/types';
-import { FlowLayerOptions } from './types';
+import { FLowLayerActiveOptions, FlowLayerOptions } from './types';
 
 export const EMPTY_CIRCLE_LAYER_SOURCE: PointLayerOptions['source'] = {
   data: [],
@@ -20,6 +20,19 @@ export const EMPTY_LINE_LAYER_SOURCE: LineLayerOptions['source'] = {
     x1: 'toLng',
     y1: 'toLat',
   },
+};
+
+export const DEFAULT_FLOW_LAYER_ACTIVE_OPTIONS: FLowLayerActiveOptions = {
+  enableCircleSpread: false,
+  enableLineSpread: false,
+  circleStrokeColor: '#ccc',
+  lineStroke: '#ccc',
+};
+
+export const DEFAULT_FLOW_LAYER_SELECT_OPTIONS: FLowLayerActiveOptions = {
+  ...DEFAULT_FLOW_LAYER_ACTIVE_OPTIONS,
+  enableCircleSpread: true,
+  enableLineSpread: true,
 };
 
 export const DEFAULT_OPTIONS: FlowLayerOptions = {
@@ -59,4 +72,13 @@ export const DEFAULT_OPTIONS: FlowLayerOptions = {
   lineStrokeWidth: 1,
   fadeOpacityEnabled: true,
   fadeOpacityAmount: 0,
+  showLocationName: false,
+  locationNameSize: 12,
+  locationNameColor: '#fff',
+  locationNameStroke: '#000',
+  locationNameStrokeWidth: 1,
+  state: {
+    active: DEFAULT_FLOW_LAYER_ACTIVE_OPTIONS,
+    select: DEFAULT_FLOW_LAYER_SELECT_OPTIONS,
+  },
 };

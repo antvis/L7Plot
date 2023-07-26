@@ -1,6 +1,9 @@
 import { LineLayerOptions, LineLayerStyleOptions } from '../../../core-layers/line-layer/types';
 import { PointLayerOptions, PointLayerStyleOptions } from '../../../core-layers/point-layer/types';
+import { TextLayerStyleOptions } from '../../../core-layers/text-layer/types';
 import { CompositeLayerOptions } from '../../../core/composite-layer';
+
+export type GetClusterName = (clusterLocation: ClusterLocation, index: number) => Promise<string> | string;
 
 export type ClusterOptions = {
   /**
@@ -88,6 +91,11 @@ export type OriginLocation = {
    * 权重
    */
   weight: number;
+
+  /**
+   * 结点名称
+   */
+  name?: string;
 };
 
 export type OriginFlow = {
@@ -161,12 +169,41 @@ export type FlowParser = {
   x1: string;
   y1: string;
   weight: string;
+  name?: string;
+  name1?: string;
 };
 
 export type FlowSource = {
   data: Record<string, any>[];
 
   parser: FlowParser;
+};
+
+export type FLowLayerActiveOptions = {
+  /**
+   * 当客流点呗激活时，是否自动高亮该其关联的客流线
+   */
+  enableCircleSpread?: boolean;
+  /**
+   * 当客流线呗激活时，是否自动高亮该其关联的客流点
+   */
+  enableLineSpread?: boolean;
+  /**
+   * 客流点颜色
+   */
+  circleColor?: PointLayerOptions['color'];
+  /**
+   * 客流点边框颜色
+   */
+  circleStrokeColor?: PointLayerStyleOptions['stroke'];
+  /**
+   * 客流线填充颜色
+   */
+  lineColor?: LineLayerOptions['color'];
+  /**
+   * 客流线边框颜色
+   */
+  lineStroke?: LineLayerStyleOptions['stroke'];
 };
 
 export interface FlowLayerOptions extends CompositeLayerOptions, Partial<ClusterOptions>, Partial<DisplayOptions> {
@@ -244,4 +281,60 @@ export interface FlowLayerOptions extends CompositeLayerOptions, Partial<Cluster
    * 半透明的权重
    */
   fadeOpacityAmount?: number;
+
+  /**
+   * 是否展示点名称
+   */
+  showLocationName?: boolean;
+
+  /**
+   * 获取聚合点名称的方法
+   */
+  getClusterLocationName?: GetClusterName;
+
+  /**
+   * 点名称字体大小
+   */
+  locationNameSize?: TextLayerStyleOptions['fontSize'];
+
+  /**
+   * 点名称字体填充颜色
+   */
+  locationNameColor?: TextLayerStyleOptions['fill'];
+
+  /**
+   * 点名称字体边框颜色
+   */
+  locationNameStroke?: TextLayerStyleOptions['stroke'];
+
+  /**
+   * 点名称字体边框宽度
+   */
+  locationNameStrokeWidth?: TextLayerStyleOptions['strokeWidth'];
+
+  /**
+   * 点名称字体边框透明度
+   */
+  locationNameStrokeOpacity?: TextLayerStyleOptions['strokeOpacity'];
+
+  /**
+   * 点名称字体偏移
+   */
+  locationNameOffset?: TextLayerStyleOptions['textOffset'];
+
+  /**
+   * 交互反馈
+   */
+  state?: {
+    /**
+     * 高亮交互
+     * @default false
+     */
+    active?: boolean | FLowLayerActiveOptions;
+    /**
+     * 选中交互
+     * @default false
+     */
+    select?: boolean | FLowLayerActiveOptions;
+  };
 }

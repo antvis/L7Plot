@@ -376,17 +376,255 @@ order: 4
 }
 ```
 
-### options.fadeOpacityEnabled
+### `options.`fadeOpacityEnabled
 
 `boolean` optional default: `true`
 
 客流线是否根据权重开启透明度渐变
 
-### options.fadeOpacityAmount
+### `options.`fadeOpacityAmount
 
 `number` optional default: `0`
 
 客流线透明度渐变权重
+
+### `options.`showLocationName
+
+`boolean` optional default: `false`
+
+是否展示客流点的名称文本
+
+### `options.`getClusterLocationName
+
+`(clusterLocation: ClusterLocation, index: number) => Promise<string> | string` optional default: `undefined`
+
+获取客流聚合点名称的方法，可接收 `Promise` 实例
+
+### `options.`locationNameSize
+
+`number|SizeStyleAttribute|Function` optional default: `{ field: 'weight', value: [1, 16] }`
+
+客流点名称文本大小
+
+```js
+{
+  locationNameSize: 12;
+}
+```
+
+#### `locationNameSize.`field
+
+`string` optional
+
+客流点名称文本大小值映射关联字段。
+
+```js
+{
+  locationNameSize: {
+    field: 'weight',
+    value: [1, 16]
+  }
+}
+```
+
+#### `locationNameSize.`value
+
+`number|number[]|Function` optional
+
+客流点名称文本大小值映射值。
+
+```js
+{
+  locationNameSize: {
+    field: 'weight',
+    value: ({ weight }) => {
+      return t > 20 ? 15 : 12
+    }
+  }
+}
+```
+
+#### `locationNameSize.`scale
+
+<embed src="@/docs/common/attribute/scale.zh.md"></embed>
+
+```js
+{
+  locationNameSize: {
+    field: 'weight',
+    value: [12, 15],
+    scale: { type: 'quantile' },
+  }
+}
+```
+
+### `options.`locationNameColor
+
+`string|ColorStyleAttribute|Function` optional default: `'#fff'`
+
+客流点名称文本填充颜色。
+
+```js
+{
+  locationNameColor: 'red';
+}
+```
+
+#### `locationNameColor.`field
+
+`string` optional
+
+客流点名称文本填充颜色值映射关联字段。
+
+```js
+{
+  locationNameColor: {
+    field: 'weight';
+  }
+}
+```
+
+#### `locationNameColor.`value
+
+`string|string[]|Function` optional
+
+客流点名称文本填充颜色值映射值。
+
+```js
+{
+  locationNameColor: {
+    field: 'weight',
+    value: ({ weight }) => {
+      return weight > 20 ? 'red': 'blue'
+    }
+  }
+}
+```
+
+#### `locationNameColor.`scale
+
+<embed src="@/docs/common/attribute/scale.zh.md"></embed>
+
+```js
+{
+  locationNameColor: {
+    field: 'weight',
+    value: ['#B8E1FF', '#001D70'],
+    scale: { type: 'linear' }
+  }
+}
+```
+
+### `options.`locationNameOffset
+
+`[number, number]` optional
+
+客流点名称文本位置偏移量
+
+```js
+{
+  locationNameOffset: [0, 60];
+}
+```
+
+### `options.`locationNameStroke
+
+`string` optional default: `'#000'`
+
+客流点名称文本描边颜色
+
+```js
+{
+  locationNameStroke: '#000';
+}
+```
+
+### `options.`locationNameStrokeWidth
+
+`number` optional default: `1`
+
+客流点名称文本描边宽度
+
+```js
+{
+  locationNameStrokeWidth: 1;
+}
+```
+
+### `options.`locationNameStrokeOpacity
+
+`number` optional
+
+客流点名称文本描边透明度
+
+```js
+{
+  locationNameStrokeOpacity: 1;
+}
+```
+
+### `options.`state
+
+交互反馈。
+
+#### `active`
+
+`boolean | FLowLayerActiveOptions` optional
+
+高亮交互
+
+#### FLowLayerActiveOptions 配置如下：
+
+| 属性               | 描述                         | 类型                                       | 默认值  | 是否必填 |
+| ------------------ | ---------------------------- | ------------------------------------------ | ------- | -------- |
+| enableCircleSpread | 是否自动高亮该其关联的客流线 | `boolean`                                  | `false` | optional |
+| enableLineSpread   | 是否自动高亮该其关联的客流点 | `boolean`                                  | `false` | optional |
+| circleColor        | 客流点颜色                   | `string｜PointLayerOptions['color'] `      | `-`     | optional |
+| circleStrokeColor  | 客流点边框颜色               | `string｜PointLayerStyleOptions['stroke']` | `-`     | optional |
+| lineColor          | 客流线填充颜色               | `string｜LineLayerOptions['color']`        | `-`     | optional |
+| lineStroke         | 客流线边框颜色               | `string｜LineLayerStyleOptions['stroke']`  | `-`     | optional |
+
+```js
+// 关闭高亮交互
+{
+  state: {
+    active: false;
+  }
+}
+// 开启高亮交互
+{
+  state:{
+    active:{
+      enableCircleSpread: true,
+      circleColor: '#2f54eb',
+    }
+  }
+}
+```
+
+#### `select`
+
+`boolean | FLowLayerActiveOptions` optional
+
+选中交互
+
+```js
+// 关闭选中交互
+{
+  state: {
+    active: false;
+  }
+}
+// 开启高亮交互
+{
+  state:{
+    active:{
+      enableLineSpread: true,
+      lineColor: '#2f54eb',
+    }
+  }
+}
+```
 
 ## 二、属性
 
