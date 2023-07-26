@@ -542,7 +542,7 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
     });
   }
 
-  protected _getCircleLayerActiveData(layerEvent: any, { enableCircleSpread }: FLowLayerActiveOptions) {
+  private _getCircleLayerActiveData(layerEvent: any, { enableCircleSpread }: FLowLayerActiveOptions) {
     const locationItem = layerEvent.feature as ClusterLocation;
     const { id: locationId } = locationItem;
     let flows: ClusterFlow[] = [];
@@ -558,7 +558,7 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
     };
   }
 
-  protected _getLineLayerActiveData(layerEvent: any, { enableLineSpread }: FLowLayerActiveOptions) {
+  private _getLineLayerActiveData(layerEvent: any, { enableLineSpread }: FLowLayerActiveOptions) {
     const flowItem = layerEvent.feature as ClusterFlow;
     const locations: ClusterLocation[] = [];
     const { fromId, toId } = flowItem;
@@ -579,21 +579,21 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
     };
   }
 
-  protected _getFullActiveOptions(): FLowLayerActiveOptions {
+  private _getFullActiveOptions(): FLowLayerActiveOptions {
     return {
       ...DEFAULT_FLOW_LAYER_ACTIVE_OPTIONS,
       ...(this.options.state?.active instanceof Object ? this.options.state?.active : {}),
     };
   }
 
-  protected _getFullSelectOptions(): FLowLayerActiveOptions {
+  private _getFullSelectOptions(): FLowLayerActiveOptions {
     return {
       ...DEFAULT_FLOW_LAYER_SELECT_OPTIONS,
       ...(this.options.state?.select instanceof Object ? this.options.state?.select : {}),
     };
   }
 
-  protected _getCircleActiveLayerOptions({
+  private _getCircleActiveLayerOptions({
     circleColor,
     circleStrokeColor,
   }: FLowLayerActiveOptions): Omit<PointLayerOptions, 'source'> {
@@ -609,7 +609,7 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
     };
   }
 
-  protected _getLineActiveLayerOptions({
+  private _getLineActiveLayerOptions({
     lineColor,
     lineStroke,
   }: FLowLayerActiveOptions): Omit<LineLayerOptions, 'source'> {
