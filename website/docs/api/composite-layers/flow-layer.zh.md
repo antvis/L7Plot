@@ -563,6 +563,69 @@ order: 4
 }
 ```
 
+### state
+
+交互反馈。
+
+#### `active`
+
+`boolean | FLowLayerActiveOptions` optional
+
+高亮交互
+
+#### FLowLayerActiveOptions 配置如下：
+
+| 属性               | 描述                         | 类型                                       | 默认值  | 是否必填 |
+| ------------------ | ---------------------------- | ------------------------------------------ | ------- | -------- |
+| enableCircleSpread | 是否自动高亮该其关联的客流线 | `boolean`                                  | `false` | optional |
+| enableLineSpread   | 是否自动高亮该其关联的客流点 | `boolean`                                  | `false` | optional |
+| circleColor        | 客流点颜色                   | `string｜PointLayerOptions['color'] `      | `-`     | optional |
+| circleStrokeColor  | 客流点边框颜色               | `string｜PointLayerStyleOptions['stroke']` | `-`     | optional |
+| lineColor          | 客流线填充颜色               | `string｜LineLayerOptions['color']`        | `-`     | optional |
+| lineStroke         | 客流线边框颜色               | `string｜LineLayerStyleOptions['stroke']`  | `-`     | optional |
+
+```js
+// 关闭高亮交互
+{
+  state: {
+    active: false;
+  }
+}
+// 开启高亮交互
+{
+  state:{
+    active:{
+      enableCircleSpread: true,
+      circleColor: '#2f54eb',
+    }
+  }
+}
+```
+
+#### `select`
+
+`boolean | FLowLayerActiveOptions` optional
+
+选中交互
+
+```js
+// 关闭选中交互
+{
+  state: {
+    active: false;
+  }
+}
+// 开启高亮交互
+{
+  state:{
+    active:{
+      enableLineSpread: true,
+      lineColor: '#2f54eb',
+    }
+  }
+}
+```
+
 ## 二、属性
 
 <embed src="@/docs/common/composite-layers/composite-common/attribute.zh.md"></embed>
