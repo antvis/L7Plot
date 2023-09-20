@@ -1,7 +1,7 @@
-import { createDiv } from './dom';
 import { Plot } from '../../src/core/plot';
-import { L7PlotOptions, PlotOptions } from '../../src/types';
 import { L7Plot } from '../../src/plot';
+import { L7PlotOptions, PlotOptions } from '../../src/types';
+import { createDiv } from './dom';
 
 const mapConfig = {
   type: 'mapbox',
