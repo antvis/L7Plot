@@ -49,6 +49,9 @@ export const LayerEventList: string[] = [
   // 单击事件
   'click',
   'unclick',
+  // 双击事件
+  'dblclick',
+  'undblclick',
   // 右键事件
   'contextmenu',
   'uncontextmenu',
