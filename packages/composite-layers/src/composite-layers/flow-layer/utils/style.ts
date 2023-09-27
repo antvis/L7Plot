@@ -74,8 +74,8 @@ export function getLineOffsetsAttribute(
       value: (fromId, toId) => {
         const fromCluster = clusterIndex.clusterIdMap.get(fromId);
         const toCluster = clusterIndex.clusterIdMap.get(toId);
-        const fromOffset = fromCluster ? sizeScale(fromCluster.weight) : 0;
-        const toOffset = toCluster ? sizeScale(toCluster.weight) : 0;
+        const fromOffset = (fromCluster ? sizeScale?.(fromCluster.weight) : 0) ?? 0;
+        const toOffset = (toCluster ? sizeScale?.(toCluster.weight) : 0) ?? 0;
         return [fromOffset, toOffset] as [number, number];
       },
     };

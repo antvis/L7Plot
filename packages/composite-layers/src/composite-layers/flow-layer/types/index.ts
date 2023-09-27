@@ -7,6 +7,10 @@ export type GetClusterName = (clusterLocation: ClusterLocation, index: number) =
 
 export type ClusterOptions = {
   /**
+   * 是否开启聚合
+   */
+  enableCluster: boolean;
+  /**
    * 客流点聚合类型
    */
   clusterType: 'HCA';

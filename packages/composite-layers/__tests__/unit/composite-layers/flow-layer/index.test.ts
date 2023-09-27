@@ -84,7 +84,7 @@ describe('flow layer', () => {
 
   it('data', () => {
     expect(dataProvider.getClusterLevels(flowSource, dataProviderState).length).toBe(10);
-    expect(dataProvider.getFilterLocations(flowSource, dataProviderState).length).toBe(7);
+    expect(dataProvider.getViewLocations(flowSource, dataProviderState).length).toBe(7);
     expect(dataProvider.getFilterFlows(flowSource, dataProviderState).length).toBe(4);
   });
 

@@ -10,6 +10,7 @@ export class DataProvider extends EventEmitter {
   public getSourceParser = (source: FlowSource, config: FlowDataProviderState) => source.parser;
   public getMapZoom = (source: FlowSource, config: FlowDataProviderState) => config.mapStatus.zoom;
   public getMapBounds = (source: FlowSource, config: FlowDataProviderState) => config.mapStatus.bounds;
+  public getEnableCluster = (source: FlowSource, config: FlowDataProviderState) => config.enableCluster;
   public getClusterType = (source: FlowSource, config: FlowDataProviderState) => config.clusterType;
   public getExtent = (source: FlowSource, config: FlowDataProviderState) => config.clusterExtent;
   public getNodeSize = (source: FlowSource, config: FlowDataProviderState) => config.clusterNodeSize;
@@ -31,6 +32,7 @@ export class DataProvider extends EventEmitter {
    */
   public getClusterOptions = createSelector(
     this.getClusterType,
+    this.getEnableCluster,
     this.getExtent,
     this.getNodeSize,
     this.getRadius,
@@ -39,6 +41,7 @@ export class DataProvider extends EventEmitter {
     this.getZoomStep,
     function (
       clusterType,
+      enableCluster,
       clusterExtent,
       clusterNodeSize,
       clusterRadius,
@@ -46,7 +49,16 @@ export class DataProvider extends EventEmitter {
       maxZoom,
       clusterZoomStep
     ): ClusterState {
-      return { clusterType, clusterExtent, clusterNodeSize, clusterRadius, minZoom, maxZoom, clusterZoomStep };
+      return {
+        clusterType,
+        enableCluster,
+        clusterExtent,
+        clusterNodeSize,
+        clusterRadius,
+        minZoom,
+        maxZoom,
+        clusterZoomStep,
+      };
     }
   );
 
@@ -71,7 +83,7 @@ export class DataProvider extends EventEmitter {
   /**
    * 获取当前需要展示的聚合点
    */
-  public getFilterLocations = createSelector(
+  public getViewLocations = createSelector(
     this.getClusterIndex,
     this.getMapZoom,
     this.getMapBounds,
@@ -109,7 +121,7 @@ export class DataProvider extends EventEmitter {
    * 获取当前需要展示的聚合线数据
    */
   public getFilterFlows = createSelector(
-    this.getFilterLocations,
+    this.getViewLocations,
     this.getAggregatedFlows,
     this.getMaxTopFlowNum,
     (filterLocations, fullFlows, maxTopFlowNum) => {
@@ -127,6 +139,11 @@ export class DataProvider extends EventEmitter {
       return flows;
     }
   );
+
+  public getFilterLocations = createSelector(this.getViewLocations, this.getFilterFlows, (locations, flows) => {
+    const locationIdSet = new Set(flows.map((flow) => [flow.fromId, flow.toId]).flat());
+    return locations.filter((location) => locationIdSet.has(location.id));
+  });
 
   /**
    * 获取当前层级下筛选前的权重区间，用于计算客流线的宽度和颜色深浅

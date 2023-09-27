@@ -376,6 +376,12 @@ order: 4
 }
 ```
 
+### `options.`enableCluster
+
+`boolean` optional default: `true`
+
+是否开启根据
+
 ### `options.`fadeOpacityEnabled
 
 `boolean` optional default: `true`
