@@ -44,6 +44,7 @@ const dataProviderState: FlowDataProviderState = {
     zoom: 10.68,
     bounds: [121.489159, 31.053299, 121.779643, 31.279859],
   },
+  enableCluster: true,
   clusterType: 'HCA',
   clusterZoomStep: 1,
   clusterNodeSize: 64,
@@ -85,7 +86,7 @@ describe('flow layer', () => {
   it('data', () => {
     expect(dataProvider.getClusterLevels(flowSource, dataProviderState).length).toBe(10);
     expect(dataProvider.getViewLocations(flowSource, dataProviderState).length).toBe(7);
-    expect(dataProvider.getFilterFlows(flowSource, dataProviderState).length).toBe(4);
+    expect(dataProvider.getFilterFlows(flowSource, dataProviderState).length).toBe(7);
   });
 
   it('circle style', () => {
