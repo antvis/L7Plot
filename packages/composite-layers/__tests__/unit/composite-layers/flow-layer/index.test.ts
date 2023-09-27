@@ -4,6 +4,7 @@ import { FlowDataProviderState, FlowLayerOptions, FlowSource } from '../../../..
 import {
   DefaultScaleType,
   getColorAttribute,
+  getOpacityColorAttribute,
   getSizeAttribute,
 } from '../../../../src/composite-layers/flow-layer/utils';
 
@@ -118,5 +119,10 @@ describe('flow layer', () => {
         domain: [0, 100],
       },
     });
+
+    const opacityAttribute = getOpacityColorAttribute([0, 100], 100);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    expect(opacityAttribute?.field).toBe('weight');
   });
 });
