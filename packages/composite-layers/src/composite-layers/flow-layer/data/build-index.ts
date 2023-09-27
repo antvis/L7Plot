@@ -83,6 +83,9 @@ export function buildIndex(clusterLevels: ClusterLevel[]) {
       return targetCluster;
     }
     let cluster = clusterIdMap.get(locationId);
+    if (cluster && cluster.zoom <= zoom) {
+      return cluster;
+    }
     let parentCluster = (cluster?.parentId && clusterIdMap.get(cluster.parentId)) || undefined;
     while (cluster && parentCluster) {
       if (cluster.zoom >= zoom && zoom >= parentCluster.zoom) {

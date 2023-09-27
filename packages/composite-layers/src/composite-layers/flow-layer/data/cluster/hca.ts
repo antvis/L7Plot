@@ -104,7 +104,7 @@ function getNextClusters(
  * @returns
  */
 export function clusterByHCA(locations: OriginLocation[], state: ClusterState) {
-  const { minZoom, maxZoom, clusterZoomStep, clusterNodeSize } = state;
+  const { minZoom, maxZoom, clusterZoomStep, clusterNodeSize, enableCluster } = state;
   const trees: (ClusterLocationKDBush | undefined)[] = [];
   let clusters: ClusterLocation[] = locations
     .map((location) => ({
@@ -118,23 +118,25 @@ export function clusterByHCA(locations: OriginLocation[], state: ClusterState) {
     .sort((a, b) => a.weight - b.weight);
 
   trees[maxZoom + 1] = createKDTree(clusters, clusterNodeSize);
-  let prevZoom = maxZoom + 1;
-  for (let zoom = maxZoom; zoom >= minZoom; zoom -= clusterZoomStep) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const newClusters = getNextClusters(clusters, zoom, trees[prevZoom]!, state);
-    if (newClusters.length === clusters.length) {
-      trees[zoom] = trees[prevZoom];
-      trees[prevZoom] = undefined;
-      prevZoom = zoom;
-    } else {
-      prevZoom = zoom;
-      clusters = newClusters.sort((a, b) => a.weight - b.weight);
-      trees[zoom] = createKDTree(clusters, clusterNodeSize);
+  if (enableCluster) {
+    let prevZoom = maxZoom + 1;
+    for (let zoom = maxZoom; zoom >= minZoom; zoom -= clusterZoomStep) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const newClusters = getNextClusters(clusters, zoom, trees[prevZoom]!, state);
+      if (newClusters.length === clusters.length) {
+        trees[zoom] = trees[prevZoom];
+        trees[prevZoom] = undefined;
+        prevZoom = zoom;
+      } else {
+        prevZoom = zoom;
+        clusters = newClusters.sort((a, b) => a.weight - b.weight);
+        trees[zoom] = createKDTree(clusters, clusterNodeSize);
+      }
     }
-  }
 
-  if (trees.length === 0) {
-    return [];
+    if (trees.length === 0) {
+      return [];
+    }
   }
 
   const clusterLevels: ClusterLevel[] = [];

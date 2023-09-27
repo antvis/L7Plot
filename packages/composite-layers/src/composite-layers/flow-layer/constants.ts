@@ -47,6 +47,7 @@ export const DEFAULT_OPTIONS: FlowLayerOptions = {
       weight: 'weight',
     },
   },
+  enableCluster: true,
   clusterType: 'HCA',
   clusterZoomStep: 1,
   clusterNodeSize: 64,

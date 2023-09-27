@@ -4,6 +4,7 @@ import { FlowDataProviderState, FlowLayerOptions, FlowSource } from '../../../..
 import {
   DefaultScaleType,
   getColorAttribute,
+  getOpacityColorAttribute,
   getSizeAttribute,
 } from '../../../../src/composite-layers/flow-layer/utils';
 
@@ -44,6 +45,7 @@ const dataProviderState: FlowDataProviderState = {
     zoom: 10.68,
     bounds: [121.489159, 31.053299, 121.779643, 31.279859],
   },
+  enableCluster: true,
   clusterType: 'HCA',
   clusterZoomStep: 1,
   clusterNodeSize: 64,
@@ -84,8 +86,8 @@ describe('flow layer', () => {
 
   it('data', () => {
     expect(dataProvider.getClusterLevels(flowSource, dataProviderState).length).toBe(10);
-    expect(dataProvider.getFilterLocations(flowSource, dataProviderState).length).toBe(7);
-    expect(dataProvider.getFilterFlows(flowSource, dataProviderState).length).toBe(4);
+    expect(dataProvider.getViewLocations(flowSource, dataProviderState).length).toBe(7);
+    expect(dataProvider.getFilterFlows(flowSource, dataProviderState).length).toBe(7);
   });
 
   it('circle style', () => {
@@ -117,5 +119,10 @@ describe('flow layer', () => {
         domain: [0, 100],
       },
     });
+
+    const opacityAttribute = getOpacityColorAttribute([0, 100], 100);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    expect(opacityAttribute?.field).toBe('weight');
   });
 });
