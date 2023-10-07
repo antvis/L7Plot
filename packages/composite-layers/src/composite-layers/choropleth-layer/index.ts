@@ -1,15 +1,15 @@
 import { clone, isEqual, isUndefined, omit } from '@antv/util';
-import { CompositeLayer } from '../../core/composite-layer';
 import { LineLayer } from '../../core-layers/line-layer';
 import { PolygonLayer } from '../../core-layers/polygon-layer';
 import { TextLayer } from '../../core-layers/text-layer';
-import { getDefaultState } from './adaptor';
-import { ChoroplethLayerOptions, ChoroplethLayerSourceOptions } from './types';
+import { CompositeLayer } from '../../core/composite-layer';
 import { ICoreLayer, ISource, MouseEvent } from '../../types';
 import { EMPTY_GEOJSON_SOURCE } from '../common/constants';
-import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
 import { isGestureMultiSelect } from '../common/multi-select';
+import { getDefaultState } from './adaptor';
+import { DEFAULT_OPTIONS, DEFAULT_STATE } from './constants';
 import { getLabelLayerOptions, isLabelPosition, parserLabeSourceData } from './helper';
+import { ChoroplethLayerOptions, ChoroplethLayerSourceOptions } from './types';
 
 export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
   /**
@@ -188,6 +188,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       lineOpacity,
       lineDash,
       lineType,
+      filter,
     } = this.options;
 
     const strokeStyle = {
@@ -204,6 +205,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       size: lineWidth,
       color: strokeColor,
       style: strokeStyle,
+      filter,
     };
 
     return options;

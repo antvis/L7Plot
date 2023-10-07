@@ -5,6 +5,7 @@ import { MappingAttribute } from '../adaptor/attribute';
 import {
   AnimateAttr,
   ColorAttr,
+  FilterAttr,
   ICoreLayer,
   ILayer,
   ILegend,
@@ -54,6 +55,10 @@ export interface CoreLayerOptions extends Partial<LayerBaseConfig> {
    * 纹理贴图
    */
   texture?: TextureAttr;
+  /**
+   * 数据过滤
+   */
+  filter?: FilterAttr;
   /**
    * 图层样式
    */
@@ -183,7 +188,7 @@ export abstract class CoreLayer<O extends CoreLayerOptions> extends EventEmitter
    * 映射图层属性
    */
   protected adaptorLayerAttr(isDiff = true): void {
-    const attrKeys = ['shape', 'color', 'size', 'scale', 'texture', 'style', 'animate', 'state'];
+    const attrKeys = ['shape', 'color', 'size', 'scale', 'texture', 'filter', 'style', 'animate', 'state'];
     const currentAttrs = this.adaptorAttrOptions(this.options);
     const lastAttrs = this.adaptorAttrOptions(this.lastOptions);
 
