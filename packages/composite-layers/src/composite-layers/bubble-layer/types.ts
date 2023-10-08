@@ -53,6 +53,10 @@ export interface BubbleLayerOptions extends CompositeLayerOptions {
    */
   label?: LabelOptions;
   /**
+   * 数据过滤
+   */
+  filter?: PointLayerOptions['filter'];
+  /**
    * 交互反馈
    */
   state?: {

@@ -1,8 +1,8 @@
-import { isUndefined, uniqueId } from '@antv/util';
 import EventEmitter from '@antv/event-emitter';
 import { ILegend, Source } from '@antv/l7';
+import { isUndefined, uniqueId } from '@antv/util';
+import { CompositeLayerType, ICompositeLayer, ICoreLayer, ISource, LayerBlend, Scene, SourceOptions } from '../types';
 import { deepMergeLayerOptions, isSourceChanged } from '../utils';
-import { Scene, SourceOptions, ICompositeLayer, CompositeLayerType, LayerBlend, ICoreLayer, ISource } from '../types';
 import { CompositeLayerEvent, LayerGroupEvent, OriginLayerEventList } from './constants';
 import { LayerGroup } from './layer-group';
 

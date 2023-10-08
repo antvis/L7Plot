@@ -1,7 +1,7 @@
 import { IParserCfg } from '@antv/l7';
 import { PolygonLayerOptions } from '../../core-layers/polygon-layer/types';
 import { CompositeLayerOptions } from '../../core/composite-layer';
-import { ISourceCFG, ISource } from '../../types';
+import { ISource, ISourceCFG } from '../../types';
 import { LabelOptions } from '../common/types';
 
 /**
@@ -81,6 +81,10 @@ export interface ChoroplethLayerOptions extends CompositeLayerOptions {
      */
     position?: LabelPosition;
   };
+  /**
+   * 数据过滤
+   */
+  filter?: PolygonLayerOptions['filter'];
   /**
    * 交互反馈
    */

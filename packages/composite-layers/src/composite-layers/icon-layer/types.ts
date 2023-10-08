@@ -1,8 +1,7 @@
-import { ISourceCFG, ISource } from '../../types';
-import { PointLayerStyleOptions } from '../../core-layers/point-layer/types';
-import { PointLayerOptions } from '../../core-layers/point-layer/types';
+import { PointLayerOptions, PointLayerStyleOptions } from '../../core-layers/point-layer/types';
 import { TextLayerStyleOptions } from '../../core-layers/text-layer/types';
 import { CompositeLayerOptions } from '../../core/composite-layer';
+import { ISource, ISourceCFG } from '../../types';
 import { LabelOptions } from '../common/types';
 
 /**
@@ -60,6 +59,10 @@ export interface IconLayerOptions extends CompositeLayerOptions {
    * 文本标注
    */
   label?: LabelOptions;
+  /**
+   * 数据过滤
+   */
+  filter?: PointLayerOptions['filter'];
   /**
    * 交互反馈
    */
