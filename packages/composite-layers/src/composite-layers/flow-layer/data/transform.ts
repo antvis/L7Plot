@@ -24,7 +24,7 @@ export function latY(lat: number) {
 
 export function transformSource(source: FlowSource): OriginData {
   const locationMap: Map<string, OriginLocation> = new Map();
-  const flows: OriginFlow[] = [];
+  const flowMap: Map<string, OriginFlow> = new Map();
   const { data, parser } = source;
   const {
     type,
@@ -53,24 +53,31 @@ export function transformSource(source: FlowSource): OriginData {
     return location;
   };
 
-  if (type === 'json' && xField && yField && x1Field && y1Field && weightField) {
+  if (type === 'json' && xField && yField && x1Field && y1Field) {
     data.forEach((item) => {
       const lng1 = +get(item, xField, 0);
       const lat1 = +get(item, yField, 0);
       const lng2 = +get(item, x1Field, 0);
       const lat2 = +get(item, y1Field, 0);
-      const weight = +get(item, weightField, 0);
-      const name1 = nameField && get(item, nameField, undefined);
-      const name2 = name1Field && get(item, name1Field, undefined);
+      const weight = weightField ? +get(item, weightField, 0) : 1;
+      const flowKey = `${lng1}-${lat1}-${lng2}-${lat2}`;
 
-      const location1 = makeSureLocation({ lng: lng1, lat: lat1, weight, name: name1 });
-      const location2 = makeSureLocation({ lng: lng2, lat: lat2, weight, name: name2 });
-      flows.push({
-        id: getFlowId(),
-        fromId: location1.id,
-        toId: location2.id,
-        weight,
-      });
+      const targetFlow = flowMap.get(flowKey);
+      if (targetFlow) {
+        targetFlow.weight += weight;
+      } else {
+        const name1 = nameField && get(item, nameField, undefined);
+        const name2 = name1Field && get(item, name1Field, undefined);
+
+        const location1 = makeSureLocation({ lng: lng1, lat: lat1, weight, name: name1 });
+        const location2 = makeSureLocation({ lng: lng2, lat: lat2, weight, name: name2 });
+        flowMap.set(flowKey, {
+          id: getFlowId(),
+          fromId: location1.id,
+          toId: location2.id,
+          weight,
+        });
+      }
     });
   } else {
     console.error('FlowLayer 的 source 输入有误，请检查 source 传参');
@@ -78,6 +85,6 @@ export function transformSource(source: FlowSource): OriginData {
 
   return {
     locations: Array.from(locationMap.values()),
-    flows,
+    flows: Array.from(flowMap.values()),
   };
 }
