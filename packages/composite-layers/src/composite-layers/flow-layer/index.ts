@@ -1,3 +1,6 @@
+import bbox from '@turf/bbox';
+import bboxPolygon from '@turf/bbox-polygon';
+import transformScale from '@turf/transform-scale';
 import { debounce } from 'lodash-es';
 import { LineLayer } from '../../core-layers/line-layer';
 import { LineLayerOptions } from '../../core-layers/line-layer/types';
@@ -234,7 +237,7 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
     400,
     {
       maxWait: 400,
-    }
+    },
   );
 
   protected updateClusterState() {
@@ -245,11 +248,15 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
     const maxZoom = scene.getMaxZoom();
     const minZoom = scene.getMinZoom();
 
+    const currentBoundPolygon = bboxPolygon(scene.getBounds().flat() as MapStatus['bounds']);
+    // 将当前地图展示的区域扩大 10% 作为客流点线范围计算时的缓冲区
+    const currentBoundPolygonScale = transformScale(currentBoundPolygon, 1.1);
+
     this.dataProviderState = {
       ...(this.options as Required<FlowLayerOptions>),
       mapStatus: {
         zoom: scene.getZoom(),
-        bounds: scene.getBounds().flat() as MapStatus['bounds'],
+        bounds: bbox(currentBoundPolygonScale) as MapStatus['bounds'],
       },
       maxZoom,
       minZoom,
@@ -345,7 +352,7 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
       const flowWeightRange = this.dataProvider.getFlowWeightRange(this.options.source, this.dataProviderState);
       const filterFlowWeightRange = this.dataProvider.getFilterFlowWeightRange(
         this.options.source,
-        this.dataProviderState
+        this.dataProviderState,
       );
 
       options.source.data = this.dataProvider.getFilterFlows(this.options.source, this.dataProviderState);
@@ -385,7 +392,7 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
 
     const originSource = Object.assign(
       {},
-      showLocationName ? this.circleLayer?.options['source'] ?? EMPTY_CIRCLE_LAYER_SOURCE : EMPTY_CIRCLE_LAYER_SOURCE
+      showLocationName ? this.circleLayer?.options['source'] ?? EMPTY_CIRCLE_LAYER_SOURCE : EMPTY_CIRCLE_LAYER_SOURCE,
     );
 
     if (getClusterLocationName) {
@@ -399,7 +406,7 @@ export class FlowLayer extends CompositeLayer<FlowLayerOptions> {
             }
           }
           return location;
-        })
+        }),
       );
     }
 

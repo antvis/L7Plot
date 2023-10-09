@@ -41,6 +41,9 @@
     "@antv/event-emitter": "^0.1.2",
     "@antv/scale": "^0.4.12",
     "@antv/util": "^2.0.14",
+    "@turf/bbox": "^6.5.0",
+    "@turf/bbox-polygon": "^6.5.0",
+    "@turf/transform-scale": "^6.5.0",
     "kdbush": "^3.0.0",
     "lodash-es": "^4.17.21",
     "reselect": "^4.1.8"
