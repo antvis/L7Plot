@@ -172,7 +172,7 @@ export type FlowParser = {
   y: string;
   x1: string;
   y1: string;
-  weight: string;
+  weight?: string;
   name?: string;
   name1?: string;
 };
