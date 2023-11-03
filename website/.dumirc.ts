@@ -330,10 +330,13 @@ export default defineConfig({
     '@': __dirname,
   },
   links: [],
-  scripts: ['https://webapi.amap.com/maps?v=2.0&key=ff533602d57df6f8ab3b0fea226ae52f'],
+  scripts: [
+    `window._AMapSecurityConfig = {
+      securityJsCode: "290ddc4b0d33be7bc9b354bc6a4ca614"
+    }`,
+    'https://webapi.amap.com/maps?v=2.0&key=6f025e700cbacbb0bb866712d20bb35c',
+  ],
   // 同步 gh-page CNAME 文件
   copy: isProduction ? ['docs/CNAME'] : [],
-  styles: [
-    `.lil-gui { position: absolute; top: 16px; right: 16px; z-index: 1000000; }`
-  ]
+  styles: [`.lil-gui { position: absolute; top: 16px; right: 16px; z-index: 1000000; }`],
 });
