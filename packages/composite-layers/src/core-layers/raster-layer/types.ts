@@ -1,14 +1,5 @@
 import { CoreLayerOptions } from '../../core/core-layer';
-import { ShapeAttr } from '../../types';
-
-export interface IColorRamp {
-  /* 值域色带位置分布 */
-  positions: number[];
-  /* 值域色带颜色分布 */
-  colors: string[];
-  /* 值域色带比重分布 */
-  weights?: number[];
-}
+import { IColorRamp, ShapeAttr } from '../../types';
 
 export type RasterDataTileLayerStyleOptions = {
   /* 透明度 */

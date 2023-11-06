@@ -11,6 +11,7 @@ import type {
   ILegendSegmentItem,
   ILegendClassificaItem,
   ILegend,
+  IColorRamp,
 } from '@antv/l7';
 import { BlendType } from '@antv/l7';
 
@@ -25,6 +26,7 @@ export type {
   ILegendClassificaItem,
   ILegend,
   Scene,
+  IColorRamp,
 };
 
 export { BlendType };

@@ -1,5 +1,5 @@
-import type { IColorRamp } from '@antv/l7';
 import { CoreLayerOptions } from '../../core/core-layer';
+import { IColorRamp } from '../../types';
 
 /**
  * 热力普通图层 色带
