@@ -1,7 +1,38 @@
 import { Source } from '@antv/l7';
-import { deepMix, isEqual } from '@antv/util';
+import { isEqual, isPlainObject } from '@antv/util';
 
 export * from './keypress';
+
+function deepMix(dist: Record<string, any>, src: Record<string, any>, level: number = 0, maxLevel: number = 5) {
+  for (const key in src) {
+    if (Object.prototype.hasOwnProperty.call(src, key)) {
+      const value = src[key];
+      if (value !== null && isPlainObject(value)) {
+        if (!isPlainObject(dist[key])) {
+          dist[key] = {};
+        }
+        if (level < maxLevel) {
+          deepMix(dist[key], value, level + 1, maxLevel);
+        } else {
+          dist[key] = src[key];
+        }
+      } else if (Array.isArray(value)) {
+        dist[key] = [];
+        dist[key] = dist[key].concat(value);
+      } else if (value !== undefined) {
+        dist[key] = value;
+      }
+    }
+  }
+}
+
+const deepMixOptions = (rst: any, ...args: any[]) => {
+  for (let i = 0; i < args.length; i += 1) {
+    // 只进行最大 1 level 合并
+    deepMix(rst, args[i], 0, 1);
+  }
+  return rst;
+};
 
 /**
  * 深克隆图层配置项
@@ -9,7 +40,7 @@ export * from './keypress';
 export const deepMergeLayerOptions = <O extends { source: any }>(options: Partial<O>, srcOptions: Partial<O>): O => {
   const { source, ...restOptions } = options;
   const { source: srcSource, ...restSrcOptions } = srcOptions;
-  const target = { ...deepMix({}, restOptions, restSrcOptions) };
+  const target = deepMixOptions({}, restOptions, restSrcOptions);
 
   // source 是实例的情况
   if ((srcSource as any) instanceof Source) {
