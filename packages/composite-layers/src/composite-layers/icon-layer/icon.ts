@@ -202,7 +202,7 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
     return subLayers;
   }
 
-  protected updateSubLayers() {
+  protected updateSubLayers(options: Partial<T>) {
     this.iconLayer.update(this.getIconLayerOptions(), false);
     this.iconLabelLayer.update(getLabelLayerOptions<IconLayerOptions>(this.options), false);
   }
@@ -215,7 +215,7 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
       this.selectData.length === selectData.length &&
       isEqual(
         this.selectData.map(({ featureId }) => featureId),
-        selectData.map(({ featureId }) => featureId)
+        selectData.map(({ featureId }) => featureId),
       )
     ) {
       return;
