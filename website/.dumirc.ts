@@ -305,8 +305,14 @@ export default defineConfig({
     ],
     /** 首页配置 结束 */
     playground: {
+      container: '<div id="container" style="position: relative; height: 100%; min-height: 500px;" />',
       playgroundDidMount: 'console.log("playgroundDidMount");',
       playgroundWillUnmount: 'console.log("playgroundWillUnmount");',
+      dependencies: {
+        '@antv/l7': '^2.x',
+        '@antv/l7plot': 'latest',
+        '@antv/l7-composite-layers': 'latest',
+      },
       devDependencies: {
         typescript: 'latest',
       },
