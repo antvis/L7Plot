@@ -6,13 +6,13 @@ type LegendItemTick = { value: number | string; color: string };
 type LegendItemExtent = { value: [number, number]; color: string };
 
 const isLegendItemI = (
-  legendItems: ILegendSegmentItem[] | ILegendClassificaItem[]
+  legendItems: ILegendSegmentItem[] | ILegendClassificaItem[],
 ): legendItems is LegendItemTick[] => {
   return !Array.isArray(legendItems[0].value);
 };
 
 export const getColorLegendItems = (
-  legendItems: ILegendSegmentItem[] | ILegendClassificaItem[]
+  legendItems: ILegendSegmentItem[] | ILegendClassificaItem[],
 ): CategoryLegendListItem[] => {
   if (isLegendItemI(legendItems)) {
     return legendItems;
@@ -21,7 +21,7 @@ export const getColorLegendItems = (
   // TODO: scale nice
   const items: LegendItemExtent[] = legendItems.map((item) => ({
     ...item,
-    value: [round(item.value[0], 2), round(item.value[1], 2)],
+    value: [round(item.value[0], 4), round(item.value[1], 4)],
   }));
 
   return items;
