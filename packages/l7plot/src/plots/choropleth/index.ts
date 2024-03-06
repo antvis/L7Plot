@@ -203,7 +203,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     if (legend) {
       setTimeout(() => {
         this.updateLegendControl(legend);
-      });
+      }, 500);
     }
 
     this.emit('change-data');
@@ -241,7 +241,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   private createCountryBoundaryLayer(data: FeatureCollection, plotConfig?: ChoroplethOptions) {
     const { chinaBoundaryLayer, chinaHkmBoundaryLayer, chinaDisputeBoundaryLayer } = createCountryBoundaryLayer(
       data,
-      plotConfig
+      plotConfig,
     );
     this.chinaBoundaryLayer = chinaBoundaryLayer;
     this.chinaHkmBoundaryLayer = chinaHkmBoundaryLayer;
@@ -255,7 +255,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
   protected createLabelLayer(source: Source, label: LabelOptions): TextLayer {
     const data = source['originData'].features
       .map(({ properties }) =>
-        Object.assign({}, properties, { centroid: properties['centroid'] || properties['center'] })
+        Object.assign({}, properties, { centroid: properties['centroid'] || properties['center'] }),
       )
       .filter(({ centroid }) => centroid);
     const { visible, minZoom, maxZoom, zIndex = 0 } = this.options;
@@ -325,6 +325,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    */
   protected initLayersEvent() {
     this.initDrillEvent();
+    // this.initLegendEvent();
   }
 
   /**
@@ -373,6 +374,18 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     this.fillAreaLayer.on(triggerUp, this.onDrillUpHander);
     // 下钻事件
     this.fillAreaLayer.on(triggerDown, this.onDrillDownHander);
+  }
+
+  /**
+   * 初始化图例事件
+   */
+  private initLegendEvent() {
+    const legend = this.options.legend;
+    if (!legend) return;
+    const onUpdateLegendData = () => {
+      this.updateLegendControl(legend);
+    };
+    this.fillAreaLayer.on('legend:color', onUpdateLegendData);
   }
 
   /**
