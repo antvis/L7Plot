@@ -119,7 +119,7 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
       this.highlightLayer,
       this.selectFillLayer,
       this.selectStrokeLayer,
-      options
+      options,
     );
   }
 
@@ -146,7 +146,11 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
       return;
     }
     const features = feature ? [feature] : [];
-    this.highlightLayer.setData({ type: 'FeatureCollection', features }, { parser: { type: 'geojson' } });
+    if (this.highlightLayer.getSource()) {
+      this.highlightLayer.setData({ type: 'FeatureCollection', features }, { parser: { type: 'geojson' } });
+    } else {
+      this.highlightLayer.source({ type: 'FeatureCollection', features: [] }, { parser: { type: 'geojson' } });
+    }
     this.highlightLayerData = featureId;
   }
 
@@ -155,7 +159,7 @@ export class AreaLayer extends PlotLayer<AreaLayerOptions> {
       this.selectData.length === selectData.length &&
       isEqual(
         this.selectData.map(({ featureId }) => featureId),
-        selectData.map(({ featureId }) => featureId)
+        selectData.map(({ featureId }) => featureId),
       )
     ) {
       return;

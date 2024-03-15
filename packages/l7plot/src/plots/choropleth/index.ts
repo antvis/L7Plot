@@ -197,15 +197,6 @@ export class Choropleth extends Plot<ChoroplethOptions> {
     const { data: geoData, sourceCFG } = this.parserSourceConfig(this.options.source);
     this.source.setData(geoData, sourceCFG);
 
-    // 更新 legend
-    // TODO: 数据更新后，图层尚未执行更新，后续加图层 update 事件来解决
-    const legend = this.options.legend;
-    if (legend) {
-      setTimeout(() => {
-        this.updateLegendControl(legend);
-      }, 500);
-    }
-
     this.emit('change-data');
   }
 
@@ -325,7 +316,7 @@ export class Choropleth extends Plot<ChoroplethOptions> {
    */
   protected initLayersEvent() {
     this.initDrillEvent();
-    // this.initLegendEvent();
+    this.initLegendEvent();
   }
 
   /**
