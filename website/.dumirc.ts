@@ -57,7 +57,7 @@ export default defineConfig({
             zh: '图表示例',
             en: 'Examples',
           },
-          link: `/examples/gallery`,
+          link: `/examples`,
           type: 'primary',
         },
         {
