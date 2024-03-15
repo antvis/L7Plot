@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkl7plot_website=self.webpackChunkl7plot_website||[]).push([[1009],{63430:function(e,t,n){n.r(t),n.d(t,{default:function(){return c}});var u=n(32997),r=n(27378),c=function(){var e=(0,u.UO)().id,t=((0,u.WF)().demos[e]||{}).component;return t&&(0,r.createElement)(t)}}}]);
