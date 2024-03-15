@@ -65,4 +65,8 @@ export const LayerEventList: string[] = [
   'mousedown',
   'uncontextmenu',
   'unpick',
+  // 数据映射更新，图例更新事件
+  'legend',
+  'legend:color',
+  'legend:size',
 ];

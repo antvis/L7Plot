@@ -118,7 +118,7 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
     source: Source,
     label?: false | LabelOptions,
     plotLayerConfig?: PlotLayerOptions,
-    labelLayer?: TextLayer
+    labelLayer?: TextLayer,
   ) {
     if (label) {
       if (labelLayer) {
@@ -259,7 +259,7 @@ export abstract class Plot<O extends PlotOptions> extends Map<O> {
     if (legend) {
       setTimeout(() => {
         this.updateLegendControl(legend);
-      });
+      }, 500);
     }
 
     this.emit('change-data');
