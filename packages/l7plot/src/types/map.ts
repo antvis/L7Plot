@@ -1,6 +1,5 @@
 import type { Map as MapboxglMap } from 'mapbox-gl';
 import type { Map, IStatusOptions, PositionName, ISourceCFG, MapStyle, Source } from '@antv/l7';
-import type { IAMapInstance, IMapboxInstance } from '@antv/l7-maps/typings';
 import type { TooltipOptions } from './tooltip';
 import type { LegendOptions } from './legend';
 import type { LayerMenuControlOptions, ScaleControlOptions, ZoomControlOptions } from './control';
@@ -10,8 +9,8 @@ export type { MapboxglMap, Source };
 
 export type StatusOptions = IStatusOptions;
 export type MapInstance = Map;
-export type AMapInstance = AMap.Map & IAMapInstance;
-export type MapboxInstance = MapboxglMap & IMapboxInstance;
+export type AMapInstance = AMap.Map;
+export type MapboxInstance = MapboxglMap;
 
 /**
  * 底图类型
