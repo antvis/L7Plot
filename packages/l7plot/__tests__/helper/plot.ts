@@ -4,8 +4,7 @@ import { L7PlotOptions, PlotOptions } from '../../src/types';
 import { createDiv } from './dom';
 
 const mapConfig = {
-  type: 'mapbox',
-  token: 'pk.eyJ1IjoibGl1dmlnb25nenVvc2hpIiwiYSI6ImNrdW02cjU3ZjNvaHIyb3FsbGR2b2dja2MifQ.OLUdvRf2ZY3lhnJzBU9ToQ',
+  type: 'map',
 };
 
 export const createPlot = <T extends Plot<any>, U extends PlotOptions>(PlotClass: any, options: U): T => {
