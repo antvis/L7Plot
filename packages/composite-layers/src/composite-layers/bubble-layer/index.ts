@@ -292,7 +292,7 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
       this.selectData.length === selectData.length &&
       isEqual(
         this.selectData.map(({ featureId }) => featureId),
-        selectData.map(({ featureId }) => featureId)
+        selectData.map(({ featureId }) => featureId),
       )
     ) {
       return;
@@ -535,7 +535,8 @@ export class BubbleLayer extends CompositeLayer<BubbleLayerOptions> {
     }
 
     const feature = source.getFeatureById(featureId);
-    this.handleSelectData(featureId, feature, true);
+    const { enabledMultiSelect } = this.options;
+    this.handleSelectData(featureId, feature, enabledMultiSelect);
   }
 
   /**

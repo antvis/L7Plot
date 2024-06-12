@@ -307,7 +307,8 @@ export abstract class IconLayer<T extends IconLayerOptions> extends CompositeLay
     }
 
     const feature = source.getFeatureById(featureId);
-    this.handleSelectData(featureId, feature, true);
+    const { enabledMultiSelect } = this.options;
+    this.handleSelectData(featureId, feature, enabledMultiSelect);
     // TODO: L7 method pickFeature(id|{x,y})
   }
 
