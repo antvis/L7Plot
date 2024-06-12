@@ -319,7 +319,7 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
       this.selectData.length === selectData.length &&
       isEqual(
         this.selectData.map(({ featureId }) => featureId),
-        selectData.map(({ featureId }) => featureId)
+        selectData.map(({ featureId }) => featureId),
       )
     ) {
       return;
@@ -529,7 +529,8 @@ export class ChoroplethLayer extends CompositeLayer<ChoroplethLayerOptions> {
     }
 
     const feature = source.getFeatureById(featureId);
-    this.handleSelectData(featureId, feature, true);
+    const { enabledMultiSelect } = this.options;
+    this.handleSelectData(featureId, feature, enabledMultiSelect);
     // TODO: L7 method pickFeature(id|{x,y})
   }
 
