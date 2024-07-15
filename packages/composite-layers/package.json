@@ -27,12 +27,12 @@
   ],
   "scripts": {
     "build": "yarn run clean && yarn run build:cjs && yarn run build:esm",
-    "build:cjs": "tsc -p tsconfig.json --target ES5 --module CommonJS --outDir dist/lib",
-    "build:esm": "tsc -p tsconfig.json --target ES5 --module ESNext --outDir dist/esm",
+    "build:cjs": "tsc -p tsconfig.json --module CommonJS --outDir dist/lib",
+    "build:esm": "tsc -p tsconfig.json --module ESNext --outDir dist/esm",
     "build:umd": "rollup -c rollup.config.js",
     "clean": "rimraf dist",
     "dev": "yarn run clean && yarn run dev:cjs",
-    "dev:cjs": "tsc -p tsconfig.json --target ES6 --module CommonJS --outDir dist/lib --watch",
+    "dev:cjs": "tsc -p tsconfig.json --module CommonJS --outDir dist/lib --watch",
     "lint": "eslint src __tests__ --ext .js,.ts",
     "lint-fix": "eslint src __tests__ --ext .js,.ts --fix",
     "prettier": "prettier src __tests__ -c -w"
